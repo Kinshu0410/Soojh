@@ -372,7 +372,14 @@ def receive_poll(update, context):
     update.message.reply_text("<pre>"+options[2]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.message.reply_text("<pre>"+options[3]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.message.reply_text("<pre>"+options[4]+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    update.effective_message.reply_poll(
+    update.message.reply_text("<pre>"+options[5]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[6]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[7]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[8]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[9]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+corr+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+ex+"</pre>",parse_mode=telegram.ParseMode.HTML)
+update.effective_message.reply_poll(
         question= q,
         options=options,
         # with is_closed true, the poll/quiz is immediately closed

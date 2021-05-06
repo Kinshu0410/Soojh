@@ -366,10 +366,11 @@ def receive_poll(update, context):
     corr = actual_poll.correct_option_id
     #update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
     print(actual_poll)
-    #update.message.reply_text("<pre>"+options[0]+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    #update.message.reply_text("<pre>"+options[1]+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    #update.message.reply_text("<pre>"+options[2]+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    #update.message.reply_text("<pre>"+options[3]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[0]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[1]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[2]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[3]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+options[4]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.effective_message.reply_poll(
         question= q,
         options=options,
@@ -402,7 +403,7 @@ def help_handler(update, context):
 
 def main():
 
-    bot_token="1458427559:AAGcjAabJ2oCLS9aLhrN6dJWw6v6C0jz1zw"
+    bot_token="1458427559:AAG7yP4FJoHXUbIfu6CKiuGFHhfoU8lw19I"
     updater = Updater(bot_token,use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('start', start))

@@ -364,7 +364,7 @@ def receive_poll(update, context):
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
     corr = actual_poll.correct_option_id
-    update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+qu+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #print(actual_poll)
     #update.message.reply_text("<pre>"+question+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.message.reply_text("<pre>"+options[0]+"</pre>",parse_mode=telegram.ParseMode.HTML)

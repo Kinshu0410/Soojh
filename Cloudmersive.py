@@ -356,16 +356,17 @@ def receive_poll(update, context):
     ex=re.sub(r"\@.*?\s", "", ex)
     ex=re.sub(r"\@\w.*", "", ex)
     question= actual_poll.question
-    question=re.sub("\@\w*", "", question)
+    #question=re.sub("\@\w*", "", question)
     question=re.sub("𝗤. ", "", question)
-    question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
+    #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
     qu=re.sub("[\[].*?[\]]", "", question)
-    q="𝗤. "+qu
+    #q="𝗤. "+qu
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
     corr = actual_poll.correct_option_id
-    #update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
     print(actual_poll)
+    #update.message.reply_text("<pre>"+question+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.message.reply_text("<pre>"+options[0]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.message.reply_text("<pre>"+options[1]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.message.reply_text("<pre>"+options[2]+"</pre>",parse_mode=telegram.ParseMode.HTML)

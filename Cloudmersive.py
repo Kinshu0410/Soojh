@@ -348,10 +348,10 @@ def receive_poll(update, context):
     # a closed poll
     #ex="@Soojhboojhbot/n"
     ex =actual_poll.explanation
-    if ex is None:
+    ```if ex is None:
         ex="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
     else:
-        ex=ex
+        ex=ex```
     #update.message.reply_text(ex)
     #update.message.reply_text(ex)
     ex=re.sub(r"\@.*?\s", "", ex)
@@ -367,7 +367,7 @@ def receive_poll(update, context):
     corr = actual_poll.correct_option_id
     print(corr)
     #print(cor)
-    cor=str(corr)
+    cor=str(int(str(corr))+1)
     update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #print(actual_poll)
     #update.message.reply_text("<pre>"+question+"</pre>",parse_mode=telegram.ParseMode.HTML)

@@ -414,8 +414,7 @@ def help_handler(update, context):
 
 
 def main():
-
-    bot_token="1458427559:AAG7yP4FJoHXUbIfu6CKiuGFHhfoU8lw19I"
+    bot_token=os.environ.get("BOT_TOKEN", "")
     updater = Updater(bot_token,use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('start', start))

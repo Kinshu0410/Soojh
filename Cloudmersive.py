@@ -349,7 +349,7 @@ def receive_poll(update, context):
     #ex="@Soojhboojhbot/n"
     ex =actual_poll.explanation
     if ex is None:
-        pass
+        ex=""
         #ex="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
     else:
         ex=re.sub(r"\@.*?\s", "", ex)

@@ -363,7 +363,7 @@ def receive_poll(update, context):
     qu=re.sub("[\[].*?[\]]", "", question)
     #q="𝗤. "+qu
     print(corr)
-    cor=str(int(corr)+1)
+    cor=int(corr)+1
     print(cor)
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]

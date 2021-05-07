@@ -339,7 +339,7 @@ def preview(update, context):
         message, reply_markup=ReplyKeyboardMarkup(button, one_time_keyboard=True)
     )
 
-@run_async
+#@run_async
 @send_typing_action
 def receive_poll(update, context):
     """On receiving polls, reply to it by a closed poll copying the received poll"""
@@ -363,7 +363,7 @@ def receive_poll(update, context):
     #question=re.sub("\@\w*", "", question)
     question=re.sub("𝗤. ", "", question)
     #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
-    q=re.sub("[\[].*?[\]]", "", question)
+    q=re.sub("[\[].*?[\]] ", "", question)
     #q="𝗤. "+qu
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]

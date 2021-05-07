@@ -368,7 +368,7 @@ def receive_poll(update, context):
     print(corr)
     #print(cor)
     #cor=str(int(corr)+1)
-    update.message.reply_text("<pre>"+qu+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #print(actual_poll)
     #update.message.reply_text("<pre>"+question+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.message.reply_text("<pre>"+options[0]+"</pre>",parse_mode=telegram.ParseMode.HTML)

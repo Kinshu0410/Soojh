@@ -348,10 +348,10 @@ def receive_poll(update, context):
     # a closed poll
     #ex="@Soojhboojhbot/n"
     ex =actual_poll.explanation
-    ```if ex is None:
-        ex="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
-    else:
-        ex=ex```
+    #if ex is None:
+        #ex="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
+    #else:
+        #ex=ex
     #update.message.reply_text(ex)
     #update.message.reply_text(ex)
     ex=re.sub(r"\@.*?\s", "", ex)

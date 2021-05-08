@@ -387,16 +387,29 @@ def receive_poll(update, context):
     #update.message.reply_text("<pre>"+options[9]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+cor+"</pre>",parse_mode=telegram.ParseMode.HTML)
     update.message.reply_text("<pre>"+ex+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    update.effective_message.reply_poll(
-        question= q,
-        options=options,
-        # with is_closed true, the poll/quiz is immediately closed
-        type=Poll.QUIZ,
-    correct_option_id =corr,
-    explanation=ex,
-        is_closed=False,
-        is_anonymous=False,
-        reply_markup=ReplyKeyboardRemove()
+    if ex="":
+        update.effective_message.reply_poll(
+            question= q,
+            options=options,
+            # with is_closed true, the poll/quiz is immediately closed
+            type=Poll.QUIZ,
+            correct_option_id =corr,
+            #explanation=ex,
+            is_closed=False,
+            is_anonymous=False,
+            reply_markup=ReplyKeyboardRemove()
+    )
+    else:
+        update.effective_message.reply_poll(
+            question= q,
+            options=options,
+            # with is_closed true, the poll/quiz is immediately closed
+            type=Poll.QUIZ,
+            correct_option_id =corr,
+            explanation=ex,
+            is_closed=False,
+            is_anonymous=False,
+            reply_markup=ReplyKeyboardRemove()
     )
     #update.message.reply_text("<pre>"+ex+"</pre>",parse_mode=telegram.ParseMode.HTML)
 

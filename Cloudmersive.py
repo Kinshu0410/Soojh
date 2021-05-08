@@ -78,6 +78,8 @@ def poll(update, context):
     #que = update.message.text()
     quest=(update.message.text)
     q=quest[0:-1]
+    q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
+    q=re.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द)\.", "\n", q)
     q=re.sub("\n{2,}", "\n", q)
     
     q=re.split("[\n]", q)
@@ -96,7 +98,7 @@ def poll(update, context):
     options5="\n".join(options5)
     options5=re.sub(r"@\w*", "@kinbin247", options5)
     if options5 == "":
-        options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
+        Pass#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
     else:
         options5=options5
         print(options5)

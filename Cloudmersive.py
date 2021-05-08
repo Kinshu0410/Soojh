@@ -126,7 +126,7 @@ def poll(update, context):
         is_anonymous=False,
         allows_multiple_answers=False,
     )
-    elif if options5 is None:
+    elif options5 is None:
       co=int(corr)-1
       message = context.bot.send_poll(
         update.effective_chat.id,

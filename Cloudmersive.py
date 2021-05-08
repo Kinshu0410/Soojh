@@ -78,6 +78,8 @@ def poll(update, context):
     #que = update.message.text()
     quest=(update.message.text)
     q=quest[0:-1]
+    q=re.sub("\n{2,}", "\n", q)
+    
     q=re.split("[\n]", q)
     #update.message.reply_text(q)
     ques=q[0]

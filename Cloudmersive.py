@@ -354,7 +354,7 @@ def receive_poll(update, context):
     else:
         ex=re.sub(r"\@.*?\s", "", ex)
         ex=re.sub(r"\@\w.*", "", ex)
-        #ex=ex
+        Ex=str(ex)        #ex=ex
     #update.message.reply_text(ex)
     #update.message.reply_text(ex)
     #ex=re.sub(r"\@.*?\s", "", ex)
@@ -386,7 +386,7 @@ def receive_poll(update, context):
     #update.message.reply_text("<pre>"+options[8]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[9]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+cor+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    update.message.reply_text("<pre>"+ex+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    
     if ex is None:
         update.effective_message.reply_poll(
             question= q,
@@ -394,19 +394,20 @@ def receive_poll(update, context):
             # with is_closed true, the poll/quiz is immediately closed
             type=Poll.QUIZ,
             correct_option_id =corr,
-            #explanation=ex,
+            #explanation=Ex,
             is_closed=False,
             is_anonymous=False,
             reply_markup=ReplyKeyboardRemove()
     )
     else:
+        update.message.reply_text("<pre>"+Ex+"</pre>",parse_mode=telegram.ParseMode.HTML)
         update.effective_message.reply_poll(
             question= q,
             options=options,
             # with is_closed true, the poll/quiz is immediately closed
             type=Poll.QUIZ,
             correct_option_id =corr,
-            explanation=ex,
+            explanation=Ex,
             is_closed=False,
             is_anonymous=False,
             reply_markup=ReplyKeyboardRemove()

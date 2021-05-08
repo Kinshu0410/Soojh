@@ -122,7 +122,7 @@ def poll(update, context):
         options,
         type=Poll.QUIZ,
         correct_option_id=co,
-        explanation=options5,
+        #explanation=options5,
         is_anonymous=False,
         allows_multiple_answers=False,
     )

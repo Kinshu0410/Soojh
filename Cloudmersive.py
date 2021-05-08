@@ -79,7 +79,7 @@ def poll(update, context):
     quest=(update.message.text)
     q=quest[0:-1]
     q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
-    q=re.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द)\.", "\n", q)
+    q=re.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द)\.|\n(A|B|C|D|a|b|c|d|अ|ब|स|द)\.", "\n", q)
     q=re.sub("\n{2,}", "\n", q)
     
     q=re.split("[\n]", q)
@@ -87,10 +87,10 @@ def poll(update, context):
     ques=q[0]
     que=""+ ques
     #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
-    option1=q[1]
-    option2=q[2]
-    option3=q[3]
-    option4=q[4]
+    option1="(A) "+q[1]
+    option2="(B) "+q[2]
+    option3="(C) "+q[3]
+    option4="(D) "+q[4]
     options=[option1, option2, option3, option4]
     corr=quest[-1]
     result = re.match("[-+]?\d+$", corr)

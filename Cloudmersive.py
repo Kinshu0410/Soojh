@@ -85,7 +85,7 @@ def poll(update, context):
     q=re.split("[\n]", q)
     #update.message.reply_text(q)
     ques=q[0]
-    que="𝙌. "+ ques
+    que=""+ ques
     #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     option1=q[1]
     option2=q[2]
@@ -114,7 +114,7 @@ def poll(update, context):
           allows_multiple_answers=False,
       )
 
-    else:
+    elseif options is not None:
       co=int(corr)-1
       message = context.bot.send_poll(
         update.effective_chat.id,
@@ -123,6 +123,17 @@ def poll(update, context):
         type=Poll.QUIZ,
         correct_option_id=co,
         explanation=options5,
+        is_anonymous=False,
+        allows_multiple_answers=False,
+    )
+    elseif options is None:
+      co=int(corr)-1
+      message = context.bot.send_poll(
+        update.effective_chat.id,
+        que,
+        options,
+        type=Poll.QUIZ,
+        correct_option_id=co,#explanation=options5,
         is_anonymous=False,
         allows_multiple_answers=False,
     )

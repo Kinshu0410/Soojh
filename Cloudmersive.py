@@ -114,7 +114,7 @@ def poll(update, context):
           allows_multiple_answers=False,
       )
 
-    elif options5 is not None:
+    elif options5 !="":
       co=int(corr)-1
       message = context.bot.send_poll(
         update.effective_chat.id,

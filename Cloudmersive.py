@@ -98,7 +98,7 @@ def poll(update, context):
     options5="\n".join(options5)
     options5=re.sub(r"@\w*", "@kinbin247", options5)
     if options5 == "":
-        Pass#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
+        options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
     else:
         options5=options5
         print(options5)
@@ -122,7 +122,7 @@ def poll(update, context):
         options,
         type=Poll.QUIZ,
         correct_option_id=co,
-        #explanation=options5,
+        explanation=options5,
         is_anonymous=False,
         allows_multiple_answers=False,
     )

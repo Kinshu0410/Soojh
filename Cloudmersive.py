@@ -361,6 +361,7 @@ def receive_poll(update, context):
     actual_poll = update.effective_message.poll
     # Only need to set the question and options, since all other parameters don't matter for
     # a closed poll
+    update.message.reply_text(str(actual_poll))
     #ex="@Soojhboojhbot/n"
     ex =actual_poll.explanation
     if ex is None:

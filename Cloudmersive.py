@@ -364,7 +364,7 @@ def receive_poll(update, context):
     #update.message.reply_text(str(actual_poll))
     #ex="@Soojhboojhbot/n"
     ex =actual_poll.explanation
-    update.message.reply_text("1")
+    #update.message.reply_text("1")
     if ex is None:
         ex=""
         #ex="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
@@ -372,12 +372,12 @@ def receive_poll(update, context):
         ex=re.sub(r"\@.*?\s", "", ex)
         ex=re.sub(r"\@\w.*", "", ex)
         Ex=str(ex)        #ex=ex
-    update.message.reply_text("1")
+    #update.message.reply_text("1")
     #update.message.reply_text(ex)
     #ex=re.sub(r"\@.*?\s", "", ex)
     #ex=re.sub(r"\@\w.*", "", ex)
     question= actual_poll.question
-    update.message.reply_text("1")
+    #update.message.reply_text("1")
     #question=re.sub("\@\w*", "", question)
     question=re.sub("𝗤. ", "", question)
     #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
@@ -386,17 +386,19 @@ def receive_poll(update, context):
     #q="𝗤. "+qu
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
-    update.message.reply_text("1")
+    #update.message.reply_text("1")
     corr = actual_poll.correct_option_id
-    update.message.reply_text("1")
+    #update.message.reply_text("1")
     print(corr)
     #print(cor)
     cor=str(int(str(corr))+1)
+    update.message.reply_text("1")
     update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    #print(actual_poll)
+    update.message.reply_text("1")    #print(actual_poll)
     #update.message.reply_text("<pre>"+question+"</pre>",parse_mode=telegram.ParseMode.HTML)
     for r in options:
         update.message.reply_text("<pre>"+r+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text("1")
     update.message.reply_text("<pre>"+cor+" "+options[corr]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[2]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[3]+"</pre>",parse_mode=telegram.ParseMode.HTML)

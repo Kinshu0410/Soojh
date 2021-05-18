@@ -382,7 +382,7 @@ def receive_poll(update, context):
     question=re.sub("𝗤. ", "", question)
     #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
     q=re.sub("(\[.*?\/.*?\] ){1,}(\d{1,})(| )", "", question)
-    q=re.sub("\n{1,}| {1,}", " ", question)
+    q=re.sub("\n{1,}| {1,}", " ", q)
     #q="𝗤. "+qu
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
@@ -391,6 +391,7 @@ def receive_poll(update, context):
     #update.message.reply_text("1")
     print(corr)
     #print(cor)
+    update.message.reply_text("1")
     cor=str(int(str(corr))+1)
     update.message.reply_text("1")
     update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)

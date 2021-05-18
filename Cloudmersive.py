@@ -391,17 +391,21 @@ def receive_poll(update, context):
     #update.message.reply_text("1")
     print(corr)
     #print(cor)
-    update.message.reply_text("1")
-    cor=str(int(str(corr))+1)
-    update.message.reply_text("1")
+    #update.message.reply_text("1")
+    try:
+        cor=str(int(str(corr))+1)
+    except:
+        cor="Channel questions didn't find any answers." #update.message.reply_text("1")
     update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    update.message.reply_text("1")    #print(actual_poll)
+    #update.message.reply_text("1")    #print(actual_poll)
     #update.message.reply_text("<pre>"+question+"</pre>",parse_mode=telegram.ParseMode.HTML)
     for r in options:
         update.message.reply_text("<pre>"+r+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    update.message.reply_text("1")
-    update.message.reply_text("<pre>"+cor+" "+options[corr]+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    #update.message.reply_text("<pre>"+options[2]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    #update.message.reply_text("1")
+    try:
+        update.message.reply_text("<pre>"+cor+" "+options[corr]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    except:
+        update.message.reply_text("<pre>"+cor+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[3]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[4]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[5]+"</pre>",parse_mode=telegram.ParseMode.HTML)

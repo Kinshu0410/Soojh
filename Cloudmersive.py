@@ -77,77 +77,81 @@ def poll(update, context):
     questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
     #que = update.message.text()
     quest=(update.message.text)
-    q=quest[0:-1]
-    q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
-    q=re.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द)\.|\n(A|B|C|D|a|b|c|d|अ|ब|स|द)\.", "\n", q)
-    q=re.sub("\n{2,}", "\n", q)
-    
-    q=re.split("[\n]", q)
-    #update.message.reply_text(q)
-    ques=q[0]
-    que=""+ ques
-    #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
-    option1="(A) "+q[1]
-    option2="(B) "+q[2]
-    option3="(C) "+q[3]
-    option4="(D) "+q[4]
-    options=[option1, option2, option3, option4]
-    corr=quest[-1]
-    result = re.match("[-+]?\d+$", corr)
-    options5=q[5::1]
-    options5="\n".join(options5)
-    options5=re.sub(r"@\w*", "@kinbin247", options5)
-    if options5 == "":
-        options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
+    if quest=="Q\d{1,}\.":
+        global Quenum
+        Quenum=re.sub("Q|\.", "", quest)
+        Quenum=int(str(Quenum))
     else:
-        options5=options5
-        print(options5)
-    #options5=re.sub(r"\@\w.*", "", options5)
-    #update.message.reply_text(options)
+        q=quest[0:-1]
+        q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
+        q=re.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द)\.|\n(A|B|C|D|a|b|c|d|अ|ब|स|द)\.", "\n", q)
+        q=re.sub("\n{2,}", "\n", q)
+    
+        q=re.split("[\n]", q)
+        #update.message.reply_text(q)
+        ques=q[0]
+        que=""+ ques
+        #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
+        option1="(A) "+q[1]
+        option2="(B) "+q[2]
+        option3="(C) "+q[3]
+        option4="(D) "+q[4]
+        options=[option1, option2, option3, option4]
+        corr=quest[-1]
+        result = re.match("[-+]?\d+$", corr)
+        options5=q[5::1]
+        options5="\n".join(options5)
+        options5=re.sub(r"@\w*", "@kinbin247", options5)
+        if options5 == "":
+            options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
+        else:
+            options5=options5
+            print(options5)
+        #options5=re.sub(r"\@\w.*", "", options5)
+        #update.message.reply_text(options)
 
-    if result is None:
-        message = context.bot.send_poll(
-          update.effective_chat.id,
-          que,
-          options,
-          is_anonymous=False,
-          allows_multiple_answers=False,
-      )
-
-    elif options5 !="":
-      co=int(corr)-1
-      message = context.bot.send_poll(
-        update.effective_chat.id,
-        que,
-        options,
-        type=Poll.QUIZ,
-        correct_option_id=co,
-        explanation=options5,
-        is_anonymous=False,
-        allows_multiple_answers=False,
-    )
-    elif options5 =="":
-      co=int(corr)-1
-      message = context.bot.send_poll(
-        update.effective_chat.id,
-        que,
-        options,
-        type=Poll.QUIZ,
-        correct_option_id=co,#explanation=options5,
-        is_anonymous=False,
-        allows_multiple_answers=False,
-    )
-    # Save some info about the poll the bot_data for later use in receive_poll_answer
-    payload = {
-        message.poll.id: {
-            "questions": questions,
-            "message_id": message.message_id,
-            "chat_id": update.effective_chat.id,
-            "answers": 0,
-            "explanation": ["join"],
+        if result is None:
+          message = context.bot.send_poll(
+            update.effective_chat.id,
+            que,
+            options,
+            is_anonymous=False,
+            allows_multiple_answers=False,
+        )
+        elif options5 !="":
+          co=int(corr)-1
+          message = context.bot.send_poll(
+            update.effective_chat.id,
+            que,
+            options,
+            type=Poll.QUIZ,
+            correct_option_id=co,
+            explanation=options5,
+            is_anonymous=False,
+            allows_multiple_answers=False,
+        )
+        elif options5 =="":
+          co=int(corr)-1
+          message = context.bot.send_poll(
+            update.effective_chat.id,
+            que,
+            options,
+            type=Poll.QUIZ,
+            correct_option_id=co,#explanation=options5,
+            is_anonymous=False,
+            allows_multiple_answers=False,
+        )
+        # Save some info about the poll the bot_data for later use in receive_poll_answer
+        payload = {
+            message.poll.id: {
+                "questions": questions,
+                "message_id": message.message_id,
+                "chat_id": update.effective_chat.id,
+                "answers": 0,
+                "explanation": ["join"],
+            }
         }
-    }
-    context.bot_data.update(payload)
+        context.bot_data.update(payload)
 
 @run_async
 @send_typing_action
@@ -383,7 +387,7 @@ def receive_poll(update, context):
     #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
     q=re.sub("(\[.*\/.*\] ){1,}(|\d{1,}\.)(| )", "", question)
     q=re.sub("\n{1,}| {1,}", " ", q)
-    #q="𝗤. "+qu
+    q=quenum+". "q
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
     #update.message.reply_text("1")

@@ -361,6 +361,7 @@ def preview(update, context):
     update.effective_message.reply_text(
         message, reply_markup=ReplyKeyboardMarkup(button, one_time_keyboard=True)
     )
+Qqq=int(Quenum)
 
 #@run_async
 @send_typing_action
@@ -392,8 +393,8 @@ def receive_poll(update, context):
     q=re.sub("((\[.*\/.*\] ){1,}|)(|(Q|)\d{1,}\.)(| )", "", question)
     q=re.sub("\n{1,}| {1,}", " ", q)
     if Quenum !="":
-        Qqq=Quenum
-        q=Quenum+". "+q
+        
+        q=str(Qqq)+". "+q
         
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
@@ -455,7 +456,7 @@ def receive_poll(update, context):
 
 
 
-Qqq=str(int(Qqq)+1)
+Qqq=int(Qqq)+1
 
 
 

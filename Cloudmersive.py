@@ -406,7 +406,9 @@ def receive_poll(update, context):
         update.message.reply_text("<pre>"+r+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("1")
     try:
-        update.message.reply_text("<pre>"+cor+" "+options[corr]+"</pre>",parse_mode=telegram.ParseMode.HTML)
+        Qqq=cor+" "+options[corr]
+        Qqq=re.sub("(\(|\[)(A|B|C|D|a|b|c|d|अ|ब|स|द)(\)|\])(\ )", "",Qqq)
+        update.message.reply_text("<pre>"+Qqq+"</pre>",parse_mode=telegram.ParseMode.HTML)
     except:
         update.message.reply_text("<pre>"+cor+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[3]+"</pre>",parse_mode=telegram.ParseMode.HTML)

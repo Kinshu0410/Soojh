@@ -78,12 +78,14 @@ def poll(update, context):
     questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
     #que = update.message.text()
     quest=(update.message.text)
-    if quest=="Q\d{1,}\.":
+    try quest=="Q\d{1,}\.":
         global Quenum
         Quenum=re.sub("Q|\.", "", quest)
         Quenum=str(Quenum)
+
+        print(Quenum)
         update.message.reply_text(Quenum)
-    else:
+    except:
         q=quest[0:-1]
         q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
         q=re.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द)\.|\n(A|B|C|D|a|b|c|d|अ|ब|स|द)\.", "\n", q)

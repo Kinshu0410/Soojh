@@ -80,7 +80,7 @@ def poll(update, context):
     if quest=="Q\d{1,}\.":
         global Quenum
         Quenum=re.sub("Q|\.", "", quest)
-        Quenum=int(str(Quenum))
+        Quenum=str(Quenum)
     else:
         q=quest[0:-1]
         q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
@@ -387,7 +387,8 @@ def receive_poll(update, context):
     #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
     q=re.sub("(\[.*\/.*\] ){1,}(|\d{1,}\.)(| )", "", question)
     q=re.sub("\n{1,}| {1,}", " ", q)
-    q=quenum+". "q
+    if Quenum !="":
+        q=Quenum+". "+q
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
     #update.message.reply_text("1")

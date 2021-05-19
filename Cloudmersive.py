@@ -78,7 +78,7 @@ def poll(update, context):
     questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
     #que = update.message.text()
     quest=(update.message.text)
-    try quest=="Q\d{1,}\.":
+    try:
         global Quenum
         Quenum=re.sub("Q|\.", "", quest)
         Quenum=str(Quenum)

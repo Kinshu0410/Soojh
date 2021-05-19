@@ -70,7 +70,7 @@ def channels(update, context):
 def owner(update, context):
   update.message.reply_text("send your suggestions\n    1. @kinbin247 \n  2. @ANKITAdidi \n 3. comming soon \ud83d\ude1c")
 
-Quenum="1"
+
 @run_async
 @send_typing_action
 def poll(update, context):
@@ -79,6 +79,7 @@ def poll(update, context):
     #que = update.message.text()
     quest=(update.message.text)
     try:
+        Quenum="1"
         global Quenum
         Quenum=re.sub("Q|\.", "", quest)
         Quenum=str(Quenum)

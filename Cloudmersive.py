@@ -394,7 +394,7 @@ def receive_poll(update, context):
     q=re.sub("\n{1,}| {1,}", " ", q)
     if Quenum !="":
         
-        q=Qqq+". "+q
+        q=str(Qqq)+". "+q
         
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]

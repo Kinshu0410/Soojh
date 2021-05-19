@@ -70,6 +70,7 @@ def channels(update, context):
 def owner(update, context):
   update.message.reply_text("send your suggestions\n    1. @kinbin247 \n  2. @ANKITAdidi \n 3. comming soon \ud83d\ude1c")
 
+Quenum=""
 @run_async
 @send_typing_action
 def poll(update, context):
@@ -81,6 +82,7 @@ def poll(update, context):
         global Quenum
         Quenum=re.sub("Q|\.", "", quest)
         Quenum=str(Quenum)
+        update.message.reply_text(Quenum)
     else:
         q=quest[0:-1]
         q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)

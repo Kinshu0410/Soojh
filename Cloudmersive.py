@@ -78,16 +78,7 @@ def poll(update, context):
     questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
     #que = update.message.text()
     quest=(update.message.text)
-    try:
-        
-        global Quenum
-        Quenum="1"
-        Quenum=re.sub("Q|\.", "", quest)
-        Quenum=str(Quenum)
-
-        print(Quenum)
-        update.message.reply_text(Quenum)
-    except:
+    if 1==1:
         q=quest[0:-1]
         q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
         q=re.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द)\.|\n(A|B|C|D|a|b|c|d|अ|ब|स|द)\.", "\n", q)
@@ -363,7 +354,7 @@ def preview(update, context):
     update.effective_message.reply_text(
         message, reply_markup=ReplyKeyboardMarkup(button, one_time_keyboard=True)
     )
-Qqq=Quenum
+
 
 #@run_async
 @send_typing_action
@@ -394,9 +385,7 @@ def receive_poll(update, context):
     #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
     q=re.sub("((\[.*\/.*\] ){1,}|)(|(Q|)\d{1,}\.)(| )", "", question)
     q=re.sub("\n{1,}| {1,}", " ", q)
-    if Quenum !="":
-        
-        q=str(Qqq)+". "+q
+    
         
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
@@ -458,7 +447,7 @@ def receive_poll(update, context):
 
 
 
-Qqq=int(float(Qqq))+1
+
 
 
 

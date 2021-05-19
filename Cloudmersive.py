@@ -389,12 +389,12 @@ def receive_poll(update, context):
     #question=re.sub("\@\w*", "", question)
     question=re.sub("𝗤. ", "", question)
     #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
-    q=re.sub("(\[.*\/.*\] ){1,}(|\d{1,}\.)(| )", "", question)
+    q=re.sub("((\[.*\/.*\] ){1,}|)(|(Q|)\d{1,}\.)(| )", "", question)
     q=re.sub("\n{1,}| {1,}", " ", q)
     if Quenum !="":
         Qqq=Quenum
         q=Quenum+". "+q
-        Qqq=str(int(Qqq)+1)
+        
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
     options=[o.text for o in actual_poll.options]
     #update.message.reply_text("1")
@@ -455,7 +455,7 @@ def receive_poll(update, context):
 
 
 
-
+Qqq=str(int(Qqq)+1)
 
 
 

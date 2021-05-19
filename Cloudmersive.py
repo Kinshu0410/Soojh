@@ -79,8 +79,9 @@ def poll(update, context):
     #que = update.message.text()
     quest=(update.message.text)
     try:
-        Quenum="1"
+        
         global Quenum
+        Quenum="1"
         Quenum=re.sub("Q|\.", "", quest)
         Quenum=str(Quenum)
 

@@ -407,7 +407,7 @@ def receive_poll(update, context):
     #update.message.reply_text("1")
     try:
         Qqq=cor+" "+options[corr]
-        Qqq=re.sub("(\(|\[)(A|B|C|D|a|b|c|d|अ|ब|स|द)(\)|\])(\ )", "",Qqq)
+        Qqq=re.sub("(\(|\[)(A|B|C|D|a|b|c|d|अ|ब|स|द)(\)|\])(|\ )", "",Qqq)
         update.message.reply_text("<pre>"+Qqq+"</pre>",parse_mode=telegram.ParseMode.HTML)
     except:
         update.message.reply_text("<pre>"+cor+"</pre>",parse_mode=telegram.ParseMode.HTML)

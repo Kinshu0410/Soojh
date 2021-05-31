@@ -420,7 +420,7 @@ def receive_poll(update, context):
     #update.message.reply_text("<pre>"+options[9]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+cor+"</pre>",parse_mode=telegram.ParseMode.HTML)
     
-    if ex is None:
+    if ex == "":
         update.effective_message.reply_poll(
             question= q,
             options=options,

@@ -428,7 +428,7 @@ def receive_poll(update, context):
             type=Poll.QUIZ,
             correct_option_id =corr,
             #explanation=Ex,
-            is_closed=False,
+            is_closed=True,
             is_anonymous=True,
             reply_markup=ReplyKeyboardRemove()
     )

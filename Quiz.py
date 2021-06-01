@@ -280,7 +280,13 @@ def delete(update: Update, _: CallbackContext) -> int:
 
     return ConversationHandler.END
 
-
+def quizlist(update: Update, _: CallbackContext) -> int:
+    user = update.message.from_user
+    with open('Newfile.text') as json_file:
+    	db = json.load(json_file)
+    	List=list(db.keys())
+    	for L in List:
+    		update.message.reply_text(L)
 
 
 def main() -> None:
@@ -324,7 +330,7 @@ def main() -> None:
     dispatcher.add_handler(conv_handler)
     dispatcher.add_handler(conv_handler01)
     dispatcher.add_handler(conv_handler02)
-
+    dispatcher.add_handler(CommandHandler('quizlist', quizlist))
     # Start the Bot
     updater.start_polling()
 

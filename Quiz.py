@@ -31,6 +31,8 @@ from telegram.ext import (
     CallbackContext,
 )
 
+
+
 # Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -41,6 +43,20 @@ logger = logging.getLogger(__name__)
 GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE = range(6)
 
 
+
+def send_typing_action(func):
+    """Sends typing action while processing func command."""
+
+    @wraps(func)
+    def command_func(update, context, *args, **kwargs):
+        context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
+        return func(update, context,  *args, **kwargs)
+
+    return command_func
+
+
+#@run_async
+@send_typing_action
 def createquiz(update: Update, _: CallbackContext) -> int:
     
 
@@ -173,6 +189,8 @@ def cancel(update: Update, _: CallbackContext) -> int:
     return ConversationHandler.END
 
 
+@run_async
+@send_typing_action
 def playquiz(update: Update, _: CallbackContext) -> int:
     
 
@@ -236,6 +254,9 @@ def deletequiz(update: Update, _: CallbackContext) -> int:
 
     return DELETE
 
+
+#@run_async
+@send_typing_action
 Textstr1=""
 def delete(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user

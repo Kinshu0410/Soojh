@@ -77,7 +77,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')'''
     global db
     global we
-    with open('Newfile.text') as json_file:
+    with open('https://github.com/kinshusharma0412/Soojh/blob/26111185e62a11e2fe300ca0dd348750096b177d/Newfile.text') as json_file:
     	db = json.load(json_file)
     	new=[{'que':str(we)+". "+user.question, 'op':[o.text for o in user.options], 'cor':user.correct_option_id}]
     	if Textstr not in list(db.keys()):
@@ -86,12 +86,12 @@ def photo(update: Update, _: CallbackContext) -> int:
     		'''db[Textstr]=[]
     		db[Textstr].append({'que':str(we)+". "+user.question, 'op':[o.text for o in user.options], 'cor':user.correct_option_id})'''
     		we+=1
-    		with open('Newfile.text', 'w') as outfile:
+    		with open('https://github.com/kinshusharma0412/Soojh/blob/26111185e62a11e2fe300ca0dd348750096b177d/Newfile.text', 'w') as outfile:
     			json.dump(db, outfile)
     	else:
     		db[Textstr].append(new)
     		we+=1
-    		with open('Newfile.text', 'w') as outfile:
+    		with open('https://github.com/kinshusharma0412/Soojh/blob/26111185e62a11e2fe300ca0dd348750096b177d/Newfile.text', 'w') as outfile:
     			json.dump(db, outfile)
 
 
@@ -104,7 +104,7 @@ def photo(update: Update, _: CallbackContext) -> int:
 def skip_photo(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s did not send a poll.", user.first_name)
-    with open('Newfile.text', 'w') as outfile:
+    with open('https://github.com/kinshusharma0412/Soojh/blob/26111185e62a11e2fe300ca0dd348750096b177d/Newfile.text', 'w') as outfile:
     	json.dump(db, outfile)
     
     #update.message.reply_text(db[Textstr][0]['que'])
@@ -188,7 +188,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
     global Textstr0
     userText=update.message.text
     Textstr0=userText
-    with open('Newfile.text') as json_file:
+    with open('https://github.com/kinshusharma0412/Soojh/blob/26111185e62a11e2fe300ca0dd348750096b177d/Newfile.text') as json_file:
     	db = json.load(json_file)
     	try:
     		update.message.reply_text("Quiz Play", reply_markup=ReplyKeyboardRemove(),)
@@ -242,11 +242,11 @@ def delete(update: Update, _: CallbackContext) -> int:
     global Textstr1
     userText=update.message.text
     Textstr1=userText
-    with open('Newfile.text') as json_file:
+    with open('https://github.com/kinshusharma0412/Soojh/blob/26111185e62a11e2fe300ca0dd348750096b177d/Newfile.text') as json_file:
     	db = json.load(json_file)
     	try:
     		db.pop(Textstr1)
-    		with open('Newfile.text', 'w') as outfile:
+    		with open('https://github.com/kinshusharma0412/Soojh/blob/26111185e62a11e2fe300ca0dd348750096b177d/Newfile.text', 'w') as outfile:
     			json.dump(db, outfile)
     		update.message.reply_text("Quiz "+Textstr1+" deleted", reply_markup=ReplyKeyboardRemove(),)
     		

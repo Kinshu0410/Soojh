@@ -86,7 +86,7 @@ def gender(update: Update, _: CallbackContext) -> int:
 
 
 db = {}
-we=1
+
 Que=""
 #question=""
 #options=""
@@ -100,18 +100,18 @@ def photo(update: Update, _: CallbackContext) -> int:
     global we
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
-    	new=[{'que':str(we)+". "+user.question, 'op':[o.text for o in user.options], 'cor':user.correct_option_id}]
+    	new=[{'que':user.question, 'op':[o.text for o in user.options], 'cor':user.correct_option_id}]
     	if Textstr not in list(db.keys()):
     		print("123")
     		db[Textstr]=new
     		'''db[Textstr]=[]
-    		db[Textstr].append({'que':str(we)+". "+user.question, 'op':[o.text for o in user.options], 'cor':user.correct_option_id})'''
-    		we+=1
+    		db[Textstr].append({'que':user.question, 'op':[o.text for o in user.options], 'cor':user.correct_option_id})'''
+    		
     		with open('Newfile.text', 'w') as outfile:
     			json.dump(db, outfile)
     	else:
     		db[Textstr].append(new)
-    		we+=1
+    		
     		with open('Newfile.text', 'w') as outfile:
     			json.dump(db, outfile)
 

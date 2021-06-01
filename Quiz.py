@@ -254,10 +254,9 @@ def deletequiz(update: Update, _: CallbackContext) -> int:
 
     return DELETE
 
-
+Textstr1=""
 #@run_async
 @send_typing_action
-Textstr1=""
 def delete(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
    

@@ -282,6 +282,7 @@ def delete(update: Update, _: CallbackContext) -> int:
 
 def quizlist(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
+    update.message.reply_text("here is your quiz list")
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     	List=list(db.keys())

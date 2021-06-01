@@ -18,6 +18,7 @@ import re
 import json
 import logging
 import os
+from functools import wraps
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, Poll, Update
 from telegram.ext import (

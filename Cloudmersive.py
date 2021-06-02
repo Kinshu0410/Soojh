@@ -2,6 +2,7 @@ import telegram
 
 from telegram import (
     Poll,
+    Update,
     ParseMode,
     KeyboardButton,
     KeyboardButtonPollType,
@@ -18,6 +19,8 @@ from telegram.ext import (
     PollHandler,
     MessageHandler,
     Filters,
+    CallbackContext,
+    ConversationHandler,
     CallbackQueryHandler
 )
 
@@ -62,7 +65,7 @@ def channels(update, context):
   update.message.reply_text( 'Math Group   https://t.me/Royalworldmathdoubt' )
   update.message.reply_text('Math Channel  https://t.me/Maths_Quiz_Notes')
   update.message.reply_text( 'Math Group   https://t.me/learnwithaditya' )
-  update.message.reply_text('All sub Quiz   https://t.me/makefuturebright')
+  update.message.reply_text('All SUBQUIZ   https://t.me/makefuturebright')
   update.message.reply_text('Math Question Bot   https://t.me/soojhboojh')
 
 @run_async
@@ -463,11 +466,87 @@ def help_handler(update, context):
     update.message.reply_text("send me a POLL" )
     update.message.reply_text(" I CAN CREATE.\n\n30 voting poll. \n             &\n OCR thing compcompletely shut down." )
 
+SUBQUIZ, POLLSUB = range(2)
+
+def sub(update: Update, _: CallbackContext) -> int:
+    
+
+    update.message.reply_text(
+        "Send me TEXT that you want me to Regrx.\n\nyou can study Regrx here\n\nhttps://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285"
+	)
+
+    return SUBQUIZ
+
+Textstr2=""
+#@run_async
+@send_typing_action
+def sub_quiz(update: Update, _: CallbackContext) -> int:
+    user = update.message.from_user
+    global Textstr2
+    Textstr2=update.message.text
+    update.message.reply_text("Send me 1 or more Polls or /cancel")
+    return POLLSUB
+
+@send_typing_action
+def poll_sub(update: Update, _: CallbackContext) -> int:
+    update.message.reply_text("yoo")
+    user = update.message.from_user
+    userText=update.message.poll
+    q=userText.question
+    options=[o.text for o in userText.options]
+    corr=userText.correct_option_id
+    q=re.sub(Textstr2, "",q)
+    #corr=re.sub(Textstr2, "",corr)
+    for op in range(len(options)):
+    	options[op]=re.sub(Textstr2, "",options[op])
+    update.effective_message.reply_poll(
+            question= q,
+            options=options,
+            # with is_closed true, the poll/quiz is immediately closed
+            type=Poll.QUIZ,
+            correct_option_id =corr,
+            #explanation=Ex,
+            is_closed=True,
+            is_anonymous=False,
+            reply_markup=ReplyKeyboardRemove()
+    )
+    update.message.reply_text("send me more polls or /cancel")
+    return POLLSUB
+
+
+
+
+
+
+
+def cancel(update: Update, _: CallbackContext) -> int:
+    user = update.message.from_user
+    logger.info("User %s canceled the conversation.", user.first_name)
+    update.message.reply_text(
+        'Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove()
+    )
+
+    return ConversationHandler.END
+
+
 
 def main():
     bot_token=os.environ.get("BOT_TOKEN", "")
+    #bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
     updater = Updater(bot_token,use_context=True)
+    
+    conv_handler02 = ConversationHandler(
+        entry_points=[CommandHandler('sub', sub)],
+        states={
+            SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
+            POLLSUB: [MessageHandler(Filters.poll, poll_sub)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    
+    
     dp = updater.dispatcher
+    dp.add_handler(conv_handler02)
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('channels', channels))
     dp.add_handler(CommandHandler('owner', owner))
@@ -480,6 +559,7 @@ def main():
     dp.add_handler(CommandHandler('help', help_handler))
     dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CommandHandler('donate', donate))
+    
     #dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()

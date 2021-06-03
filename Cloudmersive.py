@@ -208,7 +208,7 @@ def receive_quiz_answer(update, context):
         try:
             quiz_data = context.bot_data[update.poll.id]
         # this means this poll answer update is from an old poll, we can't stop it then
-        except KeyError:
+        except KeyError: 
             return
         context.bot.stop_poll(quiz_data["chat_id"], quiz_data["message_id"])
 i=0
@@ -528,9 +528,10 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
 
 #@run_async
 @send_typing_action
-def sub_exp(update: Update, _: CallbackContext) -> int:
+def poll_exp(update: Update, _: CallbackContext) -> int:
     update.message.reply_text("Send me your explanation.")
     return POLLEXPX
+
 exp=""
 @send_typing_action
 def poll_expx(update: Update, _: CallbackContext) -> int:

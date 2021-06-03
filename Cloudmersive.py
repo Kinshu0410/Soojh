@@ -575,7 +575,7 @@ def main():
         states={
             SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
             POLLSUB: [MessageHandler(Filters.poll, poll_sub)],
-            POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace), CommandHandler('add_explanation', pollexp)],
+            POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace), CommandHandler('add_explanation', poll_exp)],
             POLLEXPS: [MessageHandler(Filters.regex('^.*$'), poll_exps)]
         },
         fallbacks=[CommandHandler('cancel', cancel)],

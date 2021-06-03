@@ -466,7 +466,7 @@ def help_handler(update, context):
     update.message.reply_text("send me a POLL" )
     update.message.reply_text(" I CAN CREATE.\n\n30 voting poll. \n             &\n OCR thing compcompletely shut down." )
 
-SUBQUIZ, POLLSUB , POLLREPLACE , POLLEXPX= range(4)
+SUBQUIZ, POLLSUB , POLLREPLACE , POLLEXPS= range(4)
 
 def sub(update: Update, _: CallbackContext) -> int:
     
@@ -530,11 +530,11 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
 @send_typing_action
 def poll_exp(update: Update, _: CallbackContext) -> int:
     update.message.reply_text("Send me your explanation.")
-    return POLLEXPX
+    return POLLEXPS
 
 exp=""
 @send_typing_action
-def poll_expx(update: Update, _: CallbackContext) -> int:
+def poll_exps(update: Update, _: CallbackContext) -> int:
     #update.message.reply_text("yoo")
     exp = update.message.text
     update.effective_message.reply_poll(

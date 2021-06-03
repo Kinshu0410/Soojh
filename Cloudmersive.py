@@ -484,7 +484,7 @@ def sub_quiz(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global Textstr2
     Textstr2=update.message.text
-    update.message.reply_text("Send me Text New text for empty use /nil or for cancel use /cancel")
+    update.message.reply_text("Send me Text \"NEW REPLACE TEXT\"\nfor empty use /nil\nfor cancel use /cancel")
     return POLLREPLACE
 
 Textstr3=""
@@ -494,7 +494,7 @@ def poll_replace(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global Textstr3
     Textstr3=update.message.text
-    update.message.reply_text("Send me 1 or more Polls or /cancel")
+    update.message.reply_text("Send me 1 or more Polls\nfor cancel All upcoming Commands use /cancel")
     if Textstr3=="/nil":
     	Textstr3=""
     return POLLSUB
@@ -502,7 +502,7 @@ def poll_replace(update: Update, _: CallbackContext) -> int:
 
 @send_typing_action
 def poll_sub(update: Update, _: CallbackContext) -> int:
-    update.message.reply_text("yoo")
+    #update.message.reply_text("yoo")
     user = update.message.from_user
     userText=update.message.poll
     q=userText.question
@@ -523,7 +523,7 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
             is_anonymous=False,
             reply_markup=ReplyKeyboardRemove()
     )
-    update.message.reply_text("send me more polls or /cancel")
+    #update.message.reply_text("send me more polls or /cancel")
     return POLLSUB
 
 

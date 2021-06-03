@@ -505,6 +505,9 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     #update.message.reply_text("yoo")
     user = update.message.from_user
     userText=update.message.poll
+    global q
+    global options
+    global corr
     q=userText.question
     options=[o.text for o in userText.options]
     corr=userText.correct_option_id

@@ -575,8 +575,8 @@ def main():
         entry_points=[CommandHandler('sub', sub)],
         states={
             SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
-            POLLSUB: [MessageHandler(Filters.poll, poll_sub)],
-            POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace), CommandHandler('add_explanation', poll_exp)],
+            POLLSUB: [MessageHandler(Filters.poll, poll_sub), CommandHandler('add_explanation', poll_exp)],
+            POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace)],
             POLLEXPS: [MessageHandler(Filters.regex('^.*$'), poll_exps)]
         },
         fallbacks=[CommandHandler('cancel', cancel)],

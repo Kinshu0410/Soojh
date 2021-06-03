@@ -466,7 +466,7 @@ def help_handler(update, context):
     update.message.reply_text("send me a POLL" )
     update.message.reply_text(" I CAN CREATE.\n\n30 voting poll. \n             &\n OCR thing compcompletely shut down." )
 
-SUBQUIZ, POLLSUB , POLLREPLACE= range(3)
+SUBQUIZ, POLLSUB , POLLREPLACE , POLLEXPX= range(4)
 
 def sub(update: Update, _: CallbackContext) -> int:
     
@@ -494,7 +494,7 @@ def poll_replace(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global Textstr3
     Textstr3=update.message.text
-    update.message.reply_text("Send me 1 or more Polls\nfor cancel All upcoming Commands use /cancel")
+    update.message.reply_text("Send me 1 or more Polls\nfor adding explanation use \add_explanation after poll\nfor cancel All upcoming Commands use /cancel")
     if Textstr3=="/nil":
     	Textstr3=""
     return POLLSUB
@@ -526,7 +526,29 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     #update.message.reply_text("send me more polls or /cancel")
     return POLLSUB
 
-
+#@run_async
+@send_typing_action
+def sub_exp(update: Update, _: CallbackContext) -> int:
+    update.message.reply_text("Send me your explanation.")
+    return POLLEXPX
+exp=""
+@send_typing_action
+def poll_expx(update: Update, _: CallbackContext) -> int:
+    #update.message.reply_text("yoo")
+    exp = update.message.text
+    update.effective_message.reply_poll(
+            question= q,
+            options=options,
+            # with is_closed true, the poll/quiz is immediately closed
+            type=Poll.QUIZ,
+            correct_option_id =corr,
+            explanation=exp,
+            is_closed=True,
+            is_anonymous=False,
+            reply_markup=ReplyKeyboardRemove()
+    )
+    #update.message.reply_text("send me more polls or /cancel")
+    return POLLSUB
 
 
 
@@ -553,7 +575,8 @@ def main():
         states={
             SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
             POLLSUB: [MessageHandler(Filters.poll, poll_sub)],
-            POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace)]
+            POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace), CommandHandler('add_explanation', pollexp)],
+            POLLEXPS: [MessageHandler(Filters.regex('^.*$'), poll_exps)]
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

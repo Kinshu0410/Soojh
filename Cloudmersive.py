@@ -490,7 +490,7 @@ def sub_quiz(update: Update, _: CallbackContext) -> int:
 Textstr3=""
 #@run_async
 @send_typing_action
-def sub_quiz(update: Update, _: CallbackContext) -> int:
+def poll_replace(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global Textstr3
     Textstr3=update.message.text

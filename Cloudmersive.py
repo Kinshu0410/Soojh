@@ -466,7 +466,7 @@ def help_handler(update, context):
     update.message.reply_text("send me a POLL" )
     update.message.reply_text(" I CAN CREATE.\n\n30 voting poll. \n             &\n OCR thing compcompletely shut down." )
 
-SUBQUIZ, POLLSUB = range(2)
+SUBQUIZ, POLLSUB , POLLREPLACE= range(3)
 
 def sub(update: Update, _: CallbackContext) -> int:
     
@@ -485,7 +485,20 @@ def sub_quiz(update: Update, _: CallbackContext) -> int:
     global Textstr2
     Textstr2=update.message.text
     update.message.reply_text("Send me 1 or more Polls or /cancel")
+    return POLLREPLACE
+
+Textstr3=""
+#@run_async
+@send_typing_action
+def sub_quiz(update: Update, _: CallbackContext) -> int:
+    user = update.message.from_user
+    global Textstr3
+    Textstr3=update.message.text
+    update.message.reply_text("Send me Text New text for empty use /nil or for cancel use /cancel")
+    if Textstr3=="/nil":
+    	Textstr3=""
     return POLLSUB
+
 
 @send_typing_action
 def poll_sub(update: Update, _: CallbackContext) -> int:
@@ -495,10 +508,10 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     q=userText.question
     options=[o.text for o in userText.options]
     corr=userText.correct_option_id
-    q=re.sub(Textstr2, "",q)
+    q=re.sub(Textstr2,Textstr3, q)
     #corr=re.sub(Textstr2, "",corr)
     for op in range(len(options)):
-    	options[op]=re.sub(Textstr2, "",options[op])
+    	options[op]=re.sub(Textstr2, Textstr3, options[op])
     update.effective_message.reply_poll(
             question= q,
             options=options,
@@ -541,6 +554,7 @@ def main():
             SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
             POLLSUB: [MessageHandler(Filters.poll, poll_sub)],
         },
+        POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace)],
         fallbacks=[CommandHandler('cancel', cancel)],
     )
     

@@ -494,7 +494,7 @@ def poll_replace(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global Textstr3
     Textstr3=update.message.text
-    update.message.reply_text("Send me 1 or more Polls\nfor adding explanation use \add_explanation after poll\nfor cancel All upcoming Commands use /cancel")
+    update.message.reply_text("Send me 1 or more Polls\nfor adding explanation use /add_explanation after poll\nfor cancel All upcoming Commands use /cancel")
     if Textstr3=="/nil":
     	Textstr3=""
     return POLLSUB

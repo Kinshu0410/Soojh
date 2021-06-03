@@ -422,7 +422,7 @@ def receive_poll(update, context):
     #update.message.reply_text("<pre>"+options[8]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[9]+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+cor+"</pre>",parse_mode=telegram.ParseMode.HTML)
-    
+    '''
     if ex == "":
         update.effective_message.reply_poll(
             question= q,
@@ -447,7 +447,7 @@ def receive_poll(update, context):
             is_closed=False,
             is_anonymous=True,
             reply_markup=ReplyKeyboardRemove()
-    )
+    )'''
     #update.message.reply_text("<pre>"+ex+"</pre>",parse_mode=telegram.ParseMode.HTML)
 
 

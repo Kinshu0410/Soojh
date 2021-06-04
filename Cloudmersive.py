@@ -578,10 +578,10 @@ def poll_exps(update: Update, _: CallbackContext) -> int:
 def cancel(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
-    global tar, Textstr2, Textstr3
+    global tar #, Textstr2, Textstr3
     tar=""
-    Textstr2=[]
-    Textstr3=[]
+    #Textstr2=[]
+    #Textstr3=[]
     update.message.reply_text(
         'Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove()
     )

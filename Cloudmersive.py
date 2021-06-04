@@ -466,37 +466,54 @@ def help_handler(update, context):
     update.message.reply_text("send me a POLL" )
     update.message.reply_text(" I CAN CREATE.\n\n30 voting poll. \n             &\n OCR thing compcompletely shut down." )
 
+
+
+
 SUBQUIZ, POLLSUB , POLLREPLACE , POLLEXPS= range(4)
 
 def sub(update: Update, _: CallbackContext) -> int:
-    
-
-    update.message.reply_text(
+    if i==0:
+    	update.message.reply_text(
         "Send me TEXT that you want me to Regrx.\n\nyou can study Regrx here\n\nhttps://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285"
-	)
+		)
+    elif i>0:
+    	update.message.reply_text("After "+Textstr2[i-1]+ " what you want me to replace you. You can text me only.")
 
     return SUBQUIZ
 
-Textstr2=""
+tsr=""
+i=0
+Textstr2=[]
 #@run_async
 @send_typing_action
 def sub_quiz(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global Textstr2
-    Textstr2=update.message.text
-    update.message.reply_text("Send me Text \"NEW REPLACE TEXT\"\nfor empty use /nil\nfor cancel use /cancel")
+    
+    Textstr2.append(update.message.text)
+    if i==0:
+    	update.message.reply_text("Send me Text \"NEW REPLACE TEXT\"\nfor empty use /nil\nfor cancel use /cancel")
+    
     return POLLREPLACE
 
-Textstr3=""
+Textstr3=[]
 #@run_async
 @send_typing_action
 def poll_replace(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global Textstr3
-    Textstr3=update.message.text
-    update.message.reply_text("Send me 1 or more Polls\nfor adding explanation use /add_explanation after poll\nfor cancel All upcoming Commands use /cancel")
-    if Textstr3=="/nil":
-    	Textstr3=""
+    global i
+    global tsr
+    Textstr3.append(update.message.text)
+    update.message.reply_text("List what you can do.\n1. Text(Replace)\n2. Poll (in poll for adding explanation use /add_explanation )\n3. /cancel")
+    
+    if True:
+    	tsr=tsr+"\n"+Textstr2[i]+" ➢ ➣ ➤ "+Textstr3[i]
+    	update.message.reply_text("Replace sequence\n\n"+tsr+ "\n\nLooking Good!")
+    if Textstr3[i]=="/nil":
+    	Textstr3[i]=""
+    i+=1
+
     return POLLSUB
 
 
@@ -511,10 +528,10 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     q=userText.question
     options=[o.text for o in userText.options]
     corr=userText.correct_option_id
-    q=re.sub(Textstr2,Textstr3, q)
-    #corr=re.sub(Textstr2, "",corr)
-    for op in range(len(options)):
-    	options[op]=re.sub(Textstr2, Textstr3, options[op])
+    for z in range(len(Textstr2)):
+	    q=re.sub(Textstr2[z],Textstr3[z], q)
+	    for op in range(len(options)):
+	    	options[op]=re.sub(Textstr2[z], Textstr3[z], options[op])
     update.effective_message.reply_poll(
             question= q,
             options=options,
@@ -578,7 +595,7 @@ def main():
         entry_points=[CommandHandler('sub', sub)],
         states={
             SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
-            POLLSUB: [MessageHandler(Filters.poll, poll_sub), CommandHandler('add_explanation', poll_exp)],
+            POLLSUB: [MessageHandler(Filters.poll, poll_sub), MessageHandler(Filters.regex('^.*$') & ~Filters.command, sub_quiz), CommandHandler('add_explanation', poll_exp)],
             POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace)],
             POLLEXPS: [MessageHandler(Filters.regex('^.*$'), poll_exps)]
         },

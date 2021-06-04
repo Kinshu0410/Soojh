@@ -530,6 +530,8 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     options=[o.text for o in userText.options]
     corr=userText.correct_option_id
     for z in range(len(Textstr2)):
+            print(Textstr2[z])
+            print(Textstr3[z])
 	    q=re.sub(Textstr2[z],Textstr3[z], q)
 	    for op in range(len(options)):
 	    	options[op]=re.sub(Textstr2[z], Textstr3[z], options[op])

@@ -578,8 +578,10 @@ def poll_exps(update: Update, _: CallbackContext) -> int:
 def cancel(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
-    global tar
+    global tar, Textstr2, Textstr3
     tar=""
+    Textstr2=[]
+    Textstr3=[]
     update.message.reply_text(
         'Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove()
     )
@@ -596,7 +598,7 @@ def main():
         entry_points=[CommandHandler('sub', sub)],
         states={
             SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
-            POLLSUB: [MessageHandler(Filters.poll, poll_sub), MessageHandler(Filters.regex('^.*$') & ~Filters.command, sub_quiz), CommandHandler('add_explanation', poll_exp)],
+            POLLSUB: [MessageHandler(Filters.poll, poll_sub), MessageHandler(Filters.regex('^.*$') & ~Filters.command, sub_quiz), CommandHandler('add_explanation', poll_exp), CommandHandler('cancel', cancel)],
             POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace)],
             POLLEXPS: [MessageHandler(Filters.regex('^.*$'), poll_exps)]
         },

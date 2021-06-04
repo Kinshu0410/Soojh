@@ -578,6 +578,8 @@ def poll_exps(update: Update, _: CallbackContext) -> int:
 def cancel(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
+    global tar
+    tar=""
     update.message.reply_text(
         'Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove()
     )
@@ -590,7 +592,6 @@ def main():
     bot_token=os.environ.get("BOT_TOKEN", "")
     #bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
     updater = Updater(bot_token,use_context=True)
-    
     conv_handler02 = ConversationHandler(
         entry_points=[CommandHandler('sub', sub)],
         states={

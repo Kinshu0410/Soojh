@@ -526,6 +526,7 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     global options
     global corr
     q=userText.question
+    q=re.sub("(\[\d{1,}/\d{1,}\] ){1,}((Q|)(\d{1,}|)(_|)(\d{1,}|)(\.|)( |)){1,}","",q)
     options=[o.text for o in userText.options]
     corr=userText.correct_option_id
     for z in range(len(Textstr2)):

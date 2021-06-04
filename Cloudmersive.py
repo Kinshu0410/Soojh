@@ -578,10 +578,11 @@ def poll_exps(update: Update, _: CallbackContext) -> int:
 def cancel(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
-    global tar #, Textstr2, Textstr3
-    tar=""
-    #Textstr2=[]
-    #Textstr3=[]
+    global tsr , Textstr2, Textstr3, i
+    tsr=""
+    i=0
+    Textstr2=[]
+    Textstr3=[]
     update.message.reply_text(
         'Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove()
     )
@@ -591,14 +592,14 @@ def cancel(update: Update, _: CallbackContext) -> int:
 
 
 def main():
-    bot_token=os.environ.get("BOT_TOKEN", "")
-    #bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
+    #bot_token=os.environ.get("BOT_TOKEN", "")
+    bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
     updater = Updater(bot_token,use_context=True)
     conv_handler02 = ConversationHandler(
         entry_points=[CommandHandler('sub', sub)],
         states={
             SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
-            POLLSUB: [MessageHandler(Filters.poll, poll_sub), MessageHandler(Filters.regex('^.*$') & ~Filters.command, sub_quiz), CommandHandler('add_explanation', poll_exp), CommandHandler('cancel', cancel)],
+            POLLSUB: [MessageHandler(Filters.poll, poll_sub), MessageHandler(Filters.regex('^.*$') & ~Filters.command, sub_quiz), CommandHandler('add_explanation', poll_exp)],
             POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace)],
             POLLEXPS: [MessageHandler(Filters.regex('^.*$'), poll_exps)]
         },

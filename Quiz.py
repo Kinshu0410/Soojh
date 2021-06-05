@@ -204,7 +204,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
 def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     global dbA
     answer = update.poll_answer
-    with open('/storage/emulated/0/ADM/result.py') as json_file:
+    with open('Result.text') as json_file:
     	dbA = json.load(json_file)
     	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
     	if Textstr not in list(dbA.keys()):
@@ -216,7 +216,7 @@ def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     		dbname['result'] = [x+4 for x in dbname['result']]
     	else:
     		dbname['result'] = [x-1 for x in dbname['result']]
-    	with open('/storage/emulated/0/ADM/result.py', 'w') as outfile:
+    	with open('Result.text', 'w') as outfile:
     		json.dump(dbA, outfile)
     	#print(str(dbA))
     	#print(str(dbname))
@@ -284,7 +284,7 @@ def result(update: Update, _: CallbackContext) -> int:
     global Textstr4
     userText=update.message.text
     Textstr1=userText
-    with open('/storage/emulated/0/ADM/result.py') as json_file:
+    with open('Result.text') as json_file:
     	dbA = json.load(json_file)
     	try:
     		db=dbA[Textstr4]
@@ -305,8 +305,8 @@ def result(update: Update, _: CallbackContext) -> int:
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
-    #bot_token=os.environ.get("BOT_TOKEN", "")
-    bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
+    bot_token=os.environ.get("BOT_TOKEN", "")
+    #bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
     updater = Updater(bot_token,use_context=True)
 
     # Get the dispatcher to register handlers

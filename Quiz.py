@@ -85,39 +85,24 @@ def gender(update: Update, _: CallbackContext) -> int:
 
 
 
-db = {}
-
-Que=""
-#question=""
-#options=""
-#correct_option_id=""
+i=0
 def photo(update: Update, _: CallbackContext) -> int:
     user = update.effective_message.poll
     '''photo_file = update.message.photo[-1].get_file()
     photo_file.download('user_photo.jpg')
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')'''
     global db
-    global we
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
-    	new=[{'que':user.question, 'op':[o.text for o in user.options], 'cor':user.correct_option_id}]
+    	new={'que':[], 'op':[], 'cor':[]}
     	if Textstr not in list(db.keys()):
-    		print("123")
     		db[Textstr]=new
-    		'''db[Textstr]=[]
-    		db[Textstr].append({'que':user.question, 'op':[o.text for o in user.options], 'cor':user.correct_option_id})'''
-    		
-    		with open('Newfile.text', 'w') as outfile:
-    			json.dump(db, outfile)
-    	else:
-    		db[Textstr].append(new)
-    		
-    		with open('Newfile.text', 'w') as outfile:
-    			json.dump(db, outfile)
-
-
-
-    #update.message.reply_text(Que)
+    	db[Textstr]['que'].append(user.question)
+    	db[Textstr]['op'].append([o.text for o in user.options])
+    	db[Textstr]['cor'].append(user.correct_option_id)
+    	print(db[Textstr])
+    	with open('Newfile.text', 'w') as outfile:
+    		json.dump(db, outfile)
     update.message.reply_text("Send me more polls or quiz using /skip")
     return PHOTO
 
@@ -125,14 +110,7 @@ def photo(update: Update, _: CallbackContext) -> int:
 def skip_photo(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s did not send a poll.", user.first_name)
-    with open('Newfile.text', 'w') as outfile:
-    	json.dump(db, outfile)
-    
-    #update.message.reply_text(db[Textstr][0]['que'])
-    #update.message.reply_text(db[Textstr]['op'])
-    #update.message.reply_text(db[Textstr]['cor'])
-
-    return LOCATION
+    return ConversationHandler.END
 
 i=0
 def location(update: Update, _: CallbackContext) -> int:
@@ -140,28 +118,8 @@ def location(update: Update, _: CallbackContext) -> int:
     user_location = update.message.text
     '''logger.info(
         "Location of %s: %f / %f", user.first_name, user_location.latitude, user_location.longitude
-    )'''
+ )'''
     
-    
-    if Textstr==user_location:
-    	print(Textstr)
-    	
-    	
-    else:
-    	update.message.reply_text("sorry")
-    
-    for p in db[Textstr]:
-         message = context.bot.send_poll(
-            update.effective_chat.id,
-            question=p[question],
-            options=p[options],
-            type=Poll.QUIZ,
-            correct_option_id=p[cor],
-            #explanation=options5,,
-            is_anonymous=False,
-            allows_multiple_answers=False,
-        )
-	
     return BIO
 
 
@@ -207,7 +165,7 @@ def playquiz(update: Update, _: CallbackContext) -> int:
 Textstr0=""
 def quiz(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
-   
+    global payload
     global Textstr0
     userText=update.message.text
     Textstr0=userText
@@ -215,39 +173,60 @@ def quiz(update: Update, _: CallbackContext) -> int:
     	db = json.load(json_file)
     	try:
     		update.message.reply_text("Quiz Play", reply_markup=ReplyKeyboardRemove(),)
-    		for X in range(len(db[Textstr0])):
-    			X=int(len(db[Textstr0]))-X-1
+    		for X in range(len(db[Textstr0]['que'])):
+    			global correct_option_id
+    			correct_option_id =db[Textstr0]['cor'][X]
     			if X==0:
-		    		for q in db[Textstr0]:
-		    			update.effective_message.reply_poll(
-		    			question=q['que'],
-		    			options=q['op'],
-		    			# with is_closed true, the poll/quiz is immediately closed
-		    			type=Poll.QUIZ,
-		    			correct_option_id =q['cor'],
-		    			#explanation=Ex,
-		    			is_closed=False,
-		    			is_anonymous=False,
-		    			reply_markup=ReplyKeyboardRemove()
-		    			)
-		    	else:
-		    		for p in db[Textstr0][X]:
-		    			update.effective_message.reply_poll(
-		    			question=p['que'],
-		    			options=p['op'],
-		    			# with is_closed true, the poll/quiz is immediately closed
-		    			type=Poll.QUIZ,
-		    			correct_option_id =p['cor'],
-		    			#explanation=Ex,
-		    			is_closed=False,
-		    			is_anonymous=False,
-		    			reply_markup=ReplyKeyboardRemove()
-		    			)
-	    			time.sleep(5)
+    				pass
+    			else:
+    				time.sleep(10)
+		    	message=update.effective_message.reply_poll(	
+		    		question=db[Textstr0]['que'][X],
+		    		options=db[Textstr0]['op'][X],
+		    		# with is_closed true, the poll/quiz is immediately closed
+		    		type=Poll.QUIZ,
+		    		correct_option_id =db[Textstr0]['cor'][X],
+		    		open_period=6,
+		    		#explanation=Ex,
+		    		is_closed=False,
+		    		is_anonymous=False,
+		    		
+		    		reply_markup=ReplyKeyboardRemove()
+		    		)
+		    	print(update.effective_chat.id)
+		    	print(str(message.poll))
+		    	
     	except:
-    		update.message.reply_text("Name not exist Or Quiz finish.", reply_markup=ReplyKeyboardRemove(),)
+    		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
 
     return ConversationHandler.END
+
+def receive_poll_answer(update: Update, context: CallbackContext) -> None:
+    global dbA
+    answer = update.poll_answer
+    with open('/storage/emulated/0/ADM/result.py') as json_file:
+    	dbA = json.load(json_file)
+    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
+    	if Textstr not in list(dbA.keys()):
+    		dbA[Textstr0]={}
+    	if answer.user.first_name not in list(dbA[Textstr0].keys()):
+    		dbA[Textstr0][answer.user.first_name]=newA
+    	dbname=dbA[Textstr0][answer.user.first_name]
+    	if dbname['so']==correct_option_id:
+    		dbname['result'] = [x+4 for x in dbname['result']]
+    	else:
+    		dbname['result'] = [x-1 for x in dbname['result']]
+    	with open('/storage/emulated/0/ADM/result.py', 'w') as outfile:
+    		json.dump(dbA, outfile)
+    	#print(str(dbA))
+    	#print(str(dbname))
+    	
+    
+
+    
+    
+
+
 
 def deletequiz(update: Update, _: CallbackContext) -> int:
     
@@ -288,10 +267,46 @@ def quizlist(update: Update, _: CallbackContext) -> int:
     	for L in range(len(List)):
     		update.message.reply_text(List[L])
 
+RESULT=range(1)
+
+def quizresult(update: Update, _: CallbackContext) -> int:
+    update.message.reply_text(
+        "Hello Quizers \nSend me a name of your quiz"
+	)
+    return RESULT
+
+Textstr4=""
+#@run_async
+@send_typing_action
+def result(update: Update, _: CallbackContext) -> int:
+    user = update.message.from_user
+   
+    global Textstr4
+    userText=update.message.text
+    Textstr1=userText
+    with open('/storage/emulated/0/ADM/result.py') as json_file:
+    	dbA = json.load(json_file)
+    	try:
+    		db=dbA[Textstr4]
+    		
+    	except:
+    		pass
+    	
+    	
+    	update.message.reply_text("Quiz "+Textstr1+" deleted", reply_markup=ReplyKeyboardRemove(),)
+    		
+    	except:
+    		update.message.reply_text("Name not exist", reply_markup=ReplyKeyboardRemove(),)
+
+    return ConversationHandler.END
+
+
+
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
-    bot_token=os.environ.get("BOT_TOKEN", "")
+    #bot_token=os.environ.get("BOT_TOKEN", "")
+    bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
     updater = Updater(bot_token,use_context=True)
 
     # Get the dispatcher to register handlers
@@ -326,7 +341,16 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
-
+    
+    conv_handler03 = ConversationHandler(
+        entry_points=[CommandHandler('quizresult', quizresult)],
+        states={
+            DELETE: [MessageHandler(Filters.regex('^.*$'), delete)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))
+    
     dispatcher.add_handler(conv_handler)
     dispatcher.add_handler(conv_handler01)
     dispatcher.add_handler(conv_handler02)

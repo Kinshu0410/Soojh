@@ -789,7 +789,10 @@ def result(update: Update, _: CallbackContext) -> int:
 #@run_async
 @send_typing_action
 def downloadfile(update,context):
-    update.message.reply_text("playing")
+    try:
+        update.message.reply_text("playing")
+    except Exception as e:
+    	print(e)
     f = 'Newfile.text'
     print("1")
     chat_id=update.effective_chat.id

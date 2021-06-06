@@ -59,7 +59,7 @@ def send_typing_action(func):
     return command_func
 
 
-#@run_async
+@run_async
 @send_typing_action
 def createquiz(update: Update, _: CallbackContext) -> int:
     
@@ -71,6 +71,7 @@ def createquiz(update: Update, _: CallbackContext) -> int:
     return GENDER
 
 Textstr=""
+@run_async
 def gender(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("Gender of %s: %s", user.first_name, update.message.text)
@@ -86,6 +87,7 @@ def gender(update: Update, _: CallbackContext) -> int:
 
 
 i=0
+@run_async
 def photo(update: Update, _: CallbackContext) -> int:
     user = update.effective_message.poll
     '''photo_file = update.message.photo[-1].get_file()
@@ -106,7 +108,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     update.message.reply_text("Send me more polls or quiz using /skip")
     return PHOTO
 
-
+@run_async
 def skip_photo(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s did not send a poll.", user.first_name)
@@ -140,7 +142,7 @@ def bio(update: Update, _: CallbackContext) -> int:
 
     return ConversationHandler.END
 
-
+@run_async
 def cancel(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
@@ -163,6 +165,7 @@ def playquiz(update: Update, _: CallbackContext) -> int:
     return QUIZ
 
 Textstr0=""
+@run_async
 def quiz(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global payload
@@ -175,7 +178,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
     with open('Result.text', 'w') as outfile:
     	json.dump(dbA, outfile)
     	try:
-    		update.message.reply_text("Quiz Play", reply_markup=ReplyKeyboardRemove(),)
+    		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"'\n\n🖊 "+len(db[Textstr0]['que']+" questions\n⏱ 30 seconds per question\n📰 Votes are visible to group members only", reply_markup=ReplyKeyboardRemove(),)
     		for X in range(len(db[Textstr0]['que'])):
     			global correct_option_id
     			correct_option_id =db[Textstr0]['cor'][X]
@@ -184,7 +187,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
     			else:
     				time.sleep(30)
     			message=update.effective_message.reply_poll(	
-		    		question=db[Textstr0]['que'][X],
+		    		question=X+". "+db[Textstr0]['que'][X],
 		    		options=db[Textstr0]['op'][X],
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
@@ -221,7 +224,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
 	
 	
 
-
+@run_async
 def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     global dbA
     answer = update.poll_answer
@@ -251,7 +254,7 @@ def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     
 
 
-
+@run_async
 def deletequiz(update: Update, _: CallbackContext) -> int:
     
 
@@ -262,7 +265,7 @@ def deletequiz(update: Update, _: CallbackContext) -> int:
     return DELETE
 
 Textstr1=""
-#@run_async
+@run_async
 @send_typing_action
 def delete(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
@@ -283,6 +286,7 @@ def delete(update: Update, _: CallbackContext) -> int:
 
     return ConversationHandler.END
 
+@run_async
 def quizlist(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     with open('Newfile.text') as json_file:
@@ -303,6 +307,7 @@ def quizresult(update: Update, _: CallbackContext) -> int:
 
     return RESULT
 
+@run_async
 def result(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     userText=update.message.text

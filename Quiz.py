@@ -44,7 +44,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT = range(7)
+GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT, QUIZ2 = range(8)
 
 
 
@@ -178,16 +178,20 @@ def quiz(update: Update, _: CallbackContext) -> int:
     with open('Result.text', 'w') as outfile:
     	json.dump(dbA, outfile)
     	try:
-    		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+len(db[Textstr0]['que'])+" questions\n⏱ 30 seconds per question\n📰 Votes are visible to group members only", reply_markup=ReplyKeyboardRemove(),)
+    		
+    		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ 30 seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark", reply_markup=ReplyKeyboardRemove())
+    		
     		for X in range(len(db[Textstr0]['que'])):
     			global correct_option_id
     			correct_option_id =db[Textstr0]['cor'][X]
     			if X==0:
     				pass
     			else:
-    				time.sleep(30)
+    				pass
+    				#time.sleep(30)
+    			print("1")
     			message=update.effective_message.reply_poll(	
-		    		question=X+". "+db[Textstr0]['que'][X],
+		    		question=str(X+1)+". "+db[Textstr0]['que'][X],
 		    		options=db[Textstr0]['op'][X],
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
@@ -199,6 +203,10 @@ def quiz(update: Update, _: CallbackContext) -> int:
 		    		
 		    		reply_markup=ReplyKeyboardRemove()
 		    	)
+		    	time.sleep(30)
+    			#return QUIZ2
+    			
+    			
     		#time.sleep(10)
     		#global dab
 #    		dab=list(dbA)
@@ -227,6 +235,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
 #@run_async
 def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     global dbA
+    print("2")
     answer = update.poll_answer
     ##print(answer)
     with open('Result.text') as json_file:
@@ -242,7 +251,7 @@ def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     		dbname['result'] = [x+4 for x in dbname['result']]
     	else:
     		dbname['result'] = [x-1 for x in dbname['result']]
-    	#print(str(dbA))
+    	print(str(dbA))
     	with open('Result.text', 'w') as outfile:
     		json.dump(dbA, outfile)
     	print(str(dbA))
@@ -307,7 +316,7 @@ def quizresult(update: Update, _: CallbackContext) -> int:
 
     return RESULT
 
-run_async
+@run_async
 def result(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     userText=update.message.text
@@ -316,15 +325,15 @@ def result(update: Update, _: CallbackContext) -> int:
     try:
     	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!")
     	List=list(dbR[userText].keys())
-    	#print(str(List))
-    	for L in range(len(List)):
+    	P=len(List)
+    	for L in range(P):
     			Fname=dbR[userText][List[L]]['fname']
-    			print(Fname)	
+    			#print(Fname)	
     			Uname=dbR[userText][List[L]]['uname']
-    			print(Uname)
+    			#print(Uname)
     			Rs=dbR[userText][List[L]]['result'][0]
-    			print(Rs)
-    			update.message.reply_text(Fname+" gain "+str(Rs))
+    			#print(Rs)
+    			update.message.reply_text(Fname+" gain "+str(Rs)+"/"+str(P*4)+" Marks")
     except:
     	update.message.reply_text("quiz not found")
     return ConversationHandler.END
@@ -359,7 +368,6 @@ def main() -> None:
         entry_points=[CommandHandler('playquiz', playquiz)],
         states={
             QUIZ: [MessageHandler(Filters.regex('^.*$'), quiz)],
-            
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

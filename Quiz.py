@@ -44,7 +44,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT, QUIZ2 = range(8)
+GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT, TIME = range(8)
 
 
 
@@ -159,10 +159,22 @@ def playquiz(update: Update, _: CallbackContext) -> int:
     
 
     update.message.reply_text(
+        "Time in seconds. limit (5-600) "
+	)
+
+    return TIME
+Time=30
+def time0(update: Update, _: CallbackContext) -> int:
+    global Time
+    userText=update.message.text
+    Time=userText
+
+    update.message.reply_text(
         "Send me Quiz Name"
 	)
 
     return QUIZ
+
 
 Textstr0=""
 #@run_async
@@ -175,11 +187,11 @@ def quiz(update: Update, _: CallbackContext) -> int:
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     dbA={}
-    with open('Result.text', 'w') as outfile:
+    with open(Result.text, 'w') as outfile:
     	json.dump(dbA, outfile)
     	try:
     		
-    		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ 30 seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark", reply_markup=ReplyKeyboardRemove())
+    		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark", reply_markup=ReplyKeyboardRemove())
     		
     		for X in range(len(db[Textstr0]['que'])):
     			global correct_option_id
@@ -188,7 +200,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
     				pass
     			else:
     				pass
-    				#time.sleep(30)
+    				#time.sleep(int(Time))
     			print("1")
     			message=update.effective_message.reply_poll(	
 		    		question=str(X+1)+". "+db[Textstr0]['que'][X],
@@ -196,14 +208,14 @@ def quiz(update: Update, _: CallbackContext) -> int:
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
 		    		correct_option_id =db[Textstr0]['cor'][X],
-		    		open_period=30,
+		    		open_period=int(Time),
 		    		#explanation=Ex,
 		    		is_closed=False,
 		    		is_anonymous=False,
-		    		
-		    		reply_markup=ReplyKeyboardRemove()
+		    		reply_markup=ReplyKeyboardRemove(),
 		    	)
-		    	time.sleep(30)
+		    	time.sleep(int(Time))
+		    	
     			#return QUIZ2
     			
     			
@@ -232,13 +244,13 @@ def quiz(update: Update, _: CallbackContext) -> int:
 	
 	
 
-#@run_async
+@run_async
 def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     global dbA
     print("2")
     answer = update.poll_answer
     ##print(answer)
-    with open('Result.text') as json_file:
+    with open(Result.text) as json_file:
     	dbA = json.load(json_file)
     	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
     	if Textstr0 not in list(dbA.keys()):
@@ -252,7 +264,7 @@ def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     	else:
     		dbname['result'] = [x-1 for x in dbname['result']]
     	print(str(dbA))
-    	with open('Result.text', 'w') as outfile:
+    	with open(Result.text, 'w') as outfile:
     		json.dump(dbA, outfile)
     	print(str(dbA))
     	##print(str(dbname))
@@ -315,17 +327,20 @@ def quizresult(update: Update, _: CallbackContext) -> int:
 	)
 
     return RESULT
-
+re=""
 @run_async
 def result(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     userText=update.message.text
-    with open('Result.text') as json_file:
+    global re
+    with open(Result.text) as json_file:
     	dbR = json.load(json_file)
+    with open('Newfile.text') as json_file:
+    	db = json.load(json_file)
     try:
-    	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!")
     	List=list(dbR[userText].keys())
     	P=len(List)
+    	Q=len(db[userText]['que'])
     	for L in range(P):
     			Fname=dbR[userText][List[L]]['fname']
     			#print(Fname)	
@@ -333,7 +348,10 @@ def result(update: Update, _: CallbackContext) -> int:
     			#print(Uname)
     			Rs=dbR[userText][List[L]]['result'][0]
     			#print(Rs)
-    			update.message.reply_text(Fname+" gain "+str(Rs)+"/"+str(P*4)+" Marks")
+    			re=re+"\n"+Fname+" gain "+str(Rs)+"/"+str(Q*4)+" Marks"
+    			print(re)
+    	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!\n\n"+str(len(db[userText]['que']))+" questions answered\n\n"+re)
+    	re=""
     except:
     	update.message.reply_text("quiz not found")
     return ConversationHandler.END
@@ -368,6 +386,7 @@ def main() -> None:
         entry_points=[CommandHandler('playquiz', playquiz)],
         states={
             QUIZ: [MessageHandler(Filters.regex('^.*$'), quiz)],
+            TIME: [MessageHandler(Filters.regex('^\d{1,}$'), time0)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

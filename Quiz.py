@@ -178,7 +178,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
     with open('Result.text', 'w') as outfile:
     	json.dump(dbA, outfile)
     	try:
-    		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"'\n\n🖊 "+len(db[Textstr0]['que']+" questions\n⏱ 30 seconds per question\n📰 Votes are visible to group members only", reply_markup=ReplyKeyboardRemove(),)
+    		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+len(db[Textstr0]['que'])+" questions\n⏱ 30 seconds per question\n📰 Votes are visible to group members only", reply_markup=ReplyKeyboardRemove(),)
     		for X in range(len(db[Textstr0]['que'])):
     			global correct_option_id
     			correct_option_id =db[Textstr0]['cor'][X]

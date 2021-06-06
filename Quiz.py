@@ -786,7 +786,7 @@ def result(update: Update, _: CallbackContext) -> int:
 
 
 
-@run_async
+#@run_async
 @send_typing_action
 def downloadfile(update,context):
     update.message.reply_text("playing")

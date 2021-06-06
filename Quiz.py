@@ -182,14 +182,14 @@ def quiz(update: Update, _: CallbackContext) -> int:
     			if X==0:
     				pass
     			else:
-    				time.sleep(10)
+    				time.sleep(30)
     			message=update.effective_message.reply_poll(	
 		    		question=db[Textstr0]['que'][X],
 		    		options=db[Textstr0]['op'][X],
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
 		    		correct_option_id =db[Textstr0]['cor'][X],
-		    		open_period=10,
+		    		open_period=30,
 		    		#explanation=Ex,
 		    		is_closed=False,
 		    		is_anonymous=False,

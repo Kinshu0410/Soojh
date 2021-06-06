@@ -865,8 +865,7 @@ def main() -> None:
     dispatcher.add_handler(conv_handler02)
     dispatcher.add_handler(conv_handler0R)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
-    dp=updater.dispatcher
-    dp.add_handler(CommandHandler('download',downloadfile))
+    dispatcher.add_handler(CommandHandler('download',downloadfile))
     # Start the Bot
     updater.start_polling()
 

@@ -789,18 +789,18 @@ def result(update: Update, _: CallbackContext) -> int:
 @run_async
 @send_typing_action
 def downloadfile(update,context):
-    f = 'Newfile.text'
+    f = 'https://github.com/kinshusharma0412/Soojh/blob/2f1fa5cd6bdbb2488d6199d61e72f2895d11bd5c/Newfile.text'
     print("1")
     chat_id=update.effective_chat.id
     print(chat_id)
-    with open(f, "rb") as file:
-    	context.bot.send_document(chat_id, document=file)
+    #with open(f, "rb") as file:
+    	#context.bot.send_document(chat_id, document=file)
      
-    	'''
-    	try:
-    		context.bot.send_document(chat_id, document=file)
-    	except Exception as e:
-    		print(e)'''
+    	
+    try:
+    	context.bot.send_document(chat_id, f)#document=file)
+    except Exception as e:
+    	print(e)
 
 
     

@@ -44,7 +44,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE = range(6)
+GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT = range(7)
 
 
 
@@ -100,7 +100,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     	db[Textstr]['que'].append(user.question)
     	db[Textstr]['op'].append([o.text for o in user.options])
     	db[Textstr]['cor'].append(user.correct_option_id)
-    	print(db[Textstr])
+    	#print(db[Textstr])
     	with open('Newfile.text', 'w') as outfile:
     		json.dump(db, outfile)
     update.message.reply_text("Send me more polls or quiz using /skip")
@@ -171,6 +171,9 @@ def quiz(update: Update, _: CallbackContext) -> int:
     Textstr0=userText
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
+    dbA={}
+    with open('Result.text', 'w') as outfile:
+    	json.dump(dbA, outfile)
     	try:
     		update.message.reply_text("Quiz Play", reply_markup=ReplyKeyboardRemove(),)
     		for X in range(len(db[Textstr0]['que'])):
@@ -180,46 +183,67 @@ def quiz(update: Update, _: CallbackContext) -> int:
     				pass
     			else:
     				time.sleep(10)
-		    	message=update.effective_message.reply_poll(	
+    			message=update.effective_message.reply_poll(	
 		    		question=db[Textstr0]['que'][X],
 		    		options=db[Textstr0]['op'][X],
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
 		    		correct_option_id =db[Textstr0]['cor'][X],
-		    		open_period=6,
+		    		open_period=10,
 		    		#explanation=Ex,
 		    		is_closed=False,
 		    		is_anonymous=False,
 		    		
 		    		reply_markup=ReplyKeyboardRemove()
-		    		)
-		    	print(update.effective_chat.id)
-		    	print(str(message.poll))
-		    	
+		    	)
+    		#time.sleep(10)
+    		#global dab
+#    		dab=list(dbA)
+#    		#print(str(dab))
+#    		List=list(dbA[Textstr0].keys())
+#    		for L in range(len(List)):
+#    			dab=dbA[Textstr0][L]
+#    			#print(dab)
+    		
+    		
+    		
+    		
+    		
+
+		    
     	except:
     		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
-
+    
+    #return RESULT
     return ConversationHandler.END
+
+
+	
+	
+
 
 def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     global dbA
     answer = update.poll_answer
+    ##print(answer)
     with open('Result.text') as json_file:
     	dbA = json.load(json_file)
     	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
-    	if Textstr not in list(dbA.keys()):
+    	if Textstr0 not in list(dbA.keys()):
     		dbA[Textstr0]={}
     	if answer.user.first_name not in list(dbA[Textstr0].keys()):
     		dbA[Textstr0][answer.user.first_name]=newA
     	dbname=dbA[Textstr0][answer.user.first_name]
+    	dbname['so']=answer.option_ids[0]
     	if dbname['so']==correct_option_id:
     		dbname['result'] = [x+4 for x in dbname['result']]
     	else:
     		dbname['result'] = [x-1 for x in dbname['result']]
+    	#print(str(dbA))
     	with open('Result.text', 'w') as outfile:
     		json.dump(dbA, outfile)
-    	#print(str(dbA))
-    	#print(str(dbname))
+    	print(str(dbA))
+    	##print(str(dbname))
     	
     
 
@@ -267,39 +291,38 @@ def quizlist(update: Update, _: CallbackContext) -> int:
     	for L in range(len(List)):
     		update.message.reply_text(List[L])
 
-RESULT=range(1)
 
+@run_async
+@send_typing_action
 def quizresult(update: Update, _: CallbackContext) -> int:
+    
+
     update.message.reply_text(
-        "Hello Quizers \nSend me a name of your quiz"
+        "Send me Quiz Name that you recently play."
 	)
+
     return RESULT
 
-Textstr4=""
-#@run_async
-@send_typing_action
 def result(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
-   
-    global Textstr4
     userText=update.message.text
-    Textstr1=userText
     with open('Result.text') as json_file:
-    	dbA = json.load(json_file)
-    	try:
-    		db=dbA[Textstr4]
-    		
-    	except:
-    		pass
-    	
-    	
-    	update.message.reply_text("Quiz "+Textstr1+" deleted", reply_markup=ReplyKeyboardRemove(),)
-    		
-    	except:
-    		update.message.reply_text("Name not exist", reply_markup=ReplyKeyboardRemove(),)
-
+    	dbR = json.load(json_file)
+    try:
+    	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!")
+    	List=list(dbR[userText].keys())
+    	#print(str(List))
+    	for L in range(len(List)):
+    			Fname=dbR[userText][List[L]]['fname']
+    			print(Fname)	
+    			Uname=dbR[userText][List[L]]['uname']
+    			print(Uname)
+    			Rs=dbR[userText][List[L]]['result'][0]
+    			print(Rs)
+    			update.message.reply_text(Fname+" gain "+str(Rs))
+    except:
+    	update.message.reply_text("quiz not found")
     return ConversationHandler.END
-
 
 
 
@@ -331,6 +354,7 @@ def main() -> None:
         entry_points=[CommandHandler('playquiz', playquiz)],
         states={
             QUIZ: [MessageHandler(Filters.regex('^.*$'), quiz)],
+            
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
@@ -342,18 +366,21 @@ def main() -> None:
         fallbacks=[CommandHandler('cancel', cancel)],
     )
     
-    conv_handler03 = ConversationHandler(
+    conv_handler0R = ConversationHandler(
         entry_points=[CommandHandler('quizresult', quizresult)],
         states={
-            DELETE: [MessageHandler(Filters.regex('^.*$'), delete)],
+            RESULT: [MessageHandler(Filters.regex('^.*$'), result)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
+    
+    
     dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))
     
     dispatcher.add_handler(conv_handler)
     dispatcher.add_handler(conv_handler01)
     dispatcher.add_handler(conv_handler02)
+    dispatcher.add_handler(conv_handler0R)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
     # Start the Bot
     updater.start_polling()

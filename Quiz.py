@@ -71,7 +71,7 @@ def createquiz(update: Update, _: CallbackContext) -> int:
     return GENDER
 
 Textstr=""
-@run_async
+#@run_async
 def gender(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("Gender of %s: %s", user.first_name, update.message.text)
@@ -87,7 +87,7 @@ def gender(update: Update, _: CallbackContext) -> int:
 
 
 i=0
-@run_async
+#@run_async
 def photo(update: Update, _: CallbackContext) -> int:
     user = update.effective_message.poll
     '''photo_file = update.message.photo[-1].get_file()
@@ -108,7 +108,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     update.message.reply_text("Send me more polls or quiz using /skip")
     return PHOTO
 
-@run_async
+#@run_async
 def skip_photo(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s did not send a poll.", user.first_name)
@@ -165,7 +165,7 @@ def playquiz(update: Update, _: CallbackContext) -> int:
     return QUIZ
 
 Textstr0=""
-@run_async
+#@run_async
 def quiz(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global payload
@@ -224,7 +224,7 @@ def quiz(update: Update, _: CallbackContext) -> int:
 	
 	
 
-@run_async
+#@run_async
 def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     global dbA
     answer = update.poll_answer
@@ -307,7 +307,7 @@ def quizresult(update: Update, _: CallbackContext) -> int:
 
     return RESULT
 
-@run_async
+run_async
 def result(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     userText=update.message.text

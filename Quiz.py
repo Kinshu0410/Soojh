@@ -786,6 +786,25 @@ def result(update: Update, _: CallbackContext) -> int:
 
 
 
+@run_async
+@send_typing_action
+def downloadfile(update,context):
+    f = '/storage/emulated/0/ADM/file.text'
+    print("1")
+    chat_id=update.effective_chat.id
+    print(chat_id)
+    with open(f, "rb") as file:
+    	context.bot.send_document(chat_id, document=file)
+     
+    	'''
+    	try:
+    		context.bot.send_document(chat_id, document=file)
+    	except Exception as e:
+    		print(e)'''
+
+
+    
+
 def main() -> None:
     # Create the Updater and pass it your bot's token.
     bot_token=os.environ.get("BOT_TOKEN", "")
@@ -842,6 +861,8 @@ def main() -> None:
     dispatcher.add_handler(conv_handler02)
     dispatcher.add_handler(conv_handler0R)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
+    dp=updater.dispatcher
+    dp.add_handler(CommandHandler('download',downloadfile))
     # Start the Bot
     updater.start_polling()
 
@@ -853,4 +874,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-#

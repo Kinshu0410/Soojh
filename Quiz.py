@@ -250,7 +250,7 @@ re=""
 def res(update: Update, context: CallbackContext) -> None:
     print("quiz finish")
     global re
-    dbR=dbA
+    dbR=json.load(dbA)
     print(str(dbR))
     print("gghhjj")
     with open('Newfile.text') as json_file:

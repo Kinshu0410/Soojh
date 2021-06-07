@@ -280,7 +280,7 @@ def res(update: Update, context: CallbackContext) -> None:
 	
 	
 
-@run_async
+#@run_async
 def receive_poll_answer(update: Update, context: CallbackContext) -> None:
     global dbA
     print("2")

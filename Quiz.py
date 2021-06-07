@@ -44,7 +44,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT, TIME = range(8)
+GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT, TIME, Re = range(9)
 
 
 
@@ -237,10 +237,42 @@ def quiz(update: Update, _: CallbackContext) -> int:
     	except:
     		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
     
-    #return RESULT
+    update.message.reply_text("/result")
+    try:
+    	return Re
+    except Exception as e:
+    	print(e)
+    
+
+
+
+re=""
+def res(update: Update, context: CallbackContext) -> None:
+    print("quiz finish")
+    global re
+    dbR=dbA
+    print(str(dbA))
+    print("gghhjj")
+    with open('Newfile.text') as json_file:
+    	db = json.load(json_file)
+    try:
+    	List=list(db[Textstr0].keys())
+    	P=len(List)
+    	print("P=="+P)
+    	for L in range(P):
+    			Fname=dbR[Textstr0][List[L]]['fname']
+    			#print(Fname)	
+    			Uname=dbR[Textstr0][List[L]]['uname']
+    			#print(Uname)
+    			Rs=dbR[Textstr0][List[L]]['result'][0]
+    			#print(Rs)
+    			re=re+"\n"+Fname+" gain "+str(Rs)+"/"+str(P*4)+" Marks"
+    			print(re)
+    	update.message.reply_text("🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+re)
+    	re=""
+    except:
+    	update.message.reply_text("quiz not found")
     return ConversationHandler.END
-
-
 	
 	
 
@@ -418,6 +450,7 @@ def main() -> None:
         states={
             QUIZ: [MessageHandler(Filters.regex('^.*$'), quiz)],
             TIME: [MessageHandler(Filters.regex('^\d{1,}$'), time0)],
+            Re:[CommandHandler('result', res)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

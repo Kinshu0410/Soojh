@@ -175,11 +175,12 @@ def time0(update: Update, _: CallbackContext) -> int:
 
     return QUIZ
 
-
+i=0
 Textstr0=""
 #@run_async
 def quiz(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
+    global i
     global payload
     global Textstr0
     userText=update.message.text
@@ -193,21 +194,17 @@ def quiz(update: Update, _: CallbackContext) -> int:
     		
     		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark", reply_markup=ReplyKeyboardRemove())
     		
-    		for X in range(len(db[Textstr0]['que'])):
+    		X=len(db[Textstr0]['que'])
+    		if i<X:
     			global correct_option_id
-    			correct_option_id =db[Textstr0]['cor'][X]
-    			if X==0:
-    				pass
-    			else:
-    				pass
-    				#time.sleep(int(Time))
+    			correct_option_id =db[Textstr0]['cor'][i]
     			print("1")
     			message=update.effective_message.reply_poll(	
-		    		question=str(X+1)+". "+db[Textstr0]['que'][X],
-		    		options=db[Textstr0]['op'][X],
+		    		question=str(i+1)+". "+db[Textstr0]['que'][i],
+		    		options=db[Textstr0]['op'][i],
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
-		    		correct_option_id =db[Textstr0]['cor'][X],
+		    		correct_option_id =db[Textstr0]['cor'][i],
 		    		open_period=int(Time),
 		    		#explanation=Ex,
 		    		is_closed=False,
@@ -215,24 +212,11 @@ def quiz(update: Update, _: CallbackContext) -> int:
 		    		reply_markup=ReplyKeyboardRemove(),
 		    	)
 		    	time.sleep(int(Time))
-		    	
-    			#return QUIZ2
-    			
-    			
-    		#time.sleep(10)
-    		#global dab
-#    		dab=list(dbA)
-#    		#print(str(dab))
-#    		List=list(dbA[Textstr0].keys())
-#    		for L in range(len(List)):
-#    			dab=dbA[Textstr0][L]
-#    			#print(dab)
-    		
-    		
-    		
-    		
-    		
-
+		    	i+=1
+		    	return QUIZ
+    		elif i==X:
+    			i=0
+    			return Re
 		    
     	except:
     		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)

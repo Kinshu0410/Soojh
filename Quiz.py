@@ -256,7 +256,7 @@ def res(update: Update, context: CallbackContext) -> None:
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     try:
-    	List=list(db[Textstr0].keys())
+    	List=list(dbR[Textstr0].keys())
     	P=len(List)
     	print("P is this "+P)
     	for L in range(P):

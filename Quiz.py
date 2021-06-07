@@ -251,14 +251,14 @@ def res(update: Update, context: CallbackContext) -> None:
     print("quiz finish")
     global re
     dbR=dbA
-    print(str(dbA))
+    print(str(dbR))
     print("gghhjj")
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     try:
     	List=list(db[Textstr0].keys())
     	P=len(List)
-    	print("P=="+P)
+    	print("P is this "+P)
     	for L in range(P):
     			Fname=dbR[Textstr0][List[L]]['fname']
     			#print(Fname)	

@@ -256,9 +256,11 @@ def res(update: Update, context: CallbackContext) -> None:
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     try:
-    	List=list(db[Textstr0].keys())
+    	List=list(db[Textstr0]['que'])
+    	Q=len(List)
+    	List=list(dbR[Textstr0].keys())
     	P=len(List)
-    	print("P=="+P)
+    	print(str(List))
     	for L in range(P):
     			Fname=dbR[Textstr0][List[L]]['fname']
     			#print(Fname)	
@@ -266,7 +268,7 @@ def res(update: Update, context: CallbackContext) -> None:
     			#print(Uname)
     			Rs=dbR[Textstr0][List[L]]['result'][0]
     			#print(Rs)
-    			re=re+"\n"+Fname+" gain "+str(Rs)+"/"+str(P*4)+" Marks"
+    			re=re+"\n"+Fname+" gain "+str(Rs)+"/"+str(Q*4)+" Marks"
     			print(re)
     	update.message.reply_text("🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+re)
     	re=""

@@ -198,7 +198,14 @@ def quiz(update,context):
     
     	try:
     		
-    		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark", reply_markup=ReplyKeyboardRemove())
+    		context.bot.send_message(chat_id=chatid, text="🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark", reply_markup=ReplyKeyboardRemove())
+    		mes=context.bot.send_message(chat_id=chatid, text="Quiz is about to start")
+    		time.sleep(3)
+    		for xooo in range(10):
+    			context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text=str(10-xooo))
+    			time.sleep(1)
+    			
+    		
     		
     		for X in range(len(db[Textstr0]['que'])):
     			

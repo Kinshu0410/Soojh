@@ -341,7 +341,8 @@ def receive_poll_answer(update,context):
 		    	context.bot.send_message(chat_id=chatid, text="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree)
     			re=""
 
-    	except:
+    	except Exception as e:
+		    print("e===="+str(e))
 		    context.bot.send_message(chat_id=chatid, text="quiz not found")
 	    		
 	    		

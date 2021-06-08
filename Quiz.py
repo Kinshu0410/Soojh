@@ -321,7 +321,7 @@ def receive_poll_answer(update,context):
     	print("bdR = "+str(dbR))
     	J=J+1
     	try:
-	    	context.bot.send_message(chat_id=chatid, text="☺️")
+	    	#context.bot.send_message(chat_id=chatid, text="☺️")
 	    	ree="yooooooko#"
 	    	
 	    	print("j = "+str(J))

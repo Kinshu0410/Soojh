@@ -24,7 +24,7 @@ from functools import wraps
 
 from telegram.ext.dispatcher import run_async
 
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, Poll, Update, ChatAction
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, Poll, Update, ChatAction, ParseMode
 from telegram.ext import (
     Updater,
     CommandHandler,
@@ -318,7 +318,7 @@ def receive_poll_answer(update,context):
     global mess
     answer = update.poll_answer
     poll_id = answer.poll_id
-    
+    print("answer"+str(answer))
     try:
         corec = context.bot_data[poll_id]["cor"][0]
         #print("questions ======="+questions)
@@ -370,10 +370,13 @@ def receive_poll_answer(update,context):
 		    			#print(Uname)
 		    			Rs=dbR[Textstr0][List[L]]['result'][0]
 		    			#print(Rs)
-		    			ree=ree+"\n"+str(Fname)+" gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    			ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\">"+str(Fname)+"</a>"+" gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			print(ree)
+		    			
+		    	
+		    			
 		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree
-		    	context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo)
+		    	context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
     			re=""
     			
 
@@ -462,9 +465,9 @@ def result(update: Update, _: CallbackContext) -> int:
     			#print(Uname)
     			Rs=dbR[userText][List[L]]['result'][0]
     			#print(Rs)
-    			re=re+"\n"+Fname+" gain "+str(Rs)+"/"+str(P*4)+" Marks"
+    			re=re+"\n"+"<a href=\"https://t.me/"+Uname+"\">"+Fname+"</a>"+" gain "+str(Rs)+"/"+str(P*4)+" Marks"
     			print(re)
-    	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!\n\n"+str(len(db[userText]['que']))+" questions answered\n\n"+re)
+    	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!\n\n"+str(len(db[userText]['que']))+" questions answered\n\n"+re,parse_mode=ParseMode.HTML)
     	re=""
     except:
     	update.message.reply_text("quiz not found")

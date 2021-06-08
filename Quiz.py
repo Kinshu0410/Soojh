@@ -288,6 +288,7 @@ j=0
 def receive_poll_answer(update,context):
     global dbR
     global j
+    global ree
     print("2")
     answer = update.poll_answer
     
@@ -318,7 +319,8 @@ def receive_poll_answer(update,context):
     	print("bdR = "+str(dbR))
     	try:
 	    	
-	    	ree=""
+	    	ree="yooooooko#"
+	    	print(ree)
 	    	if X==j+1:
     			j=0
     			print("j="+str(j))

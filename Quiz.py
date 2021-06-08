@@ -370,7 +370,7 @@ def receive_poll_answer(update,context):
 		    			#print(Uname)
 		    			Rs=dbR[Textstr0][List[L]]['result'][0]
 		    			#print(Rs)
-		    			ree=ree+"\n"+str(Fname)+" gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    			ree=ree+"\n"+<a href="https://t.me/"+Uname>+str(Fname)+</a>+" gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			print(ree)
 		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree
 		    	context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo)

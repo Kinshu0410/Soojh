@@ -179,13 +179,11 @@ def time0(update: Update, _: CallbackContext) -> int:
 
 Textstr0=""
 #@run_async
-def quiz(update: Update, _: CallbackContext) -> int:
+def quiz(update,context):
     user = update.message.from_user
     global payload
     global Textstr0
     global chatid
-    global J
-    J=0
     chatid=update.effective_chat.id
     userText=update.message.text
     Textstr0=userText
@@ -200,16 +198,19 @@ def quiz(update: Update, _: CallbackContext) -> int:
     		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark", reply_markup=ReplyKeyboardRemove())
     		
     		for X in range(len(db[Textstr0]['que'])):
-    			global correct_option_id
     			
+    			correct_option_id =db[Textstr0]['cor'][X],
+    			question=str(X+1)+". "+db[Textstr0]['que'][X]
+    			options=db[Textstr0]['op'][X]
     			if X==0:
     				pass
     			else:
     				pass
     				#time.sleep(int(Time))
     			print("1")
-    			message=update.effective_message.reply_poll(	
-		    		question=str(X+1)+". "+db[Textstr0]['que'][X],
+    			message = context.bot.send_poll(
+    				update.effective_chat.id,
+    				question=str(X+1)+". "+db[Textstr0]['que'][X],
 		    		options=db[Textstr0]['op'][X],
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
@@ -220,21 +221,28 @@ def quiz(update: Update, _: CallbackContext) -> int:
 		    		is_anonymous=False,
 		    		reply_markup=ReplyKeyboardRemove(),
 		    	)
+		    	print(update.effective_chat.id)
 		    	time.sleep(int(Time))
-		    	
-    			#return QUIZ2
+		    	try:
+		    		print("start")
+			    	payload = {
+				        message.poll.id: {
+				        	"cor": question,
+				            "options": options,
+				            "cor":correct_option_id,
+				            "message_id": message.message_id,
+				            "chat_id": update.effective_chat.id
+				        }
+			    	}
+			    	context.bot_data.update(payload)
+		    	except Exception as e:
+			    	print(e)
+			    	
+			    	
+			    	#return QUIZ2
     			
     			
-    		#time.sleep(10)
-    		#global dab
-#    		dab=list(dbA)
-#    		#print(str(dab))
-#    		List=list(dbA[Textstr0].keys())
-#    		for L in range(len(List)):
-#    			dab=dbA[Textstr0][L]
-#    			#print(dab)
-    		
-    		
+    	
     		
     		
     		
@@ -289,15 +297,12 @@ def res(update: Update, context: CallbackContext) -> None:
 #@run_async
 def receive_poll_answer(update,context):
     global dbR
-    global J
     global ree
-    
-    print("2")
     answer = update.poll_answer
     poll_id = answer.poll_id
     
     try:
-        questions = str(context.bot_data)
+        corec = context.bot_data[poll_id]["cor"][0]
         print("questions ======="+questions)
     # this means this poll answer update is from an old poll, we can't do our answering then
     except Exception as e:
@@ -310,7 +315,7 @@ def receive_poll_answer(update,context):
     	db = json.load(json_file)
     	
     	#print(dbR)
-    	corec=db[Textstr0]['cor'][J]
+    	
     	print(corec)
     	X=len(db[Textstr0]['que'])
     	print("X="+str(X))
@@ -329,15 +334,12 @@ def receive_poll_answer(update,context):
     	with open('Result.text', 'w') as outfile:
     		json.dump(dbR, outfile)
     	print("bdR = "+str(dbR))
-    	J=J+1
+    	
     	try:
 	    	#context.bot.send_message(chat_id=chatid, text="☺️")
-	    	ree="yooooooko#"
-	    	
-	    	print("j = "+str(J))
+	    	ree=""
 	    	print("correct options = "+str(corec))
-	    	if X==J:
-    			print("j=yoorop "+str(J))
+	    	if X==3:
 	    		List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	for L in range(P):

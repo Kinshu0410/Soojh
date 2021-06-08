@@ -370,7 +370,7 @@ def receive_poll_answer(update,context):
 		    			#print(Uname)
 		    			Rs=dbR[Textstr0][List[L]]['result'][0]
 		    			#print(Rs)
-		    			ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\">"+str(Fname)+"</a>"+" gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    			ree=ree+"\n"+f"{update.effective_user.mention_html()} gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			print(ree)
 		    			
 		    	

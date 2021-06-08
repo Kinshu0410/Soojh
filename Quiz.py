@@ -320,7 +320,7 @@ def receive_poll_answer(update,context):
     		json.dump(dbR, outfile)
     	print("bdR = "+str(dbR))
     	try:
-	    	
+	    	context.bot.send_message(chat_id=chatid, text="☺️")
 	    	ree="yooooooko#"
 	    	j=+1
 	    	print("j = "+str(j))

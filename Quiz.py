@@ -291,8 +291,18 @@ def receive_poll_answer(update,context):
     global dbR
     global J
     global ree
+    
     print("2")
     answer = update.poll_answer
+    poll_id = answer.poll_id
+    
+    try:
+        questions = context.bot_data[poll_id]
+        print("questions ======="+str(questions))
+    # this means this poll answer update is from an old poll, we can't do our answering then
+    except KeyError:
+        return
+    
     print("answer ======"+str(answer))
     with open('Result.text') as json_file:
     	dbR = json.load(json_file)

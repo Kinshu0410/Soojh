@@ -297,7 +297,7 @@ def receive_poll_answer(update,context):
     poll_id = answer.poll_id
     
     try:
-        questions = context.bot_data[poll_id]
+        questions = context.bot_data[poll_id].keys()
         print("questions ======="+str(list(questions)))
     # this means this poll answer update is from an old poll, we can't do our answering then
     except Exception as e:

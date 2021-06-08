@@ -298,10 +298,10 @@ def receive_poll_answer(update,context):
     
     try:
         questions = context.bot_data[poll_id]
-        print("questions ======="+questions)
+        print("questions ======="+str(questions))
     # this means this poll answer update is from an old poll, we can't do our answering then
     except Exception as e:
-        print("Exception as "+e)
+        print("Exception as "+str(e))
     
     print("answer ======"+str(answer))
     with open('Result.text') as json_file:

@@ -184,6 +184,8 @@ def quiz(update: Update, _: CallbackContext) -> int:
     global payload
     global Textstr0
     global chatid
+    global j
+    j=0
     chatid=update.effective_chat.id
     userText=update.message.text
     Textstr0=userText
@@ -320,11 +322,11 @@ def receive_poll_answer(update,context):
     	try:
 	    	
 	    	ree="yooooooko#"
+	    	j=+1
 	    	print("j = "+str(j))
 	    	print("correct options = "+str(corec))
-	    	if X==j+1:
-    			j=0
-    			print("j="+str(j))
+	    	if X==j:
+    			print("j=yoorop "+str(j))
 	    		List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	for L in range(P):
@@ -338,7 +340,7 @@ def receive_poll_answer(update,context):
 		    			print(ree)
 		    	context.bot.send_message(chat_id=chatid, text="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree)
     			re=""
-	    	j=+1
+
     	except:
 		    context.bot.send_message(chat_id=chatid, text="quiz not found")
 	    		

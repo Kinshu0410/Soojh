@@ -370,7 +370,7 @@ Textstr1=""
 @send_typing_action
 def delete(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
-   
+    print("from user ="+str(user))
     global Textstr1
     userText=update.message.text
     Textstr1=userText

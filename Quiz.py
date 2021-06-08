@@ -285,7 +285,7 @@ def res(update: Update, context: CallbackContext) -> None:
 
 j=0
 #@run_async
-def receive_poll_answer(update,context)
+def receive_poll_answer(update,context):
     global dbR
     global j
     print("2")

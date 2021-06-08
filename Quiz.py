@@ -293,7 +293,7 @@ def receive_poll_answer(update,context):
     global ree
     print("2")
     answer = update.poll_answer
-    
+    print("answer ======"+str(answer))
     with open('Result.text') as json_file:
     	dbR = json.load(json_file)
     with open('Newfile.text') as json_file:

@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 # pylint: disable=C0116
 # This program is dedicated to the public domain under the CC0 license.
@@ -175,14 +176,15 @@ def time0(update: Update, _: CallbackContext) -> int:
 
     return QUIZ
 
-i=0
+
 Textstr0=""
 #@run_async
 def quiz(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
-    global i
     global payload
     global Textstr0
+    global chatid
+    chatid=update.effective_chat.id
     userText=update.message.text
     Textstr0=userText
     with open('Newfile.text') as json_file:
@@ -190,21 +192,26 @@ def quiz(update: Update, _: CallbackContext) -> int:
     dbA={}
     with open('Result.text', 'w') as outfile:
     	json.dump(dbA, outfile)
+    
     	try:
     		
     		update.message.reply_text("🎲 Get ready for the quiz\'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark", reply_markup=ReplyKeyboardRemove())
     		
-    		X=len(db[Textstr0]['que'])
-    		if i<X:
+    		for X in range(len(db[Textstr0]['que'])):
     			global correct_option_id
-    			correct_option_id =db[Textstr0]['cor'][i]
+    			
+    			if X==0:
+    				pass
+    			else:
+    				pass
+    				#time.sleep(int(Time))
     			print("1")
     			message=update.effective_message.reply_poll(	
-		    		question=str(i+1)+". "+db[Textstr0]['que'][i],
-		    		options=db[Textstr0]['op'][i],
+		    		question=str(X+1)+". "+db[Textstr0]['que'][X],
+		    		options=db[Textstr0]['op'][X],
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
-		    		correct_option_id =db[Textstr0]['cor'][i],
+		    		correct_option_id =db[Textstr0]['cor'][X],
 		    		open_period=int(Time),
 		    		#explanation=Ex,
 		    		is_closed=False,
@@ -212,18 +219,31 @@ def quiz(update: Update, _: CallbackContext) -> int:
 		    		reply_markup=ReplyKeyboardRemove(),
 		    	)
 		    	time.sleep(int(Time))
-		    	i+=1
-		    	return QUIZ
-    		elif i==X:
-    			i=0
-    			return Re
+		    	
+    			#return QUIZ2
+    			
+    			
+    		#time.sleep(10)
+    		#global dab
+#    		dab=list(dbA)
+#    		#print(str(dab))
+#    		List=list(dbA[Textstr0].keys())
+#    		for L in range(len(List)):
+#    			dab=dbA[Textstr0][L]
+#    			#print(dab)
+    		
+    		
+    		
+    		
+    		
+
 		    
     	except:
     		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
     
-    update.message.reply_text("/result")
+    #update.message.reply_text("/result")
     try:
-    	return Re
+    	return ConversationHandler.END
     except Exception as e:
     	print(e)
     
@@ -262,32 +282,65 @@ def res(update: Update, context: CallbackContext) -> None:
     	update.message.reply_text("quiz not found")
     return ConversationHandler.END
 	
-	
 
+j=0
 #@run_async
 def receive_poll_answer(update: Update, context: CallbackContext) -> None:
-    global dbA
-    print("2")
+    global dbR
+    global j
+    #print("2")
     answer = update.poll_answer
-    ##print(answer)
+    
     with open('Result.text') as json_file:
-    	dbA = json.load(json_file)
+    	dbR = json.load(json_file)
+    with open('Newfile.text') as json_file:
+    	db = json.load(json_file)
+    	
+    	#print(dbR)
+    	corec=db[Textstr0]['cor'][j]
+    	#print(corec)
+    	X=len(db[Textstr0]['que'])
+    	#print("X="+str(X))
     	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
-    	if Textstr0 not in list(dbA.keys()):
-    		dbA[Textstr0]={}
-    	if answer.user.first_name not in list(dbA[Textstr0].keys()):
-    		dbA[Textstr0][answer.user.first_name]=newA
-    	dbname=dbA[Textstr0][answer.user.first_name]
+    	if Textstr0 not in list(dbR.keys()):
+    		dbR[Textstr0]={}
+    	if answer.user.first_name not in list(dbR[Textstr0].keys()):
+    		dbR[Textstr0][answer.user.first_name]=newA
+    	dbname=dbR[Textstr0][answer.user.first_name]
     	dbname['so']=answer.option_ids[0]
-    	if dbname['so']==correct_option_id:
+    	if dbname['so']==corec:
     		dbname['result'] = [x+4 for x in dbname['result']]
     	else:
     		dbname['result'] = [x-1 for x in dbname['result']]
-    	print(str(dbA))
+    	#print(str(dbR))
     	with open('Result.text', 'w') as outfile:
-    		json.dump(dbA, outfile)
-    	print(str(dbA))
-    	##print(str(dbname))
+    		json.dump(dbR, outfile)
+    	#print(str(dbR))
+    	try:
+	    	
+	    	ree=""
+	    	if X==j+1:
+    			j=0
+    			print("j="+str(j))
+	    		List=list(dbR[Textstr0].keys())
+		    	P=len(List)
+		    	for L in range(P):
+		    			Fname=dbR[Textstr0][List[L]]['fname']
+		    			#print(Fname)	
+		    			Uname=dbR[Textstr0][List[L]]['uname']
+		    			#print(Uname)
+		    			Rs=dbR[Textstr0][List[L]]['result'][0]
+		    			#print(Rs)
+		    			ree=ree+"\n"+str(Fname)+" gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    			print(ree)
+		    	context.bot.send_message(chat_id=chatid, text="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree)
+    			re=""
+	    	j=+1
+    	except:
+		    context.bot.send_message(chat_id=chatid, text="quiz not found")
+	    		
+	    		
+	    	
     	
     
 

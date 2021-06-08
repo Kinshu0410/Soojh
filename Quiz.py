@@ -184,8 +184,8 @@ def quiz(update: Update, _: CallbackContext) -> int:
     global payload
     global Textstr0
     global chatid
-    global j
-    j=0
+    global J
+    J=0
     chatid=update.effective_chat.id
     userText=update.message.text
     Textstr0=userText
@@ -289,7 +289,7 @@ def res(update: Update, context: CallbackContext) -> None:
 #@run_async
 def receive_poll_answer(update,context):
     global dbR
-    global j
+    global J
     global ree
     print("2")
     answer = update.poll_answer
@@ -300,7 +300,7 @@ def receive_poll_answer(update,context):
     	db = json.load(json_file)
     	
     	#print(dbR)
-    	corec=db[Textstr0]['cor'][j]
+    	corec=db[Textstr0]['cor'][J]
     	print(corec)
     	X=len(db[Textstr0]['que'])
     	print("X="+str(X))
@@ -319,14 +319,15 @@ def receive_poll_answer(update,context):
     	with open('Result.text', 'w') as outfile:
     		json.dump(dbR, outfile)
     	print("bdR = "+str(dbR))
+    	J=J+1
     	try:
 	    	context.bot.send_message(chat_id=chatid, text="☺️")
 	    	ree="yooooooko#"
-	    	j=+1
-	    	print("j = "+str(j))
+	    	
+	    	print("j = "+str(J))
 	    	print("correct options = "+str(corec))
-	    	if X==j:
-    			print("j=yoorop "+str(j))
+	    	if X==J:
+    			print("j=yoorop "+str(J))
 	    		List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	for L in range(P):

@@ -206,7 +206,7 @@ def quiz(update,context):
     				context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text=str(5-xooo))
     				time.sleep(1)
     			if xooo==5:
-    				context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text="")
+    				context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text="Best Of Luck 👍👍👍")
     				
     			
     			

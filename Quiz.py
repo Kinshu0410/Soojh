@@ -298,9 +298,9 @@ def receive_poll_answer(update,context):
     	
     	#print(dbR)
     	corec=db[Textstr0]['cor'][j]
-    	#print(corec)
+    	print(corec)
     	X=len(db[Textstr0]['que'])
-    	#print("X="+str(X))
+    	print("X="+str(X))
     	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
     	if Textstr0 not in list(dbR.keys()):
     		dbR[Textstr0]={}
@@ -315,7 +315,7 @@ def receive_poll_answer(update,context):
     	#print(str(dbR))
     	with open('Result.text', 'w') as outfile:
     		json.dump(dbR, outfile)
-    	#print(str(dbR))
+    	print("bdR = "+str(dbR))
     	try:
 	    	
 	    	ree=""

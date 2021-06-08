@@ -285,10 +285,10 @@ def res(update: Update, context: CallbackContext) -> None:
 
 j=0
 #@run_async
-def receive_poll_answer(update: Update, context: CallbackContext) -> None:
+def receive_poll_answer(update,context)
     global dbR
     global j
-    #print("2")
+    print("2")
     answer = update.poll_answer
     
     with open('Result.text') as json_file:

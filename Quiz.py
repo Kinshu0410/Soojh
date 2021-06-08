@@ -34,6 +34,7 @@ from telegram.ext import (
     PollHandler,
     ConversationHandler,
     CallbackContext,
+    
 )
 
 
@@ -184,6 +185,8 @@ def quiz(update,context):
     global payload
     global Textstr0
     global chatid
+    global J
+    J=0
     chatid=update.effective_chat.id
     userText=update.message.text
     Textstr0=userText
@@ -298,12 +301,14 @@ def res(update: Update, context: CallbackContext) -> None:
 def receive_poll_answer(update,context):
     global dbR
     global ree
+    global J
+    global mess
     answer = update.poll_answer
     poll_id = answer.poll_id
     
     try:
         corec = context.bot_data[poll_id]["cor"][0]
-        print("questions ======="+questions)
+        #print("questions ======="+questions)
     # this means this poll answer update is from an old poll, we can't do our answering then
     except Exception as e:
         print("Exception as "+str(e))
@@ -336,7 +341,10 @@ def receive_poll_answer(update,context):
     	print("bdR = "+str(dbR))
     	
     	try:
-	    	#context.bot.send_message(chat_id=chatid, text="☺️")
+    		if J==0:
+    			mess=context.bot.send_message(chat_id=chatid, text="RESULT")
+    			print("message ==="+str(mess.message_id))
+    		J=J+1
 	    	ree=""
 	    	print("correct options = "+str(corec))
 	    	if X==3:
@@ -351,8 +359,10 @@ def receive_poll_answer(update,context):
 		    			#print(Rs)
 		    			ree=ree+"\n"+str(Fname)+" gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			print(ree)
-		    	context.bot.send_message(chat_id=chatid, text="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree)
+		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree
+		    	context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo)
     			re=""
+    			
 
     	except Exception as e:
 		    print("e===="+str(e))

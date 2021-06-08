@@ -320,7 +320,7 @@ def receive_poll_answer(update,context):
     	try:
 	    	
 	    	ree="yooooooko#"
-	    	print(ree)
+	    	print("correct options = "+str(corec))
 	    	if X==j+1:
     			j=0
     			print("j="+str(j))

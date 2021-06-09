@@ -323,7 +323,7 @@ def res(update: Update, context: CallbackContext) -> None:
     	update.message.reply_text("quiz not found")
     return ConversationHandler.END
 	
-time.sleep(1)
+#time.sleep(1)
 print("Sleeping for one sec")
 #@run_async
 def receive_poll_answer(update,context):
@@ -333,7 +333,7 @@ def receive_poll_answer(update,context):
     global mess
     answer = update.poll_answer
     
-    time.sleep(2)
+    time.sleep(5)
     poll_id = answer.poll_id
     #print("answer"+str(answer))
     try:

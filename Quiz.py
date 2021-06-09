@@ -332,7 +332,7 @@ def receive_poll_answer(update,context):
     global J
     global mess
     answer = update.poll_answer
-    print(are(answer))
+    print(str(answer))
     time.sleep(5)
     poll_id = answer.poll_id
     #print("answer"+str(answer))

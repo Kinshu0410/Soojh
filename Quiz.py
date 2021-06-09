@@ -365,13 +365,13 @@ def receive_poll_answer(update,context):
 		    	P=len(List)
 		    	for L in range(P):
 		    			Fname=dbR[Textstr0][List[L]]['fname']
-		    			#print(Fname)	
+		    			Lname=dbR[Textstr0][List[L]]['lname']
 		    			Uname=dbR[Textstr0][List[L]]['uname']
 		    			#print(Uname)
 		    			Rs=dbR[Textstr0][List[L]]['result'][0]
 		    			#print(Rs)
 		    			if Uname is None:
-		    				ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\"><b>"+str(Fname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    				ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			else:
 		    				ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			print(ree)

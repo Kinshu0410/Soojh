@@ -325,7 +325,7 @@ def res(update: Update, context: CallbackContext) -> None:
 	
 
 
-#@run_async
+@run_async
 def receive_poll_answer(update,context):
     global dbR
     global ree

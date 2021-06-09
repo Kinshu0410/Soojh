@@ -68,7 +68,7 @@ def restricted(func):
     def wrapped(update, context, *args, **kwargs):
         userName = update.message.chat.username
         if userName not in LIST_OF_ADMINS:
-            print("Unauthorized access denied for {}.".format(user_id))
+            #print("Unauthorized access denied for {}.".format(user_id))
             return
         return func(update, context, *args, **kwargs)
     return wrapped
@@ -117,7 +117,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     	db[Textstr]['que'].append(user.question)
     	db[Textstr]['op'].append([o.text for o in user.options])
     	db[Textstr]['cor'].append(user.correct_option_id)
-    	#print(db[Textstr])
+    	##print(db[Textstr])
     	with open('Newfile.text', 'w') as outfile:
     		json.dump(db, outfile)
     update.message.reply_text("Send me more polls or quiz using /skip")
@@ -236,7 +236,7 @@ def quiz(update,context):
     			else:
     				pass
     				#time.sleep(int(Time))
-    			print("1")
+    			#print("1")
     			message = context.bot.send_poll(
     				update.effective_chat.id,
     				question=str(X+1)+". "+db[Textstr0]['que'][X],
@@ -250,10 +250,10 @@ def quiz(update,context):
 		    		is_anonymous=False,
 		    		reply_markup=ReplyKeyboardRemove(),
 		    	)
-		    	print(update.effective_chat.id)
+		    	#print(update.effective_chat.id)
 		    	time.sleep(int(Time))
 		    	try:
-		    		print("start")
+		    		#print("start")
 			    	payload = {
 				        message.poll.id: {
 				        	"cor": question,
@@ -265,7 +265,8 @@ def quiz(update,context):
 			    	}
 			    	context.bot_data.update(payload)
 		    	except Exception as e:
-			    	print(e)
+		    		pass
+			    	#print(e)
 			    	
 			    	
 			    	#return QUIZ2
@@ -284,20 +285,21 @@ def quiz(update,context):
     try:
     	return ConversationHandler.END
     except Exception as e:
-    	print(e)
+    	pass
+    	#print(e)
     
 
 
 
 re=""
 def res(update: Update, context: CallbackContext) -> None:
-    print("quiz finish")
+    #print("quiz finish")
     global re
     global dbR
     with open('Result.text') as json_file:
     	dbR = json.load(json_file)
-    print(str(dbR))
-    print("gghhjj")
+    #print(str(dbR))
+    #print("gghhjj")
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     try:
@@ -305,16 +307,16 @@ def res(update: Update, context: CallbackContext) -> None:
     	Q=len(List)
     	List=list(dbR[Textstr0].keys())
     	P=len(List)
-    	print(str(List))
+    	#print(str(List))
     	for L in range(P):
     			Fname=dbR[Textstr0][List[L]]['fname']
-    			#print(Fname)	
+    			##print(Fname)	
     			Uname=dbR[Textstr0][List[L]]['uname']
-    			#print(Uname)
+    			##print(Uname)
     			Rs=dbR[Textstr0][List[L]]['result'][0]
-    			#print(Rs)
+    			##print(Rs)
     			re=re+"\n"+Fname+" gain "+str(Rs)+"/"+str(Q*4)+" Marks"
-    			print(re)
+    			#print(re)
     	update.message.reply_text("🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+re)
     	re=""
     except:
@@ -331,25 +333,26 @@ def receive_poll_answer(update,context):
     global mess
     answer = update.poll_answer
     poll_id = answer.poll_id
-    print("answer"+str(answer))
+    #print("answer"+str(answer))
     try:
         corec = context.bot_data[poll_id]["cor"][0]
-        #print("questions ======="+questions)
+        ##print("questions ======="+questions)
     # this means this poll answer update is from an old poll, we can't do our answering then
     except Exception as e:
-        print("Exception as "+str(e))
+        pass
+        #print("Exception as "+str(e))
     
-    print("answer ======"+str(answer))
+    #print("answer ======"+str(answer))
     with open('Result.text') as json_file:
     	dbR = json.load(json_file)
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     	
-    	#print(dbR)
+    	##print(dbR)
     	
-    	print(corec)
+    	#print(corec)
     	X=len(db[Textstr0]['que'])
-    	print("X="+str(X))
+    	#print("X="+str(X))
     	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
     	if Textstr0 not in list(dbR.keys()):
     		dbR[Textstr0]={}
@@ -361,18 +364,18 @@ def receive_poll_answer(update,context):
     		dbname['result'] = [x+4 for x in dbname['result']]
     	else:
     		dbname['result'] = [x-1 for x in dbname['result']]
-    	#print(str(dbR))
+    	##print(str(dbR))
     	with open('Result.text', 'w') as outfile:
     		json.dump(dbR, outfile)
-    	print("bdR = "+str(dbR))
+    	#print("bdR = "+str(dbR))
     	
     	try:
     		if J==0:
     			mess=context.bot.send_message(chat_id=chatid, text="RESULT")
-    			print("message ==="+str(mess.message_id))
+    			#print("message ==="+str(mess.message_id))
     		J=J+1
 	    	ree=""
-	    	print("correct options = "+str(corec))
+	    	#print("correct options = "+str(corec))
 	    	if X==3:
 	    		List=list(dbR[Textstr0].keys())
 		    	P=len(List)
@@ -380,14 +383,14 @@ def receive_poll_answer(update,context):
 		    			Fname=dbR[Textstr0][List[L]]['fname']
 		    			Lname=dbR[Textstr0][List[L]]['lname']
 		    			Uname=dbR[Textstr0][List[L]]['uname']
-		    			#print(Uname)
+		    			##print(Uname)
 		    			Rs=dbR[Textstr0][List[L]]['result'][0]
-		    			#print(Rs)
+		    			##print(Rs)
 		    			if Uname is None:
 		    				ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			else:
 		    				ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
-		    			print(ree)
+		    			#print(ree)
 		    			
 		    	
 		    			
@@ -397,7 +400,7 @@ def receive_poll_answer(update,context):
     			
 
     	except Exception as e:
-		    print("e===="+str(e))
+		    #print("e===="+str(e))
 		    context.bot.send_message(chat_id=chatid, text="quiz not found")
 	    		
 	    		
@@ -424,7 +427,7 @@ Textstr1=""
 @send_typing_action
 def delete(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
-    print("from user ="+str(user))
+    #print("from user ="+str(user))
     global Textstr1
     userText=update.message.text
     Textstr1=userText
@@ -476,13 +479,13 @@ def result(update: Update, _: CallbackContext) -> int:
     	P=len(List)
     	for L in range(P):
     			Fname=dbR[userText][List[L]]['fname']
-    			#print(Fname)	
+    			##print(Fname)	
     			Uname=dbR[userText][List[L]]['uname']
-    			#print(Uname)
+    			##print(Uname)
     			Rs=dbR[userText][List[L]]['result'][0]
-    			#print(Rs)
+    			##print(Rs)
     			re=re+"\n"+"<a href=\"https://t.me/"+Uname+"\">"+Fname+"</a>"+" gain "+str(Rs)+"/"+str(P*4)+" Marks"
-    			print(re)
+    			#print(re)
     	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!\n\n"+str(len(db[userText]['que']))+" questions answered\n\n"+re,parse_mode=ParseMode.HTML)
     	re=""
     except:
@@ -494,9 +497,9 @@ def result(update: Update, _: CallbackContext) -> int:
 @send_typing_action
 def downloadfile(update,context):
     f = 'Newfile.text'
-    print("1")
+    #print("1")
     chat_id=update.effective_chat.id
-    print(chat_id)
+    #print(chat_id)
     with open(f, "rb") as file:
     	context.bot.send_document(chat_id, document=file)
      
@@ -504,15 +507,15 @@ def downloadfile(update,context):
     	try:
     		context.bot.send_document(chat_id, document=file)
     	except Exception as e:
-    		print(e)
+    		#print(e)
 '''
 #@run_async
 @send_typing_action
 def downloadfile(update,context):
     f = 'Newfile.text'
-    print("1")
+    #print("1")
     chat_id=update.effective_chat.id
-    print(chat_id)
+    #print(chat_id)
     #with open(f, "rb") as file:
     	#context.bot.send_document(chat_id, document=file)
      
@@ -520,7 +523,8 @@ def downloadfile(update,context):
     try:
     	context.bot.send_document(chat_id, open(f, "rb"))#document=file)
     except Exception as e:
-    	print(e)
+    	pass
+    	#print(e)
     
 UPLOAD =range(1)
 
@@ -537,7 +541,7 @@ def upload(update,context):
     except Exception:
     	pass
     global file_id
-    print("123345")
+    #print("123345")
     file_id = update.message.document.file_id
     newFile = context.bot.get_file(file_id)
     qwer=newFile.download(filename)

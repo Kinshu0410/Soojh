@@ -390,6 +390,7 @@ def receive_poll_answer(update,context):
 		    			##print(Rs)
 		    			if Uname is None:
 		    				ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    				Uname=None
 		    			else:
 		    				ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			#print(ree)

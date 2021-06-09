@@ -323,8 +323,8 @@ def res(update: Update, context: CallbackContext) -> None:
     	update.message.reply_text("quiz not found")
     return ConversationHandler.END
 	
-
-
+time.sleep(1)
+print("Sleeping for one sec")
 #@run_async
 def receive_poll_answer(update,context):
     global dbR

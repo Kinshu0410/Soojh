@@ -325,7 +325,7 @@ def res(update: Update, context: CallbackContext) -> None:
 	
 
 
-@run_async
+#@run_async
 def receive_poll_answer(update,context):
     global dbR
     global ree
@@ -376,7 +376,7 @@ def receive_poll_answer(update,context):
     		J=J+1
 	    	ree=""
 	    	#print("correct options = "+str(corec))
-	    	if X==3:
+	    	if X!=10000000:
 	    		List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	for L in range(P):

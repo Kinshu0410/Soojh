@@ -60,6 +60,18 @@ def send_typing_action(func):
 
     return command_func
 
+LIST_OF_ADMINS = ["Kinbin247"]
+
+def restricted(func):
+    @wraps(func)
+    def wrapped(update, context, *args, **kwargs):
+        userName = update.message.chat.username
+        if userName not in LIST_OF_ADMINS:
+            print("Unauthorized access denied for {}.".format(user_id))
+            return
+        return func(update, context, *args, **kwargs)
+    return wrapped
+
 
 @run_async
 @send_typing_action
@@ -370,7 +382,7 @@ def receive_poll_answer(update,context):
 		    			#print(Uname)
 		    			Rs=dbR[Textstr0][List[L]]['result'][0]
 		    			#print(Rs)
-		    			ree=ree+"\n"+f"{update.effective_user.mention_html()} gain "+str(Rs)+"/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    			ree=ree+"\n"+f"{update.effective_user.mention_html()} gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    			print(ree)
 		    			
 		    	
@@ -497,15 +509,40 @@ def downloadfile(update,context):
     print("1")
     chat_id=update.effective_chat.id
     print(chat_id)
-    #with open(f, "rb") as file:
-    	#context.bot.send_document(chat_id, document=file)
-     
-    	
     try:
-    	context.bot.send_document(chat_id, open(f, "rb"))#document=file)
+    	context.bot.send_document(chat_id, open(f, "rb"))
     except Exception as e:
     	print(e)
     
+UPLOAD =range(1)
+
+@send_typing_action
+def uploadfile(update,context):
+    update.message.reply_text("send me file.")
+    return UPLOAD
+    
+def upload(update,context):
+    global filename
+    filename="testing.text"
+    try:
+    	os.remove('testing.text')
+    except Exception:
+    	pass
+    global file_id
+    print("123345")
+    file_id = update.message.document.file_id
+    newFile = context.bot.get_file(file_id)
+    newFile.download(filename)
+    update.message.reply_text("photo upload")
+    return ConversationHandler.END
+#    try:
+#    	
+#    except Exception as e:
+#    	print(e)
+    
+
+
+
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -555,7 +592,13 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
-    
+    conv_handler0u = ConversationHandler(
+        entry_points=[CommandHandler('uploadfile', uploadfile)],
+        states={
+            UPLOAD: [MessageHandler(Filters.document, upload)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
     
     dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))
     
@@ -563,9 +606,11 @@ def main() -> None:
     dispatcher.add_handler(conv_handler01)
     dispatcher.add_handler(conv_handler02)
     dispatcher.add_handler(conv_handler0R)
+    dispatcher.add_handler(conv_handler0u)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
     dp=updater.dispatcher
-    dp.add_handler(CommandHandler('download',downloadfile))
+    dp.add_handler(CommandHandler('downloadfile',downloadfile))
+    
     # Start the Bot
     updater.start_polling()
 

@@ -540,7 +540,10 @@ def upload(update,context):
     print("123345")
     file_id = update.message.document.file_id
     newFile = context.bot.get_file(file_id)
-    newFile.download(filename)
+    qwer=newFile.download(filename)
+    with open(qwer) as json_file:
+    	dbq = json.load(json_file)
+    	print("1234566666666666665565="+str(dbq))
     update.message.reply_text("photo upload")
     return ConversationHandler.END
     

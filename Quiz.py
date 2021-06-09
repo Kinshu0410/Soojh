@@ -332,6 +332,8 @@ def receive_poll_answer(update,context):
     global J
     global mess
     answer = update.poll_answer
+    if J%5:
+        time.sleep(3)
     poll_id = answer.poll_id
     #print("answer"+str(answer))
     try:

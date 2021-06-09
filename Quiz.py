@@ -543,7 +543,11 @@ def upload(update,context):
     qwer=newFile.download(filename)
     with open(qwer) as json_file:
     	dbq = json.load(json_file)
-    	print("1234566666666666665565="+str(dbq))
+    dbw=""
+    with open('Newfile.text', 'w') as outfile:
+    	json.dump(dbw, outfile)
+    	json.dump(dbw, outfile)
+    
     update.message.reply_text("photo upload")
     return ConversationHandler.END
     

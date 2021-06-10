@@ -68,6 +68,7 @@ def restricted(func):
     def wrapped(update, context, *args, **kwargs):
         userName = update.message.chat.username
         if userName not in LIST_OF_ADMINS:
+            print("user "+userName)
             update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)
@@ -169,7 +170,7 @@ def cancel(update: Update, _: CallbackContext) -> int:
 
 
 @run_async
-#@restricted
+@restricted
 @send_typing_action
 def playquiz(update: Update, _: CallbackContext) -> int:
     

@@ -171,13 +171,11 @@ def cancel(update: Update, _: CallbackContext) -> int:
 @run_async
 @restricted
 @send_typing_action
-def playquiz(update: Update, _: CallbackContext) -> int:
+def playquiz(update,context):
     
-    #global Uid
-    #Uid=update.message.user_id
-    update.message.reply_text(
-        "Time in seconds. limit (5-600) "
-	)
+    global chatid
+    chatid=update.message.user_id
+    context.bot.send_message(chat_id=chatid, text="Time in seconds. limit (5-600) .")
 
     return TIME
 Time=30

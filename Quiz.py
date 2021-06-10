@@ -61,14 +61,14 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["Kinbin247"]
+LIST_OF_ADMINS = ["Kinbin247","imKkala", "amit_y11", "Gksgj", "ANKITAdidi", "Naaj6", "mr_abhiiii", "Selenasaffron", "Sid000123", "sohitk", "jai_hind_1", "Study_Quiz_India", "GK_Zone", "Maths_Quiz_Group", "Maths_Quiz_Notes"]
 
 def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
         userName = update.message.chat.username
         if userName not in LIST_OF_ADMINS:
-            #print("Unauthorized access denied for {}.".format(user_id))
+            update.message.reply_text("Unauthorized access denied for {}.".format(user_id))
             return
         return func(update, context, *args, **kwargs)
     return wrapped
@@ -169,6 +169,7 @@ def cancel(update: Update, _: CallbackContext) -> int:
 
 
 @run_async
+@restricted
 @send_typing_action
 def playquiz(update: Update, _: CallbackContext) -> int:
     
@@ -414,7 +415,7 @@ def receive_poll_answer(update,context):
     
     
 
-
+@restricted
 @run_async
 def deletequiz(update: Update, _: CallbackContext) -> int:
     
@@ -447,6 +448,7 @@ def delete(update: Update, _: CallbackContext) -> int:
 
     return ConversationHandler.END
 
+@restricted
 @run_async
 def quizlist(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
@@ -496,6 +498,7 @@ def result(update: Update, _: CallbackContext) -> int:
     return ConversationHandler.END
 
 '''
+@restricted
 @run_async
 @send_typing_action
 def downloadfile(update,context):
@@ -531,6 +534,7 @@ def downloadfile(update,context):
     
 UPLOAD =range(1)
 
+@restricted
 @send_typing_action
 def uploadfile(update,context):
     update.message.reply_text("send me file.")

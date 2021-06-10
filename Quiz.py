@@ -68,7 +68,7 @@ def restricted(func):
     def wrapped(update, context, *args, **kwargs):
         userName = update.message.chat.username
         if userName not in LIST_OF_ADMINS:
-            update.message.reply_text("Unauthorized access denied for {}.".format(update.effective_message.chat_id))
+            update.message.reply_text("Unauthorized access denied for "+f"{update.effective_user.mention_html()}+".",parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)
     return wrapped

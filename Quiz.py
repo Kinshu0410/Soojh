@@ -61,7 +61,7 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["Kinbin247","imKkala", "amit_y11", "Gksgj", "ANKITAdidi", "Naaj6", "mr_abhiiii", "Selenasaffron", "Sid000123", "sohitk", "jai_hind_1", "Study_Quiz_India", "GK_Zone", "Maths_Quiz_Group", "Maths_Quiz_Notes"]
+LIST_OF_ADMINS = ["Kinbin247", "sindhari", "Maths_Quiz_Group", "imKkala", "amit_y11", "Gksgj", "ANKITAdidi", "Naaj6", "mr_abhiiii", "Selenasaffron", "Sid000123", "sohitk", "jai_hind_1", "Study_Quiz_India", "GK_Zone", "Maths_Quiz_Group", "Maths_Quiz_Notes"]
 
 def restricted(func):
     @wraps(func)

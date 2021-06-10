@@ -169,7 +169,7 @@ def cancel(update: Update, _: CallbackContext) -> int:
 
 
 @run_async
-@restricted
+#@restricted
 @send_typing_action
 def playquiz(update: Update, _: CallbackContext) -> int:
     

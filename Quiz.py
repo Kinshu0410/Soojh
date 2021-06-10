@@ -174,7 +174,7 @@ def cancel(update: Update, _: CallbackContext) -> int:
 def playquiz(update,context):
     
     global chatid
-    chatid=update.message.user_id
+    chatid=update.message.user.id
     context.bot.send_message(chat_id=chatid, text="Time in seconds. limit (5-600) .")
 
     return TIME

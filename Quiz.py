@@ -173,8 +173,8 @@ def cancel(update: Update, _: CallbackContext) -> int:
 @send_typing_action
 def playquiz(update: Update, _: CallbackContext) -> int:
     
-    global Uid
-    Uid=update.message.user_id
+    #global Uid
+    #Uid=update.message.user_id
     update.message.reply_text(
         "Time in seconds. limit (5-600) "
 	)
@@ -420,8 +420,8 @@ def receive_poll_answer(update,context):
 @run_async
 def deletequiz(update: Update, _: CallbackContext) -> int:
     
-    global Uid
-    Uid=update.message.user_id
+    #global Uid
+    #Uid=update.message.user_id
     update.message.reply_text(
         "Hello Quizers \n\n Send me a name of your quiz you want to DELETE."
 	)
@@ -453,8 +453,8 @@ def delete(update: Update, _: CallbackContext) -> int:
 @restricted
 @run_async
 def quizlist(update: Update, _: CallbackContext) -> int:
-    global Uid
-    Uid=update.message.user_id
+    #global Uid
+    #Uid=update.message.user_id
     user = update.message.from_user
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
@@ -506,8 +506,8 @@ def result(update: Update, _: CallbackContext) -> int:
 @run_async
 @send_typing_action
 def downloadfile(update,context):
-    global Uid
-    Uid=update.message.user_id
+    #global Uid
+    #Uid=update.message.user_id
     f = 'Newfile.text'
     #print("1")
     chat_id=update.effective_chat.id
@@ -543,8 +543,8 @@ UPLOAD =range(1)
 @restricted
 @send_typing_action
 def uploadfile(update,context):
-    global Uid
-    Uid=update.message.user_id
+    #global Uid
+    #Uid=update.message.user_id
     update.message.reply_text("send me file.")
     return UPLOAD
 
@@ -652,4 +652,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-#

@@ -61,14 +61,13 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["Kinbin247", "sindhari",  "imKkala", "amit_y11", "Gksgj", "ANKITAdidi", "Naaj6", "mr_abhiiii", "Selenasaffron", "Sid000123", "sohitk", "jai_hind_1", "Study_Quiz_India", "GK_Zone", "Maths_Quiz_Group", "Maths_Quiz_Notes"]
+LIST_OF_ADMINS = ["Kinbin247","imKkala", "amit_y11", "Gksgj", "ANKITAdidi", "Naaj6", "mr_abhiiii", "Selenasaffron", "Sid000123", "sohitk", "jai_hind_1", "Study_Quiz_India", "GK_Zone", "Maths_Quiz_Notes"]
 
 def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
         userName = update.message.chat.username
         if userName not in LIST_OF_ADMINS:
-            print("user "+str(userName))
             update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)
@@ -336,7 +335,7 @@ def receive_poll_answer(update,context):
     global mess
     answer = update.poll_answer
     print(str(answer))
-    time.sleep(5)
+    time.sleep(3)
     poll_id = answer.poll_id
     #print("answer"+str(answer))
     try:

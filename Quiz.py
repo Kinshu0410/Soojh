@@ -210,7 +210,7 @@ def quiz(update,context):
     
     	try:
     		
-    		context.bot.send_message(chat_id=chatid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n<b>At least 1 voting for last three questions far calculating Results.</b>", parse_mode=telegram.ParseMode.HTML)
+    		context.bot.send_message(chat_id=chatid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n<b>At least 1 voting for last three questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
     		mes=context.bot.send_message(chat_id=chatid, text="Quiz is about to start")
     		time.sleep(2)
     		for xooo in range(6):

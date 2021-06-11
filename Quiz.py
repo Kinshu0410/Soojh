@@ -507,7 +507,7 @@ def time0c(update,context):
 def chn(update,context):
     global channelid
     channelid=update.message.text
-    channelid=reaaa.sub("https", "@", channelid)
+    channelid=reaaa.sub("(https|http)://t\.me/", "@", channelid)
     print(channelid)
     context.bot.send_message(chat_id=chatid, text="Send me Quiz Name")
 

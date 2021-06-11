@@ -562,7 +562,7 @@ def quizc(update,context):
     			try:
     					print("1")
 	    				message = context.bot.send_poll(
-	    					chat_id=int(channelid),
+	    					chat_id=channelid,
 	    					question=str(X+1)+". "+db[Textstr0]['que'][X],
 			    			options=db[Textstr0]['op'][X],
 			    			# with is_closed true, the poll/quiz is immediately closed

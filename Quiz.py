@@ -693,7 +693,7 @@ def receive_poll_answer(update,context):
 		    	Rs=dbR[Textstr0][List[L]]['result'][0]
 		    	##print(Rs)
 		    	if Uname is None:
-		    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    		ree=ree+"\n<b>{update.effective_user.mention_html()}<\b> gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    		Uname=None
 		    	else:
 		    		ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
@@ -701,7 +701,7 @@ def receive_poll_answer(update,context):
 		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
 	    	try:
 		     	if Y>=XY-3:
-		     		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
+		     		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=f(yo),parse_mode=ParseMode.HTML)
 		     		time.sleep(3)
 	    	except:
 	    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST 3 QUESTIONS \nSo Result won't COME this time.")

@@ -650,7 +650,7 @@ def quizc(update,context):
     				#time.sleep(int(Time))
     			#print("1")
     			message = context.bot.send_poll(
-    				channelid,
+    				update.effective_chat.id,
     				question=str(X+1)+". "+db[Textstr0]['que'][X],
 		    		options=db[Textstr0]['op'][X],
 		    		# with is_closed true, the poll/quiz is immediately closed
@@ -668,7 +668,7 @@ def quizc(update,context):
 		    		#print("start")
 			    	payload = {
 				        message.poll.id: {
-				        	"cor": question,
+				            "cor": question,
 				            "options": options,
 				            "cor":correct_option_id,
 				            "message_id": message.message_id,

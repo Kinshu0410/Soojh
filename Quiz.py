@@ -184,7 +184,7 @@ def time0(update,context):
     userText=update.message.text
     Time=userText
 
-    context.bot.send_message(chat_id=chatid,"Send me Quiz Name")
+    context.bot.send_message(chat_id=chatid, text="Send me Quiz Name")
 
     return QUIZ
 

@@ -507,6 +507,7 @@ def chn(update,context):
     global channelid
     channelid=update.message.text
     channelid=re.sub("https", "@", channelid)
+    print(channelid)
     context.bot.send_message(chat_id=chatid, text="Send me Quiz Name")
 
     return QUIZ

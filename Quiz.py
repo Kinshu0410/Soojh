@@ -397,7 +397,7 @@ def receive_poll_answer(update,context):
 		    	else:
 		    		ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    		
-		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree
+		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
 	    	try:
 		     	if XY>=Y-3:
 		     		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)

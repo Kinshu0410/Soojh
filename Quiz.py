@@ -210,15 +210,15 @@ def quiz(update,context):
     
     	try:
     		
-    		context.bot.send_message(chat_id=chatid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
-    		mes=context.bot.send_message(chat_id=chatid, text="Quiz is about to start")
+    		context.bot.send_message(chat_id="testing123215", text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
+    		mes=context.bot.send_message(chat_id="testing123215", text="Quiz is about to start")
     		time.sleep(2)
     		for xooo in range(6):
     			if xooo!=5:
-    				context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text=str(5-xooo))
+    				context.bot.editMessageText(chat_id="testing123215", message_id=mes.message_id, text=str(5-xooo))
     				time.sleep(1)
     			if xooo==5:
-    				context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text="Best Of Luck 👍👍👍")
+    				context.bot.editMessageText(chat_id="testing123215", message_id=mes.message_id, text="Best Of Luck 👍👍👍")
     				time.sleep(1)
     				
     			

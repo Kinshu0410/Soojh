@@ -276,11 +276,8 @@ def quiz(update,context):
     		
     		
     		
-
-		    
     	except Exception as e:
-    	        
-    	        print(e)
+    		print(e)
     		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
     
     #update.message.reply_text("/result")

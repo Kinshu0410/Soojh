@@ -108,7 +108,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     photo_file.download('user_photo.jpg')
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')'''
     global db
-    with open('/storage/emulated/0/ADM/Newfile.text') as json_file:
+    with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     	new={'que':[], 'op':[], 'cor':[]}
     	if Textstr not in list(db.keys()):
@@ -117,7 +117,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     	db[Textstr]['op'].append([o.text for o in user.options])
     	db[Textstr]['cor'].append(user.correct_option_id)
     	##print(db[Textstr])
-    	with open('/storage/emulated/0/ADM/Newfile.text', 'w') as outfile:
+    	with open('Newfile.text', 'w') as outfile:
     		json.dump(db, outfile)
     update.message.reply_text("Send me more polls or quiz using /skip")
     return PHOTO
@@ -201,7 +201,7 @@ def quiz(update,context):
     chatid=update.effective_chat.id
     userText=update.message.text
     Textstr0=userText
-    with open('/storage/emulated/0/ADM/Newfile.text') as json_file:
+    with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     dbA={}
     with open('Result.text', 'w') as outfile:
@@ -299,7 +299,7 @@ def res(update: Update, context: CallbackContext) -> None:
     	dbR = json.load(json_file)
     #print(str(dbR))
     #print("gghhjj")
-    with open('/storage/emulated/0/ADM/Newfile.text') as json_file:
+    with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     try:
     	List=list(db[Textstr0]['que'])
@@ -346,11 +346,11 @@ def delete(update: Update, _: CallbackContext) -> int:
     global Textstr1
     userText=update.message.text
     Textstr1=userText
-    with open('/storage/emulated/0/ADM/Newfile.text') as json_file:
+    with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     	try:
     		db.pop(Textstr1)
-    		with open('/storage/emulated/0/ADM/Newfile.text', 'w') as outfile:
+    		with open('Newfile.text', 'w') as outfile:
     			json.dump(db, outfile)
     		update.message.reply_text("Quiz "+Textstr1+" deleted", reply_markup=ReplyKeyboardRemove(),)
     		
@@ -365,7 +365,7 @@ def quizlist(update: Update, _: CallbackContext) -> int:
     #global Uid
     #Uid=update.message.user_id
     user = update.message.from_user
-    with open('/storage/emulated/0/ADM/Newfile.text') as json_file:
+    with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     	List=list(db.keys())
     	for L in range(len(List)):
@@ -390,7 +390,7 @@ def result(update: Update, _: CallbackContext) -> int:
     global re
     with open('Result.text') as json_file:
     	dbR = json.load(json_file)
-    with open('/storage/emulated/0/ADM/Newfile.text') as json_file:
+    with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     try:
     	List=list(dbR[userText].keys())
@@ -417,7 +417,7 @@ def result(update: Update, _: CallbackContext) -> int:
 def downloadfile(update,context):
     #global Uid
     #Uid=update.message.user_id
-    f = '/storage/emulated/0/ADM/Newfile.text'
+    f = 'Newfile.text'
     #print("1")
     chat_id=update.effective_chat.id
     #print(chat_id)
@@ -433,7 +433,7 @@ def downloadfile(update,context):
 #@run_async
 @send_typing_action
 def downloadfile(update,context):
-    f = '/storage/emulated/0/ADM/Newfile.text'
+    f = 'Newfile.text'
     #print("1")
     chat_id=update.effective_chat.id
     #print(chat_id)
@@ -472,7 +472,7 @@ def upload(update,context):
     with open(qwer) as json_file:
     	dbq = json.load(json_file)
     
-    with open('/storage/emulated/0/ADM/Newfile.text', 'w') as outfile:
+    with open('Newfile.text', 'w') as outfile:
     	#json.dump(dbw, outfile)
     	json.dump(dbq, outfile)
     
@@ -524,7 +524,7 @@ def quizc(update,context):
     
     userText=update.message.text
     Textstr0=userText
-    with open('/storage/emulated/0/ADM/Newfile.text') as json_file:
+    with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     dbA={}
     with open('Result.text', 'w') as outfile:
@@ -571,8 +571,8 @@ def quizc(update,context):
 			    			open_period=int(Time),
 			    			#explanation=Ex,
 			    			is_closed=False,
-			    			is_anonymous=True,
-			    			
+			    			is_anonymous=False,
+			    			reply_markup=ReplyKeyboardRemove(),	
 			    		)
 			    		print(5)
 			    		#print(update.effective_chat.id)
@@ -650,7 +650,7 @@ def receive_poll_answer(update,context):
     #print("answer ======"+str(answer))
     with open('Result.text') as json_file:
     	dbR = json.load(json_file)
-    with open('/storage/emulated/0/ADM/Newfile.text') as json_file:
+    with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     	
     	##print(dbR)
@@ -752,7 +752,7 @@ def main() -> None:
     
     
     conv_handler0C = ConversationHandler(
-        entry_points=[CommandHandler('playinchannel', playinc)],
+        entry_points=[CommandHandler('playingroup', playinc)],
         states={
         	CHN: [MessageHandler(Filters.regex('^.*$'), chn)],
             QUIZ: [MessageHandler(Filters.regex('^.*$'), quizc)],

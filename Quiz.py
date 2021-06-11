@@ -261,7 +261,7 @@ def quiz(update,context):
 				            "cor":correct_option_id,
 				            "message_id": message.message_id,
 				            "chat_id": update.effective_chat.id,
-				            "que_no":X
+				            "que_no":X+1
 				        }
 			    	}
 			    	context.bot_data.update(payload)
@@ -383,33 +383,31 @@ def receive_poll_answer(update,context):
     		J=J+1
 	    	ree=""
 	    	#print("correct options = "+str(corec))
-	    	if XY!=10000000:
-	    		List=list(dbR[Textstr0].keys())
-		    	P=len(List)
-		    	for L in range(P):
-		    			Fname=dbR[Textstr0][List[L]]['fname']
-		    			Lname=dbR[Textstr0][List[L]]['lname']
-		    			Uname=dbR[Textstr0][List[L]]['uname']
-		    			##print(Uname)
-		    			Rs=dbR[Textstr0][List[L]]['result'][0]
-		    			##print(Rs)
-		    			if Uname is None:
-		    				ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
-		    				Uname=None
-		    			else:
-		    				ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
-		    			#print(ree)
-		    			
-		    	
-		    			
+	    	List=list(dbR[Textstr0].keys())
+	    	P=len(List)
+	    	for L in range(P):
+		    	Fname=dbR[Textstr0][List[L]]['fname']
+		    	Lname=dbR[Textstr0][List[L]]['lname']
+		    	Uname=dbR[Textstr0][List[L]]['uname']
+		    	##print(Uname)
+		    	Rs=dbR[Textstr0][List[L]]['result'][0]
+		    	##print(Rs)
+		    	if Uname is None:
+		    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    		Uname=None
+		    	else:
+		    		ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    		
 		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree
-		    	context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
-    			re=""
-    			
-
     	except Exception as e:
 		    #print("e===="+str(e))
 		    context.bot.send_message(chat_id=chatid, text="quiz not found")
+    	try:
+		    if XY==Y:
+		    	time.sleep(5)
+		    	context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
+    	except:
+    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT last Que Ans So no Result.")
 	    		
 	    		
 	    	

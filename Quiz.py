@@ -175,7 +175,7 @@ def playquiz(update,context):
     
     global chatid
     chatid=update.message.chat.id
-    context.bot.send_message(chat_id=chatid, text="Time in seconds. limit (5-600) .")
+    context.bot.send_message(chat_id="@testing123215", text="Time in seconds. limit (5-600) .")
 
     return TIME
 Time=30

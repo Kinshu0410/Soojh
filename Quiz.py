@@ -499,14 +499,14 @@ def time0c(update,context):
     userText=update.message.text
     Time=userText
 
-    context.bot.send_message(chat_id=chatid, text="Send me channel id")
+    context.bot.send_message(chat_id=chatid, text="Send me group username")
     return CHN
 
 @run_async
 def chn(update,context):
     global channelid
     channelid=update.message.text
-
+    channelid=re.sub("https://t.me/", "@", channelid)
     context.bot.send_message(chat_id=chatid, text="Send me Quiz Name")
 
     return QUIZ

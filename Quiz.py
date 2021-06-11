@@ -191,7 +191,7 @@ def time0(update,context):
 
 
 Textstr0=""
-@run_async
+#@run_async
 def quiz(update,context):
     user = update.message.from_user
     global payload

@@ -571,6 +571,139 @@ def upload(update,context):
     return ConversationHandler.END
     
 
+CHN =range(1)
+
+@run_async
+@restricted
+@send_typing_action
+def playinc(update,context):
+    
+    global chatid
+    chatid=update.message.chat.id
+    context.bot.send_message(chat_id=chatid, text="Time in seconds. limit (5-600) .")
+
+    return TIME
+Time=30
+@run_async
+def time0c(update,context):
+    global Time
+    userText=update.message.text
+    Time=userText
+
+    context.bot.send_message(chat_id=chatid, text="Send me channel id")
+    return CHN
+
+@run_async
+def chn(update,context):
+    global channelid
+    channelid=update.message.text
+
+    context.bot.send_message(chat_id=chatid, text="Send me Quiz Name")
+
+    return QUIZ
+
+
+Textstr0=""
+#@run_async
+def quizc(update,context):
+    user = update.message.from_user
+    global payload
+    global Textstr0
+    global J
+    global chatid
+    J=0
+    
+    userText=update.message.text
+    Textstr0=userText
+    with open('Newfile.text') as json_file:
+    	db = json.load(json_file)
+    dbA={}
+    with open('Result.text', 'w') as outfile:
+    	json.dump(dbA, outfile)
+    
+    	try:
+    		
+    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
+    		mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
+    		time.sleep(2)
+    		for xooo in range(6):
+    			if xooo!=5:
+    				context.bot.editMessageText(chat_id=channelid, message_id=mes.message_id, text=str(5-xooo))
+    				time.sleep(1)
+    			if xooo==5:
+    				context.bot.editMessageText(chat_id=channelid, message_id=mes.message_id, text="Best Of Luck 👍👍👍")
+    				time.sleep(1)
+    				
+    			
+    			
+    		
+    		
+    		for X in range(len(db[Textstr0]['que'])):
+    			
+    			correct_option_id =db[Textstr0]['cor'][X],
+    			question=str(X+1)+". "+db[Textstr0]['que'][X]
+    			options=db[Textstr0]['op'][X]
+    			if X==0:
+    				pass
+    			else:
+    				pass
+    				#time.sleep(int(Time))
+    			#print("1")
+    			message = context.bot.send_poll(
+    				channelid,
+    				question=str(X+1)+". "+db[Textstr0]['que'][X],
+		    		options=db[Textstr0]['op'][X],
+		    		# with is_closed true, the poll/quiz is immediately closed
+		    		type=Poll.QUIZ,
+		    		correct_option_id =db[Textstr0]['cor'][X],
+		    		open_period=int(Time),
+		    		#explanation=Ex,
+		    		is_closed=False,
+		    		is_anonymous=False,
+		    		reply_markup=ReplyKeyboardRemove(),
+		    	)
+		    	#print(update.effective_chat.id)
+		    	time.sleep(int(Time))
+		    	try:
+		    		#print("start")
+			    	payload = {
+				        message.poll.id: {
+				        	"cor": question,
+				            "options": options,
+				            "cor":correct_option_id,
+				            "message_id": message.message_id,
+				            "chat_id": update.effective_chat.id,
+				            "que_no":X+1
+				        }
+			    	}
+			    	context.bot_data.update(payload)
+			    	chatid=channelid
+		    	except Exception as e:
+		    		pass
+			    	#print(e)
+			    	
+			    	
+			    	#return QUIZ2
+    			
+    			
+    	
+    		
+    		
+    		
+
+		    
+    	except:
+    		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
+    
+    #update.message.reply_text("/result")
+    try:
+    	return ConversationHandler.END
+    except Exception as e:
+    	pass
+    	#print(e)
+    
+
+
 
 
 def main() -> None:
@@ -606,6 +739,21 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
+    
+    
+    
+    conv_handler0C = ConversationHandler(
+        entry_points=[CommandHandler('playinchannel', playinc)],
+        states={
+        	CHN: [MessageHandler(Filters.regex('^.*$'), chn)],
+            QUIZ: [MessageHandler(Filters.regex('^.*$'), quizc)],
+            TIME: [MessageHandler(Filters.regex('^\d{1,}$'), time0c)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    
+    
+    
     conv_handler02 = ConversationHandler(
         entry_points=[CommandHandler('deletequiz', deletequiz)],
         states={
@@ -635,6 +783,7 @@ def main() -> None:
     
     dispatcher.add_handler(conv_handler)
     dispatcher.add_handler(conv_handler01)
+    dispatcher.add_handler(conv_handler0C)
     dispatcher.add_handler(conv_handler02)
     dispatcher.add_handler(conv_handler0R)
     dispatcher.add_handler(conv_handler0u)

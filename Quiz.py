@@ -717,8 +717,8 @@ def receive_poll_answer(update,context):
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
-    #bot_token=os.environ.get("BOT_TOKEN", "")
-    bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
+    bot_token=os.environ.get("BOT_TOKEN", "")
+    #bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
     updater = Updater(bot_token,use_context=True)
 
     # Get the dispatcher to register handlers

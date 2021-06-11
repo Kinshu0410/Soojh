@@ -175,18 +175,16 @@ def playquiz(update,context):
     
     global chatid
     chatid=update.message.chat.id
-    update.send_message(chat_id='@testing123215', text="Time in seconds. limit (5-600) .")
+    context.bot.send_message(chat_id=chatid, text="Time in seconds. limit (5-600) .")
 
     return TIME
 Time=30
-def time0(update: Update, _: CallbackContext) -> int:
+def time0(update,context):
     global Time
     userText=update.message.text
     Time=userText
 
-    update.message.reply_text(
-        "Send me Quiz Name"
-	)
+    context.bot.send_message(chat_id=chatid,"Send me Quiz Name")
 
     return QUIZ
 

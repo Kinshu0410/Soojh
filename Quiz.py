@@ -260,7 +260,8 @@ def quiz(update,context):
 				            "options": options,
 				            "cor":correct_option_id,
 				            "message_id": message.message_id,
-				            "chat_id": update.effective_chat.id
+				            "chat_id": update.effective_chat.id,
+				            "que_no":X
 				        }
 			    	}
 			    	context.bot_data.update(payload)
@@ -334,11 +335,14 @@ def receive_poll_answer(update,context):
     answe=update
     answer = update.poll_answer
     print(str(answe))
-    time.sleep(3)
+    #time.sleep(3)
     poll_id = answer.poll_id
     #print("answer"+str(answer))
     try:
+        
         corec = context.bot_data[poll_id]["cor"][0]
+        Y= context.bot_data[poll_id]["que_no"]
+        print("Y"+str(Y))
         ##print("questions ======="+questions)
     # this means this poll answer update is from an old poll, we can't do our answering then
     except Exception as e:
@@ -354,8 +358,8 @@ def receive_poll_answer(update,context):
     	##print(dbR)
     	
     	#print(corec)
-    	X=len(db[Textstr0]['que'])
-    	#print("X="+str(X))
+    	XY=len(db[Textstr0]['que'])
+    	print("XY="+str(XY))
     	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
     	if Textstr0 not in list(dbR.keys()):
     		dbR[Textstr0]={}
@@ -379,7 +383,7 @@ def receive_poll_answer(update,context):
     		J=J+1
 	    	ree=""
 	    	#print("correct options = "+str(corec))
-	    	if X!=10000000:
+	    	if XY!=10000000:
 	    		List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	for L in range(P):

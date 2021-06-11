@@ -61,7 +61,7 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["Kinbin247","imKkala", "amit_y11", "Gksgj", "ANKITAdidi", "Naaj6", "mr_abhiiii", "Selenasaffron", "Sid000123", "sohitk", "jai_hind_1", "Study_Quiz_India", "GK_Zone", "Maths_Quiz_Notes"]
+LIST_OF_ADMINS = ["Kinbin247","testing123215","imKkala", "amit_y11", "Gksgj", "ANKITAdidi", "Naaj6", "mr_abhiiii", "Selenasaffron", "Sid000123", "sohitk", "jai_hind_1", "Study_Quiz_India", "GK_Zone", "Maths_Quiz_Notes"]
 
 def restricted(func):
     @wraps(func)
@@ -175,7 +175,7 @@ def playquiz(update,context):
     
     global chatid
     chatid=update.message.chat.id
-    context.bot.send_message(chat_id="testing123215", text="Time in seconds. limit (5-600) .")
+    context.bot.send_message(chat_id="@testing123215", text="Time in seconds. limit (5-600) .")
 
     return TIME
 Time=30

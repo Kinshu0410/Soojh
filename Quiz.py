@@ -403,11 +403,11 @@ def receive_poll_answer(update,context):
 		    #print("e===="+str(e))
 		    context.bot.send_message(chat_id=chatid, text="quiz not found")
     	try:
-		    if XY==Y:
+		    if XY>=Y-3:
 		    	time.sleep(5)
 		    	context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
     	except:
-    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT last Que Ans So no Result.")
+    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT last 3 Questions Ans So no Result.")
 	    		
 	    		
 	    	

@@ -15,6 +15,7 @@ bot.
 """
 import time
 import re
+import re as reaaa
 import json
 import logging
 import os
@@ -506,7 +507,7 @@ def time0c(update,context):
 def chn(update,context):
     global channelid
     channelid=update.message.text
-    channelid=re.sub("https", "@", channelid)
+    channelid=reaaa.sub("https", "@", channelid)
     print(channelid)
     context.bot.send_message(chat_id=chatid, text="Send me Quiz Name")
 

@@ -398,17 +398,18 @@ def receive_poll_answer(update,context):
 		    		ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    		
 		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+ree
+	    	try:
+		     	if XY>=Y-3:
+		     		time.sleep(5)
+		     		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
+	    	except:
+	    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST 3 QUESTIONS \nSo Result won't COME this time.")
+		    		
+		    		
     	except Exception as e:
 		    #print("e===="+str(e))
 		    context.bot.send_message(chat_id=chatid, text="quiz not found")
-    	try:
-		    if XY==Y:
-		    	time.sleep(5)
-		    	context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
-    	except:
-    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ \nSo Result didn't COME.")
-	    		
-	    		
+    	
 	    	
     	
     

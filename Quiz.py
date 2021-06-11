@@ -506,7 +506,7 @@ def time0c(update,context):
 def chn(update,context):
     global channelid
     channelid=update.message.text
-    channelid=re.sub("https://t.me/", "@", channelid)
+    channelid=re.sub("https", "@", channelid)
     context.bot.send_message(chat_id=chatid, text="Send me Quiz Name")
 
     return QUIZ

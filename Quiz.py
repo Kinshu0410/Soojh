@@ -179,6 +179,7 @@ def playquiz(update,context):
 
     return TIME
 Time=30
+@run_async
 def time0(update,context):
     global Time
     userText=update.message.text
@@ -190,7 +191,7 @@ def time0(update,context):
 
 
 Textstr0=""
-#@run_async
+@run_async
 def quiz(update,context):
     user = update.message.from_user
     global payload

@@ -789,8 +789,8 @@ def main() -> None:
     conv_handler1C = ConversationHandler(
         entry_points=[CommandHandler('massingroup', playing)],
         states={
-        	GHN: [MessageHandler(Filters.regex('^.*$'), ghn)],
-            TIME1: [MessageHandler(Filters.regex('^.*$'), time1c)],
+        	GHN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, ghn)],
+            TIME1: [MessageHandler(Filters.regex('^((https|http).*|@.*)$'), time1c)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

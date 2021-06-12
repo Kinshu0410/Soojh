@@ -481,7 +481,7 @@ def upload(update,context):
     return ConversationHandler.END
     
 
-CHN =range(1)
+CHN, GHN =range(2)
 
 @run_async
 @restricted
@@ -712,10 +712,34 @@ def receive_poll_answer(update,context):
 		    context.bot.send_message(chat_id=chatid, text="quiz not found")
     	
 	    	
-    	
+TIME1=range(1)
     
+@run_async
+@restricted
+@send_typing_action
+def playing(update,context):
+    
+    global chat0id
+    chat0id=update.message.chat.id
+    context.bot.send_message(chat_id=chat0id, text="Send me group url.")
 
+    return TIME1
 
+@run_async
+def time1c(update,context):
+    global Time1
+    userText=update.message.text
+    Time1=userText
+    Time1=reaaa.sub("(https|http)://t\.me/", "@", Time1)
+    context.bot.send_message(chat_id=chat0id, text="Send me message.")
+    return GHN
+
+@run_async
+def ghn(update,context):
+    userText=update.message.text
+
+    context.bot.send_message(chat_id=Time1, text=userText)
+    return GHN
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -762,6 +786,15 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
+    conv_handler1C = ConversationHandler(
+        entry_points=[CommandHandler('massingroup', playing)],
+        states={
+        	GHN: [MessageHandler(Filters.regex('^.*$'), ghn)],
+            TIME1: [MessageHandler(Filters.regex('^.*$'), time1c)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    
     
     
     
@@ -795,6 +828,7 @@ def main() -> None:
     dispatcher.add_handler(conv_handler)
     dispatcher.add_handler(conv_handler01)
     dispatcher.add_handler(conv_handler0C)
+    dispatcher.add_handler(conv_handler1C)
     dispatcher.add_handler(conv_handler02)
     dispatcher.add_handler(conv_handler0R)
     dispatcher.add_handler(conv_handler0u)

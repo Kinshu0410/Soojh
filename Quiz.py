@@ -798,7 +798,7 @@ def poll(update, context):
             type=Poll.QUIZ,
             correct_option_id=co,
             explanation=options5,
-            is_closed=False,
+            #is_closed=False,
             is_anonymous=True,
             allows_multiple_answers=False,
         )
@@ -810,7 +810,7 @@ def poll(update, context):
             options,
             type=Poll.QUIZ,
             correct_option_id=co,#explanation=options5,
-            is_closed=False,
+            #is_closed=False,
             is_anonymous=True,
             allows_multiple_answers=False,
         )

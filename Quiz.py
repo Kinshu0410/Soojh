@@ -745,16 +745,15 @@ def ghn(update,context):
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
     #que = update.message.text()
     quest=(update.message.text)
-    if 1==1:
+    try:
         q=quest[0:-1]
-        q=re.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
-        q=re.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द)\.|\n(A|B|C|D|a|b|c|d|अ|ब|स|द)\.", "\n", q)
-        q=re.sub("\n{2,}", "\n", q)
+        q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
+        q=reaaa.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4)\.|\n(A|B|C|D|a|b|c|d|अ|ब|स|द1|2|3|4)\.", "\n", q)
+        q=reaaa.sub("\n{2,}", "\n", q)
     
-        q=re.split("[\n]", q)
+        q=reaaa.split("[\n]", q)
         #update.message.reply_text(q)
         ques=q[0]
         que=""+ ques
@@ -765,10 +764,10 @@ def poll(update, context):
         option4="(D) "+q[4]
         options=[option1, option2, option3, option4]
         corr=quest[-1]
-        result = re.match("[-+]?\d+$", corr)
+        result = reaaa.match("[-+]?\d+$", corr)
         options5=q[5::1]
         options5="\n".join(options5)
-        options5=re.sub(r"@\w*", "@kinbin247", options5)
+        options5=reaaa.sub(r"@\w*", "@kinbin247", options5)
         if options5 == "":
             options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
         else:
@@ -821,7 +820,8 @@ def poll(update, context):
             }
         }
         context.bot_data.update(payload)
-
+    except Exception as e:
+        print(str(e))
 
 
 def main() -> None:

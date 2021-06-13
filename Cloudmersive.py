@@ -402,28 +402,39 @@ def receive_poll(update, context):
         cor=str(int(str(corr))+1)
     except:
         cor="Channel questions didn't find any answers." #update.message.reply_text("1")
+    #print("12")
     
-    update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    #print("123")
     #update.message.reply_text("1")    #print(actual_poll)
     #update.message.reply_text("<pre>"+question+"</pre>",parse_mode=telegram.ParseMode.HTML)
     
     #update.message.reply_text("1")
     try:
+        #print("12")
         Qqq=cor+" "+options[corr]
         
         Qqq=re.sub("(\(|\[)(A|B|C|D|a|b|c|d|अ|ब|स|द)(\)|\])(|\ )", "",Qqq)
-        abc=re.match("^(1|2|3|4) (A|B|C|D|a|b|c|d|अ|ब|स|द)$")
+        #print("1234")
+        abc=re.match("^(1|2|3|4) (A|B|C|D|a|b|c|d|अ|ब|स|द)$", Qqq)
+        a1=re.match("^(1|2|3|4) (Aa|अ)$", Qqq)
+        a2=re.match("^(1|2|3|4) (B|b|ब|)$", Qqq)
+        a3=re.match("^(1|2|3|4) (C|c|स)$", Qqq)
+        a4=re.match("^(1|2|3|4) (D|d|द)$", Qqq)
+        #print("2")
         if abc:
-        	if Qqq=="\d (A|अ|a)":
+        	#print("3")
+        	if a1:
         		Qqq="1"
-        	elif Qqq=="\d (B|ब|b)":
+        	elif a2:
         		Qqq="2"
-        	elif Qqq=="\d (C|स|c)":
+        	elif a3:
         		Qqq="3"
-        	elif Qqq=="\d (D|द|d)":
+        	elif a4:
         		Qqq="4"
-        update.message.reply_text("<pre>"+Qqq+"</pre>",parse_mode=telegram.ParseMode.HTML)
+        	#print(Qqq)
+        update.message.reply_text("<pre>"+q+Qqq+"</pre>",parse_mode=telegram.ParseMode.HTML)
     except:
+        update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
         for r in options:
         	update.message.reply_text("<pre>"+r+"</pre>",parse_mode=telegram.ParseMode.HTML)
         update.message.reply_text("<pre>"+cor+"</pre>",parse_mode=telegram.ParseMode.HTML)

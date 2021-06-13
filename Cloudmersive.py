@@ -416,7 +416,7 @@ def receive_poll(update, context):
         Qqq=re.sub("(\(|\[)(A|B|C|D|a|b|c|d|अ|ब|स|द)(\)|\])(|\ )", "",Qqq)
         #print("1234")
         abc=re.match("^(1|2|3|4) (A|B|C|D|a|b|c|d|अ|ब|स|द)$", Qqq)
-        a1=re.match("^(1|2|3|4) (Aa|अ)$", Qqq)
+        a1=re.match("^(1|2|3|4) (A|a|अ)$", Qqq)
         a2=re.match("^(1|2|3|4) (B|b|ब|)$", Qqq)
         a3=re.match("^(1|2|3|4) (C|c|स)$", Qqq)
         a4=re.match("^(1|2|3|4) (D|d|द)$", Qqq)

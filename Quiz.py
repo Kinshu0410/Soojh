@@ -757,6 +757,7 @@ def poll(update, context):
         q=reaaa.split("[\n]", q)
         #update.message.reply_text(q)
         ques=q[0]
+        ques=reaaa.sub("^(Q_|Q|)(\d{1,})(\.)(\ |){1,}", "", ques)
         que=""+ ques
         #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
         option1="(A) "+q[1]
@@ -768,7 +769,7 @@ def poll(update, context):
         result = reaaa.match("[-+]?\d+$", corr)
         options5=q[5::1]
         options5="\n".join(options5)
-        options5=reaaa.sub(r"@\w*", "@kinbin247", options5)
+        options5=reaaa.sub(r"@\w*", "", options5)
         if options5 == "":
             options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
         else:

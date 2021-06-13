@@ -1,3 +1,2 @@
 python-3.9.5
-aspose-cells
-Iv jpype1==0.7.0
+xlsxwriter

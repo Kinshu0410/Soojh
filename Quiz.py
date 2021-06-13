@@ -633,7 +633,6 @@ def receive_poll_answer(update,context):
     print("jdjdjdjxj")
     answe=update
     answer = update.poll_answer
-    Usid=str(answer.user.id)
     print(str(answe))
     #time.sleep(3)
     poll_id = answer.poll_id
@@ -661,7 +660,7 @@ def receive_poll_answer(update,context):
     	#print(corec)
     	XY=len(db[Textstr0]['que'])
     	print("XY="+str(XY))
-    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username, 'so':answer.option_ids[0], 'result':[0]}
+    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0]}
     	if Textstr0 not in list(dbR.keys()):
     		dbR[Textstr0]={}
     	if answer.user.first_name not in list(dbR[Textstr0].keys()):
@@ -690,11 +689,12 @@ def receive_poll_answer(update,context):
 		    	Fname=dbR[Textstr0][List[L]]['fname']
 		    	Lname=dbR[Textstr0][List[L]]['lname']
 		    	Uname=dbR[Textstr0][List[L]]['uname']
+		    	Usid=dbR[Textstr0][List[L]]['usid']
 		    	##print(Uname)
 		    	Rs=dbR[Textstr0][List[L]]['result'][0]
 		    	##print(Rs)
 		    	if Uname is None:
-		    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+Usid+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(Usid)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    		Uname=None
 		    		Usid=None
 		    	else:

@@ -431,8 +431,8 @@ def receive_poll(update, context):
         		Qqq="3"
         	elif a4:
         		Qqq="4"
-        	else:
-        		Qqq=0
+        else:
+        	Qqq=0
         	#print(Qqq)
         update.message.reply_text("<pre>"+q+Qqq+"</pre>",parse_mode=telegram.ParseMode.HTML)
     except:

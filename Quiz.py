@@ -633,6 +633,7 @@ def receive_poll_answer(update,context):
     print("jdjdjdjxj")
     answe=update
     answer = update.poll_answer
+    Usid=str(answer.user.id)
     print(str(answe))
     #time.sleep(3)
     poll_id = answer.poll_id
@@ -693,11 +694,13 @@ def receive_poll_answer(update,context):
 		    	Rs=dbR[Textstr0][List[L]]['result'][0]
 		    	##print(Rs)
 		    	if Uname is None:
-		    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(answer.user.id)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+		    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+Usid+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 		    		Uname=None
+		    		Usid=None
 		    	else:
 		    		ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
-		    		
+		    		Uname=None
+		    		Usid=None
 		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
 	    	try:
 		     	if Y>=XY-0:

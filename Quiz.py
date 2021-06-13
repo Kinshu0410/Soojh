@@ -631,88 +631,91 @@ def receive_poll_answer(update,context):
     global J
     global mess
     print("jdjdjdjxj")
-    answe=update
-    answer = update.poll_answer
-    print(str(answe))
-    #time.sleep(3)
-    poll_id = answer.poll_id
-    #print("answer"+str(answer))
-    
     try:
-        
-        corec = context.bot_data[poll_id]["cor"][0]
-        Y= context.bot_data[poll_id]["que_no"]
-        print("Y"+str(Y))
-        ##print("questions ======="+questions)
-    # this means this poll answer update is from an old poll, we can't do our answering then
-    except Exception as e:
-        pass
-        #print("Exception as "+str(e))
-    
-    #print("answer ======"+str(answer))
-    with open('Result.text') as json_file:
-    	dbR = json.load(json_file)
-    with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
-    	
-    	##print(dbR)
-    	
-    	#print(corec)
-    	XY=len(db[Textstr0]['que'])
-    	print("XY="+str(XY))
-    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0]}
-    	if Textstr0 not in list(dbR.keys()):
-    		dbR[Textstr0]={}
-    	if answer.user.first_name not in list(dbR[Textstr0].keys()):
-    		dbR[Textstr0][answer.user.first_name]=newA
-    	dbname=dbR[Textstr0][answer.user.first_name]
-    	dbname['so']=answer.option_ids[0]
-    	if dbname['so']==corec:
-    		dbname['result'] = [x+4 for x in dbname['result']]
-    	else:
-    		dbname['result'] = [x-1 for x in dbname['result']]
-    	##print(str(dbR))
-    	with open('Result.text', 'w') as outfile:
-    		json.dump(dbR, outfile)
-    	#print("bdR = "+str(dbR))
-    	
-    	try:
-    		if J==0:
-    			mess=context.bot.send_message(chat_id=chatid, text="RESULT")
-    			#print("message ==="+str(mess.message_id))
-    		J=J+1
-	    	ree=""
-	    	#print("correct options = "+str(corec))
-	    	List=list(dbR[Textstr0].keys())
-	    	P=len(List)
-	    	for L in range(P):
-		    	Fname=dbR[Textstr0][List[L]]['fname']
-		    	Lname=dbR[Textstr0][List[L]]['lname']
-		    	Uname=dbR[Textstr0][List[L]]['uname']
-		    	Usid=dbR[Textstr0][List[L]]['usid']
-		    	##print(Uname)
-		    	Rs=dbR[Textstr0][List[L]]['result'][0]
-		    	##print(Rs)
-		    	if Uname is None:
-		    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(Usid)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
-		    		Uname=None
-		    		Usid=None
-		    	else:
-		    		ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
-		    		Uname=None
-		    		Usid=None
-		    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
+	    answe=update
+	    answer = update.poll_answer
+	    print(str(answe))
+	    #time.sleep(3)
+	    poll_id = answer.poll_id
+	    #print("answer"+str(answer))
+	    
+	    try:
+	        
+	        corec = context.bot_data[poll_id]["cor"][0]
+	        Y= context.bot_data[poll_id]["que_no"]
+	        print("Y"+str(Y))
+	        ##print("questions ======="+questions)
+	    # this means this poll answer update is from an old poll, we can't do our answering then
+	    except Exception as e:
+	        pass
+	        #print("Exception as "+str(e))
+	    
+	    #print("answer ======"+str(answer))
+	    with open('Result.text') as json_file:
+	    	dbR = json.load(json_file)
+	    with open('Newfile.text') as json_file:
+	    	db = json.load(json_file)
+	    	
+	    	##print(dbR)
+	    	
+	    	#print(corec)
+	    	XY=len(db[Textstr0]['que'])
+	    	print("XY="+str(XY))
+	    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0]}
+	    	if Textstr0 not in list(dbR.keys()):
+	    		dbR[Textstr0]={}
+	    	if answer.user.first_name not in list(dbR[Textstr0].keys()):
+	    		dbR[Textstr0][answer.user.first_name]=newA
+	    	dbname=dbR[Textstr0][answer.user.first_name]
+	    	dbname['so']=answer.option_ids[0]
+	    	if dbname['so']==corec:
+	    		dbname['result'] = [x+4 for x in dbname['result']]
+	    	else:
+	    		dbname['result'] = [x-1 for x in dbname['result']]
+	    	##print(str(dbR))
+	    	with open('Result.text', 'w') as outfile:
+	    		json.dump(dbR, outfile)
+	    	#print("bdR = "+str(dbR))
+	    	
 	    	try:
-		     	if Y>=XY-0:
-		     		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
-		     		time.sleep(3)
-	    	except:
-	    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST 3 QUESTIONS \nSo Result won't COME this time.")
-		    		
-		    		
-    	except Exception as e:
-		    #print("e===="+str(e))
-		    context.bot.send_message(chat_id=chatid, text="quiz not found")
+	    		if J==0:
+	    			mess=context.bot.send_message(chat_id=chatid, text="RESULT")
+	    			#print("message ==="+str(mess.message_id))
+	    		J=J+1
+		    	ree=""
+		    	#print("correct options = "+str(corec))
+		    	List=list(dbR[Textstr0].keys())
+		    	P=len(List)
+		    	for L in range(P):
+			    	Fname=dbR[Textstr0][List[L]]['fname']
+			    	Lname=dbR[Textstr0][List[L]]['lname']
+			    	Uname=dbR[Textstr0][List[L]]['uname']
+			    	Usid=dbR[Textstr0][List[L]]['usid']
+			    	##print(Uname)
+			    	Rs=dbR[Textstr0][List[L]]['result'][0]
+			    	##print(Rs)
+			    	if Uname is None:
+			    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(Usid)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+			    		Uname=None
+			    		Usid=None
+			    	else:
+			    		ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+			    		Uname=None
+			    		Usid=None
+			    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
+		    	try:
+			     	if Y>=XY-0:
+			     		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
+			     		time.sleep(3)
+		    	except:
+		    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST 3 QUESTIONS \nSo Result won't COME this time.")
+			    		
+			    		
+	    	except Exception as e:
+			    #print("e===="+str(e))
+			    context.bot.send_message(chat_id=chatid, text="quiz not found")
+    except:
+    	print("fail")
     	
 	    	
 TIME1=range(1)

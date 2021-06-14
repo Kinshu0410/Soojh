@@ -637,7 +637,7 @@ def main():
             SUBQUIZ: [MessageHandler(Filters.regex('^.*$'), sub_quiz)],
             POLLSUB: [MessageHandler(Filters.poll, poll_sub), MessageHandler(Filters.regex('^.*$') & ~Filters.command, sub_quiz), CommandHandler('add_explanation', poll_exp)],
             POLLREPLACE: [MessageHandler(Filters.regex('^.*$'), poll_replace)],
-            POLLEXPS: [MessageHandler(Filters.regex('^.*$'), poll_exps)]
+            POLLEXPS: [MessageHandler(Filters.text, poll_exps)]
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

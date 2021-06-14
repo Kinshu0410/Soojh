@@ -747,6 +747,28 @@ def ghn(update,context):
     context.bot.send_message(chat_id=Time1, text=userText)
     return GHN
 
+TIME2, POLLL=range(2)
+
+@run_async
+@restricted
+@send_typing_action
+def playing1(update,context):
+    
+    global chat0id
+    chat0id=update.message.chat.id
+    context.bot.send_message(chat_id=chat0id, text="Que nu.")
+
+    return TIME2
+
+@run_async
+def time2c(update,context):
+    global Time2
+    userText=update.message.text
+    Time2=userText
+    Time2=reaaa.sub("(https|http)://t\.me/", "@", Time1)
+    context.bot.send_message(chat_id=chat0id, text="Send me message.")
+    return POLLL
+
 @restricted
 @run_async
 @send_typing_action
@@ -754,17 +776,21 @@ def poll(update, context):
     """Sends a predefined poll"""
     #que = update.message.text()
     quest=(update.message.text)
+    global Time2
     try:
         q=quest[0:-1]
         q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
         q=reaaa.sub("\n\(.\) |\n.\. |\n.\) |\n\[.\] |\n.\. | \(.\) | .\) | .\. |\n\(.\) | \[.\] | (A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4)\.|\n(A|B|C|D|a|b|c|d|अ|ब|स|द1|2|3|4)\.", "\n", q)
         q=reaaa.sub("\n{2,}", "\n", q)
-    
+        
         q=reaaa.split("[\n]", q)
+        
         #update.message.reply_text(q)
         ques=q[0]
         ques=reaaa.sub("^(Q_|Q|)(\d{1,})(\.)(\ |){1,}", "", ques)
-        que=""+ ques
+        ques=reaaa.sub("^(\ |\.){1,}", "", ques)
+        que=Time2+". "+ ques
+        Time2+=1
         #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
         option1="(A) "+q[1]
         option2="(B) "+q[2]
@@ -818,6 +844,7 @@ def poll(update, context):
         # Save some info about the poll the bot_data for later use in receive_poll_answer
     except Exception as e:
         print(str(e))
+    return Time2
 
 
 def main() -> None:
@@ -865,15 +892,22 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
-    conv_handler1C = ConversationHandler(
+    conv_handler2C = ConversationHandler(
         entry_points=[CommandHandler('massingroup', playing)],
         states={
-        	GHN: [MessageHandler(Filters.text & ~Filters.command, ghn)],
-            TIME1: [MessageHandler(Filters.regex('^((https|http).*|@.*)$'), time1c)],
+            TIME1: [MessageHandler(Filters.regex('^\d{1,}$'), time2c), MessageHandler((Filters.text) & (~Filters.regex('^\d{1,}$'))& (~Filters.command)), poll],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
     
+    conv_handler1C = ConversationHandler(
+        entry_points=[CommandHandler('pollno', playing1)],
+        states={
+        	GHN: [MessageHandler(Filters.text & ~Filters.command, ghn)],
+            TIME1: [MessageHandler(Filters.regex('^((https|http).*|@.*)$'), time2c)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
     
     
     
@@ -908,13 +942,14 @@ def main() -> None:
     dispatcher.add_handler(conv_handler01)
     dispatcher.add_handler(conv_handler0C)
     dispatcher.add_handler(conv_handler1C)
+    dispatcher.add_handler(conv_handler2C)
     dispatcher.add_handler(conv_handler02)
     dispatcher.add_handler(conv_handler0R)
     dispatcher.add_handler(conv_handler0u)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
     dp=updater.dispatcher
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))
+    
     # Start the Bot
     updater.start_polling()
 

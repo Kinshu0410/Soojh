@@ -600,8 +600,8 @@ def poll_exps(update: Update, _: CallbackContext) -> int:
             type=Poll.QUIZ,
             correct_option_id =corr,
             explanation=exp,
-            is_closed=True,
-            is_anonymous=False,
+            #is_closed=True,
+            is_anonymous=True,
             reply_markup=ReplyKeyboardRemove()
     )
     #update.message.reply_text("send me more polls or /cancel")

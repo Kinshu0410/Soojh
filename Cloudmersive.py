@@ -440,6 +440,9 @@ def receive_poll(update, context):
         #for r in options:
         	#update.message.reply_text("<pre>"+r+"</pre>",parse_mode=telegram.ParseMode.HTML)
         options="\n".join(options)
+        T=q+"\n"+options+"\n"+cor
+        update.message.reply_text("<pre>"+T+"</pre>",parse_mode=telegram.ParseMode.HTML)
+    
         q=q+"\n"+options+"\n"+Ex+"\n"+cor
         update.message.reply_text("<pre>"+q+"</pre>",parse_mode=telegram.ParseMode.HTML)
     #update.message.reply_text("<pre>"+options[3]+"</pre>",parse_mode=telegram.ParseMode.HTML)

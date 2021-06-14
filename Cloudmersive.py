@@ -127,6 +127,7 @@ def poll(update, context):
             type=Poll.QUIZ,
             correct_option_id=co,
             explanation=options5,
+            is_closed=False,
             is_anonymous=False,
             allows_multiple_answers=False,
         )
@@ -138,6 +139,7 @@ def poll(update, context):
             options,
             type=Poll.QUIZ,
             correct_option_id=co,#explanation=options5,
+            is_closed=False,
             is_anonymous=False,
             allows_multiple_answers=False,
         )
@@ -463,7 +465,7 @@ def receive_poll(update, context):
             correct_option_id =corr,
             #explanation=Ex,
             is_closed=True,
-            is_anonymous=True,
+            is_anonymous=False,
             reply_markup=ReplyKeyboardRemove()
     )
     else:
@@ -475,8 +477,8 @@ def receive_poll(update, context):
             type=Poll.QUIZ,
             correct_option_id =corr,
             explanation=Ex,
-            is_closed=False,
-            is_anonymous=True,
+            is_closed=True,
+            is_anonymous=False,
             reply_markup=ReplyKeyboardRemove()
     )'''
     #update.message.reply_text("<pre>"+ex+"</pre>",parse_mode=telegram.ParseMode.HTML)

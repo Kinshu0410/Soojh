@@ -759,12 +759,12 @@ def poll(update, context):
         q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
         q=reaaa.sub("(\n|\ )(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द1|2|3|4)(\)|\]|\.)(\.|\ |)", "\n", q)
         q=reaaa.sub("\n{2,}", "\n", q)
-    
+        q=reaaa.sub("☞", "", q)
         q=reaaa.split("[\n]", q)
         #update.message.reply_text(q)
         ques=q[0]
         ques=reaaa.sub("^(Q_|Q|)(\d{1,})(\.)(\ |){1,}", "", ques)
-        que=""+ ques
+        que="☞ "+ ques
         #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
         option1="(A) "+q[1]
         option2="(B) "+q[2]

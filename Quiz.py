@@ -736,7 +736,7 @@ def receive_poll_answer(update,context):
 			    		Usid=None
 			    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
 		    	try:
-			     	if Y==XY-0:
+			     	if Y==XY+1:
 			     		if J==1:
 			     			context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 			     			time.sleep(3)

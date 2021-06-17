@@ -267,7 +267,7 @@ def quiz(update,context):
 			    
 		    	except Exception as e:
 		    		pass
-		    message = context.bot.send_poll(
+    		message = context.bot.send_poll(
     			update.effective_chat.id,
     			question=str(X+2)+". Free Hit.",
 		    	options=["Option", "Option", "Option", "Option"],
@@ -281,8 +281,8 @@ def quiz(update,context):
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-		    time.sleep(int(Time))
-		    try:
+    		time.sleep(int(Time))
+    		try:
 		    	#print("start")
 			    payload = {
 				    message.poll.id: {
@@ -296,7 +296,7 @@ def quiz(update,context):
 			    }
 			    context.bot_data.update(payload)
 			    
-		    except Exception as e:
+    		except Exception as e:
 		    	pass
 			    	#print(e)
 			    	
@@ -736,8 +736,8 @@ def receive_poll_answer(update,context):
 			    		Usid=None
 			    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
 		    	try:
-			     	if Y=XY-0:
-			     		if J=1:
+			     	if Y==XY-0:
+			     		if J==1:
 			     			context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 			     			time.sleep(3)
 			     			J=2

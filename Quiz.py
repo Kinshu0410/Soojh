@@ -281,7 +281,7 @@ def quiz(update,context):
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(int(Time))
+    		time.sleep(10)
     		try:
 		    	#print("start")
 			    payload = {
@@ -643,7 +643,7 @@ def quizc(update,context):
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(int(Time))
+    		time.sleep(10)
     		try:
 		    	#print("start")
 			    payload = {

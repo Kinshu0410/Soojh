@@ -722,7 +722,7 @@ def receive_poll_answer(update,context):
 	    	##print(dbR)
 	    	
 	    	#print(corec)
-	    	XY=len(db[Textstr0]['que'])
+	    	XY=len(db[Textstr0]['que'])+1
 	    	print("XY="+str(XY))
 	    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0]}
 	    	if Textstr0 not in list(dbR.keys()):
@@ -767,7 +767,7 @@ def receive_poll_answer(update,context):
 			    		Usid=None
 			    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
 		    	try:
-			     	if Y==XY+1:
+			     	if Y==XY:
 			     		if J==1:
 			     			context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 			     			time.sleep(3)

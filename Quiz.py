@@ -745,7 +745,7 @@ def receive_poll_answer(update,context):
 	    	
 	    	try:
 	    		if J==0:
-	    			mess=context.bot.send_message(chat_id=chatid, text="RESULT")
+	    			mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
 	    			#print("message ==="+str(mess.message_id))
 	    		J=1
 		    	ree=""

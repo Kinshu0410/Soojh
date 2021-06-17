@@ -770,13 +770,23 @@ def receive_poll_answer(update,context):
 			    		ree=ree+"\n<b>@"+str(Uname)+"</b> ✔︎"+str(Rname)+"×4–✖︎"+str(Wname)+"×1 == <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 			    		Uname=None
 			    		Usid=None
-			    	yo="<!DOCTYPE html><html><head><title>Page Title</title></head><body><h1>🏁 The quiz \'"+Textstr0+"\' has finished!</h1><p>"+str(len(db[Textstr0]['que']))+" questions answered</p><p>"+ree+"</p>🏆 Congratulations to the winners!</p></body></html>"
+			    	yo="""<html>
+			    	<head>
+			    	<title>Page Title</title>
+			    	</head>
+			    	<body>
+			    	<h1>The quiz \'"""+Textstr0+"""\' has finished!</h1>
+			    	<p>"""+str(len(db[Textstr0]['que']))+""" questions answered</p>
+			    	<p>"""+ree+"""</p>
+			    	<p> Congratulations to the winners!</p>
+			    	</body>
+			    	</html>"""
 		    	try:
 			     	if Y==XY:
 			     		if J==1:
 			     			try:
 			     				with open('Result.html', 'w') as outfile:
-			     					json.dump("",outfile)
+			     					
 			     					json.dump(yo, outfile)
 			     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 			     				try:

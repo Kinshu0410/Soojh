@@ -61,7 +61,7 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["Kinbin247"]
+LIST_OF_ADMINS = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
 
 def restricted(func):
     @wraps(func)
@@ -275,7 +275,7 @@ def quiz(update,context):
 		    	type=Poll.QUIZ,
 		    	correct_option_id =3,
 		    	open_period=int(10),
-		    	#explanation=Ex,
+		    	explanation="No point in this quistion.\nIt was only for result count",
 		    	is_closed=False,
 		    	is_anonymous=False,
 		    	reply_markup=ReplyKeyboardRemove(),
@@ -629,6 +629,37 @@ def quizc(update,context):
 			    	chatid=channelid
 		    	except Exception as e:
 		    		pass
+    		message = context.bot.send_poll(
+    			chat_id=channelid,
+    			question=str(X+2)+". Free Hit.",
+		    	options=["Option", "Option", "Option", "Option"],
+		    	# with is_closed true, the poll/quiz is immediately closed
+		    	type=Poll.QUIZ,
+		    	correct_option_id =3,
+		    	open_period=int(10),
+		    	explanation="No point in this quistion.\nIt was only for result count",
+		    	is_closed=False,
+		    	is_anonymous=False,
+		    	reply_markup=ReplyKeyboardRemove(),
+		    )
+		    #print(update.effective_chat.id)
+    		time.sleep(int(Time))
+    		try:
+		    	#print("start")
+			    payload = {
+				    message.poll.id: {
+				        "cor": question,
+				        "options": options,
+				        "cor":correct_option_id,
+				        "message_id": message.message_id,
+				        "chat_id": update.effective_chat.id,
+				        "que_no":X+2
+				    }
+			    }
+			    context.bot_data.update(payload)
+			    
+    		except Exception as e:
+		    	pass
 			    	#print(e)
 			    	
 			    	

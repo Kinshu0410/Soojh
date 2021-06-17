@@ -205,7 +205,7 @@ def quiz(update,context):
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     dbA={}
-    with open('Result.text', 'w') as outfile:
+    with open('Result.html', 'w') as outfile:
     	json.dump(dbA, outfile)
     
     	try:
@@ -328,7 +328,7 @@ def res(update: Update, context: CallbackContext) -> None:
     #print("quiz finish")
     global re
     global dbR
-    with open('Result.text') as json_file:
+    with open('Result.html') as json_file:
     	dbR = json.load(json_file)
     #print(str(dbR))
     #print("gghhjj")
@@ -421,7 +421,7 @@ def result(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     userText=update.message.text
     global re
-    with open('Result.text') as json_file:
+    with open('Result.html') as json_file:
     	dbR = json.load(json_file)
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
@@ -561,7 +561,7 @@ def quizc(update,context):
     with open('Newfile.text') as json_file:
     	db = json.load(json_file)
     dbA={}
-    with open('Result.text', 'w') as outfile:
+    with open('Result.html', 'w') as outfile:
     	json.dump(dbA, outfile)
     
     	try:
@@ -714,7 +714,7 @@ def receive_poll_answer(update,context):
 	        #print("Exception as "+str(e))
 	    
 	    #print("answer ======"+str(answer))
-	    with open('Result.text') as json_file:
+	    with open('Result.html') as json_file:
 	    	dbR = json.load(json_file)
 	    with open('Newfile.text') as json_file:
 	    	db = json.load(json_file)
@@ -739,7 +739,7 @@ def receive_poll_answer(update,context):
 	    			dbname['result'] = [x-1 for x in dbname['result']]
 	    			dbname['✖︎'] = [x+1 for x in dbname['✖︎']]
 	    	##print(str(dbR))
-	    	with open('Result.text', 'w') as outfile:
+	    	with open('Result.html', 'w') as outfile:
 	    		json.dump(dbR, outfile)
 	    	#print("bdR = "+str(dbR))
 	    	
@@ -770,18 +770,18 @@ def receive_poll_answer(update,context):
 			    		ree=ree+"\n<b>@"+str(Uname)+"</b> ✔︎"+str(Rname)+"×4–✖︎"+str(Wname)+"×1 == <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 			    		Uname=None
 			    		Usid=None
-			    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
+			    	yo="<!DOCTYPE html><html><head><title>Page Title</title></head><body><h1>🏁 The quiz \'"+Textstr0+"\' has finished!</h1><p>"+str(len(db[Textstr0]['que']))+" questions answered</p><p>"+ree+"</p>🏆 Congratulations to the winners!</p></body></html>"
 		    	try:
 			     	if Y==XY:
 			     		if J==1:
 			     			try:
-			     				with open('Result.text', 'w') as outfile:
+			     				with open('Result.html', 'w') as outfile:
 			     					json.dump("",outfile)
 			     					json.dump(yo, outfile)
 			     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 			     				try:
 			     					
-			     					context.bot.send_document(chatid, open('Result.text', "rb"))#document=file)
+			     					context.bot.send_document(chatid, open('Result.html', "rb"))#document=file)
 			     				except Exception as e:
 			     					pass
 			     				time.sleep(3)

@@ -724,7 +724,7 @@ def receive_poll_answer(update,context):
 	    	#print(corec)
 	    	XY=len(db[Textstr0]['que'])+1
 	    	print("XY="+str(XY))
-	    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0]}
+	    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0], '✔︎':[0] ,'✖︎':[0]}
 	    	if Textstr0 not in list(dbR.keys()):
 	    		dbR[Textstr0]={}
 	    	if answer.user.first_name not in list(dbR[Textstr0].keys()):
@@ -733,9 +733,11 @@ def receive_poll_answer(update,context):
 	    	dbname['so']=answer.option_ids[0]
 	    	if Y!=XY:
 	    		if dbname['so']==corec:
+	    			dbname['✔︎'] = [x+1 for x in dbname['✔︎']]
 	    			dbname['result'] = [x+4 for x in dbname['result']]
 	    		else:
 	    			dbname['result'] = [x-1 for x in dbname['result']]
+	    			dbname['✖︎'] = [x+1 for x in dbname['✖︎']]
 	    	##print(str(dbR))
 	    	with open('Result.text', 'w') as outfile:
 	    		json.dump(dbR, outfile)
@@ -752,6 +754,8 @@ def receive_poll_answer(update,context):
 		    	P=len(List)
 		    	for L in range(P):
 			    	Fname=dbR[Textstr0][List[L]]['fname']
+			    	Rname=dbR[Textstr0][List[L]]['✔︎']
+			    	Wname=dbR[Textstr0][List[L]]['✖︎']
 			    	Lname=dbR[Textstr0][List[L]]['lname']
 			    	Uname=dbR[Textstr0][List[L]]['uname']
 			    	Usid=dbR[Textstr0][List[L]]['usid']
@@ -759,11 +763,11 @@ def receive_poll_answer(update,context):
 			    	Rs=dbR[Textstr0][List[L]]['result'][0]
 			    	##print(Rs)
 			    	if Uname is None:
-			    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(Usid)+"\"><b>"+str(Fname)+" "+str(Lname)+"</b></a>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+			    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(Usid)+"\"><b>"+str(Fname)+"</b></a> ✔︎["+str(Rname)+"] ✖︎["+str(Wname)+"] == <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 			    		Uname=None
 			    		Usid=None
 			    	else:
-			    		ree=ree+"\n<b>@"+str(Uname)+"</b>"+" gain <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+			    		ree=ree+"\n<b>@"+str(Uname)+"</b> ✔︎["+str(Rname)+"] ✖︎["+str(Wname)+"] == <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
 			    		Uname=None
 			    		Usid=None
 			    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"

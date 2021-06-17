@@ -264,8 +264,40 @@ def quiz(update,context):
 				        }
 			    	}
 			    	context.bot_data.update(payload)
+			    
 		    	except Exception as e:
 		    		pass
+		    message = context.bot.send_poll(
+    			update.effective_chat.id,
+    			question=str(X+2)+". Free Hit.",
+		    	options=["Option", "Option", "Option", "Option"],
+		    	# with is_closed true, the poll/quiz is immediately closed
+		    	type=Poll.QUIZ,
+		    	correct_option_id =3,
+		    	open_period=int(10),
+		    	#explanation=Ex,
+		    	is_closed=False,
+		    	is_anonymous=False,
+		    	reply_markup=ReplyKeyboardRemove(),
+		    )
+		    #print(update.effective_chat.id)
+		    time.sleep(int(Time))
+		    try:
+		    	#print("start")
+			    payload = {
+				    message.poll.id: {
+				        "cor": question,
+				        "options": options,
+				        "cor":correct_option_id,
+				        "message_id": message.message_id,
+				        "chat_id": update.effective_chat.id,
+				        "que_no":X+2
+				    }
+			    }
+			    context.bot_data.update(payload)
+			    
+		    except Exception as e:
+		    	pass
 			    	#print(e)
 			    	
 			    	
@@ -681,7 +713,7 @@ def receive_poll_answer(update,context):
 	    		if J==0:
 	    			mess=context.bot.send_message(chat_id=chatid, text="RESULT")
 	    			#print("message ==="+str(mess.message_id))
-	    		J=J+1
+	    		J=1
 		    	ree=""
 		    	#print("correct options = "+str(corec))
 		    	List=list(dbR[Textstr0].keys())
@@ -704,9 +736,11 @@ def receive_poll_answer(update,context):
 			    		Usid=None
 			    	yo="🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n"+ree+"\n\n🏆 Congratulations to the winners!"
 		    	try:
-			     	if Y>=XY-0:
-			     		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
-			     		time.sleep(3)
+			     	if Y=XY-0:
+			     		if J=1:
+			     			context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
+			     			time.sleep(3)
+			     			J=2
 		    	except:
 		    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST 3 QUESTIONS \nSo Result won't COME this time.")
 			    		

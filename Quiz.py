@@ -775,7 +775,15 @@ def receive_poll_answer(update,context):
 			     	if Y==XY:
 			     		if J==1:
 			     			try:
-			     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
+			     				with open('Result.text', 'w') as outfile:
+			     					json.dump("",outfile)
+			     					json.dump(yo, outfile)
+			     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
+			     				try:
+			     					
+			     					context.bot.send_document(chat_id, open('Result.text', "rb"))#document=file)
+			     				except Exception as e:
+			     					pass
 			     				time.sleep(3)
 			     			except:
 			     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST QUESTION \nSo Result won't COME this time.")

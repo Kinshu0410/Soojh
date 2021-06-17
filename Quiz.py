@@ -781,7 +781,7 @@ def receive_poll_answer(update,context):
 			     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 			     				try:
 			     					
-			     					context.bot.send_document(chat_id, open('Result.text', "rb"))#document=file)
+			     					context.bot.send_document(chat_id=chatid, open('Result.text', "rb"))#document=file)
 			     				except Exception as e:
 			     					pass
 			     				time.sleep(3)

@@ -787,7 +787,8 @@ def receive_poll_answer(update,context):
 			     			try:
 			     				with open('Result.html', 'w') as outfile:
 			     					
-			     					json.dump(yo, outfile)
+			     					outfile.write(yo)
+			     					outfile.close()
 			     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 			     				try:
 			     					

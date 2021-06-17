@@ -776,10 +776,10 @@ def receive_poll_answer(update,context):
 			     		if J==1:
 			     			try:
 			     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
-			     			time.sleep(3)
-			     		except:
-			     			context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST QUESTION \nSo Result won't COME this time.")
-			     		J=2
+			     				time.sleep(3)
+			     			except:
+			     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST QUESTION \nSo Result won't COME this time.")
+			     			J=2
 		    	except:
 		    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="Fail to complet process.")
 			    		

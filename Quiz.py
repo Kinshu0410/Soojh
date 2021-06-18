@@ -748,7 +748,7 @@ def receive_poll_answer(update,context):
 	    			mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
 	    			#print("message ==="+str(mess.message_id))
 	    		J=1
-		    	ree=""
+		    	ree=""""""
 		    	#print("correct options = "+str(corec))
 		    	List=list(dbR[Textstr0].keys())
 		    	P=len(List)
@@ -763,11 +763,13 @@ def receive_poll_answer(update,context):
 			    	Rs=dbR[Textstr0][List[L]]['result'][0]
 			    	##print(Rs)
 			    	if Uname is None:
-			    		ree=ree+"\n<a href=\"tg://openmessage?user_id="+str(Usid)+"\"><b>"+str(Fname)+"</b></a> ✔︎"+str(Rname)+"×4–✖︎"+str(Wname)+"×1 == <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+			    		ree=ree+"""
+			    		<a href=\"tg://openmessage?user_id="""+str(Usid)+"""\"><b>"""+str(Fname)+"""</b></a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""</b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
 			    		Uname=None
 			    		Usid=None
 			    	else:
-			    		ree=ree+"\n<b>@"+str(Uname)+"</b> ✔︎"+str(Rname)+"×4–✖︎"+str(Wname)+"×1 == <b>"+str(Rs)+"</b>/"+str(len(db[Textstr0]['que'])*4)+" Marks"
+			    		ree=ree+"""
+			    		<a href=\"tg://openmessage?user_id="""+str(Usid)+"""\"><b>"""+str(Fname)+"""</b></a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""</b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
 			    		Uname=None
 			    		Usid=None
 			    	yo="""<html>
@@ -775,10 +777,10 @@ def receive_poll_answer(update,context):
 			    	<title>Page Title</title>
 			    	</head>
 			    	<body>
-			    	<h1>The quiz \'"""+Textstr0+"""\' has finished!</h1>
+			    	<h1>🏁 The quiz \'"""+Textstr0+"""\' has finished!</h1>
 			    	<p>"""+str(len(db[Textstr0]['que']))+""" questions answered</p>
 			    	<p>"""+ree+"""</p>
-			    	<p> Congratulations to the winners!</p>
+			    	<p>🏆 Congratulations to the winners!</p>
 			    	</body>
 			    	</html>"""
 		    	try:

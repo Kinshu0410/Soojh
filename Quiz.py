@@ -771,7 +771,7 @@ def receive_poll_answer(update,context):
 			    		ree=ree+"""<br><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\"><b>"""+str(Fname)+""" """+str(Lname)+"""</b></a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""</b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
 			    		Uname=None
 			    		Usid=None
-			    	yo="""<html>
+			    	yo="""<!DOCTYPE html><html>
 			    	<head>
 			    	<title>Page Title</title>
 			    	</head>

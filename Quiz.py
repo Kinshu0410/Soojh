@@ -764,12 +764,11 @@ def receive_poll_answer(update,context):
 			    	##print(Rs)
 			    	if Uname is None:
 			    		ree=ree+"""
-			    		<a href=\"tg://openmessage?user_id="""+str(Usid)+"""\"><b>"""+str(Fname)+"""</b></a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""</b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
+			    		<a href=\"tg://openmessage?user_id="""+str(Usid)+"""\"><b>"""+str(Fname)+""" """+str(Lname)+"""</b></a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""</b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
 			    		Uname=None
 			    		Usid=None
 			    	else:
-			    		ree=ree+"""
-			    		<a href=\"tg://openmessage?user_id="""+str(Usid)+"""\"><b>"""+str(Fname)+"""</b></a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""</b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
+			    		ree=ree+"""<br><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\"><b>"""+str(Fname)+""" """+str(Lname)+"""</b></a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""</b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
 			    		Uname=None
 			    		Usid=None
 			    	yo="""<html>
@@ -778,9 +777,9 @@ def receive_poll_answer(update,context):
 			    	</head>
 			    	<body>
 			    	<h1>🏁 The quiz \'"""+Textstr0+"""\' has finished!</h1>
-			    	<p>"""+str(len(db[Textstr0]['que']))+""" questions answered</p>
-			    	<p>"""+ree+"""</p>
-			    	<p>🏆 Congratulations to the winners!</p>
+			    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered.</mark></p>
+			    	<pre>"""+ree+"""</pre>
+			    	<p><hr>🏆 Congratulations to the winners!<hr></p>
 			    	</body>
 			    	</html>"""
 		    	try:

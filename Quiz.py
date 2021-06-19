@@ -227,6 +227,7 @@ def quiz(update,context):
     		
     		for X in range(len(db[Textstr0]['que'])):
     			
+    			Zno=len(db[Textstr0]['que'])-X
     			correct_option_id =db[Textstr0]['cor'][X],
     			question=str(X+1)+". "+db[Textstr0]['que'][X]
     			options=db[Textstr0]['op'][X]
@@ -238,7 +239,7 @@ def quiz(update,context):
     			#print("1")
     			message = context.bot.send_poll(
     				update.effective_chat.id,
-    				question=str(X+1)+". "+db[Textstr0]['que'][X],
+    				question=str(Zno)+". "+db[Textstr0]['que'][X],
 		    		options=db[Textstr0]['op'][X],
 		    		# with is_closed true, the poll/quiz is immediately closed
 		    		type=Poll.QUIZ,
@@ -269,19 +270,19 @@ def quiz(update,context):
 		    		pass
     		message = context.bot.send_poll(
     			update.effective_chat.id,
-    			question=str(X+2)+". Free Hit.",
+    			question="Must attempt Free Hit.",
 		    	options=["Option", "Option", "Option", "Option"],
 		    	# with is_closed true, the poll/quiz is immediately closed
 		    	type=Poll.QUIZ,
 		    	correct_option_id =3,
-		    	open_period=int(10),
+		    	open_period=int(Time)+5,
 		    	explanation="No point in this quistion.\nIt was only for result count",
 		    	is_closed=False,
 		    	is_anonymous=False,
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(10)
+    		time.sleep(int(Time)+5)
     		try:
 		    	#print("start")
 			    payload = {

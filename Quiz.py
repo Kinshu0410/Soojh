@@ -761,91 +761,91 @@ def receive_poll_answer(update,context):
 		    				Rs=dbR[Textstr0][List[L]]['result'][0]
 		    				dbbb.append(int(Rs))
 		    			print(dbbb)
-		    			dbbb.append([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)])
-		    			print(dbbb)
-		    	for L in range(P):
-			    	Fname=dbR[Textstr0][List[L]]['fname']
-			    	Rname=dbR[Textstr0][List[L]]['✔︎']
-			    	Wname=dbR[Textstr0][List[L]]['✖︎']
-			    	Lname=dbR[Textstr0][List[L]]['lname']
-			    	Uname=dbR[Textstr0][List[L]]['uname']
-			    	Usid=dbR[Textstr0][List[L]]['usid']
-			    	##print(Uname)
-			    	Rs=dbR[Textstr0][List[L]]['result'][0]
-			    	dbbb.append(int(Rs))
-			    	
-			    	##print(Rs)
-			    	if Uname is None:
-			    		ree=ree+"""<tr>
-			    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
-			    		<th>"""+str(Rname)+"""</th>
-			    		<th>"""+str(Wname)+"""</th>
-			    		<th>"""+str(Rs)+"""</th></tr>"""
-			    		Uname=None
-			    		Usid=None
-			    	else:
-			    		ree=ree+"""<tr>
-			    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
-			    		<th>"""+str(Rname)+"""</th>
-			    		<th>"""+str(Wname)+"""</th>
-			    		<th>"""+str(Rs)+"""</th></tr>"""
-			    		Uname=None
-			    		Usid=None
-			    	yo="""<!DOCTYPE html><html>
-			    	<head>
-			    	<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  }
-			    	td, th {
-  border: 1px solid #dddddd;
-  text-align: center;
-  vertical-align: middle;
-  padding: 8px;
-}
-			    	tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-			    	<title>On @Soojhboojh_01bot</title>
-			    	</head>
-			    	<body>
-			    	<h1> 🏁 The quiz \'"""+Textstr0+"""\' has finished!</h1>
-			    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered.<br>Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p>
-			    	<table>
-			    	<tr>
-			    	<th>Name</th>
-			    	<th>Right Options</th>
-			    	<th>Wrong Options</th>
-			    	<th>Marks</th>
-			    	</tr>
-			    	"""+ree+"""</table>
-			    	<p><hr> 🏆 Congratulations to the winners!<hr></p>
-			    	</body>
-			    	</html>"""
-		    	try:
-			     	if Y==XY:
-			     		if J==1:
-			     			try:
-			     				with open('Result.html', 'w') as outfile:
-			     					
-			     					outfile.write(yo)
-			     					outfile.close()
-			     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
-			     				try:
-			     					
-			     					context.bot.send_document(chatid, open('Result.html', "rb"))#document=file)
-			     				except Exception as e:
-			     					pass
-			     				time.sleep(3)
-			     			except:
-			     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST QUESTION \nSo Result won't COME this time.")
-			     			J=2
-		    	except:
-		    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="Fail to complet process.")
-			    		
+		    			yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
+		    			print(yest)
+				    	for L in yest:
+					    	Fname=dbR[Textstr0][List[L]]['fname']
+					    	Rname=dbR[Textstr0][List[L]]['✔︎']
+					    	Wname=dbR[Textstr0][List[L]]['✖︎']
+					    	Lname=dbR[Textstr0][List[L]]['lname']
+					    	Uname=dbR[Textstr0][List[L]]['uname']
+					    	Usid=dbR[Textstr0][List[L]]['usid']
+					    	##print(Uname)
+					    	Rs=dbR[Textstr0][List[L]]['result'][0]
+					    	dbbb.append(int(Rs))
+					    	
+					    	##print(Rs)
+					    	if Uname is None:
+					    		ree=ree+"""<tr>
+					    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
+					    		<th>"""+str(Rname)+"""</th>
+					    		<th>"""+str(Wname)+"""</th>
+					    		<th>"""+str(Rs)+"""</th></tr>"""
+					    		Uname=None
+					    		Usid=None
+					    	else:
+					    		ree=ree+"""<tr>
+					    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
+					    		<th>"""+str(Rname)+"""</th>
+					    		<th>"""+str(Wname)+"""</th>
+					    		<th>"""+str(Rs)+"""</th></tr>"""
+					    		Uname=None
+					    		Usid=None
+					    	yo="""<!DOCTYPE html><html>
+					    	<head>
+					    	<style>
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		  }
+					    	td, th {
+		  border: 1px solid #dddddd;
+		  text-align: center;
+		  vertical-align: middle;
+		  padding: 8px;
+		}
+					    	tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+		</style>
+					    	<title>On @Soojhboojh_01bot</title>
+					    	</head>
+					    	<body>
+					    	<h1> 🏁 The quiz \'"""+Textstr0+"""\' has finished!</h1>
+					    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered.<br>Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p>
+					    	<table>
+					    	<tr>
+					    	<th>Name</th>
+					    	<th>Right Options</th>
+					    	<th>Wrong Options</th>
+					    	<th>Marks</th>
+					    	</tr>
+					    	"""+ree+"""</table>
+					    	<p><hr> 🏆 Congratulations to the winners!<hr></p>
+					    	</body>
+					    	</html>"""
+				    	try:
+					     	if Y==XY:
+					     		if J==1:
+					     			try:
+					     				with open('Result.html', 'w') as outfile:
+					     					
+					     					outfile.write(yo)
+					     					outfile.close()
+					     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
+					     				try:
+					     					
+					     					context.bot.send_document(chatid, open('Result.html', "rb"))#document=file)
+					     				except Exception as e:
+					     					pass
+					     				time.sleep(3)
+					     			except:
+					     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST QUESTION \nSo Result won't COME this time.")
+					     			J=2
+				    	except:
+				    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="Fail to complet process.")
+					    		
 			    		
 	    	except Exception as e:
 			    #print("e===="+str(e))

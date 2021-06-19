@@ -755,11 +755,11 @@ def receive_poll_answer(update,context):
 		    	List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	dbbb=[]
-		    	for L in range(P):
-		    		Rs=dbR[Textstr0][List[L]]['result'][0]
-			    	dbbb.append(int(Rs))
 		    	if Y==XY:
 		    		if J==1:
+		    			for L in range(P):
+		    				Rs=dbR[Textstr0][List[L]]['result'][0]
+		    				dbbb.append(int(Rs))
 		    			print(dbbb)
 		    			dbbb.append([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)])
 		    			print(dbbb)

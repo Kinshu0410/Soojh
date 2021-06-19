@@ -790,7 +790,8 @@ table {
   }
 			    	td, th {
   border: 1px solid #dddddd;
-  text-align: left;
+  text-align: center;
+  vertical-align: middle;
   padding: 8px;
 }
 			    	tr:nth-child(even) {

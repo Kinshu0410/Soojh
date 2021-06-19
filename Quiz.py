@@ -749,11 +749,18 @@ def receive_poll_answer(update,context):
 	    		if J==0:
 	    			mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
 	    			#print("message ==="+str(mess.message_id))
-	    		J=1
+	    			J=1
 		    	ree=""""""
 		    	#print("correct options = "+str(corec))
 		    	List=list(dbR[Textstr0].keys())
 		    	P=len(List)
+		    	dbbb=[]
+		    	for L in range(P):
+		    		Rs=dbR[Textstr0][List[L]]['result'][0]
+			    	dbbb.append(int(Rs))
+			    	if Y==XY:
+			     		if J==1:
+			     			print(dbbb)
 		    	for L in range(P):
 			    	Fname=dbR[Textstr0][List[L]]['fname']
 			    	Rname=dbR[Textstr0][List[L]]['✔︎']
@@ -763,6 +770,8 @@ def receive_poll_answer(update,context):
 			    	Usid=dbR[Textstr0][List[L]]['usid']
 			    	##print(Uname)
 			    	Rs=dbR[Textstr0][List[L]]['result'][0]
+			    	dbbb.append(int(Rs))
+			    	
 			    	##print(Rs)
 			    	if Uname is None:
 			    		ree=ree+"""<tr>

@@ -763,22 +763,36 @@ def receive_poll_answer(update,context):
 			    	Rs=dbR[Textstr0][List[L]]['result'][0]
 			    	##print(Rs)
 			    	if Uname is None:
-			    		ree=ree+"""
-			    		<a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""<\b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
+			    		ree=ree+"""<tr>
+			    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
+			    		<th>"""+str(Rname)+"""</th>
+			    		<th>"""+str(Wname)+"""</th>
+			    		<th>"""+str(Rs)+"""</th></tr>"""
 			    		Uname=None
 			    		Usid=None
 			    	else:
-			    		ree=ree+"""<br><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a> ✔︎"""+str(Rname)+"""×4–✖︎"""+str(Wname)+"""×1 == <b>"""+str(Rs)+"""</b>/"""+str(len(db[Textstr0]['que'])*4)+""" Marks"""
+			    		ree=ree+"""<tr>
+			    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
+			    		<th>"""+str(Rname)+"""</th>
+			    		<th>"""+str(Wname)+"""</th>
+			    		<th>"""+str(Rs)+"""</th></tr>"""
 			    		Uname=None
 			    		Usid=None
 			    	yo="""<!DOCTYPE html><html>
 			    	<head>
-			    	<title>Page Title</title>
+			    	<title>On @Soojhboojh_01bot</title>
 			    	</head>
 			    	<body>
 			    	<h1> 🏁 The quiz \'"""+Textstr0+"""\' has finished!</h1>
-			    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered.</mark></p>
-			    	<pre>"""+ree+"""</pre>
+			    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered.<br>Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p>
+			    	<table>
+			    	<tr>
+			    	<th>Name</th>
+			    	<th>Right Options</th>
+			    	<th>Wrong Options</th>
+			    	<th>Marks</th>
+			    	</tr>
+			    	"""+ree+"""</table>
 			    	<p><hr> 🏆 Congratulations to the winners!<hr></p>
 			    	</body>
 			    	</html>"""

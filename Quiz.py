@@ -758,9 +758,11 @@ def receive_poll_answer(update,context):
 		    	for L in range(P):
 		    		Rs=dbR[Textstr0][List[L]]['result'][0]
 			    	dbbb.append(int(Rs))
-			    	if Y==XY:
-			     		if J==1:
-			     			print(dbbb)
+			    if Y==XY:
+			     	if J==1:
+			     		print(dbbb)
+			     		dbbb.append([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)])
+			     		print(dbbb)
 		    	for L in range(P):
 			    	Fname=dbR[Textstr0][List[L]]['fname']
 			    	Rname=dbR[Textstr0][List[L]]['✔︎']

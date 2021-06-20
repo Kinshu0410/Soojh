@@ -639,14 +639,14 @@ def quizc(update,context):
 		    	# with is_closed true, the poll/quiz is immediately closed
 		    	type=Poll.QUIZ,
 		    	correct_option_id =3,
-		    	open_period=15,
+		    	#open_period=15,
 		    	explanation="No point in this quistion.\nIt was only for result count",
 		    	is_closed=False,
 		    	is_anonymous=False,
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(15)
+    		time.sleep(3600)
     		try:
 		    	#print("start")
 			    payload = {

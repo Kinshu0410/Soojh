@@ -604,7 +604,7 @@ def quizc(update,context):
 			    			# with is_closed true, the poll/quiz is immediately closed
 			    			type=Poll.QUIZ,
 			    			correct_option_id =db[Textstr0]['cor'][X],
-			    			open_period=int(Time),
+			    			#open_period=int(Time),
 			    			#explanation=Ex,
 			    			is_closed=False,
 			    			is_anonymous=False,
@@ -612,7 +612,7 @@ def quizc(update,context):
 			    		)
 			    		print(5)
 			    		#print(update.effective_chat.id)
-			    		time.sleep(int(Time))
+			    		time.sleep(5)
 		    	except Exception as e:
 			    		print("e===="+str(e))
 		    	try:
@@ -638,7 +638,7 @@ def quizc(update,context):
 		    	# with is_closed true, the poll/quiz is immediately closed
 		    	type=Poll.QUIZ,
 		    	correct_option_id =3,
-		    	open_period=int(Time)+5,
+		    	open_period=5,
 		    	explanation="No point in this quistion.\nIt was only for result count",
 		    	is_closed=False,
 		    	is_anonymous=False,

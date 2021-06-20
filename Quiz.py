@@ -799,6 +799,8 @@ def receive_poll_answer(update,context):
 		  border-collapse: collapse;
 		  width: 100%;
 		  }
+					    	h1 {text-align: center;}
+					    	p {text-align: center;}
 					    	td, th {
 		  border: 1px solid #dddddd;
 		  text-align: center;
@@ -813,7 +815,7 @@ def receive_poll_answer(update,context):
 					    	</head>
 					    	<body>
 					    	<h1> 🏁 The quiz \'"""+Textstr0+"""\' has finished!</h1>
-					    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered.<br>Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p>
+					    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered. Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p>
 					    	<table>
 					    	<tr>
 					    	<th>Name</th>

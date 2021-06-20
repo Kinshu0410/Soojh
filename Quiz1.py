@@ -631,6 +631,7 @@ def quizc(update,context):
 			    	chatid=channelid
 		    	except Exception as e:
 		    		pass
+    		time.sleep(int(Time))
     		message = context.bot.send_poll(
     			chat_id=channelid,
     			question="Must attempt Free Hit.",
@@ -638,14 +639,14 @@ def quizc(update,context):
 		    	# with is_closed true, the poll/quiz is immediately closed
 		    	type=Poll.QUIZ,
 		    	correct_option_id =3,
-		    	open_period=5,
+		    	open_period=15,
 		    	explanation="No point in this quistion.\nIt was only for result count",
 		    	is_closed=False,
 		    	is_anonymous=False,
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(int(Time)+5)
+    		time.sleep(15)
     		try:
 		    	#print("start")
 			    payload = {

@@ -567,7 +567,7 @@ def quizc(update,context):
     
     	try:
     		
-    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
+    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ Voting avaliable"+str(time.ctime())+"–"+str(time.ctime()+79200)+" \n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for free hit questions far calculating Results.\n\nResult Comes on "+str(time.ctime()+86400)+"\n Playing Group @GK_Zone</b>", parse_mode=ParseMode.HTML)
     		mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
     		time.sleep(2)
     		for xooo in range(6):
@@ -646,7 +646,7 @@ def quizc(update,context):
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(3600)
+    		time.sleep(7200)
     		try:
 		    	#print("start")
 			    payload = {
@@ -776,20 +776,25 @@ def receive_poll_answer(update,context):
 					    	dbbb.append(int(Rs))
 					    	
 					    	##print(Rs)
+					    	rnumb=1
 					    	if Uname is None:
 					    		ree=ree+"""<tr>
+					    		<th>"""+str(rnumb)+"""</th>
 					    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
 					    		<th>"""+str(Rname)+"""</th>
 					    		<th>"""+str(Wname)+"""</th>
 					    		<th>"""+str(Rs)+"""</th></tr>"""
+					    		rnumb+=1
 					    		Uname=None
 					    		Usid=None
 					    	else:
 					    		ree=ree+"""<tr>
+					    		<th>"""+str(rnumb)+"""</th>
 					    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
 					    		<th>"""+str(Rname)+"""</th>
 					    		<th>"""+str(Wname)+"""</th>
 					    		<th>"""+str(Rs)+"""</th></tr>"""
+					    		rnumb+=1
 					    		Uname=None
 					    		Usid=None
 					    	yo="""<!DOCTYPE html><html>
@@ -819,6 +824,7 @@ def receive_poll_answer(update,context):
 					    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered. Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p>
 					    	<table>
 					    	<tr>
+					    	<th>Rank No.</th>
 					    	<th>Name</th>
 					    	<th>Right Options</th>
 					    	<th>Wrong Options</th>

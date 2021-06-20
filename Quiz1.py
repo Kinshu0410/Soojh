@@ -646,7 +646,7 @@ def quizc(update,context):
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(60)
+    		time.sleep(7200)
     		try:
 		    	#print("start")
 			    payload = {

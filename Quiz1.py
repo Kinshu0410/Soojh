@@ -764,6 +764,7 @@ def receive_poll_answer(update,context):
 		    			print(dbbb)
 		    			yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
 		    			print(yest)
+		    			rnumb=1
 				    	for L in yest:
 					    	Fname=dbR[Textstr0][List[L]]['fname']
 					    	Rname=dbR[Textstr0][List[L]]['✔︎']
@@ -776,7 +777,7 @@ def receive_poll_answer(update,context):
 					    	dbbb.append(int(Rs))
 					    	
 					    	##print(Rs)
-					    	rnumb=1
+					    	
 					    	if Uname is None:
 					    		ree=ree+"""<tr>
 					    		<th>"""+str(rnumb)+"""</th>

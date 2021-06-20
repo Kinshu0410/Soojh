@@ -824,7 +824,7 @@ def receive_poll_answer(update,context):
 					    	<th>Marks</th>
 					    	</tr>
 					    	"""+ree+"""</table>
-					    	<p><hr> 🏆 Congratulations to the winners!<hr></p>
+					    	<hr><p> 🏆 Congratulations to the winners!</p><hr>
 					    	</body>
 					    	</html>"""
 				    	try:

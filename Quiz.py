@@ -567,7 +567,7 @@ def quizc(update,context):
     
     	try:
     		
-    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
+    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting avaliable "+str(time.ctime())+"– "+str(time.ctime(time.time() + int(Time) -900))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for free hit questions far calculating Results.\n\nResult Comes on "+str(time.ctime(time.time() + int(Time)))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
     		mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
     		time.sleep(2)
     		for xooo in range(6):
@@ -604,7 +604,7 @@ def quizc(update,context):
 			    			# with is_closed true, the poll/quiz is immediately closed
 			    			type=Poll.QUIZ,
 			    			correct_option_id =db[Textstr0]['cor'][X],
-			    			open_period=int(Time),
+			    			#open_period=int(Time),
 			    			#explanation=Ex,
 			    			is_closed=False,
 			    			is_anonymous=False,
@@ -612,7 +612,7 @@ def quizc(update,context):
 			    		)
 			    		print(5)
 			    		#print(update.effective_chat.id)
-			    		time.sleep(int(Time))
+			    		time.sleep(5)
 		    	except Exception as e:
 			    		print("e===="+str(e))
 		    	try:
@@ -631,6 +631,7 @@ def quizc(update,context):
 			    	chatid=channelid
 		    	except Exception as e:
 		    		pass
+    		time.sleep(int(Time))
     		message = context.bot.send_poll(
     			chat_id=channelid,
     			question="Must attempt Free Hit.",
@@ -638,14 +639,14 @@ def quizc(update,context):
 		    	# with is_closed true, the poll/quiz is immediately closed
 		    	type=Poll.QUIZ,
 		    	correct_option_id =3,
-		    	open_period=int(Time)+5,
+		    	#open_period=15,
 		    	explanation="No point in this quistion.\nIt was only for result count",
 		    	is_closed=False,
 		    	is_anonymous=False,
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(int(Time)+5)
+    		time.sleep(900)
     		try:
 		    	#print("start")
 			    payload = {
@@ -763,6 +764,7 @@ def receive_poll_answer(update,context):
 		    			print(dbbb)
 		    			yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
 		    			print(yest)
+		    			rnumb=1
 				    	for L in yest:
 					    	Fname=dbR[Textstr0][List[L]]['fname']
 					    	Rname=dbR[Textstr0][List[L]]['✔︎']
@@ -775,20 +777,25 @@ def receive_poll_answer(update,context):
 					    	dbbb.append(int(Rs))
 					    	
 					    	##print(Rs)
+					    	
 					    	if Uname is None:
 					    		ree=ree+"""<tr>
+					    		<th>"""+str(rnumb)+"""</th>
 					    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
 					    		<th>"""+str(Rname)+"""</th>
 					    		<th>"""+str(Wname)+"""</th>
 					    		<th>"""+str(Rs)+"""</th></tr>"""
+					    		rnumb+=1
 					    		Uname=None
 					    		Usid=None
 					    	else:
 					    		ree=ree+"""<tr>
+					    		<th>"""+str(rnumb)+"""</th>
 					    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
 					    		<th>"""+str(Rname)+"""</th>
 					    		<th>"""+str(Wname)+"""</th>
 					    		<th>"""+str(Rs)+"""</th></tr>"""
+					    		rnumb+=1
 					    		Uname=None
 					    		Usid=None
 					    	yo="""<!DOCTYPE html><html>
@@ -818,6 +825,7 @@ def receive_poll_answer(update,context):
 					    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered. Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p>
 					    	<table>
 					    	<tr>
+					    	<th>Rank No.</th>
 					    	<th>Name</th>
 					    	<th>Right Options</th>
 					    	<th>Wrong Options</th>

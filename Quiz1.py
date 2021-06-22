@@ -737,7 +737,7 @@ def receive_poll_answer(update,context):
 		    	List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	dbbb=[]
-		    	if Y==XY:
+		    	if True:
 		    		if J==1:
 		    			for L in range(P):
 		    				Rs=dbR[Textstr0][List[L]]['result'][0]
@@ -817,7 +817,7 @@ def receive_poll_answer(update,context):
 					    	</body>
 					    	</html>"""
 				    	try:
-					     	if Y==XY:
+					     	if True:
 					     		if J==1:
 					     			try:
 					     				with open('Result.html', 'w') as outfile:
@@ -827,13 +827,13 @@ def receive_poll_answer(update,context):
 					     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 					     				try:
 					     					
-					     					context.bot.send_document(chatid, open('Result.html', "rb"))#document=file)
+					     					Pass#context.bot.send_document(chatid, open('Result.html', "rb"))#document=file)
 					     				except Exception as e:
 					     					pass
 					     				time.sleep(3)
 					     			except:
 					     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST QUESTION \nSo Result won't COME this time.")
-					     			J=2
+					     			#J=2
 				    	except:
 				    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="Fail to complet process.")
 					    		

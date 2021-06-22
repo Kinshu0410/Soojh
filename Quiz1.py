@@ -421,27 +421,8 @@ re=""
 def result(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     userText=update.message.text
-    global re
-    with open('Result.html') as json_file:
-    	dbR = json.load(json_file)
-    with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
-    try:
-    	List=list(dbR[userText].keys())
-    	P=len(List)
-    	for L in range(P):
-    			Fname=dbR[userText][List[L]]['fname']
-    			##print(Fname)	
-    			Uname=dbR[userText][List[L]]['uname']
-    			##print(Uname)
-    			Rs=dbR[userText][List[L]]['result'][0]
-    			##print(Rs)
-    			re=re+"\n"+"<a href=\"https://t.me/"+Uname+"\">"+Fname+"</a>"+" gain "+str(Rs)+"/"+str(P*4)+" Marks"
-    			#print(re)
-    	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!\n\n"+str(len(db[userText]['que']))+" questions answered\n\n"+re,parse_mode=ParseMode.HTML)
-    	re=""
-    except:
-    	update.message.reply_text("quiz not found")
+    #global re
+    context.bot.send_document(chat_id, open('Result.html', "rb"))
     return ConversationHandler.END
 
 '''
@@ -567,7 +548,7 @@ def quizc(update,context):
     
     	try:
     		
-    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting avaliable "+str(time.ctime(time.time() +19800))+"– "+str(time.ctime(time.time() + int(Time) +19800 -900))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for free hit questions far calculating Results.\n\nResult Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
+    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting avaliable "+str(time.ctime(time.time() +19800))+"– "+str(time.ctime(time.time() + int(Time) +19800 ))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for free hit questions far calculating Results.\n\nResult Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
     		mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
     		time.sleep(2)
     		for xooo in range(6):
@@ -646,7 +627,7 @@ def quizc(update,context):
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		time.sleep(900)
+    		#time.sleep(900)
     		try:
 		    	#print("start")
 			    payload = {

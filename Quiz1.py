@@ -449,11 +449,11 @@ def downloadfile(update,context):
 @send_typing_action
 def downloadfile(update,context):
     f = 'Newfile.text'
-    #print("1")
-    chat_id=update.effective_chat.id
+    chat__id=update.message.chat.id#print("1")
+    #chat__id=update.effective_chat.id
     #print(chat_id)
     #with open(f, "rb") as file:
-    	#context.bot.send_document(chat_id, document=file)
+    	#context.bot.send_document(chat__id, document=file)
      
     	
     try:

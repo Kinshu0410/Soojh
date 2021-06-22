@@ -422,7 +422,7 @@ def result(update,context):
     user = update.message.from_user
     userText=update.message.text
     chat__id=update.message.chat.id#global re
-    context.bot.send_document(chat__id, open('Result.html', "rb"))
+    context.bot.send_document(chat__id, open('Result.html1', "rb"))
     return ConversationHandler.END
 
 '''
@@ -820,7 +820,7 @@ def receive_poll_answer(update,context):
 					     	if True:
 					     		if J==1:
 					     			try:
-					     				with open('Result.html', 'w') as outfile:
+					     				with open('Result.html1', 'w') as outfile:
 					     					
 					     					outfile.write(yo)
 					     					outfile.close()

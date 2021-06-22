@@ -723,8 +723,8 @@ def receive_poll_answer(update,context):
 	    			dbname['result'] = [x-1 for x in dbname['result']]
 	    			dbname['✖︎'] = [x+1 for x in dbname['✖︎']]
 	    	##print(str(dbR))
-	    	with open('Result.html', 'w') as outfile:
-	    		json.dump(dbR, outfile)
+	    	#with open('Result.html', 'w') as outfile:
+	    		#json.dump(dbR, outfile)
 	    	#print("bdR = "+str(dbR))
 	    	
 	    	try:
@@ -817,6 +817,9 @@ def receive_poll_answer(update,context):
 					    	</body>
 					    	</html>"""
 				    	try:
+					     	with open('Result.html', 'w') as outfile:
+					     		outfile.write(yo)
+					     		outfile.close()
 					     	if Y==XY:
 					     		if J==1:
 					     			try:

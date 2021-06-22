@@ -817,10 +817,10 @@ def receive_poll_answer(update,context):
 					    	</body>
 					    	</html>"""
 				    	try:
-					     	os.remove('Result.html')
-					     	with open('Result.html', 'w') as outfile:
-					     		outfile.write(yo)
-					     		outfile.close()
+					     	#os.remove('Result.html')
+					     	#with open('Result.html', 'w') as outfile:
+					     		#outfile.write(yo)
+					     		#outfile.close()
 					     	if Y==XY:
 					     		if J==1:
 					     			try:

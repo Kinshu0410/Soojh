@@ -418,7 +418,7 @@ def quizresult(update: Update, _: CallbackContext) -> int:
     return RESULT
 re=""
 @run_async
-def result(update: Update, _: CallbackContext) -> int:
+def result(update,context):
     user = update.message.from_user
     userText=update.message.text
     #global re

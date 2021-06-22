@@ -421,8 +421,8 @@ re=""
 def result(update,context):
     user = update.message.from_user
     userText=update.message.text
-    #global re
-    context.bot.send_document(chat_id, open('Result.html', "rb"))
+    chat__id=update.message.chat.id#global re
+    context.bot.send_document(chat__id, open('Result.html', "rb"))
     return ConversationHandler.END
 
 '''

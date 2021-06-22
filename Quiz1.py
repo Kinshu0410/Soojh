@@ -737,8 +737,8 @@ def receive_poll_answer(update,context):
 		    	List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	dbbb=[]
-		    	if True:
-		    		if True:
+		    	if Y==XY:
+		    		if J==1:
 		    			for L in range(P):
 		    				Rs=dbR[Textstr0][List[L]]['result'][0]
 		    				dbbb.append(int(Rs))

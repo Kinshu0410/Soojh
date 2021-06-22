@@ -449,11 +449,11 @@ def downloadfile(update,context):
 @send_typing_action
 def downloadfile(update,context):
     f = 'Newfile.text'
-    chat__id=update.message.chat.id#print("1")
-    #chat__id=update.effective_chat.id
+    #print("1")
+    chat_id=update.effective_chat.id
     #print(chat_id)
     #with open(f, "rb") as file:
-    	#context.bot.send_document(chat__id, document=file)
+    	#context.bot.send_document(chat_id, document=file)
      
     	
     try:
@@ -548,7 +548,7 @@ def quizc(update,context):
     
     	try:
     		
-    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting avaliable "+str(time.ctime(time.time() +19800))+"– "+str(time.ctime(time.time() + int(Time) +19800 ))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for free hit questions far calculating Results.\n\nResult Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
+    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting avaliable "+str(time.ctime(time.time() +19800))+"– "+str(time.ctime(time.time() + int(Time) +19800 -900))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for free hit questions far calculating Results.\n\nResult Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
     		mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
     		time.sleep(2)
     		for xooo in range(6):
@@ -627,7 +627,7 @@ def quizc(update,context):
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		#time.sleep(900)
+    		time.sleep(900)
     		try:
 		    	#print("start")
 			    payload = {
@@ -723,8 +723,8 @@ def receive_poll_answer(update,context):
 	    			dbname['result'] = [x-1 for x in dbname['result']]
 	    			dbname['✖︎'] = [x+1 for x in dbname['✖︎']]
 	    	##print(str(dbR))
-	    	#with open('Result.html', 'w') as outfile:
-	    		#json.dump(dbR, outfile)
+	    	with open('Result.html', 'w') as outfile:
+	    		json.dump(dbR, outfile)
 	    	#print("bdR = "+str(dbR))
 	    	
 	    	try:
@@ -817,10 +817,6 @@ def receive_poll_answer(update,context):
 					    	</body>
 					    	</html>"""
 				    	try:
-					     	#os.remove('Result.html')
-					     	#with open('Result.html', 'w') as outfile:
-					     		#outfile.write(yo)
-					     		#outfile.close()
 					     	if Y==XY:
 					     		if J==1:
 					     			try:
@@ -845,8 +841,8 @@ def receive_poll_answer(update,context):
 	    	except Exception as e:
 			    #print("e===="+str(e))
 			    context.bot.send_message(chat_id=chatid, text="quiz not found")
-    except Exception as e:
-    	print("fail======"+str(e))
+    except:
+    	print("fail")
     	
 	    	
 TIME1=range(1)

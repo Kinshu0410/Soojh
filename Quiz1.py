@@ -844,8 +844,8 @@ def receive_poll_answer(update,context):
 	    	except Exception as e:
 			    #print("e===="+str(e))
 			    context.bot.send_message(chat_id=chatid, text="quiz not found")
-    except:
-    	print("fail")
+    except Exception as e:
+    	print("fail======"+str(e))
     	
 	    	
 TIME1=range(1)

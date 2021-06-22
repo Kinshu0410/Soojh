@@ -627,7 +627,7 @@ def quizc(update,context):
 		    	reply_markup=ReplyKeyboardRemove(),
 		    )
 		    #print(update.effective_chat.id)
-    		#time.sleep(900)
+    		time.sleep(900)
     		try:
 		    	#print("start")
 			    payload = {
@@ -737,8 +737,8 @@ def receive_poll_answer(update,context):
 		    	List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	dbbb=[]
-		    	if True:
-		    		if True:
+		    	if Y==XY:
+		    		if J==1:
 		    			for L in range(P):
 		    				Rs=dbR[Textstr0][List[L]]['result'][0]
 		    				dbbb.append(int(Rs))
@@ -817,16 +817,13 @@ def receive_poll_answer(update,context):
 					    	</body>
 					    	</html>"""
 				    	try:
-					     	if True:
-					     		if True:
-					     			if True:
-					     				with open('Result.html', 'w') as outfile:
-					     					outfile.write(yo)
-					     					outfile.close()
-
 					     	if Y==XY:
 					     		if J==1:
 					     			try:
+					     				with open('Result.html', 'w') as outfile:
+					     					
+					     					outfile.write(yo)
+					     					outfile.close()
 					     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 					     				try:
 					     					

@@ -407,6 +407,7 @@ def quizlist(update: Update, _: CallbackContext) -> int:
 
 
 @run_async
+@restricted
 @send_typing_action
 def quizresult(update: Update, _: CallbackContext) -> int:
     
@@ -418,30 +419,11 @@ def quizresult(update: Update, _: CallbackContext) -> int:
     return RESULT
 re=""
 @run_async
-def result(update: Update, _: CallbackContext) -> int:
+def result(update,context):
     user = update.message.from_user
     userText=update.message.text
-    global re
-    with open('Result.html') as json_file:
-    	dbR = json.load(json_file)
-    with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
-    try:
-    	List=list(dbR[userText].keys())
-    	P=len(List)
-    	for L in range(P):
-    			Fname=dbR[userText][List[L]]['fname']
-    			##print(Fname)	
-    			Uname=dbR[userText][List[L]]['uname']
-    			##print(Uname)
-    			Rs=dbR[userText][List[L]]['result'][0]
-    			##print(Rs)
-    			re=re+"\n"+"<a href=\"https://t.me/"+Uname+"\">"+Fname+"</a>"+" gain "+str(Rs)+"/"+str(P*4)+" Marks"
-    			#print(re)
-    	update.message.reply_text("🏁 The quiz \'"+userText+"\' has finished!\n\n"+str(len(db[userText]['que']))+" questions answered\n\n"+re,parse_mode=ParseMode.HTML)
-    	re=""
-    except:
-    	update.message.reply_text("quiz not found")
+    chat__id=update.message.chat.id#global re
+    context.bot.send_document(chat__id, open('Result.html1', "rb"))
     return ConversationHandler.END
 
 '''
@@ -555,8 +537,9 @@ def quizc(update,context):
     global Textstr0
     global J
     global chatid
+    global Dbz
     J=0
-    
+    Dbz=[]
     userText=update.message.text
     Textstr0=userText
     with open('Newfile.text') as json_file:
@@ -567,7 +550,7 @@ def quizc(update,context):
     
     	try:
     		
-    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting avaliable "+str(time.ctime(time.time() +19800))+"– "+str(time.ctime(time.time() + int(Time) +19800 -7200))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for free hit questions far calculating Results.\n\nResult Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
+    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the quiz \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting avaliable "+str(time.ctime(time.time() +19800))+"– "+str(time.ctime(time.time() + int(Time) +19800 -900))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for free hit questions far calculating Results.\n\nResult Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
     		mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
     		time.sleep(2)
     		for xooo in range(6):
@@ -611,7 +594,7 @@ def quizc(update,context):
 			    			reply_markup=ReplyKeyboardRemove(),	
 			    		)
 			    		print(5)
-			    		#print(update.effective_chat.id)
+			    		Dbz.append(message.poll.id)
 			    		time.sleep(5)
 		    	except Exception as e:
 			    		print("e===="+str(e))
@@ -631,42 +614,9 @@ def quizc(update,context):
 			    	chatid=channelid
 		    	except Exception as e:
 		    		pass
-    		time.sleep(int(Time))
-    		message = context.bot.send_poll(
-    			chat_id=channelid,
-    			question="Must attempt Free Hit.",
-		    	options=["Option", "Option", "Option", "Option"],
-		    	# with is_closed true, the poll/quiz is immediately closed
-		    	type=Poll.QUIZ,
-		    	correct_option_id =3,
-		    	#open_period=15,
-		    	explanation="No point in this quistion.\nIt was only for result count",
-		    	is_closed=False,
-		    	is_anonymous=False,
-		    	reply_markup=ReplyKeyboardRemove(),
-		    )
-		    #print(update.effective_chat.id)
-    		time.sleep(7200)
-    		try:
-		    	#print("start")
-			    payload = {
-				    message.poll.id: {
-				        "cor": question,
-				        "options": options,
-				        "cor":correct_option_id,
-				        "message_id": message.message_id,
-				        "chat_id": update.effective_chat.id,
-				        "que_no":X+2
-				    }
-			    }
-			    context.bot_data.update(payload)
-			    
-    		except Exception as e:
-		    	pass
-			    	#print(e)
+    		
 			    	
-			    	
-			    	#return QUIZ2
+			
     			
 	
 
@@ -684,7 +634,7 @@ def quizc(update,context):
     	return ConversationHandler.END
     except Exception as e:
     	pass
-    	#print(e)
+    print(str(Dbz))
     
 
     	
@@ -756,7 +706,7 @@ def receive_poll_answer(update,context):
 		    	List=list(dbR[Textstr0].keys())
 		    	P=len(List)
 		    	dbbb=[]
-		    	if Y==XY:
+		    	if True:
 		    		if J==1:
 		    			for L in range(P):
 		    				Rs=dbR[Textstr0][List[L]]['result'][0]
@@ -836,23 +786,23 @@ def receive_poll_answer(update,context):
 					    	</body>
 					    	</html>"""
 				    	try:
-					     	if Y==XY:
+					     	if True:
 					     		if J==1:
 					     			try:
-					     				with open('Result.html', 'w') as outfile:
+					     				with open('Result.html1', 'w') as outfile:
 					     					
 					     					outfile.write(yo)
 					     					outfile.close()
 					     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
 					     				try:
 					     					
-					     					context.bot.send_document(chatid, open('Result.html', "rb"))#document=file)
+					     					Pass#context.bot.send_document(chatid, open('Result.html', "rb"))#document=file)
 					     				except Exception as e:
 					     					pass
 					     				time.sleep(3)
 					     			except:
 					     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST QUESTION \nSo Result won't COME this time.")
-					     			J=2
+					     			#J=2
 				    	except:
 				    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="Fail to complet process.")
 					    		

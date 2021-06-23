@@ -696,7 +696,7 @@ def receive_poll_answer(update,context):
 	    		json.dump(dbR, outfile)
 	    	#print("bdR = "+str(dbR))
 	    	
-	    	try poll_id in Dbz:
+	    	try :
 	    		if J==0:
 	    			#mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
 	    			#print("message ==="+str(mess.message_id))

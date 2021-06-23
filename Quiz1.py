@@ -61,14 +61,14 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
+LIST_OF_ADMINS = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala"]
 
 def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
         userName = update.message.chat.username
         if userName not in LIST_OF_ADMINS:
-            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            #context.bot.send_message(chat_id='', text=f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)
     return wrapped
@@ -423,7 +423,7 @@ def result(update,context):
     user = update.message.from_user
     userText=update.message.text
     chat__id=update.message.chat.id#global re
-    context.bot.send_document(chat__id, open('Result dont open in chrome.html', "rb"))
+    context.bot.send_document(chat__id, open('Result don\'t open in chrome.html', "rb"))
     return ConversationHandler.END
 
 '''
@@ -678,9 +678,9 @@ def receive_poll_answer(update,context):
 	    	XY=len(db[Textstr0]['que'])+1
 	    	print("XY="+str(XY))
 	    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0], '✔︎':[0] ,'✖︎':[0]}
-	    	if Textstr0 not in list(dbR.keys()):
+	    	if Textstr0 not in list(dbR.keys()) and poll_id in Dbz:
 	    		dbR[Textstr0]={}
-	    	if answer.user.first_name not in list(dbR[Textstr0].keys()):
+	    	if answer.user.first_name not in list(dbR[Textstr0].keys()) and poll_id in Dbz:
 	    		dbR[Textstr0][answer.user.first_name]=newA
 	    	dbname=dbR[Textstr0][answer.user.first_name]
 	    	dbname['so']=answer.option_ids[0]
@@ -696,7 +696,7 @@ def receive_poll_answer(update,context):
 	    		json.dump(dbR, outfile)
 	    	#print("bdR = "+str(dbR))
 	    	
-	    	try:
+	    	try poll_id in Dbz:
 	    		if J==0:
 	    			#mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
 	    			#print("message ==="+str(mess.message_id))

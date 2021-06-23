@@ -771,8 +771,8 @@ def receive_poll_answer(update,context):
 					    	<title>On @Soojhboojh_01bot</title>
 					    	</head>
 					    	<body>
-					    	<h1> 🏁 The quiz \'"""+Textstr0+"""\' has finished!</h1>
-					    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered. Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p>
+					    	<h1> 🏁 The quiz \' <b>"""+Textstr0+"""\</b>' has finished!</h1>
+					    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered. Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p><p>Present Time == <b>"""+str(time.ctime(time.time() +19800))+"""</b></p>
 					    	<table>
 					    	<tr>
 					    	<th>Rank No.</th>

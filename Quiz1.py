@@ -407,6 +407,7 @@ def quizlist(update: Update, _: CallbackContext) -> int:
 
 
 @run_async
+@restricted
 @send_typing_action
 def quizresult(update: Update, _: CallbackContext) -> int:
     
@@ -536,8 +537,9 @@ def quizc(update,context):
     global Textstr0
     global J
     global chatid
+    global Dbz
     J=0
-    
+    Dbz=[]
     userText=update.message.text
     Textstr0=userText
     with open('Newfile.text') as json_file:
@@ -592,7 +594,7 @@ def quizc(update,context):
 			    			reply_markup=ReplyKeyboardRemove(),	
 			    		)
 			    		print(5)
-			    		#print(update.effective_chat.id)
+			    		Dbz.append(message.poll.id)
 			    		time.sleep(5)
 		    	except Exception as e:
 			    		print("e===="+str(e))
@@ -612,42 +614,9 @@ def quizc(update,context):
 			    	chatid=channelid
 		    	except Exception as e:
 		    		pass
-    		time.sleep(int(Time))
-    		message = context.bot.send_poll(
-    			chat_id=channelid,
-    			question="Must attempt Free Hit.",
-		    	options=["Option", "Option", "Option", "Option"],
-		    	# with is_closed true, the poll/quiz is immediately closed
-		    	type=Poll.QUIZ,
-		    	correct_option_id =3,
-		    	#open_period=15,
-		    	explanation="No point in this quistion.\nIt was only for result count",
-		    	is_closed=False,
-		    	is_anonymous=False,
-		    	reply_markup=ReplyKeyboardRemove(),
-		    )
-		    #print(update.effective_chat.id)
-    		#time.sleep(900)
-    		try:
-		    	#print("start")
-			    payload = {
-				    message.poll.id: {
-				        "cor": question,
-				        "options": options,
-				        "cor":correct_option_id,
-				        "message_id": message.message_id,
-				        "chat_id": update.effective_chat.id,
-				        "que_no":X+2
-				    }
-			    }
-			    context.bot_data.update(payload)
-			    
-    		except Exception as e:
-		    	pass
-			    	#print(e)
+    		
 			    	
-			    	
-			    	#return QUIZ2
+			
     			
 	
 
@@ -665,7 +634,7 @@ def quizc(update,context):
     	return ConversationHandler.END
     except Exception as e:
     	pass
-    	#print(e)
+    print(str(Dbz))
     
 
     	

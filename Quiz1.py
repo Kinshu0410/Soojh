@@ -423,7 +423,7 @@ def result(update,context):
     user = update.message.from_user
     userText=update.message.text
     chat__id=update.message.chat.id#global re
-    context.bot.send_document(chat__id, open('Result dont open in chrome.html', "rb"))
+    context.bot.send_document(chat__id, open('Result don\'t open in chrome.html', "rb"))
     return ConversationHandler.END
 
 '''

@@ -684,7 +684,7 @@ def receive_poll_answer(update,context):
 	    		dbR[Textstr0][answer.user.first_name]=newA
 	    	dbname=dbR[Textstr0][answer.user.first_name]
 	    	dbname['so']=answer.option_ids[0]
-	    	if Y!=XY:
+	    	if poll_id in Dbz:
 	    		if dbname['so']==corec:
 	    			dbname['✔︎'] = [x+1 for x in dbname['✔︎']]
 	    			dbname['result'] = [x+4 for x in dbname['result']]

@@ -698,7 +698,7 @@ def receive_poll_answer(update,context):
 	    	
 	    	try:
 	    		if J==0:
-	    			mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
+	    			#mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
 	    			#print("message ==="+str(mess.message_id))
 	    			J=1
 		    	ree=""""""
@@ -771,7 +771,7 @@ def receive_poll_answer(update,context):
 					    	<title>On @Soojhboojh_01bot</title>
 					    	</head>
 					    	<body>
-					    	<h1> 🏁 The quiz \' <b>"""+Textstr0+"""\</b>' has finished!</h1>
+					    	<h1> 🏁 The quiz \' <b>"""+Textstr0+"""</b> \' has finished!</h1>
 					    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered. Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p><p>Present Time == <b>"""+str(time.ctime(time.time() +19800))+"""</b></p>
 					    	<table>
 					    	<tr>

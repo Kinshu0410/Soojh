@@ -720,6 +720,7 @@ def receive_poll_answer(update,context):
 			    			print(yest)
 			    			rnumb=1
 					    	for L in yest:
+					    		print("full ="+str(dbR)[Textstr0])
 						    	Fname=dbR[Textstr0][List[L]]['fname']
 						    	Rname=dbR[Textstr0][List[L]]['✔︎']
 						    	Wname=dbR[Textstr0][List[L]]['✖︎']

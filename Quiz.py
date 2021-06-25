@@ -20,7 +20,7 @@ import json
 import logging
 import os
 from functools import wraps
-
+import xlsxwriter
 
 from telegram.ext.dispatcher import run_async
 
@@ -72,6 +72,19 @@ def restricted(func):
             return
         return func(update, context, *args, **kwargs)
     return wrapped
+
+LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala"]
+
+def restricted1(func):
+    @wraps(func)
+    def wrapped(update, context, *args, **kwargs):
+        userName = update.message.chat.username
+        if userName not in LIST_OF_ADMINS1:
+            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            return
+        return func(update, context, *args, **kwargs)
+    return wrapped
+
 
 
 @run_async
@@ -407,7 +420,7 @@ def quizlist(update: Update, _: CallbackContext) -> int:
 
 
 @run_async
-@restricted
+@restricted1
 @send_typing_action
 def quizresult(update: Update, _: CallbackContext) -> int:
     
@@ -424,9 +437,9 @@ def result(update,context):
     userText=update.message.text
     chat__id=update.message.chat.id#global re
     try:
-    	context.bot.send_document(chat__id, open("Result don't open in chrome.html", "rb"))
-    except:
-    	update.message.reply_text("No Current Quiz so no Result.")
+        context.bot.send_document(chat__id, open('Result do not open in chrome.html', "rb"))
+    except Exception as e:
+        update.message.reply_text("no live quiz at now come next time.\n error name = "+str(e))
     return ConversationHandler.END
 
 '''
@@ -640,6 +653,9 @@ def quizc(update,context):
     print(str(Dbz))
     
 
+
+
+Dbz=[]
     	
 #time.sleep(1)
 print("Sleeping for one sec")
@@ -656,8 +672,9 @@ def receive_poll_answer(update,context):
 	    print(str(answe))
 	    #time.sleep(3)
 	    poll_id = answer.poll_id
+	    ui=str(answer.user.id)
 	    #print("answer"+str(answer))
-	    
+	    print("Dbz = "+str(Dbz))
 	    if poll_id in Dbz:
 		    try:
 		        
@@ -684,9 +701,9 @@ def receive_poll_answer(update,context):
 		    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0], '✔︎':[0] ,'✖︎':[0]}
 		    	if Textstr0 not in list(dbR.keys()):
 		    		dbR[Textstr0]={}
-		    	if answer.user.id not in list(dbR[Textstr0].keys()):
-		    		dbR[Textstr0][answer.user.id]=newA
-		    	dbname=dbR[Textstr0][answer.user.id]
+		    	if ui not in list(dbR[Textstr0].keys()):
+		    		dbR[Textstr0][ui]=newA
+		    	dbname=dbR[Textstr0][ui]
 		    	dbname['so']=answer.option_ids[0]
 		    	if poll_id in Dbz:
 		    		if dbname['so']==corec:
@@ -719,6 +736,8 @@ def receive_poll_answer(update,context):
 			    			yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
 			    			print(yest)
 			    			rnumb=1
+			    			workbook = xlsxwriter.Workbook('demo.xlsx')
+			    			workbook = workbook.add_worksheet()
 					    	for L in yest:
 						    	Fname=dbR[Textstr0][List[L]]['fname']
 						    	Rname=dbR[Textstr0][List[L]]['✔︎']
@@ -752,34 +771,15 @@ def receive_poll_answer(update,context):
 						    		rnumb+=1
 						    		Uname=None
 						    		Usid=None
-						    	yo="""<!DOCTYPE html><html>
-						    	<head>
-						    	<style>
-			table {
-			  font-family: arial, sans-serif;
-			  border-collapse: collapse;
-			  width: 100%;
-			  }
-						    	h1 {text-align: center;}
-						    	p {text-align: center;}
-						    	td, th {
-			  border: 1px solid #dddddd;
-			  text-align: center;
-			  vertical-align: middle;
-			  padding: 8px;
-			}
-						    	tr:nth-child(even) {
-			  background-color: #dddddd;
-			}
-			</style>
-						    	<title>On @Soojhboojh_01bot</title>
-						    	</head>
-						    	<body>
-						    	<h1> 🏁 The quiz \' <b>"""+Textstr0+"""</b> \' has finished!</h1>
-						    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered. Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p><p>Present Time == <b>"""+str(time.ctime(time.time() +19800))+"""</b></p>
-						    	<table>
-						    	<tr>
-						    	<th>Rank No.</th>
+						    	
+						    	workbook.write('A1', 'Rank')
+						    	workbook.write('B1', 'Name')
+						    	workbook.write('C1', 'Right Options')
+						        workbook.write('D1', 'Wrong Options')
+						    	workbook.write('E1', 'Marks')
+						    	for L in range(P):
+						    		
+						    		
 						    	<th>Name</th>
 						    	<th>Right Options</th>
 						    	<th>Wrong Options</th>
@@ -793,7 +793,7 @@ def receive_poll_answer(update,context):
 						     	if True:
 						     		if J==1:
 						     			try:
-						     				with open("Result don't open in chrome.html", 'w') as outfile:
+						     				with open('Result do not open in chrome.html', 'w') as outfile:
 						     					
 						     					outfile.write(yo)
 						     					outfile.close()
@@ -815,7 +815,7 @@ def receive_poll_answer(update,context):
 				    #print("e===="+str(e))
 				    context.bot.send_message(chat_id=chatid, text="quiz not found")
     except:
-    	print("Program fail Dbz = "+str(Dbz))
+    	print("fail")
     	
 	    	
 TIME1=range(1)

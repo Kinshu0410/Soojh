@@ -73,6 +73,19 @@ def restricted(func):
         return func(update, context, *args, **kwargs)
     return wrapped
 
+LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala"]
+
+def restricted1(func):
+    @wraps(func)
+    def wrapped(update, context, *args, **kwargs):
+        userName = update.message.chat.username
+        if userName not in LIST_OF_ADMINS1:
+            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            return
+        return func(update, context, *args, **kwargs)
+    return wrapped
+
+
 
 @run_async
 @send_typing_action
@@ -407,7 +420,7 @@ def quizlist(update: Update, _: CallbackContext) -> int:
 
 
 @run_async
-@restricted
+@restricted1
 @send_typing_action
 def quizresult(update: Update, _: CallbackContext) -> int:
     
@@ -423,7 +436,10 @@ def result(update,context):
     user = update.message.from_user
     userText=update.message.text
     chat__id=update.message.chat.id#global re
-    context.bot.send_document(chat__id, open('Result do not open in chrome.html', "rb"))
+    try:
+        context.bot.send_document(chat__id, open('Result do not open in chrome.html', "rb"))
+    except Exception as e:
+        update.message.reply_text("no live quiz at now come next time.\n error name = "str(e))
     return ConversationHandler.END
 
 '''

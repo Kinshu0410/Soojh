@@ -99,7 +99,7 @@ def gender(update: Update, _: CallbackContext) -> int:
 
     return PHOTO
 
-Dbz=[]
+
 
 i=0
 #@run_async
@@ -423,10 +423,7 @@ def result(update,context):
     user = update.message.from_user
     userText=update.message.text
     chat__id=update.message.chat.id#global re
-    try:
-    	context.bot.send_document(chat__id, open("Result do not open in chrome.html", "rb"))
-    except:
-    	update.message.reply_text("No Current Quiz so no Result.")
+    context.bot.send_document(chat__id, open('Result do not open in chrome.html', "rb"))
     return ConversationHandler.END
 
 '''
@@ -639,7 +636,7 @@ def quizc(update,context):
     	pass
     print(str(Dbz))
     
-
+Dbz=[]
     	
 #time.sleep(1)
 print("Sleeping for one sec")
@@ -656,6 +653,7 @@ def receive_poll_answer(update,context):
 	    print(str(answe))
 	    #time.sleep(3)
 	    poll_id = answer.poll_id
+	    ui=str(answer.user.id)
 	    #print("answer"+str(answer))
 	    print("Dbz = "+str(Dbz))
 	    if poll_id in Dbz:
@@ -684,9 +682,9 @@ def receive_poll_answer(update,context):
 		    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0], '✔︎':[0] ,'✖︎':[0]}
 		    	if Textstr0 not in list(dbR.keys()):
 		    		dbR[Textstr0]={}
-		    	if answer.user.id not in list(dbR[Textstr0].keys()):
-		    		dbR[Textstr0][answer.user.id]=newA
-		    	dbname=dbR[Textstr0][answer.user.id]
+		    	if ui not in list(dbR[Textstr0].keys()):
+		    		dbR[Textstr0][ui]=newA
+		    	dbname=dbR[Textstr0][ui]
 		    	dbname['so']=answer.option_ids[0]
 		    	if poll_id in Dbz:
 		    		if dbname['so']==corec:
@@ -720,7 +718,6 @@ def receive_poll_answer(update,context):
 			    			print(yest)
 			    			rnumb=1
 					    	for L in yest:
-					    		print("full ="+str(dbR)[Textstr0])
 						    	Fname=dbR[Textstr0][List[L]]['fname']
 						    	Rname=dbR[Textstr0][List[L]]['✔︎']
 						    	Wname=dbR[Textstr0][List[L]]['✖︎']
@@ -794,7 +791,7 @@ def receive_poll_answer(update,context):
 						     	if True:
 						     		if J==1:
 						     			try:
-						     				with open("Result do not open in chrome.html", 'w') as outfile:
+						     				with open('Result do not open in chrome.html', 'w') as outfile:
 						     					
 						     					outfile.write(yo)
 						     					outfile.close()
@@ -813,10 +810,10 @@ def receive_poll_answer(update,context):
 						    		
 				    		
 		    	except Exception as e:
-				    print("e===="+str(e))
-				    context.bot.send_message(chat_id=chatid, text="quiz not found"+str(e))
+				    #print("e===="+str(e))
+				    context.bot.send_message(chat_id=chatid, text="quiz not found")
     except:
-    	print("Program fail Dbz = "+str(Dbz))
+    	print("fail")
     	
 	    	
 TIME1=range(1)

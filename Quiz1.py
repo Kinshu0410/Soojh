@@ -99,7 +99,7 @@ def gender(update: Update, _: CallbackContext) -> int:
 
     return PHOTO
 
-Dbz=""
+Dbz=[]
 
 i=0
 #@run_async

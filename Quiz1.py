@@ -424,7 +424,7 @@ def result(update,context):
     userText=update.message.text
     chat__id=update.message.chat.id#global re
     try:
-    	context.bot.send_document(chat__id, open("Result don't open in chrome.html", "rb"))
+    	context.bot.send_document(chat__id, open("Result do not open in chrome.html", "rb"))
     except:
     	update.message.reply_text("No Current Quiz so no Result.")
     return ConversationHandler.END
@@ -794,7 +794,7 @@ def receive_poll_answer(update,context):
 						     	if True:
 						     		if J==1:
 						     			try:
-						     				with open("Result don't open in chrome.html", 'w') as outfile:
+						     				with open("Result do not open in chrome.html", 'w') as outfile:
 						     					
 						     					outfile.write(yo)
 						     					outfile.close()
@@ -814,7 +814,7 @@ def receive_poll_answer(update,context):
 				    		
 		    	except Exception as e:
 				    #print("e===="+str(e))
-				    context.bot.send_message(chat_id=chatid, text="quiz not found")
+				    context.bot.send_message(chat_id=chatid, text="quiz not found"+str(e))
     except:
     	print("Program fail Dbz = "+str(Dbz))
     	

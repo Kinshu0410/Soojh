@@ -657,7 +657,7 @@ def receive_poll_answer(update,context):
 	    #time.sleep(3)
 	    poll_id = answer.poll_id
 	    #print("answer"+str(answer))
-	    
+	    print("Dbz = "+str(Dbz))
 	    if poll_id in Dbz:
 		    try:
 		        

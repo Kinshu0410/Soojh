@@ -439,7 +439,7 @@ def result(update,context):
     try:
         context.bot.send_document(chat__id, open('Result do not open in chrome.html', "rb"))
     except Exception as e:
-        update.message.reply_text("no live quiz at now come next time.\n error name = "str(e))
+        update.message.reply_text("no live quiz at now come next time.\n error name = "+str(e))
     return ConversationHandler.END
 
 '''

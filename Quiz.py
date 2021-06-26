@@ -436,7 +436,81 @@ def result(update,context):
     user = update.message.from_user
     userText=update.message.text
     chat__id=update.message.chat.id#global re
+    with open('Newfile.text') as json_file:
+        db = json.load(json_file)
+        
+    with open('Result.html', 'w') as outfile:
+          dbR = json.load(json_file)
     try:
+        if True:
+            if True:
+                try:
+                    if J==0:
+                        #mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
+                        #print("message ==="+str(mess.message_id))
+                        J=1
+                    
+                    #print("correct options = "+str(corec))
+                    List=list(dbR[Textstr0].keys())
+                    P=len(List)
+                    dbbb=[]
+                    if True:
+                        if J==1:
+                            for L in range(P):
+                                Rs=dbR[Textstr0][List[L]]['result'][0]
+                                dbbb.append(int(Rs))
+                            #print(dbbb)
+                            yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
+                            #print(yest)
+                            rnumb=1
+                            try:
+                                os.remove('Result.xlsx')
+                            except:
+                                print("removing")
+                            workbook = xlsxwriter.Workbook('Result.xlsx')
+                            worksheet = workbook.add_worksheet()
+                            #print("start A1")
+                            worksheet.write('A1', 'Rank')
+                            worksheet.write('B1', 'Name')
+                            worksheet.write('C1', 'Right Options')
+                            worksheet.write('D1', 'Wrong Options')
+                            worksheet.write('E1', 'Marks')
+                            for L in yest:
+                                #print("list")
+                                Fname=dbR[Textstr0][List[L]]['fname']
+                                
+                                
+                                Lname=dbR[Textstr0][List[L]]['lname']
+                                Rname=dbR[Textstr0][List[L]]['✔︎']
+                                
+                                Wname=dbR[Textstr0][List[L]]['✖︎']
+                                
+                                Uname=dbR[Textstr0][List[L]]['uname']
+                                Usid=dbR[Textstr0][List[L]]['usid']
+                                ##print(Uname)
+                                Rs=dbR[Textstr0][List[L]]['result'][0]
+                                #print("data loading start")
+                                
+                                worksheet.write('A'+str(rnumb+1), str(rnumb))
+                                
+                                worksheet.write('B'+str(rnumb+1), str(Fname)+" "+str(Lname))
+                                worksheet.write('C'+str(rnumb+1), str(Rname))
+                                worksheet.write('D'+str(rnumb+1), str(Wname))
+                                worksheet.write('E'+str(rnumb+1), str(Rs))
+                                #print("data load")
+                                rnumb+=1
+                            workbook.close()
+                            #print("webhook close")
+                            
+                                    
+                            
+                except Exception as e:
+                    #print("e===="+str(e))
+                    context.bot.send_message(chat_id=chatid, text="quiz not found")
+        
+        
+        
+        
         context.bot.send_document(chat__id, open('Result.xlsx', "rb"))
     except Exception as e:
         update.message.reply_text("no live quiz at now come next time.\n error name = "+str(e))
@@ -717,71 +791,9 @@ def receive_poll_answer(update,context):
                     json.dump(dbR, outfile)
                 #print("bdR = "+str(dbR))
                 
-                try:
-                    if J==0:
-                        #mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
-                        #print("message ==="+str(mess.message_id))
-                        J=1
-                    ree=""""""
-                    #print("correct options = "+str(corec))
-                    List=list(dbR[Textstr0].keys())
-                    P=len(List)
-                    dbbb=[]
-                    if True:
-                        if J==1:
-                            for L in range(P):
-                                Rs=dbR[Textstr0][List[L]]['result'][0]
-                                dbbb.append(int(Rs))
-                            #print(dbbb)
-                            yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
-                            #print(yest)
-                            rnumb=1
-                            try:
-                                os.remove('Result.xlsx')
-                            except:
-                                print("removing")
-                            workbook = xlsxwriter.Workbook('Result.xlsx')
-                            worksheet = workbook.add_worksheet()
-                            #print("start A1")
-                            worksheet.write('A1', 'Rank')
-                            worksheet.write('B1', 'Name')
-                            worksheet.write('C1', 'Right Options')
-                            worksheet.write('D1', 'Wrong Options')
-                            worksheet.write('E1', 'Marks')
-                            for L in yest:
-                                #print("list")
-                                Fname=dbR[Textstr0][List[L]]['fname']
-                                
-                                
-                                Lname=dbR[Textstr0][List[L]]['lname']
-                                Rname=dbR[Textstr0][List[L]]['✔︎']
-                                
-                                Wname=dbR[Textstr0][List[L]]['✖︎']
-                                
-                                Uname=dbR[Textstr0][List[L]]['uname']
-                                Usid=dbR[Textstr0][List[L]]['usid']
-                                ##print(Uname)
-                                Rs=dbR[Textstr0][List[L]]['result'][0]
-                                #print("data loading start")
-                                
-                                worksheet.write('A'+str(rnumb+1), str(rnumb))
-                                
-                                worksheet.write('B'+str(rnumb+1), str(Fname)+" "+str(Lname))
-                                worksheet.write('C'+str(rnumb+1), str(Rname))
-                                worksheet.write('D'+str(rnumb+1), str(Wname))
-                                worksheet.write('E'+str(rnumb+1), str(Rs))
-                                #print("data load")
-                                rnumb+=1
-                            workbook.close()
-                            #print("webhook close")
-                            
-                                    
-                            
-                except Exception as e:
-                    #print("e===="+str(e))
-                    context.bot.send_message(chat_id=chatid, text="quiz not found")
+
     except:
-        #print("fail")
+        print("fail")
         
             
 TIME1=range(1)

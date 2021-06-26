@@ -677,7 +677,7 @@ def receive_poll_answer(update,context):
 		        
 		        corec = context.bot_data[poll_id]["cor"][0]
 		        Y= context.bot_data[poll_id]["que_no"]
-		        print("Y"+str(Y))
+		        #print("Y"+str(Y))
 		        ##print("questions ======="+questions)
 		    # this means this poll answer update is from an old poll, we can't do our answering then
 		    except Exception as e:

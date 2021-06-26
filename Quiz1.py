@@ -440,7 +440,7 @@ def result(update,context):
     
         
     with open('Result.html', 'w') as outfile:
-          dbR = json.load(json_file)
+          dbR = json.load(outfile)
     try:
         if True:
             if True:

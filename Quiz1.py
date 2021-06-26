@@ -662,11 +662,11 @@ def receive_poll_answer(update,context):
     global ree
     global J
     global mess
-    print("jdjdjdjxj")
+    #print("jdjdjdjxj")
     try:
 	    answe=update
 	    answer = update.poll_answer
-	    print(str(answe))
+	    #print(str(answe))
 	    #time.sleep(3)
 	    poll_id = answer.poll_id
 	    ui=str(answer.user.id)

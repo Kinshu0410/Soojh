@@ -439,7 +439,7 @@ def result(update,context):
     global dbR
     
         
-    with open('Result.html', 'w') as outfile:
+    with open('Result.html') as outfile:
           dbR = json.load(outfile)
     try:
         if True:

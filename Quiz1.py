@@ -650,7 +650,7 @@ def quizc(update,context):
     	return ConversationHandler.END
     except Exception as e:
     	pass
-    print(str(Dbz))
+    #print(str(Dbz))
     
 Dbz=[]
     	
@@ -671,7 +671,7 @@ def receive_poll_answer(update,context):
 	    poll_id = answer.poll_id
 	    ui=str(answer.user.id)
 	    #print("answer"+str(answer))
-	    print("Dbz = "+str(Dbz))
+	    #print("Dbz = "+str(Dbz))
 	    if poll_id in Dbz:
 		    try:
 		        

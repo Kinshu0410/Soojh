@@ -650,7 +650,7 @@ def quizc(update,context):
         return ConversationHandler.END
     except Exception as e:
         pass
-    print(str(Dbz))
+    #print(str(Dbz))
     
 
 
@@ -665,22 +665,22 @@ def receive_poll_answer(update,context):
     global ree
     global J
     global mess
-    print("jdjdjdjxj")
+    #print("jdjdjdjxj")
     try:
         answe=update
         answer = update.poll_answer
-        print(str(answe))
+        #print(str(answe))
         #time.sleep(3)
         poll_id = answer.poll_id
         ui=str(answer.user.id)
         #print("answer"+str(answer))
-        print("Dbz = "+str(Dbz))
+        #print("Dbz = "+str(Dbz))
         if poll_id in Dbz:
             try:
                 
                 corec = context.bot_data[poll_id]["cor"][0]
                 Y= context.bot_data[poll_id]["que_no"]
-                print("Y"+str(Y))
+                #print("Y"+str(Y))
                 ##print("questions ======="+questions)
             # this means this poll answer update is from an old poll, we can't do our answering then
             except Exception as e:
@@ -697,7 +697,7 @@ def receive_poll_answer(update,context):
                 
                 #print(corec)
                 XY=len(db[Textstr0]['que'])+1
-                print("XY="+str(XY))
+                #print("XY="+str(XY))
                 newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0], '✔︎':[0] ,'✖︎':[0]}
                 if Textstr0 not in list(dbR.keys()):
                     dbR[Textstr0]={}
@@ -732,9 +732,9 @@ def receive_poll_answer(update,context):
                             for L in range(P):
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
                                 dbbb.append(int(Rs))
-                            print(dbbb)
+                            #print(dbbb)
                             yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
-                            print(yest)
+                            #print(yest)
                             rnumb=1
                             try:
                                 os.remove('Result.xlsx')
@@ -742,14 +742,14 @@ def receive_poll_answer(update,context):
                                 print("removing")
                             workbook = xlsxwriter.Workbook('Result.xlsx')
                             worksheet = workbook.add_worksheet()
-                            print("start A1")
+                            #print("start A1")
                             worksheet.write('A1', 'Rank')
                             worksheet.write('B1', 'Name')
                             worksheet.write('C1', 'Right Options')
                             worksheet.write('D1', 'Wrong Options')
                             worksheet.write('E1', 'Marks')
                             for L in yest:
-                                print("list")
+                                #print("list")
                                 Fname=dbR[Textstr0][List[L]]['fname']
                                 
                                 
@@ -762,7 +762,7 @@ def receive_poll_answer(update,context):
                                 Usid=dbR[Textstr0][List[L]]['usid']
                                 ##print(Uname)
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
-                                print("data loading start")
+                                #print("data loading start")
                                 
                                 worksheet.write('A'+str(rnumb+1), str(rnumb))
                                 
@@ -770,18 +770,18 @@ def receive_poll_answer(update,context):
                                 worksheet.write('C'+str(rnumb+1), str(Rname))
                                 worksheet.write('D'+str(rnumb+1), str(Wname))
                                 worksheet.write('E'+str(rnumb+1), str(Rs))
-                                print("data load")
+                                #print("data load")
                                 rnumb+=1
                             workbook.close()
-                            print("webhook close")
+                            #print("webhook close")
                             
                                     
                             
                 except Exception as e:
-                    print("e===="+str(e))
+                    #print("e===="+str(e))
                     context.bot.send_message(chat_id=chatid, text="quiz not found")
     except:
-        print("fail")
+        #print("fail")
         
             
 TIME1=range(1)

@@ -490,7 +490,7 @@ def quizresult(update, context):
                                 
                                 worksheet.write('A'+str(rnumb+1), str(rnumb), cell_format)
                                 
-                                worksheet.write('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), string=str(Fname)+" "+str(Lname))
+                                worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), string=str(Fname)+" "+str(Lname))
                                 worksheet.write('C'+str(rnumb+1), str(Rname), cell_format)
                                 worksheet.write('D'+str(rnumb+1), str(Wname), cell_format)
                                 worksheet.write('E'+str(rnumb+1), str(Rs), cell_format10)

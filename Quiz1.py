@@ -459,7 +459,7 @@ def quizresult(update, context):
                             worksheet = workbook.add_worksheet()
                             cell_format = workbook.add_format()
                             cell_format1 = workbook.add_format()
-                            cell_format1 = workbook.add_format()
+                            cell_format10 = workbook.add_format()
                             cell_format.set_align('center')
                             cell_format1.set_align('center')
                             cell_format1.set_font_color('green')

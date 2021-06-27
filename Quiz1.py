@@ -464,7 +464,7 @@ def quizresult(update, context):
                             cell_format1.set_align('center')
                             cell_format1.set_font_color('green')
                             cell_format1.set_bold()
-                            worksheet.set_column('A:A', 60)
+                            worksheet.set_column('B:B', 50)
                             worksheet.write('A1', 'Rank', cell_format1)
                             worksheet.write('B1', 'Name', cell_format1)
                             worksheet.write('C1', 'Right Options', cell_format1)

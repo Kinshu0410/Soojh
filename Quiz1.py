@@ -423,18 +423,6 @@ def quizlist(update: Update, _: CallbackContext) -> int:
 @restricted1
 @send_typing_action
 def quizresult(update: Update, _: CallbackContext) -> int:
-    
-
-    update.message.reply_text(
-        "Send me Quiz Name that you recently play."
-    )
-
-    return RESULT
-
-#@run_async
-def result(update,context):
-    user = update.message.from_user
-    userText=update.message.text
     chat__id=update.message.chat.id#global re
     global dbR
     
@@ -506,10 +494,7 @@ def result(update,context):
                             
                 except Exception as e:
                     #print("e===="+str(e))
-                    context.bot.send_message(chat_id=chatid, text="quiz not found")
-        
-        
-        
+                    context.bot.send_message(chat_id=chat__id, text="quiz not found")
         
         context.bot.send_document(chat__id, open('Result.xlsx', "rb"))
     except Exception as e:
@@ -963,13 +948,13 @@ def main() -> None:
         fallbacks=[CommandHandler('cancel', cancel)],
     )
     
-    conv_handler0R = ConversationHandler(
+    '''conv_handler0R = ConversationHandler(
         entry_points=[CommandHandler('quizresult', quizresult)],
         states={
             RESULT: [MessageHandler(Filters.regex('^.*$'), result)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
-    )
+    )'''
     conv_handler0u = ConversationHandler(
         entry_points=[CommandHandler('uploadfile', uploadfile)],
         states={
@@ -979,7 +964,7 @@ def main() -> None:
     )
 
 
-    
+    dispatcher.add_handler(CommandHandler('quizresult',quizresult))
     dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))
     
     dispatcher.add_handler(conv_handler)

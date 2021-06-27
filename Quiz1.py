@@ -422,7 +422,7 @@ def quizlist(update: Update, _: CallbackContext) -> int:
 #@run_async
 @restricted1
 @send_typing_action
-def quizresult(update: Update, _: CallbackContext) -> int:
+def quizresult(update, context):
     chat__id=update.message.chat.id#global re
     global dbR
     
@@ -498,8 +498,7 @@ def quizresult(update: Update, _: CallbackContext) -> int:
         
         context.bot.send_document(chat__id, open('Result.xlsx', "rb"))
     except Exception as e:
-        update.message.reply_text("no live quiz at now come next time.\n error name = "+str(e))
-    return ConversationHandler.END
+        context.bot.send_message(chat_id=chat__id, text="no live quiz at now come next time.\n error name = "+str(e))
 
 '''
 @restricted

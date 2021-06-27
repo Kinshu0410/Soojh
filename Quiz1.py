@@ -457,12 +457,21 @@ def quizresult(update, context):
                                 print("removing")
                             workbook = xlsxwriter.Workbook('Result.xlsx')
                             worksheet = workbook.add_worksheet()
-                            #print("start A1")
-                            worksheet.write('A1', 'Rank')
-                            worksheet.write('B1', 'Name')
-                            worksheet.write('C1', 'Right Options')
-                            worksheet.write('D1', 'Wrong Options')
-                            worksheet.write('E1', 'Marks')
+                            cell_format = workbook.add_format()
+                            cell_format1 = workbook.add_format()
+                            cell_format1 = workbook.add_format()
+                            cell_format.set_align('center')
+                            cell_format1.set_align('center')
+                            cell_format1.set_font_color('green')
+                            cell_format1.set_bold()
+                            worksheet.set_column('A:A', 60)
+                            worksheet.write('A1', 'Rank', cell_format1)
+                            worksheet.write('B1', 'Name', cell_format1)
+                            worksheet.write('C1', 'Right Options', cell_format1)
+                            worksheet.write('D1', 'Wrong Options', cell_format1)
+                            worksheet.write('E1', 'Marks', cell_format1)
+                            worksheet.write('F1', 'User Name', cell_format1)
+                            cell_format10.set_num_format('[Green]General;[Red]-General;General')
                             for L in yest:
                                 #print("list")
                                 Fname=dbR[Textstr0][List[L]]['fname']
@@ -479,12 +488,17 @@ def quizresult(update, context):
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
                                 #print("data loading start")
                                 
-                                worksheet.write('A'+str(rnumb+1), str(rnumb))
+                                worksheet.write('A'+str(rnumb+1), str(rnumb), cell_format)
                                 
-                                worksheet.write('B'+str(rnumb+1), str(Fname)+" "+str(Lname))
-                                worksheet.write('C'+str(rnumb+1), str(Rname))
-                                worksheet.write('D'+str(rnumb+1), str(Wname))
-                                worksheet.write('E'+str(rnumb+1), str(Rs))
+                                worksheet.write('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), string=str(Fname)+" "+str(Lname))
+                                worksheet.write('C'+str(rnumb+1), str(Rname), cell_format)
+                                worksheet.write('D'+str(rnumb+1), str(Wname), cell_format)
+                                worksheet.write('E'+str(rnumb+1), str(Rs), cell_format10)
+                                if Uname is None:
+                                	worksheet.write('F'+str(rnumb+1), 'None', cell_format)
+                                else:
+                                	worksheet.write('F'+str(rnumb+1), "@"+str(Uname), cell_format)
+                                	Uname=None
                                 #print("data load")
                                 rnumb+=1
                             workbook.close()

@@ -972,7 +972,7 @@ def main() -> None:
     dispatcher.add_handler(conv_handler0C)
     dispatcher.add_handler(conv_handler1C)
     dispatcher.add_handler(conv_handler02)
-    dispatcher.add_handler(conv_handler0R)
+    #dispatcher.add_handler(conv_handler0R)
     dispatcher.add_handler(conv_handler0u)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
     dp=updater.dispatcher

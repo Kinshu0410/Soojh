@@ -507,7 +507,7 @@ def quizresult(update, context):
                                     
                             
                 except Exception as e:
-                    #print("e===="+str(e))
+                    print("e===="+str(e))
                     context.bot.send_message(chat_id=chat__id, text="quiz not found")
         
         context.bot.send_document(chat__id, open('Result.xlsx', "rb"))

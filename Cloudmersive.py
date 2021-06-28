@@ -73,7 +73,20 @@ def channels(update, context):
 def owner(update, context):
   update.message.reply_text("send your suggestions\n    1. @kinbin247 \n  2. @ANKITAdidi \n 3. comming soon \ud83d\ude1c")
 
+LIST_OF_ADMINS = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
 
+def restricted(func):
+    @wraps(func)
+    def wrapped(update, context, *args, **kwargs):
+        userName = update.message.chat.username
+        if userName not in LIST_OF_ADMINS:
+            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            return
+        return func(update, context, *args, **kwargs)
+    return wrapped
+
+
+@restricted
 @run_async
 @send_typing_action
 def poll(update, context):
@@ -155,6 +168,7 @@ def poll(update, context):
         }
         context.bot_data.update(payload)
 
+@restricted
 @run_async
 @send_typing_action
 def receive_poll_answer(update, context):
@@ -185,6 +199,7 @@ def receive_poll_answer(update, context):
             context.bot_data[poll_id]["chat_id"], context.bot_data[poll_id]["message_id"]
         )
 
+@restricted
 @run_async
 @send_typing_action
 def quiz(update, context):
@@ -199,6 +214,7 @@ def quiz(update, context):
     }
     context.bot_data.update(payload)
 
+@restricted
 @run_async
 @send_typing_action
 def receive_quiz_answer(update, context):
@@ -310,7 +326,7 @@ def button(update, context):
             pass
     return button
 
-
+@restricted
 def my_fun(indz):
     if indz==len(x):
         indz=0
@@ -362,6 +378,7 @@ def preview(update, context):
 
 
 #@run_async
+@restricted
 @send_typing_action
 def receive_poll(update, context):
     """On receiving polls, reply to it by a closed poll copying the received poll"""
@@ -489,7 +506,7 @@ def receive_poll(update, context):
 
 
 
-
+@restricted
 @run_async
 @send_typing_action
 def help_handler(update, context):
@@ -516,7 +533,9 @@ def sub(update: Update, _: CallbackContext) -> int:
 
 tsr=""
 i=0
+
 Textstr2=[]
+@restricted
 #@run_async
 @send_typing_action
 def sub_quiz(update: Update, _: CallbackContext) -> int:
@@ -532,6 +551,7 @@ def sub_quiz(update: Update, _: CallbackContext) -> int:
 Textstr3=[]
 #@run_async
 @send_typing_action
+@restricted
 def poll_replace(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     global Textstr3
@@ -549,7 +569,7 @@ def poll_replace(update: Update, _: CallbackContext) -> int:
 
     return POLLSUB
 
-
+@restricted
 @send_typing_action
 def poll_sub(update: Update, _: CallbackContext) -> int:
     #update.message.reply_text("yoo")
@@ -583,6 +603,7 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     return POLLSUB
 
 #@run_async
+@restricted
 @send_typing_action
 def poll_exp(update: Update, _: CallbackContext) -> int:
     update.message.reply_text("Send me your explanation.")
@@ -590,6 +611,7 @@ def poll_exp(update: Update, _: CallbackContext) -> int:
 
 exp=""
 @send_typing_action
+@restricted
 def poll_exps(update: Update, _: CallbackContext) -> int:
     #update.message.reply_text("yoo")
     exp = update.message.text
@@ -609,8 +631,7 @@ def poll_exps(update: Update, _: CallbackContext) -> int:
 
 
 
-
-
+@restricted
 def cancel(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)

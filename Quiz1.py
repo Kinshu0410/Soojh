@@ -495,11 +495,11 @@ def quizresult(update, context):
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
                                 print("data loading start")
                                 if Lname is not None:
-                                	if COUNTJ<=1:
+                                	if COUNTJ<=9:
                                 		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+" "+Lname+"\n"
                                 		COUNTJ+=1
                                 else:
-                                	if COUNTJ<=1:
+                                	if COUNTJ<=9:
                                 		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+"\n"
                                 		COUNTJ+=1
                                 

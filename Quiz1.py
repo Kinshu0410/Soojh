@@ -426,7 +426,7 @@ def quizresult(update, context):
     chat__id=update.message.chat.id#global re
     global dbR
     
-        
+    COUNTJ=0
     with open('Result.html') as outfile:
           dbR = json.load(outfile)
     try:
@@ -476,6 +476,7 @@ def quizresult(update, context):
                             worksheet.write('F1', 'User Name', cell_format1)
                             cell_format10.set_align('center')
                             cell_format10.set_num_format('[Green]General;[Red]-General;General')
+                            COUNTR=""
                             for L in yest:
                                 #print("list")
                                 Fname=dbR[Textstr0][List[L]]['fname']
@@ -491,6 +492,11 @@ def quizresult(update, context):
                                 ##print(Uname)
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
                                 #print("data loading start")
+                                if COUNTJ<=2:
+                                	COUNTR=COUNTR+""+str(COUNTJ+1)+" "+Fname+" "+Lname+"\n"
+                                	COUNTJ+=1
+                                
+                                
                                 
                                 worksheet.write('A'+str(rnumb+1), str(rnumb), cell_format)
                                 
@@ -513,8 +519,8 @@ def quizresult(update, context):
                 except Exception as e:
                     print("e===="+str(e))
                     context.bot.send_message(chat_id=chat__id, text="quiz not found")
-        
-        context.bot.send_document(chat__id, open('Result.xlsx', "rb"))
+        caption1="🏁 The quiz \'"+Textstr0+"\' has finished!\n\nCurrent Time"+str(time.ctime(time.time() +19800))+" \n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners!"
+        context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1)
     except Exception as e:
         context.bot.send_message(chat_id=chat__id, text="no live quiz at now come next time.\n error name = "+str(e))
 

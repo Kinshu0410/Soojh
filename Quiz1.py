@@ -494,7 +494,7 @@ def quizresult(update, context):
                                 ##print(Uname)
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
                                 #print("data loading start")
-                                if COUNTJ<=9:
+                                if COUNTJ<=0:
                                 	COUNTR=COUNTR+""+str(COUNTJ+1)+". <b><a href=\"tg://openmessage?user_id="+str(Usid)+"\">"+Fname+" "+Lname+"</a></b>\n"
                                 	COUNTJ+=1
                                 

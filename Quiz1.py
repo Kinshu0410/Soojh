@@ -73,7 +73,7 @@ def restricted(func):
         return func(update, context, *args, **kwargs)
     return wrapped
 
-LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala"]
+LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala", "Om_2611"]
 
 def restricted1(func):
     @wraps(func)
@@ -494,7 +494,10 @@ def quizresult(update, context):
                                 ##print(Uname)
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
                                 print("data loading start")
-                                if Lname is not None:
+                                if Uname is not None:
+                                	if COUNTJ<=9:
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". @"+str(Uname)+"\n"
+                                elif Lname is not None:
                                 	if COUNTJ<=9:
                                 		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+" "+Lname+"\n"
                                 		COUNTJ+=1

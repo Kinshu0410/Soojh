@@ -427,6 +427,8 @@ def quizresult(update, context):
     global dbR
     
     COUNTJ=0
+    with open('Newfile.text') as outfile:
+          db = json.load(outfile)
     with open('Result.html') as outfile:
           dbR = json.load(outfile)
     try:

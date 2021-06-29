@@ -480,7 +480,7 @@ def quizresult(update, context):
                             cell_format10.set_num_format('[Green]General;[Red]-General;General')
                             COUNTR=""
                             for L in yest:
-                                #print("list")
+                                print("list")
                                 Fname=dbR[Textstr0][List[L]]['fname']
                                 
                                 
@@ -493,9 +493,9 @@ def quizresult(update, context):
                                 Usid=dbR[Textstr0][List[L]]['usid']
                                 ##print(Uname)
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
-                                #print("data loading start")
-                                if COUNTJ<=0:
-                                	COUNTR=COUNTR+""+str(COUNTJ+1)+". <b><a href=\"tg://openmessage?user_id="+str(Usid)+"\">"+Fname+" "+Lname+"</a></b>\n"
+                                print("data loading start")
+                                if COUNTJ<=1:
+                                	COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+" "+Lname+"\n"
                                 	COUNTJ+=1
                                 
                                 
@@ -514,7 +514,7 @@ def quizresult(update, context):
                                 print(COUNTR)
                                 rnumb+=1
                             workbook.close()
-                            #print("webhook close")
+                            print("webhook close")
                             
                                     
                             

@@ -494,7 +494,7 @@ def quizresult(update, context):
                                 ##print(Uname)
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
                                 #print("data loading start")
-                                if COUNTJ<=2:
+                                if COUNTJ<=0:
                                 	COUNTR=COUNTR+""+str(COUNTJ+1)+" "+Fname+" "+Lname+"\n"
                                 	COUNTJ+=1
                                 
@@ -511,7 +511,7 @@ def quizresult(update, context):
                                 else:
                                 	worksheet.write('F'+str(rnumb+1), "@"+str(Uname), cell_format)
                                 	Uname=None
-                                #print("data load")
+                                print(COUNTR)
                                 rnumb+=1
                             workbook.close()
                             #print("webhook close")
@@ -522,7 +522,7 @@ def quizresult(update, context):
                     print("e===="+str(e))
                     context.bot.send_message(chat_id=chat__id, text="quiz not found")
         caption1="🏁 The quiz \'"+Textstr0+"\' has finished!\n\nCurrent Time"+str(time.ctime(time.time() +19800))+" \n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners!"
-        context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1)
+        context.bot.send_document(chat__id, open('Result.xlsx', "rb"))#,caption=caption1)
     except Exception as e:
         context.bot.send_message(chat_id=chat__id, text="no live quiz at now come next time.\n error name = "+str(e))
 

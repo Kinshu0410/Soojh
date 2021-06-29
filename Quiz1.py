@@ -506,9 +506,9 @@ def quizresult(update, context):
                                 
                                 
                                 worksheet.write('A'+str(rnumb+1), str(rnumb), cell_format)
-                                 if Lname is not None:
-                                 	worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), cell_format=cell_format, string=str(Fname)+" "+str(Lname))
-                                 else:
+                                if Lname is not None:
+                                	worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), cell_format=cell_format, string=str(Fname)+" "+str(Lname))
+                                else:
                                  	worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), cell_format=cell_format, string=str(Fname))
                                 worksheet.write('C'+str(rnumb+1), str(Rname), cell_format)
                                 worksheet.write('D'+str(rnumb+1), str(Wname), cell_format)

@@ -497,6 +497,7 @@ def quizresult(update, context):
                                 if Uname is not None:
                                 	if COUNTJ<=9:
                                 		COUNTR=COUNTR+""+str(COUNTJ+1)+". @"+str(Uname)+"\n"
+                                		COUNTJ+=1
                                 elif Lname is not None:
                                 	if COUNTJ<=9:
                                 		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+" "+Lname+"\n"

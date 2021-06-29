@@ -494,15 +494,22 @@ def quizresult(update, context):
                                 ##print(Uname)
                                 Rs=dbR[Textstr0][List[L]]['result'][0]
                                 print("data loading start")
-                                if COUNTJ<=1:
-                                	COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+" "+Lname+"\n"
-                                	COUNTJ+=1
+                                if Lname is not None:
+                                	if COUNTJ<=1:
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+" "+Lname+"\n"
+                                		COUNTJ+=1
+                                else:
+                                	if COUNTJ<=1:
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+"\n"
+                                		COUNTJ+=1
                                 
                                 
                                 
                                 worksheet.write('A'+str(rnumb+1), str(rnumb), cell_format)
-                                
-                                worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), cell_format=cell_format, string=str(Fname)+" "+str(Lname))
+                                 if Lname is not None:
+                                 	worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), cell_format=cell_format, string=str(Fname)+" "+str(Lname))
+                                 else:
+                                 	worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), cell_format=cell_format, string=str(Fname))
                                 worksheet.write('C'+str(rnumb+1), str(Rname), cell_format)
                                 worksheet.write('D'+str(rnumb+1), str(Wname), cell_format)
                                 worksheet.write('E'+str(rnumb+1), int(Rs), cell_format10)

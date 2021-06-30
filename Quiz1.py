@@ -942,7 +942,7 @@ def copyc(update,context):
     	except Exception as e:
     		print(str(e))
     else:
-    	Pass
+    	pass
     context.bot.send_message(chat_id=chat1id, text="Right Option only digit")
 
     return COPY

@@ -430,7 +430,7 @@ def quizresult(update, context):
     	except Exception as e:
     		print(str(e))
     else:
-    	Pass
+    	pass
     
     
     COUNTJ=0

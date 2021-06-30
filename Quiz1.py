@@ -66,19 +66,21 @@ def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
         userName = update.message.chat.username
-        if userName not in LIST_OF_ADMINS:
+        userName1=update.message.from_user.username
+        if userName and userName1 not in LIST_OF_ADMINS:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)
     return wrapped
 
-LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala", "Om_2611"]
+LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala", "Om_2611","Gksgj", "ANKITAdidi", "Sharma_jii_ki_betii","yogeshogesh","Unacademy_Quizer", "JayBhim00"]
 
 def restricted1(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
         userName = update.message.chat.username
-        if userName not in LIST_OF_ADMINS1:
+        userName1=update.message.from_user.username
+        if userName and userName1 not in LIST_OF_ADMINS1:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)
@@ -941,6 +943,7 @@ def copyc(update,context):
     		chat1id="@"+str(update.message.chat.username)#id
     	except Exception as e:
     		print(str(e))
+    		
     else:
     	pass
     context.bot.send_message(chat_id=chat1id, text="Right Option only digit")

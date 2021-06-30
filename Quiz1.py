@@ -422,12 +422,16 @@ def quizlist(update: Update, _: CallbackContext) -> int:
 @restricted1
 @send_typing_action
 def quizresult(update, context):
-    try:
-    	chat__id="@"+str(update.message.chat.username)#id
-    except Exception as e:
-    	print(str(e))
-    	chat__id=update.message.chat.id
     global dbR
+    chat__id=int(update.message.chat.id)
+    if chat__id<=0:
+    	try:
+    		chat__id="@"+str(update.message.chat.username)#id
+    	except Exception as e:
+    		print(str(e))
+    else:
+    	Pass
+    
     
     COUNTJ=0
     with open('Newfile.text') as outfile:
@@ -931,12 +935,14 @@ COPY, POLLS=range(2)
 def copyc(update,context):
     global chat1id
     print(str(update))
-    try:
-    	chat1id="@"+str(update.message.chat.username)#id
-    	print("yo")
-    except Exception as e:
-    	print(str(e))
-    	chat1id=update.message.chat.id
+    chat1id=int(update.message.chat.id)
+    if chat1id<=0:
+    	try:
+    		chat1id="@"+str(update.message.chat.username)#id
+    	except Exception as e:
+    		print(str(e))
+    else:
+    	Pass
     context.bot.send_message(chat_id=chat1id, text="Right Option only digit")
 
     return COPY

@@ -927,7 +927,7 @@ COPY, POLLS=range(2)
 def copyc(update,context):
     global chat1id
     chat1id=update.message.chat.id
-    context.bot.send_message(chat_id=chat1id, text="Right Option with space.")
+    context.bot.send_message(chat_id=chat1id, text="Right Option only digit")
 
     return COPY
 
@@ -984,7 +984,7 @@ def main() -> None:
     conv_handler012 = ConversationHandler(
         entry_points=[CommandHandler('copyc', copyc)],
         states={
-            COPY: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, copy), 
+            COPY: [MessageHandler(Filters.regex('^(\d){1,}$') & ~Filters.command, copy), 
             MessageHandler(Filters.poll, polls),
             ],
         },

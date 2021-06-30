@@ -14,7 +14,6 @@ Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
 import time
-import re
 import re as reaaa
 import json
 import logging
@@ -918,7 +917,59 @@ def poll(update, context):
         # Save some info about the poll the bot_data for later use in receive_poll_answer
     except Exception as e:
         print(str(e))
+COPY, POLLS=range(2)
 
+
+
+
+@restricted
+@send_typing_action
+def copyc(update,context):
+    global chat1id
+    chat1id=update.message.chat.id
+    context.bot.send_message(chat_id=chat1id, text="Right Option with space.")
+
+    return COPY
+
+
+
+@run_async
+def copy(update,context):
+    global Time2
+    global Tco
+    userText=update.message.text
+    Time2=userText
+    Time2=reaaa.split("", Time2)
+    Tco=0
+    context.bot.send_message(chat_id=chat1id, text="Send me polls.")
+    return COPY
+
+@send_typing_action
+@restricted
+def polls(update: Update, _: CallbackContext) -> int:
+    #update.message.reply_text("yoo")
+    global Tco
+    try:
+	    actual_poll = update.message.poll
+	    question= actual_poll.question
+	    options=[o.text for o in actual_poll.options]
+	    corr=str(int(Time2[Tco])-1)
+	    Tco+=1
+	    update.effective_message.reply_poll(
+	            question= question,
+	            options=options,
+	            # with is_closed true, the poll/quiz is immediately closed
+	            type=Poll.QUIZ,
+	            correct_option_id =corr,
+	            #explanation=exp,
+	            is_closed=True,
+	            is_anonymous=True,
+	            reply_markup=ReplyKeyboardRemove()
+	    )
+	    #update.message.reply_text("send me more polls or /cancel")
+    except Exception as e:
+    	update.effective_message.reply_text('program finish /cancel \nError name = '+str(e))
+    return COPY
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -930,6 +981,17 @@ def main() -> None:
     dispatcher = updater.dispatcher
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
+    conv_handler012 = ConversationHandler(
+        entry_points=[CommandHandler('copyc', copyc)],
+        states={
+            COPY: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, copy), 
+            MessageHandler(Filters.poll, polls),
+            ],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    
+    
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('createquiz', createquiz)],
         states={
@@ -985,13 +1047,7 @@ def main() -> None:
         fallbacks=[CommandHandler('cancel', cancel)],
     )
     
-    '''conv_handler0R = ConversationHandler(
-        entry_points=[CommandHandler('quizresult', quizresult)],
-        states={
-            RESULT: [MessageHandler(Filters.regex('^.*$'), result)],
-        },
-        fallbacks=[CommandHandler('cancel', cancel)],
-    )'''
+    
     conv_handler0u = ConversationHandler(
         entry_points=[CommandHandler('uploadfile', uploadfile)],
         states={
@@ -1009,7 +1065,7 @@ def main() -> None:
     dispatcher.add_handler(conv_handler0C)
     dispatcher.add_handler(conv_handler1C)
     dispatcher.add_handler(conv_handler02)
-    #dispatcher.add_handler(conv_handler0R)
+    dispatcher.add_handler(conv_handler012)
     dispatcher.add_handler(conv_handler0u)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
     dp=updater.dispatcher

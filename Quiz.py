@@ -14,13 +14,12 @@ Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
 import time
-import re
 import re as reaaa
 import json
 import logging
 import os
 from functools import wraps
-
+import xlsxwriter
 
 from telegram.ext.dispatcher import run_async
 
@@ -73,7 +72,7 @@ def restricted(func):
         return func(update, context, *args, **kwargs)
     return wrapped
 
-LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala"]
+LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala", "Om_2611"]
 
 def restricted1(func):
     @wraps(func)
@@ -94,7 +93,7 @@ def createquiz(update: Update, _: CallbackContext) -> int:
 
     update.message.reply_text(
         "Hello Quizers \n\n Send me a name of your quiz..."
-	)
+    )
 
     return GENDER
 
@@ -123,16 +122,16 @@ def photo(update: Update, _: CallbackContext) -> int:
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')'''
     global db
     with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
-    	new={'que':[], 'op':[], 'cor':[]}
-    	if Textstr not in list(db.keys()):
-    		db[Textstr]=new
-    	db[Textstr]['que'].append(user.question)
-    	db[Textstr]['op'].append([o.text for o in user.options])
-    	db[Textstr]['cor'].append(user.correct_option_id)
-    	##print(db[Textstr])
-    	with open('Newfile.text', 'w') as outfile:
-    		json.dump(db, outfile)
+        db = json.load(json_file)
+        new={'que':[], 'op':[], 'cor':[]}
+        if Textstr not in list(db.keys()):
+            db[Textstr]=new
+        db[Textstr]['que'].append(user.question)
+        db[Textstr]['op'].append([o.text for o in user.options])
+        db[Textstr]['cor'].append(user.correct_option_id)
+        ##print(db[Textstr])
+        with open('Newfile.text', 'w') as outfile:
+            json.dump(db, outfile)
     update.message.reply_text("Send me more polls or quiz using /skip")
     return PHOTO
 
@@ -216,123 +215,123 @@ def quiz(update,context):
     userText=update.message.text
     Textstr0=userText
     with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
+        db = json.load(json_file)
     dbA={}
     with open('Result.html', 'w') as outfile:
-    	json.dump(dbA, outfile)
+        json.dump(dbA, outfile)
     
-    	try:
-    		
-    		context.bot.send_message(chat_id=chatid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
-    		mes=context.bot.send_message(chat_id=chatid, text="Quiz is about to start")
-    		time.sleep(2)
-    		for xooo in range(6):
-    			if xooo!=5:
-    				context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text=str(5-xooo))
-    				time.sleep(1)
-    			if xooo==5:
-    				context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text="Best Of Luck 👍👍👍")
-    				time.sleep(1)
-    				
-    			
-    			
-    		
-    		
-    		for X in range(len(db[Textstr0]['que'])):
-    			
-    			Zno=len(db[Textstr0]['que'])-X
-    			correct_option_id =db[Textstr0]['cor'][X],
-    			question=str(X+1)+". "+db[Textstr0]['que'][X]
-    			options=db[Textstr0]['op'][X]
-    			if X==0:
-    				pass
-    			else:
-    				pass
-    				#time.sleep(int(Time))
-    			#print("1")
-    			message = context.bot.send_poll(
-    				update.effective_chat.id,
-    				question=str(Zno)+". "+db[Textstr0]['que'][X],
-		    		options=db[Textstr0]['op'][X],
-		    		# with is_closed true, the poll/quiz is immediately closed
-		    		type=Poll.QUIZ,
-		    		correct_option_id =db[Textstr0]['cor'][X],
-		    		open_period=int(Time),
-		    		#explanation=Ex,
-		    		is_closed=False,
-		    		is_anonymous=False,
-		    		reply_markup=ReplyKeyboardRemove(),
-		    	)
-		    	#print(update.effective_chat.id)
-		    	time.sleep(int(Time))
-		    	try:
-		    		#print("start")
-			    	payload = {
-				        message.poll.id: {
-				        	"cor": question,
-				            "options": options,
-				            "cor":correct_option_id,
-				            "message_id": message.message_id,
-				            "chat_id": update.effective_chat.id,
-				            "que_no":X+1
-				        }
-			    	}
-			    	context.bot_data.update(payload)
-			    
-		    	except Exception as e:
-		    		pass
-    		message = context.bot.send_poll(
-    			update.effective_chat.id,
-    			question="Must attempt Free Hit.",
-		    	options=["Option", "Option", "Option", "Option"],
-		    	# with is_closed true, the poll/quiz is immediately closed
-		    	type=Poll.QUIZ,
-		    	correct_option_id =3,
-		    	open_period=int(Time)+5,
-		    	explanation="No point in this quistion.\nIt was only for result count",
-		    	is_closed=False,
-		    	is_anonymous=False,
-		    	reply_markup=ReplyKeyboardRemove(),
-		    )
-		    #print(update.effective_chat.id)
-    		time.sleep(int(Time)+5)
-    		try:
-		    	#print("start")
-			    payload = {
-				    message.poll.id: {
-				        "cor": question,
-				        "options": options,
-				        "cor":correct_option_id,
-				        "message_id": message.message_id,
-				        "chat_id": update.effective_chat.id,
-				        "que_no":X+2
-				    }
-			    }
-			    context.bot_data.update(payload)
-			    
-    		except Exception as e:
-		    	pass
-			    	#print(e)
-			    	
-			    	
-			    	#return QUIZ2
-    			
-    			
-    	
-    		
-    		
-    		
+        try:
+            
+            context.bot.send_message(chat_id=chatid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
+            mes=context.bot.send_message(chat_id=chatid, text="Quiz is about to start")
+            time.sleep(2)
+            for xooo in range(6):
+                if xooo!=5:
+                    context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text=str(5-xooo))
+                    time.sleep(1)
+                if xooo==5:
+                    context.bot.editMessageText(chat_id=chatid, message_id=mes.message_id, text="Best Of Luck 👍👍👍")
+                    time.sleep(1)
+                    
+                
+                
+            
+            
+            for X in range(len(db[Textstr0]['que'])):
+                
+                Zno=len(db[Textstr0]['que'])-X
+                correct_option_id =db[Textstr0]['cor'][X],
+                question=str(X+1)+". "+db[Textstr0]['que'][X]
+                options=db[Textstr0]['op'][X]
+                if X==0:
+                    pass
+                else:
+                    pass
+                    #time.sleep(int(Time))
+                #print("1")
+                message = context.bot.send_poll(
+                    update.effective_chat.id,
+                    question=str(Zno)+". "+db[Textstr0]['que'][X],
+                    options=db[Textstr0]['op'][X],
+                    # with is_closed true, the poll/quiz is immediately closed
+                    type=Poll.QUIZ,
+                    correct_option_id =db[Textstr0]['cor'][X],
+                    open_period=int(Time),
+                    #explanation=Ex,
+                    is_closed=False,
+                    is_anonymous=False,
+                    reply_markup=ReplyKeyboardRemove(),
+                )
+                #print(update.effective_chat.id)
+                time.sleep(int(Time))
+                try:
+                    #print("start")
+                    payload = {
+                        message.poll.id: {
+                            "cor": question,
+                            "options": options,
+                            "cor":correct_option_id,
+                            "message_id": message.message_id,
+                            "chat_id": update.effective_chat.id,
+                            "que_no":X+1
+                        }
+                    }
+                    context.bot_data.update(payload)
+                
+                except Exception as e:
+                    pass
+            message = context.bot.send_poll(
+                update.effective_chat.id,
+                question="Must attempt Free Hit.",
+                options=["Option", "Option", "Option", "Option"],
+                # with is_closed true, the poll/quiz is immediately closed
+                type=Poll.QUIZ,
+                correct_option_id =3,
+                open_period=int(Time)+5,
+                explanation="No point in this quistion.\nIt was only for result count",
+                is_closed=False,
+                is_anonymous=False,
+                reply_markup=ReplyKeyboardRemove(),
+            )
+            #print(update.effective_chat.id)
+            time.sleep(int(Time)+5)
+            try:
+                #print("start")
+                payload = {
+                    message.poll.id: {
+                        "cor": question,
+                        "options": options,
+                        "cor":correct_option_id,
+                        "message_id": message.message_id,
+                        "chat_id": update.effective_chat.id,
+                        "que_no":X+2
+                    }
+                }
+                context.bot_data.update(payload)
+                
+            except Exception as e:
+                pass
+                    #print(e)
+                    
+                    
+                    #return QUIZ2
+                
+                
+        
+            
+            
+            
 
-		    
-    	except:
-    		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
+            
+        except:
+            update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
     
     #update.message.reply_text("/result")
     try:
-    	return ConversationHandler.END
+        return ConversationHandler.END
     except Exception as e:
-    	pass
-    	#print(e)
+        pass
+        #print(e)
     
 
 
@@ -343,32 +342,32 @@ def res(update: Update, context: CallbackContext) -> None:
     global re
     global dbR
     with open('Result.html') as json_file:
-    	dbR = json.load(json_file)
+        dbR = json.load(json_file)
     #print(str(dbR))
     #print("gghhjj")
     with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
+        db = json.load(json_file)
     try:
-    	List=list(db[Textstr0]['que'])
-    	Q=len(List)
-    	List=list(dbR[Textstr0].keys())
-    	P=len(List)
-    	#print(str(List))
-    	for L in range(P):
-    			Fname=dbR[Textstr0][List[L]]['fname']
-    			##print(Fname)	
-    			Uname=dbR[Textstr0][List[L]]['uname']
-    			##print(Uname)
-    			Rs=dbR[Textstr0][List[L]]['result'][0]
-    			##print(Rs)
-    			re=re+"\n"+Fname+" gain "+str(Rs)+"/"+str(Q*4)+" Marks"
-    			#print(re)
-    	update.message.reply_text("🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+re)
-    	re=""
+        List=list(db[Textstr0]['que'])
+        Q=len(List)
+        List=list(dbR[Textstr0].keys())
+        P=len(List)
+        #print(str(List))
+        for L in range(P):
+                Fname=dbR[Textstr0][List[L]]['fname']
+                ##print(Fname)    
+                Uname=dbR[Textstr0][List[L]]['uname']
+                ##print(Uname)
+                Rs=dbR[Textstr0][List[L]]['result'][0]
+                ##print(Rs)
+                re=re+"\n"+Fname+" gain "+str(Rs)+"/"+str(Q*4)+" Marks"
+                #print(re)
+        update.message.reply_text("🏁 The quiz \'"+Textstr0+"\' has finished!\n\n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+re)
+        re=""
     except:
-    	update.message.reply_text("quiz not found")
+        update.message.reply_text("quiz not found")
     return ConversationHandler.END
-	
+    
 
     
 
@@ -380,7 +379,7 @@ def deletequiz(update: Update, _: CallbackContext) -> int:
     #Uid=update.message.user_id
     update.message.reply_text(
         "Hello Quizers \n\n Send me a name of your quiz you want to DELETE."
-	)
+    )
 
     return DELETE
 
@@ -394,15 +393,15 @@ def delete(update: Update, _: CallbackContext) -> int:
     userText=update.message.text
     Textstr1=userText
     with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
-    	try:
-    		db.pop(Textstr1)
-    		with open('Newfile.text', 'w') as outfile:
-    			json.dump(db, outfile)
-    		update.message.reply_text("Quiz "+Textstr1+" deleted", reply_markup=ReplyKeyboardRemove(),)
-    		
-    	except:
-    		update.message.reply_text("Name not exist", reply_markup=ReplyKeyboardRemove(),)
+        db = json.load(json_file)
+        try:
+            db.pop(Textstr1)
+            with open('Newfile.text', 'w') as outfile:
+                json.dump(db, outfile)
+            update.message.reply_text("Quiz "+Textstr1+" deleted", reply_markup=ReplyKeyboardRemove(),)
+            
+        except:
+            update.message.reply_text("Name not exist", reply_markup=ReplyKeyboardRemove(),)
 
     return ConversationHandler.END
 
@@ -413,34 +412,130 @@ def quizlist(update: Update, _: CallbackContext) -> int:
     #Uid=update.message.user_id
     user = update.message.from_user
     with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
-    	List=list(db.keys())
-    	for L in range(len(List)):
-    		update.message.reply_text(List[L])
+        db = json.load(json_file)
+        List=list(db.keys())
+        for L in range(len(List)):
+            update.message.reply_text(List[L])
 
 
-@run_async
+#@run_async
 @restricted1
 @send_typing_action
-def quizresult(update: Update, _: CallbackContext) -> int:
-    
-
-    update.message.reply_text(
-        "Send me Quiz Name that you recently play."
-	)
-
-    return RESULT
-re=""
-@run_async
-def result(update,context):
-    user = update.message.from_user
-    userText=update.message.text
+def quizresult(update, context):
     chat__id=update.message.chat.id#global re
+    global dbR
+    
+    COUNTJ=0
+    with open('Newfile.text') as outfile:
+          db = json.load(outfile)
+    with open('Result.html') as outfile:
+          dbR = json.load(outfile)
     try:
-        context.bot.send_document(chat__id, open('Result do not open in chrome.html', "rb"))
+        if True:
+            if True:
+                try:
+                    
+                        #mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
+                        #print("message ==="+str(mess.message_id))
+                        
+                    
+                    #print("correct options = "+str(corec))
+                    List=list(dbR[Textstr0].keys())
+                    P=len(List)
+                    dbbb=[]
+                    if True:
+                        if True:
+                            for L in range(P):
+                                Rs=dbR[Textstr0][List[L]]['result'][0]
+                                dbbb.append(int(Rs))
+                            #print(dbbb)
+                            yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
+                            #print(yest)
+                            rnumb=1
+                            try:
+                                os.remove('Result.xlsx')
+                            except:
+                                print("removing")
+                            workbook = xlsxwriter.Workbook('Result.xlsx')
+                            worksheet = workbook.add_worksheet()
+                            cell_format = workbook.add_format()
+                            cell_format1 = workbook.add_format()
+                            cell_format10 = workbook.add_format()
+                            cell_format.set_align('center')
+                            cell_format1.set_align('center')
+                            cell_format1.set_font_color('green')
+                            cell_format1.set_bold()
+                            worksheet.set_column('A:A', 5)
+                            worksheet.set_column('C:E', 9)
+                            worksheet.set_column('B:B', 37)
+                            worksheet.set_column('F:F', 17)
+                            worksheet.write('A1', 'Rank', cell_format1)
+                            worksheet.write('B1', 'Name', cell_format1)
+                            worksheet.write('C1', '︎✔︎ Options', cell_format1)
+                            worksheet.write('D1', '︎✖ Options', cell_format1)
+                            worksheet.write('E1', 'Marks', cell_format1)
+                            worksheet.write('F1', 'User Name', cell_format1)
+                            cell_format10.set_align('center')
+                            cell_format10.set_num_format('[Green]General;[Red]-General;General')
+                            COUNTR=""
+                            for L in yest:
+                                print("list")
+                                Fname=dbR[Textstr0][List[L]]['fname']
+                                
+                                
+                                Lname=dbR[Textstr0][List[L]]['lname']
+                                Rname=dbR[Textstr0][List[L]]['✔︎']
+                                
+                                Wname=dbR[Textstr0][List[L]]['✖︎']
+                                
+                                Uname=dbR[Textstr0][List[L]]['uname']
+                                Usid=dbR[Textstr0][List[L]]['usid']
+                                ##print(Uname)
+                                Rs=dbR[Textstr0][List[L]]['result'][0]
+                                print("data loading start")
+                                if Uname is not None:
+                                	if COUNTJ<=9:
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". @"+str(Uname)+"\n"
+                                		COUNTJ+=1
+                                elif Lname is not None:
+                                	if COUNTJ<=9:
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+" "+Lname+"\n"
+                                		COUNTJ+=1
+                                else:
+                                	if COUNTJ<=9:
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+"\n"
+                                		COUNTJ+=1
+                                
+                                
+                                
+                                worksheet.write('A'+str(rnumb+1), str(rnumb), cell_format)
+                                if Lname is not None:
+                                	worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), cell_format=cell_format, string=str(Fname)+" "+str(Lname))
+                                else:
+                                 	worksheet.write_url('B'+str(rnumb+1), "tg://openmessage?user_id="+str(Usid), cell_format=cell_format, string=str(Fname))
+                                worksheet.write('C'+str(rnumb+1), str(Rname), cell_format)
+                                worksheet.write('D'+str(rnumb+1), str(Wname), cell_format)
+                                worksheet.write('E'+str(rnumb+1), int(Rs), cell_format10)
+                                if Uname is None:
+                                	worksheet.write('F'+str(rnumb+1), 'None', cell_format)
+                                else:
+                                	worksheet.write('F'+str(rnumb+1), "@"+str(Uname), cell_format)
+                                	Uname=None
+                                print(COUNTR)
+                                rnumb+=1
+                            workbook.close()
+                            print("webhook close")
+                            
+                                    
+                            
+                except Exception as e:
+                    print("e===="+str(e))
+                    context.bot.send_message(chat_id=chat__id, text="quiz not found")
+        caption1="🏁 The quiz \'"+Textstr0+"\' has finished!\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners!"
+        print(caption1)
+        context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1)
     except Exception as e:
-        update.message.reply_text("no live quiz at now come next time.\n error name = "+str(e))
-    return ConversationHandler.END
+        context.bot.send_message(chat_id=chat__id, text="no live quiz at now come next time.\n error name = "+str(e))
 
 '''
 @restricted
@@ -454,13 +549,13 @@ def downloadfile(update,context):
     chat_id=update.effective_chat.id
     #print(chat_id)
     with open(f, "rb") as file:
-    	context.bot.send_document(chat_id, document=file)
+        context.bot.send_document(chat_id, document=file)
      
-    	
-    	try:
-    		context.bot.send_document(chat_id, document=file)
-    	except Exception as e:
-    		#print(e)
+        
+        try:
+            context.bot.send_document(chat_id, document=file)
+        except Exception as e:
+            #print(e)
 '''
 #@run_async
 @send_typing_action
@@ -470,14 +565,14 @@ def downloadfile(update,context):
     chat_id=update.effective_chat.id
     #print(chat_id)
     #with open(f, "rb") as file:
-    	#context.bot.send_document(chat_id, document=file)
+        #context.bot.send_document(chat_id, document=file)
      
-    	
+        
     try:
-    	context.bot.send_document(chat_id, open(f, "rb"))#document=file)
+        context.bot.send_document(chat_id, open(f, "rb"))#document=file)
     except Exception as e:
-    	pass
-    	#print(e)
+        pass
+        #print(e)
     
 UPLOAD =range(1)
 
@@ -493,20 +588,20 @@ def upload(update,context):
     global filename
     filename="testing.text"
     try:
-    	os.remove('testing.text')
+        os.remove('testing.text')
     except Exception:
-    	pass
+        pass
     global file_id
     #print("123345")
     file_id = update.message.document.file_id
     newFile = context.bot.get_file(file_id)
     qwer=newFile.download(filename)
     with open(qwer) as json_file:
-    	dbq = json.load(json_file)
+        dbq = json.load(json_file)
     
     with open('Newfile.text', 'w') as outfile:
-    	#json.dump(dbw, outfile)
-    	json.dump(dbq, outfile)
+        #json.dump(dbw, outfile)
+        json.dump(dbq, outfile)
     
     update.message.reply_text("photo upload")
     return ConversationHandler.END
@@ -559,101 +654,104 @@ def quizc(update,context):
     userText=update.message.text
     Textstr0=userText
     with open('Newfile.text') as json_file:
-    	db = json.load(json_file)
+        db = json.load(json_file)
     dbA={}
     with open('Result.html', 'w') as outfile:
-    	json.dump(dbA, outfile)
+        json.dump(dbA, outfile)
     
-    	try:
-    		
-    		context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
-    		mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
-    		time.sleep(2)
-    		for xooo in range(6):
-    			if xooo!=5:
-    				context.bot.editMessageText(chat_id=channelid, message_id=mes.message_id, text=str(5-xooo))
-    				time.sleep(1)
-    			if xooo==5:
-    				context.bot.editMessageText(chat_id=channelid, message_id=mes.message_id, text="Best Of Luck 👍👍👍")
-    				time.sleep(1)
-    				
-    			
-    			
-    		
-    		
-    		for X in range(len(db[Textstr0]['que'])):
-    			Zno=len(db[Textstr0]['que'])-X
-    			
-    			correct_option_id =db[Textstr0]['cor'][X],
-    			question=str(X+1)+". "+db[Textstr0]['que'][X]
-    			options=db[Textstr0]['op'][X]
-    			if X==0:
-    				pass
-    			else:
-    				pass
-    				#time.sleep(int(Time))
-    			#print("1")
-    			#print(update.effective_chat)
-    			try:
-    					print("1")
-	    				message = context.bot.send_poll(
-	    					chat_id=channelid,
-	    					question=str(Zno)+". "+db[Textstr0]['que'][X],
-			    			options=db[Textstr0]['op'][X],
-			    			# with is_closed true, the poll/quiz is immediately closed
-			    			type=Poll.QUIZ,
-			    			correct_option_id =db[Textstr0]['cor'][X],
-			    			#open_period=int(Time),
-			    			#explanation=Ex,
-			    			is_closed=False,
-			    			is_anonymous=False,
-			    			reply_markup=ReplyKeyboardRemove(),	
-			    		)
-			    		print(5)
-			    		Dbz.append(message.poll.id)
-			    		time.sleep(5)
-		    	except Exception as e:
-			    		print("e===="+str(e))
-		    	try:
-		    		#print("start")
-			    	payload = {
-				        message.poll.id: {
-				            "cor": question,
-				            "options": options,
-				            "cor":correct_option_id,
-				            "message_id": message.message_id,
-				            "chat_id": update.effective_chat.id,
-				            "que_no":X+1
-				        }
-			    	}
-			    	context.bot_data.update(payload)
-			    	chatid=channelid
-		    	except Exception as e:
-		    		pass
-    		
-			    	
-			
-    			
-	
+        try:
+            
+            context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
+            mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
+            time.sleep(2)
+            for xooo in range(6):
+                if xooo!=5:
+                    context.bot.editMessageText(chat_id=channelid, message_id=mes.message_id, text=str(5-xooo))
+                    time.sleep(1)
+                if xooo==5:
+                    context.bot.editMessageText(chat_id=channelid, message_id=mes.message_id, text="Best Of Luck 👍👍👍")
+                    time.sleep(1)
+                    
+                
+                
+            
+            
+            for X in range(len(db[Textstr0]['que'])):
+                Zno=len(db[Textstr0]['que'])-X
+                
+                correct_option_id =db[Textstr0]['cor'][X],
+                question=str(X+1)+". "+db[Textstr0]['que'][X]
+                options=db[Textstr0]['op'][X]
+                if X==0:
+                    pass
+                else:
+                    pass
+                    #time.sleep(int(Time))
+                #print("1")
+                #print(update.effective_chat)
+                try:
+                        print("1")
+                        message = context.bot.send_poll(
+                            chat_id=channelid,
+                            question=str(Zno)+". "+db[Textstr0]['que'][X],
+                            options=db[Textstr0]['op'][X],
+                            # with is_closed true, the poll/quiz is immediately closed
+                            type=Poll.QUIZ,
+                            correct_option_id =db[Textstr0]['cor'][X],
+                            #open_period=int(Time),
+                            #explanation=Ex,
+                            is_closed=False,
+                            is_anonymous=False,
+                            reply_markup=ReplyKeyboardRemove(),    
+                        )
+                        print(5)
+                        Dbz.append(message.poll.id)
+                        time.sleep(5)
+                except Exception as e:
+                        print("e===="+str(e))
+                try:
+                    #print("start")
+                    payload = {
+                        message.poll.id: {
+                            "cor": question,
+                            "options": options,
+                            "cor":correct_option_id,
+                            "message_id": message.message_id,
+                            "chat_id": update.effective_chat.id,
+                            "que_no":X+1
+                        }
+                    }
+                    context.bot_data.update(payload)
+                    chatid=channelid
+                except Exception as e:
+                    pass
+            
+                    
+            
+                
+    
 
-        		
-    		
-    		
+                
+            
+            
 
-		    
-    	except Exception as e:
-    		print("e========"+str(e))
-    		update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
+            
+        except Exception as e:
+            print("e========"+str(e))
+            update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
     
     #update.message.reply_text("/result")
     try:
-    	return ConversationHandler.END
+        return ConversationHandler.END
     except Exception as e:
-    	pass
+        pass
     #print(str(Dbz))
     
+
+
+
 Dbz=[]
-    	
+        
 #time.sleep(1)
 print("Sleeping for one sec")
 #@run_async
@@ -664,174 +762,61 @@ def receive_poll_answer(update,context):
     global mess
     #print("jdjdjdjxj")
     try:
-	    answe=update
-	    answer = update.poll_answer
-	    #print(str(answe))
-	    #time.sleep(3)
-	    poll_id = answer.poll_id
-	    ui=str(answer.user.id)
-	    #print("answer"+str(answer))
-	    #print("Dbz = "+str(Dbz))
-	    if poll_id in Dbz:
-		    try:
-		        
-		        corec = context.bot_data[poll_id]["cor"][0]
-		        Y= context.bot_data[poll_id]["que_no"]
-		        #print("Y"+str(Y))
-		        ##print("questions ======="+questions)
-		    # this means this poll answer update is from an old poll, we can't do our answering then
-		    except Exception as e:
-		        pass
-		        #print("Exception as "+str(e))
-		    
-		    #print("answer ======"+str(answer))
-		    with open('Result.html') as json_file:
-		    	dbR = json.load(json_file)
-		    with open('Newfile.text') as json_file:
-		    	db = json.load(json_file)
-		    	
-		    	##print(dbR)
-		    	
-		    	#print(corec)
-		    	XY=len(db[Textstr0]['que'])+1
-		    	print("XY="+str(XY))
-		    	newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0], '✔︎':[0] ,'✖︎':[0]}
-		    	if Textstr0 not in list(dbR.keys()):
-		    		dbR[Textstr0]={}
-		    	if ui not in list(dbR[Textstr0].keys()):
-		    		dbR[Textstr0][ui]=newA
-		    	dbname=dbR[Textstr0][ui]
-		    	dbname['so']=answer.option_ids[0]
-		    	if poll_id in Dbz:
-		    		if dbname['so']==corec:
-		    			dbname['✔︎'] = [x+1 for x in dbname['✔︎']]
-		    			dbname['result'] = [x+4 for x in dbname['result']]
-		    		else:
-		    			dbname['result'] = [x-1 for x in dbname['result']]
-		    			dbname['✖︎'] = [x+1 for x in dbname['✖︎']]
-		    	##print(str(dbR))
-		    	with open('Result.html', 'w') as outfile:
-		    		json.dump(dbR, outfile)
-		    	#print("bdR = "+str(dbR))
-		    	
-		    	try:
-		    		if J==0:
-		    			#mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
-		    			#print("message ==="+str(mess.message_id))
-		    			J=1
-			    	ree=""""""
-			    	#print("correct options = "+str(corec))
-			    	List=list(dbR[Textstr0].keys())
-			    	P=len(List)
-			    	dbbb=[]
-			    	if True:
-			    		if J==1:
-			    			for L in range(P):
-			    				Rs=dbR[Textstr0][List[L]]['result'][0]
-			    				dbbb.append(int(Rs))
-			    			print(dbbb)
-			    			yest=list(([int(i[0]) for i in sorted(enumerate(dbbb), key=lambda k: k[1], reverse=True)]))
-			    			print(yest)
-			    			rnumb=1
-					    	for L in yest:
-						    	Fname=dbR[Textstr0][List[L]]['fname']
-						    	Rname=dbR[Textstr0][List[L]]['✔︎']
-						    	Wname=dbR[Textstr0][List[L]]['✖︎']
-						    	Lname=dbR[Textstr0][List[L]]['lname']
-						    	Uname=dbR[Textstr0][List[L]]['uname']
-						    	Usid=dbR[Textstr0][List[L]]['usid']
-						    	##print(Uname)
-						    	Rs=dbR[Textstr0][List[L]]['result'][0]
-						    	dbbb.append(int(Rs))
-						    	
-						    	##print(Rs)
-						    	
-						    	if Uname is None:
-						    		ree=ree+"""<tr>
-						    		<th>"""+str(rnumb)+"""</th>
-						    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
-						    		<th>"""+str(Rname)+"""</th>
-						    		<th>"""+str(Wname)+"""</th>
-						    		<th>"""+str(Rs)+"""</th></tr>"""
-						    		rnumb+=1
-						    		Uname=None
-						    		Usid=None
-						    	else:
-						    		ree=ree+"""<tr>
-						    		<th>"""+str(rnumb)+"""</th>
-						    		<th><a href=\"tg://openmessage?user_id="""+str(Usid)+"""\">"""+str(Fname)+""" """+str(Lname)+"""</a></th>
-						    		<th>"""+str(Rname)+"""</th>
-						    		<th>"""+str(Wname)+"""</th>
-						    		<th>"""+str(Rs)+"""</th></tr>"""
-						    		rnumb+=1
-						    		Uname=None
-						    		Usid=None
-						    	yo="""<!DOCTYPE html><html>
-						    	<head>
-						    	<style>
-			table {
-			  font-family: arial, sans-serif;
-			  border-collapse: collapse;
-			  width: 100%;
-			  }
-						    	h1 {text-align: center;}
-						    	p {text-align: center;}
-						    	td, th {
-			  border: 1px solid #dddddd;
-			  text-align: center;
-			  vertical-align: middle;
-			  padding: 8px;
-			}
-						    	tr:nth-child(even) {
-			  background-color: #dddddd;
-			}
-			</style>
-						    	<title>On @Soojhboojh_01bot</title>
-						    	</head>
-						    	<body>
-						    	<h1> 🏁 The quiz \' <b>"""+Textstr0+"""</b> \' has finished!</h1>
-						    	<p><mark>"""+str(len(db[Textstr0]['que']))+""" questions answered. Total Marks Out off """+str(len(db[Textstr0]['que'])*4)+"""</mark></p><p>Present Time == <b>"""+str(time.ctime(time.time() +19800))+"""</b></p>
-						    	<table>
-						    	<tr>
-						    	<th>Rank No.</th>
-						    	<th>Name</th>
-						    	<th>Right Options</th>
-						    	<th>Wrong Options</th>
-						    	<th>Marks</th>
-						    	</tr>
-						    	"""+ree+"""</table>
-						    	<hr><p> 🏆 Congratulations to the winners!</p><hr>
-						    	</body>
-						    	</html>"""
-					    	try:
-						     	if True:
-						     		if J==1:
-						     			try:
-						     				with open('Result do not open in chrome.html', 'w') as outfile:
-						     					
-						     					outfile.write(yo)
-						     					outfile.close()
-						     				#context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text=yo,parse_mode=ParseMode.HTML)
-						     				try:
-						     					
-						     					Pass#context.bot.send_document(chatid, open('Result.html', "rb"))#document=file)
-						     				except Exception as e:
-						     					pass
-						     				time.sleep(3)
-						     			except:
-						     				context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="No one ATTAMPT QUIZ LAST QUESTION \nSo Result won't COME this time.")
-						     			#J=2
-					    	except:
-					    		context.bot.editMessageText(chat_id=chatid, message_id=mess.message_id, text="Fail to complet process.")
-						    		
-				    		
-		    	except Exception as e:
-				    #print("e===="+str(e))
-				    context.bot.send_message(chat_id=chatid, text="quiz not found")
+        answe=update
+        answer = update.poll_answer
+        #print(str(answe))
+        #time.sleep(3)
+        poll_id = answer.poll_id
+        ui=str(answer.user.id)
+        #print("answer"+str(answer))
+        #print("Dbz = "+str(Dbz))
+        if poll_id in Dbz:
+            try:
+                
+                corec = context.bot_data[poll_id]["cor"][0]
+                Y= context.bot_data[poll_id]["que_no"]
+                #print("Y"+str(Y))
+                ##print("questions ======="+questions)
+            # this means this poll answer update is from an old poll, we can't do our answering then
+            except Exception as e:
+                pass
+                #print("Exception as "+str(e))
+            
+            #print("answer ======"+str(answer))
+            with open('Result.html') as json_file:
+                dbR = json.load(json_file)
+            with open('Newfile.text') as json_file:
+                db = json.load(json_file)
+                
+                ##print(dbR)
+                
+                #print(corec)
+                XY=len(db[Textstr0]['que'])+1
+                #print("XY="+str(XY))
+                newA={'fname':answer.user.first_name, 'lname':answer.user.last_name, 'uname':answer.user.username,"usid":answer.user.id ,'so':answer.option_ids[0], 'result':[0], '✔︎':[0] ,'✖︎':[0]}
+                if Textstr0 not in list(dbR.keys()):
+                    dbR[Textstr0]={}
+                if ui not in list(dbR[Textstr0].keys()):
+                    dbR[Textstr0][ui]=newA
+                dbname=dbR[Textstr0][ui]
+                dbname['so']=answer.option_ids[0]
+                if poll_id in Dbz:
+                    if dbname['so']==corec:
+                        dbname['✔︎'] = [x+1 for x in dbname['✔︎']]
+                        dbname['result'] = [x+4 for x in dbname['result']]
+                    else:
+                        dbname['result'] = [x-1 for x in dbname['result']]
+                        dbname['✖︎'] = [x+1 for x in dbname['✖︎']]
+                ##print(str(dbR))
+                with open('Result.html', 'w') as outfile:
+                    json.dump(dbR, outfile)
+                #print("bdR = "+str(dbR))
+                
+
     except:
-    	print("fail")
-    	
-	    	
+        print("fail")
+        
+            
 TIME1=range(1)
     
 @run_async
@@ -932,18 +917,81 @@ def poll(update, context):
         # Save some info about the poll the bot_data for later use in receive_poll_answer
     except Exception as e:
         print(str(e))
+COPY, POLLS=range(2)
 
+
+
+
+@restricted
+@send_typing_action
+def copyc(update,context):
+    global chat1id
+    chat1id=update.message.chat.id
+    context.bot.send_message(chat_id=chat1id, text="Right Option only digit")
+
+    return COPY
+
+
+
+@run_async
+def copy(update,context):
+    global Time2
+    global Tco
+    userText=update.message.text
+    Time2=userText
+    #Time2=reaaa.split("", Time2)
+    Tco=0
+    context.bot.send_message(chat_id=chat1id, text="Send me polls.")
+    return COPY
+
+@send_typing_action
+@restricted
+def polls(update: Update, _: CallbackContext) -> int:
+    #update.message.reply_text("yoo")
+    global Tco
+    try:
+	    actual_poll = update.message.poll
+	    question= actual_poll.question
+	    options=[o.text for o in actual_poll.options]
+	    corr=str(int(Time2[Tco])-1)
+	    Tco+=1
+	    update.effective_message.reply_poll(
+	            question= question,
+	            options=options,
+	            # with is_closed true, the poll/quiz is immediately closed
+	            type=Poll.QUIZ,
+	            correct_option_id =corr,
+	            #explanation=exp,
+	            is_closed=True,
+	            is_anonymous=True,
+	            reply_markup=ReplyKeyboardRemove()
+	    )
+	    #update.message.reply_text("send me more polls or /cancel")
+    except Exception as e:
+    	update.effective_message.reply_text('program finish /cancel \nError name = '+str(e))
+    return COPY
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
     bot_token=os.environ.get("BOT_TOKEN", "")
-    #bot_token='1291597596:AAH88fF4z60x8gLL47Sk9oMp3lANO6bOHkk'
+    #bot_token='1458427559:AAG7yP4FJoHXUbIfu6CKiuGFHhfoU8lw19I'
     updater = Updater(bot_token,use_context=True)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
+    conv_handler012 = ConversationHandler(
+        entry_points=[CommandHandler('copyc', copyc)],
+        states={
+            COPY: [MessageHandler(Filters.regex('^(\d){1,}$') & ~Filters.command, copy), 
+            MessageHandler(Filters.poll, polls),
+            ],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    
+    
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('createquiz', createquiz)],
         states={
@@ -973,7 +1021,7 @@ def main() -> None:
     conv_handler0C = ConversationHandler(
         entry_points=[CommandHandler('playingroup', playinc)],
         states={
-        	CHN: [MessageHandler(Filters.regex('^.*$'), chn)],
+            CHN: [MessageHandler(Filters.regex('^.*$'), chn)],
             QUIZ: [MessageHandler(Filters.regex('^.*$'), quizc)],
             TIME: [MessageHandler(Filters.regex('^\d{1,}$'), time0c)],
         },
@@ -982,7 +1030,7 @@ def main() -> None:
     conv_handler1C = ConversationHandler(
         entry_points=[CommandHandler('massingroup', playing)],
         states={
-        	GHN: [MessageHandler(Filters.text & ~Filters.command, ghn)],
+            GHN: [MessageHandler(Filters.text & ~Filters.command, ghn)],
             TIME1: [MessageHandler(Filters.regex('^((https|http).*|@.*)$'), time1c)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
@@ -999,13 +1047,7 @@ def main() -> None:
         fallbacks=[CommandHandler('cancel', cancel)],
     )
     
-    conv_handler0R = ConversationHandler(
-        entry_points=[CommandHandler('quizresult', quizresult)],
-        states={
-            RESULT: [MessageHandler(Filters.regex('^.*$'), result)],
-        },
-        fallbacks=[CommandHandler('cancel', cancel)],
-    )
+    
     conv_handler0u = ConversationHandler(
         entry_points=[CommandHandler('uploadfile', uploadfile)],
         states={
@@ -1015,7 +1057,7 @@ def main() -> None:
     )
 
 
-    
+    dispatcher.add_handler(CommandHandler('quizresult',quizresult))
     dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))
     
     dispatcher.add_handler(conv_handler)
@@ -1023,7 +1065,7 @@ def main() -> None:
     dispatcher.add_handler(conv_handler0C)
     dispatcher.add_handler(conv_handler1C)
     dispatcher.add_handler(conv_handler02)
-    dispatcher.add_handler(conv_handler0R)
+    dispatcher.add_handler(conv_handler012)
     dispatcher.add_handler(conv_handler0u)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
     dp=updater.dispatcher

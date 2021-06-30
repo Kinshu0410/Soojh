@@ -933,6 +933,7 @@ def copyc(update,context):
     print(str(update))
     try:
     	chat1id="@"+str(update.message.chat.username)#id
+    	print("yo")
     except Exception as e:
     	print(str(e))
     	chat1id=update.message.chat.id

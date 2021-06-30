@@ -939,7 +939,7 @@ def copy(update,context):
     global Tco
     userText=update.message.text
     Time2=userText
-    Time2=reaaa.split("", Time2)
+    #Time2=reaaa.split("", Time2)
     Tco=0
     context.bot.send_message(chat_id=chat1id, text="Send me polls.")
     return COPY

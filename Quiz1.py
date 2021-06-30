@@ -422,7 +422,11 @@ def quizlist(update: Update, _: CallbackContext) -> int:
 @restricted1
 @send_typing_action
 def quizresult(update, context):
-    chat__id=update.message.chat.id#global re
+    try:
+    	chat__id="@"+str(update.message.chat.username)#id
+    except Exception as e:
+    	print(str(e))
+    	chat__id=update.message.chat.id
     global dbR
     
     COUNTJ=0
@@ -926,7 +930,12 @@ COPY, POLLS=range(2)
 @send_typing_action
 def copyc(update,context):
     global chat1id
-    chat1id=update.message.chat.id
+    print(str(update))
+    try:
+    	chat1id="@"+str(update.message.chat.username)#id
+    except Exception as e:
+    	print(str(e))
+    	chat1id=update.message.chat.id
     context.bot.send_message(chat_id=chat1id, text="Right Option only digit")
 
     return COPY
@@ -951,6 +960,7 @@ def polls(update: Update, _: CallbackContext) -> int:
     global Tco
     try:
 	    actual_poll = update.message.poll
+	    print(str(actual_poll))
 	    question= actual_poll.question
 	    options=[o.text for o in actual_poll.options]
 	    corr=str(int(Time2[Tco])-1)
@@ -984,7 +994,7 @@ def main() -> None:
     conv_handler012 = ConversationHandler(
         entry_points=[CommandHandler('copyc', copyc)],
         states={
-            COPY: [MessageHandler(Filters.regex('^(\d){1,}$') & ~Filters.command, copy), 
+            COPY: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, copy), 
             MessageHandler(Filters.poll, polls),
             ],
         },

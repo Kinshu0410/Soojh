@@ -719,8 +719,7 @@ def quizc(update,context):
                         print(5)
                         Dbz.append(message.poll.id)
                         Mid.append(message.message_id)
-                        if X%4==3:
-                        	time.sleep(5)
+                        time.sleep(5)
                 except Exception as e:
                         print("e===="+str(e))
                 try:

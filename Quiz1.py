@@ -719,7 +719,8 @@ def quizc(update,context):
                         print(5)
                         Dbz.append(message.poll.id)
                         Mid.append(message.message_id)
-                        time.sleep(5)
+                        if X%4==3:
+                        	time.sleep(5)
                 except Exception as e:
                         print("e===="+str(e))
                 try:
@@ -1019,6 +1020,8 @@ def pollfsend(update,context):
     try:
     	for d in range(len(Mid)):
     		context.bot.forward_message(chat_id=ChanId,from_chat_id=channelid, message_id=Mid[d])
+    		if d%4==3:
+    			time.sleep(5)
     except Exception as e:
     	print(str(e))
     return POLLF

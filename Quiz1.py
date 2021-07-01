@@ -1038,7 +1038,7 @@ def main() -> None:
     conv_handler01F= ConversationHandler(
         entry_points=[CommandHandler('pollf', pollf)],
         states={
-            POLLF: [MessageHandler(Filters.regex('^(((https|http)://t\.me/)|@).*$') & ~Filters.command, pollfsend),],
+            POLLF: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

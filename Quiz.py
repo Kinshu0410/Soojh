@@ -659,6 +659,8 @@ def quizc(update,context):
     global J
     global chatid
     global Dbz
+    global Mid
+    Mid = []
     J=0
     Dbz=[]
     userText=update.message.text
@@ -716,6 +718,7 @@ def quizc(update,context):
                         )
                         print(5)
                         Dbz.append(message.poll.id)
+                        Mid.append(message.message_id)
                         time.sleep(5)
                 except Exception as e:
                         print("e===="+str(e))
@@ -991,6 +994,37 @@ def polls(update: Update, _: CallbackContext) -> int:
     	update.effective_message.reply_text('program finish /cancel \nError name = '+str(e))
     return COPY
 
+POLLF=range(1)
+
+@restricted
+@send_typing_action
+def pollf(update,context):
+    chat___id=int(update.message.chat.id)
+    if chat___id<=0:
+    	try:
+    		chat___id="@"+str(update.message.chat.username)#id
+    	except Exception as e:
+    		print(str(e))
+    else:
+    	pass
+    context.bot.send_message(chat_id=chat___id, text="Send me group link")
+    return POLLF
+    
+def pollfsend(update,context):
+    global Time3
+    global Tco
+    userText=update.message.text
+    Time3=userText
+    ChanId=reaaa.sub("(https|http)://t\.me/", "@", Time3)
+    try:
+    	for d in range(len(Mid)):
+    		context.bot.forward_message(chat_id=ChanId,from_chat_id=channelid, message_id=Mid[d])
+    except Exception as e:
+    	print(str(e))
+    return POLLF
+
+
+
 def main() -> None:
     # Create the Updater and pass it your bot's token.
     bot_token=os.environ.get("BOT_TOKEN", "")
@@ -1001,6 +1035,15 @@ def main() -> None:
     dispatcher = updater.dispatcher
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
+    conv_handler01F= ConversationHandler(
+        entry_points=[CommandHandler('pollf', pollf)],
+        states={
+            POLLF: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    
+    
     conv_handler012 = ConversationHandler(
         entry_points=[CommandHandler('copyc', copyc)],
         states={
@@ -1081,6 +1124,7 @@ def main() -> None:
     dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))
     
     dispatcher.add_handler(conv_handler)
+    dispatcher.add_handler(conv_handler01F)
     dispatcher.add_handler(conv_handler01)
     dispatcher.add_handler(conv_handler0C)
     dispatcher.add_handler(conv_handler1C)
@@ -1102,4 +1146,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-#

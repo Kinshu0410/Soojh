@@ -999,7 +999,15 @@ POLLF=range(1)
 @restricted
 @send_typing_action
 def pollf(update,context):
-    context.bot.send_message(chat_id=chat1id, text="Send me group link")
+    chat___id=int(update.message.chat.id)
+    if chat___id<=0:
+    	try:
+    		chat___id="@"+str(update.message.chat.username)#id
+    	except Exception as e:
+    		print(str(e))
+    else:
+    	pass
+    context.bot.send_message(chat_id=chat___id, text="Send me group link")
     return POLLF
     
 def pollfsend(update,context):

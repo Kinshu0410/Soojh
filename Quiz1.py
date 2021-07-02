@@ -1045,7 +1045,7 @@ def pollfsend(update,context):
     try:
     	with open('Newfile.text') as json_file:
     		db = json.load(json_file)
-    	context.bot.send_message(chat_id=ChanId, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>\n\nPlaying Group "+str(ChanId)+"</b>\n\ncleck here for more #Soojh_Booojh", parse_mode=ParseMode.HTML)
+    	context.bot.send_message(chat_id=ChanId, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(ChanId)+"\n\nclick here for more #Soojh_Booojh</b>", parse_mode=ParseMode.HTML)
     	for d in range(len(Mid)):
     		context.bot.forward_message(chat_id=ChanId,from_chat_id=channelid, message_id=Mid[d])
     		if d%4==2:

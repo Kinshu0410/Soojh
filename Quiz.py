@@ -698,7 +698,7 @@ def quizc(update,context):
     
         try:
             
-            context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>", parse_mode=ParseMode.HTML)
+            context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"</b>\n\ncleck here for more #SoojhBooojh ", parse_mode=ParseMode.HTML)
             mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
             time.sleep(2)
             for xooo in range(6):
@@ -1038,13 +1038,17 @@ def pollf(update,context):
 def pollfsend(update,context):
     global Time3
     global Tco
+    global db
     userText=update.message.text
     Time3=userText
-    ChanId=reaaa.sub("(https|http)://t\.me/", "@", Time3)
+    ChanId=reaaa.sub(r"(https|http)://t\.me/", "@", Time3)
     try:
+    	with open('Newfile.text') as json_file:
+    		db = json.load(json_file)
+    	context.bot.send_message(chat_id=ChanId, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>\n\nPlaying Group "+str(ChanId)+"</b>\n\ncleck here for more #Soojh_Booojh", parse_mode=ParseMode.HTML)
     	for d in range(len(Mid)):
     		context.bot.forward_message(chat_id=ChanId,from_chat_id=channelid, message_id=Mid[d])
-    		if d%4==3:
+    		if d%4==2:
     			time.sleep(5)
     except Exception as e:
     	print(str(e))

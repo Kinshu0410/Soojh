@@ -65,6 +65,7 @@ LIST_OF_ADMINS = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
 def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
+        
         userName = update.message.chat.username
         userName1=update.message.from_user.username
         if userName and userName1 not in LIST_OF_ADMINS:
@@ -78,11 +79,35 @@ LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala", "Om_26
 def restricted1(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
+        mid=update.message.message_id
         userName = update.message.chat.username
+        #print(userName)
         userName1=update.message.from_user.username
-        if userName and userName1 not in LIST_OF_ADMINS1:
-            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+        chatiid=int(update.message.chat.id)
+        #print(chatiid)
+        chatiid=int(update.message.chat.id)
+        	
+        
+        
+        
+        if userName and userName1 not in LIST_OF_ADMINS1 or userName is None:
+            
+            try:
+            	if chatiid<=0:
+            		
+            		try:
+            			chatiid="@"+str(update.message.chat.username)#id
+            			print("chatid="+str(chatiid))
+            			print("message*d"+str(mid))
+            		except Exception as e:
+            			print(str(e))
+            	
+            except Exception as e:
+            	print(str(e))
+            context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
             return
+            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            
         return func(update, context, *args, **kwargs)
     return wrapped
 
@@ -996,7 +1021,7 @@ def polls(update: Update, _: CallbackContext) -> int:
 
 POLLF=range(1)
 
-@restricted
+@restricted1
 @send_typing_action
 def pollf(update,context):
     chat___id=int(update.message.chat.id)
@@ -1030,7 +1055,7 @@ def pollfsend(update,context):
 def main() -> None:
     # Create the Updater and pass it your bot's token.
     bot_token=os.environ.get("BOT_TOKEN", "")
-    #bot_token='1458427559:AAG7yP4FJoHXUbIfu6CKiuGFHhfoU8lw19I'
+    #bot_token='1458427559:AAFDcDNOg6VfK6Gscrf7hhS6eciKr2Q_nT0'
     updater = Updater(bot_token,use_context=True)
 
     # Get the dispatcher to register handlers

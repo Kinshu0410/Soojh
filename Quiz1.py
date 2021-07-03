@@ -866,7 +866,7 @@ def playing(update,context):
     chat0id=update.message.chat.id
     context.bot.send_message(chat_id=chat0id, text="Send me group url.")
 
-    return TIME1
+    return GHN
 
 @run_async
 def time1c(update,context):
@@ -883,6 +883,29 @@ def ghn(update,context):
 
     context.bot.send_message(chat_id=Time1, text=userText)
     return GHN
+    
+@run_async
+def ghn1(update,context):
+    userText=update.message.poll
+    que=userText.question
+    options=[o.text for o in userText.options]
+    co=userText.correct_option_id
+    explan=userText.explanation
+    try:
+    	context.bot.send_poll(
+    		chat_id=Time1,
+    		question=que,
+    		options=options,
+            type=Poll.QUIZ,
+            correct_option_id=co,
+            explanation=explan,
+            is_anonymous=False,
+            allows_multiple_answers=False,
+        )
+    except Exception as e:
+    	print(str(e))
+    return GHN
+
 
 @restricted
 @run_async
@@ -1124,8 +1147,7 @@ def main() -> None:
     conv_handler1C = ConversationHandler(
         entry_points=[CommandHandler('massingroup', playing)],
         states={
-            GHN: [MessageHandler(Filters.text & ~Filters.command, ghn)],
-            TIME1: [MessageHandler(Filters.regex('^((https|http).*|@.*)$'), time1c)],
+            GHN: [MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$'), ghn), MessageHandler(Filters.regex(r'^((https|http).*|@.*)$'), time1c),MessageHandler(Filters.poll,  ghn1)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

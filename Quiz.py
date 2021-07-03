@@ -884,7 +884,7 @@ def ghn(update,context):
     context.bot.send_message(chat_id=Time1, text=userText)
     return GHN
     
-@run_async
+#@run_async
 def ghn1(update,context):
     userText=update.message.poll
     que=userText.question

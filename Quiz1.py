@@ -905,7 +905,7 @@ def ghn1(update,context):
             type=Poll.QUIZ,
             correct_option_id=co,
             explanation=explan,
-            is_anonymous=False,
+            is_anonymous=True,
             allows_multiple_answers=False,
         )
     except Exception as e:

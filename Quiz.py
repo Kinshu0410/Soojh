@@ -864,6 +864,7 @@ def playing(update,context):
     
     global chat0id
     chat0id=update.message.chat.id
+    #print(str(update))
     context.bot.send_message(chat_id=chat0id, text="Send me group url.")
 
     return GHN
@@ -880,8 +881,13 @@ def time1c(update,context):
 @run_async
 def ghn(update,context):
     userText=update.message.text
-
-    context.bot.send_message(chat_id=Time1, text=userText)
+    try:
+	    if reaaa.match(r"^\d{1,}$",userText):
+	    	context.bot.delete_message(chat_id=Time1,message_id=int(userText))
+	    else:
+	    	context.bot.send_message(chat_id=Time1, text=userText)
+    except Exception as e:
+    	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
     
 #@run_async

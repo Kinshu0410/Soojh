@@ -111,6 +111,37 @@ def restricted1(func):
         return func(update, context, *args, **kwargs)
     return wrapped
 
+LIST_OF_ADMINS_D = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
+def restrictedD(func):
+    @wraps(func)
+    def wrapped(update, context, *args, **kwargs):
+        mid=update.message.message_id
+        userName = update.message.chat.username
+        #print(userName)
+        userName1=update.message.from_user.username
+        chatiid=int(update.message.chat.id)
+        #print(chatiid)
+        chatiid=int(update.message.chat.id)
+        if userName and userName1 in LIST_OF_ADMINS_D: # or userName is None:
+            try:
+            	if chatiid<=0:
+            		
+            		try:
+            			chatiid="@"+str(update.message.chat.username)#id
+            			print("chatid="+str(chatiid))
+            			print("message*d"+str(mid))
+            		except Exception as e:
+            			print(str(e))
+            	
+            except Exception as e:
+            	print(str(e))
+            context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
+            return func(update, context, *args, **kwargs)
+            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            
+        return 
+    return wrapped
+
 
 
 @run_async
@@ -913,7 +944,7 @@ def ghn1(update,context):
     return GHN
 
 
-@restricted
+@restrictedD
 @run_async
 @send_typing_action
 def poll(update, context):
@@ -1205,4 +1236,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-#
+

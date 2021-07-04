@@ -954,13 +954,13 @@ def poll(update, context):
     try:
         q=quest[0:-1]
         q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
-        q=reaaa.sub("(\n|\ )(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|बी|सी|डी|ड़ी)(\)|\]|\.)(\.|\ |)", "\n", q)
+        q=reaaa.sub(r"(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|बी|स|सी|डी|ड|क|ख|ग|घ|य|र|ल|व)(\)|\]|\.)(\.| |)", "\n", q)
         q=reaaa.sub("\n{2,}", "\n", q)
         q=reaaa.sub("☞", "", q)
-        q=reaaa.split("[\n]", q)
+        q=reaaa.split(r"[\n]", q)
         #update.message.reply_text(q)
         ques=q[0]
-        ques=reaaa.sub("^(Q_|Q|)(\d{1,})(\.)(\ |){1,}", "", ques)
+        ques=reaaa.sub(r"^(Q_|Q|)(\d{1,})(\.)(\ |){1,}", "", ques)
         que="☞ "+ ques
         #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
         option1="(A) "+q[1]
@@ -998,7 +998,7 @@ def poll(update, context):
             type=Poll.QUIZ,
             correct_option_id=co,
             explanation=options5,
-            is_anonymous=True,
+            is_anonymous=False,
             allows_multiple_answers=False,
         )
         elif options5 =="":
@@ -1009,7 +1009,7 @@ def poll(update, context):
             options,
             type=Poll.QUIZ,
             correct_option_id=co,#explanation=options5,
-            is_anonymous=True,
+            is_anonymous=False,
             allows_multiple_answers=False,
         )
         # Save some info about the poll the bot_data for later use in receive_poll_answer

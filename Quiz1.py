@@ -905,7 +905,10 @@ def time1c(update,context):
     global Time1
     userText=update.message.text
     Time1=userText
-    Time1=reaaa.sub("(https|http)://t\.me/", "@", Time1)
+    if reaaa.match(r"^(https|http)://t\.me/.*$",Time1):
+        Time1=reaaa.sub("(https|http)://t\.me/", "@", Time1)
+    if reaaa.match(r"^-\d{1,}$",Time1):
+        Time1=int(Time1)
     context.bot.send_message(chat_id=chat0id, text="Send me message.")
     return GHN
 
@@ -1184,7 +1187,7 @@ def main() -> None:
     conv_handler1C = ConversationHandler(
         entry_points=[CommandHandler('massingroup', playing)],
         states={
-            GHN: [MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$'), ghn), MessageHandler(Filters.regex(r'^((https|http).*|@.*)$'), time1c),MessageHandler(Filters.poll,  ghn1)],
+            GHN: [MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn), MessageHandler(Filters.regex(r'^(((https|http).*|@.*))|(-\d{1,})$'), time1c),MessageHandler(Filters.poll,  ghn1)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

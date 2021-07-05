@@ -908,6 +908,7 @@ def time1c(update,context):
     if reaaa.match(r"^(https|http)://t\.me/.*$",Time1):
         Time1=reaaa.sub("(https|http)://t\.me/", "@", Time1)
     if reaaa.match(r"^-\d{1,}$",Time1):
+        Time1=reaaa.sub("-", "-100", Time1)
         Time1=int(Time1)
     context.bot.send_message(chat_id=chat0id, text="Send me message.")
     return GHN

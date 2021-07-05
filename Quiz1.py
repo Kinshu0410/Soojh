@@ -927,6 +927,10 @@ def ghn(update,context):
     
 #@run_async
 def ghn1(update,context):
+    if reaaa.match(r"^-\d{1,}$",str(Time1)):
+        is_anonymous=True
+    else:
+        is_anonymous=False
     userText=update.message.poll
     que=userText.question
     options=[o.text for o in userText.options]
@@ -940,7 +944,7 @@ def ghn1(update,context):
             type=Poll.QUIZ,
             correct_option_id=co,
             explanation=explan,
-            is_anonymous=False,
+            is_anonymous=is_anonymous,
             allows_multiple_answers=False,
         )
     except Exception as e:

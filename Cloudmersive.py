@@ -140,7 +140,7 @@ def poll(update, context):
             type=Poll.QUIZ,
             correct_option_id=co,
             explanation=options5,
-            is_closed=False,
+            is_closed=True,
             is_anonymous=False,
             allows_multiple_answers=False,
         )
@@ -152,7 +152,7 @@ def poll(update, context):
             options,
             type=Poll.QUIZ,
             correct_option_id=co,#explanation=options5,
-            is_closed=False,
+            is_closed=True,
             is_anonymous=False,
             allows_multiple_answers=False,
         )
@@ -382,7 +382,6 @@ def preview(update, context):
 @send_typing_action
 def receive_poll(update, context):
     """On receiving polls, reply to it by a closed poll copying the received poll"""
-    update.message.reply_text(str(update))
     actual_poll = update.effective_message.poll
     # Only need to set the question and options, since all other parameters don't matter for
     # a closed poll

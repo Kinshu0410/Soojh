@@ -925,6 +925,10 @@ def ghn(update,context):
 def ghn1(update,context):
     userText=update.message.poll
     que=userText.question
+    que=reaaa.sub("☞ ", "", que)
+    que=reaaa.sub(r"\ {1,}", " ", que)
+    que=reaaa.sub(r"^(\(|\[|)(\d{1,})(\.|\)|\])( |)", "", que)
+    que="☞ "+que
     options=[o.text for o in userText.options]
     co=userText.correct_option_id
     explan=userText.explanation

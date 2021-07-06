@@ -382,6 +382,7 @@ def preview(update, context):
 @send_typing_action
 def receive_poll(update, context):
     """On receiving polls, reply to it by a closed poll copying the received poll"""
+    update.message.reply_text(str(update))
     actual_poll = update.effective_message.poll
     # Only need to set the question and options, since all other parameters don't matter for
     # a closed poll

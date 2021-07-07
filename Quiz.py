@@ -868,9 +868,10 @@ def receive_poll_answer(update,context):
         #print("answer"+str(answer))
         #print("Dbz = "+str(Dbz))
         Quizname=context.bot_data[poll_id]["quiz_name"]
+        Quizname1=Quizname
         Quizname=reaaa.sub(" ", "_",Quizname)
         print(Quizname)
-        if Quizname in Dbz:
+        if Quizname1 in Dbz:
             try:
             	conn = sqlite3.connect('test.db')
             	conn.execute('''CREATE TABLE '''+Quizname+'''

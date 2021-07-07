@@ -509,8 +509,8 @@ def result(update, context):
 	    conn = sqlite3.connect('test.db')
 	    print("w")
 	    cursor = conn.execute( "SELECT NAME,✔︎,︎✖,Marks,User_Name,User_ID from "+userTex+" ORDER BY Marks DESC")
-    except:
-	    print("connection fail")
+    except Exception as e:
+	    print("connection fail "+str(e))
 	    
 
     

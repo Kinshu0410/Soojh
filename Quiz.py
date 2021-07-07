@@ -1197,7 +1197,7 @@ def pollfsend(update,context):
     	for d in range(len(ZMid[Time4])):
     		print(Time3)
     		print(ZMid[Time4][d])
-    		context.bot.forward_message(chat_id=Time3,from_chat_id=str(Cid[Time4]), message_id=Mid[d])
+    		context.bot.forward_message(chat_id=Time3,from_chat_id=str(Cid[Time4]), message_id=ZMid[Time4][d])
     		if d%4==2:
     			time.sleep(5)
     except Exception as e:

@@ -568,7 +568,7 @@ def result(update, context):
                                 Usid=L[5]
                                 Rs=L[3]
                                 print("data loading start")
-                                if Uname is not None:
+                                if Uname !="None":
                                 	if COUNTJ<=9:
                                 		COUNTR=COUNTR+""+str(COUNTJ+1)+". @"+str(Uname)+"\n"
                                 		COUNTJ+=1
@@ -602,7 +602,7 @@ def result(update, context):
                 except Exception as e:
                     print("e===="+str(e))
                     context.bot.send_message(chat_id=chat__id, text="quiz not found")
-        caption1="🏁 The quiz \'"+Textstr0+"\' has finished!\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[Textstr0]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners!"
+        caption1="🏁 The quiz \'"+userTex+"\' has finished!\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[userTex1]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners!"
         print(caption1)
         context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1)
     except Exception as e:

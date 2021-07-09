@@ -632,7 +632,7 @@ def downloadfile(update,context):
 #@run_async
 @send_typing_action
 def downloadfile(update,context):
-    f = 'Newfile.text'
+    f = ['Newfile.text','test.db']
     #print("1")
     chat_id=update.effective_chat.id
     #print(chat_id)
@@ -641,10 +641,11 @@ def downloadfile(update,context):
      
         
     try:
-        context.bot.send_document(chat_id, open(f, "rb"))#document=file)
+        for x in f:
+            context.bot.send_document(chat_id, open(x, "rb"))#document=file)
     except Exception as e:
-        pass
-        #print(e)
+        #pass
+        print(e)
     
 UPLOAD =range(1)
 

@@ -909,7 +909,7 @@ def receive_poll_answer(update,context):
             		newvalues1 = { "$set": { "Marks":str(int(mark)+4),"✔︎":str(int(right)+1)} }
             		col1.update_one(myquery1, newvalues1)
             	else:
-            		x=col1.find_one({}, {"User_ID":answer.user.id})
+            		x=col1.find_one({"User_ID":answer.user.id})
             		mark=x["Marks"]
             		wrong=x["︎✖"]
             		print(mark)

@@ -914,7 +914,7 @@ def receive_poll_answer(update,context):
             		wrong=x["︎✖"]
             		print(mark)
             		myquery2 = {"User_ID":answer.user.id}
-            		newvalues2 = { "$set": { "Marks":str(int(mark)+4),"︎✖":str(int(right)-1)} }
+            		newvalues2 = { "$set": { "Marks":str(int(mark)-1),"︎✖":str(int(right)+1)} }
             		col1.update_one(myquery2, newvalues2)
             	print("--------------updated-------------")
             except Exception as e:
@@ -1169,10 +1169,11 @@ def pollfsend(update,context):
     		db = json.load(json_file)
     	context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(len(db[Time4]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
     	channel_ids=x["Channel_Id"]
+    	
     	for y in x[Time4]:
     		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
-    		if d%4==2:
-    			time.sleep(5)
+    		'''if %4==2:
+    			time.sleep(5)'''
     except Exception as e:
     	print(str(e))
     return POLLF

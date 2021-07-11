@@ -480,8 +480,8 @@ def quizlist(update: Update, _: CallbackContext) -> int:
     global Dbz
     #user = update.message.from_user
     try:
-    	Dbzquiz=client["Quiz"]["Quizlist"]
-    	Dbzquiz.delete_many({'Id':'0'})
+    	Dbzqui=client["Quiz"]["Quizlist"]
+    	Dbzqui.delete_many({'Id':'0'})
     	print("All Quiz_List Deleted...")
     except Exception as e:
     	print("deleting error "+str(e))
@@ -493,7 +493,7 @@ def quizlist(update: Update, _: CallbackContext) -> int:
             update.message.reply_text(List[L])
             Dbz.append(List[L])
         Dbz1={"Quiz_List":Dbz,'Id':'0'}
-        
+        Dbzquiz=client["Quiz"]["Quizlist"]
         Dbzquiz.insert_one(Dbz1)
 
 

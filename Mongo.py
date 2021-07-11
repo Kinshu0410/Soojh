@@ -4,5 +4,5 @@ str = 'mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryW
 client=MongoClient(str)
 db=client["test"]
 col=db["test1"]
-print(db.list_collection_names())
+print(col.list_collection_names())
 print("hjjk")

@@ -1176,7 +1176,7 @@ def pollfsend(update,context):
     			time.sleep(5)'''
     except Exception as e:
     	print(str(e))
-    return POLLF
+    return ConversationHandler.END
 
 
 

@@ -840,7 +840,7 @@ def quizc(update,context):
         dbn1=ZMid[Textstr0]
         dbn.delete_many({"Id":Textstr0})
         print("Deleting ...")
-        dbn.insert_one({Textstr0:dbn1,"Id":Textstr0})
+        dbn.insert_one({Textstr0:dbn1,"Id":Textstr0,"Channel_Id":channelid})
     #update.message.reply_text("/result")
     try:
         return ConversationHandler.END
@@ -914,7 +914,7 @@ def receive_poll_answer(update,context):
             		wrong=x["︎✖"]
             		print(mark)
             		myquery2 = {"User_ID":answer.user.id}
-            		newvalues2 = { "$set": { "Marks":str(int(mark)-1),"︎✖":str(int(wrong)+1)} }
+            		newvalues2 = { "$set": { "Marks":str(int(mark)+4),"︎✖":str(int(right)-1)} }
             		col1.update_one(myquery2, newvalues2)
             	print("--------------updated-------------")
             except Exception as e:
@@ -1161,16 +1161,16 @@ def pollfsend(update,context):
     userText=update.message.text
     Time3=userText
     Time3=reaaa.sub(r"(https|http)://t\.me/", "@", Time3)
+    col=client["Quiz"]["Quizlist"]
+    x=col.find_one({"Id":Time4})
+    
     try:
     	with open('Newfile.text') as json_file:
     		db = json.load(json_file)
-    	context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Time4]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
-    	Time4=reaaa.sub(" ", "_",Time4)
-    	print(ZMid[Time4])
-    	for d in range(len(ZMid[Time4])):
-    		print(Time3)
-    		print(ZMid[Time4][d])
-    		context.bot.forward_message(chat_id=Time3,from_chat_id=str(Cid[Time4]), message_id=ZMid[Time4][d])
+    	context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(len(db[Time4]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+    	channel_ids=x["Channel_Id"]
+    	for y in x[Time4]:
+    		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
     		if d%4==2:
     			time.sleep(5)
     except Exception as e:

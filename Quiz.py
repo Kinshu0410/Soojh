@@ -1,3 +1,12 @@
+from pymongo import MongoClient
+import dns
+
+'''import dns.resolver
+dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
+dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public dns server,  use whatever dns server you like here
+# as a test, dns.resolver.query('www.google.com') should return an answer, not an exception
+client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')'''
+
 #!/usr/bin/env pyth
 # pylint: disable=C0116
 # This program is dedicated to the public domain under the CC0 license.
@@ -469,7 +478,13 @@ def quizlist(update: Update, _: CallbackContext) -> int:
     #global Uid
     #Uid=update.message.user_id
     global Dbz
-    user = update.message.from_user
+    #user = update.message.from_user
+    try:
+    	Dbzquiz=client["Quiz"]["Quizlist"]
+    	Dbzquiz.delete_many({'Id':'0'})
+    	print("All Quiz_List Deleted...")
+    except Exception as e:
+    	print("deleting error "+str(e))
     Dbz=[]
     with open('Newfile.text') as json_file:
         db = json.load(json_file)
@@ -477,6 +492,9 @@ def quizlist(update: Update, _: CallbackContext) -> int:
         for L in range(len(List)):
             update.message.reply_text(List[L])
             Dbz.append(List[L])
+        Dbz1={"Quiz_List":Dbz,'Id':'0'}
+        
+        Dbzquiz.insert_one(Dbz1)
 
 
 RESULT=range(1)
@@ -502,16 +520,13 @@ def result(update, context):
     global COUNTR
     userTex=update.message.text
     userTex1=userTex
-    userTex=reaaa.sub(" ","_",userTex)
     COUNTJ=0
     rnumb=1
     try:
-	    conn = sqlite3.connect('test.db')
-	    print("w")
-	    cursor = conn.execute( "SELECT NAME,✔︎,︎✖,Marks,User_Name,User_ID from "+userTex+" ORDER BY Marks DESC")
+	    col=client["Quiz"][userTex]
     except Exception as e:
 	    print("connection fail "+str(e))
-	    
+    mydoc = col.find().sort("Marks", -1)
 
     
     
@@ -560,13 +575,13 @@ def result(update, context):
                             cell_format10.set_align('center')
                             cell_format10.set_num_format('[Green]General;[Red]-General;General')
                             COUNTR=""
-                            for L in cursor:
-                                Fname=L[0]
-                                Rname=L[1]
-                                Wname=L[2]
-                                Uname=L[4]
-                                Usid=L[5]
-                                Rs=L[3]
+                            for x in mydoc:
+                                Fname=x["Fname"]
+                                Rname=x["✔︎"]
+                                Wname=x["︎✖"]
+                                Uname=x["User_Name"]
+                                Usid=x["User_ID"]
+                                Rs=x["Marks"]
                                 print("data loading start")
                                 if Uname !="None":
                                 	if COUNTJ<=9:
@@ -717,7 +732,7 @@ ZMid={}
 Textstr0=""
 #@run_async
 def quizc(update,context):
-    user = update.message.from_user
+    #user = update.message.from_user
     global payload
     global Textstr0
     global J
@@ -729,25 +744,16 @@ def quizc(update,context):
     J=0
     
     userText=update.message.text
+    
     Textstr0=userText
+    
     with open('Newfile.text') as json_file:
         db = json.load(json_file)
     dbA={}
     with open('Result.html', 'w') as outfile:
         json.dump(dbA, outfile)
-        Textstr0=reaaa.sub(" ", "_",Textstr0)
-        TextstrZ=Textstr0
+        
         try:
-            try:
-            	Cid[Textstr0]=channelid
-            	#print(Cid[Textstr0])
-            	conn = sqlite3.connect('test.db')
-            	conn.execute("DELETE from "+Textstr0+";")
-            	conn.commit()
-            	conn.close()
-            except Exception as e:
-            	print(str(e))
-            Textstr0=reaaa.sub("_", " ",Textstr0)
             context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
             mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
             time.sleep(2)
@@ -777,8 +783,8 @@ def quizc(update,context):
                 #print("1")
                 #print(update.effective_chat)
                 try:
-                        print("1")
-                        message = context.bot.send_poll(
+                    print("1")
+                    message = context.bot.send_poll(
                             chat_id=channelid,
                             question=str(Zno)+". "+db[Textstr0]['que'][X],
                             options=db[Textstr0]['op'][X],
@@ -791,13 +797,13 @@ def quizc(update,context):
                             is_anonymous=False,
                             reply_markup=ReplyKeyboardRemove(),    
                         )
-                        print(5)
-                        
-                        Mid.append(message.message_id)
-                        time.sleep(5)
+                    print("5")
+                    Mid.append(message.message_id)
+                    time.sleep(5)
                 except Exception as e:
-                        print("e===="+str(e))
-                ZMid[TextstrZ]=Mid
+                    print("e===="+str(e))
+                ZMid[Textstr0]=Mid
+                
                 try:
                     #print("start")
                     payload = {
@@ -828,8 +834,13 @@ def quizc(update,context):
             
         except Exception as e:
             print("e========"+str(e))
+        
             update.message.reply_text("Name not exist.", reply_markup=ReplyKeyboardRemove(),)
-    
+        dbn=client["Quiz"]["Quizlist"]
+        dbn1=ZMid[Textstr0]
+        dbn.delete_many({"Id":Textstr0})
+        print("Deleting ...")
+        dbn.insert_one({Textstr0:dbn1,"Id":Textstr0})
     #update.message.reply_text("/result")
     try:
         return ConversationHandler.END
@@ -869,87 +880,47 @@ def receive_poll_answer(update,context):
         #print("answer"+str(answer))
         #print("Dbz = "+str(Dbz))
         Quizname=context.bot_data[poll_id]["quiz_name"]
-        Quizname1=Quizname
-        Quizname=reaaa.sub(" ", "_",Quizname)
         print(Quizname)
-        if Quizname1 in Dbz:
+        col=client["Quiz"]["Quizlist"]
+        coldb=col.find_one({"Id":"0"})
+        print(coldb["Quiz_List"])
+        if Quizname in coldb["Quiz_List"]:
+            print("succ..")
             try:
-            	conn = sqlite3.connect('test.db')
-            	conn.execute('''CREATE TABLE '''+Quizname+'''
-         		(NAME     TEXT    NOT NULL,
-         ✔︎           TEXT     NOT NULL,
-         ︎✖        TEXT     NOT NULL,
-         Marks         TEXT     NOT NULL,
-         User_Name     TEXT    NOT NULL,
-         User_ID         TEXT     NOT NULL);''')
-            	conn.commit()
-            	conn.close()
+            	col1=client["Quiz"][Quizname]
+            	if col1.find_one({"User_ID":answer.user.id}) is not None:
+            		pass
+            	else:
+            		Lname=answer.user.last_name
+            		if Lname is None:
+                		Lname=""	
+            		dict1={"User_ID":answer.user.id,"Fname":answer.user.first_name+" "+Lname,"✔︎":"0","︎✖":"0", "Marks":"0","User_Name":usname}
+            		col1.insert_one(dict1)
+            		print("---------------------------")
+            		print("suss")
+            		print("---------------------------")
+            	corec = str(context.bot_data[poll_id]["cor"][0])
+            	if str(answer.option_ids[0])==corec:
+            		x=col1.find_one({"User_ID":answer.user.id})
+            		mark=x["Marks"]
+            		right=x["✔︎"]
+            		print(mark)
+            		myquery1 = {"User_ID":answer.user.id}
+            		newvalues1 = { "$set": { "Marks":str(int(mark)+4),"✔︎":str(int(right)+1)} }
+            		col1.update_one(myquery1, newvalues1)
+            	else:
+            		x=col1.find_one({}, {"User_ID":answer.user.id})
+            		mark=x["Marks"]
+            		wrong=x["︎✖"]
+            		print(mark)
+            		myquery2 = {"User_ID":answer.user.id}
+            		newvalues2 = { "$set": { "Marks":str(int(mark)-1),"︎✖":str(int(wrong)+1)} }
+            		col1.update_one(myquery2, newvalues2)
+            	print("--------------updated-------------")
             except Exception as e:
-            	print("data exist "+str(e))
-            try:
-                corec = str(context.bot_data[poll_id]["cor"][0])
-                Y= context.bot_data[poll_id]["que_no"]
-            except Exception as e:
-                pass
-            with open('Result.html') as json_file:
-                dbR = json.load(json_file)
-            with open('Newfile.text') as json_file:
-                db = json.load(json_file)
-                
-                
-                try:
-                	conn = sqlite3.connect('test.db')
-                	cursor = conn.execute("SELECT User_ID FROM "+Quizname)
-                	usid=str(answer.user.id)
-                	yo=[]
-                	for x in cursor:
-                		yo.append(x[0])
-                	if True:
-                		#yo.append(rows[0])
-                		Lname=answer.user.last_name
-                		if Lname is None:
-                			Lname=""
-	                	if usid not in yo:
-	                		conn.execute("INSERT INTO "+Quizname+" (NAME,✔︎,︎✖,Marks,User_Name,User_ID) \
-	                		VALUES ('"+answer.user.first_name+" "+Lname+"', '0', '0', '0', '"+usname+"', '"+usid+"')")
-	                		yo.append(usid)
-	                		print("suss")
-	                		conn.commit()
-	                		conn.close()
-	                	else:
-	                		 pass
-                	try:
-                		 conn = sqlite3.connect('test.db')
-                		 cursor = conn.execute("SELECT ✔︎,︎✖,Marks,User_ID FROM "+Quizname+" WHERE User_ID = '"+usid+"'")
-                		 print("g")
-                		 for row in cursor:
-                		 	Rmark=row[0]
-                		 	print(Rmark)
-                		 	Wmark=row[1]
-                		 	print(Wmark)
-                		 	mark=row[2]
-                		 	print("y")
-                		 	if str(answer.option_ids[0])==corec:
-                		 		print("1")
-	                		 	Rmark= str(int(Rmark)+1)
-	                		 	print("3")
-	                		 	mark=str(int(mark)+4)
-	                		 	print("2")
-                		 	else:
-	                		 	Wmark = str(int(Wmark)+1)
-	                		 	mark=str(int(mark)-1)
-                		 conn.execute("UPDATE "+Quizname+" set ✔︎ = "+Rmark+" where User_ID = "+usid)
-                		 conn.execute("UPDATE "+Quizname+" set ︎✖ = "+Wmark+" where User_ID = "+usid)
-                		 conn.execute("UPDATE "+Quizname+" set Marks = "+mark+" where User_ID = "+usid)
-                		 conn.commit()
-                		 conn.close()
-                	except Exception as e:
-                		print("squlite faaaaaaail "+str(e))
-                except Exception as e:
-                	print("squlite fail "+str(e))
+            	print("wrong01 "+str(e))
     except Exception as e:
-    	print("wrong "+str(e))
-
+    	print("wrong02 "+str(e))
                 	
                 
                 

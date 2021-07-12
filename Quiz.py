@@ -757,8 +757,10 @@ def quizc(update,context):
                     
                 
             cil=client["Quiz"]['Quiz_Polls']
+            cil1=client["Quiz"][Textstr0]
             try:
                 cil.delete_many({"QuizID":Textstr0})
+                cil1.drop()
                 print("Quiz_Polls Deleted...")
             except Exception as e:
                 print("Quiz_Polls = "+str(e))

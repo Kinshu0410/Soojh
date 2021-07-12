@@ -906,7 +906,7 @@ def receive_poll_answer(update,context):
             		right=x["✔︎"]
             		print(mark)
             		myquery1 = {"User_ID":answer.user.id}
-            		newvalues1 = { "$set": { "Marks":str(int(mark)+4),"✔︎":str(int(right)+1)} }
+            		newvalues1 = { "$set": { "Marks":int(mark)+4,"✔︎":str(int(right)+1)} }
             		col1.update_one(myquery1, newvalues1)
             	else:
             		x=col1.find_one({"User_ID":answer.user.id})
@@ -914,7 +914,7 @@ def receive_poll_answer(update,context):
             		wrong=x["︎✖"]
             		print(mark)
             		myquery2 = {"User_ID":answer.user.id}
-            		newvalues2 = { "$set": { "Marks":str(int(mark)-1),"︎✖":str(int(wrong)+1)} }
+            		newvalues2 = { "$set": { "Marks":int(mark)-1,"︎✖":str(int(wrong)+1)} }
             		col1.update_one(myquery2, newvalues2)
             	print("--------------updated-------------")
             except Exception as e:

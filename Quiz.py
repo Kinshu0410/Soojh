@@ -876,11 +876,12 @@ def receive_poll_answer(update,context):
         else:
         	usname="None"
         poll_id = answer.poll_id
+        print("poll_id="+poll_id)
         ui=str(answer.user.id)
         #print("answer"+str(answer))
         #print("Dbz = "+str(Dbz))
         Quizname=context.bot_data[poll_id]["quiz_name"]
-        print(Quizname)
+        print("Quizname="+Quizname)
         col=client["Quiz"]["Quizlist"]
         coldb=col.find_one({"Id":"0"})
         print(coldb["Quiz_List"])

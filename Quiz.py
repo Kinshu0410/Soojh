@@ -532,27 +532,17 @@ def result(update, context):
     
     
     with open('Newfile.text') as outfile:
-          db = json.load(outfile)
-    with open('Result.html') as outfile:
-          dbR = json.load(outfile)
+    	db = json.load(outfile)
     try:
         if True:
             if True:
                 try:
-                    
-                        #mess=context.bot.send_message(chat_id=chatid, text="👆👆👆 Must attempt for RESULT")
-                        #print("message ==="+str(mess.message_id))
-                        
-                    
-                    #print("correct options = "+str(corec))
-                    
-                    
                     if True:
                         if True:
                             try:
                                 os.remove('Result.xlsx')
                             except:
-                                print("removing")
+                                print("removing Result.xlsx File")
                             workbook = xlsxwriter.Workbook('Result.xlsx')
                             worksheet = workbook.add_worksheet()
                             cell_format = workbook.add_format()
@@ -808,16 +798,18 @@ def quizc(update,context):
                     #print("start")
                     payload = {
                         message.poll.id: {
-                            "cor": question,
+                            "Que": question,
                             "options": options,
                             "cor":correct_option_id,
                             "message_id": message.message_id,
                             "chat_id": update.effective_chat.id,
                             "que_no":X+1,
                             "quiz_name":Textstr0
-                        }
+                        },"ID":message.poll.id
                     }
                     context.bot_data.update(payload)
+                    cil=client["Quiz"]['Quiz_Polls']
+                    cil.insert_one(payload)
                     chatid=channelid
                 except Exception as e:
                     pass
@@ -880,13 +872,12 @@ def receive_poll_answer(update,context):
         ui=str(answer.user.id)
         #print("answer"+str(answer))
         #print("Dbz = "+str(Dbz))
-        print("context="+str(context.bot_data))
-        Quizname=context.bot_data[poll_id]["quiz_name"]
-        print("Quizname="+Quizname)
-        col=client["Quiz"]["Quizlist"]
-        coldb=col.find_one({"Id":"0"})
-        print(coldb["Quiz_List"])
-        if Quizname in coldb["Quiz_List"]:
+        #print("context="+str(context.bot_data))
+        cli=client["Quiz"]['Quiz_Polls']
+        yoo=cli.find_one({"ID":poll_id})
+        Quizname=yoo[poll_id]["quiz_name"]
+        print(Quizname)
+        if True:
             print("succ..")
             try:
             	col1=client["Quiz"][Quizname]
@@ -896,12 +887,13 @@ def receive_poll_answer(update,context):
             		Lname=answer.user.last_name
             		if Lname is None:
                 		Lname=""	
-            		dict1={"User_ID":answer.user.id,"Fname":answer.user.first_name+" "+Lname,"✔︎":"0","︎✖":"0", "Marks":"0","User_Name":usname}
+            		dict1={"User_ID":answer.user.id,"Fname":answer.user.first_name+" "+Lname,"✔︎":0,"︎✖":0, "Marks":0,"User_Name":usname}
             		col1.insert_one(dict1)
             		print("---------------------------")
             		print("suss")
             		print("---------------------------")
-            	corec = str(context.bot_data[poll_id]["cor"][0])
+            	corec = str(yoo[poll_id]["cor"][0])
+            	print(corec)
             	if str(answer.option_ids[0])==corec:
             		x=col1.find_one({"User_ID":answer.user.id})
             		mark=x["Marks"]

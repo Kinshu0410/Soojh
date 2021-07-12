@@ -880,6 +880,7 @@ def receive_poll_answer(update,context):
         ui=str(answer.user.id)
         #print("answer"+str(answer))
         #print("Dbz = "+str(Dbz))
+        print("context="+str(context.bot_data))
         Quizname=context.bot_data[poll_id]["quiz_name"]
         print("Quizname="+Quizname)
         col=client["Quiz"]["Quizlist"]

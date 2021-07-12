@@ -1171,10 +1171,10 @@ def pollfsend(update,context):
     		db = json.load(json_file)
     	context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(len(db[Time4]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
     	channel_ids=x["Channel_Id"]
-    	print(channel_ids)
+    	
     	for y in x[Time4]:
     		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
-    		print(y)'''if %4==2:
+    		'''if %4==2:
     			time.sleep(5)'''
     except Exception as e:
     	print(str(e))
@@ -1310,3 +1310,4 @@ def main() -> None:
 if __name__ == '__main__':
     main()
 
+#

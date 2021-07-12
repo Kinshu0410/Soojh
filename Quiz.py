@@ -756,7 +756,12 @@ def quizc(update,context):
                     time.sleep(1)
                     
                 
-                
+            cil=client["Quiz"]['Quiz_Polls']
+                try:
+                    cil.delete_many({"QuizID":Textstr0})
+                    print("Quiz_Polls Deleted...")
+                except Exception as e:
+                    print("Quiz_Polls = "+str(e))
             
             
             for X in range(len(db[Textstr0]['que'])):
@@ -809,11 +814,7 @@ def quizc(update,context):
                     }
                     context.bot_data.update(payload)
                     cil=client["Quiz"]['Quiz_Polls']
-                    try:
-                    	cil.delete_many({"QuizID":Textstr0})
-                    	print("Quiz_Polls Deleted...")
-                    except Exception as e:
-                    	print("Quiz_Polls = "+str(e))
+                    
                     cil.insert_one(payload)
                     chatid=channelid
                 except Exception as e:

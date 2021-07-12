@@ -757,11 +757,11 @@ def quizc(update,context):
                     
                 
             cil=client["Quiz"]['Quiz_Polls']
-                try:
-                    cil.delete_many({"QuizID":Textstr0})
-                    print("Quiz_Polls Deleted...")
-                except Exception as e:
-                    print("Quiz_Polls = "+str(e))
+            try:
+                cil.delete_many({"QuizID":Textstr0})
+                print("Quiz_Polls Deleted...")
+            except Exception as e:
+                print("Quiz_Polls = "+str(e))
             
             
             for X in range(len(db[Textstr0]['que'])):

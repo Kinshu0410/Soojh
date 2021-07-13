@@ -530,8 +530,8 @@ def result(update, context):
     mydoc = col.find().sort("Marks", -1)
     colme=client["Quiz"]["Message"]
     coldoc={"ID":chat__id+"_"+userTex1}
-    colme.find_one(coldoc)
-    colmessage=colme["MessID"]
+    Colm=colme.find_one(coldoc)
+    colmessage=Colm["MessID"]
     print(colmessage)
     
     

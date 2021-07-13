@@ -758,7 +758,7 @@ def quizc(update,context):
             colme=client["Quiz"]["Message"]
             coldoc={"MessID":messa.message_id,"ID":channelid+"_"+Textstr0}
             try:
-            	colme.delete_one(coldoc)
+            	colme.delete_many({"ID":channel_ids+"_"+Time4})
             except Exception as e:
             	print("First time play or not play. "+str(e))
             colme.insert_one(coldoc)
@@ -1190,8 +1190,9 @@ def pollfsend(update,context):
     	channel_ids=x["Channel_Id"]
     	colme=client["Quiz"]["Message"]
     	coldoc={"MessID":messa.message_id,"ID":channel_ids+"_"+Time4}
+    	
     	try:
-    		colme.delete_one(coldoc)
+    		colme.delete_many({"ID":channel_ids+"_"+Time4})
     	except Exception as e:
     		print("First time play or not play. "+str(e))
     	colme.insert_one(coldoc)

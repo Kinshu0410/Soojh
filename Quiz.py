@@ -524,6 +524,7 @@ def result(update, context):
     rnumb=1
     try:
 	    col=client["Quiz"][userTex]
+	    
     except Exception as e:
 	    print("connection fail "+str(e))
     mydoc = col.find().sort("Marks", -1)
@@ -607,7 +608,7 @@ def result(update, context):
                 except Exception as e:
                     print("e===="+str(e))
                     context.bot.send_message(chat_id=chat__id, text="quiz not found")
-        caption1="🏁 The quiz \'"+userTex+"\' has finished!\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[userTex1]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners!"
+        caption1="🏁 The quiz \'"+userTex+"\' has finished!\nQuiz Attempt 👉🏻 "+col.count_documents({"User_ID":{ "$type" : "int" }})+"\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[userTex1]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners! 🍟"
         print(caption1)
         context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1)
     except Exception as e:

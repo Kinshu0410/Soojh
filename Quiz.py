@@ -576,11 +576,11 @@ def result(update, context):
                                 print("data loading start")
                                 if Uname !="None":
                                 	if COUNTJ<=9:
-                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". @"+str(Uname)+"\n"
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". @"+str(Uname)+" 🎰 "+str(Rs)+"\n"
                                 		COUNTJ+=1
                                 else:
                                 	if COUNTJ<=9:
-                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+"\n"
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". "+Fname+" 🎰 "+str(Rs)+"\n"
                                 		COUNTJ+=1
                                 
                                 
@@ -610,7 +610,7 @@ def result(update, context):
                     context.bot.send_message(chat_id=chat__id, text="quiz not found")
         caption1="🏁 The quiz \'"+userTex+"\' has finished!\nQuiz Attempt 👉🏻 "+str(col.count_documents({"User_ID":{ "$type" : "int" }}))+" Persons.\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[userTex1]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners! 🍟"
         print(caption1)
-        context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1)
+        context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1, parse_mode=ParseMode.HTML)
     except Exception as e:
         context.bot.send_message(chat_id=chat__id, text="no live quiz at now come next time.\n error name = "+str(e))
     return ConversationHandler.END

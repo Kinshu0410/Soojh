@@ -576,7 +576,7 @@ def result(update, context):
                                 print("data loading start")
                                 if Uname !="None":
                                 	if COUNTJ<=9:
-                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". @"+str(Uname)+" 🎰 "+str(Rs)+"\n"
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". <b>@"+str(Uname)+"</b> 🎰 "+str(Rs)+"\n"
                                 		COUNTJ+=1
                                 else:
                                 	if COUNTJ<=9:

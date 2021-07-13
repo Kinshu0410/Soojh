@@ -532,6 +532,7 @@ def result(update, context):
     coldoc={"ID":chat__id+"_"+userTex1}
     colme.find_one(coldoc)
     colmessage=colme["MessID"]
+    print(colmessage)
     
     
     
@@ -615,6 +616,7 @@ def result(update, context):
         print(caption1)
         try:
         	context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+        	print(colmessage)
         except:
         	context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1, parse_mode=ParseMode.HTML)
     except Exception as e:

@@ -528,7 +528,10 @@ def result(update, context):
     except Exception as e:
 	    print("connection fail "+str(e))
     mydoc = col.find().sort("Marks", -1)
-
+    colme=client["Quiz"]["Message"]
+    coldoc={"ID":chat__id+"_"+userTex1}
+    colme.find_one(coldoc)
+    colmessage=colme["MessID"]
     
     
     
@@ -610,7 +613,10 @@ def result(update, context):
                     context.bot.send_message(chat_id=chat__id, text="quiz not found")
         caption1="🏁 The quiz \'"+userTex+"\' has finished!\nQuiz Attempt 👉🏻 "+str(col.count_documents({"User_ID":{ "$type" : "int" }}))+" Persons.\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[userTex1]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners! 🍟"
         print(caption1)
-        context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1, parse_mode=ParseMode.HTML)
+        try:
+        	context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+        except:
+        	context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1, parse_mode=ParseMode.HTML)
     except Exception as e:
         context.bot.send_message(chat_id=chat__id, text="no live quiz at now come next time.\n error name = "+str(e))
     return ConversationHandler.END
@@ -745,7 +751,14 @@ def quizc(update,context):
         json.dump(dbA, outfile)
         
         try:
-            context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+Textstr0+"\'\n\n🖊 "+str(len(db[Textstr0]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+            colme=client["Quiz"]["Message"]
+            coldoc={"MessID":messa.message_id,"ID":channelid+"_"+Textstr0}
+            try:
+            	colme.delete_one(coldoc)
+            except Exception as e:
+            	print("First time play or not play. "+str(e))
+            colme.insert_one(coldoc)
             mes=context.bot.send_message(chat_id=channelid, text="Quiz is about to start")
             time.sleep(2)
             for xooo in range(6):
@@ -1170,8 +1183,15 @@ def pollfsend(update,context):
     try:
     	with open('Newfile.text') as json_file:
     		db = json.load(json_file)
-    	context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(len(db[Time4]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+    	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(len(db[Time4]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
     	channel_ids=x["Channel_Id"]
+    	colme=client["Quiz"]["Message"]
+    	coldoc={"MessID":messa.message_id,"ID":channel_ids+"_"+Time4}
+    	try:
+    		colme.delete_one(coldoc)
+    	except Exception as e:
+    		print("First time play or not play. "+str(e))
+    	colme.insert_one(coldoc)
     	
     	for y in x[Time4]:
     		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)

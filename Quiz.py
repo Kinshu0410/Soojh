@@ -580,7 +580,7 @@ def result(update, context):
                                 		COUNTJ+=1
                                 else:
                                 	if COUNTJ<=9:
-                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". <a href=\"tg://openmessage?user_id="+str(Usid)+"\"><b>""+Fname+"</b></a> 🎰 "+str(Rs)+"\n"
+                                		COUNTR=COUNTR+""+str(COUNTJ+1)+". <a href=\"tg://openmessage?user_id="+str(Usid)+"\"><b>"+Fname+"</b></a> 🎰 "+str(Rs)+"\n"
                                 		COUNTJ+=1
                                 
                                 

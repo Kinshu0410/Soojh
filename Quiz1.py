@@ -194,17 +194,14 @@ def photo(update: Update, _: CallbackContext) -> int:
     correct_option_id=user.correct_option_id
     exp=user.explanation
     if exp is not None:
-        exp= reaaa.sub(r"@\w*", "", exp)
-        exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)
+    	exp= reaaa.sub(r"@\w*", "", exp)
+    	exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)
     
     if exp=="":
     	exp=None
-    new={"que":question, "op":options, "cor":correct_option_id, "exp":exp, "ID":Textstr, "User_ID":update.message.chat.id}
+    new={'que':question, 'op':options, 'cor':correct_option_id, 'exp':exp, 'ID':Textstr, 'User_ID':update.message.chat.id}
     col=client["Quiz_Data"][Textstr]
-    try:
-        col.insert_one(new)
-    except Exception as e:
-        print("error===="+str(e))
+    col.insert_one(new)
     update.message.reply_text("Send me more polls or finish using /skip")
     return PHOTO
 
@@ -293,7 +290,7 @@ def quiz(update,context):
     if True:
         try:
             
-            context.bot.send_message(chat_id=chatid, text="🎲 Get ready for the LIVE TEST \'"+userText+"\'\n\n🖊 "+str(col.count_documents({"User_ID":{ "type" : "int" }}))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
+            context.bot.send_message(chat_id=chatid, text="🎲 Get ready for the LIVE TEST \'"+userText+"\'\n\n🖊 "+str(col.count_documents({}))+" questions\n⏱ "+Time+" seconds per question\n📰 Votes are visible to group members only\nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>At least 1 voting for last 3 questions far calculating Results.</b>", parse_mode=ParseMode.HTML)
             mes=context.bot.send_message(chat_id=chatid, text="Quiz is about to start")
             time.sleep(2)
             for xooo in range(6):
@@ -306,7 +303,7 @@ def quiz(update,context):
             y=0
             for X in coldb:
                 
-                Zno=col.count_documents({"User_ID":{ "type" : "int" }})-y
+                Zno=col.count_documents({})-y
                 question=str(Zno)+". "+X["que"]
                 options=X["op"]
                 correct_option_id =X['cor']
@@ -419,7 +416,7 @@ def delete(update: Update, _: CallbackContext) -> int:
 	    coldb=col.find({'User_ID':update.message.chat.id})
 	    #new={'que':question, 'op':options, 'cor':correct_option_id, 'exp':exp, 'ID':Textstr, 'User_ID':update.message.chat.id}
 	    x=int(len(coldb))
-	    y=int(col.count_documents({"User_ID":{ "type" : "int" }}))
+	    y=int(col.count_documents({}))
 	    if  x==y or update.message.chat.username in LIST_OF_ADMINS:
 	        col.drop()
 	        update.message.reply_text("Quiz "+userText+" deleted", reply_markup=ReplyKeyboardRemove(),)
@@ -485,7 +482,7 @@ def result(update: Update, context: CallbackContext):
     rnumb=1
     coll=client["Quiz_Data"][userTex]
     cx=coll.find_one()
-    colldb=coll.count_documents({"User_ID":{ "type" : "int" }})
+    colldb=coll.count_documents({})
     #if cx["User_ID"]
     try:
 	    col=client["Quiz"][userTex]
@@ -717,7 +714,7 @@ def quizc(update,context):
     colldb=coll.find()
     if True: 
         try:
-            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+userText+"\'\n\n🖊 "+str(coll.count_documents({"User_ID":{ "$type" : "int" }}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+userText+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
             colme=client["Quiz"]["Message"]
             coldoc={"MessID":messa.message_id,"ID":channelid+"_"+userText}
             try:
@@ -747,7 +744,7 @@ def quizc(update,context):
             
             y=0
             for X in colldb:
-                Zno=coll.count_documents({"User_ID":{ "type" : "int" }})-y
+                Zno=coll.count_documents({})-y
                 y+=1
                 question=str(Zno)+". "+X["que"]
                 options=X["op"]
@@ -1143,7 +1140,7 @@ def pollfsend(update,context):
     try:
     	coll=client["Quiz_Data"][Time4]
     	colldb=coll.find()
-    	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents({"User_ID":{ "type" : "int" }}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+    	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
     	channel_ids=x["Channel_Id"]
     	colme=client["Quiz"]["Message"]
     	coldoc={"MessID":messa.message_id,"ID":Time3+"_"+Time4}
@@ -1293,4 +1290,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-

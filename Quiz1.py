@@ -788,11 +788,11 @@ def quizc(update,context):
                     }
                     context.bot_data.update(payload)
                     cil=client["Quiz"]['Quiz_Polls']
-                    
+                    print("inserting Payload")
                     cil.insert_one(payload)
                     chatid=channelid
                 except Exception as e:
-                    pass
+                    print("payload not done ="str(e))
             
                     
             

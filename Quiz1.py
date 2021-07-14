@@ -782,7 +782,7 @@ def quizc(update,context):
                             "exp":exp,
                             "message_id": message.message_id,
                             "chat_id": update.effective_chat.id,
-                            "que_no":X+1,
+                            
                             "quiz_name":userText
                         },"ID":message.poll.id,"QuizID":Textstr0
                     }

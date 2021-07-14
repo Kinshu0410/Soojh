@@ -1198,9 +1198,11 @@ def pollfsend(update,context):
     	
     	try:
     		colme.delete_many({"ID":channel_ids+"_"+Time4})
+    		print("delete successful")
     	except Exception as e:
     		print("First time play or not play. "+str(e))
     	colme.insert_one(coldoc)
+        print("insert succeful")
     	
     	for y in x[Time4]:
     		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)

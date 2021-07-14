@@ -529,8 +529,10 @@ def result(update: Update, context: CallbackContext):
 	    print("connection fail "+str(e))
     mydoc = col.find().sort("Marks", -1)
     try:
+        
         colme=client["Quiz"]["Message"]
         coldoc={"ID":chat__id+"_"+userTex1}
+        print("ID==="+chat__id+"_"+userTex1)
         Colm=colme.find_one(coldoc)
         colmessage=Colm["MessID"]
         print(colmessage)

@@ -516,7 +516,7 @@ def quizresult(update, context):
     context.bot.send_message(chat_id=chat__id, text="Send me Quiz name")
     return RESULT
     
-def result(update, context):
+def result(update: Update, context: CallbackContext):
     global COUNTR
     userTex=update.message.text
     userTex1=userTex
@@ -580,7 +580,7 @@ def result(update, context):
                                 Uname=x["User_Name"]
                                 Usid=x["User_ID"]
                                 Rs=x["Marks"]
-                                print("data loading start")
+                                #print("data loading start")
                                 if Uname !="None":
                                 	if COUNTJ<=9:
                                 		COUNTR=COUNTR+""+str(COUNTJ+1)+". <b>@"+str(Uname)+"</b> 🎰 "+str(Rs)+"\n"
@@ -614,7 +614,7 @@ def result(update, context):
                             
                 except Exception as e:
                     print("e===="+str(e))
-                    update.message.reply_document(chat_id=chat__id, text="quiz not found")
+                    context.bot.send_document(chat_id=chat__id, text="quiz not found")
         caption1="🏁 The quiz \'"+userTex+"\' has finished!\nQuiz Attempt 👉🏻 "+str(col.count_documents({"User_ID":{ "$type" : "int" }}))+" Persons.\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[userTex1]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners! 🍟"
         #print(caption1)
         try:

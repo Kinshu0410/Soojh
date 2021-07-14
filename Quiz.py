@@ -528,11 +528,14 @@ def result(update, context):
     except Exception as e:
 	    print("connection fail "+str(e))
     mydoc = col.find().sort("Marks", -1)
-    colme=client["Quiz"]["Message"]
-    coldoc={"ID":chat__id+"_"+userTex1}
-    Colm=colme.find_one(coldoc)
-    colmessage=Colm["MessID"]
-    print(colmessage)
+    try:
+        colme=client["Quiz"]["Message"]
+        coldoc={"ID":chat__id+"_"+userTex1}
+        Colm=colme.find_one(coldoc)
+        colmessage=Colm["MessID"]
+        print(colmessage)
+    except Exception as e:
+        print("colmessage=="+str(e))
     
     
     

@@ -1196,7 +1196,7 @@ def pollfsend(update,context):
     	channel_ids=x["Channel_Id"]
     	colme=client["Quiz"]["Message"]
     	coldoc={"MessID":messa.message_id,"ID":channel_ids+"_"+Time4}
-    	
+    	print(coldoc)
     	try:
     		colme.delete_many({"ID":channel_ids+"_"+Time4})
     		print("delete successful")

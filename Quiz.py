@@ -1202,7 +1202,7 @@ def pollfsend(update,context):
     	except Exception as e:
     		print("First time play or not play. "+str(e))
     	colme.insert_one(coldoc)
-        print("insert succeful")
+    	print("insert successful")
     	
     	for y in x[Time4]:
     		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)

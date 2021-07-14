@@ -792,7 +792,7 @@ def quizc(update,context):
                     cil.insert_one(payload)
                     chatid=channelid
                 except Exception as e:
-                    print("payload not done ="str(e))
+                    print("payload not done =+"str(e))
             
                     
             

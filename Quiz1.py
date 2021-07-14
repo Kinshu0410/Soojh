@@ -782,7 +782,7 @@ def quizc(update,context):
                             "exp":exp,
                             "message_id": message.message_id,
                             "chat_id": update.effective_chat.id,
-                            
+                            "que_no":int(Zno),
                             "quiz_name":userText
                         },"ID":message.poll.id,"QuizID":Textstr0
                     }
@@ -872,7 +872,7 @@ def receive_poll_answer(update,context):
             		print("---------------------------")
             		print("suss")
             		print("---------------------------")
-            	corec = str(yoo[poll_id]["cor"][0])
+            	corec = str(yoo[poll_id]["cor"])
             	print(corec)
             	if str(answer.option_ids[0])==corec:
             		x=col1.find_one({"User_ID":answer.user.id})

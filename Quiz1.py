@@ -795,7 +795,7 @@ def quizc(update,context):
                     cil.insert_one(payload)
                     chatid=channelid
                 except Exception as e:
-                    pass
+                    print(str(e))
             
                     
             
@@ -822,7 +822,7 @@ def quizc(update,context):
     except Exception as e:
         pass
     #print(str(Dbz))
-    
+    return ConversationHandler.END
 
 
 

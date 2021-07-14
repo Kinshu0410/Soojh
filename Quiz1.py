@@ -717,7 +717,7 @@ def quizc(update,context):
     colldb=coll.find()
     if True: 
         try:
-            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+userText+"\'\n\n🖊 "+str(coll.count_documents())+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'"+userText+"\'\n\n🖊 "+str(coll.count_documents({"User_ID":{ "$type" : "int" }}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+"\n\n⏱ Voting End "+str(time.ctime(time.time() + int(Time) +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
             colme=client["Quiz"]["Message"]
             coldoc={"MessID":messa.message_id,"ID":channelid+"_"+userText}
             try:
@@ -776,7 +776,7 @@ def quizc(update,context):
                 ZMid[userText]=Mid
                 
                 try:
-                    print(Zmid)
+                    #print("start")
                     payload = {
                         message.poll.id: {
                             "Que": question,
@@ -795,7 +795,7 @@ def quizc(update,context):
                     cil.insert_one(payload)
                     chatid=channelid
                 except Exception as e:
-                    print(str(e))
+                    pass
             
                     
             
@@ -822,7 +822,7 @@ def quizc(update,context):
     except Exception as e:
         pass
     #print(str(Dbz))
-    return ConversationHandler.END
+    
 
 
 
@@ -1143,7 +1143,7 @@ def pollfsend(update,context):
     try:
     	coll=client["Quiz_Data"][Time4]
     	colldb=coll.find()
-    	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents())+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+    	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents({"User_ID":{ "type" : "int" }}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
     	channel_ids=x["Channel_Id"]
     	colme=client["Quiz"]["Message"]
     	coldoc={"MessID":messa.message_id,"ID":Time3+"_"+Time4}
@@ -1293,5 +1293,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-
 

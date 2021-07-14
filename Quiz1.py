@@ -199,7 +199,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     
     if exp=="":
     	exp=None
-    new={'que':question, 'op':options, 'cor':correct_option_id, 'exp':exp, 'ID':Textstr, 'User_ID':update.message.chat.id}
+    new={Textstr:{'que':question, 'op':options, 'cor':correct_option_id, 'exp':exp}, 'ID':Textstr, 'User_ID':update.message.chat.id}
     col=client["Quiz Data"][Textstr]
     col.insert_one(new)
     update.message.reply_text("Send me more polls or finish using /skip")

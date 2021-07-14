@@ -193,8 +193,9 @@ def photo(update: Update, _: CallbackContext) -> int:
     options=[o.text for o in user.options]
     correct_option_id=user.correct_option_id
     exp=user.explanation
-    exp= reaaa.sub(r"@\w*", "", exp)
-    exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)
+    if exp is not None:
+        exp= reaaa.sub(r"@\w*", "", exp)
+        exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)
     
     if exp=="":
     	exp=None

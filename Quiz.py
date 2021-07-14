@@ -605,7 +605,7 @@ def result(update, context):
                                 else:
                                 	worksheet.write('F'+str(rnumb+1), "@"+str(Uname), cell_format)
                                 	Uname=None
-                                print(COUNTR)
+                                #print(COUNTR)
                                 rnumb+=1
                             workbook.close()
                             print("webhook close")
@@ -616,7 +616,7 @@ def result(update, context):
                     print("e===="+str(e))
                     context.bot.send_message(chat_id=chat__id, text="quiz not found")
         caption1="🏁 The quiz \'"+userTex+"\' has finished!\nQuiz Attempt 👉🏻 "+str(col.count_documents({"User_ID":{ "$type" : "int" }}))+" Persons.\nCurrent Time = "+str(time.ctime(time.time() +19800))+" \n"+str(len(db[userTex1]['que']))+" questions answered\n\n"+COUNTR+"\n🏆 Congratulations to the winners! 🍟"
-        print(caption1)
+        #print(caption1)
         try:
         	context.bot.send_document(chat__id, open('Result.xlsx', "rb"),caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
         	print(colmessage)

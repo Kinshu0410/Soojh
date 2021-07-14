@@ -200,7 +200,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     if exp=="":
     	exp=None
     new={"que":question, "op":options, "cor":correct_option_id, "exp":exp, "ID":Textstr, "User_ID":update.message.chat.id}
-    col=client["Quiz Data"][Textstr]
+    col=client["Quiz_Data"][Textstr]
     try:
         col.insert_one(new)
     except Exception as e:
@@ -287,7 +287,7 @@ def quiz(update,context):
     chatid=update.effective_chat.id
     userText=update.message.text
     Textstr0=userText
-    col=client["Quiz Data"][userText]
+    col=client["Quiz_Data"][userText]
     coldb=col.find()
     #new={'que':question, 'op':options, 'cor':correct_option_id, 'exp':exp, 'ID':Textstr, 'User_ID':update.message.chat.id}
     if True:
@@ -415,7 +415,7 @@ def delete(update: Update, _: CallbackContext) -> int:
     userText=update.message.text
     Textstr1=userText
     try:
-	    col=client["Quiz Data"][userText]
+	    col=client["Quiz_Data"][userText]
 	    coldb=col.find({'User_ID':update.message.chat.id})
 	    #new={'que':question, 'op':options, 'cor':correct_option_id, 'exp':exp, 'ID':Textstr, 'User_ID':update.message.chat.id}
 	    x=int(len(coldb))
@@ -483,7 +483,7 @@ def result(update: Update, context: CallbackContext):
     userTex1=userTex
     COUNTJ=0
     rnumb=1
-    coll=client["Quiz Data"][userTex]
+    coll=client["Quiz_Data"][userTex]
     cx=coll.find_one()
     colldb=coll.count_documents()
     #if cx["User_ID"]
@@ -713,7 +713,7 @@ def quizc(update,context):
     
     Textstr0=userText
     
-    coll=client["Quiz Data"][userText]
+    coll=client["Quiz_Data"][userText]
     colldb=coll.find()
     if True: 
         try:
@@ -1141,7 +1141,7 @@ def pollfsend(update,context):
     x=col.find_one({"Id":Time4})
     
     try:
-    	coll=client["Quiz Data"][Time4]
+    	coll=client["Quiz_Data"][Time4]
     	colldb=coll.find()
     	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents())+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
     	channel_ids=x["Channel_Id"]
@@ -1293,4 +1293,5 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
 

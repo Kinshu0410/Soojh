@@ -776,7 +776,7 @@ def quizc(update,context):
                 ZMid[userText]=Mid
                 
                 try:
-                    #print("start")
+                    print(Zmid)
                     payload = {
                         message.poll.id: {
                             "Que": question,

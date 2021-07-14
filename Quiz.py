@@ -1195,10 +1195,10 @@ def pollfsend(update,context):
     	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(len(db[Time4]['que']))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
     	channel_ids=x["Channel_Id"]
     	colme=client["Quiz"]["Message"]
-    	coldoc={"MessID":messa.message_id,"ID":channel_ids+"_"+Time3}
+    	coldoc={"MessID":messa.message_id,"ID":Time3+"_"+Time4}
     	print(coldoc)
     	try:
-    		colme.delete_many({"ID":channel_ids+"_"+Time3})
+    		colme.delete_many({"ID":Time3+"_"+Time4})
     		print("delete successful")
     	except Exception as e:
     		print("First time play or not play. "+str(e))

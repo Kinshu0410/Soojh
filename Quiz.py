@@ -140,8 +140,11 @@ def restricted2(func):
             
             try:
             	if chatiid<=0:
+                    try:
             		context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
-            		return
+                    except:
+            		pass
+                    return
             except Exception as e:
             	print(str(e))
             

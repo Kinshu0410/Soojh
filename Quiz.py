@@ -141,11 +141,11 @@ def restricted2(func):
             try:
             	if chatiid<=0:
             		context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
-            	
+            		return
             except Exception as e:
             	print(str(e))
             
-            return
+            
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             
         return func(update, context, *args, **kwargs)

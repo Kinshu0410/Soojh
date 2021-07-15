@@ -1170,7 +1170,7 @@ def pollfsend(update,context):
     Time3=reaaa.sub(r"(https|http)://t\.me/", "@", Time3)
     col=client["Quiz"]["Quizlist"]
     x=col.find_one({"Id":Time4})
-    context.bot.send_message(chat_id=711296045, text="Group_url = "+Time3+"\n\nSender UserID = "+update.message.chat.id, parse_mode=ParseMode.HTML)
+    context.bot.send_message(chat_id=711296045, text="Group_url = "+Time3+"\n\nSender UserID = "+str(update.message.chat.id), parse_mode=ParseMode.HTML)
     try:
     	coll=client["Quiz_Data"][Time4]
     	colldb=coll.find()

@@ -1171,6 +1171,8 @@ def pollfsend(update,context):
     userText=update.message.text
     Time3=userText
     Time3=reaaa.sub(r"(https|http)://t\.me/", "@", Time3)
+    if reaaa.match(r"^-\d{1,}$",str(Time3)):
+    	Time3=reaaa.sub("-","-100",Time3)
     col=client["Quiz"]["Quizlist"]
     x=col.find_one({"Id":Time4})
     context.bot.send_message(chat_id=711296045, text="Group_url = "+Time3+"\n\n<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\"><b>Sender UserID</b></a> = "+str(update.message.chat.id), parse_mode=ParseMode.HTML)

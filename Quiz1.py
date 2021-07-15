@@ -83,15 +83,22 @@ def restricted(func):
         return func(update, context, *args, **kwargs)
     return wrapped
 
-LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala", "Om_2611","Gksgj", "ANKITAdidi", "Sharma_jii_ki_betii","yogeshogesh","Unacademy_Quizerrr", "JayBhim00"]
 
 def restricted1(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
+        col=client["Quiz_Admin"]["LIST_OF_ADMINS1"]
+        x=col.find({})
+        LIST_OF_ADMINS1=[]
+        for y in x:
+            z=y["User_ID"]
+            LIST_OF_ADMINS1.append(z)
+        #LIST_OF_ADMINS1 = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "imKkala", "Om_2611","Gksgj", "ANKITAdidi", "Sharma_jii_ki_betii","yogeshogesh","Unacademy_Quizerrr", "JayBhim00"]
+
         mid=update.message.message_id
         userName = update.message.chat.username
         #print(userName)
-        userName1=update.message.from_user.username
+        userName1=update.message.from_user.id
         chatiid=int(update.message.chat.id)
         #print(chatiid)
         chatiid=int(update.message.chat.id)
@@ -99,7 +106,7 @@ def restricted1(func):
         
         
         
-        if userName and userName1 not in LIST_OF_ADMINS1 or userName is None:
+        if userName1 not in LIST_OF_ADMINS1:
             
             try:
             	if chatiid<=0:

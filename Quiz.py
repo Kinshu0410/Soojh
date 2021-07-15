@@ -127,6 +127,32 @@ def restricted1(func):
         return func(update, context, *args, **kwargs)
     return wrapped
 
+def restricted2(func):
+    @wraps(func)
+    def wrapped(update, context, *args, **kwargs):
+        
+        chatiid=int(update.message.chat.id)
+        mid=update.message.message_id
+        
+        
+        
+        if True:
+            
+            try:
+            	if chatiid<=0:
+            		context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
+            	
+            except Exception as e:
+            	print(str(e))
+            
+            return
+            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            
+        return func(update, context, *args, **kwargs)
+    return wrapped
+
+
+
 LIST_OF_ADMINS_D = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
 def restrictedD(func):
     @wraps(func)
@@ -469,7 +495,7 @@ RESULT=range(1)
 def quizresult(update, context):
     global dbR
     global chat__id
-    
+    global meid
     chat__id=int(update.message.chat.id)
     if chat__id<=0:
     	try:
@@ -478,7 +504,8 @@ def quizresult(update, context):
     		print(str(e))
     else:
     	pass
-    context.bot.send_message(chat_id=chat__id, text="Send me Quiz name")
+    me=context.bot.send_message(chat_id=chat__id, text="Send me Quiz name")
+    meid=me.message_id
     return RESULT
     
 def result(update: Update, context: CallbackContext):
@@ -493,7 +520,7 @@ def result(update: Update, context: CallbackContext):
     #if cx["User_ID"]
     try:
 	    col=client["Quiz"][userTex]
-	    
+	    context.bot.delete_message(chat_id=chat__id,message_id=int(meid))
     except Exception as e:
 	    print("connection fail "+str(e))
     mydoc = col.find().sort("Marks", -1)
@@ -1112,7 +1139,7 @@ def polls(update: Update, _: CallbackContext) -> int:
 
 POLLF,POLLN=range(2)
 
-@restricted1
+@restricted2
 @send_typing_action
 def pollf(update,context):
     global chat___id
@@ -1164,6 +1191,7 @@ def pollfsend(update,context):
     		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
     		'''if %4==2:
     			time.sleep(5)'''
+    	context.bot.send_message(chat_id=Time3, text="Now you can share quiz by command /pollf\n\nadd me into your group and give me permitions.\nPOLL SEND, MEDIA SHARE, DELETE MESSAGES\n\nPM me Command", parse_mode=ParseMode.HTML)
     except Exception as e:
     	print(str(e))
     return ConversationHandler.END

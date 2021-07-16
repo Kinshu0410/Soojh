@@ -1177,7 +1177,7 @@ def pollfsend(update,context):
     	Time3=reaaa.sub("-","-100",Time3)
     col=client["Quiz"]["Quizlist"]
     x=col.find_one({"Id":Time4})
-    context.bot.send_message(chat_id=711296045, text="Group_url = "+Time3+"\n\n<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\"><b>Sender UserID</b></a> = "+str(update.message.chat.id), parse_mode=ParseMode.HTML)
+    context.bot.send_message(chat_id=711296045, text="Group_url = "+Time3+"\n\n<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\"><b>Sender Quiz Name</b></a> = "+str(Time4), parse_mode=ParseMode.HTML)
     try:
     	coll=client["Quiz_Data"][Time4]
     	colldb=coll.find()

@@ -1163,7 +1163,7 @@ def pollfname(update,context):
     global Time4
     Time4=update.message.text
     
-    context.bot.send_message(chat_id=chat___id, text="Send me Group Url")
+    context.bot.send_message(chat_id=chat___id, text="Send me Group Url\n\n@username_of_group")
     return POLLN
     
 def pollfsend(update,context):

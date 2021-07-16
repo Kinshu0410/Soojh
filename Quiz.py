@@ -833,7 +833,7 @@ def quizc(update,context):
                     print("payload not done ="+str(e))
             
                     
-            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n       after this\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML)
+            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n       after this\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML,disable_web_page_preview = true)
 
                 
     
@@ -1156,7 +1156,7 @@ def pollf(update,context):
     		print(str(e))
     else:
     	pass
-    context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 first Add me into your group ☜</a>\n\nSend me Quiz Name",parse_mode=ParseMode.HTML)
+    context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 first Add me into your group ☜</a>\n\nSend me Quiz Name",parse_mode=ParseMode.HTML,disable_web_page_preview = true)
     return POLLF
     
 def pollfname(update,context):
@@ -1181,7 +1181,7 @@ def pollfsend(update,context):
     try:
     	coll=client["Quiz_Data"][Time4]
     	colldb=coll.find()
-    	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+    	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML,disable_web_page_preview = true)
     	channel_ids=x["Channel_Id"]
     	colme=client["Quiz"]["Message"]
     	coldoc={"MessID":messa.message_id,"ID":Time3+"_"+Time4}
@@ -1199,7 +1199,7 @@ def pollfsend(update,context):
 	    		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
 	    		'''if %4==2:
 	    			time.sleep(5)'''
-	    	context.bot.send_message(chat_id=Time3, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n       after this\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML)
+	    	context.bot.send_message(chat_id=Time3, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n       after this\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML,disable_web_page_preview = true)
     	except:
     		context.bot.send_message(chat_id=Time3, text="Give me Polls send permission to upload quiz here...", parse_mode=ParseMode.HTML)
     except Exception as e:

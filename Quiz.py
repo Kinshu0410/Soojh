@@ -833,7 +833,7 @@ def quizc(update,context):
                     print("payload not done ="+str(e))
             
                     
-            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a> after this\n\n<a href=\"https://t.me/Soojhboojh_02bot?start=vCH1vGWJxfSeof\">CLECK HERE for sharing this quiz</a>", parse_mode=ParseMode.HTML)
+            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n       after this\n\n<a href=\"https://t.me/Soojhboojh_02bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML)
 
                 
     
@@ -1156,7 +1156,7 @@ def pollf(update,context):
     		print(str(e))
     else:
     	pass
-    context.bot.send_message(chat_id=chat___id, text="Send me Quiz Name")
+    context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 first Add me into your group ☜</a>\n\nSend me Quiz Name")
     return POLLF
     
 def pollfname(update,context):
@@ -1194,11 +1194,14 @@ def pollfsend(update,context):
     	colme.insert_one(coldoc)
     	print("insert successful")
     	
-    	for y in x[Time4]:
-    		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
-    		'''if %4==2:
-    			time.sleep(5)'''
-    	context.bot.send_message(chat_id=Time3, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a> after this\n\n<a href=\"https://t.me/Soojhboojh_02bot?start=vCH1vGWJxfSeof\">CLECK HERE for sharing this quiz</a>", parse_mode=ParseMode.HTML)
+    	try:
+    		for y in x[Time4]:
+	    		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
+	    		'''if %4==2:
+	    			time.sleep(5)'''
+	    	context.bot.send_message(chat_id=Time3, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n       after this\n\n<a href=\"https://t.me/Soojhboojh_02bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML)
+    	except:
+    		context.bot.send_message(chat_id=Time3, text="Give me Polls send permission to upload quiz here...", parse_mode=ParseMode.HTML)
     except Exception as e:
     	print(str(e))
     return ConversationHandler.END

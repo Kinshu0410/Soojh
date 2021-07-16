@@ -1196,7 +1196,7 @@ def pollfsend(update,context):
     		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
     		'''if %4==2:
     			time.sleep(5)'''
-    	context.bot.send_message(chat_id=Time3, text="Now you can share quiz by command /pollf\n\nadd me into your group and give me permitions.\nPOLL SEND, MEDIA SHARE, DELETE MESSAGES\n\nPM me Command", parse_mode=ParseMode.HTML)
+    	context.bot.send_message(chat_id=Time3, text="Now you can share polls easily first add my bot into your group\n\n                   <a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">=> Link <=</a>\n\nGive me <b>poll permission</b> for sharing polls.\nIf you are bot administration than give me <b>Media Permission</b> so i send result\nand last give me <b>Delete message permission</b> so when your group members send my command without my permission than there messages will be delete.\n\nUse this command <a href=\"tg://openmessage?user_id=1431722823\">ONLY HERE</a> /pollf", parse_mode=ParseMode.HTML)
     except Exception as e:
     	print(str(e))
     return ConversationHandler.END

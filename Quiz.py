@@ -1156,7 +1156,7 @@ def pollf(update,context):
     		print(str(e))
     else:
     	pass
-    context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 first Add me into your group ☜</a>\n\nSend me Quiz Name")
+    context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 first Add me into your group ☜</a>\n\nSend me Quiz Name",parse_mode=ParseMode.HTML)
     return POLLF
     
 def pollfname(update,context):

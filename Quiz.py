@@ -833,7 +833,7 @@ def quizc(update,context):
                     print("payload not done ="+str(e))
             
                     
-            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n       after this\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
                 
     
@@ -1199,7 +1199,7 @@ def pollfsend(update,context):
 	    		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
 	    		'''if %4==2:
 	    			time.sleep(5)'''
-	    	context.bot.send_message(chat_id=Time3, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n       after this\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	    	context.bot.send_message(chat_id=Time3, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	except:
     		context.bot.send_message(chat_id=Time3, text="Give me Polls send permission to upload quiz here...", parse_mode=ParseMode.HTML)
     except Exception as e:

@@ -468,7 +468,7 @@ def delete(update: Update, _: CallbackContext) -> int:
 
 #@restricted
 @run_async
-def quizlist(update: Update, _: CallbackContext):
+def quizlist(update,context):
     context.bot.delete_message(chat_id=chat__id,message_id=update.message.message_id)
     db=client["Quiz_Data"]
     x=(db.list_collection_names({}))
@@ -1152,7 +1152,7 @@ def pollf(update,context):
     x=(db.list_collection_names({}))
     mesho=[]
     for y in x:
-    	mesho1=context.bot.send_message(chat_id=chat__id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	mesho1=context.bot.send_message(chat_id=chat___id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	mesho.append(mesho1.message_id)
     return POLLF
     

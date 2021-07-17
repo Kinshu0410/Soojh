@@ -501,7 +501,7 @@ def quizresult(update, context):
     x=(db.list_collection_names({}))
     mesho3=[]
     for y in x:
-    	mesho2=context.bot.send_message(chat_id=chat___id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	mesho2=context.bot.send_message(chat_id=chat__id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	mesho3.append(mesho2.message_id)
     return RESULT
     
@@ -516,7 +516,7 @@ def result(update: Update, context: CallbackContext):
     colldb=coll.count_documents({})
     #if cx["User_ID"]
     for x in mesho3:
-    	context.bot.delete_message(chat_id=chat___id,message_id=int(x))
+    	context.bot.delete_message(chat_id=chat__id,message_id=int(x))
 
     try:
 	    col=client["Quiz"][userTex]

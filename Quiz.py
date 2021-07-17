@@ -486,6 +486,7 @@ def quizresult(update, context):
     global dbR
     global chat__id
     global meid
+    global mesho3
     chat__id=int(update.message.chat.id)
     if chat__id<=0:
     	try:
@@ -496,6 +497,12 @@ def quizresult(update, context):
     	pass
     me=context.bot.send_message(chat_id=chat__id, text="Send me Quiz name")
     meid=me.message_id
+    db=client["Quiz_Data"]
+    x=(db.list_collection_names({}))
+    mesho3=[]
+    for y in x:
+    	mesho2=context.bot.send_message(chat_id=chat___id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	mesho3.append(mesho2.message_id)
     return RESULT
     
 def result(update: Update, context: CallbackContext):
@@ -508,6 +515,9 @@ def result(update: Update, context: CallbackContext):
     cx=coll.find_one()
     colldb=coll.count_documents({})
     #if cx["User_ID"]
+    for x in mesho3:
+    	context.bot.delete_message(chat_id=chat___id,message_id=int(x))
+
     try:
 	    col=client["Quiz"][userTex]
 	    context.bot.delete_message(chat_id=chat__id,message_id=int(meid))

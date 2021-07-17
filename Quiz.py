@@ -469,6 +469,7 @@ def delete(update: Update, _: CallbackContext) -> int:
 #@restricted
 @run_async
 def quizlist(update,context):
+    chat__id=int(update.message.chat.id)
     context.bot.delete_message(chat_id=chat__id,message_id=update.message.message_id)
     db=client["Quiz_Data"]
     x=(db.list_collection_names({}))

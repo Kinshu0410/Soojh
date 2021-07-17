@@ -466,29 +466,15 @@ def delete(update: Update, _: CallbackContext) -> int:
     return ConversationHandler.END
     
 
-@restricted
+#@restricted
 @run_async
-def quizlist(update: Update, _: CallbackContext) -> int:
-    #global Uid
-    #Uid=update.message.user_id
-    global Dbz
-    #user = update.message.from_user
-    try:
-    	Dbzqui=client["Quiz"]["Quizlist"]
-    	Dbzqui.delete_many({'Id':'0'})
-    	print("All Quiz_List Deleted...")
-    except Exception as e:
-    	print("deleting error "+str(e))
-    Dbz=[]
-    with open('Newfile.text') as json_file:
-        db = json.load(json_file)
-        List=list(db.keys())
-        for L in range(len(List)):
-            update.message.reply_text(List[L])
-            Dbz.append(List[L])
-        Dbz1={"Quiz_List":Dbz,'Id':'0'}
-        Dbzquiz=client["Quiz"]["Quizlist"]
-        Dbzquiz.insert_one(Dbz1)
+def quizlist(update: Update, _: CallbackContext):
+    context.bot.delete_message(chat_id=chat__id,message_id=update.message.message_id)
+    db=client["Quiz_Data"]
+    x=(db.list_collection_names({}))
+    for y in x:
+    	context.bot.send_message(chat_id=chat__id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	
 
 
 RESULT=range(1)
@@ -975,7 +961,10 @@ def ghn(update,context):
 	    if reaaa.match(r"^\d{1,}$",userText):
 	    	context.bot.delete_message(chat_id=Time1,message_id=int(userText))
 	    else:
-	    	context.bot.send_message(chat_id=Time1, text=userText)
+	    	userText=reaaa.sub(r"@@","<a href=\"",userText)
+	    	userText=reaaa.sub(r"##","\"><b>",userText)
+	    	userText=reaaa.sub(r"%%","</b></a>",userText)
+	    	context.bot.send_message(chat_id=Time1, text=userText,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     except Exception as e:
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
@@ -1143,11 +1132,12 @@ def polls(update: Update, _: CallbackContext) -> int:
     return COPY
 
 POLLF,POLLN=range(2)
-
+@run_async
 @restricted2
 @send_typing_action
 def pollf(update,context):
     global chat___id
+    global mesho
     chat___id=int(update.message.chat.id)
     if chat___id<=0:
     	try:
@@ -1156,16 +1146,25 @@ def pollf(update,context):
     		print(str(e))
     else:
     	pass
-    context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 first Add me into your group ☜</a>\n\nSend me Quiz Name",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 first Add me into your group ☜</a>\n\nSend me Quiz Name\n\n👇👇👇  Quiz List",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    
+    db=client["Quiz_Data"]
+    x=(db.list_collection_names({}))
+    mesho=[]
+    for y in x:
+    	mesho1=context.bot.send_message(chat_id=chat__id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	mesho.append(mesho1.message_id)
     return POLLF
     
+ 
 def pollfname(update,context):
     global Time4
     Time4=update.message.text
-    
+    for x in mesho:
+    	context.bot.delete_message(chat_id=chat___id,message_id=int(x))
     context.bot.send_message(chat_id=chat___id, text="Send me Group Url\n\n@username_of_group")
     return POLLN
-    
+ 
 def pollfsend(update,context):
     global Time3
     global Tco

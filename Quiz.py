@@ -1176,7 +1176,7 @@ def pollf(update,context):
     
     return ConversationHandler.END
     
- 
+@restricted2
 def pollfname(update,context):
     global Time4
     Time4=update.message.text

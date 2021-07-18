@@ -1153,7 +1153,7 @@ def pollf(update,context):
     	try:
     		
     		chat___id="@"+str(update.message.chat.username)#id
-    		mesho01=context.bot.send_message(chat_id=chat___id, text="<a href=\"https://t.me/Soojhboojh_01bot?start\">🌐 find Quiz Here☜</a>\nafter that come here and send me Quiz name that you want to play",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    		mesho01=context.bot.send_message(chat_id=chat___id, text="<a href=\"https://t.me/Soojhboojh_01bot?start\">🌐 find Quiz Name Here☜</a>\nSend me Quiz name that you want to play",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     		context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>user tring to share</b></a> = "+chat___id,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
     	except Exception as e:
@@ -1166,7 +1166,7 @@ def pollf(update,context):
 	    for y in x:
 	    	context.bot.send_message(chat_id=chat___id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 	    	
-	    context.bot.send_message(chat_id=chat___id,text="copy one fo them 👆👆👆\n<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">Click Here for share</a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	    context.bot.send_message(chat_id=chat___id,text="copy one fo them 👆👆👆\n<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">Click Here for Play Quiz in your group</a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     
     return ConversationHandler.END
     

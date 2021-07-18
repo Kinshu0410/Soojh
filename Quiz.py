@@ -130,28 +130,35 @@ def restricted1(func):
 def restricted2(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
-        
+        uid=update.message.from_user.id
         chatiid=int(update.message.chat.id)
         mid=update.message.message_id
-        
-        
-        
-        if True:
-            
+        try:
+	        y=context.bot.get_chat_administrators(chat_id=chatiid)
+	        xid=[]
+	        for x in y:
+	        	print(x['user']['id'])
+	        	xid.append(x['user']['id'])
+        except:
+        	pass
+        if chatiid<=0:
             try:
-            	if chatiid<=0:
-            		try:
-            		      context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
-            		except:
-            		      pass
+            	try:
+            		 context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
+            	except:
+            		 pass
+            	if uid in xid or uid==711296045:
+            		return func(update, context, *args, **kwargs)
+            	else:
             		return
+            		
             except Exception as e:
             	print(str(e))
             
             
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
-            
-        return func(update, context, *args, **kwargs)
+        else:
+        	return func(update, context, *args, **kwargs)
     return wrapped
 
 
@@ -830,7 +837,7 @@ def quizc(update,context):
                     print("payload not done ="+str(e))
             
                     
-            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
                 
     
@@ -1148,56 +1155,48 @@ POLLF,POLLN=range(2)
 @send_typing_action
 def pollf(update,context):
     global chat___id
-    global mesho
+    global mesho01
     chat___id=int(update.message.chat.id)
     if chat___id<=0:
     	try:
+    		
     		chat___id="@"+str(update.message.chat.username)#id
+    		mesho01=context.bot.send_message(chat_id=chat___id, text="<a href=\"https://t.me/Soojhboojh_01bot?start\">🌐 find Quiz Here☜</a>\nafter that come here and send me Quiz name that you want to play",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	except Exception as e:
     		print(str(e))
+    	return POLLF
     else:
-    	pass
-    context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 first Add me into your group ☜</a>\n\nSend me Quiz Name\n\n👇👇👇  Quiz List",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	    db=client["Quiz_Data"]
+	    x=(db.list_collection_names({}))
+	    
+	    for y in x:
+	    	context.bot.send_message(chat_id=chat___id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	    	
+	    context.bot.send_message(chat_id=chat___id,text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">Quiz List 👍👍</a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     
-    db=client["Quiz_Data"]
-    x=(db.list_collection_names({}))
-    mesho=[]
-    for y in x:
-    	mesho1=context.bot.send_message(chat_id=chat___id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
-    	mesho.append(mesho1.message_id)
-    return POLLF
+    return ConversationHandler.END
     
  
 def pollfname(update,context):
     global Time4
     Time4=update.message.text
-    for x in mesho:
-    	context.bot.delete_message(chat_id=chat___id,message_id=int(x))
-    context.bot.send_message(chat_id=chat___id, text="Send me Group Url\n\n@username_of_group")
-    return POLLN
- 
-def pollfsend(update,context):
-    global Time3
-    global Tco
-    global Time4
-    userText=update.message.text
-    Time3=userText
-    Time3=reaaa.sub(r"(https|http)://t\.me/", "@", Time3)
-    if reaaa.match(r"^-\d{1,}$",str(Time3)):
-    	Time3=reaaa.sub("-","-100",Time3)
+    try:
+    	context.bot.delete_message(chat_id=chat___id,message_id=mesho01.message_id)
+    except:
+    	pass
     col=client["Quiz"]["Quizlist"]
     x=col.find_one({"Id":Time4})
-    context.bot.send_message(chat_id=711296045, text="Group_url = "+Time3+"\n\n<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\"><b>Sender Quiz Name</b></a> = "+str(Time4), parse_mode=ParseMode.HTML)
+    context.bot.send_message(chat_id=711296045, text="Group_url = "+chat___id+"\n\n<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\"><b>Sender Quiz Name</b></a> = "+str(Time4), parse_mode=ParseMode.HTML)
     try:
     	coll=client["Quiz_Data"][Time4]
     	colldb=coll.find()
-    	messa=context.bot.send_message(chat_id=Time3, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(Time3)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	messa=context.bot.send_message(chat_id=chat___id, text="🎲 Get ready for the LIVE TEST \'"+Time4+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n⏱ Voting Start "+str(time.ctime(time.time() +19800))+" \n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(chat___id)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	channel_ids=x["Channel_Id"]
     	colme=client["Quiz"]["Message"]
-    	coldoc={"MessID":messa.message_id,"ID":Time3+"_"+Time4}
+    	coldoc={"MessID":messa.message_id,"ID":chat___id+"_"+Time4}
     	print(coldoc)
     	try:
-    		colme.delete_many({"ID":Time3+"_"+Time4})
+    		colme.delete_many({"ID":chat___id+"_"+Time4})
     		print("delete successful")
     	except Exception as e:
     		print("First time play or not play. "+str(e))
@@ -1206,12 +1205,12 @@ def pollfsend(update,context):
     	
     	try:
     		for y in x[Time4]:
-	    		context.bot.forward_message(chat_id=Time3,from_chat_id=channel_ids, message_id=y)
+	    		context.bot.forward_message(chat_id=chat___id,from_chat_id=channel_ids, message_id=y)
 	    		'''if %4==2:
 	    			time.sleep(5)'''
-	    	context.bot.send_message(chat_id=Time3, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Add me into your group ☜ </a>\n\n<a href=\"https://t.me/Soojhboojh_01bot?start=vCH1vGWJxfSeof\">CLECK HERE</a> for sharing quiz", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	    	context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	except:
-    		context.bot.send_message(chat_id=Time3, text="Give me Polls send permission to upload quiz here...", parse_mode=ParseMode.HTML)
+    		context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz here...", parse_mode=ParseMode.HTML)
     except Exception as e:
     	print(str(e))
     return ConversationHandler.END
@@ -1231,10 +1230,10 @@ def main() -> None:
     conv_handler01F= ConversationHandler(
         entry_points=[CommandHandler('start', pollf)],
         states={
-        POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
+        #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
             POLLF: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfname),],
         },
-        fallbacks=[CommandHandler('cancel', cancel)],
+        fallbacks=[CommandHandler('start', pollf)],
     )
     
     

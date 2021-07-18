@@ -1166,7 +1166,7 @@ def pollf(update,context):
 	    for y in x:
 	    	context.bot.send_message(chat_id=chat___id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 	    	
-	    context.bot.send_message(chat_id=chat___id,text="copy one fo them 👆👆👆<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">Click Here for share</a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	    context.bot.send_message(chat_id=chat___id,text="copy one fo them 👆👆👆\n<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">Click Here for share</a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     
     return ConversationHandler.END
     

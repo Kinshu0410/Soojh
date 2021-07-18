@@ -1163,7 +1163,7 @@ def pollf(update,context):
     		
     		chat___id="@"+str(update.message.chat.username)#id
     		mesho01=context.bot.send_message(chat_id=chat___id, text="<a href=\"https://t.me/Soojhboojh_01bot?start\">🌐 find Quiz Here☜</a>\nafter that come here and send me Quiz name that you want to play",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
-    		context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>user tring to share</b> = "+chat___id,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    		context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>user tring to share</b></a> = "+chat___id,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
     	except Exception as e:
     		print(str(e))

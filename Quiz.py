@@ -240,8 +240,8 @@ def photo(update: Update, _: CallbackContext) -> int:
     	exp= reaaa.sub(r"@\w*", "", exp)
     	exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)
     
-    if exp=="":
-    	exp=None
+    if exp is None:
+    	exp=""
     new={'que':question, 'op':options, 'cor':correct_option_id, 'exp':exp, 'ID':Textstr, 'User_ID':update.message.chat.id}
     col=client["Quiz_Data"][Textstr]
     col.insert_one(new)
@@ -782,6 +782,8 @@ def quizc(update,context):
                 options=X["op"]
                 correct_option_id =X["cor"]
                 exp=X["exp"]
+                if exp =="":
+                    exp=None
                 
                 try:
                     print("1")

@@ -196,7 +196,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')'''
     question=user.question
     question= reaaa.sub(r"@\w*", "", question)
-    question= reaaa.sub(r"^(\[\d{1,}/\d{1,}\] ){1,}", "", question)
+    question= reaaa.sub(r"^(\[\d{1,}/\d{1,}\] ){1,}(Q_|Q|)(\d{1,}\.|)(Q_|Q|)(\d{1,}\.|){1,}", "", question)
     options=[o.text for o in user.options]
     correct_option_id=user.correct_option_id
     exp=user.explanation

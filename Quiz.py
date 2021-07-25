@@ -990,8 +990,8 @@ def ghn1(update,context):
         is_anonymous=False
     userText=update.message.poll
     que=userText.question
-    que=reaaa.sub(r"(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_|Q|)(\d{1,}\.|\d{1,}|)( |))","",que)
-    #que=reaaa.sub(r"@@","<a href=\"",que)
+    que=reaaa.sub(r"(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_|Q|)(\d{1,}\. |\d{1,}\.|))","Que  ",que)
+    que="<b>"+que+"</b>"
     options=[o.text for o in userText.options]
     co=userText.correct_option_id
     explan=userText.explanation
@@ -1005,6 +1005,7 @@ def ghn1(update,context):
             explanation=explan,
             is_anonymous=is_anonymous,
             allows_multiple_answers=False,
+            parse_mode=ParseMode.HTML #,disable_web_page_preview = True
         )
     except Exception as e:
     	print(str(e))

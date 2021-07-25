@@ -991,7 +991,7 @@ def ghn1(update,context):
     userText=update.message.poll
     que=userText.question
     que=reaaa.sub(r"(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_|Q|)(\d{1,}\. |\d{1,}\.|))","",que)
-    que="<b>Que  "+que+"</b>"
+    que="Que  "+que
     print(que)
     options=[o.text for o in userText.options]
     co=userText.correct_option_id

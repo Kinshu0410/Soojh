@@ -992,6 +992,7 @@ def ghn1(update,context):
     que=userText.question
     que=reaaa.sub(r"(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_|Q|)(\d{1,}\. |\d{1,}\.|))","Que  ",que)
     que="<b>"+que+"</b>"
+    print(que)
     options=[o.text for o in userText.options]
     co=userText.correct_option_id
     explan=userText.explanation

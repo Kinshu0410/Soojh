@@ -966,7 +966,7 @@ def time1c(update,context):
         Time1=int(Time1)
     context.bot.send_message(chat_id=chat0id, text="Send me message.")
     return GHN
-No=1
+No="1"
 @run_async
 def ghn(update,context):
     userText=update.message.text

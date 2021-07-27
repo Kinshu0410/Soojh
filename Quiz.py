@@ -966,13 +966,17 @@ def time1c(update,context):
         Time1=int(Time1)
     context.bot.send_message(chat_id=chat0id, text="Send me message.")
     return GHN
-
+No=1
 @run_async
 def ghn(update,context):
     userText=update.message.text
     try:
+	    global No
 	    if reaaa.match(r"^\d{1,}$",userText):
 	    	context.bot.delete_message(chat_id=Time1,message_id=int(userText))
+	    elif reaaa.match(r"^#\d{1,}$",userText):
+	    	userText=reaaa.sub(r"#","",userText)
+	    	No=userText
 	    else:
 	    	userText=reaaa.sub(r"@@","<a href=\"",userText)
 	    	userText=reaaa.sub(r"##","\"><b>",userText)
@@ -984,6 +988,7 @@ def ghn(update,context):
     
 #@run_async
 def ghn1(update,context):
+    global No
     if reaaa.match(r"^-\d{1,}$",str(Time1)):
         is_anonymous=True
     else:
@@ -991,7 +996,8 @@ def ghn1(update,context):
     userText=update.message.poll
     que=userText.question
     que=reaaa.sub(r"(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_|Q|)(\d{1,}\. |\d{1,}\.|))","",que)
-    que="Que  "+que
+    que=No+".  "+que
+    No=str(int(No)+1)
     print(que)
     options=[o.text for o in userText.options]
     co=userText.correct_option_id

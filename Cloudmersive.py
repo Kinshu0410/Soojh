@@ -405,7 +405,7 @@ def receive_poll(update, context):
     #question=re.sub("\@\w*", "", question)
     question=re.sub("𝗤. ", "", question)
     #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
-    q=re.sub("\[\d{1,}\/\d{1,}\] (|\d{1,}\.)(| )|( |\n)(\@)(.*?)( |\n)", "", question)
+    q=re.sub("((\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
     q=re.sub("\n{1,}|\ {1,}", " ", q)
     
         

@@ -995,7 +995,7 @@ def ghn1(update,context):
         is_anonymous=False
     userText=update.message.poll
     que=userText.question
-    que=reaaa.sub(r"^(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_|Q|)(\d{1,}\. |\d{1,}\.|))","",que)
+    que=reaaa.sub(r"^(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
     que=No+".  "+que
     No=str(int(No)+1)
     print(que)

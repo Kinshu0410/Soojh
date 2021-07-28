@@ -1006,7 +1006,7 @@ def ghn1(update,context):
     co=userText.correct_option_id
     explan=userText.explanation
     try:
-    	col=client["Schedule"][Time1]
+    	col=client["Schedule"][str(Time1)]
     	c={"chat_id":Time1,"question":que,"options":options,"correct_option_id":co,"explanation":explan}
     	col.insert_one(c)
     	'''context.bot.send_poll(

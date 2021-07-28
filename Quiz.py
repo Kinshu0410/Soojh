@@ -973,7 +973,7 @@ def ghn(update,context):
 	    global No
 	    if reaaa.match(r"^\d{1,}$",userText):
 	    	context.bot.delete_message(chat_id=Time1,message_id=int(userText))
-	    elif reaaa.match(r"^done$",userText):
+	    elif reaaa.match(r"^Done$",userText):
 	    	due=10
 	    	chat_id=update.message.chat.id
 	    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))

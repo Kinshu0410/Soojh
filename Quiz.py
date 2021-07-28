@@ -1,5 +1,3 @@
-
-#
 from pymongo import MongoClient
 import dns
 
@@ -1014,6 +1012,7 @@ def ghn1(update,context):
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML #,disable_web_page_preview = True
         )
+    	time.sleep(5)
     except Exception as e:
     	print(str(e))
     return GHN

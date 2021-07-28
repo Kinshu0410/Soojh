@@ -993,7 +993,7 @@ def ghn1(update,context):
         is_anonymous=False
     userText=update.message.poll
     que=userText.question
-    que=reaaa.sub(r"^(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
+    que=reaaa.sub("^(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
     que=No+".  "+que
     No=str(int(No)+1)
     print(que)
@@ -1001,7 +1001,10 @@ def ghn1(update,context):
     co=userText.correct_option_id
     explan=userText.explanation
     try:
-    	context.bot.send_poll(
+    	col=client["Schedule"][Time1]
+    	c={"chat_id":Time1,"question":que,"options":options,"correct_option_id":co,"explanation":explan}
+    	col.insert_one(c)
+    	'''context.bot.send_poll(
     		chat_id=Time1,
     		question=que,
     		options=options,
@@ -1011,11 +1014,55 @@ def ghn1(update,context):
             is_anonymous=is_anonymous,
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML #,disable_web_page_preview = True
-        )
-    	time.sleep(5)
+        )'''
+    	#time.sleep(5)
     except Exception as e:
     	print(str(e))
     return GHN
+
+
+def alarm(context: CallbackContext):
+    job = context.job
+    due=5
+    try:
+    	col=client["Schedule"]
+    	yy=col.list_collection_names({})
+    	for y in yy:
+    		coly=col[y]
+    		z=coly.find_one_and_delete({})
+    		chat_id=z["chat_id"]
+    		if reaaa.match(r"^-\d{1,}$",str(chat_id)):
+    			is_anonymous=True
+    		else:
+    			is_anonymous=False
+    		que=z["question"]
+    		options=z["options"]
+    		co=z["correct_option_id"]
+    		explan=z["explanation"]
+	    	context.bot.send_poll(
+	    		chat_id=chat_id,
+	    		question=que,
+	    		options=options,
+	            type=Poll.QUIZ,
+	            correct_option_id=co,
+	            explanation=explan,
+	            is_anonymous=is_anonymous,
+	            allows_multiple_answers=False,
+	            parse_mode=ParseMode.HTML #,disable_web_page_preview = True
+    		)
+    		context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
+    	#time.sleep(5)
+    except Exception as e:
+    	print(str(e))
+    
+    
+    
+    
+    
+    
+    
+    
+
 
 
 @restrictedD

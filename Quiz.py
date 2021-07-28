@@ -967,7 +967,7 @@ def time1c(update,context):
 No="1"
 @run_async
 def ghn(update,context):
-    
+    global due1
     userText=update.message.text
     try:
 	    global No
@@ -977,6 +977,9 @@ def ghn(update,context):
 	    	due=10
 	    	chat_id=update.message.chat.id
 	    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
+	    elif reaaa.match(r"^!\d{1,}$",userText):
+	    	userText=reaaa.sub(r"!","",userText)
+	    	due1=int(userText)
 	    elif reaaa.match(r"^#\d{1,}$",userText):
 	    	userText=reaaa.sub(r"#","",userText)
 	    	No=userText
@@ -1020,21 +1023,26 @@ def ghn1(update,context):
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML #,disable_web_page_preview = True
         )'''
+    	context.bot.send_message(chat_id=update.message.user.id, text="Que No. = "+No)
     	#time.sleep(5)
     except Exception as e:
     	print(str(e))
     return GHN
 
-
+due1=1800
 def alarm(context: CallbackContext):
+    
     job = context.job
-    due=5
+    due=due1
     try:
     	col=client["Schedule"]
     	yy=col.list_collection_names({})
     	for y in yy:
     		coly=col[y]
+    		cou=coly.count_documents({})
     		z=coly.find_one_and_delete({})
+    		if cou==1:
+    			coly.drop()
     		chat_id=z["chat_id"]
     		if reaaa.match(r"^-\d{1,}$",str(chat_id)):
     			is_anonymous=True

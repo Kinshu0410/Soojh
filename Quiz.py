@@ -1023,7 +1023,7 @@ def ghn1(update,context):
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML #,disable_web_page_preview = True
         )'''
-    	context.bot.send_message(chat_id=update.message.user.id, text="Que No. = "+No)
+    	context.bot.send_message(chat_id=update.message.chat.id, text="Que No. = "+No)
     	#time.sleep(5)
     except Exception as e:
     	print(str(e))

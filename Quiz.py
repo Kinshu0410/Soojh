@@ -967,11 +967,16 @@ def time1c(update,context):
 No="1"
 @run_async
 def ghn(update,context):
+    
     userText=update.message.text
     try:
 	    global No
 	    if reaaa.match(r"^\d{1,}$",userText):
 	    	context.bot.delete_message(chat_id=Time1,message_id=int(userText))
+	    elif reaaa.match(r"^done$",userText):
+	    	due=10
+	    	chat_id=update.message.chat.id
+	    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
 	    elif reaaa.match(r"^#\d{1,}$",userText):
 	    	userText=reaaa.sub(r"#","",userText)
 	    	No=userText

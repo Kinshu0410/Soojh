@@ -983,10 +983,10 @@ def time1c(update,context):
     	Noo=col111.find_one({'No':{"$type" : "str" }})
     	No=Noo['No']
     except:
-    	pass
+    	No="1"
     context.bot.send_message(chat_id=chat0id, text="Send me message.")
     return GHN
-No="1"
+
 @run_async
 def ghn(update,context):
     global due1
@@ -1034,8 +1034,8 @@ def ghn1(update,context):
     	col=client["Schedule"][str(Time1)]
     	c={"chat_id":Time1,"question":que,"options":options,"correct_option_id":co,"explanation":explan}
     	col.insert_one(c)
-    	xoo=col.find_one({'No':{"$type" : "str" }})
-    	
+    	if No == '1':
+    		col.insert_one({'No':'1'})
     	myquery1 = {"No":No}
     	newvalues1 = { "$set": { "No":str(int(No)+1)} }
     	col.update_one(myquery1, newvalues1)

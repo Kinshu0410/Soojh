@@ -876,8 +876,8 @@ def receive_poll_answer(update,context):
     #print("jdjdjdjxj")
     if Xiii==1:
     	due=10
-    	chat_id=711296045
-    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
+    	chat_id11=711296045
+    	context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
     	Xiii+=1
     else:
     	pass

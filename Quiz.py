@@ -1044,7 +1044,7 @@ def ghn1(update,context):
     	print(str(e))
     return GHN
 
-due1=864
+due1=18000
 def alarm(context: CallbackContext):
     
     job = context.job
@@ -1053,31 +1053,32 @@ def alarm(context: CallbackContext):
     	col=client["Schedule"]
     	yy=col.list_collection_names({})
     	for y in yy:
-    		coly=col[y]
-    		cou=coly.count_documents({})
-    		z=coly.find_one_and_delete({})
-    		if cou==1:
-    			coly.drop()
-    		chat_id=z["chat_id"]
-    		if reaaa.match(r"^-\d{1,}$",str(chat_id)):
-    			is_anonymous=True
-    		else:
-    			is_anonymous=False
-    		que=z["question"]
-    		options=z["options"]
-    		co=z["correct_option_id"]
-    		explan=z["explanation"]
-	    	context.bot.send_poll(
-	    		chat_id=chat_id,
-	    		question=que,
-	    		options=options,
-	            type=Poll.QUIZ,
-	            correct_option_id=co,
-	            explanation=explan,
-	            is_anonymous=is_anonymous,
-	            allows_multiple_answers=False,
-	            parse_mode=ParseMode.HTML #,disable_web_page_preview = True
-    		)
+    		for yyy in range(10):
+	    		coly=col[y]
+	    		cou=coly.count_documents({})
+	    		z=coly.find_one_and_delete({})
+	    		if cou==1:
+	    			coly.drop()
+	    		chat_id=z["chat_id"]
+	    		if reaaa.match(r"^-\d{1,}$",str(chat_id)):
+	    			is_anonymous=True
+	    		else:
+	    			is_anonymous=False
+	    		que=z["question"]
+	    		options=z["options"]
+	    		co=z["correct_option_id"]
+	    		explan=z["explanation"]
+		    	context.bot.send_poll(
+		    		chat_id=chat_id,
+		    		question=que,
+		    		options=options,
+		            type=Poll.QUIZ,
+		            correct_option_id=co,
+		            explanation=explan,
+		            is_anonymous=is_anonymous,
+		            allows_multiple_answers=False,
+		            parse_mode=ParseMode.HTML #,disable_web_page_preview = True
+	    		)
     	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
     	#time.sleep(5)
     except Exception as e:

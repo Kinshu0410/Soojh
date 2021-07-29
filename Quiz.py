@@ -858,7 +858,7 @@ def quizc(update,context):
     
 
 
-
+Xiii=1
 Dbz=[]     
 #time.sleep(1)
 print("Sleeping for one sec")
@@ -874,6 +874,13 @@ def receive_poll_answer(update,context):
     
     
     #print("jdjdjdjxj")
+    if Xiii==1:
+    	due=10
+    	chat_id=update.message.chat.id
+    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
+    	Xiii+=1
+    else:
+    	pass
     try:
         answe=update
         answer = update.poll_answer
@@ -973,7 +980,7 @@ def ghn(update,context):
 	    global No
 	    if reaaa.match(r"^\d{1,}$",userText):
 	    	context.bot.delete_message(chat_id=Time1,message_id=int(userText))
-	    elif reaaa.match(r"^Done$",userText):
+	    elif reaaa.match(r"^done$",userText):
 	    	due=10
 	    	chat_id=update.message.chat.id
 	    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
@@ -1023,13 +1030,13 @@ def ghn1(update,context):
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML #,disable_web_page_preview = True
         )'''
-    	context.bot.send_message(chat_id=update.message.chat.id, text="Que No. = "+No)
+    	context.bot.send_message(chat_id=update.message.user.id, text="Que No. = "+No)
     	#time.sleep(5)
     except Exception as e:
     	print(str(e))
     return GHN
 
-due1=1800
+due1=600
 def alarm(context: CallbackContext):
     
     job = context.job
@@ -1063,7 +1070,7 @@ def alarm(context: CallbackContext):
 	            allows_multiple_answers=False,
 	            parse_mode=ParseMode.HTML #,disable_web_page_preview = True
     		)
-    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
+    		context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
     	#time.sleep(5)
     except Exception as e:
     	print(str(e))

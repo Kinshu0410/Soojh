@@ -1052,8 +1052,8 @@ def alarm(context: CallbackContext):
     try:
     	col=client["Schedule"]
     	yy=col.list_collection_names({})
-    	for y in yy:
-    		for yyy in range(10):
+    	for yyy in range(10):
+    		for y in yy:
 	    		coly=col[y]
 	    		cou=coly.count_documents({})
 	    		z=coly.find_one_and_delete({})
@@ -1079,7 +1079,7 @@ def alarm(context: CallbackContext):
 		            allows_multiple_answers=False,
 		            parse_mode=ParseMode.HTML #,disable_web_page_preview = True
 	    		)
-	    		time.sleep(5)
+	    	time.sleep(5)
     	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
     	#time.sleep(5)
     except Exception as e:

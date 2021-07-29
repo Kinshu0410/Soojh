@@ -167,6 +167,14 @@ LIST_OF_ADMINS_D = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
 def restrictedD(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
+        global Xiii
+        if Xiii==1:
+            due=10
+            chat_id11=711296045
+            context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
+            Xiii+=1
+        else:
+            pass
         mid=update.message.message_id
         userName = update.message.chat.username
         #print(userName)

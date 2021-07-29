@@ -1044,7 +1044,7 @@ def ghn1(update,context):
     	print(str(e))
     return GHN
 
-due1=600
+due1=843
 def alarm(context: CallbackContext):
     
     job = context.job
@@ -1081,6 +1081,7 @@ def alarm(context: CallbackContext):
     		context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
     	#time.sleep(5)
     except Exception as e:
+    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
     	print(str(e))
     
     

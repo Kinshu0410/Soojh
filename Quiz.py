@@ -1051,8 +1051,9 @@ def alarm(context: CallbackContext):
     due=due1
     try:
     	col=client["Schedule"]
-    	yy=col.list_collection_names({})
+    	#yy=col.list_collection_names({})
     	for yyy in range(10):
+    		yy=col.list_collection_names({})
     		for y in yy:
 	    		coly=col[y]
 	    		cou=coly.count_documents({})

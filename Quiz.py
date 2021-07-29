@@ -1036,7 +1036,7 @@ def ghn1(update,context):
     	col.insert_one(c)
     	if No == '1':
     		col.insert_one({'No':'1'})
-    	myquery1 = {"No":No}
+    	myquery1 = {"No":{"$type" : "str" }}
     	newvalues1 = { "$set": { "No":str(int(No)+1)} }
     	col.update_one(myquery1, newvalues1)
     	No=str(int(No)+1)

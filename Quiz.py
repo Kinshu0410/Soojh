@@ -970,6 +970,7 @@ def playing(update,context):
 @run_async
 def time1c(update,context):
     global Time1
+    global No
     userText=update.message.text
     Time1=userText
     if reaaa.match(r"^(https|http)://t\.me/.*$",Time1):
@@ -977,6 +978,12 @@ def time1c(update,context):
     if reaaa.match(r"^-\d{1,}$",Time1):
         Time1=reaaa.sub("-", "-100", Time1)
         Time1=int(Time1)
+    col111=client["Schedule"][str(Time1)]
+    try:
+    	Noo=col111.find_one({'No':{"$type" : "str" }})
+    	No=Noo['No']
+    except:
+    	pass
     context.bot.send_message(chat_id=chat0id, text="Send me message.")
     return GHN
 No="1"
@@ -1018,7 +1025,7 @@ def ghn1(update,context):
     que=userText.question
     que=reaaa.sub("^(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
     que=No+".  "+que
-    No=str(int(No)+1)
+    
     print(que)
     options=[o.text for o in userText.options]
     co=userText.correct_option_id
@@ -1027,6 +1034,15 @@ def ghn1(update,context):
     	col=client["Schedule"][str(Time1)]
     	c={"chat_id":Time1,"question":que,"options":options,"correct_option_id":co,"explanation":explan}
     	col.insert_one(c)
+    	xoo=col.find_one({'No':{"$type" : "str" }})
+    	
+    	myquery1 = {"No":No}
+    	newvalues1 = { "$set": { "No":str(int(No)+1)} }
+    	col.update_one(myquery1, newvalues1)
+    	No=str(int(No)+1)
+    	
+    	
+    	
     	'''context.bot.send_poll(
     		chat_id=Time1,
     		question=que,

@@ -871,7 +871,7 @@ def receive_poll_answer(update,context):
     global Rmark
     global Wmark
     global mark
-    
+    global Xiii
     
     #print("jdjdjdjxj")
     if Xiii==1:

@@ -978,9 +978,9 @@ def time1c(update,context):
     if reaaa.match(r"^-\d{1,}$",Time1):
         Time1=reaaa.sub("-", "-100", Time1)
         Time1=int(Time1)
-    col111=client["Schedule"][str(Time1)]
+    col2=client["Schedule"]["Quiz"]
     try:
-    	Noo=col111.find_one({"Uid":str(Time1)})
+    	Noo=col2.find_one({"Uid":str(Time1)})
     	No=Noo['No']
     	print('suss======'+No+'======suss')
     except:
@@ -1036,16 +1036,18 @@ def ghn1(update,context):
     	col=client["Schedule"][str(Time1)]
     	c={"chat_id":Time1,"question":que,"options":options,"correct_option_id":co,"explanation":explan}
     	col.insert_one(c)
-    	if No == '1':
-    		col.insert_one({"Uid":str(Time1),'No':'1'})
+    	col2=client["Schedule"]["Quiz"]
+    	if col2.find_one({"Uid":str(Time1)}) is None:
+    		col2.insert_one({"Uid":str(Time1),'No':No})
+    		print("new account")
     	No=str(int(No)+1)
-    	col=client["Schedule"][str(Time1)]
-    	print("yoyoyk")
+    	col2=client["Schedule"]["Quiz"]
+    	#print("yoyoyk")
     	myquery1 = {"Uid":str(Time1)}
-    	print("yoyoyk")
+    	#print("yoyoyk")
     	newvalues1 = { "$set": { "No":No} }
-    	print("yoyoyk")
-    	col.update_one(myquery1, newvalues1)
+    	#print("yoyoyk")
+    	col2.update_one(myquery1, newvalues1)
     	print("yoyoyk")
 
     	

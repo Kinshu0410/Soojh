@@ -1080,6 +1080,7 @@ def alarm(context: CallbackContext):
     	#yy=col.list_collection_names({})
     	for yyy in range(10):
     		yy=col.list_collection_names({})
+    		yy.remove('Quiz')
     		for y in yy:
 	    		coly=col[y]
 	    		cou=coly.count_documents({})

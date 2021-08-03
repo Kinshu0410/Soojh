@@ -1193,6 +1193,7 @@ def poll(update, context):
             allows_multiple_answers=False,
         )
         # Save some info about the poll the bot_data for later use in receive_poll_answer
+        time.sleep(5)
     except Exception as e:
         print(str(e))
 COPY, POLLS=range(2)

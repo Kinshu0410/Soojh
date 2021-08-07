@@ -1025,7 +1025,7 @@ def ghn1(update,context):
         is_anonymous=False
     userText=update.message.poll
     que=userText.question
-    que=reaaa.sub("^(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
+    que=reaaa.sub("^(☞( ){1,}|)(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
     que=No+".  "+que
     
     print(que)
@@ -1134,7 +1134,7 @@ def poll(update, context):
     try:
         q=quest[0:-1]
         q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
-        q=reaaa.sub(r"(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|बी|स|सी|डी|ड|द|क|ख|ग|घ|य|र|ल|व|1|2|3|4)(\)|\]|\.)(\.| |)", "\n", q)
+        q=reaaa.sub(r"(\n| )(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|बी|स|सी|डी|ड|द|क|ख|ग|घ|य|र|ल|व|1|2|3|4)(\)|\]|\.)(\.| |)", "\n", q)
         q=reaaa.sub("\n{2,}", "\n", q)
         q=reaaa.sub("☞", "", q)
         q=reaaa.split(r"[\n]", q)

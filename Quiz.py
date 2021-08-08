@@ -1033,7 +1033,7 @@ def ghn2(update,context):
     z=""
     userText=update.message.poll
     que=userText.question
-    que=reaaa.sub("^(☞( ){1,}|)(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
+    que1=reaaa.sub("^(☞( ){1,}|)(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
     
     for y in admin2:
     	col2=client["Schedule"]["Quiz"]
@@ -1043,7 +1043,7 @@ def ghn2(update,context):
 	    	#print('suss======'+No+'======suss')
     	except:
 	    	No="1"
-    	que=No+".  "+que
+    	que=No+".  "+que1
     	options=[o.text for o in userText.options]
     	co=userText.correct_option_id
     	explan=userText.explanation

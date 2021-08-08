@@ -1035,7 +1035,7 @@ def ghn2(update,context):
     que=userText.question
     que=reaaa.sub("^(☞( ){1,}|)(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
     
-    for y in admin1:
+    for y in admin2:
     	col2=client["Schedule"]["Quiz"]
     	try:
 	    	Noo=col2.find_one({"Uid":str(y)})

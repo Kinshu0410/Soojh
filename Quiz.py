@@ -1024,7 +1024,7 @@ def ghn(update,context):
     except Exception as e:
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
-
+x=1
 admin2=["-1001135796728"]
 def ghn2(update,context):
     global x
@@ -1066,7 +1066,7 @@ def ghn2(update,context):
 	    	z = z+" "+str(No)
     	except Exception as e:
     		print(str(e))
-    z=re.sub("^ ","",z)
+    z=re.sub("^",str(x),z)
     context.bot.send_message(chat_id=711296045, text=z)
     return GHN2	
 

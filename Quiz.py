@@ -954,7 +954,7 @@ def receive_poll_answer(update,context):
                 
                 
             
-TIME1=range(1)
+TIME1, GHN2=range(2)
 @run_async
 @restricted
 @send_typing_action
@@ -992,12 +992,13 @@ def time1c(update,context):
 @run_async
 def ghn(update,context):
     global due1
+    global admin2
     userText=update.message.text
     try:
 	    global No
 	    if reaaa.match(r"^\d{1,}$",userText):
 	    	context.bot.delete_message(chat_id=Time1,message_id=int(userText))
-	    elif reaaa.match(r"^done$",userText):
+	    elif reaaa.match(r"^Done$",userText):
 	    	due=10
 	    	chat_id=update.message.chat.id
 	    	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
@@ -1007,6 +1008,14 @@ def ghn(update,context):
 	    elif reaaa.match(r"^#\d{1,}$",userText):
 	    	userText=reaaa.sub(r"#","",userText)
 	    	No=userText
+	    elif reaaa.match(r"^Add .*$",userText):
+	    	userText=reaaa.sub("^Add ","",userText)
+	    	userText=reaaa.split(r"[ ]", userText)
+	    	admin2=[]
+	    	for x in range(len(userText)):
+	    		admin2.append("-100"+userText[x])
+	    	return GHN2
+	    	
 	    else:
 	    	userText=reaaa.sub(r"@@","<a href=\"",userText)
 	    	userText=reaaa.sub(r"##","\"><b>",userText)
@@ -1015,7 +1024,53 @@ def ghn(update,context):
     except Exception as e:
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
+
+admin2=["-1001135796728"]
+def ghn2(update,context):
+    global x
+    print(str(x))
+    x+=1
+    z=""
+    userText=update.message.poll
+    que=userText.question
+    que=re.sub("^(☞( ){1,}|)(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
     
+    for y in admin1:
+    	col2=client["Schedule"]["Quiz"]
+    	try:
+	    	Noo=col2.find_one({"Uid":str(y)})
+	    	No=Noo['No']
+	    	#print('suss======'+No+'======suss')
+    	except:
+	    	No="1"
+    	que=No+".  "+que
+    	options=[o.text for o in userText.options]
+    	co=userText.correct_option_id
+    	explan=userText.explanation
+    	try:
+	    	col=client["Schedule"][str(y)]
+	    	c={"chat_id":int(y),"question":que,"options":options,"correct_option_id":co,"explanation":explan}
+	    	col.insert_one(c)
+	    	col2=client["Schedule"]["Quiz"]
+	    	if col2.find_one({"Uid":str(y)}) is None:
+	    		col2.insert_one({"Uid":str(y),'No':No})
+	    		print("new account")
+	    	No=str(int(No)+1)
+	    	col2=client["Schedule"]["Quiz"]
+	    	#print("yoyoyk")
+	    	myquery1 = {"Uid":str(y)}
+	    	#print("yoyoyk")
+	    	newvalues1 = { "$set": { "No":No} }
+	    	#print("yoyoyk")
+	    	col2.update_one(myquery1, newvalues1)
+	    	z = z+" "+str(No)
+    	except Exception as e:
+    		print(str(e))
+    z=re.sub("^ ","",z)
+    context.bot.send_message(chat_id=711296045, text=z)
+    return GHN2	
+
+
 #@run_async
 def ghn1(update,context):
     global No
@@ -1401,6 +1456,7 @@ def main() -> None:
         entry_points=[CommandHandler('massingroup', playing)],
         states={
             GHN: [MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn), MessageHandler(Filters.regex(r'^(((https|http).*|@.*))|(-\d{1,})$'), time1c),MessageHandler(Filters.poll,  ghn1)],
+            GHN2:[MessageHandler(Filters.poll,  ghn2),MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

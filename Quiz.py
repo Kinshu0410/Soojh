@@ -1033,7 +1033,7 @@ def ghn2(update,context):
     z=""
     userText=update.message.poll
     que=userText.question
-    que=re.sub("^(☞( ){1,}|)(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
+    que=reaaa.sub("^(☞( ){1,}|)(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
     
     for y in admin1:
     	col2=client["Schedule"]["Quiz"]
@@ -1066,7 +1066,7 @@ def ghn2(update,context):
 	    	z = z+" "+str(No)
     	except Exception as e:
     		print(str(e))
-    z=re.sub("^",str(x),z)
+    z=reaaa.sub("^",str(x),z)
     context.bot.send_message(chat_id=711296045, text=z)
     return GHN2	
 
@@ -1213,7 +1213,7 @@ def poll(update, context):
         else:
             options5=options5
             print(options5)
-        #options5=re.sub(r"\@\w.*", "", options5)
+        #options5=reaaa.sub(r"\@\w.*", "", options5)
         #update.message.reply_text(options)
 
         if result is None:

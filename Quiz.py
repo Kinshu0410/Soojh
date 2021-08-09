@@ -996,6 +996,7 @@ def ghn(update,context):
     userText=update.message.text
     try:
 	    global No
+	    global x
 	    if reaaa.match(r"^\d{1,}$",userText):
 	    	context.bot.delete_message(chat_id=Time1,message_id=int(userText))
 	    elif reaaa.match(r"^Done$",userText):
@@ -1012,8 +1013,9 @@ def ghn(update,context):
 	    	userText=reaaa.sub("^Add ","",userText)
 	    	userText=reaaa.split(r"[ ]", userText)
 	    	admin2=[]
-	    	for x in range(len(userText)):
-	    		admin2.append("-100"+userText[x])
+	    	for X in range(len(userText)):
+	    		admin2.append("-100"+userText[X])
+	    		x=0
 	    	return GHN2
 	    	
 	    else:
@@ -1024,7 +1026,7 @@ def ghn(update,context):
     except Exception as e:
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
-x=1
+x=0
 admin2=["-1001135796728"]
 def ghn2(update,context):
     global x
@@ -1080,35 +1082,13 @@ def ghn1(update,context):
         is_anonymous=False
     userText=update.message.poll
     que=userText.question
-    que=reaaa.sub("^(☞( ){1,}|)(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|))","",que)
-    que=No+".  "+que
-    
-    print(que)
+    que=reaaa.sub("^(☞( ){1,}|(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)))","",que)
     options=[o.text for o in userText.options]
     co=userText.correct_option_id
     explan=userText.explanation
-    try:
-    	col=client["Schedule"][str(Time1)]
-    	c={"chat_id":Time1,"question":que,"options":options,"correct_option_id":co,"explanation":explan}
-    	col.insert_one(c)
-    	col2=client["Schedule"]["Quiz"]
-    	if col2.find_one({"Uid":str(Time1)}) is None:
-    		col2.insert_one({"Uid":str(Time1),'No':No})
-    		print("new account")
-    	No=str(int(No)+1)
-    	col2=client["Schedule"]["Quiz"]
-    	#print("yoyoyk")
-    	myquery1 = {"Uid":str(Time1)}
-    	#print("yoyoyk")
-    	newvalues1 = { "$set": { "No":No} }
-    	#print("yoyoyk")
-    	col2.update_one(myquery1, newvalues1)
-    	print("yoyoyk")
-
+    
     	
-    	
-    	
-    	'''context.bot.send_poll(
+    context.bot.send_poll(
     		chat_id=Time1,
     		question=que,
     		options=options,
@@ -1118,11 +1098,10 @@ def ghn1(update,context):
             is_anonymous=is_anonymous,
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML #,disable_web_page_preview = True
-        )'''
-    	context.bot.send_message(chat_id=update.message.chat.id, text="Que No. = "+No)
+        )
+    time.sleep(5)
+    	#context.bot.send_message(chat_id=update.message.chat.id, text="Que No. = "+No)
     	#time.sleep(5)
-    except Exception as e:
-    	print(str(e))
     return GHN
 
 due1=18000

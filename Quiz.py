@@ -1018,7 +1018,7 @@ def ghn(update,context):
     except Exception as e:
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
-
+@restricted
 def ghppp1(update,context):
     userText=update.message.poll
     print("ghn1 started")

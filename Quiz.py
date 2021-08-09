@@ -169,7 +169,7 @@ def restrictedD(func):
     def wrapped(update, context, *args, **kwargs):
         global Xiii
         if Xiii==1:
-            due=18001
+            due=1801
             chat_id11=711296045
             context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
             Xiii+=1
@@ -883,7 +883,7 @@ def receive_poll_answer(update,context):
     
     #print("jdjdjdjxj")
     if Xiii==1:
-    	due=18001
+    	due=1801
     	chat_id11=711296045
     	context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
     	Xiii+=1
@@ -1041,12 +1041,6 @@ def ghn1(update,context):
         )
     print("sended")
     time.sleep(5)
-    
-    	#context.bot.send_message(chat_id=update.message.chat.id, text="Que No. = "+No)
-    	#time.sleep(5)
-    
-
-
 
 x=0
 admin2=[]
@@ -1471,7 +1465,7 @@ def main() -> None:
     dispatcher.add_handler(conv_handler012)
     dispatcher.add_handler(conv_handler0u)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
-    dp=updater.dispatcher
+    dp=dispatcher
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))
     dp.add_handler(MessageHandler(Filters.poll, ghn1))

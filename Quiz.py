@@ -1068,11 +1068,13 @@ def ghn2(update,context):
 #@run_async
 def ghn1(update,context):
     userText=update.message.poll
+    print("ghn1 started")
     que=userText.question
     que=reaaa.sub("^(☞( ){1,}|(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)))","",que)
     options=[o.text for o in userText.options]
     co=userText.correct_option_id
     explan=userText.explanation
+    print("poll")
     context.bot.send_poll(
     		chat_id=-1001517843177,
     		question=que,
@@ -1084,7 +1086,9 @@ def ghn1(update,context):
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML #,disable_web_page_preview = True
         )
+    print("sended")
     time.sleep(5)
+    
     	#context.bot.send_message(chat_id=update.message.chat.id, text="Que No. = "+No)
     	#time.sleep(5)
     return GHN

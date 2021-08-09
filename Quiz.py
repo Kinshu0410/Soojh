@@ -1067,21 +1067,14 @@ def ghn2(update,context):
 
 #@run_async
 def ghn1(update,context):
-    global No
-    if reaaa.match(r"^-\d{1,}$",str(Time1)):
-        is_anonymous=True
-    else:
-        is_anonymous=False
     userText=update.message.poll
     que=userText.question
     que=reaaa.sub("^(☞( ){1,}|(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)))","",que)
     options=[o.text for o in userText.options]
     co=userText.correct_option_id
     explan=userText.explanation
-    
-    	
     context.bot.send_poll(
-    		chat_id=Time1,
+    		chat_id=-1001517843177,
     		question=que,
     		options=options,
             type=Poll.QUIZ,
@@ -1485,4 +1478,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-#g
+

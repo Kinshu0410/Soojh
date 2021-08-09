@@ -1029,7 +1029,7 @@ def ghppp1(update,context):
     explan=userText.explanation
     print("poll")
     context.bot.send_poll(
-            chat_id=-1001517843177,
+            chat_id=-1001495791558,
             question=que,
             options=options,
             type=Poll.QUIZ,

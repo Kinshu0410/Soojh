@@ -1019,7 +1019,7 @@ def ghn(update,context):
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
 
-def ghn1(update,context):
+def ghppp1(update,context):
     userText=update.message.poll
     print("ghn1 started")
     que=userText.question
@@ -1357,7 +1357,7 @@ def main() -> None:
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
-    dispatcher.add_handler(MessageHandler(Filters.poll, ghn1))
+    dispatcher.add_handler(MessageHandler(Filters.poll, ghppp1))
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler01F= ConversationHandler(
         entry_points=[CommandHandler('start', pollf)],

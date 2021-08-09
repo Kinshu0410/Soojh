@@ -1095,7 +1095,7 @@ def ghn1(update,context):
             type=Poll.QUIZ,
             correct_option_id=co,
             explanation=explan,
-            is_anonymous=is_anonymous,
+            is_anonymous=True,
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML #,disable_web_page_preview = True
         )

@@ -1041,7 +1041,7 @@ def ghn1(update,context):
         )
     print("sended")
     time.sleep(5)
-
+    return ConversationHandler.END
 x=0
 admin2=[]
 def ghn2(update,context):

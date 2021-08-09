@@ -1044,7 +1044,7 @@ def ghn1(update,context):
     
     	#context.bot.send_message(chat_id=update.message.chat.id, text="Que No. = "+No)
     	#time.sleep(5)
-    return GHN
+    
 
 
 
@@ -1426,7 +1426,7 @@ def main() -> None:
     conv_handler1C = ConversationHandler(
         entry_points=[CommandHandler('massingroup', playing)],
         states={
-            GHN: [MessageHandler(Filters.poll,  ghn1),MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn), MessageHandler(Filters.regex(r'^((https|http).*|@.*|-\d{1,})$'), time1c)],
+            GHN: [MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn), MessageHandler(Filters.regex(r'^((https|http).*|@.*|-\d{1,})$'), time1c)],
             GHN2:[MessageHandler(Filters.poll,  ghn2),MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
@@ -1474,6 +1474,7 @@ def main() -> None:
     dp=updater.dispatcher
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))
+    dp.add_handler(MessageHandler(Filters.poll, ghn1))
     # Start the Bot
     updater.start_polling()
 

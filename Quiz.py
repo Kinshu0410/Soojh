@@ -978,14 +978,6 @@ def time1c(update,context):
     if reaaa.match(r"^-\d{1,}$",Time1):
         Time1=reaaa.sub("-", "-100", Time1)
         Time1=int(Time1)
-    col2=client["Schedule"]["Quiz"]
-    try:
-    	Noo=col2.find_one({"Uid":str(Time1)})
-    	No=Noo['No']
-    	print('suss======'+No+'======suss')
-    except:
-    	No="1"
-
     context.bot.send_message(chat_id=chat0id, text="Send me message.")
     return GHN
 

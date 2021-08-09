@@ -1423,7 +1423,7 @@ def main() -> None:
     conv_handler1C = ConversationHandler(
         entry_points=[CommandHandler('massingroup', playing)],
         states={
-            GHN: [MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn), MessageHandler(Filters.regex(r'^(((https|http).*|@.*))|(-\d{1,})$'), time1c),MessageHandler(Filters.poll,  ghn1)],
+            GHN: [MessageHandler(Filters.poll,  ghn1),MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn), MessageHandler(Filters.regex(r'^((https|http).*|@.*|-\d{1,})$', time1c)],
             GHN2:[MessageHandler(Filters.poll,  ghn2),MessageHandler(Filters.text & ~Filters.command & ~Filters.regex(r'^((https|http).*|@.*)$') & ~Filters.regex(r'^-\d{1,}$'), ghn)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],

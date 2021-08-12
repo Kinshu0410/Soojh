@@ -1358,7 +1358,7 @@ def main() -> None:
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
-    dispatcher.add_handler(MessageHandler(Filters.poll, ghppp1))
+    #dispatcher.
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler01F= ConversationHandler(
         entry_points=[CommandHandler('start', pollf)],
@@ -1467,6 +1467,7 @@ def main() -> None:
     dp=dispatcher
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))
+    dp.add_handler(MessageHandler(Filters.poll, ghppp1))
     # Start the Bot
     updater.start_polling()
 

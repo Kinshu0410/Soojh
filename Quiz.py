@@ -1023,7 +1023,7 @@ def ghppp1(update,context):
     userText=update.message.poll
     print("ghn1 started")
     que=userText.question
-    que=reaaa.sub("^(☞( ){1,}|(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)))","",que)
+    que=reaaa.sub("^(☞( ){1,}|(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |)))","",que)
     options=[o.text for o in userText.options]
     co=userText.correct_option_id
     explan=userText.explanation

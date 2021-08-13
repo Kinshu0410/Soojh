@@ -1103,29 +1103,33 @@ def alarm(context: CallbackContext):
     		for y in yy:
 	    		coly=col[y]
 	    		cou=coly.count_documents({})
-	    		z=coly.find_one_and_delete({})
+	    		z=coly.find_one({})
 	    		if cou==1:
 	    			coly.drop()
 	    		chat_id=z["chat_id"]
-	    		if reaaa.match(r"^-\d{1,}$",str(chat_id)):
-	    			is_anonymous=True
-	    		else:
-	    			is_anonymous=False
-	    		que=z["question"]
-	    		options=z["options"]
-	    		co=z["correct_option_id"]
-	    		explan=z["explanation"]
-		    	context.bot.send_poll(
-		    		chat_id=chat_id,
-		    		question=que,
-		    		options=options,
-		            type=Poll.QUIZ,
-		            correct_option_id=co,
-		            explanation=explan,
-		            is_anonymous=is_anonymous,
-		            allows_multiple_answers=False,
-		            parse_mode=ParseMode.HTML #,disable_web_page_preview = True
-	    		)
+	    		try:
+		    		if reaaa.match(r"^-\d{1,}$",str(chat_id)):
+		    			is_anonymous=True
+		    		else:
+		    			is_anonymous=False
+		    		que=z["question"]
+		    		options=z["options"]
+		    		co=z["correct_option_id"]
+		    		explan=z["explanation"]
+			    	context.bot.send_poll(
+			    		chat_id=chat_id,
+			    		question=que,
+			    		options=options,
+			            type=Poll.QUIZ,
+			            correct_option_id=co,
+			            explanation=explan,
+			            is_anonymous=is_anonymous,
+			            allows_multiple_answers=False,
+			            parse_mode=ParseMode.HTML #,disable_web_page_preview = True
+		    		)
+	    			coly.find_one_and_delete({})
+	    		except:
+	    			pass
 	    	time.sleep(5)
     	context.job_queue.run_once(alarm, due, context=chat_id, name=str(chat_id))
     	#time.sleep(5)

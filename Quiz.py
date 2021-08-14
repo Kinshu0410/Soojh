@@ -1163,7 +1163,7 @@ def poll(update, context):
         q=reaaa.split(r"[\n]", q)
         #update.message.reply_text(q)
         ques=q[0]
-        ques=reaaa.sub(r"^((\[\d{1,}/\d{1,}\] ){1,}|)(Q_|Q|(\d{1,})(\.)(\ |){1,}", "", ques)
+        ques=reaaa.sub(r"^((((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)))", "", ques)
         que="☞ "+ ques
         #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
         option1="(A) "+q[1]

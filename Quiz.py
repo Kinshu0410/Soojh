@@ -163,7 +163,7 @@ def restricted2(func):
 
 
 
-LIST_OF_ADMINS_D = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
+LIST_OF_ADMINS_D = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "ctettyari20"]
 def restrictedD(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
@@ -189,7 +189,7 @@ def restrictedD(func):
             		try:
             			chatiid="@"+str(update.message.chat.username)#id
             			print("chatid="+str(chatiid))
-            			print("message*d"+str(mid))
+            			print("messageid"+str(mid))
             		except Exception as e:
             			print(str(e))
             	
@@ -1157,13 +1157,13 @@ def poll(update, context):
     try:
         q=quest[0:-1]
         q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
-        q=reaaa.sub(r"(\n| )(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|बी|स|सी|डी|ड|द|क|ख|ग|घ|य|र|ल|व|1|2|3|4)(\)|\]|\.)(\.| |)", "\n", q)
+        q=reaaa.sub(r"(\n| )(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|बी|स|सी|डी|ड|द|क|ख|ग|घ|1|2|3|4)(\)|\]|\.)(\.| |)", "\n", q)
         q=reaaa.sub("\n{2,}", "\n", q)
         q=reaaa.sub("☞", "", q)
         q=reaaa.split(r"[\n]", q)
         #update.message.reply_text(q)
         ques=q[0]
-        ques=reaaa.sub(r"^(Q_|Q|)(\d{1,})(\.)(\ |){1,}", "", ques)
+        ques=reaaa.sub(r"^((\[\d{1,}/\d{1,}\] ){1,}|)(Q_|Q|(\d{1,})(\.)(\ |){1,}", "", ques)
         que="☞ "+ ques
         #que=que+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
         option1="(A) "+q[1]

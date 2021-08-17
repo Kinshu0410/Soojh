@@ -420,7 +420,7 @@ def receive_poll(update, context):
     try:
         cor=str(int(str(corr))+1)
     except:
-        cor="(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)" #update.message.reply_text("1")
+        cor="(a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a) (a)" #update.message.reply_text("1")
     #print("12")
     
     #print("123")

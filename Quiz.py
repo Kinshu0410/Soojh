@@ -163,7 +163,7 @@ def restricted2(func):
 
 
 
-LIST_OF_ADMINS_D = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "ctettyari20"]
+LIST_OF_ADMINS_D = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "ctettyari20","golumeena247"]
 def restrictedD(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):

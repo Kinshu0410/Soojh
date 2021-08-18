@@ -1366,8 +1366,8 @@ def pdfc(update,context):
 	
 	
 		
-	yyy=[" ‚",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",]
-	zzz=["‚",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S",]
+	yyy=[" ‚",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",    " a" ,    " ¡",    " %",     " W" , " ~j",  " ~" ," +" ]
+	zzz=["‚",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S",    "a" ,    "¡",    "%",     "W" , "~j",  "~" ,"+" ]
 	try:
 		for ln in range(len(yyy)):
 			x=reaaa.sub(yyy[ln],zzz[ln],x)

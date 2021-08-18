@@ -1387,7 +1387,7 @@ def pdfc(update,context):
 		yy=""	
 		for y in range(len(z1)):
 			yy=yy+z2[y]+" "+z1[y]
-		x1=yy+z2[-1]
+		x1=yy+" "+z2[-1]
 	except Exception as e:
 		x1=KrutiDev_to_Unicode(x)
 		print("playing Except error = "+str(e))
@@ -1401,7 +1401,7 @@ def pdfc(update,context):
 	
 def KrutiDev_to_Unicode(krutidev_substring):
     
-    string1="(fD|f\[|fX|f\?|fP|fT|f\.|fR|fF|fH|f\÷|fD|f«|f\{|fº|fU|f¶)k"
+    string1="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\")"
     modified_substring = krutidev_substring#.encode('utf-8')
     
     array_one = ["ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”",
@@ -1473,7 +1473,7 @@ def KrutiDev_to_Unicode(krutidev_substring):
     position_of_f = modified_substring.rfind("f")
     while (position_of_f != -1):
         print(position_of_f)
-        if reaaa.findall(string1,modified_substring[position_of_f:position_of_f+3]):
+        if reaaa.findall(string1,modified_substring[position_of_f:position_of_f+2]):
         	#print("match")
         	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+3] + modified_substring[position_of_f] +  modified_substring[position_of_f+3:]
         else:

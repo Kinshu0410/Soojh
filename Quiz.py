@@ -1354,24 +1354,27 @@ def pollfname(update,context):
 
 PDF = range(1)
 
-def pdf(update: Update, context: CallbackContext) -> None:
+def pdf(update,context):
 	"""Echo the user message."""
 	update.message.reply_text("Send me pdf text that you want ro convert into hindi text.\nSome pdf can convert some not...\n\nCancel any time click /cancel")
 	return PDF
 
-def pdfc(update: Update, context: CallbackContext) -> None:
+def pdfc(update,context):
 	"""Echo the user message."""
 	x=str(update.message.text)
 	
+	
+	
+		
 	yyy=[" as "," aS", " s", " S", " a", " ª", "fDr","fDR"," `","fDl"," \+u","fHk"," Z","f/k","fLF","f'k","ÙkkZ","fFk","fF","fC/","f\.","f\[","kkZ","fUn","f\"","f’k","khZ"        ]
 	zzz=["sa ","Sa", "s", "S", "a", "ª", "Dfr","DfR","`","Dfl","+u","Hfk","Z","/fk","LFf","'fk","ÙkZk","Fkf","Ff","C/f",".f","[f","kZk","Unf",'"f',"f'k","kZh"         ]
 	try:
 		for ln in range(len(yyy)):
-			x=re.sub(yyy[ln],zzz[ln],x)
+			x=reaaa.sub(yyy[ln],zzz[ln],x)
 		real='\([a-zA-Z0-9 ]*?\)|\d{1,}\.|\n|-'
 	
-		z=re.split(real,x)
-		z1=re.findall(real,x)
+		z=reaaa.split(real,x)
+		z1=reaaa.findall(real,x)
 		#print(z)
 		#print(len(z))
 		z2=[]
@@ -1384,14 +1387,17 @@ def pdfc(update: Update, context: CallbackContext) -> None:
 		for y in range(len(z1)):
 			yy=yy+z2[y]+" "+z1[y]
 		x1=yy+z2[-1]
-	except:
+	except Exception as e:
 		x1=KrutiDev_to_Unicode(x)
-	return PDF
+		print("playing Except error = "+str(e))
+	#print(x1)
 	
 	
 	#text=KrutiDev_to_Unicode(x1)
     
 	update.message.reply_text(x1)
+	return PDF
+	
 def KrutiDev_to_Unicode(krutidev_substring):
     
     modified_substring = krutidev_substring#.encode('utf-8')
@@ -1489,23 +1495,24 @@ def KrutiDev_to_Unicode(krutidev_substring):
     #print(modified_substring)
     return modified_substring
 
+
 def main() -> None:
     # Create the Updater and pass it your bot's token.
     bot_token=os.environ.get("BOT_TOKEN", "")
-    #bot_token='1458427559:AAFDcDNOg6VfK6Gscrf7hhS6eciKr2Q_nT0'
+    #bot_token='1415600890:AAHl1L2Om1E5O655U0v2Q-nIo7HszNiZKaI'
     updater = Updater(bot_token,use_context=True)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
     #dispatcher.
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
-    conv_handler01F= ConversationHandler(
+    conv_handler01PDF= ConversationHandler(
         entry_points=[CommandHandler('pdf', pdf)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            PDF: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pdfc),],
+            PDF: [MessageHandler(Filters.text& ~Filters.command, pdfc),],
         },
-        fallbacks=[CommandHandler('cancel', pollf)],
+        fallbacks=[CommandHandler('cancel', cancel)],
     )
     
     conv_handler01F= ConversationHandler(
@@ -1599,11 +1606,12 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
-
+    dispatcher.add_handler(conv_handler01PDF)
     dispatcher.add_handler(conv_handler01R)
     dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))
     
     dispatcher.add_handler(conv_handler)
+    
     dispatcher.add_handler(conv_handler01F)
     dispatcher.add_handler(conv_handler01)
     dispatcher.add_handler(conv_handler0C)

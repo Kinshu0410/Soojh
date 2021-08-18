@@ -1366,11 +1366,10 @@ def pdfc(update,context):
 	
 	
 		
-	yyy=[" ‚",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",    " a" ,    " ¡",    " %",     " W" , " ~j",  " ~" ," \+(?!= )" ]
+	yyy=[" ‚",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",    " a" ,    " ¡",    " %",     " W" , " ~j",  " ~" ," \+" ]
 	zzz=["‚",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S",    "a" ,    "¡",    "%",     "W" , "~j",  "~" ,"+" ]
 	try:
-		for ln in range(len(yyy)):
-			x=reaaa.sub(yyy[ln],zzz[ln],x)
+		
 		real='\([a-zA-Z0-9 ]*?\)|\d{1,}\.|\n|-| \+ '
 	
 		z=reaaa.split(real,x)
@@ -1379,7 +1378,9 @@ def pdfc(update,context):
 		#print(len(z))
 		z2=[]
 		for zz in range(len(z1)):
-			z2.append(KrutiDev_to_Unicode(z[zz]))
+			for ln in range(len(yyy)):
+				z[zz]=reaaa.sub(yyy[ln],zzz[ln],z[zz])
+				z2.append(KrutiDev_to_Unicode(z[zz]))
 			
 			#z2.append(KrutiDev_to_Unicode(zz))
 		#print(len(z1))
@@ -1635,4 +1636,5 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
 

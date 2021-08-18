@@ -1366,8 +1366,8 @@ def pdfc(update,context):
 	
 	
 		
-	yyy=[" ‚",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",    " a" ,    " ¡",    " %",     " W" , " ~j",  " ~" ," \+","kkZ"      ]
-	zzz=["‚",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S",    "a" ,    "¡",    "%",     "W" , "~j",  "~" ,"+","kZk"      ]
+	yyy=[" ‚","frz","/kq zo","/kqzo",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",    " a" ,    " ¡",    " %",     " W" , " ~j",  " ~" ," \+","kkZ"      ]
+	zzz=["‚","rfZ","/kzqo","/kzqo",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S",    "a" ,    "¡",    "%",     "W" , "~j",  "~" ,"+","kZk"      ]
 	try:
 		
 		real='\([a-zA-Z0-9 ]*?\)|\d{1,}\.|\n|-| \+ '
@@ -1401,7 +1401,7 @@ def pdfc(update,context):
 	
 def KrutiDev_to_Unicode(krutidev_substring):
     
-    string1="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L)"
+    string1="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù)"
     modified_substring = krutidev_substring#.encode('utf-8')
     
     array_one = ["ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”",

@@ -1401,7 +1401,7 @@ def pdfc(update,context):
 	
 def KrutiDev_to_Unicode(krutidev_substring):
     
-    string1="fD|f\[|fX|f\?|fP|fT|f\.|fR|fF|fH|f\÷|fD|f«|f\{|fº|fU|f¶"
+    string1="fD"
     modified_substring = krutidev_substring#.encode('utf-8')
     
     array_one = ["ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”",

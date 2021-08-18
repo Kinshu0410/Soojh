@@ -1401,6 +1401,7 @@ def pdfc(update,context):
 	
 def KrutiDev_to_Unicode(krutidev_substring):
     
+    string=""
     modified_substring = krutidev_substring#.encode('utf-8')
     
     array_one = ["ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”",
@@ -1470,8 +1471,13 @@ def KrutiDev_to_Unicode(krutidev_substring):
     # Move "f"  to correct position and replace
     modified_substring = "  "+modified_substring+"  "
     position_of_f = modified_substring.rfind("f")
-    while (position_of_f != -1):    
-        modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1] + modified_substring[position_of_f] +  modified_substring[position_of_f+2:]
+    while (position_of_f != -1):
+        print(position_of_f)
+        if re.findall(string,modified_substring):
+        	#print("match")
+        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+3] + modified_substring[position_of_f] +  modified_substring[position_of_f+3:]
+        else:
+        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1] + modified_substring[position_of_f] +  modified_substring[position_of_f+2:]
         position_of_f = modified_substring.rfind("f",0, position_of_f - 1 ) # search for f ahead of the current position.
     modified_substring = modified_substring.replace("f","ि")
     modified_substring = modified_substring.strip()

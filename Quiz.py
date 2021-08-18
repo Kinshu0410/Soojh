@@ -1366,8 +1366,8 @@ def pdfc(update,context):
 	
 	
 		
-	yyy=[" as "," aS", " s", " S", " a", " ª", "fDr","fDR"," `","fDl"," \+u","fHk"," Z","f/k","fLF","f'k","ÙkkZ","fFk","fF","fC/","f\.","f\[","kkZ","fUn","f\"","f’k","khZ"        ]
-	zzz=["sa ","Sa", "s", "S", "a", "ª", "Dfr","DfR","`","Dfl","+u","Hfk","Z","/fk","LFf","'fk","ÙkZk","Fkf","Ff","C/f",".f","[f","kZk","Unf",'"f',"f'k","kZh"         ]
+	yyy=[" as "," aS", " s", " S", " a", " ª", "fDr","fDR"," `","fDl"," \+u","fHk"," Z","f/k","fLF","f'k","ÙkkZ","fFk","fF","fC/","f\.","f\[","kkZ","fUn","f\"","f’k","khZ","fU","ck sZ","cksZ","fY"                     ]
+	zzz=["sa ","Sa", "s", "S", "a", "ª", "Dfr","DfR","`","Dfl","+u","Hfk","Z","/fk","LFf","'fk","ÙkZk","Fkf","Ff","C/f",".f","[f","kZk","Unf",'"f',"'fk","kZh","Uf","ck Zs","ckZs","Yf"                         ]
 	try:
 		for ln in range(len(yyy)):
 			x=reaaa.sub(yyy[ln],zzz[ln],x)

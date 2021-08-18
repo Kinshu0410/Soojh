@@ -1401,7 +1401,7 @@ def pdfc(update,context):
 	
 def KrutiDev_to_Unicode(krutidev_substring):
     
-    string=""
+    string="f(D|\[|X|\?|P|T|\.|R|F|H|÷|D|«|\{|º|U|¶)"
     modified_substring = krutidev_substring#.encode('utf-8')
     
     array_one = ["ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”",
@@ -1473,7 +1473,7 @@ def KrutiDev_to_Unicode(krutidev_substring):
     position_of_f = modified_substring.rfind("f")
     while (position_of_f != -1):
         print(position_of_f)
-        if re.findall(string,modified_substring):
+        if re.findall(string,modified_substring[position_of_f:position_of_f+3]):
         	#print("match")
         	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+3] + modified_substring[position_of_f] +  modified_substring[position_of_f+3:]
         else:

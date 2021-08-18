@@ -1366,8 +1366,8 @@ def pdfc(update,context):
 	
 	
 		
-	yyy=["’kCn","’kqf)","fU/k"," as "," aS", " s", " S", " a", " ª", "fDr","fDR"," `","fDl"," \+u","fHk"," Z","f/k","fLF","f'k","ÙkkZ","fFk","fF","fC/","f\.","f\[","kkZ","fUn","f\"","f’k","khZ","fU","ck sZ","cksZ","fY"                     ]
-	zzz=["'kCn","'kqf)","U/fk","sa ","Sa", "s", "S", "a", "ª", "Dfr","DfR","`","Dfl","+u","Hfk","Z","/fk","LFf","'fk","ÙkZk","Fkf","Ff","C/f",".f","[f","kZk","Unf",'"f',"'fk","kZh","Uf","ck Zs","ckZs","Yf"                         ]
+	yyy=[" ‚",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",]
+	zzz=["‚",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S",]
 	try:
 		for ln in range(len(yyy)):
 			x=reaaa.sub(yyy[ln],zzz[ln],x)
@@ -1402,7 +1402,7 @@ def KrutiDev_to_Unicode(krutidev_substring):
     
     modified_substring = krutidev_substring#.encode('utf-8')
     
-    array_one = ["1\.","\n","ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”",
+    array_one = ["ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”",
     
     "å",  "ƒ",  "„",   "…",   "†",   "‡",   "ˆ",   "‰",   "Š",   "‹", 
     
@@ -1432,7 +1432,7 @@ def KrutiDev_to_Unicode(krutidev_substring):
     "a",    "¡",    "%",     "W",  "•", "·", "∙", "·", "~j",  "~", "\\","+"," ः",
     "^", "*",  "Þ", "ß", "(", "¼", "½", "¿", "À", "¾", "A", "-", "&", "&", "Œ", "]","~ ","@"]
     
-    array_two = ["1.","\n","॰","QZ+","sa","a","र्द्ध","Z","\"","\"","'","'",
+    array_two = ["॰","QZ+","sa","a","र्द्ध","Z","\"","\"","'","'",
     
     "०",  "१",  "२",  "३",     "४",   "५",  "६",   "७",   "८",   "९",   
     

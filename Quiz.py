@@ -1366,8 +1366,8 @@ def pdfc(update,context):
 	
 	
 		
-	yyy=[" ‚",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",    " a" ,    " ¡",    " %",     " W" , " ~j",  " ~" ," \+",      ]
-	zzz=["‚",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S",    "a" ,    "¡",    "%",     "W" , "~j",  "~" ,"+",      ]
+	yyy=[" ‚",    " ks",   " kS",   " k",  " h",    " q",   " w",   " `",    " s",    " S",    " a" ,    " ¡",    " %",     " W" , " ~j",  " ~" ," \+","kkZ"      ]
+	zzz=["‚",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S",    "a" ,    "¡",    "%",     "W" , "~j",  "~" ,"+","kZk"      ]
 	try:
 		
 		real='\([a-zA-Z0-9 ]*?\)|\d{1,}\.|\n|-| \+ '
@@ -1479,7 +1479,7 @@ def KrutiDev_to_Unicode(krutidev_substring):
     # Move "half R"  to correct position and replace
     modified_substring = "  " + modified_substring + "  "
     position_of_r = modified_substring.find("Z")
-    set_of_matras =  ["‚",    "ks",   "kS", "kk",   "k",     "h",    "q",   "w",   "`",    "s",    "S", "a",    "¡",    "%",     "W",   "·",   "~ ", "~"]
+    set_of_matras =  ["‚",    "ks",   "kS",   "k",     "h",    "q",   "w",   "`",    "s",    "S", "a",    "¡",    "%",     "W",   "·",   "~ ", "~"]
     while (position_of_r != -1):    
         modified_substring = modified_substring.replace("Z","",1)
         if modified_substring[position_of_r - 1] in set_of_matras:

@@ -1377,10 +1377,10 @@ def pdfc(update,context):
 		#print(z)
 		#print(len(z))
 		z2=[]
-		for zz in range(len(z1)):
+		for zz in range(len(z)):
 			for ln in range(len(yyy)):
 				z[zz]=reaaa.sub(yyy[ln],zzz[ln],z[zz])
-				z2.append(KrutiDev_to_Unicode(z[zz]))
+			z2.append(KrutiDev_to_Unicode(z[zz]))
 			
 			#z2.append(KrutiDev_to_Unicode(zz))
 		#print(len(z1))

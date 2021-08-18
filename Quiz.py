@@ -169,7 +169,7 @@ def restrictedD(func):
     def wrapped(update, context, *args, **kwargs):
         global Xiii
         if Xiii==1:
-            due=1801
+            due=7201
             chat_id11=711296045
             context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
             Xiii+=1
@@ -883,7 +883,7 @@ def receive_poll_answer(update,context):
     
     #print("jdjdjdjxj")
     if Xiii==1:
-    	due=1801
+    	due=7201
     	chat_id11=711296045
     	context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
     	Xiii+=1

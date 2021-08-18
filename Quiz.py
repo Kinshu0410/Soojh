@@ -1371,7 +1371,7 @@ def pdfc(update,context):
 	try:
 		for ln in range(len(yyy)):
 			x=reaaa.sub(yyy[ln],zzz[ln],x)
-		real='\([a-zA-Z0-9 ]*?\)|\d{1,}\.|\n|-'
+		real='\([a-zA-Z0-9 ]*?\)|\d{1,}\.|\n|-| \+ '
 	
 		z=reaaa.split(real,x)
 		z1=reaaa.findall(real,x)

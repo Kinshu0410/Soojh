@@ -196,7 +196,7 @@ def restrictedD(func):
             except Exception as e:
             	print(str(e))
             messag=update.message.text
-            if reaaa.findall("(.*?\n){4,}.*?",messag):
+            if reaaa.findall("(.*?\n{1,}){4,}.*?",messag):
             	context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
             else:
             	pass

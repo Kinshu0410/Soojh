@@ -187,7 +187,7 @@ def restrictedD(func):
             	if chatiid<=0:
             		
             		try:
-            			chatiid="@"+str(update.message.chat.username)#id
+            			#chatiid="@"+str(update.message.chat.username)#id
             			print("chatid="+str(chatiid))
             			print("messageid"+str(mid))
             		except Exception as e:

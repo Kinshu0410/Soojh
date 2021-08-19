@@ -1496,10 +1496,14 @@ def KrutiDev_to_Unicode(krutidev_substring):
     set_of_matras =  ["‚",    "ks",   "kS",   "k",     "h",    "q",   "w",   "`",    "s",    "S", "a",    "¡",    "%",     "W",   "·",   "~ ", "~"]
     while (position_of_r != -1):    
         modified_substring = modified_substring.replace("Z","",1)
-        if modified_substring[position_of_r - 1] in set_of_matras:
+        if modified_substring[position_of_r - 1] =="ि":
+        	modified_substring = modified_substring[:position_of_r - 1] + "Zि" + modified_substring[position_of_r +1:]
+        elif modified_substring[position_of_r - 1] in set_of_matras:
             modified_substring = modified_substring[:position_of_r - 2] + "j~" + modified_substring[position_of_r - 2:]
+            print(modified_substring)
         else:
             modified_substring = modified_substring[:position_of_r - 1] + "j~" + modified_substring[position_of_r - 1:]
+            print(modified_substring)
         position_of_r = modified_substring.find("Z")
     modified_substring = modified_substring.strip()
     

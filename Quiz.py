@@ -1493,14 +1493,11 @@ def KrutiDev_to_Unicode(krutidev_substring):
     # Move "half R"  to correct position and replace
     modified_substring = "  " + modified_substring + "  "
     position_of_r = modified_substring.find("Z")
-    set_Z=["ि"]
-    set_of_matras =  ["‚",    "ks",   "kS",   "k",     "h",    "q",   "w",   "`",    "s",    "S", "a",    "¡",    "%",     "W",   "·",   "~ ", "~"]
+    set_of_matras =  ["‚",    "ks",   "kS",   "k",     "h",    "q",   "w",   "`",    "s",    "S", "a",    "¡",    "%",     "W",   "·",   "~ ", "~","ि"]
     while (position_of_r != -1):    
         modified_substring = modified_substring.replace("Z","",1)
-        if modified_substring[position_of_r - 1] in set_Z:
-            modified_substring = modified_substring[:position_of_r - 1] + "Z"+ modified_substring[position_of_r -1] + modified_substring[position_of_r +1:]
-        elif modified_substring[position_of_r - 1] in set_of_matras:
-            modified_substring = modified_substring[:position_of_r - 2] + "j~" + modified_substring[position_of_r - 2:]
+        if modified_substring[position_of_r - 1] in set_of_matras:
+            modified_substring = modified_substring[:position_of_r - 1] + "Z"+ modified_substring[position_of_r -1] + modified_substring[position_of_r :]
             print(modified_substring)
         else:
             modified_substring = modified_substring[:position_of_r - 1] + "j~" + modified_substring[position_of_r - 1:]

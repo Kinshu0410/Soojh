@@ -1481,16 +1481,16 @@ def KrutiDev_to_Unicode(krutidev_substring):
         print(position_of_f)
         if reaaa.findall(string4,modified_substring[position_of_f:position_of_f+3]):
         	#print("match")
-        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+5] + modified_substring[position_of_f] +  modified_substring[position_of_f+5:]
+        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+6] + modified_substring[position_of_f] +  modified_substring[position_of_f+6:]
         if reaaa.findall(string3,modified_substring[position_of_f:position_of_f+3]):
         	#print("match")
-        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+4] + modified_substring[position_of_f] +  modified_substring[position_of_f+4:]
+        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+5] + modified_substring[position_of_f] +  modified_substring[position_of_f+5:]
         if reaaa.findall(string2,modified_substring[position_of_f:position_of_f+3]):
         	#print("match")
-        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+3] + modified_substring[position_of_f] +  modified_substring[position_of_f+3:]
+        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+4] + modified_substring[position_of_f] +  modified_substring[position_of_f+4:]
         elif reaaa.findall(string1,modified_substring[position_of_f:position_of_f+2]):
         	#print("match")
-        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+2] + modified_substring[position_of_f] +  modified_substring[position_of_f+2:]
+        	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+3] + modified_substring[position_of_f] +  modified_substring[position_of_f+3:]
         else:
         	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1] + modified_substring[position_of_f] +  modified_substring[position_of_f+2:]
         position_of_f = modified_substring.rfind("f",0, position_of_f - 1 ) # search for f ahead of the current position.

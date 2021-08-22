@@ -1404,10 +1404,10 @@ def pdfc(update,context):
 	return PDF
 	
 def KrutiDev_to_Unicode(krutidev_substring):
-    string4="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù|’|E|C|O|I|Y|U|'){4}"
-    string3="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù|’|E|C|O|I|Y|U|'){3}"
-    string2="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù|’|E|C|O|I|Y|U|'){2}"
-    string1="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù|’|E|C|I|Y|U|')"
+    string4="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù|’|E|C|O|I|Y|U|'|.~|.z){4}"
+    string3="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù|’|E|C|O|I|Y|U|'|.~|.z){3}"
+    string2="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù|’|E|C|O|I|Y|U|'|.~|.z){2}"
+    string1="f(D|\[|X|\?|P|T|\.|R|F|H|\÷|D|«|\{|º|U|¶|/|\"|L|Ù|’|E|C|I|Y|U|'|.~|.z)"
     modified_substring = krutidev_substring#.encode('utf-8')
     
     array_one = ["ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”",
@@ -1479,10 +1479,10 @@ def KrutiDev_to_Unicode(krutidev_substring):
     position_of_f = modified_substring.rfind("f")
     while (position_of_f != -1):
         print(position_of_f)
-        if reaaa.findall(string4,modified_substring[position_of_f:position_of_f+3]):
+        if reaaa.findall(string4,modified_substring[position_of_f:position_of_f+5]):
         	#print("match")
         	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+6] + modified_substring[position_of_f] +  modified_substring[position_of_f+6:]
-        if reaaa.findall(string3,modified_substring[position_of_f:position_of_f+3]):
+        if reaaa.findall(string3,modified_substring[position_of_f:position_of_f+4]):
         	#print("match")
         	modified_substring = modified_substring[:position_of_f] + modified_substring[position_of_f+1:position_of_f+5] + modified_substring[position_of_f] +  modified_substring[position_of_f+5:]
         if reaaa.findall(string2,modified_substring[position_of_f:position_of_f+3]):

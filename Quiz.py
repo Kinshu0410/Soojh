@@ -1034,7 +1034,8 @@ def ghppp1(update,context):
         options[yx]=reaaa.sub(" "," ",options[yx])
     co=userText.correct_option_id
     explan=userText.explanation
-    explan=reaaa.sub(" "," ",explan)
+    if explan:
+        explan=reaaa.sub(" "," ",explan)
     print("poll")
     context.bot.send_poll(
             chat_id=-1001517843177,

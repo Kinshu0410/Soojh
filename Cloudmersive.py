@@ -94,11 +94,13 @@ def poll(update, context):
     questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
     #que = update.message.text()
     quest=(update.message.text)
+    re.sub(" "," ",quest)
     if 1==1:
         q=quest[0:-1]
         q=re.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
         q=re.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
         q=re.sub("\n{2,}", "\n", q)
+
     
         q=re.split("[\n]", q)
         #update.message.reply_text(q)

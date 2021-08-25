@@ -1032,7 +1032,7 @@ def ghppp1(update,context):
     que=reaaa.sub("(\n| |)✍{0,} Priti Gupta ✍{0,}(\n| |)","",que)
     que=reaaa.sub("(\n| |)Sandeep Choudhary(\n| |)","",que)
     que=reaaa.sub("(\n| |)🤗.*?🤗(\n| |)","",que)
-    que=reaaa.sub("(\n{1,}","\n",que)
+    que=reaaa.sub("(\n){1,}","\n",que)
     que=reaaa.sub("^\n","",que)
     options=[o.text for o in userText.options]
     for yx in range(len(options)):

@@ -1027,10 +1027,14 @@ def ghppp1(update,context):
     userText=update.message.poll
     print("ghn1 started")
     que=userText.question
+    que=reaaa.sub(" "," ",que)
     que=reaaa.sub("^(☞( ){1,}|(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)))","",que)
     options=[o.text for o in userText.options]
+    for yx in range(len(options)):
+        options[yx]=reaaa.sub(" "," ",options[yx])
     co=userText.correct_option_id
     explan=userText.explanation
+    explan=reaaa.sub(" "," ",explan)
     print("poll")
     context.bot.send_poll(
             chat_id=-1001517843177,

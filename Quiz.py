@@ -249,14 +249,15 @@ def photo(update: Update, _: CallbackContext) -> int:
     que=reaaa.sub("(\n| |)🤗.*?🤗(\n| |)","",que)
     que=reaaa.sub("(\n){1,}","\n",que)
     que=reaaa.sub("^\n","",que) 
-    question= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/])", "", que)
+    question= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/\.])", "", que)
     question= reaaa.sub(r"^(\[\d{1,}/\d{1,}\] ){1,}", "", question)
     options=[o.text for o in user.options]
     correct_option_id=user.correct_option_id
     exp=user.explanation
-    if reaaa.findall("@[a-zA-Z0-9_-]",exp):
-        exp=False
+    
     if explan:
+        if reaaa.findall("@[a-zA-Z0-9_-]",exp):
+            exp=False
         exp=reaaa.sub(" "," ",exp) 
     if exp is not None:
     	exp= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/])", "", exp)
@@ -1044,14 +1045,16 @@ def ghppp1(update,context):
     que=reaaa.sub("(\n| |)🤗.*?🤗(\n| |)","",que)
     que=reaaa.sub("(\n){1,}","\n",que)
     que=reaaa.sub("^\n","",que)
+    que= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/\.])", "", que)
     options=[o.text for o in userText.options]
     for yx in range(len(options)):
         options[yx]=reaaa.sub(" "," ",options[yx])
     co=userText.correct_option_id
     explan=userText.explanation
-    if reaaa.findall("@[a-zA-Z0-9_-]",explan):
-        explan=False
+    
     if explan:
+        if reaaa.findall("@[a-zA-Z0-9_-]",explan):
+            explan="Join @Polls_Quiz"
         explan=reaaa.sub(" "," ",explan)
     print("poll")
     context.bot.send_poll(

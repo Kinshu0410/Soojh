@@ -254,7 +254,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     options=[o.text for o in user.options]
     correct_option_id=user.correct_option_id
     exp=user.explanation
-    if re.findall("@[a-zA-Z0-9_-]",exp):
+    if reaaa.findall("@[a-zA-Z0-9_-]",exp):
         exp=False
     if explan:
         exp=reaaa.sub(" "," ",exp) 
@@ -1049,7 +1049,7 @@ def ghppp1(update,context):
         options[yx]=reaaa.sub(" "," ",options[yx])
     co=userText.correct_option_id
     explan=userText.explanation
-    if re.findall("@[a-zA-Z0-9_-]",explan):
+    if reaaa.findall("@[a-zA-Z0-9_-]",explan):
         explan=False
     if explan:
         explan=reaaa.sub(" "," ",explan)

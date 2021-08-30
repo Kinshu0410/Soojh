@@ -255,12 +255,12 @@ def photo(update: Update, _: CallbackContext) -> int:
     correct_option_id=user.correct_option_id
     exp=user.explanation
     
-    if explan:
+    if exp:
         if reaaa.findall("@[a-zA-Z0-9_-]",exp):
             exp=False
         exp=reaaa.sub(" "," ",exp) 
     if exp is not None:
-    	exp= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/])", "", exp)
+    	exp= reaaa.sub(r"(#\w*)|(http(s|)://[a-zA-Z0-9_/])", "", exp)
     	exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)
     
     if exp is None:

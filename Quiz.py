@@ -243,13 +243,23 @@ def photo(update: Update, _: CallbackContext) -> int:
     photo_file.download('user_photo.jpg')
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')'''
     question=user.question
-    question= reaaa.sub(r"@\w*", "", question)
+    que=reaaa.sub(" "," ",question)
+    que=reaaa.sub("(\n| |)✍{0,} Priti Gupta ✍{0,}(\n| |)","",que)
+    que=reaaa.sub("(\n| |)Sandeep Choudhary(\n| |)","",que)
+    que=reaaa.sub("(\n| |)🤗.*?🤗(\n| |)","",que)
+    que=reaaa.sub("(\n){1,}","\n",que)
+    que=reaaa.sub("^\n","",que) 
+    question= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/])", "", que)
     question= reaaa.sub(r"^(\[\d{1,}/\d{1,}\] ){1,}", "", question)
     options=[o.text for o in user.options]
     correct_option_id=user.correct_option_id
     exp=user.explanation
+    if re.findall("@[a-zA-Z0-9_-]",exp):
+        exp=False
+    if explan:
+        exp=reaaa.sub(" "," ",exp) 
     if exp is not None:
-    	exp= reaaa.sub(r"@\w*", "", exp)
+    	exp= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/])", "", exp)
     	exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)
     
     if exp is None:
@@ -1039,6 +1049,8 @@ def ghppp1(update,context):
         options[yx]=reaaa.sub(" "," ",options[yx])
     co=userText.correct_option_id
     explan=userText.explanation
+    if re.findall("@[a-zA-Z0-9_-]",explan):
+        explan=False
     if explan:
         explan=reaaa.sub(" "," ",explan)
     print("poll")

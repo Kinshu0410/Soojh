@@ -77,7 +77,7 @@ def restricted(func):
         
         userName = update.message.chat.username
         userName1=update.message.from_user.username
-        if userName and userName1 not in LIST_OF_ADMINS and userName1 =="none":
+        if userName and userName1 not in LIST_OF_ADMINS and userName1 =="None":
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)

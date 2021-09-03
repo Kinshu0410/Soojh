@@ -69,15 +69,15 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["Kinbin247"]
+LIST_OF_ADMINS = ["711296045"]
 
 def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
         
-        userName = update.message.chat.username
-        userName1=update.message.from_user.username
-        if userName and userName1 not in LIST_OF_ADMINS and userName1 =="None":
+        userName = update.message.chat.id
+        userName1=update.message.from_user.id
+        if userName and userName1 not in LIST_OF_ADMINS:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)

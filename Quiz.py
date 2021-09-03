@@ -1036,7 +1036,7 @@ def ghn(update,context):
 @restricted
 def ghppp1(update,context):
     userText=update.message.poll
-    context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(context.bot.chat.id)+"\">user info</a>")
+    context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(update.message.from_user.id)+"\">grouo</a>")
     print("ghn1 started")
     que=userText.question
     que=reaaa.sub(" "," ",que)

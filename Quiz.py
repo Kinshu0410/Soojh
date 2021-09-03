@@ -75,8 +75,8 @@ def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
         
-        userName = update.message.chat.id
-        userName1=update.message.from_user.id
+        userName = str(update.message.chat.id)
+        userName1=str(update.message.from_user.id)
         if userName and userName1 not in LIST_OF_ADMINS:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return

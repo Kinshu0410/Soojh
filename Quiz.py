@@ -1335,13 +1335,16 @@ def pollf(update,context):
     		print(str(e))
     	return POLLF
     else:
-	    db=client["Quiz_Data"]
-	    x=(db.list_collection_names({}))
-	    
-	    for y in x:
-	    	context.bot.send_message(chat_id=chat___id,text="<pre>"+y+"</pre>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	    db=client["user"]["sub"]
+	    col=db.find_one(({"Uid":update.message.chat.id}))
+	    if bool(col):
+	    	update.message.reply_text("you can use /quizlist command to see Quiz for your group and i add you in my data")
+	    else:
+	    	db.insert_one({"Uid":update.message.chat.id})
+	    	update.message.reply_text("you can use /quizlist command to see Quiz for your group.")
 	    	
-	    context.bot.send_message(chat_id=chat___id,text="copy one fo them 👆👆👆👆👆👆👆\n<a href=\"https://telegram.me/Soojhboojh_01bot?startgroup=true\">Click Here for Play Quiz in your group</a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	    
+	    
     
     return ConversationHandler.END
     

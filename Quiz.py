@@ -1793,7 +1793,10 @@ def call3(update,context):
 		cor=y["cor"]
 		type=y["type"]
 		data=y["data"]
-		caption=y["text"]
+		try:
+			caption=y["text"]
+		except:
+			caption=False
 		print(data)
 		keyboard = [
         [

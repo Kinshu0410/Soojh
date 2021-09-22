@@ -1657,13 +1657,15 @@ def button(update: Update, context: CallbackContext) -> None:
 		newvalues1 = { qQ:qA}
 		#print(myquery1)
 		#print(newvalues1)
-		coll.update_one(myquery1,{"$set":newvalues1})
+		if qA!="0":
+			coll.update_one(myquery1,{"$set":newvalues1})
 	else:
-		coll.insert_one({"uid":uId,qQ:qA})
+		if qA!="0":
+			coll.insert_one({"uid":uId,qQ:qA})
 	if qA=='0':
 		if qq:
-			print(exp)
-			if bool(reaaa.match("^$",exp)):
+			print(qq)
+			if bool(re.match("^$",exp)):
 				query.answer(text="Now we don't have Explanation\n\nहमारे पास अभी कोई भी hint नहीं है।🙏🙏", show_alert=True)
 				#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))
 				print(bool(reaaa.match("^$",exp)))

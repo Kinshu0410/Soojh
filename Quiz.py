@@ -32,7 +32,7 @@ import xlsxwriter
 import sqlite3
 from telegram.ext.dispatcher import run_async
 
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, Poll, Update, ChatAction, ParseMode
+from telegram import ReplyKeyboardMarkup,InlineKeyboardButton,InlineKeyboardMarkup, ReplyKeyboardRemove, Update, Poll, Update, ChatAction, ParseMode
 from telegram.ext import (
     Updater,
     CommandHandler,
@@ -42,9 +42,11 @@ from telegram.ext import (
     PollHandler,
     ConversationHandler,
     CallbackContext,
+    CommandHandler, 
+    CallbackQueryHandler, 
+    CallbackContext
     
 )
-
 
 
 # Enable logging
@@ -1545,6 +1547,322 @@ def KrutiDev_to_Unicode(krutidev_substring):
     #print(modified_substring)
     return modified_substring
 
+from pymongo import MongoClient
+#import dns
+
+import dns.resolver
+dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
+dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public dns server,  use whatever dns server you like here
+# as a test, dns.resolver.query('www.google.com') should return an answer, not an exception
+client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
+
+import logging
+
+import re
+import time
+
+from telegram import ReplyKeyboardMarkup,InlineKeyboardButton,InlineKeyboardMarkup, ReplyKeyboardRemove, Update, Poll, Update, ChatAction, ParseMode
+from telegram.ext import (
+    Updater,
+    CommandHandler,
+    MessageHandler,
+    Filters,
+    PollAnswerHandler,
+    PollHandler,
+    ConversationHandler,
+    CallbackContext,
+    CommandHandler, 
+    CallbackQueryHandler, 
+    CallbackContext
+    
+)
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+
+
+	
+def start(update: Update, context: CallbackContext) -> None:
+    """Sends a message with three inline buttons attached."""
+    #context.bot.get_message(chat_id="@specialquestionsgroup", message_id=1217)
+    
+    #msg = context.bot.copyMessage(chat_id=711296045,from_chat_id="@ONLY_FOR_US",message_id=8182)
+    #print(msg)
+    quizNameC=(update.message.text)
+    quizNameC=re.sub("/start ","",quizNameC)
+    quizNameC="_".split(quizNameC)
+    col=client["QuizC"][quizNameC]
+    yy=col.find()
+    for y in yy:
+    	cor=y["cor"]
+    	if cor:
+    		new={"type":"Quiz","typee":"photo","data":data,"text":caption,"cor":cor,"exp":""}
+    		type=y["type"]
+    		typee=y["typee"]
+    		data=y["data"]
+    		caption=y["caption"]
+    	else:
+    		type=y["type"]
+    		typee=y["typee"]
+    		data=y["data"]
+    		caption=y["caption"]
+    	
+    cou=str(col.count_documents({"type":"Quiz"}))
+#    cou=str(col.count_documents({"type":"Quiz"}))
+    keyboard = [
+        [
+            InlineKeyboardButton("A", callback_data=quizNameC+"_"+str(int(cou)+1)+'_1'),
+            InlineKeyboardButton("B", callback_data=quizNameC+"_"+str(int(cou)+1)+'_2'),
+            InlineKeyboardButton("C", callback_data=quizNameC+"_"+str(int(cou)+1)+'_3'),
+            InlineKeyboardButton("D", callback_data=quizNameC+"_"+str(int(cou)+1)+'_4'),],
+    ]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    update.message.reply_text('Please choose:', reply_markup=reply_markup)
+
+
+def button(update: Update, context: CallbackContext) -> None:
+	query = update.callback_query
+	#print(query)
+	ddd=re.split("_",query.data)
+	qN=ddd[0]
+	qQ=str(ddd[1])
+	print(qQ)
+	qA=ddd[2]
+	col=client["QuizC"][qN]
+	cou1=str(col.count_documents({"type":"Quiz"}))
+	yy=col.find({})
+	cor=yy[int(qQ)-1]["cor"]
+	exp=yy[int(qQ)-1]["exp"]
+	#print(exp)
+	uId=(query.from_user.id)
+	coll=client["QuizCData"][qN]
+	#print('1')
+	#print(coll)
+	qq=None
+	if coll.find_one({"uid":uId,qQ:{"$type":"string"}}):
+		#print("2")
+		ccc=coll.find_one({"uid":uId,qQ:{"$type":"string"}})
+		qq=str(ccc[qQ])
+		#print(qq)
+	elif coll.find_one({"uid":uId}):
+		#coll.find_and_modify
+		myquery1 = {"uid":uId}
+		newvalues1 = { qQ:qA}
+		#print(myquery1)
+		#print(newvalues1)
+		coll.update_one(myquery1,{"$set":newvalues1})
+	else:
+		coll.insert_one({"uid":uId,qQ:qA})
+	if qA=='0':
+		if qq:
+			print(exp)
+			if bool(re.match("^$",exp)):
+				query.answer(text="Now we don't have Explanation\n\nहमारे पास अभी कोई भी hint नहीं है।🙏🙏", show_alert=True)
+				#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))
+				print(bool(re.match("^$",exp)))
+			elif bool(re.findall(r"^https://t\.me/.*",exp)):
+				
+				try:
+					context.bot.sendPhoto(chat_id=int(uId), photo=(exp))#caption=caption)
+					query.answer(text="@soojhboojh_01bot Bot send you a file or Photo message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True)
+				except:
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True)
+			else:
+				try:
+					context.bot.send_message(chat_id=int(uId), text=exp)
+					query.answer(text="@soojhboojh_01bot Bot send you a file or text message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True)
+				except:
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True)
+		else:
+			query.answer(text="First select option then click Q_Number for Hint\n\nसबसे पहले एक option select कीजिये तब आप explanation जान पाओगें यदि explanation होगी तो🙏🙏", show_alert=True)
+	elif qq:
+		if qq==cor:
+			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou gain = 4📈" , show_alert=True)
+		else:
+			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou lost = 1📉" , show_alert=True)
+	elif cor==query.data:
+		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈" , show_alert=True)
+	else:
+		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉" , show_alert=True)
+		
+	
+	
+
+
+def help_command(update: Update, context: CallbackContext) -> None:
+    """Displays info on how to use the bot."""
+    update.message.reply_text("Use /start to test this bot.")
+
+file_text=""
+def photos(update,context):
+    global file_text
+    bot=context.bot
+    
+    #file_text=update.message.caption
+    #print(file_text)
+    keyboard = [
+        [
+            InlineKeyboardButton("A", callback_data='1'),
+            InlineKeyboardButton("B", callback_data='2'),
+            InlineKeyboardButton("C", callback_data='3'),
+            InlineKeyboardButton("D", callback_data='4'),],
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    #file_id = update.message.photo[-1]
+    #newFile = bot.getFile(file_id)
+    #newFile.download('/storage/emulated/0/ADM/New Folder/test.jpg')
+    #bot.sendPhoto(chat_id=update.message.chat_id,  photo='https://t.me/SudhirParihar/4856',caption='https://t.me/SudhirParihar/4856',reply_markup=reply_markup)
+    #bot.sendDocument(chat_id=update.message.chat_id,  document=('https://t.me/PariharClasses/963'),caption="Here is your today Question",reply_markup=reply_markup)
+
+quizName=""
+CALL=range(1)
+def upload1(update,context):
+	global quizName
+	update.message.reply_text("send me Quiz deta")
+	quizName=(update.message.text)
+	quizName=re.sub("/create ","",quizName)
+	
+	return CALL
+def call1(update,context):
+	#print(update)
+	callv=update.message.text
+	#print(callv)
+	if bool(re.match("1|2|3|4",callv[-1])):
+		data=callv[:-1]
+		cor=callv[-1]
+	else:
+		data=callv
+		cor=None
+	col=client["QuizC"][quizName]
+	if cor:
+		new={"type":"text","data":data,"cor":cor,"exp":""}
+	else:
+		new={"type":"text","data":data,"cor":cor,"exp":""}
+	print(new)
+	col.insert_one(new)
+	print("sussful")
+	return CALL
+def call2(update,context):
+	col=client["QuizC"][quizName]
+	#print(update)
+	data="https://t.me/"+update.message.forward_from_chat.username+"/"+str(update.message.forward_from_message_id)
+	
+	if bool(re.match("1|2|3|4",update.message.caption[-1])):
+		caption=update.message.caption[:-1]
+		cor=update.message.caption[-1]
+	else:
+		caption=update.message.caption
+		cor=None
+	if cor:
+		new={"type":"photo","data":data,"text":caption,"cor":cor,"exp":""}
+	else:
+		new={"type":"photo","data":data,"text":caption,"cor":cor,"exp":""}
+	print(new)
+	col.insert_one(new)
+	print("sussful")
+	return CALL
+
+def cancel(update: Update, _: CallbackContext) -> int:
+    user = update.message.from_user
+    logger.info("User %s canceled the conversation.", user.first_name)
+    update.message.reply_text(
+        'Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove()
+    )
+
+    return ConversationHandler.END
+#var3=1
+def call3(update,context):
+	print("start")
+	#print(update)
+	callv=update.message.text
+	callv=re.sub("/startquiz ","",callv)
+	callv=re.split("_", callv)
+	var3=1
+	print(callv)
+	col=client["QuizC"][callv[0]]
+	yy=col.find({})
+	for y in yy:
+		print("3")
+		cor=y["cor"]
+		type=y["type"]
+		data=y["data"]
+		caption=y["text"]
+		print(data)
+		keyboard = [
+        [
+            InlineKeyboardButton("Q_"+str(var3), callback_data=callv[0]+"_"+str(var3)+'_0'),
+            InlineKeyboardButton("A", callback_data=callv[0]+"_"+str(var3)+'_1'),
+            InlineKeyboardButton("B", callback_data=callv[0]+"_"+str(var3)+'_2'),
+            InlineKeyboardButton("C", callback_data=callv[0]+"_"+str(var3)+'_3'),
+            InlineKeyboardButton("D", callback_data=callv[0]+"_"+str(var3)+'_4'),],
+    ]
+		
+	
+		reply_markup = InlineKeyboardMarkup(keyboard)
+		if cor:
+			if type=="text":
+				context.bot.send_message(chat_id=int(callv[1]), text=data, reply_markup=reply_markup)
+			elif type=="photo":
+				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption,reply_markup=reply_markup)
+			var3+=1
+		else:
+			if type=="text":
+				context.bot.send_message(chat_id=int(callv[1]), text=data)#, reply_markup=reply_markup)
+			elif type=="photo":
+				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption)#,reply_markup=reply_markup)
+		time.sleep(5)
+	
+quizName1=""
+CALL1=range(1)
+def upload2(update,context):
+	global quizName1
+	update.message.reply_text("send me Quiz explain deta")
+	quizName1=(update.message.text)
+	#print(quizName1)
+	quizName1=re.sub("/adde ","",quizName1)
+	
+	return CALL1
+def call4(update,context):
+	#print(quizName1)
+	callv=update.message.text
+	#print(callv)
+	var=re.split("_",quizName1)
+	#print(var)
+	col=client["QuizC"][var[0]]
+	colll=col.find({"cor":{"$type":"string"}})[int(var[1])-1]
+	colll=colll["data"]
+	#print(colll)
+	myquery1 = {"data":colll}
+	newvalues1 = {"exp":callv}
+	#print(myquery1)
+	#print(newvalues1)
+	#col.update_one
+	col.update_one(myquery1,{"$set":newvalues1})
+	print("sussful")
+	#return CALL1
+def call5(update,context):
+	print(quizName1)
+	callv=data="https://t.me/"+update.message.forward_from_chat.username+"/"+str(update.message.forward_from_message_id)
+	#print(callv)
+	var=re.split("_",quizName1)
+	#print(var)
+	col=client["QuizC"][var[0]]
+	colll=col.find({"cor":{"$type":"string"}})[int(var[1])-1]
+	colll=colll["data"]
+	#print(colll)
+	myquery1 = {"data":colll}
+	newvalues1 = {"exp":callv}
+	#print(myquery1)
+	#print(newvalues1)
+	#col.update_one
+	col.update_one(myquery1,{"$set":newvalues1})
+	print("sussful")
+	#return CALL1
+
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -1656,6 +1974,30 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
+    conv_handler01R1= ConversationHandler(
+        entry_points=[CommandHandler('create', upload2)],
+        states={
+            #CALL: [],
+            CALL: [MessageHandler(Filters.text& ~Filters.command, call1),MessageHandler(Filters.photo& ~Filters.command,call2)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    conv_handler01R2= ConversationHandler(
+        entry_points=[CommandHandler('adde', upload2)],
+        states={
+            #CALL: [],
+            CALL1: [MessageHandler(Filters.text& ~Filters.command, call4),MessageHandler(Filters.photo& ~Filters.command,call5)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    updater.dispatcher.add_handler(conv_handler01R1)
+    updater.dispatcher.add_handler(conv_handler01R2)
+    updater.dispatcher.add_handler(CommandHandler('add', call4))
+    updater.dispatcher.add_handler(CommandHandler('startquiz', call3))
+    #updater.dispatcher.add_handler(CommandHandler('start', start))
+    updater.dispatcher.add_handler(MessageHandler(Filters.photo, photos))
+    updater.dispatcher.add_handler(CallbackQueryHandler(button))
+    updater.dispatcher.add_handler(CommandHandler('help', help_command))
     dispatcher.add_handler(conv_handler01PDF)
     dispatcher.add_handler(conv_handler01R)
     dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))

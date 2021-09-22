@@ -1687,7 +1687,7 @@ def button(update: Update, context: CallbackContext) -> None:
 			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou gain = 4📈" , show_alert=True)
 		else:
 			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou lost = 1📉" , show_alert=True)
-	elif cor==query.data:
+	elif cor==qA:
 		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈" , show_alert=True)
 	else:
 		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉" , show_alert=True)

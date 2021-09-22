@@ -1843,7 +1843,7 @@ def call4(update,context):
 	#col.update_one
 	col.update_one(myquery1,{"$set":newvalues1})
 	print("sussful")
-	#return CALL1
+	return ConversationHandler.END
 def call5(update,context):
 	print(quizName1)
 	callv=data="https://t.me/"+update.message.forward_from_chat.username+"/"+str(update.message.forward_from_message_id)
@@ -1861,7 +1861,7 @@ def call5(update,context):
 	#col.update_one
 	col.update_one(myquery1,{"$set":newvalues1})
 	print("sussful")
-	#return CALL1
+	return ConversationHandler.END
 
 
 def main() -> None:

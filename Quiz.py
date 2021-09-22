@@ -1975,7 +1975,7 @@ def main() -> None:
         fallbacks=[CommandHandler('cancel', cancel)],
     )
     conv_handler01R1= ConversationHandler(
-        entry_points=[CommandHandler('create', upload2)],
+        entry_points=[CommandHandler('create', upload1)],
         states={
             #CALL: [],
             CALL: [MessageHandler(Filters.text& ~Filters.command, call1),MessageHandler(Filters.photo& ~Filters.command,call2)],

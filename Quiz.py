@@ -245,7 +245,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     photo_file.download('user_photo.jpg')
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')'''
     question=user.question
-    que=reaaa.sub(" "," ",question)
+    que=reaaa.sub(" "," ",question)
     que=reaaa.sub("(\n| |)✍{0,} Priti Gupta ✍{0,}(\n| |)","",que)
     que=reaaa.sub("(\n| |)Sandeep Choudhary(\n| |)","",que)
     que=reaaa.sub("(\n| |)🤗.*?🤗(\n| |)","",que)
@@ -260,7 +260,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     if exp:
         if reaaa.findall("@[a-zA-Z0-9_-]",exp):
             exp=False
-        exp=reaaa.sub(" "," ",exp) 
+        exp=reaaa.sub(" "," ",exp) 
     if exp is not None:
     	exp= reaaa.sub(r"(#\w*)|(http(s|)://[a-zA-Z0-9_/])", "", exp)
     	exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)
@@ -1041,7 +1041,7 @@ def ghppp1(update,context):
     context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(update.message.from_user.id)+"\">grouo</a>",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     print("ghn1 started")
     que=userText.question
-    que=reaaa.sub(" "," ",que)
+    que=reaaa.sub(" "," ",que)
     que=reaaa.sub("^(☞( ){1,}|(((\[\d{1,}/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)))","",que)
     que=reaaa.sub("(\n| |)✍{0,} Priti Gupta ✍{0,}(\n| |)","",que)
     que=reaaa.sub("(\n| |)Sandeep Choudhary(\n| |)","",que)
@@ -1051,14 +1051,14 @@ def ghppp1(update,context):
     que= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/\.])", "", que)
     options=[o.text for o in userText.options]
     for yx in range(len(options)):
-        options[yx]=reaaa.sub(" "," ",options[yx])
+        options[yx]=reaaa.sub(" "," ",options[yx])
     co=userText.correct_option_id
     explan=userText.explanation
     
     if explan:
         if reaaa.findall("@[a-zA-Z0-9_-]",explan):
             explan="Join @Polls_Quiz"
-        explan=reaaa.sub(" "," ",explan)
+        explan=reaaa.sub(" "," ",explan)
     print("poll")
     context.bot.send_poll(
             chat_id=-1001517843177,
@@ -1379,7 +1379,7 @@ def pollfname(update,context):
 	    			time.sleep(5)'''
 	    	context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?start\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	except:
-    		context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz here...", parse_mode=ParseMode.HTML)
+    		context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz hereaaa...", parse_mode=ParseMode.HTML)
     except Exception as e:
     	print(str(e))
     return ConversationHandler.END
@@ -1591,7 +1591,7 @@ def start(update: Update, context: CallbackContext) -> None:
     #msg = context.bot.copyMessage(chat_id=711296045,from_chat_id="@ONLY_FOR_US",message_id=8182)
     #print(msg)
     quizNameC=(update.message.text)
-    quizNameC=re.sub("/start ","",quizNameC)
+    quizNameC=reaaa.sub("/start ","",quizNameC)
     quizNameC="_".split(quizNameC)
     col=client["QuizC"][quizNameC]
     yy=col.find()
@@ -1627,7 +1627,7 @@ def start(update: Update, context: CallbackContext) -> None:
 def button(update: Update, context: CallbackContext) -> None:
 	query = update.callback_query
 	#print(query)
-	ddd=re.split("_",query.data)
+	ddd=reaaa.split("_",query.data)
 	qN=ddd[0]
 	qQ=str(ddd[1])
 	print(qQ)
@@ -1660,11 +1660,11 @@ def button(update: Update, context: CallbackContext) -> None:
 	if qA=='0':
 		if qq:
 			print(exp)
-			if bool(re.match("^$",exp)):
+			if bool(reaaa.match("^$",exp)):
 				query.answer(text="Now we don't have Explanation\n\nहमारे पास अभी कोई भी hint नहीं है।🙏🙏", show_alert=True)
 				#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))
-				print(bool(re.match("^$",exp)))
-			elif bool(re.findall(r"^https://t\.me/.*",exp)):
+				print(bool(reaaa.match("^$",exp)))
+			elif bool(reaaa.findall(r"^https://t\.me/.*",exp)):
 				
 				try:
 					context.bot.sendPhoto(chat_id=int(uId), photo=(exp))#caption=caption)
@@ -1724,14 +1724,14 @@ def upload1(update,context):
 	global quizName
 	update.message.reply_text("send me Quiz deta")
 	quizName=(update.message.text)
-	quizName=re.sub("/create ","",quizName)
+	quizName=reaaa.sub("/create ","",quizName)
 	
 	return CALL
 def call1(update,context):
 	#print(update)
 	callv=update.message.text
 	#print(callv)
-	if bool(re.match("1|2|3|4",callv[-1])):
+	if bool(reaaa.match("1|2|3|4",callv[-1])):
 		data=callv[:-1]
 		cor=callv[-1]
 	else:
@@ -1751,7 +1751,7 @@ def call2(update,context):
 	#print(update)
 	data="https://t.me/"+update.message.forward_from_chat.username+"/"+str(update.message.forward_from_message_id)
 	
-	if bool(re.match("1|2|3|4",update.message.caption[-1])):
+	if bool(reaaa.match("1|2|3|4",update.message.caption[-1])):
 		caption=update.message.caption[:-1]
 		cor=update.message.caption[-1]
 	else:
@@ -1779,8 +1779,8 @@ def call3(update,context):
 	print("start")
 	#print(update)
 	callv=update.message.text
-	callv=re.sub("/startquiz ","",callv)
-	callv=re.split("_", callv)
+	callv=reaaa.sub("/startquiz ","",callv)
+	callv=reaaa.split("_", callv)
 	var3=1
 	print(callv)
 	col=client["QuizC"][callv[0]]
@@ -1823,14 +1823,14 @@ def upload2(update,context):
 	update.message.reply_text("send me Quiz explain deta")
 	quizName1=(update.message.text)
 	#print(quizName1)
-	quizName1=re.sub("/adde ","",quizName1)
+	quizName1=reaaa.sub("/adde ","",quizName1)
 	
 	return CALL1
 def call4(update,context):
 	#print(quizName1)
 	callv=update.message.text
 	#print(callv)
-	var=re.split("_",quizName1)
+	var=reaaa.split("_",quizName1)
 	#print(var)
 	col=client["QuizC"][var[0]]
 	colll=col.find({"cor":{"$type":"string"}})[int(var[1])-1]
@@ -1848,7 +1848,7 @@ def call5(update,context):
 	print(quizName1)
 	callv=data="https://t.me/"+update.message.forward_from_chat.username+"/"+str(update.message.forward_from_message_id)
 	#print(callv)
-	var=re.split("_",quizName1)
+	var=reaaa.split("_",quizName1)
 	#print(var)
 	col=client["QuizC"][var[0]]
 	colll=col.find({"cor":{"$type":"string"}})[int(var[1])-1]
@@ -2027,5 +2027,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-
 

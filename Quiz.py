@@ -1685,15 +1685,17 @@ def button(update: Update, context: CallbackContext) -> None:
 		else:
 			query.answer(text="First select option then click Q_Number for Hint\n\nसबसे पहले एक option select कीजिये तब आप explanation जान पाओगें यदि explanation होगी तो🙏🙏", show_alert=True)
 	elif qq:
+		exp1=""
+		if exp!="":
+			exp1="\n\n\nFor explanation click Q_"+qQ+" button"
 		if qq==cor:
-			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou gain = 4📈" , show_alert=True)
+			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou gain = 4📈"+exp1 , show_alert=True)
 		else:
-			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou lost = 1📉" , show_alert=True)
+			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou lost = 1📉"+exp1 , show_alert=True)
 	elif cor==qA:
-		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈" , show_alert=True)
+		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈"+exp1 , show_alert=True)
 	else:
-		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉" , show_alert=True)
-		
+		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉"+exp1 , show_alert=True)
 	
 	
 

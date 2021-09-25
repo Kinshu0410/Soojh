@@ -1640,6 +1640,39 @@ def button(update: Update, context: CallbackContext) -> None:
 	yy=col.find({})
 	cor=yy[int(qQ)-1]["cor"]
 	exp=yy[int(qQ)-1]["exp"]
+	if exp!="":
+		keyboard = [
+        [
+            InlineKeyboardButton("Q_"+str(qQ), callback_data=qN+"_"+str(qQ)+'_0'),
+            InlineKeyboardButton("A", callback_data=qN+"_"+str(qQ)+'_1'),
+            InlineKeyboardButton("B", callback_data=qN+"_"+str(qQ)+'_2'),
+            InlineKeyboardButton("C", callback_data=qN+"_"+str(qQ)+'_3'),
+            InlineKeyboardButton("D", callback_data=qN+"_"+str(qQ)+'_4'),],
+    ]
+
+		reply_markup = InlineKeyboardMarkup(keyboard)
+		print(query.message.text)
+		try:
+			if re.search("👇 Explanation here",str(query.message.caption)):
+				print("start caption")
+			else:
+				tex=query.message.caption
+				if tex is None:
+					tex=""
+				print(tex)
+				query.edit_message_caption(tex+"\n\n👇 Explanation here",reply_markup=reply_markup)
+				print("Done Caption")
+			print()
+		except:
+			if re.search("👇yoooo Explanation here",str(query.message.text)):
+				print("start text")
+			else:
+				tex=query.message.text
+				if tex is None:
+					tex=""
+				query.edit_message_text(tex+"\n\n👇 Explanation here",reply_markup=reply_markup)
+				print("Done Text")
+	
 	#print(exp)
 	uId=(query.from_user.id)
 	coll=client["QuizCData"][qN]

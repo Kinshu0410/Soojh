@@ -8,7 +8,7 @@ dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public 
 client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
 
 import re
-qN=input("Quiz Name = ")
+qN="psy-02"
 col=client["QuizC"][qN]
 ll1=col.count_documents({"cor":{"$type":"string"}})
 print(ll1)

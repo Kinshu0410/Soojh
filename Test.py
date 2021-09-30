@@ -36,7 +36,7 @@ for x in range(coll.count_documents({})):
 		except:
 			pass
 	result[uid]=Z
-	print(result)
+	#print(result)
 print(result)
 		
 	

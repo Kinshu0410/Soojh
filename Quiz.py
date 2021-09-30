@@ -1770,6 +1770,7 @@ def upload1(update,context):
 def call1(update,context):
 	#print(update)
 	callv=update.message.text
+	callv=re.sub("\n(\(a\) ){10,}","",callv)
 	#print(callv)
 	if bool(reaaa.match("1|2|3|4",callv[-1])):
 		data=callv[:-1]

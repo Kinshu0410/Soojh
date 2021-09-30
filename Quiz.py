@@ -1806,6 +1806,17 @@ def call2(update,context):
 	print("sussful")
 	return CALL
 
+def call6(update,context):
+	poll=update.message.poll
+	question=poll.question
+	option=[o.text for o in poll.options]
+	option="\n".join(option)
+	cor=str(poll.correct_option_id+1)
+	text=question+"\n\n"+option
+	new={"type":"text","data":text,"cor":cor,"exp":""}
+	col=client["QuizC"][quizName]
+	col.insert_one(new)
+
 def cancel(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
@@ -2021,7 +2032,7 @@ def main() -> None:
         entry_points=[CommandHandler('create', upload1)],
         states={
             #CALL: [],
-            CALL: [MessageHandler(Filters.text& ~Filters.command, call1),MessageHandler(Filters.photo& ~Filters.command,call2)],
+            CALL: [MessageHandler(Filters.text& ~Filters.command, call1),MessageHandler(Filters.photo& ~Filters.command,call2),MessageHandler(Filters.poll& ~Filters.command,call6)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

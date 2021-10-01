@@ -1652,26 +1652,7 @@ def button(update: Update, context: CallbackContext) -> None:
 
 		reply_markup = InlineKeyboardMarkup(keyboard)
 		print(query.message.text)
-		try:
-			if re.search("👇 Explanation here",str(query.message.caption)):
-				print("start caption")
-			else:
-				tex=query.message.caption
-				if tex is None:
-					tex=""
-				print(tex)
-				query.edit_message_caption(tex+"\n\n👇 Explanation here",reply_markup=reply_markup)
-				print("Done Caption")
-			print()
-		except:
-			if re.search("👇 Explanation here",str(query.message.text)):
-				print("start text")
-			else:
-				tex=query.message.text
-				if tex is None:
-					tex=""
-				query.edit_message_text(tex+"\n\n👇 Explanation here",reply_markup=reply_markup)
-				print("Done Text")
+
 	
 	#print(exp)
 	uId=(query.from_user.id)
@@ -1729,7 +1710,27 @@ def button(update: Update, context: CallbackContext) -> None:
 		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈"+exp1 , show_alert=True)
 	else:
 		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉"+exp1 , show_alert=True)
-	
+	if exp!="":
+		try:
+			if re.search("👇 Explanation here",str(query.message.caption)):
+				print("start caption")
+			else:
+				tex=query.message.caption
+				if tex is None:
+					tex=""
+				print(tex)
+				query.edit_message_caption(tex+"\n\n👇 Explanation here",reply_markup=reply_markup)
+				print("Done Caption")
+			print()
+		except:
+			if re.search("👇 Explanation here",str(query.message.text)):
+				print("start text")
+			else:
+				tex=query.message.text
+				if tex is None:
+					tex=""
+				query.edit_message_text(tex+"\n\n👇 Explanation here",reply_markup=reply_markup)
+				print("Done Text")
 	
 
 

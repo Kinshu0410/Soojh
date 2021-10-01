@@ -1663,6 +1663,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	else:
 		if qA!="0":
 			coll.insert_one({"uid":uId,qQ:qA})
+	exp1=""
 	if qA=='0':
 		if qq:
 			print(qq)
@@ -1686,7 +1687,7 @@ def button(update: Update, context: CallbackContext) -> None:
 		else:
 			query.answer(text="First select option then click Q_Number for Hint\n\nसबसे पहले एक option select कीजिये तब आप explanation जान पाओगें यदि explanation होगी तो🙏🙏", show_alert=True)
 	elif qq:
-		exp1=""
+		
 		if exp!="":
 			exp1="\n\n\nFor explanation click Q_"+qQ+" button"
 		if qq==cor:

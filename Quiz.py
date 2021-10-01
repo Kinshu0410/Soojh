@@ -1640,20 +1640,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	yy=col.find({})
 	cor=yy[int(qQ)-1]["cor"]
 	exp=yy[int(qQ)-1]["exp"]
-	if exp!="":
-		keyboard = [
-        [
-            InlineKeyboardButton("Q_"+str(qQ), callback_data=qN+"_"+str(qQ)+'_0'),
-            InlineKeyboardButton("A", callback_data=qN+"_"+str(qQ)+'_1'),
-            InlineKeyboardButton("B", callback_data=qN+"_"+str(qQ)+'_2'),
-            InlineKeyboardButton("C", callback_data=qN+"_"+str(qQ)+'_3'),
-            InlineKeyboardButton("D", callback_data=qN+"_"+str(qQ)+'_4'),],
-    ]
 
-		reply_markup = InlineKeyboardMarkup(keyboard)
-		print(query.message.text)
-
-	
 	#print(exp)
 	uId=(query.from_user.id)
 	coll=client["QuizCData"][qN]
@@ -1711,6 +1698,17 @@ def button(update: Update, context: CallbackContext) -> None:
 	else:
 		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉"+exp1 , show_alert=True)
 	if exp!="":
+		keyboard = [
+        [
+            InlineKeyboardButton("Q_"+str(qQ), callback_data=qN+"_"+str(qQ)+'_0'),
+            InlineKeyboardButton("A", callback_data=qN+"_"+str(qQ)+'_1'),
+            InlineKeyboardButton("B", callback_data=qN+"_"+str(qQ)+'_2'),
+            InlineKeyboardButton("C", callback_data=qN+"_"+str(qQ)+'_3'),
+            InlineKeyboardButton("D", callback_data=qN+"_"+str(qQ)+'_4'),],
+    ]
+
+		reply_markup = InlineKeyboardMarkup(keyboard)
+		print(query.message.text)
 		try:
 			if re.search("👇 Explanation here",str(query.message.caption)):
 				print("start caption")

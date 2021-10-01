@@ -1664,7 +1664,7 @@ def button(update: Update, context: CallbackContext) -> None:
 				print("Done Caption")
 			print()
 		except:
-			if re.search("👇yoooo Explanation here",str(query.message.text)):
+			if re.search("👇 Explanation here",str(query.message.text)):
 				print("start text")
 			else:
 				tex=query.message.text

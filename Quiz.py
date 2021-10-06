@@ -1637,7 +1637,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	qA=ddd[2]
 	col=client["QuizC"][qN]
 	cou1=str(col.count_documents({"type":"Quiz"}))
-	yy=col.find({})
+	yy=col.find({"cor":{"$type":"string"}})
 	cor=yy[int(qQ)-1]["cor"]
 	exp=yy[int(qQ)-1]["exp"]
 

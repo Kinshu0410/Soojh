@@ -1348,10 +1348,17 @@ def pollf(update,context):
 	    col=client["QuizC"][qN]
 	    yy=col.find({"cor":{"$type":"string"}})
 	    exp=yy[int(qQ)-1]["exp"]
+	    uurrl=ddd[3]
+	    uurrl="https://t.me/"+uurrl
+	    keyboard = [
+        [
+            InlineKeyboardButton("Go Back to Question", url=)
+    ]
+	    reply_markup = InlineKeyboardMarkup(keyboard)
 	    if bool(re.findall(r"^https://t\.me/.*",exp)):
-	    	context.bot.sendPhoto(chat_id=int(chat___id), photo=(exp))
+	    	context.bot.sendPhoto(chat_id=int(chat___id), photo=(exp),reply_markup=reply_markup)
 	    else:
-	    	context.bot.send_message(chat_id=int(chat___id), text=exp)
+	    	context.bot.send_message(chat_id=int(chat___id), text=exp,reply_markup=reply_markup)
     return ConversationHandler.END
     
 @restricted2
@@ -1641,15 +1648,15 @@ def button(update: Update, context: CallbackContext) -> None:
 				
 				try:
 					#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))#caption=caption)
-					query.answer(text="@soojhboojh_01bot Bot send you a file or Photo message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data))
+					query.answer(text="@soojhboojh_01bot Bot send you a file or Photo message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"/"+str(update.callback_query.message.message_id))
 				except:
-					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data))
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"/"+str(update.callback_query.message.message_id))
 			else:
 				try:
 					#context.bot.send_message(chat_id=int(uId), text=exp)
-					query.answer(text="@soojhboojh_01bot Bot send you a file or text message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data))
+					query.answer(text="@soojhboojh_01bot Bot send you a file or text message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"/"+str(update.callback_query.message.message_id))
 				except:
-					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data))
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"/"+str(update.callback_query.message.message_id))
 		else:
 			query.answer(text="First select option then click Q_Number for Hint\n\nसबसे पहले एक option select कीजिये तब आप explanation जान पाओगें यदि explanation होगी तो🙏🙏", show_alert=True)
 	elif qq:

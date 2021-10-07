@@ -1349,7 +1349,7 @@ def pollf(update,context):
 	    col=client["QuizC"][qN]
 	    yy=col.find({"cor":{"$type":"string"}})
 	    exp=yy[int(qQ)-1]["exp"]
-	    uurrl=ddd[3]
+	    uurrl=ddd[3:]
 	    uurrl="https://t.me/"+uurrl
 	    keyboard = [
         [

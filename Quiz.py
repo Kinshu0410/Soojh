@@ -1341,6 +1341,7 @@ def pollf(update,context):
 	    else:
 	    	db.insert_one({"Uid":update.message.chat.id})
 	    query=update.message.text
+	    print(query)
 	    query=reaaa.sub("/start ","",query)
 	    ddd=re.split("_",query)
 	    qN=ddd[0]

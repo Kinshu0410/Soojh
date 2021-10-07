@@ -1326,7 +1326,6 @@ def pollf(update,context):
     Ccc=update.message.from_user.id
     if chat___id<=0:
     	try:
-    		
     		chat___id="@"+str(update.message.chat.username)#id
     		mesho01=context.bot.send_message(chat_id=chat___id, text="<a href=\"https://t.me/Soojhboojh_01bot?start\">🌐 find Quiz Name Here☜</a>\nSend me Quiz name that you want to play",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     		context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>user tring to share</b></a> = "+chat___id,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
@@ -1337,15 +1336,18 @@ def pollf(update,context):
     else:
 	    db=client["user"]["sub"]
 	    col=db.find_one(({"Uid":update.message.chat.id}))
-	    if bool(col):
-	    	update.message.reply_text("एक बार दुबारा उस button को दबाइये जिसे अभी आपने दबाया था\nclick ones more time that button.")
+	    query=update.message.text
+	    query=reaaa.sub("/start ","",query)
+	    ddd=re.split("_",query)
+	    qN=ddd[0]
+	    qQ=str(ddd[1])
+	    col=client["QuizC"][qN]
+	    cou1=str(col.count_documents({"type":"Quiz"}))
+	    exp=yy[int(qQ)-1]["exp"]
+	    if bool(re.findall(r"^https://t\.me/.*",exp)):
+	    	context.bot.sendPhoto(chat_id=int(chat___id), photo=(exp))
 	    else:
-	    	db.insert_one({"Uid":update.message.chat.id})
-	    	update.message.reply_text("you can use /quizlist command to see Quiz for your group.")
-	    	
-	    
-	    
-    
+	    	context.bot.send_message(chat_id=int(chat___id), text=exp)
     return ConversationHandler.END
     
 @restricted2
@@ -1586,46 +1588,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-	
-def start(update: Update, context: CallbackContext) -> None:
-    """Sends a message with three inline buttons attached."""
-    #context.bot.get_message(chat_id="@specialquestionsgroup", message_id=1217)
-    
-    #msg = context.bot.copyMessage(chat_id=711296045,from_chat_id="@ONLY_FOR_US",message_id=8182)
-    #print(msg)
-    quizNameC=(update.message.text)
-    quizNameC=reaaa.sub("/start ","",quizNameC)
-    quizNameC="_".split(quizNameC)
-    col=client["QuizC"][quizNameC]
-    yy=col.find()
-    for y in yy:
-    	cor=y["cor"]
-    	if cor:
-    		new={"type":"Quiz","typee":"photo","data":data,"text":caption,"cor":cor,"exp":""}
-    		type=y["type"]
-    		typee=y["typee"]
-    		data=y["data"]
-    		caption=y["caption"]
-    	else:
-    		type=y["type"]
-    		typee=y["typee"]
-    		data=y["data"]
-    		caption=y["caption"]
-    	
-    cou=str(col.count_documents({"type":"Quiz"}))
-#    cou=str(col.count_documents({"type":"Quiz"}))
-    keyboard = [
-        [
-            InlineKeyboardButton("A", callback_data=quizNameC+"_"+str(int(cou)+1)+'_1'),
-            InlineKeyboardButton("B", callback_data=quizNameC+"_"+str(int(cou)+1)+'_2'),
-            InlineKeyboardButton("C", callback_data=quizNameC+"_"+str(int(cou)+1)+'_3'),
-            InlineKeyboardButton("D", callback_data=quizNameC+"_"+str(int(cou)+1)+'_4'),],
-    ]
-
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    update.message.reply_text('Please choose:', reply_markup=reply_markup)
-
 
 def button(update: Update, context: CallbackContext) -> None:
 	query = update.callback_query
@@ -1677,13 +1639,13 @@ def button(update: Update, context: CallbackContext) -> None:
 					context.bot.sendPhoto(chat_id=int(uId), photo=(exp))#caption=caption)
 					query.answer(text="@soojhboojh_01bot Bot send you a file or Photo message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True)
 				except:
-					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start=yyy")
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data))
 			else:
 				try:
 					context.bot.send_message(chat_id=int(uId), text=exp)
 					query.answer(text="@soojhboojh_01bot Bot send you a file or text message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True)
 				except:
-					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start=yyy")
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data))
 		else:
 			query.answer(text="First select option then click Q_Number for Hint\n\nसबसे पहले एक option select कीजिये तब आप explanation जान पाओगें यदि explanation होगी तो🙏🙏", show_alert=True)
 	elif qq:

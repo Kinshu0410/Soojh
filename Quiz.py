@@ -1322,6 +1322,7 @@ POLLF,POLLN=range(2)
 def pollf(update,context):
     global chat___id
     global mesho01
+    uurrl=""
     chat___id=int(update.message.chat.id)
     Ccc=update.message.from_user.id
     if chat___id<=0:

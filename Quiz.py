@@ -1350,13 +1350,10 @@ def pollf(update,context):
 	    col=client["QuizC"][qN]
 	    yy=col.find({"cor":{"$type":"string"}})
 	    exp=yy[int(qQ)-1]["exp"]
-	    uurrl=reaaa.sub("_701400400000000","/",ddd[3:])
+	    uurrl=reaaa.sub("_701400400000000","/",str(ddd[3:]))
 	    uurrl="https://t.me/"+uurrl
-	    print("uurrl= "+uurrl)
-	    keyboard = [
-        [
-            InlineKeyboardButton("Go Back to Question", url=uurrl),],
-    ]
+	    print("uurrl = "+str(uurrl))
+	    keyboard = [[InlineKeyboardButton("Go Back to Question", url=uurrl),],]
 	    reply_markup = InlineKeyboardMarkup(keyboard)
 	    if bool(re.findall(r"^https://t\.me/.*",exp)):
 	    	context.bot.sendPhoto(chat_id=int(chat___id), photo=(exp),reply_markup=reply_markup)

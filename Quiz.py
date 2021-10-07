@@ -1629,7 +1629,7 @@ def start(update: Update, context: CallbackContext) -> None:
 
 def button(update: Update, context: CallbackContext) -> None:
 	query = update.callback_query
-	#print("Query Data = "+str(update))
+	#print(query)
 	ddd=reaaa.split("_",query.data)
 	qN=ddd[0]
 	qQ=str(ddd[1])
@@ -1677,11 +1677,11 @@ def button(update: Update, context: CallbackContext) -> None:
 					context.bot.sendPhoto(chat_id=int(uId), photo=(exp))#caption=caption)
 					query.answer(text="@soojhboojh_01bot Bot send you a file or Photo message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True)
 				except:
-					query.answer(chat_id=int(uId),url='https://t.me/Soojhboojh_01bot')
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True)
 			else:
 				try:
 					context.bot.send_message(chat_id=int(uId), text=exp)
-					query.answer(text="@soojhboojh_01bot Bot send you a file or text message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url='https://t.me/Soojhboojh_01bot')
+					query.answer(text="@soojhboojh_01bot Bot send you a file or text message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True)
 				except:
 					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True)
 		else:
@@ -2082,4 +2082,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-

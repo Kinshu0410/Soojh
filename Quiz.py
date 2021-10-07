@@ -1350,7 +1350,7 @@ def pollf(update,context):
 	    col=client["QuizC"][qN]
 	    yy=col.find({"cor":{"$type":"string"}})
 	    exp=yy[int(qQ)-1]["exp"]
-	    uurrl="_".joint(ddd[3:])
+	    uurrl="_".join(ddd[3:])
 	    uurrl=reaaa.sub("_701400400000000","/",uurrl)
 	    uurrl="https://t.me/"+uurrl
 	    print("uurrl = "+str(uurrl))

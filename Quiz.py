@@ -1338,7 +1338,7 @@ def pollf(update,context):
 	    db=client["user"]["sub"]
 	    col=db.find_one(({"Uid":update.message.chat.id}))
 	    if bool(col):
-	    	update.message.reply_text("you can use /quizlist command to see Quiz for your group and i add you in my data")
+	    	update.message.reply_text("एक बार दुबारा उस button को दबाइये जिसे अभी आपने दबाया था\nclick ones more time that button.")
 	    else:
 	    	db.insert_one({"Uid":update.message.chat.id})
 	    	update.message.reply_text("you can use /quizlist command to see Quiz for your group.")

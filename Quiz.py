@@ -1640,7 +1640,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	exp1=""
 	if qA=='0':
 		if qq:
-			print(qq)
+			print("https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"/"+str(update.callback_query.message.message_id))
 			if bool(re.match("^$",exp)):
 				query.answer(text="Now we don't have Explanation\n\nहमारे पास अभी कोई भी hint नहीं है।🙏🙏", show_alert=True)
 				#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))

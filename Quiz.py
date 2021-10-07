@@ -1336,6 +1336,10 @@ def pollf(update,context):
     else:
 	    db=client["user"]["sub"]
 	    col=db.find_one(({"Uid":update.message.chat.id}))
+	    if bool(col):
+	    	pass
+	    else:
+	    	db.insert_one({"Uid":update.message.chat.id})
 	    query=update.message.text
 	    query=reaaa.sub("/start ","",query)
 	    ddd=re.split("_",query)

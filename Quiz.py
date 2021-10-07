@@ -1629,7 +1629,7 @@ def start(update: Update, context: CallbackContext) -> None:
 
 def button(update: Update, context: CallbackContext) -> None:
 	query = update.callback_query
-	print(query.data)
+	print("Query Data = "+query.data)
 	ddd=reaaa.split("_",query.data)
 	qN=ddd[0]
 	qQ=str(ddd[1])

@@ -1644,7 +1644,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	#print(exp)
 	uId=(query.from_user.id)
 	coll=client["QuizCData"][qN]
-	#print('1')
+	print('1')
 	#print(coll)
 	qq=None
 	if coll.find_one({"uid":uId,qQ:{"$type":"string"}}):

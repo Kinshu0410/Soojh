@@ -1629,7 +1629,7 @@ def start(update: Update, context: CallbackContext) -> None:
 
 def button(update: Update, context: CallbackContext) -> None:
 	query = update.callback_query
-	#print(query)
+	print(query.data)
 	ddd=reaaa.split("_",query.data)
 	qN=ddd[0]
 	qQ=str(ddd[1])
@@ -1644,7 +1644,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	#print(exp)
 	uId=(query.from_user.id)
 	coll=client["QuizCData"][qN]
-	print('1')
+	#print('1')
 	#print(coll)
 	qq=None
 	if coll.find_one({"uid":uId,qQ:{"$type":"string"}}):

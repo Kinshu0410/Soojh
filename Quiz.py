@@ -1701,7 +1701,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	if exp!="":
 		keyboard = [
         [
-            InlineKeyboardButton("Q_"+str(qQ), callback_data=qN+"_"+str(qQ)+'_0',url='https://t.me/Soojhboojh_01bot'),
+            InlineKeyboardButton("Q_"+str(qQ), callback_data=qN+"_"+str(qQ)+'_0'),
             InlineKeyboardButton("A", callback_data=qN+"_"+str(qQ)+'_1'),
             InlineKeyboardButton("B", callback_data=qN+"_"+str(qQ)+'_2'),
             InlineKeyboardButton("C", callback_data=qN+"_"+str(qQ)+'_3'),
@@ -1849,7 +1849,7 @@ def call3(update,context):
 		print(data)
 		keyboard = [
         [
-            InlineKeyboardButton("Q_"+str(var3), callback_data=callv[0]+"_"+str(var3)+'_0',url='https://t.me/Soojhboojh_01bot'),
+            InlineKeyboardButton("Q_"+str(var3), callback_data=callv[0]+"_"+str(var3)+'_0'),
             InlineKeyboardButton("A", callback_data=callv[0]+"_"+str(var3)+'_1'),
             InlineKeyboardButton("B", callback_data=callv[0]+"_"+str(var3)+'_2'),
             InlineKeyboardButton("C", callback_data=callv[0]+"_"+str(var3)+'_3'),

@@ -1342,7 +1342,7 @@ def pollf(update,context):
 	    else:
 	    	db.insert_one({"Uid":update.message.chat.id})
 	    query=update.message.text
-	    print(query)
+	    #print(query)
 	    query=reaaa.sub("/start ","",query)
 	    ddd=re.split("_",query)
 	    qN=ddd[0]
@@ -1350,9 +1350,9 @@ def pollf(update,context):
 	    col=client["QuizC"][qN]
 	    yy=col.find({"cor":{"$type":"string"}})
 	    exp=yy[int(qQ)-1]["exp"]
-	    uurrl=reaaa.sub("_701400400000000","/",uurrl)
+	    uurrl=reaaa.sub("_701400400000000","/",ddd[3:])
 	    uurrl="https://t.me/"+uurrl
-	    print(uurrl)
+	    print("uurrl= "+uurrl)
 	    keyboard = [
         [
             InlineKeyboardButton("Go Back to Question", url=uurrl),],

@@ -1342,7 +1342,7 @@ def pollf(update,context):
 	    qN=ddd[0]
 	    qQ=str(ddd[1])
 	    col=client["QuizC"][qN]
-	    cou1=str(col.count_documents({"type":"Quiz"}))
+	    yy=col.find({"cor":{"$type":"string"}})
 	    exp=yy[int(qQ)-1]["exp"]
 	    if bool(re.findall(r"^https://t\.me/.*",exp)):
 	    	context.bot.sendPhoto(chat_id=int(chat___id), photo=(exp))

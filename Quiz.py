@@ -1352,6 +1352,7 @@ def pollf(update,context):
 	    exp=yy[int(qQ)-1]["exp"]
 	    uurrl=reaaa.sub("_701400400000000","/",uurrl)
 	    uurrl="https://t.me/"+uurrl
+	    print(uurrl)
 	    keyboard = [
         [
             InlineKeyboardButton("Go Back to Question", url=uurrl),],

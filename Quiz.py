@@ -1036,7 +1036,7 @@ def ghn(update,context):
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
     
-Man=[711296045,1001183009]
+Man=[1001183009,711296045]
 Group=[-1001517843177,-1001183315065]
 @restricted
 def ghppp1(update,context):

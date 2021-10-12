@@ -1035,8 +1035,15 @@ def ghn(update,context):
     except Exception as e:
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
+    
+Man=[711296045,1001183009]
+Group=[-1001517843177,-1001183315065]
 @restricted
 def ghppp1(update,context):
+    cid=""
+    for li1 in range(len(Man)):
+    	if str(update.message.chat.id) in str(Man[li1]):
+    		cid=Group[li1]
     userText=update.message.poll
     context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(update.message.from_user.id)+"\">grouo</a>",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     print("ghn1 started")
@@ -1061,7 +1068,7 @@ def ghppp1(update,context):
         explan=reaaa.sub(" "," ",explan)
     print("poll")
     context.bot.send_poll(
-            chat_id=-1001517843177,
+            chat_id=int(cid),
             question=que,
             options=options,
             type=Poll.QUIZ,
@@ -1186,6 +1193,7 @@ def poll(update, context):
     """Sends a predefined poll"""
     #que = update.message.text()
     quest=(update.message.text)
+    
     try:
         q=quest[0:-1]
         q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
@@ -1350,7 +1358,7 @@ def pollf(update,context):
 	    col=client["QuizC"][qN]
 	    yy=col.find({"cor":{"$type":"string"}})
 	    exp=yy[int(qQ)-1]["exp"]
-	    uurrl="_".join(ddd[3:])
+	    uurrl="_".joint(ddd[3:])
 	    uurrl=reaaa.sub("_701400400000000","/",uurrl)
 	    uurrl="https://t.me/"+uurrl
 	    print("uurrl = "+str(uurrl))

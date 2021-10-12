@@ -1041,11 +1041,13 @@ Group=[-1001517843177,-1001183315065]
 @restricted
 def ghppp1(update,context):
     cid=""
+    id=""
     for li1 in range(len(Man)):
     	if str(update.message.chat.id) in str(Man[li1]):
     		cid=Group[li1]
+    		id=Man[li1]
     userText=update.message.poll
-    context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(update.message.chat.id)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(update.message.from_user.id)+"\">grouo</a>",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(cid)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(id)+"\">grouo</a>",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     print("ghn1 started")
     que=userText.question
     que=reaaa.sub(" "," ",que)

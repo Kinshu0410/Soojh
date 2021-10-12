@@ -71,7 +71,7 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["711296045"]
+LIST_OF_ADMINS = ["711296045","1001183009"]
 
 def restricted(func):
     @wraps(func)

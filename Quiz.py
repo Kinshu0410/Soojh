@@ -191,7 +191,7 @@ def restrictedD(func):
             		try:
             			#chatiid="@"+str(update.message.chat.username)#id
             			print("chatid="+str(chatiid))
-            			print("messageid"+str(mid))
+            			#print("messageid"+str(mid))
             		except Exception as e:
             			print(str(e))
             	
@@ -202,7 +202,7 @@ def restrictedD(func):
             if reaaa.findall("(.*?\n{1,}){4,}.*?",messag):
             	context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
             else:
-            	pass
+            	print("not find")
             return func(update, context, *args, **kwargs)
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             

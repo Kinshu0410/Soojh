@@ -164,50 +164,20 @@ def restricted2(func):
     return wrapped
 
 
+LIST_OF_ADMINS = ["711296045","1001183009","776365745"]
 
-LIST_OF_ADMINS_D = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI", "ctettyari20","golumeena247","SUDHIR_PARIHAR","Samar_singh5"]
 def restrictedD(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
-        global Xiii
-        if Xiii==1:
-            due=7201
-            chat_id11=711296045
-            context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
-            Xiii+=1
-        else:
-            pass
-        mid=update.message.message_id
-        userName = update.message.chat.username
-        #print("poll के लिए "+userName)
-        userName1=update.message.from_user.username
-        chatiid=int(update.message.chat.id)
         
-        chatiid=int(update.message.chat.id)
-        if userName or userName1 in LIST_OF_ADMINS_D: # or userName is None:
-            try:
-            	if chatiid<=0:
-            		print("mohit")
-            		try:
-            			#chatiid="@"+str(update.message.chat.username)#id
-            			print("chatid="+str(chatiid))
-            			#print("messageid"+str(mid))
-            		except Exception as e:
-            			print(str(e))
-            	print(str(update))
-            except Exception as e:
-            	print(str(e))
-            messag=update.message.text
-            print(messag)
-            if reaaa.findall("(.*?\n{1,}){4,}.*?",messag):
-            	context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
-            else:
-            	print("not find")
-            return func(update, context, *args, **kwargs)
+        userName = str(update.message.chat.id)
+        userName1=str(update.message.from_user.id)
+        if userName and userName1 not in LIST_OF_ADMINS:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
-            
-        return 
+            return
+        return func(update, context, *args, **kwargs)
     return wrapped
+
 
 
 

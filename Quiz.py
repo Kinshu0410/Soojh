@@ -164,7 +164,7 @@ def restricted2(func):
     return wrapped
 
 
-LIST_OF_ADMINS = ["711296045","1001183009","776365745"]
+LIST_OF_ADMINS = ["711296045","1001183009","776365745","875026044","1468125551"]
 
 def restrictedD(func):
     @wraps(func)
@@ -175,6 +175,10 @@ def restrictedD(func):
         if userName and userName1 not in LIST_OF_ADMINS:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
+        chatiid=int(update.message.chat.id)
+        if chatiid<=0:
+        	if reaaa.findall("(.*?\n{1,}){4,}.*?",update.message.text):
+        		context.bot.delete_message(chat_id=chatiid,message_id=update.message.message_id)
         return func(update, context, *args, **kwargs)
     return wrapped
 

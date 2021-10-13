@@ -1195,7 +1195,7 @@ def poll(update, context):
     """Sends a predefined poll"""
     #que = update.message.text()
     quest=(update.message.text)
-    
+    print("poll Conversation = "+update.message.text)
     try:
         q=quest[0:-1]
         q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)

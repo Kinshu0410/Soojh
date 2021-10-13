@@ -179,7 +179,7 @@ def restrictedD(func):
             pass
         mid=update.message.message_id
         userName = update.message.chat.username
-        #print(userName)
+        print("poll के लिए "+userName)
         userName1=update.message.from_user.username
         chatiid=int(update.message.chat.id)
         #print(chatiid)
@@ -198,6 +198,7 @@ def restrictedD(func):
             except Exception as e:
             	print(str(e))
             messag=update.message.text
+            print(messag)
             if reaaa.findall("(.*?\n{1,}){4,}.*?",messag):
             	context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
             else:

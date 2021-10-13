@@ -182,7 +182,7 @@ def restrictedD(func):
         print("poll के लिए "+userName)
         userName1=update.message.from_user.username
         chatiid=int(update.message.chat.id)
-        print(chatiid)
+        print(str(update))
         chatiid=int(update.message.chat.id)
         if userName and userName1 in LIST_OF_ADMINS_D: # or userName is None:
             try:

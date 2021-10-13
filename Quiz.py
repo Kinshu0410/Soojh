@@ -184,7 +184,7 @@ def restrictedD(func):
         chatiid=int(update.message.chat.id)
         
         chatiid=int(update.message.chat.id)
-        if userName and userName1 in LIST_OF_ADMINS_D: # or userName is None:
+        if userName or userName1 in LIST_OF_ADMINS_D: # or userName is None:
             try:
             	if chatiid<=0:
             		print("mohit")

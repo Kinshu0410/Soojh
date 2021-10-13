@@ -179,10 +179,10 @@ def restrictedD(func):
             pass
         mid=update.message.message_id
         userName = update.message.chat.username
-        print("poll के लिए "+userName)
+        #print("poll के लिए "+userName)
         userName1=update.message.from_user.username
         chatiid=int(update.message.chat.id)
-        print(str(update))
+        
         chatiid=int(update.message.chat.id)
         if userName and userName1 in LIST_OF_ADMINS_D: # or userName is None:
             try:
@@ -194,7 +194,7 @@ def restrictedD(func):
             			#print("messageid"+str(mid))
             		except Exception as e:
             			print(str(e))
-            	
+            	print(str(update))
             except Exception as e:
             	print(str(e))
             messag=update.message.text

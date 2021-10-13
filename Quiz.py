@@ -169,7 +169,11 @@ LIST_OF_ADMINS = ["711296045","1001183009","776365745","875026044","1468125551"]
 def restrictedD(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
-        
+        global Xiii
+        if Xiii==1:
+            due=7201
+            chat_id11=711296045
+            context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
         userName = str(update.message.chat.id)
         userName1=str(update.message.from_user.id)
         if userName and userName1 not in LIST_OF_ADMINS:

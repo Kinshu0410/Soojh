@@ -71,7 +71,7 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["711296045","1001183009","776365745"]
+LIST_OF_ADMINS = ["711296045","1001183009","776365745","1527108544"]
 
 def restricted(func):
     @wraps(func)
@@ -164,7 +164,7 @@ def restricted2(func):
     return wrapped
 
 
-LIST_OF_ADMINS = ["711296045","1001183009","776365745","875026044","1468125551"]
+LIST_OF_ADMINS = ["711296045","1001183009","776365745","875026044","1468125551","1527108544"]
 
 def restrictedD(func):
     @wraps(func)
@@ -1015,8 +1015,8 @@ def ghn(update,context):
     	context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
     
-Man=[711296045,1001183009,776365745]
-Group=[-1001517843177,-1001183315065,-1001523064999]
+Man=[711296045,1001183009,776365745,1527108544]
+Group=[-1001517843177,-1001183315065,-1001523064999,-1001362563196]
 @restricted
 def ghppp1(update,context):
     cid=""

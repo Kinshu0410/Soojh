@@ -225,6 +225,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')'''
     question=user.question
     que=reaaa.sub(" "," ",question)
+    que=reaaa.sub("(by|golu).*?(✍️){1,}"," ",que)
     que=reaaa.sub("(\n| |)✍{0,} Priti Gupta ✍{0,}(\n| |)","",que)
     que=reaaa.sub("(\n| |)Sandeep Choudhary(\n| |)","",que)
     que=reaaa.sub("(\n| |)🤗.*?🤗(\n| |)","",que)

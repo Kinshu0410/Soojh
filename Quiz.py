@@ -1833,7 +1833,7 @@ def call3(update,context):
 			var3+=1
 		else:
 			if type=="text":
-				context.bot.send_message(chat_id=int(callv[1]), text=data)#, reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
+				context.bot.send_message(chat_id=int(callv[1]), text=data, parse_mode=telegram.ParseMode.HTML)
 			elif type=="photo":
 				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption)#,reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
 		time.sleep(5)

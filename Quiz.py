@@ -1045,9 +1045,12 @@ def ghppp1(update,context):
     explan=userText.explanation
     
     if explan:
-        if reaaa.findall("@[a-zA-Z0-9_-]",explan):
-            explan="Join @Polls_Quiz"
         explan=reaaa.sub(" "," ",explan)
+        if reaaa.findall("@[a-zA-Z0-9_-]",explan):
+            explan=None
+        elif reaaa.findall("t\.me",explan):
+            explan=None
+
     print("poll")
     context.bot.send_poll(
             chat_id=int(cid),
@@ -1347,9 +1350,9 @@ def pollf(update,context):
 	    keyboard = [[InlineKeyboardButton("Go Back to Question", url=uurrl),],]
 	    reply_markup = InlineKeyboardMarkup(keyboard)
 	    if bool(re.findall(r"^https://t\.me/.*",exp)):
-	    	context.bot.sendPhoto(chat_id=int(chat___id), photo=(exp),reply_markup=reply_markup)
+	    	context.bot.sendPhoto(chat_id=int(chat___id), photo=(exp),reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
 	    else:
-	    	context.bot.send_message(chat_id=int(chat___id), text=exp,reply_markup=reply_markup)
+	    	context.bot.send_message(chat_id=int(chat___id), text=exp,reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
     return ConversationHandler.END
     
 @restricted2
@@ -1682,7 +1685,7 @@ def button(update: Update, context: CallbackContext) -> None:
 				if tex is None:
 					tex=""
 				print(tex)
-				query.edit_message_caption(tex+"\n\n👇 Explanation here",reply_markup=reply_markup)
+				query.edit_message_caption(tex+"\n\n👇 Explanation here",reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
 				print("Done Caption")
 			print()
 		except:
@@ -1692,7 +1695,7 @@ def button(update: Update, context: CallbackContext) -> None:
 				tex=query.message.text
 				if tex is None:
 					tex=""
-				query.edit_message_text(tex+"\n\n👇 Explanation here",reply_markup=reply_markup)
+				query.edit_message_text(tex+"\n\n👇 Explanation here",reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
 				print("Done Text")
 	
 
@@ -1824,15 +1827,15 @@ def call3(update,context):
 		reply_markup = InlineKeyboardMarkup(keyboard)
 		if cor:
 			if type=="text":
-				context.bot.send_message(chat_id=int(callv[1]), text=data, reply_markup=reply_markup)
+				context.bot.send_message(chat_id=int(callv[1]), text=data, reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
 			elif type=="photo":
-				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption,reply_markup=reply_markup)
+				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption,reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
 			var3+=1
 		else:
 			if type=="text":
-				context.bot.send_message(chat_id=int(callv[1]), text=data)#, reply_markup=reply_markup)
+				context.bot.send_message(chat_id=int(callv[1]), text=data)#, reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
 			elif type=="photo":
-				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption)#,reply_markup=reply_markup)
+				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption)#,reply_markup=reply_markup,parse_mode=telegram.ParseMode.HTML)
 		time.sleep(5)
 	
 quizName1=""

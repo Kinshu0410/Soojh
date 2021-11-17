@@ -1,10 +1,10 @@
 from pymongo import MongoClient
-import dns
+#import dns
 
-'''import dns.resolver
+import dns.resolver
 dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
 dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public dns server,  use whatever dns server you like here
-# as a test, dns.resolver.query('www.google.com') should return an answer, not an exception'''
+# as a test, dns.resolver.query('www.google.com') should return an answer, not an exception
 client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
 
 #!/usr/bin/env pyth#
@@ -1337,7 +1337,7 @@ def pollf(update,context):
 	    query=update.message.text
 	    #print(query)
 	    query=reaaa.sub("/start ","",query)
-	    ddd=re.split("_",query)
+	    ddd=reaaa.split("_",query)
 	    qN=ddd[0]
 	    qQ=str(ddd[1])
 	    col=client["QuizC"][qN]
@@ -1349,7 +1349,7 @@ def pollf(update,context):
 	    print("uurrl = "+str(uurrl))
 	    keyboard = [[InlineKeyboardButton("Go Back to Question", url=uurrl),],]
 	    reply_markup = InlineKeyboardMarkup(keyboard)
-	    if bool(re.findall(r"^https://t\.me/.*",exp)):
+	    if bool(reaaa.findall(r"^https://t\.me/.*",exp)):
 	    	context.bot.sendPhoto(chat_id=int(chat___id), photo=(exp),reply_markup=reply_markup,parse_mode=ParseMode.HTML)
 	    else:
 	    	context.bot.send_message(chat_id=int(chat___id), text=exp,reply_markup=reply_markup,parse_mode=ParseMode.HTML)
@@ -1581,8 +1581,10 @@ def button(update: Update, context: CallbackContext) -> None:
 		M="0"
 		ccc=coll.find_one({"uid":uId,qQ:{"$type":"string"}})
 		qq=str(ccc[qQ])
-		Marks = ccc["Marks"]
-		
+		try:
+			Marks = ccc["Marks"]
+		except:
+			Marks = "0"
 	elif coll.find_one({"uid":uId}):
 		#coll.find_and_modify
 
@@ -1593,12 +1595,12 @@ def button(update: Update, context: CallbackContext) -> None:
 				M="-1"
 		else:
 			M="0"
+		print(qA+"Your Marks = "+M)
 		ccc=coll.find_one({"uid":uId})
-		qq=str(ccc[qQ])
-		Marks = ccc["Marks"]
-		if Marks:
-			pass
-		else:
+		print(str(ccc))
+		try:
+			Marks = ccc["Marks"]
+		except:
 			Marks="0"
 		myquery1 = {"uid":uId}
 		newvalues1 = { qQ:qA,"Marks":str(int(Marks)+int(M))}
@@ -1618,7 +1620,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	if qA=='0':
 		if qq:
 			print("https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"/"+str(update.callback_query.message.message_id))
-			if bool(re.match("^$",exp)):
+			if bool(reaaa.match("^$",exp)):
 				query.answer(text="Now we don't have Explanation\n\nहमारे पास अभी कोई भी hint नहीं है।🙏🙏", show_alert=True)
 				#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))
 				print(bool(reaaa.match("^$",exp)))
@@ -1662,11 +1664,11 @@ def button(update: Update, context: CallbackContext) -> None:
 		reply_markup = InlineKeyboardMarkup(keyboard)
 		print(query.message.text)
 		try:
-			if re.search("👇 Explanation here",str(query.message.caption)):
+			if reaaa.search("👇 Explanation here",str(query.message.caption)):
 				print("start caption")
 			else:
 				tex=query.message.caption
-				print("main thing ="+str(query))
+				#print("main thing ="+str(query))
 				#tex=reaaa.sub("^","<b>",tex)
 				#tex=reaaa.sub("(?<=^.*?)\n","\n</b>",tex)
 				if tex is None:
@@ -1676,7 +1678,8 @@ def button(update: Update, context: CallbackContext) -> None:
 				print("Done Caption")
 			print()
 		except:
-			if re.search("👇 Explanation here",str(query.message.text)):
+			
+			if reaaa.search("👇 Explanation here",query.message.text):
 				print("start text")
 			else:
 				tex=query.message.text
@@ -1724,7 +1727,7 @@ def upload1(update,context):
 def call1(update,context):
 	#print(update)
 	callv=update.message.text
-	callv=re.sub("\n(\(a\) ){10,}\(a\)","",callv)
+	callv=reaaa.sub("\n(\(a\) ){10,}\(a\)","",callv)
 	#print(callv)
 	if bool(reaaa.match("1|2|3|4",callv[-1])):
 		data=callv[:-1]
@@ -1875,8 +1878,8 @@ def call5(update,context):
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
-    bot_token=os.environ.get("BOT_TOKEN", "")
-    #bot_token='1415600890:AAHl1L2Om1E5O655U0v2Q-nIo7HszNiZKaI'
+    #bot_token=os.environ.get("BOT_TOKEN", "")
+    bot_token='1293606633:AAHuGiRGZpdvMOpichWNy4mmzhB0-BL5_V8'
     updater = Updater(bot_token,use_context=True)
 
     # Get the dispatcher to register handlers

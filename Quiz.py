@@ -1564,10 +1564,12 @@ def button(update: Update, context: CallbackContext) -> None:
 	qQ=str(ddd[1])
 	print(qQ)
 	qA=ddd[2]
+	#print(qA)
 	col=client["QuizC"][qN]
 	cou1=str(col.count_documents({"type":"Quiz"}))
 	yy=col.find({"cor":{"$type":"string"}})
 	cor=yy[int(qQ)-1]["cor"]
+	
 	exp=yy[int(qQ)-1]["exp"]
 
 	
@@ -1587,23 +1589,26 @@ def button(update: Update, context: CallbackContext) -> None:
 			Marks = "0"
 	elif coll.find_one({"uid":uId}):
 		#coll.find_and_modify
-
-		if qA!="0":
-			if qA==cor:
+		print(qA)
+		print("yooo")
+		print(cor)
+		if str(qA)!="0":
+			if str(qA)==str(cor):
 				M="4"
 			else:
 				M="-1"
 		else:
 			M="0"
-		print(qA+"Your Marks = "+M)
+		
 		ccc=coll.find_one({"uid":uId})
-		print(str(ccc))
+		#print(str(ccc))
 		try:
 			Marks = ccc["Marks"]
 		except:
 			Marks="0"
 		myquery1 = {"uid":uId}
-		newvalues1 = { qQ:qA,"Marks":str(int(Marks)+int(M))}
+		Marks=int(Marks)+int(M)
+		newvalues1 = {"uid":uId, qQ:qA,"Marks":str(Marks)}
 		#print(myquery1)
 		#print(newvalues1)
 		if qA!="0":
@@ -1615,7 +1620,8 @@ def button(update: Update, context: CallbackContext) -> None:
 				M="4"
 			else:
 				M="-1"
-			coll.insert_one({"uid":uId,qQ:qA,"Marks":str(int(Marks)+int(M))})
+			Marks=int(Marks)+int(M)
+			coll.insert_one({"uid":uId,qQ:qA,"Marks":str(Marks)})
 	exp1=""
 	if qA=='0':
 		if qq:

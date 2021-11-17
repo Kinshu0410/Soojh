@@ -1557,46 +1557,8 @@ def KrutiDev_to_Unicode(krutidev_substring):
     #print(modified_substring)
     return modified_substring
 
-from pymongo import MongoClient
-#import dns
-
-import dns.resolver
-dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
-dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public dns server,  use whatever dns server you like here
-# as a test, dns.resolver.query('www.google.com') should return an answer, not an exception
-client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
-
-import logging
-
-import re
-import time
-
-from telegram import ReplyKeyboardMarkup,InlineKeyboardButton,InlineKeyboardMarkup, ReplyKeyboardRemove, Update, Poll, Update, ChatAction, ParseMode
-from telegram.ext import (
-    Updater,
-    CommandHandler,
-    MessageHandler,
-    Filters,
-    PollAnswerHandler,
-    PollHandler,
-    ConversationHandler,
-    CallbackContext,
-    CommandHandler, 
-    CallbackQueryHandler, 
-    CallbackContext
-    
-)
-
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-)
-logger = logging.getLogger(__name__)
-
-
-
 def button(update: Update, context: CallbackContext) -> None:
 	query = update.callback_query
-	#print(query)
 	ddd=reaaa.split("_",query.data)
 	qN=ddd[0]
 	qQ=str(ddd[1])
@@ -1608,28 +1570,50 @@ def button(update: Update, context: CallbackContext) -> None:
 	cor=yy[int(qQ)-1]["cor"]
 	exp=yy[int(qQ)-1]["exp"]
 
-	#print(exp)
+	
 	uId=(query.from_user.id)
 	coll=client["QuizCData"][qN]
-	#print('1')
-	#print(coll)
+	
 	qq=None
 	if coll.find_one({"uid":uId,qQ:{"$type":"string"}}):
 		#print("2")
+		
+		M="0"
 		ccc=coll.find_one({"uid":uId,qQ:{"$type":"string"}})
 		qq=str(ccc[qQ])
-		#print(qq)
+		Marks = ccc["Marks"]
+		
 	elif coll.find_one({"uid":uId}):
 		#coll.find_and_modify
+
+		if qA!="0":
+			if qA==cor:
+				M="4"
+			else:
+				M="-1"
+		else:
+			M="0"
+		ccc=coll.find_one({"uid":uId})
+		qq=str(ccc[qQ])
+		Marks = ccc["Marks"]
+		if Marks:
+			pass
+		else:
+			Marks="0"
 		myquery1 = {"uid":uId}
-		newvalues1 = { qQ:qA}
+		newvalues1 = { qQ:qA,"Marks":str(int(Marks)+int(M))}
 		#print(myquery1)
 		#print(newvalues1)
 		if qA!="0":
 			coll.update_one(myquery1,{"$set":newvalues1})
 	else:
 		if qA!="0":
-			coll.insert_one({"uid":uId,qQ:qA})
+			Marks="0"
+			if qA==cor:
+				M="4"
+			else:
+				M="-1"
+			coll.insert_one({"uid":uId,qQ:qA,"Marks":str(int(Marks)+int(M))})
 	exp1=""
 	if qA=='0':
 		if qq:
@@ -1658,13 +1642,13 @@ def button(update: Update, context: CallbackContext) -> None:
 		if exp!="":
 			exp1="\n\n\nFor explanation click Q_"+qQ+" button"
 		if qq==cor:
-			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou gain = 4📈"+exp1 , show_alert=True)
+			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou gain = 4📈\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
 		else:
-			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou lost = 1📉"+exp1 , show_alert=True)
+			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou lost = 1📉\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
 	elif cor==qA:
-		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈"+exp1 , show_alert=True)
+		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
 	else:
-		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉"+exp1 , show_alert=True)
+		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
 	if exp!="":
 		keyboard = [
         [
@@ -1682,6 +1666,9 @@ def button(update: Update, context: CallbackContext) -> None:
 				print("start caption")
 			else:
 				tex=query.message.caption
+				print("main thing ="+str(query))
+				#tex=reaaa.sub("^","<b>",tex)
+				#tex=reaaa.sub("(?<=^.*?)\n","\n</b>",tex)
 				if tex is None:
 					tex=""
 				print(tex)

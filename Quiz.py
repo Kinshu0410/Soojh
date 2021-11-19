@@ -1804,14 +1804,14 @@ def call3(update,context):
 	callv=update.message.text
 	callv=reaaa.sub("/startquiz ","",callv)
 	callv=reaaa.split("_", callv)
-	due=5
+	due11=1
 	chat_id=int(callv[1])
 	var3=1
 	collll=client["QuizC"][callv[0]]
 	yy=collll.find({})
 	y=collll.count_documents({})
 	count=0
-	context.job_queue.run_once(alarm1, due, context=chat_id, name=str(chat_id))
+	context.job_queue.run_once(alarm1, due11, context=chat_id, name=str(chat_id))
 
 def alarm1(context: CallbackContext):
 	global count

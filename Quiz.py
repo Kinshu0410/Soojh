@@ -1804,7 +1804,7 @@ def call3(update,context):
 	callv=update.message.text
 	callv=reaaa.sub("/startquiz ","",callv)
 	callv=reaaa.split("_", callv)
-	due11=1
+	due11=6
 	chat_id=int(callv[1])
 	var3=1
 	collll=client["QuizC"][callv[0]]
@@ -1817,7 +1817,7 @@ def alarm1(context: CallbackContext):
 	global count
 	global var3
 	job = context.job
-	due=5
+	due=6
 	chat_id=int(callv[1])
 	
 	print(callv)

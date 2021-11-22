@@ -1789,45 +1789,24 @@ def cancel(update: Update, _: CallbackContext) -> int:
     )
 
     return ConversationHandler.END
-
-
+#var3=1
 def call3(update,context):
-	global callv
-	global count
-	global var3
-	global y
-	global collll
-	global yy
-
 	print("start")
 	#print(update)
 	callv=update.message.text
 	callv=reaaa.sub("/startquiz ","",callv)
 	callv=reaaa.split("_", callv)
-	due11=10
-	chat_id=int(callv[1])
 	var3=1
-	collll=client["QuizC"][callv[0]]
-	yy=collll.find({})
-	y=collll.count_documents({})
-	count=0
-	context.job_queue.run_once(alarm1, due11, context=chat_id, name=str(chat_id))
-
-def alarm1(context: CallbackContext):
-	global count
-	global var3
-	job = context.job
-	due=10
-	chat_id=int(callv[1])
-	
 	print(callv)
-		
-	if count<=y:
-		cor=yy[count]["cor"]
-		type=yy[count]["type"]
-		data=yy[count]["data"]
+	col=client["QuizC"][callv[0]]
+	yy=col.find({})
+	for y in yy:
+		print("3")
+		cor=y["cor"]
+		type=y["type"]
+		data=y["data"]
 		try:
-			caption=yy[count]["text"]
+			caption=y["text"]
 		except:
 			caption=False
 		print(data)
@@ -1853,8 +1832,7 @@ def alarm1(context: CallbackContext):
 				context.bot.send_message(chat_id=int(callv[1]), text=data, parse_mode=ParseMode.HTML)
 			elif type=="photo":
 				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption)#,reply_markup=reply_markup,parse_mode=ParseMode.HTML)
-		count+=1
-		context.job_queue.run_once(alarm1, due, context=chat_id, name=str(chat_id))
+		time.sleep(5)
 	
 quizName1=""
 CALL1=range(1)

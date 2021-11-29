@@ -1,3 +1,7 @@
+from functools import wraps
+from telegram import ChatAction, Update
+from telegram.ext import CallbackContext
+
 LIST_OF_ADMINS = ["711296045","1001183009","776365745","1527108544","2020953330","1202919365","659902469"]
 
 def restricted(func):

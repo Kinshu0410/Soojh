@@ -1557,15 +1557,6 @@ def KrutiDev_to_Unicode(krutidev_substring):
     #print(modified_substring)
     return modified_substring
 
-def createFolder(directory):
-    try:
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-    except OSError:
-        print ('Error: Creating directory. ' +  directory)
-# Example
-#createFolder('./data/')
-
 def button(update: Update, context: CallbackContext) -> None:
 	query = update.callback_query
 	ddd=reaaa.split("_",query.data)
@@ -1573,172 +1564,135 @@ def button(update: Update, context: CallbackContext) -> None:
 	qQ=str(ddd[1])
 	print(qQ)
 	qA=ddd[2]
-	print(qA)
-	if qA=="Refresh":
-		createFolder('./'+qN+'/')
-		print("create folder")
-		yo="""<!DOCTYPE html><html>
-					    	<head>
-					    	<style>
-		table {
-		  font-family: arial, sans-serif;
-		  border-collapse: collapse;
-		  width: 100%;
-		  }
-					    	h1 {text-align: center;}
-					    	p {text-align: center;}
-					    	td, th {
-		  border: 1px solid #dddddd;
-		  text-align: center;
-		  vertical-align: middle;
-		  padding: 8px;
-		}
-					    	tr:nth-child(even) {
-		  background-color: #dddddd;
-		}
-		</style>
-					    	<title>On @Soojhboojh_01bot</title>
-					    	</head>
-					    	<body>your result
-					    	</body>
-					    	</html>"""
-		with open('index.html', 'w') as outfile:
-			outfile.write(yo)
-			outfile.close()
-			print("create file")
-	elif qA=="Share":
-		pass
-	elif qA=="Result-01":
-		pass
-	else:
-		col=client["QuizC"][qN]
-		cou1=str(col.count_documents({"type":"Quiz"}))
-		yy=col.find({"cor":{"$type":"string"}})
-		cor=yy[int(qQ)-1]["cor"]
-		
-		exp=yy[int(qQ)-1]["exp"]
+	#print(qA)
+	col=client["QuizC"][qN]
+	cou1=str(col.count_documents({"type":"Quiz"}))
+	yy=col.find({"cor":{"$type":"string"}})
+	cor=yy[int(qQ)-1]["cor"]
 	
+	exp=yy[int(qQ)-1]["exp"]
+
+	
+	uId=(query.from_user.id)
+	coll=client["QuizCData"][qN]
+	
+	qq=None
+	if coll.find_one({"uid":uId,qQ:{"$type":"string"}}):
+		#print("2")
 		
-		uId=(query.from_user.id)
-		coll=client["QuizCData"][qN]
-		
-		qq=None
-		if coll.find_one({"uid":uId,qQ:{"$type":"string"}}):
-			#print("2")
-			
+		M="0"
+		ccc=coll.find_one({"uid":uId,qQ:{"$type":"string"}})
+		qq=str(ccc[qQ])
+		try:
+			Marks = ccc["Marks"]
+		except:
+			Marks = "0"
+	elif coll.find_one({"uid":uId}):
+		#coll.find_and_modify
+		print(qA)
+		print("yooo")
+		print(cor)
+		if str(qA)!="0":
+			if str(qA)==str(cor):
+				M="4"
+			else:
+				M="-1"
+		else:
 			M="0"
-			ccc=coll.find_one({"uid":uId,qQ:{"$type":"string"}})
-			qq=str(ccc[qQ])
-			try:
-				Marks = ccc["Marks"]
-			except:
-				Marks = "0"
-		elif coll.find_one({"uid":uId}):
-			#coll.find_and_modify
-			print(qA)
-			print("yooo")
-			print(cor)
-			if str(qA)!="0":
-				if str(qA)==str(cor):
-					M="4"
-				else:
-					M="-1"
+		
+		ccc=coll.find_one({"uid":uId})
+		#print(str(ccc))
+		try:
+			Marks = ccc["Marks"]
+		except:
+			Marks="0"
+		myquery1 = {"uid":uId}
+		Marks=int(Marks)+int(M)
+		newvalues1 = {"uid":uId, qQ:qA,"Marks":str(Marks)}
+		#print(myquery1)
+		#print(newvalues1)
+		if qA!="0":
+			coll.update_one(myquery1,{"$set":newvalues1})
+	else:
+		if qA!="0":
+			Marks="0"
+			if qA==cor:
+				M="4"
 			else:
-				M="0"
-			
-			ccc=coll.find_one({"uid":uId})
-			#print(str(ccc))
-			try:
-				Marks = ccc["Marks"]
-			except:
-				Marks="0"
-			myquery1 = {"uid":uId}
+				M="-1"
 			Marks=int(Marks)+int(M)
-			newvalues1 = {"uid":uId, qQ:qA,"Marks":str(Marks)}
-			#print(myquery1)
-			#print(newvalues1)
-			if qA!="0":
-				coll.update_one(myquery1,{"$set":newvalues1})
-		else:
-			if qA!="0":
-				Marks="0"
-				if qA==cor:
-					M="4"
-				else:
-					M="-1"
-				Marks=int(Marks)+int(M)
-				coll.insert_one({"uid":uId,qQ:qA,"Marks":str(Marks)})
-		exp1=""
-		if qA=='0':
-			if qq:
-				print("https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"/"+str(update.callback_query.message.message_id))
-				if bool(reaaa.match("^$",exp)):
-					query.answer(text="Now we don't have Explanation\n\nहमारे पास अभी कोई भी hint नहीं है।🙏🙏", show_alert=True)
-					#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))
-					print(bool(reaaa.match("^$",exp)))
-				elif bool(reaaa.findall(r"^https://t\.me/.*",exp)):
-					
-					try:
-						#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))#caption=caption)
-						query.answer(text="@soojhboojh_01bot Bot send you a file or Photo message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
-					except:
-						query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
-				else:
-					try:
-						#context.bot.send_message(chat_id=int(uId), text=exp)
-						query.answer(text="@soojhboojh_01bot Bot send you a file or text message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
-					except:
-						query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
-			else:
-				query.answer(text="First select option then click Q_Number for Hint\n\nसबसे पहले एक option select कीजिये तब आप explanation जान पाओगें यदि explanation होगी तो🙏🙏", show_alert=True)
-		elif qq:
-			
-			if exp!="":
-				exp1="\n\n\nFor explanation click Q_"+qQ+" button"
-			if qq==cor:
-				query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou gain = 4📈\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
-			else:
-				query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou lost = 1📉\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
-		elif cor==qA:
-			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
-		else:
-			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
-		if exp!="":
-			keyboard = [
-	        [
-	            InlineKeyboardButton("Q_"+str(qQ), callback_data=qN+"_"+str(qQ)+'_0'),
-	            InlineKeyboardButton("A", callback_data=qN+"_"+str(qQ)+'_1'),
-	            InlineKeyboardButton("B", callback_data=qN+"_"+str(qQ)+'_2'),
-	            InlineKeyboardButton("C", callback_data=qN+"_"+str(qQ)+'_3'),
-	            InlineKeyboardButton("D", callback_data=qN+"_"+str(qQ)+'_4'),],
-	    ]
-	
-			reply_markup = InlineKeyboardMarkup(keyboard)
-			print(query.message.text)
-			try:
-				if reaaa.search("👇 Explanation here",str(query.message.caption)):
-					print("start caption")
-				else:
-					tex=query.message.caption
-					#print("main thing ="+str(query))
-					#tex=reaaa.sub("^","<b>",tex)
-					#tex=reaaa.sub("(?<=^.*?)\n","\n</b>",tex)
-					if tex is None:
-						tex=""
-					print(tex)
-					query.edit_message_caption(tex+"\n\n👇 Explanation here",reply_markup=reply_markup,parse_mode=ParseMode.HTML)
-					print("Done Caption")
-				print()
-			except:
+			coll.insert_one({"uid":uId,qQ:qA,"Marks":str(Marks)})
+	exp1=""
+	if qA=='0':
+		if qq:
+			print("https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"/"+str(update.callback_query.message.message_id))
+			if bool(reaaa.match("^$",exp)):
+				query.answer(text="Now we don't have Explanation\n\nहमारे पास अभी कोई भी hint नहीं है।🙏🙏", show_alert=True)
+				#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))
+				print(bool(reaaa.match("^$",exp)))
+			elif bool(reaaa.findall(r"^https://t\.me/.*",exp)):
 				
-				if reaaa.search("👇 Explanation here",query.message.text):
-					print("start text")
-				else:
-					tex=query.message.text
-					if tex is None:
-						tex=""
-					query.edit_message_text(tex+"\n\n👇 Explanation here",reply_markup=reply_markup,parse_mode=ParseMode.HTML)
-					print("Done Text")
+				try:
+					#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))#caption=caption)
+					query.answer(text="@soojhboojh_01bot Bot send you a file or Photo message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
+				except:
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
+			else:
+				try:
+					#context.bot.send_message(chat_id=int(uId), text=exp)
+					query.answer(text="@soojhboojh_01bot Bot send you a file or text message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
+				except:
+					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
+		else:
+			query.answer(text="First select option then click Q_Number for Hint\n\nसबसे पहले एक option select कीजिये तब आप explanation जान पाओगें यदि explanation होगी तो🙏🙏", show_alert=True)
+	elif qq:
+		
+		if exp!="":
+			exp1="\n\n\nFor explanation click Q_"+qQ+" button"
+		if qq==cor:
+			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou gain = 4📈\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
+		else:
+			query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nfirst time Selected option :{qq}\nyou lost = 1📉\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
+	elif cor==qA:
+		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou gain = 4📈\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
+	else:
+		query.answer(text=f"Selected option: {qA}\nRight Ans: {cor}\nyou lost = 1📉\n\nYour Marsk for this Quiz is == {Marks}"+exp1 , show_alert=True)
+	if exp!="":
+		keyboard = [
+        [
+            InlineKeyboardButton("Q_"+str(qQ), callback_data=qN+"_"+str(qQ)+'_0'),
+            InlineKeyboardButton("A", callback_data=qN+"_"+str(qQ)+'_1'),
+            InlineKeyboardButton("B", callback_data=qN+"_"+str(qQ)+'_2'),
+            InlineKeyboardButton("C", callback_data=qN+"_"+str(qQ)+'_3'),
+            InlineKeyboardButton("D", callback_data=qN+"_"+str(qQ)+'_4'),],
+    ]
+
+		reply_markup = InlineKeyboardMarkup(keyboard)
+		print(query.message.text)
+		try:
+			if reaaa.search("👇 Explanation here",str(query.message.caption)):
+				print("start caption")
+			else:
+				tex=query.message.caption
+				#print("main thing ="+str(query))
+				#tex=reaaa.sub("^","<b>",tex)
+				#tex=reaaa.sub("(?<=^.*?)\n","\n</b>",tex)
+				if tex is None:
+					tex=""
+				print(tex)
+				query.edit_message_caption(tex+"\n\n👇 Explanation here",reply_markup=reply_markup,parse_mode=ParseMode.HTML)
+				print("Done Caption")
+			print()
+		except:
+			
+			if reaaa.search("👇 Explanation here",query.message.text):
+				print("start text")
+			else:
+				tex=query.message.text
+				if tex is None:
+					tex=""
+				query.edit_message_text(tex+"\n\n👇 Explanation here",reply_markup=reply_markup,parse_mode=ParseMode.HTML)
+				print("Done Text")
 	
 
 
@@ -1879,17 +1833,7 @@ def call3(update,context):
 			elif type=="photo":
 				context.bot.sendPhoto(chat_id=int(callv[1]),  photo=(data),caption=caption)#,reply_markup=reply_markup,parse_mode=ParseMode.HTML)
 		time.sleep(5)
-	keyboard = [
-        [
-            InlineKeyboardButton("Refresh", callback_data=callv[0]+"_"+str(var3)+'_Refresh'),
-            InlineKeyboardButton("Share Quiz", callback_data=callv[0]+"_"+str(var3)+'_Share'),],
-        [
-            InlineKeyboardButton("Web Result", callback_data=callv[0]+"_"+str(var3)+'_Result-01',url=('https://kinshusharma0412.github.io/SoojhboojhQuiz/'+callv[0]+'index.html'),),
-        ],
-    ]
-	reply_markup = InlineKeyboardMarkup(keyboard)
-	context.bot.send_message(chat_id=int(callv[1]), text="if Web page not working Click Refresh button and now share button not work", reply_markup=reply_markup,parse_mode=ParseMode.HTML)
-    
+	
 quizName1=""
 CALL1=range(1)
 def upload2(update,context):

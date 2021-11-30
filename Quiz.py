@@ -1573,9 +1573,10 @@ def button(update: Update, context: CallbackContext) -> None:
 	qQ=str(ddd[1])
 	print(qQ)
 	qA=ddd[2]
-	#print(qA)
+	print(qA)
 	if qA=="Refresh":
 		createFolder('./'+qN+'/')
+		print("create folder")
 		yo="""<!DOCTYPE html><html>
 					    	<head>
 					    	<style>
@@ -1604,6 +1605,7 @@ def button(update: Update, context: CallbackContext) -> None:
 		with open('index.html', 'w') as outfile:
 			outfile.write(yo)
 			outfile.close()
+			print("create file")
 	elif qA=="Share":
 		pass
 	elif qA=="Result-01":
@@ -1879,7 +1881,7 @@ def call3(update,context):
 		time.sleep(5)
 	keyboard = [
         [
-            InlineKeyboardButton("Refresh"+str(var3), callback_data=callv[0]+"_"+str(var3)+'_Refresh'),
+            InlineKeyboardButton("Refresh", callback_data=callv[0]+"_"+str(var3)+'_Refresh'),
             InlineKeyboardButton("Share Quiz", callback_data=callv[0]+"_"+str(var3)+'_Share'),],
         [
             InlineKeyboardButton("Web Result", callback_data=callv[0]+"_"+str(var3)+'_Result-01',url=('https://kinshusharma0412.github.io/SoojhboojhQuiz/'+callv[0]+'index.html'),),

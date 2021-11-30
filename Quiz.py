@@ -1601,12 +1601,12 @@ def button(update: Update, context: CallbackContext) -> None:
 					    	<body>your result
 					    	</body>
 					    	</html>"""
-					    	with open('index.html', 'w') as outfile:
-					     		outfile.write(yo)
-					     		outfile.close()
+		with open('index.html', 'w') as outfile:
+			outfile.write(yo)
+			outfile.close()
 	elif qA=="Share":
 		pass
-	elif qA=="Result-01"
+	elif qA=="Result-01":
 		pass
 	else:
 		col=client["QuizC"][qN]
@@ -1881,9 +1881,11 @@ def call3(update,context):
         [
             InlineKeyboardButton("Refresh"+str(var3), callback_data=callv[0]+"_"+str(var3)+'_Refresh'),
             InlineKeyboardButton("Share Quiz", callback_data=callv[0]+"_"+str(var3)+'_Share'),],
-            [InlineKeyboardButton("Web Result", callback_data=callv[0]+"_"+str(var3)+'_Result-01'),url='https://kinshusharma0412.github.io/SoojhboojhQuiz/'+callv[0]+'index.html')]
+        [
+            InlineKeyboardButton("Web Result", callback_data=callv[0]+"_"+str(var3)+'_Result-01',url=('https://kinshusharma0412.github.io/SoojhboojhQuiz/'+callv[0]+'index.html'),),
+        ],
     ]
-    context.bot.send_message(chat_id=int(callv[1]), text="if Web page not working Click Refresh button and now share button not work", reply_markup=reply_markup,parse_mode=ParseMode.HTML)
+	context.bot.send_message(chat_id=int(callv[1]), text="if Web page not working Click Refresh button and now share button not work", reply_markup=reply_markup,parse_mode=ParseMode.HTML)
     
 quizName1=""
 CALL1=range(1)

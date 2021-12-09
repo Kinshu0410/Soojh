@@ -1773,13 +1773,26 @@ def call2(update,context):
 def call6(update,context):
 	poll=update.message.poll
 	question=poll.question
+	que=reaaa.sub(" "," ",question)
+	que=reaaa.sub("(by|golu).*?(✍️){1,}"," ",que)
+	que=reaaa.sub("(\n| |)✍{0,} Priti Gupta ✍{0,}(\n| |)","",que)
+	que=reaaa.sub("(\n| |)Sandeep Choudhary(\n| |)","",que)
+	que=reaaa.sub("(\n| |)🤗.*?🤗(\n| |)","",que)
+	que=reaaa.sub("(\n){1,}","\n",que)
+	que=reaaa.sub("^\n","",que) 
+	question= reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/\.])", "", que)
+	question= reaaa.sub(r"^(\[\d{1,}/\d{1,}\] ){1,}", "", question)
 	option=[o.text for o in poll.options]
 	option="\n".join(option)
 	cor=str(poll.correct_option_id+1)
+	if int(cor)>4:
+	    update.message.reply_text("Option Must be less then 4")
+	    return CALL
 	text=question+"\n\n"+option
 	new={"type":"text","data":text,"cor":cor,"exp":""}
 	col=client["QuizC"][quizName]
 	col.insert_one(new)
+	return CALL
 
 def cancel(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user

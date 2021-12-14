@@ -2046,7 +2046,7 @@ def main() -> None:
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))
     dp.add_handler(MessageHandler(Filters.poll, ghppp1))
     # Start the Bot
-    updater.start_polling(drop_pending_updates=True)
+    updater.start_polling(clean = True)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since

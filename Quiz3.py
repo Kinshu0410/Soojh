@@ -59,6 +59,9 @@ logger = logging.getLogger(__name__)
 GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT, TIME, Re = range(9)
 
 
+import asyncio
+from create_results import save_results, save_photos
+
 
 def send_typing_action(func):
     """Sends typing action while processing func command."""
@@ -71,7 +74,7 @@ def send_typing_action(func):
     return command_func
 
 
-LIST_OF_ADMINS = ["711296045","1001183009","776365745","1527108544","2020953330","1202919365","1309577346","875026044"]
+LIST_OF_ADMINS = ["711296045","1001183009","776365745","1527108544","2020953330","1202919365","1309577346","875026044","5094761615"]
 
 def restricted(func):
     @wraps(func)
@@ -164,7 +167,7 @@ def restricted2(func):
     return wrapped
 
 
-LIST_OF_ADMINS = ["711296045","1001183009","776365745","2020953330","875026044","1468125551","1527108544","1202919365","1086189598","1309577346","875026044"]
+LIST_OF_ADMINS = ["711296045","1001183009","776365745","2020953330","875026044","1468125551","1527108544","1202919365","1086189598","1309577346","5094761615"]
 
 def restrictedD(func):
     @wraps(func)
@@ -207,6 +210,7 @@ def gender(update: Update, _: CallbackContext) -> int:
     logger.info("Gender of %s: %s", user.first_name, update.message.text)
     global Textstr
     userText=update.message.text
+    asyncio.run(save_results(userText,update,context))
     Textstr=userText
     update.message.reply_text(
         "Greate! this is a good name.\n\n Send me poll or you can skip using /skip do you want to quit ", reply_markup=ReplyKeyboardRemove(),
@@ -511,8 +515,7 @@ def quizresult(update, context):
     meid=me.message_id
     return RESULT
 
-import asyncio
-from create_results import save_results, save_photos
+
 
 def result(update: Update, context: CallbackContext):
     global COUNTR
@@ -708,9 +711,9 @@ def playinc(update,context):
     
     global chatid
     chatid=update.message.chat.id
-    context.bot.send_message(chat_id=chatid, text="Time in seconds. limit (5-600) .")
+    context.bot.send_message(chat_id=chatid, text="Send me group username Which you want to play quiz")
 
-    return TIME
+    return CHN
 Time=30
 @run_async
 def time0c(update,context):
@@ -838,8 +841,24 @@ def quizc(update,context):
                 except Exception as e:
                     print("payload not done ="+str(e))
             
-                    
-            context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?start\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+            unique_url=asyncio.run(save_results(userText,update,context))
+            print("https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[24:])
+            keyboard = [
+                [
+                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[24:]),
+                    InlineKeyboardButton("Result", callback_data='2',url=unique_url),],[
+        #],[
+        #InlineKeyboardButton("Option 3", callback_data='3',url=''),
+                ],
+            ]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            context.bot.send_message(chat_id=channelid,text='🌐 Click here for Sharing ☜', reply_markup=reply_markup)
+            
+            
+            
+            
+            
+            #context.bot.send_message(chat_id=channelid, text="<a href=\"https://telegram.me/Soojhboojh_01bot?start\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
                 
 
@@ -1027,8 +1046,8 @@ def ghn(update,context):
         context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
     
-Man=[711296045,1001183009,776365745,1527108544,2020953330,1202919365,1309577346,875026044]
-Group=[-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,1309577346,-1001222891254]
+Man=[711296045,1001183009,776365745,1527108544,2020953330,1202919365,1309577346,875026044,5094761615]
+Group=[-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,1309577346,-1001222891254,-1001164423875]
 @restricted
 def ghppp1(update,context):
     cid=""
@@ -1038,7 +1057,7 @@ def ghppp1(update,context):
             cid=Group[li1]
             id=Man[li1]
     userText=update.message.poll
-    context.bot.send_message(chat_id=-1001539629311, text="<a href=\"tg://openmessage?user_id="+str(cid)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(id)+"\">grouo</a>",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(cid)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(id)+"\">grouo</a>",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     print("ghn1 started")
     que=userText.question
     que=reaaa.sub(" "," ",que)
@@ -1065,16 +1084,6 @@ def ghppp1(update,context):
     print("poll")
     context.bot.send_poll(
             chat_id=int(cid),
-            question=que,
-            options=options,
-            type=Poll.QUIZ,
-            correct_option_id=co,
-            explanation=explan,
-            is_anonymous=True,
-            allows_multiple_answers=False,
-            parse_mode=ParseMode.HTML)
-    context.bot.send_poll(
-            chat_id=int(-1001539629311),
             question=que,
             options=options,
             type=Poll.QUIZ,
@@ -1341,9 +1350,57 @@ def pollf(update,context):
     Ccc=update.message.from_user.id
     if chat___id<=0:
         try:
-            chat___id="@"+str(update.message.chat.username)#id
-            mesho01=context.bot.send_message(chat_id=chat___id, text="<a href=\"https://t.me/Soojhboojh_01bot?start\">🌐 find Quiz Name Here☜</a>\nSend me Quiz name that you want to play",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
-            context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>user tring to share</b></a> = "+chat___id,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+            if update.message.text.startswith("/start@Soojhboojh_01bot Share"):
+                unique_id=reaaa.sub("/start@Soojhboojh_01bot Share","",update.message.text)
+                
+                db = client.get_database('Quiz')
+                results = db.get_collection('results')
+                quiz_name=results.find_one({"quiz_id":unique_id})["quiz_name"]
+                col=client["Quiz"]["Quizlist"]
+                x=col.find_one({"Id":quiz_name})
+                try:
+                    coll=client["Quiz_Data"][Time4]
+                    colldb=coll.find()
+                    messa=context.bot.send_message(chat_id=chat___id, text="🎲 Get ready for the LIVE TEST \'"+quiz_name+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(chat___id)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                    channel_ids=x["Channel_Id"]
+                    colme=client["Quiz"]["Message"]
+                    coldoc={"MessID":messa.message_id,"ID":chat___id+"_"+quiz_name}
+                    print(coldoc)
+                    try:
+                        colme.delete_many({"ID":chat___id+"_"+quiz_name})
+                        print("delete successful")
+                    except Exception as e:
+                        print("First time play or not play. "+str(e))
+                    colme.insert_one(coldoc)
+                    print("insert successful")
+                    
+                    try:
+                        for y in x[Time4]:
+                            context.bot.forward_message(chat_id=chat___id,from_chat_id=channel_ids, message_id=y)
+                            '''if %4==2:
+                                time.sleep(5)'''
+                        keyboard = [
+                [
+                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[24:]),
+                    InlineKeyboardButton("Result", callback_data='2',url=unique_url),],[
+        #],[
+        #InlineKeyboardButton("Option 3", callback_data='3',url=''),
+                ],
+            ]
+                        reply_markup = InlineKeyboardMarkup(keyboard)
+                        context.bot.send_message(chat_id=channelid,text='🌐 Click here for Sharing ☜', reply_markup=reply_markup)
+                        #context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?start\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                    except:
+                        context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz hereaaa...", parse_mode=ParseMode.HTML)
+                except Exception as e:
+                    print(str(e))
+                            
+                            
+            else:
+                chat___id="@"+str(update.message.chat.username)#id
+                mesho01=context.bot.send_message(chat_id=chat___id, text="<a href=\"https://t.me/Soojhboojh_01bot?start\">🌐 find Quiz Name Here☜</a>\nSend me Quiz name that you want to play",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>user tring to share</b></a> = "+chat___id,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+
 
         except Exception as e:
             print(str(e))

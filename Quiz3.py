@@ -1391,8 +1391,8 @@ def pollf(update,context):
                                 time.sleep(5)'''
                         keyboard = [
                 [
-                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
-                    InlineKeyboardButton("Result", callback_data='2',url=unique_url),],[
+                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_id),
+                    InlineKeyboardButton("Result", callback_data='2',url="https://quizresults.cf/"+unique_id),],[
         #],[
         #InlineKeyboardButton("Option 3", callback_data='3',url=''),
                 ],

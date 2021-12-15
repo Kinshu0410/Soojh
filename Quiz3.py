@@ -1057,7 +1057,7 @@ def ghppp1(update,context):
             cid=Group[li1]
             id=Man[li1]
     userText=update.message.poll
-    context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(cid)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(id)+"\">grouo</a>",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    context.bot.send_message(chat_id=-1001539629311, text="<a href=\"tg://openmessage?user_id="+str(cid)+"\">chat info</a>\n<a href=\"tg://openmessage?user_id="+str(id)+"\">grouo</a>",parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     print("ghn1 started")
     que=userText.question
     que=reaaa.sub(" "," ",que)
@@ -1084,6 +1084,16 @@ def ghppp1(update,context):
     print("poll")
     context.bot.send_poll(
             chat_id=int(cid),
+            question=que,
+            options=options,
+            type=Poll.QUIZ,
+            correct_option_id=co,
+            explanation=explan,
+            is_anonymous=True,
+            allows_multiple_answers=False,
+            parse_mode=ParseMode.HTML)
+    context.bot.send_poll(
+            chat_id=int(-1001539629311),
             question=que,
             options=options,
             type=Poll.QUIZ,

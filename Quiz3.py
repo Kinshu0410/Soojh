@@ -205,7 +205,7 @@ def createquiz(update: Update, _: CallbackContext) -> int:
 
 Textstr=""
 #@run_async
-def gender(update: Update, _: CallbackContext) -> int:
+def gender(update,context):
     user = update.message.from_user
     logger.info("Gender of %s: %s", user.first_name, update.message.text)
     global Textstr

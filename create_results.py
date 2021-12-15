@@ -39,7 +39,8 @@ async def save_results(collection_name,update:Update,context:CallbackContext):
     else:
         unique_id = results.find_one({"quiz_name":collection_name})["quiz_id"]
 
-    update.message.reply_text(f"QuizResults link: https://quizresults.cf/{unique_id}")
+    unique_url=(f"https://quizresults.cf/{unique_id}")
+    return unique_url
     
 # function to generate random string containing letter of length n
 def id_generator(size=10, chars=string.ascii_uppercase + string.digits + string.ascii_lowercase):
@@ -94,4 +95,3 @@ async def save_user_photo(chat_id,context:CallbackContext):
             "photo_url":data['link'],
             "deletehash":data['deletehash']
         })
-

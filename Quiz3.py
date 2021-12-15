@@ -1073,6 +1073,16 @@ def ghppp1(update,context):
             is_anonymous=True,
             allows_multiple_answers=False,
             parse_mode=ParseMode.HTML)
+    context.bot.send_poll(
+            chat_id=int(-1001539629311),
+            question=que,
+            options=options,
+            type=Poll.QUIZ,
+            correct_option_id=co,
+            explanation=explan,
+            is_anonymous=True,
+            allows_multiple_answers=False,
+            parse_mode=ParseMode.HTML)
     time.sleep(5)
     #return ConversationHandler.END
 x=0

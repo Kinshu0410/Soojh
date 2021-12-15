@@ -1400,8 +1400,8 @@ def pollf(update,context):
                         reply_markup = InlineKeyboardMarkup(keyboard)
                         context.bot.send_message(chat_id=channelid,text='🌐 Click here for Sharing ☜', reply_markup=reply_markup)
                         #context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?start\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
-                    except:
-                        context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz hereaaa...", parse_mode=ParseMode.HTML)
+                    except Exception as e:
+                        context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz hereaaa...\nerror name = "+str(e), parse_mode=ParseMode.HTML)
                 except Exception as e:
                     print(str(e))
                             

@@ -1359,7 +1359,7 @@ def pollf(update,context):
                 col=client["Quiz"]["Quizlist"]
                 x=col.find_one({"Id":quiz_name})
                 try:
-                    coll=client["Quiz_Data"][Time4]
+                    coll=client["Quiz_Data"][quiz_name]
                     colldb=coll.find()
                     messa=context.bot.send_message(chat_id=chat___id, text="🎲 Get ready for the LIVE TEST \'"+quiz_name+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group "+str(chat___id)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                     channel_ids=x["Channel_Id"]
@@ -1375,7 +1375,7 @@ def pollf(update,context):
                     print("insert successful")
                     
                     try:
-                        for y in x[Time4]:
+                        for y in x[quiz_name]:
                             context.bot.forward_message(chat_id=chat___id,from_chat_id=channel_ids, message_id=y)
                             '''if %4==2:
                                 time.sleep(5)'''

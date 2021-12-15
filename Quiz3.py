@@ -842,10 +842,10 @@ def quizc(update,context):
                     print("payload not done ="+str(e))
             
             unique_url=asyncio.run(save_results(userText,update,context))
-            print("https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[24:])
+            print("https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:])
             keyboard = [
                 [
-                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[24:]),
+                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
                     InlineKeyboardButton("Result", callback_data='2',url=unique_url),],[
         #],[
         #InlineKeyboardButton("Option 3", callback_data='3',url=''),
@@ -1381,7 +1381,7 @@ def pollf(update,context):
                                 time.sleep(5)'''
                         keyboard = [
                 [
-                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[24:]),
+                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
                     InlineKeyboardButton("Result", callback_data='2',url=unique_url),],[
         #],[
         #InlineKeyboardButton("Option 3", callback_data='3',url=''),

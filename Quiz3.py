@@ -1362,13 +1362,13 @@ def pollf(update,context):
     if chat___id<=0:
         try:
             if update.message.text.startswith("/start@Soojhboojh_01bot Share"):
-                unique_id=reaaa.sub("/start@Soojhboojh_01bot Share","",update.message.text)
-                context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\nGroup= @"+update.message.chat.username,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                 db = client.get_database('Quiz')
                 results = db.get_collection('results')
                 quiz_name=results.find_one({"quiz_id":unique_id})["quiz_name"]
                 col=client["Quiz"]["Quizlist"]
                 x=col.find_one({"Id":quiz_name})
+                unique_id=reaaa.sub("/start@Soojhboojh_01bot Share","",update.message.text)
+                context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\nGroup = @"+update.message.chat.username+"\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                 try:
                     coll=client["Quiz_Data"][quiz_name]
                     colldb=coll.find()

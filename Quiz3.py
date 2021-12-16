@@ -1363,7 +1363,7 @@ def pollf(update,context):
         try:
             if update.message.text.startswith("/start@Soojhboojh_01bot Share"):
                 unique_id=reaaa.sub("/start@Soojhboojh_01bot Share","",update.message.text)
-                
+                context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\nGroup= @"+update.message.chat.username,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                 db = client.get_database('Quiz')
                 results = db.get_collection('results')
                 quiz_name=results.find_one({"quiz_id":unique_id})["quiz_name"]

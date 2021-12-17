@@ -848,7 +848,7 @@ def quizc(update,context):
                     InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
                     InlineKeyboardButton("Result", callback_data='2',url=unique_url),],[
         #],[
-        #InlineKeyboardButton("Option 3", callback_data='3',url=''),
+        InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),
                 ],
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1395,7 +1395,7 @@ def pollf(update,context):
                     InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_id),
                     InlineKeyboardButton("Result", callback_data='2',url="https://quizresults.cf/"+unique_id),],[
         #],[
-        #InlineKeyboardButton("Option 3", callback_data='3',url=''),
+        InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),
                 ],
             ]
                         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1416,6 +1416,52 @@ def pollf(update,context):
         except Exception as e:
             print(str(e))
         return POLLF
+    elif update.message.text.startswith("/start play"):
+        if True:
+            if True:
+                db = client.get_database('Quiz')
+                results = db.get_collection('results')
+                unique_id=reaaa.sub("/start Play","",update.message.text)
+                quiz_name=results.find_one({"quiz_id":unique_id})["quiz_name"]
+                col=client["Quiz"]["Quizlist"]
+                x=col.find_one({"Id":quiz_name})
+                context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                try:
+                    coll=client["Quiz_Data"][quiz_name]
+                    colldb=coll.find()
+                    messa=context.bot.send_message(chat_id=chat___id, text="🎲 Get ready for the LIVE TEST \'"+quiz_name+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>For more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                    channel_ids=x["Channel_Id"]
+                    #colme=client["Quiz"]["Message"]
+#                    coldoc={"MessID":messa.message_id,"ID":"@"+update.message.chat.username+"_"+quiz_name}
+#                    print(coldoc)
+#                    try:
+#                        colme.delete_many({"ID":"@"+update.message.chat.username+"_"+quiz_name})
+#                        print("delete successful")
+#                    except Exception as e:
+#                        print("First time play or not play. "+str(e))
+#                    colme.insert_one(coldoc)
+#                    print("insert successful")
+                    
+                    try:
+                        for y in x[quiz_name]:
+                            context.bot.forward_message(chat_id=chat___id,from_chat_id=channel_ids, message_id=y)
+                            '''if %4==2:
+                                time.sleep(5)'''
+                        keyboard = [
+                [
+                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_id),
+                    InlineKeyboardButton("Result", callback_data='2',url="https://quizresults.cf/"+unique_id),],[
+        #],[
+        InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),
+                ],
+            ]
+                        reply_markup = InlineKeyboardMarkup(keyboard)
+                        context.bot.send_message(chat_id=chat___id,text='<b>'+quiz_name+'</b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML)
+                        #context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?start\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                    except Exception as e:
+                        context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz hereaaa...\nerror name = "+str(e), parse_mode=ParseMode.HTML)
+                except Exception as e:
+                    print(str(e))
     else:
         db=client["user"]["sub"]
         col=db.find_one(({"Uid":update.message.chat.id}))

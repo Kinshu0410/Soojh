@@ -1,4 +1,3 @@
-from sys import last_traceback
 from pymongo import MongoClient
 import dns
 

@@ -1415,7 +1415,7 @@ def pollf(update,context):
                 db = client.get_database('QuizList')
                 results = db.get_collection('quizlist')
                 unique_id=reaaa.sub("/start Play","",update.message.text)
-                quiz_name=results.find_one({"quiz_id":unique_id})["quiz_name"]
+                quiz_name=results.find_one({"quizid":unique_id})["quizname"]
                 col=client["Quiz"]["Quizlist"]
                 x=col.find_one({"Id":quiz_name})
                 context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)

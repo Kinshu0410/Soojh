@@ -1416,7 +1416,7 @@ def pollf(update,context):
         except Exception as e:
             print(str(e))
         return POLLF
-    elif update.message.text.startswith("/start play"):
+    elif update.message.text.startswith("/start Play"):
         if True:
             if True:
                 db = client.get_database('Quiz')

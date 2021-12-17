@@ -1,3 +1,4 @@
+from sys import last_traceback
 from pymongo import MongoClient
 import dns
 
@@ -845,10 +846,10 @@ def quizc(update,context):
             print("https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:])
             keyboard = [
                 [
-                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
+                    InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),,
                     InlineKeyboardButton("Result", callback_data='2',url=unique_url),],[
         #],[
-        InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),
+        InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
                 ],
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1385,10 +1386,10 @@ def pollf(update,context):
                                 time.sleep(5)'''
                         keyboard = [
                 [
-                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_id),
+                    InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),
                     InlineKeyboardButton("Result", callback_data='2',url="https://quizresults.cf/"+unique_id),],[
         #],[
-        InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),
+        InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_id),
                 ],
             ]
                         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1412,10 +1413,10 @@ def pollf(update,context):
     elif update.message.text.startswith("/start Play"):
         if True:
             if True:
-                db = client.get_database('QuizList')
-                results = db.get_collection('quizlist')
+                db = client.get_database('Quiz')
+                results = db.get_collection('results')
                 unique_id=reaaa.sub("/start Play","",update.message.text)
-                quiz_name=results.find_one({"quizid":unique_id})["quizname"]
+                quiz_name=results.find_one({"quiz_id":unique_id})["quiz_name"]
                 col=client["Quiz"]["Quizlist"]
                 x=col.find_one({"Id":quiz_name})
                 context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
@@ -1442,10 +1443,10 @@ def pollf(update,context):
                                 time.sleep(5)'''
                         keyboard = [
                 [
-                    InlineKeyboardButton("Share Quiz", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_id),
+                    InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),
                     InlineKeyboardButton("Result", callback_data='2',url="https://quizresults.cf/"+unique_id),],[
         #],[
-        InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),
+        InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_id),
                 ],
             ]
                         reply_markup = InlineKeyboardMarkup(keyboard)

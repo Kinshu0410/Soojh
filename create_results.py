@@ -30,8 +30,8 @@ async def save_results(collection_name,update:Update,context:CallbackContext):
     if quizlists.find_one({"quizname":collection_name}) is None:
         unique_id = id_generator()
         quizlists.insert_one({
-            "quizname":collection_name,
-            "quizid":unique_id
+            "quizid":unique_id,
+            "quizname":collection_name
         })
     else:
         unique_id = quizlists.find_one({"quizname":collection_name})["quizid"]

@@ -1412,8 +1412,8 @@ def pollf(update,context):
     elif update.message.text.startswith("/start Play"):
         if True:
             if True:
-                db = client.get_database('Quiz')
-                results = db.get_collection('results')
+                db = client.get_database('QuizList')
+                results = db.get_collection('quizlist')
                 unique_id=reaaa.sub("/start Play","",update.message.text)
                 quiz_name=results.find_one({"quiz_id":unique_id})["quiz_name"]
                 col=client["Quiz"]["Quizlist"]

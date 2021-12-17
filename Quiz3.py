@@ -1,3 +1,4 @@
+from sys import last_traceback
 from pymongo import MongoClient
 import dns
 
@@ -914,17 +915,12 @@ def receive_poll_answer(update:Update,context:CallbackContext):
     else:
         pass
     try:
-        answe=update
         answer = update.poll_answer
-        print(str(answe))
-        usname=answer.user.username
-        if usname:
-            pass
-        else:
-            usname="None"
+        username=answer.user.username
+        user_id=answer.user.id
         poll_id = answer.poll_id
         print("poll_id="+poll_id)
-        ui=str(answer.user.id)
+
         #print("answer"+str(answer))
         #print("Dbz = "+str(Dbz))
         #print("context="+str(context.bot_data))
@@ -935,41 +931,39 @@ def receive_poll_answer(update:Update,context:CallbackContext):
         if True:
             print("succ..")
             try:
-                col1=client["Quiz"][Quizname]
-                if col1.find_one({"User_ID":answer.user.id}) is not None:
-                    pass
-                else:
-                    Lname=answer.user.last_name
+                quizresults = client.Results.quizresults
+                if quizresults.find_one({"quizname":Quizname,"userid":user_id}) is None:
+                    # runs when user is not present in the database
                     try:
-                        asyncio.run(save_user_photo(answer.user.id,context))
+                        asyncio.run(save_user_photo(user_id,context))
                     except Exception:
                         pass
-                    if Lname is None:
-                        Lname=""	
-                    dict1={"User_ID":answer.user.id,"Fname":answer.user.first_name+" "+Lname,"✔︎":0,"︎✖":0, "Marks":0,"User_Name":usname}
-                    col1.insert_one(dict1)
-                    print("---------------------------")
-                    print("suss")
-                    print("---------------------------")
+
+                    if answer.user.last_name:
+                        last_name = f" {answer.user.last_name}"
+                    else:
+                        last_name = ""
+                    
+                    quizresults.insert_one({
+                        "quizname":Quizname,
+                        "userid":user_id,
+                        "name" : answer.user.first_name + last_name,
+                        "username":username,
+                        "correct":0,
+                        "incorrect":0,
+                        "marks":0,
+                    })
+
+                
                 corec = str(yoo[poll_id]["cor"])
-                print(corec)
                 if str(answer.option_ids[0])==corec:
-                    x=col1.find_one({"User_ID":answer.user.id})
-                    mark=x["Marks"]
-                    right=x["✔︎"]
-                    print(mark)
-                    myquery1 = {"User_ID":answer.user.id}
-                    newvalues1 = { "$set": { "Marks":int(mark)+4,"✔︎":str(int(right)+1)} }
-                    col1.update_one(myquery1, newvalues1)
+                    # if answer is correct increase marks by 4 and increase the correct count
+                    quizresults.update_one({"quizname":Quizname,"userid":user_id},{'$inc':{"correct":1,"marks":4}})
+
                 else:
-                    x=col1.find_one({"User_ID":answer.user.id})
-                    mark=x["Marks"]
-                    wrong=x["︎✖"]
-                    print(mark)
-                    myquery2 = {"User_ID":answer.user.id}
-                    newvalues2 = { "$set": { "Marks":int(mark)-1,"︎✖":str(int(wrong)+1)} }
-                    col1.update_one(myquery2, newvalues2)
-                print("--------------updated-------------")
+                    # if answer is incorrect decrease marks by 1 and increase the incorrect count
+                    quizresults.update_one({"quizname":Quizname,"userid":user_id},{'$inc':{"incorrect":1,"marks":-1}})
+
             except Exception as e:
                 print("wrong01 "+str(e))
     except Exception as e:
@@ -1362,12 +1356,12 @@ def pollf(update,context):
     if chat___id<=0:
         try:
             if update.message.text.startswith("/start@Soojhboojh_01bot Share"):
-                db = client.get_database('Quiz')
-                results = db.get_collection('results')
-                quiz_name=results.find_one({"quiz_id":unique_id})["quiz_name"]
+                db = client.get_database('QuizList')
+                results = db.get_collection('quizlist')
+                unique_id=reaaa.sub("/start@Soojhboojh_01bot Share","",update.message.text)
+                quiz_name=results.find_one({"quizid":unique_id})["quizname"]
                 col=client["Quiz"]["Quizlist"]
                 x=col.find_one({"Id":quiz_name})
-                unique_id=reaaa.sub("/start@Soojhboojh_01bot Share","",update.message.text)
                 context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\nGroup = @"+update.message.chat.username+"\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                 try:
                     coll=client["Quiz_Data"][quiz_name]

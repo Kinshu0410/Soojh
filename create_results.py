@@ -1,4 +1,3 @@
-import asyncio
 from pymongo import MongoClient
 from telegram import Update
 from telegram.ext import CallbackContext
@@ -7,8 +6,7 @@ import string
 import requests
 
 client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
-db = client.get_database('Quiz')
-results = db.get_collection('results')
+quizlists = client.QuizList.quizlist
 '''
 {
     "quiz_name":"Quiz Name",
@@ -16,8 +14,7 @@ results = db.get_collection('results')
 }
 '''
 
-photo_database = client.get_database('User_Photos')
-photos = photo_database.get_collection('photos')
+photos = client.User_Photos.photos
 '''
 {
     "chat_id":123456789,
@@ -30,14 +27,14 @@ photos = photo_database.get_collection('photos')
 
 
 async def save_results(collection_name,update:Update,context:CallbackContext):
-    if results.find_one({"quiz_name":collection_name}) is None:
+    if quizlists.find_one({"quizname":collection_name}) is None:
         unique_id = id_generator()
-        results.insert_one({
-            "quiz_name":collection_name,
-            "quiz_id":unique_id
+        quizlists.insert_one({
+            "quizname":collection_name,
+            "quizid":unique_id
         })
     else:
-        unique_id = results.find_one({"quiz_name":collection_name})["quiz_id"]
+        unique_id = quizlists.find_one({"quizname":collection_name})["quizid"]
 
     unique_url=(f"https://quizresults.cf/{unique_id}")
     return unique_url
@@ -47,19 +44,20 @@ def id_generator(size=10, chars=string.ascii_uppercase + string.digits + string.
     return ''.join(random.choice(chars) for _ in range(size))
 
 async def save_photos(collection_name,update:Update,context:CallbackContext):
-    collection = db.get_collection(collection_name)
+    db = client.get_database("Results")
+    results_coll = db.quizresults
 
     update.message.reply_text("Saving photos, please wait ...")
-    quiz_results = collection.find({})
+    quiz_results = results_coll.find({'quizname':collection_name})
 
     for result in quiz_results:
-        user_id = result['User_ID']
+        user_id = result['userid']
 
         if photos.find_one({"chat_id":user_id}) is not None:
             continue 
 
         try:                
-            data = generate_imgur_link(result['User_ID'],context)
+            data = generate_imgur_link(user_id,context)
             photos.insert_one({
                 "chat_id":user_id,
                 "imgur_id":data['id'],

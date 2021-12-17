@@ -1,4 +1,4 @@
-from sys import last_traceback
+#from sys import last_traceback
 from pymongo import MongoClient
 import dns
 
@@ -846,7 +846,7 @@ def quizc(update,context):
             print("https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:])
             keyboard = [
                 [
-                    InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),,
+                    InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),
                     InlineKeyboardButton("Result", callback_data='2',url=unique_url),],[
         #],[
         InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),

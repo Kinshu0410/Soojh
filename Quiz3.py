@@ -713,8 +713,8 @@ def playinc(update,context):
     global chatid
     chatid=update.message.chat.id
     context.bot.send_message(chat_id=chatid, text="Send me group username Which you want to play quiz")
-
-    return CHN
+    #return CHN
+    return QUIZ
 Time=30
 @run_async
 def time0c(update,context):
@@ -748,6 +748,7 @@ def quizc(update,context):
     global Cid
     global Mid
     global ZMid
+    channelid="@ONLY_FOR_US"
     Mid = []
     J=0
 
@@ -1419,7 +1420,7 @@ def pollf(update,context):
                 quiz_name=results.find_one({"quizid":unique_id})["quizname"]
                 col=client["Quiz"]["Quizlist"]
                 x=col.find_one({"Id":quiz_name})
-                context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                context.bot.send_message(chat_id=-611934865, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                 try:
                     coll=client["Quiz_Data"][quiz_name]
                     colldb=coll.find()
@@ -2078,7 +2079,7 @@ def main() -> None:
     
     
     conv_handler0C = ConversationHandler(
-        entry_points=[CommandHandler('playingroup', playinc)],
+        entry_points=[CommandHandler('p', playinc)],
         states={
             CHN: [MessageHandler(Filters.regex('^.*$'), chn)],
             QUIZ: [MessageHandler(Filters.regex('^.*$'), quizc)],

@@ -35,7 +35,16 @@ async def save_results(collection_name,update:Update,context:CallbackContext):
         })
     else:
         unique_id = quizlists.find_one({"quizname":collection_name})["quizid"]
-
+        keyboard = [
+                [
+                    InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),
+                    InlineKeyboardButton("Result", callback_data='2',url="https://quizresults.cf/"+unique_id),],[
+        #],[
+        InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_id),
+                ],
+            ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        context.bot.send_message(chat_id=update.message.chat.id,text='<b>'+collection_name+'</b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML)
     unique_url=(f"https://quizresults.cf/{unique_id}")
     return unique_url
     

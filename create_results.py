@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from telegram import Update
+from telegram import Update, ReplyKeyboardMarkup,InlineKeyboardButton,InlineKeyboardMarkup, ReplyKeyboardRemove, ParseMode
 from telegram.ext import CallbackContext
 import random
 import string
@@ -35,7 +35,6 @@ async def save_results(collection_name,update:Update,context:CallbackContext):
         })
     else:
         unique_id = quizlists.find_one({"quizname":collection_name})["quizid"]
-        print("quiz name = "+collection_name)
         keyboard = [
                 [
                     InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),

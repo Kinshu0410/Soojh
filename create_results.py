@@ -35,6 +35,7 @@ async def save_results(collection_name,update:Update,context:CallbackContext):
         })
     else:
         unique_id = quizlists.find_one({"quizname":collection_name})["quizid"]
+        print("quiz name = "+collection_name)
         keyboard = [
                 [
                     InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_id),

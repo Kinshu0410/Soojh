@@ -712,8 +712,8 @@ def playinc(update,context):
     global chatid
     chatid=update.message.chat.id
     context.bot.send_message(chat_id=chatid, text="Send me group username Which you want to play quiz")
-
-    return CHN
+    #return CHN
+    return QUIZ
 Time=30
 @run_async
 def time0c(update,context):
@@ -747,6 +747,7 @@ def quizc(update,context):
     global Cid
     global Mid
     global ZMid
+    channelid="@ONLY_FOR_US"
     Mid = []
     J=0
 

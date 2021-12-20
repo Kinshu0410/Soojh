@@ -2078,7 +2078,7 @@ def main() -> None:
     
     
     conv_handler0C = ConversationHandler(
-        entry_points=[CommandHandler('playingroup', playinc)],
+        entry_points=[CommandHandler('p', playinc)],
         states={
             CHN: [MessageHandler(Filters.regex('^.*$'), chn)],
             QUIZ: [MessageHandler(Filters.regex('^.*$'), quizc)],

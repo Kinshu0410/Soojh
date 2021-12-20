@@ -1,5 +1,3 @@
-#hello
-
 from pymongo import MongoClient
 import dns
 
@@ -1420,7 +1418,7 @@ def pollf(update,context):
                 quiz_name=results.find_one({"quizid":unique_id})["quizname"]
                 col=client["Quiz"]["Quizlist"]
                 x=col.find_one({"Id":quiz_name})
-                context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                context.bot.send_message(chat_id=-611934865, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                 try:
                     coll=client["Quiz_Data"][quiz_name]
                     colldb=coll.find()

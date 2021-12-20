@@ -97,8 +97,9 @@ def poll(update, context):
     quest=re.sub(" "," ",quest)
     if 1==1:
         q=quest[0:-1]
-        q=re.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "\n", q)
-        q=re.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
+        q=re.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
+        #q=re.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
+        q=re.sub("(A|B|C|D)", "\n", q)
         q=re.sub("\n{2,}", "\n", q)
         q=re.sub("^\n", "", q)
 

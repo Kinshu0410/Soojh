@@ -244,7 +244,7 @@ def photo(update: Update, _: CallbackContext) -> int:
     if exp:
         if reaaa.findall("@[a-zA-Z0-9_-]",exp):
         	exp=reaaa.sub(" "," ",exp) 
-            exp=False
+        	exp=False
         elif reaaa.findall("http(s|)://",exp):
         	exp=reaaa.sub(" "," ",exp) 
         	exp=False

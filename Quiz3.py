@@ -1,4 +1,3 @@
-# For testing
 from pymongo import MongoClient
 import dns
 
@@ -241,10 +240,12 @@ def photo(update: Update, _: CallbackContext) -> int:
     options=[o.text for o in user.options]
     correct_option_id=user.correct_option_id
     exp=user.explanation
-
+    
     if exp:
         if reaaa.findall("@[a-zA-Z0-9_-]",exp):
             exp=False
+        elif reaaa.findall("http(s|)://",exp):
+        	exp=False
         exp=reaaa.sub(" "," ",exp) 
     if exp is not None:
         exp= reaaa.sub(r"(#\w*)|(http(s|)://[a-zA-Z0-9_/])", "", exp)

@@ -244,10 +244,10 @@ def photo(update: Update, _: CallbackContext) -> int:
     if exp:
         if reaaa.findall("@[a-zA-Z0-9_-]",exp):
         	exp=reaaa.sub(" "," ",exp) 
-        	exp=False
+        	exp=None
         elif reaaa.findall("http(s|)://",exp):
         	exp=reaaa.sub(" "," ",exp) 
-        	exp=False
+        	exp=None
     if exp is not None:
         exp= reaaa.sub(r"(#\w*)|(http(s|)://[a-zA-Z0-9_/])", "", exp)
         exp= reaaa.sub(r"(\n| |)join(\n| |)", "", exp)

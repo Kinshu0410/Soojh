@@ -1078,6 +1078,8 @@ def ghppp1(update,context):
             explan=None
         elif reaaa.findall("t\.me",explan):
             explan=None
+        elif reaaa.findall("^\d{8,}$",explan):
+            explan=None
 
     print("poll")
     context.bot.send_poll(

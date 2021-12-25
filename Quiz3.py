@@ -824,7 +824,7 @@ def quizc(update,context):
                     time.sleep(5)
 
                 except Exception as e:
-                	message = context.bot.send_message(chat_id=channelid, text=question+"\n"+"\n".join(options))
+                    message = context.bot.send_message(chat_id=channelid, text=question+"\n"+"\n".join(options))
                     print("5")
                     Mid.append(message.message_id)
                     time.sleep(5)

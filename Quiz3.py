@@ -797,13 +797,18 @@ def quizc(update,context):
                 question=str(Zno)+". "+reaaa.sub("Q\d{1,}(\.|)","",X["que"])
                 options=X["op"]
                 correct_option_id =X["cor"]
+               
                 exp=X["exp"]
                 if exp =="":
                     exp=None
                 
                 try:
                     print("1")
-                    message = context.bot.send_poll(
+                    if correct_option_id==0:
+                        options="/n".join(options)
+                        message = context.bot.send_message(chat_id=channelid, text=question+"\n"+options)
+                    else:
+                        message = context.bot.send_poll(
                             chat_id=channelid,
                             question=question,
                             options=options,

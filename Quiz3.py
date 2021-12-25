@@ -809,7 +809,7 @@ def quizc(update,context):
                     print("1")
                     if True:
                     
-                        y+=1
+
                         message = context.bot.send_poll(
                             chat_id=channelid,
                             question=str(Zno)+". "+question,
@@ -822,6 +822,7 @@ def quizc(update,context):
                             is_anonymous=False,
                             reply_markup=ReplyKeyboardRemove(),    
                         )
+                        y+=1
                     print("5")
                     Mid.append(message.message_id)
                     time.sleep(5)

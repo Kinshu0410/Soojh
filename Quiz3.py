@@ -792,9 +792,9 @@ def quizc(update,context):
             
             y=0
             for X in colldb:
-                Zno=coll.count_documents({})-y
-                y+=1
-                question=str(Zno)+". "+reaaa.sub("Q\d{1,}(\.|)","",X["que"])
+                Zno=coll.count_documents({"cor":{"$type":"string"}})-y
+                
+                question=reaaa.sub("Q\d{1,}(\.|)","",X["que"])
                 options=X["op"]
                 correct_option_id =X["cor"]
                
@@ -808,9 +808,10 @@ def quizc(update,context):
                         options="\n".join(options)
                         message = context.bot.send_message(chat_id=channelid, text=question+"\n"+options)
                     else:
+                        y+=1
                         message = context.bot.send_poll(
                             chat_id=channelid,
-                            question=question,
+                            question=str(Zno)+". "+question,
                             options=options,
                             type=Poll.QUIZ,
                             correct_option_id =correct_option_id,

@@ -270,11 +270,14 @@ i=0
 def location(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     user_location = update.message.text
+    new={'que':user_location, 'op':False, 'cor':False, 'exp':False, 'ID':Textstr, 'User_ID':update.message.chat.id}
+    col=client["Quiz_Data"][Textstr]
+    col.insert_one(new)
     '''logger.info(
         "Location of %s: %f / %f", user.first_name, user_location.latitude, user_location.longitude
  )'''
-    
-    return BIO
+    return PHOTO
+    #return BIO
 
 
 def skip_location(update: Update, _: CallbackContext) -> int:
@@ -824,7 +827,7 @@ def quizc(update,context):
                     time.sleep(5)
 
                 except Exception as e:
-                    message = context.bot.send_message(chat_id=channelid, text=question+"\n"+"\n".join(options))
+                    message = context.bot.send_message(chat_id=channelid, text=question)
                     print("5")
                     Mid.append(message.message_id)
                     time.sleep(5)
@@ -2068,9 +2071,9 @@ def main() -> None:
         entry_points=[CommandHandler('createquiz', createquiz)],
         states={
             GENDER: [MessageHandler(Filters.regex('^.*$'), gender)],
-            PHOTO: [MessageHandler(Filters.poll, photo), CommandHandler('skip', skip_photo)],
+            PHOTO: [MessageHandler(Filters.poll, photo), CommandHandler('skip', skip_photo),MessageHandler(Filters.text& ~Filters.command, location),],
             LOCATION: [
-                MessageHandler(Filters.text& ~Filters.command, location),
+                MessageHandler(Filters.text& ~Filters.command, skip_location),
                 CommandHandler('skip', skip_location),
             ],
             BIO: [MessageHandler(Filters.text & ~Filters.command, bio)],

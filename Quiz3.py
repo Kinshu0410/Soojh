@@ -804,7 +804,7 @@ def quizc(update,context):
                 
                 try:
                     print("1")
-                    
+                    if True:
                     
                         y+=1
                         message = context.bot.send_poll(

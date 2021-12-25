@@ -805,7 +805,7 @@ def quizc(update,context):
                 try:
                     print("1")
                     if correct_option_id==0:
-                        options="/n".join(options)
+                        options="\n".join(options)
                         message = context.bot.send_message(chat_id=channelid, text=question+"\n"+options)
                     else:
                         message = context.bot.send_poll(

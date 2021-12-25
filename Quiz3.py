@@ -792,7 +792,7 @@ def quizc(update,context):
             
             y=0
             for X in colldb:
-                Zno=coll.count_documents({"cor":{"$type":"string"}})-y
+                Zno=coll.count_documents({"cor":{"$type":"int"}})-y
                 
                 question=reaaa.sub("Q\d{1,}(\.|)","",X["que"])
                 options=X["op"]
@@ -804,10 +804,8 @@ def quizc(update,context):
                 
                 try:
                     print("1")
-                    if correct_option_id==0:
-                        options="\n".join(options)
-                        message = context.bot.send_message(chat_id=channelid, text=question+"\n"+options)
-                    else:
+                    
+                    
                         y+=1
                         message = context.bot.send_poll(
                             chat_id=channelid,
@@ -826,7 +824,11 @@ def quizc(update,context):
                     time.sleep(5)
 
                 except Exception as e:
-                    print("e===="+str(e))
+                	message = context.bot.send_message(chat_id=channelid, text=question+"\n"+"\n".join(options))
+                    print("5")
+                    Mid.append(message.message_id)
+                    time.sleep(5)
+                    
                 ZMid[userText]=Mid
                 
                 try:

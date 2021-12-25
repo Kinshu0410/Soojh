@@ -794,7 +794,7 @@ def quizc(update,context):
             for X in colldb:
                 Zno=coll.count_documents({})-y
                 y+=1
-                question=str(Zno)+". "+X["que"]
+                question=str(Zno)+". "+reaaa.sub("Q\d{1,}(\.|)","",X["que"])
                 options=X["op"]
                 correct_option_id =X["cor"]
                 exp=X["exp"]

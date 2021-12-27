@@ -73,6 +73,20 @@ def send_typing_action(func):
 
     return command_func
 
+LIST_OF_ADMINS_CQ = ["711296045"]
+
+def restrictedCQ(func):
+    @wraps(func)
+    def wrapped(update, context, *args, **kwargs):
+        
+        userName = str(update.message.chat.id)
+        userName1=str(update.message.from_user.id)
+        if userName and userName1 not in LIST_OF_ADMINS_CQ:
+            #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            return
+        return func(update, context, *args, **kwargs)
+    return wrapped
+
 
 LIST_OF_ADMINS = ["711296045","1001183009","776365745","1527108544","2020953330","1202919365","1309577346","875026044","5094761615"]
 
@@ -191,7 +205,7 @@ def restrictedD(func):
 
 
 
-
+@restrictedCQ
 @run_async
 @send_typing_action
 def createquiz(update: Update, _: CallbackContext) -> int:

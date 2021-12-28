@@ -779,7 +779,16 @@ def quizc(update,context):
     colldb=coll.find()
     if True: 
         try:
-            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'<pre>"+userText+"</pre>\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML)
+            keyboard = [
+                [
+                    #InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),
+                    InlineKeyboardButton("Result", callback_data='2',url=unique_url),#],[
+        #],[
+        #InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
+                ],
+            ]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'<pre>"+userText+"</pre>\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>",reply_markup=reply_markup, parse_mode=ParseMode.HTML)
             colme=client["Quiz"]["Message"]
             coldoc={"MessID":messa.message_id,"ID":channelid+"_"+userText}
             try:
@@ -1395,9 +1404,18 @@ def pollf(update,context):
                 x=col.find_one({"Id":quiz_name})
                 context.bot.send_message(chat_id=711296045, text="<a href=\"tg://openmessage?user_id="+str(Ccc)+"\"><b>User</b></a>\nGroup = @"+update.message.chat.username+"\n"+quiz_name,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                 try:
+                    keyboard = [
+                [
+                    #InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),
+                    InlineKeyboardButton("Result", callback_data='2',url=unique_url),#],[
+        #],[
+        #InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
+                ],
+                	]
+                    reply_markup = InlineKeyboardMarkup(keyboard)
                     coll=client["Quiz_Data"][quiz_name]
                     colldb=coll.find()
-                    messa=context.bot.send_message(chat_id=chat___id, text="🎲 Get ready for the LIVE TEST \'"+quiz_name+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group @"+str(update.message.chat.username)+"\n\nFor more #Soojh_Boojh</b>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+                    messa=context.bot.send_message(chat_id=chat___id, text="🎲 Get ready for the LIVE TEST \'"+quiz_name+"\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Playing Group @"+str(update.message.chat.username)+"\n\nFor more #Soojh_Boojh</b>", reply_markup=reply_markup, parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                     channel_ids=x["Channel_Id"]
                     colme=client["Quiz"]["Message"]
                     coldoc={"MessID":messa.message_id,"ID":"@"+update.message.chat.username+"_"+quiz_name}

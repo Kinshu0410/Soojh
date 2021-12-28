@@ -779,16 +779,8 @@ def quizc(update,context):
     colldb=coll.find()
     if True: 
         try:
-            keyboard = [
-                [
-                    #InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),
-                    InlineKeyboardButton("Result", callback_data='2',url=unique_url),#],[
-        #],[
-        #InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
-                ],
-            ]
-            reply_markup = InlineKeyboardMarkup(keyboard)
-            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'<pre>"+userText+"</pre>\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>",reply_markup=reply_markup, parse_mode=ParseMode.HTML)
+            
+            messa=context.bot.send_message(chat_id=channelid, text="🎲 Get ready for the LIVE TEST \'<pre>"+userText+"</pre>\'\n\n🖊 "+str(coll.count_documents({}))+" questions\n\n📰 Votes are visible to group members and shared all polls \nevery ✔︎ Question gain ✙4 Marks\nevery ✖︎ Question gain –1 Mark\n\n<b>Result Comes on "+str(time.ctime(time.time() + int(Time)+19800))+"\n\nPlaying Group "+str(channelid)+"\n\nFor more #Soojh_Boojh</b>",parse_mode=ParseMode.HTML)
             colme=client["Quiz"]["Message"]
             coldoc={"MessID":messa.message_id,"ID":channelid+"_"+userText}
             try:
@@ -1407,7 +1399,7 @@ def pollf(update,context):
                     keyboard = [
                 [
                     #InlineKeyboardButton("Play Quiz", callback_data='3',url="https://telegram.me/Soojhboojh_01bot?start=Play"+unique_url[23:]),
-                    InlineKeyboardButton("Result", callback_data='2',url=unique_url),#],[
+                    InlineKeyboardButton("Result", callback_data='2',url="https://quizresults.cf/"+unique_id),#],[
         #],[
         #InlineKeyboardButton("Play in Group", callback_data='1',url="https://telegram.me/Soojhboojh_01bot?startgroup=Share"+unique_url[23:]),
                 ],

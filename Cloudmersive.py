@@ -1,3 +1,80 @@
+from pyrogram import Client
+from pyrogram.handlers import MessageHandler, PollHandler
+from pyrogram import filters
+from pyrogram.types import Message, ReplyKeyboardRemove, Poll
+import  json
+import time
+import re
+ClienT=open("/storage/emulated/0/ADM/pyrogram/Bot/Client.text")
+ClientText=json.loads(ClienT.read())
+app = Client(ClientText["session_name"],
+#bot_token=ClientText["bot_token"],
+api_id=ClientText["api_id"],
+api_hash=ClientText["api_hash"])
+ClienT.close()
+
+
+@app.on_message(filters.poll & filters.chat(-1001599944734))
+async def start_command(client:Client,message:Message):
+	#print(message)
+	chatid=[1431722823]
+	
+	#print(message.message_id)
+	try:
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	except:
+	    mess=message.poll
+	#print(mess)
+	    #print(mess)
+	await app.delete_messages(chat_id=-1001599944734, message_ids=message.message_id)
+	question=mess.question
+	options=[o.text for o in mess.options]
+	correct_option_id = 0
+	for i in range(len(mess.options)):
+	       if mess.options[i]['correct']:
+	           correct_option_id = i
+	           break
+	#correct_option_id
+	#print(message)
+	#time.sleep(100)
+	for x in chatid:
+	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz",reply_markup=ReplyKeyboardRemove())
+
+@app.on_message(filters.text & filters.chat(1355592440) & filters.incoming)
+def forword(client:Client,message:Message):
+    #if message.forward_from_chat:
+#        forward=message.forward_from_chat
+#    else:
+#        forward=message.forward_from
+#    
+#    mess=(await app.get_history(forward.id, limit=1))
+#    
+#    #print()
+#    if mess:
+#        for mid in range(mess[0].message_id-message.forward_from_message_id):
+            
+            client.forward_messages(chat_id=1355592440,from_chat_id=message.chat.id,message_ids=message.message_id)
+            app.delete_messages(chat_id=1355592440,message_ids=message.message_id)
+#    
+
+@app.on_message(filters.poll & filters.chat(1355592440) & filters.incoming)
+def forword(client:Client,message:Message):
+    
+    client.forward_messages(chat_id=1431722823,from_chat_id=message.chat.id,message_ids=message.message_id)
+    app.delete_messages(chat_id=1355592440,message_ids=message.message_id)
+
+
+@app.on_message(filters.regex("https://t.me/.*?/\d{1,}/\d{1,}") & filters.chat(-1001682640576) & filters.outgoing )
+def forword(client:Client,message:Message):
+    chatid=message.text
+    chatid=re.sub("https://t.me/","",chatid)
+    chatid=re.split("/",chatid)
+    print(chatid)
+    for x in range(int(chatid[2])):
+       app.forward_messages(chat_id=1355592440,from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
+
+
+
 import telegram
 
 from telegram import (
@@ -686,6 +763,7 @@ def main():
     #dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
+    app.run()
     updater.idle()
     
 if __name__ == '__main__':

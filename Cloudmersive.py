@@ -4,14 +4,13 @@ from pyrogram import filters
 from pyrogram.types import Message, ReplyKeyboardRemove, Poll
 import  json
 import time
-import re
-ClienT=open("/storage/emulated/0/ADM/pyrogram/Bot/Client.text")
-ClientText=json.loads(ClienT.read())
-app = Client(ClientText["session_name"],
+import re as reaaa
+
+app = Client("my_account",
 #bot_token=ClientText["bot_token"],
-api_id=ClientText["api_id"],
-api_hash=ClientText["api_hash"])
-ClienT.close()
+api_id="13682659",
+api_hash="b984d240c5258407ea911f042c9d75f6")
+
 
 
 @app.on_message(filters.poll & filters.chat(-1001599944734))
@@ -67,8 +66,8 @@ def forword(client:Client,message:Message):
 @app.on_message(filters.regex("https://t.me/.*?/\d{1,}/\d{1,}") & filters.chat(-1001682640576) & filters.outgoing )
 def forword(client:Client,message:Message):
     chatid=message.text
-    chatid=re.sub("https://t.me/","",chatid)
-    chatid=re.split("/",chatid)
+    chatid=reaaa.sub("https://t.me/","",chatid)
+    chatid=reaaa.split("/",chatid)
     print(chatid)
     for x in range(int(chatid[2])):
        app.forward_messages(chat_id=1355592440,from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
@@ -171,17 +170,17 @@ def poll(update, context):
     questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
     #que = update.message.text()
     quest=(update.message.text)
-    quest=re.sub(" "," ",quest)
+    quest=reaaa.sub(" "," ",quest)
     if 1==1:
         q=quest[0:-1]
-        q=re.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
-        q=re.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
-        #q=re.sub("(A|B|C|D)", "\n", q)
-        q=re.sub("\n{2,}", "\n", q)
-        q=re.sub("^\n", "", q)
+        q=reaaa.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
+        q=reaaa.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
+        #q=reaaa.sub("(A|B|C|D)", "\n", q)
+        q=reaaa.sub("\n{2,}", "\n", q)
+        q=reaaa.sub("^\n", "", q)
 
     
-        q=re.split("[\n]", q)
+        q=reaaa.split("[\n]", q)
         #update.message.reply_text(q)
         ques=q[0]
         que=""+ ques
@@ -192,16 +191,16 @@ def poll(update, context):
         option4="(D) "+q[4]
         options=[option1, option2, option3, option4]
         corr=quest[-1]
-        result = re.match("[-+]?\d+$", corr)
+        result = reaaa.match("[-+]?\d+$", corr)
         options5=q[5::1]
         options5="\n".join(options5)
-        options5=re.sub(r"@\w*", "@kinbin247", options5)
+        options5=reaaa.sub(r"@\w*", "@kinbin247", options5)
         if options5 == "":
             options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
         else:
             options5=options5
             print(options5)
-        #options5=re.sub(r"\@\w.*", "", options5)
+        #options5=reaaa.sub(r"\@\w.*", "", options5)
         #update.message.reply_text(options)
 
         if result is None:
@@ -474,20 +473,20 @@ def receive_poll(update, context):
         ex=""
         #ex="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
     else:
-        ex=re.sub(r"\@.*?\s", "", ex)
-        ex=re.sub(r"\@\w.*", "", ex)
+        ex=reaaa.sub(r"\@.*?\s", "", ex)
+        ex=reaaa.sub(r"\@\w.*", "", ex)
         Ex=str(ex)        #ex=ex
     #update.message.reply_text("1")
     #update.message.reply_text(ex)
-    #ex=re.sub(r"\@.*?\s", "", ex)
-    #ex=re.sub(r"\@\w.*", "", ex)
+    #ex=reaaa.sub(r"\@.*?\s", "", ex)
+    #ex=reaaa.sub(r"\@\w.*", "", ex)
     question= actual_poll.question
     #update.message.reply_text("1")
-    #question=re.sub("\@\w*", "", question)
-    question=re.sub("𝗤. ", "", question)
-    #question=re.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
-    q=re.sub("^((\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
-    q=re.sub("\n{1,}|\ {1,}", " ", q)
+    #question=reaaa.sub("\@\w*", "", question)
+    question=reaaa.sub("𝗤. ", "", question)
+    #question=reaaa.sub(" ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■", "", question)
+    q=reaaa.sub("^((\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
+    q=reaaa.sub("\n{1,}|\ {1,}", " ", q)
     
         
     #q=q+"\n\n  ■_𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁_𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻_■"
@@ -513,13 +512,13 @@ def receive_poll(update, context):
         #print("12")
         Qqq=cor+" "+options[corr]
         
-        Qqq=re.sub("(\(|\[)(A|B|C|D|a|b|c|d|अ|ब|स|द)(\)|\])(|\ )", "",Qqq)
+        Qqq=reaaa.sub("(\(|\[)(A|B|C|D|a|b|c|d|अ|ब|स|द)(\)|\])(|\ )", "",Qqq)
         #print("1234")
-        abc=re.match("^(1|2|3|4) (A|B|C|D|a|b|c|d|अ|ब|स|द)$", Qqq)
-        a1=re.match("^(1|2|3|4) (A|a|अ)$", Qqq)
-        a2=re.match("^(1|2|3|4) (B|b|ब|)$", Qqq)
-        a3=re.match("^(1|2|3|4) (C|c|स)$", Qqq)
-        a4=re.match("^(1|2|3|4) (D|d|द)$", Qqq)
+        abc=reaaa.match("^(1|2|3|4) (A|B|C|D|a|b|c|d|अ|ब|स|द)$", Qqq)
+        a1=reaaa.match("^(1|2|3|4) (A|a|अ)$", Qqq)
+        a2=reaaa.match("^(1|2|3|4) (B|b|ब|)$", Qqq)
+        a3=reaaa.match("^(1|2|3|4) (C|c|स)$", Qqq)
+        a4=reaaa.match("^(1|2|3|4) (D|d|द)$", Qqq)
         #print("2")
         if abc:
         	#print("3")
@@ -660,15 +659,15 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     global options
     global corr
     q=userText.question
-    q=re.sub("(\[\d{1,}/\d{1,}\] ){1,}((Q|)(\d{1,}|)(_|)(\d{1,}|)(\.|)( |)){1,}","",q)
+    q=reaaa.sub("(\[\d{1,}/\d{1,}\] ){1,}((Q|)(\d{1,}|)(_|)(\d{1,}|)(\.|)( |)){1,}","",q)
     options=[o.text for o in userText.options]
     corr=userText.correct_option_id
     for z in range(len(Textstr2)):
 	    print(Textstr2[z])
 	    print(Textstr3[z])
-	    q=re.sub(Textstr2[z],Textstr3[z], q)
+	    q=reaaa.sub(Textstr2[z],Textstr3[z], q)
 	    for op in range(len(options)):
-	    	options[op]=re.sub(Textstr2[z], Textstr3[z], options[op])
+	    	options[op]=reaaa.sub(Textstr2[z], Textstr3[z], options[op])
     update.effective_message.reply_poll(
             question= q,
             options=options,

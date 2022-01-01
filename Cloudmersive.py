@@ -37,7 +37,7 @@ async def start_command(client:Client,message:Message):
 	#print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz",reply_markup=ReplyKeyboardRemove())
+	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):

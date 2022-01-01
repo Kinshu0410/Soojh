@@ -1,4 +1,3 @@
-
 from pyrogram import Client
 from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters
@@ -14,10 +13,10 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 
 
 
-@app.on_message(filters.poll & filters.chat(-1001599944734))
+@app.on_message(filters.poll & filters.chat("SOOJH_BOOJH_BOT_discussion_grouo"))
 async def start_command(client:Client,message:Message):
 	#print(message)
-	chatid=[1431722823]
+	chatid=["Soojhboojh_01bot"]
 	
 	#print(message.message_id)
 	try:
@@ -26,7 +25,7 @@ async def start_command(client:Client,message:Message):
 	    mess=message.poll
 	#print(mess)
 	    #print(mess)
-	await app.delete_messages(chat_id=-1001599944734, message_ids=message.message_id)
+	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.message_id)
 	question=mess.question
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
@@ -40,7 +39,7 @@ async def start_command(client:Client,message:Message):
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz",reply_markup=ReplyKeyboardRemove())
 
-@app.on_message(filters.text & filters.chat(1355592440) & filters.incoming)
+@app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):
     #if message.forward_from_chat:
 #        forward=message.forward_from_chat
@@ -53,26 +52,25 @@ def forword(client:Client,message:Message):
 #    if mess:
 #        for mid in range(mess[0].message_id-message.forward_from_message_id):
             
-            client.forward_messages(chat_id=1355592440,from_chat_id=message.chat.id,message_ids=message.message_id)
-            app.delete_messages(chat_id=1355592440,message_ids=message.message_id)
+            client.forward_messages(chat_id="KINBIN247_bot",from_chat_id=message.chat.id,message_ids=message.message_id)
+            app.delete_messages(chat_id="KINBIN247_bot",message_ids=message.message_id)
 #    
 
-@app.on_message(filters.poll & filters.chat(1355592440) & filters.incoming)
+@app.on_message(filters.poll & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):
     
-    client.forward_messages(chat_id=1431722823,from_chat_id=message.chat.id,message_ids=message.message_id)
-    app.delete_messages(chat_id=1355592440,message_ids=message.message_id)
+    client.forward_messages(chat_id="Soojhboojh_01bot",from_chat_id=message.chat.id,message_ids=message.message_id)
+    app.delete_messages(chat_id="KINBIN247_bot",message_ids=message.message_id)
 
 
-@app.on_message(filters.regex("https://t.me/.*?/\d{1,}/\d{1,}") & filters.chat(-1001682640576) & filters.outgoing )
+@app.on_message(filters.regex("https://t.me/.*?/\d{1,}/\d{1,}") & filters.chat("jsjdkdkkd") & filters.outgoing )
 def forword(client:Client,message:Message):
     chatid=message.text
     chatid=reaaa.sub("https://t.me/","",chatid)
     chatid=reaaa.split("/",chatid)
     print(chatid)
     for x in range(int(chatid[2])):
-       app.forward_messages(chat_id=1355592440,from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
-
+       app.forward_messages(chat_id="KINBIN247_bot",from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
 
 
 import telegram

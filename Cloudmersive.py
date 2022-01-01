@@ -46,6 +46,7 @@ async def start_command(client:Client,message:Message):
 	
 	#print(message.message_id)
 	try:
+		
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
@@ -65,7 +66,10 @@ async def start_command(client:Client,message:Message):
 	#print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    await app.send_message(chat_id=x,text=question+"\n"+"\n".join(options)+str(correct_option_id))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+	    print(mess)
+	    await app.stop_poll(chat_id=x,message_ids=mess.message_id)
+
 
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):
@@ -781,6 +785,7 @@ def main():
     dp.add_handler(CommandHandler('quiz', quiz))
     dp.add_handler(PollHandler(receive_quiz_answer))
     dp.add_handler(CommandHandler('preview', preview))
+    
     dp.add_handler(MessageHandler(Filters.poll, receive_poll))
     dp.add_handler(CommandHandler('help', help_handler))
     dp.add_handler(MessageHandler(Filters.photo, convert_image))

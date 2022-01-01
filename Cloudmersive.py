@@ -1,5 +1,3 @@
-import sys
-sys.path.append("Soojh")
 
 from pyrogram import Client
 from pyrogram.handlers import MessageHandler, PollHandler

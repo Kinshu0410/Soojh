@@ -1,7 +1,10 @@
-from .pyrogram import Client
-from .pyrogram.handlers import MessageHandler, PollHandler
-from .pyrogram import filters
-from .pyrogram.types import Message, ReplyKeyboardRemove, Poll
+import sys
+sys.path.append("Soojh")
+
+from pyrogram import Client
+from pyrogram.handlers import MessageHandler, PollHandler
+from pyrogram import filters
+from pyrogram.types import Message, ReplyKeyboardRemove, Poll
 import  json
 import time
 import re as reaaa

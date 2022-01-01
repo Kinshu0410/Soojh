@@ -39,6 +39,32 @@ async def start_command(client:Client,message:Message):
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
+@app.on_message(filters.poll & filters.chat("POLLQZ"))
+async def start_command(client:Client,message:Message):
+	#print(message)
+	chatid=["POLLQZ"]
+	
+	#print(message.message_id)
+	try:
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	except:
+	    mess=message.poll
+	#print(mess)
+	    #print(mess)
+	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
+	question=mess.question
+	options=[o.text for o in mess.options]
+	correct_option_id = 0
+	for i in range(len(mess.options)):
+	       if mess.options[i]['correct']:
+	           correct_option_id = i
+	           break
+	#correct_option_id
+	#print(message)
+	#time.sleep(100)
+	for x in chatid:
+	    await app.send_message(chat_id=x,text=question+"\n"+"\n".join(options)=options+correct_option_id)
+
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):
     #if message.forward_from_chat:

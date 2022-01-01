@@ -63,7 +63,7 @@ async def start_command(client:Client,message:Message):
 	#print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    await app.send_message(chat_id=x,text=question+"\n"+"\n".join(options)+correct_option_id)
+	    await app.send_message(chat_id=x,text=question+"\n"+"\n".join(options)+str(correct_option_id))
 
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):

@@ -54,6 +54,7 @@ async def start_command(client:Client,message:Message):
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
 	question=mess.question
 	question=reaaa.sub("\n","       ",question)
+	#
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
 	for i in range(len(mess.options)):

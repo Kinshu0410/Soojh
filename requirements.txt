@@ -5,3 +5,4 @@ pymongo
 git+https://github.com/rthalley/dnspython
 GitPython
 requests
+pysocks

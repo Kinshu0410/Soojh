@@ -39,7 +39,7 @@ async def start_command(client:Client,message:Message):
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
-@app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot))
+@app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot"))
 async def start_command(client:Client,message:Message):
 	#print(message)
 	chatid=["POLLQZ"]

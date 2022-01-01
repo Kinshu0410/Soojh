@@ -39,7 +39,7 @@ async def start_command(client:Client,message:Message):
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
-@app.on_message(filters.poll & filters.chat("POLLQZ"))
+@app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot))
 async def start_command(client:Client,message:Message):
 	#print(message)
 	chatid=["POLLQZ"]
@@ -53,6 +53,7 @@ async def start_command(client:Client,message:Message):
 	    #print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
 	question=mess.question
+	question=reaaa.sub("\n","       ",question)
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
 	for i in range(len(mess.options)):

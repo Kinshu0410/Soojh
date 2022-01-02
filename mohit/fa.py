@@ -3,7 +3,7 @@ from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters
 from pyrogram.types import Message, ReplyKeyboardRemove, Poll
 import re as reaaa
-from app_client import app
+
 @app.on_message(filters.poll & filters.chat("Neha55bot") & ~filters.chat("Soojhboojh_01bot"))
 async def start_(client:Client,message:Message):
 	chatid=["Polls_Quiz"]
@@ -113,4 +113,4 @@ def forword(client:Client,message:Message):
        app.forward_messages(chat_id="KINBIN247_bot",from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
 
 
-app.run()
+#zaa=app.run()

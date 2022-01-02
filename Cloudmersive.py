@@ -664,6 +664,7 @@ def cancel(update: Update, _: CallbackContext) -> int:
 
 def main():
     bot_token=os.environ.get("BOT_TOKEN_1", "")
+    from app_client import app
     #bot_token='1355592440:AAEG7NPTJrJXAj40NYVltjGTTpKUBgze4lc'
     updater = Updater(bot_token,use_context=True)
     conv_handler02 = ConversationHandler(
@@ -697,7 +698,7 @@ def main():
     #dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
-    #app.run()
+    app.run()
     updater.idle()
     
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ app = Client("my_account",
 #bot_token=ClientText["bot_token"],
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
-
+from mohit import fa
 
 
 @app.on_message(filters.poll & filters.chat("SOOJH_BOOJH_BOT_discussion_grouo"))
@@ -39,34 +39,26 @@ async def start_command(client:Client,message:Message):
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
+
+
 @app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot"))
 async def start_command(client:Client,message:Message):
-	#print(message)
 	chatid=["POLLQZ"]
-	
-	#print(message.message_id)
 	try:
-		
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
 	question=mess.question
 	question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"(@|#)\w*?(\s|)", "", question)
 	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
-	#
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
 	for i in range(len(mess.options)):
 	       if mess.options[i]['correct']:
 	           correct_option_id = i
 	           break
-	#correct_option_id
-	#print(message)
-	#time.sleep(100)
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
 	    #print(mess)

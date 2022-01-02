@@ -6,12 +6,10 @@ from pyrogram.types import Message, ReplyKeyboardRemove, Poll
 import re as reaaa
 import json
 
-ClienT=open(Soojh/Client.text")
-ClientText=json.loads(ClienT.read())
-app = Client(ClientText["session_name"],#bot_token=ClientText["bot_token"],
-api_id=ClientText["api_id"],
-api_hash=ClientText["api_hash"])
-ClienT.close()
+app = Client("my_account",
+#bot_token="1877489613:AAEWv36y-bbUjQPCemmJ53vSADAgKZB1A-U",
+api_id="13682659",
+api_hash="b984d240c5258407ea911f042c9d75f6")
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") & ~filters.chat("Soojhboojh_01bot"))
 async def start_(client:Client,message:Message):
@@ -219,7 +217,7 @@ def poll(update, context):
     quest=reaaa.sub(" "," ",quest)
     if 1==1:
         q=quest[0:-1]
-        q=reaaa.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
+        q=reaaa.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*???(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
         q=reaaa.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
         #q=reaaa.sub("(A|B|C|D)", "\n", q)
         q=reaaa.sub("\n{2,}", "\n", q)

@@ -1,11 +1,19 @@
+from pyrogram import Client
+from pyrogram.handlers import MessageHandler, PollHandler
+from pyrogram import filters
+from pyrogram.types import Message, ReplyKeyboardRemove, Poll
+app = Client("my_account",
+#bot_token=ClientText["bot_token"],
+api_id="13682659",
+api_hash="b984d240c5258407ea911f042c9d75f6")
 @app.on_message(filters.poll & filters.chat("Neha55bot") & ~filters.chat("Soojhboojh_01bot"))
-async def start_command(client:Client,message:Message):
+async def start_(client:Client,message:Message):
 	chatid=["Polls_Quiz"]
 	try:
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
+	await app.delete_messages(chat_id="Neha55bot", message_ids=message.message_id)
 	question=mess.question
 	question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"(@|#)\w*?(\s|)", "", question)

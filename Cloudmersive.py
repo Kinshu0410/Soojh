@@ -1,13 +1,13 @@
-
 from pyrogram import Client
 from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters
 from pyrogram.types import Message, ReplyKeyboardRemove, Poll
+import  json
+import time
 import re as reaaa
-import json
 
 app = Client("my_account",
-#bot_token="1877489613:AAEWv36y-bbUjQPCemmJ53vSADAgKZB1A-U",
+#bot_token=ClientText["bot_token"],
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 
@@ -60,26 +60,60 @@ async def start_command(client:Client,message:Message):
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
-
-
-@app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot"))
+@app.on_message(filters.poll & filters.chat("SOOJH_BOOJH_BOT_discussion_grouo"))
 async def start_command(client:Client,message:Message):
-	chatid=["POLLQZ"]
+	#print(message)
+	chatid=["Soojhboojh_01bot"]
+	
+	#print(message.message_id)
 	try:
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
+	#print(mess)
+	    #print(mess)
+	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.message_id)
 	question=mess.question
-	question=reaaa.sub("\n","       ",question)
-	question=reaaa.sub(r"(@|#)\w*?(\s|)", "", question)
-	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
 	for i in range(len(mess.options)):
 	       if mess.options[i]['correct']:
 	           correct_option_id = i
 	           break
+	#correct_option_id
+	#print(message)
+	#time.sleep(100)
+	for x in chatid:
+	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
+
+@app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot"))
+async def start_command(client:Client,message:Message):
+	#print(message)
+	chatid=["POLLQZ"]
+	
+	#print(message.message_id)
+	try:
+		
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	except:
+	    mess=message.poll
+	#print(mess)
+	    #print(mess)
+	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
+	question=mess.question
+	question=reaaa.sub("\n","       ",question)
+	question=reaaa.sub(r"(@|#)\w*?(\s|)", "", question)
+	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
+	#
+	options=[o.text for o in mess.options]
+	correct_option_id = 0
+	for i in range(len(mess.options)):
+	       if mess.options[i]['correct']:
+	           correct_option_id = i
+	           break
+	#correct_option_id
+	#print(message)
+	#time.sleep(100)
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
 	    #print(mess)
@@ -118,6 +152,8 @@ def forword(client:Client,message:Message):
     print(chatid)
     for x in range(int(chatid[2])):
        app.forward_messages(chat_id="KINBIN247_bot",from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
+
+
 import telegram
 
 from telegram import (
@@ -214,11 +250,11 @@ def poll(update, context):
     questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
     #que = update.message.text()
     quest=(update.message.text)
-    quest=reaaa.sub(" "," ",quest)
+    quest=reaaa.sub(" "," ",quest)
     if 1==1:
         q=quest[0:-1]
-        q=reaaa.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*???(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
-        q=reaaa.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
+        q=reaaa.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
+        q=reaaa.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
         #q=reaaa.sub("(A|B|C|D)", "\n", q)
         q=reaaa.sub("\n{2,}", "\n", q)
         q=reaaa.sub("^\n", "", q)
@@ -774,7 +810,6 @@ def cancel(update: Update, _: CallbackContext) -> int:
 
 def main():
     bot_token=os.environ.get("BOT_TOKEN_1", "")
-    
     #bot_token='1355592440:AAEG7NPTJrJXAj40NYVltjGTTpKUBgze4lc'
     updater = Updater(bot_token,use_context=True)
     conv_handler02 = ConversationHandler(

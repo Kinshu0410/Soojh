@@ -5,8 +5,8 @@ from pyrogram.types import Message, ReplyKeyboardRemove, Poll
 import  json
 import time
 import re as reaaa
-
 from mohit import fa
+#from mohit.fa import start_,start_command,
 
 import telegram
 
@@ -697,7 +697,7 @@ def main():
     #dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
-    app.run()
+    #app.run()
     updater.idle()
     
 if __name__ == '__main__':

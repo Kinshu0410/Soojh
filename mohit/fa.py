@@ -113,4 +113,4 @@ def forword(client:Client,message:Message):
        app.forward_messages(chat_id="KINBIN247_bot",from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
 
 
-app.run()
+#app.run()

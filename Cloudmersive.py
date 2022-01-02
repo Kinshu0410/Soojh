@@ -6,7 +6,7 @@ from pyrogram.types import Message, ReplyKeyboardRemove, Poll
 import re as reaaa
 import json
 
-ClienT=open("/storage/emulated/0/ADM/pyrogram/Bot/Client.text")
+ClienT=open(Soojh/Client.text")
 ClientText=json.loads(ClienT.read())
 app = Client(ClientText["session_name"],#bot_token=ClientText["bot_token"],
 api_id=ClientText["api_id"],

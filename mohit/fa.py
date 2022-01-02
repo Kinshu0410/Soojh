@@ -28,3 +28,4 @@ async def start_(client:Client,message:Message):
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
 	    #print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
+app.run()

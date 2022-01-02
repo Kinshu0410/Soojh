@@ -1,3 +1,5 @@
+from pyrogram import Client
+
 app = Client("my_account",
 #bot_token=ClientText["bot_token"],
 api_id="13682659",

@@ -555,8 +555,8 @@ def receive_poll(update, context):
     else:
         ex=reaaa.sub(r"\@.*?\s", "", ex)
         ex=reaaa.sub(r"\@\w.*", "", ex)
-        Ex=str(ex)        #ex=ex
-    #update.message.reply_text("1")
+    
+    Ex=str(ex)        #ex=ex
     #update.message.reply_text(ex)
     #ex=reaaa.sub(r"\@.*?\s", "", ex)
     #ex=reaaa.sub(r"\@\w.*", "", ex)

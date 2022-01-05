@@ -14,18 +14,18 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 @app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
 async def forword(client:Client,message:Message):
     try:
-        await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
+        await app.send_message("quizbot", message.reply_markup["inline_keyboard"][0][0].url)
     except:
         pass
     
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-	await app.send_message("me", str(message.reply_markup.inline_keyboard[0][0].callback_data))
-	if str(message.reply_markup.inline_keyboard[0][0].callback_data)==str({"a":"user_ready"}):
+	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))
+	if str(message.reply_markup["inline_keyboard"][0][0].callback_data)==str({"a":"user_ready"}):
 	   await client.request_callback_answer(
     chat_id=message.chat.id,
     message_id=message.message_id,
-    callback_data=message.reply_markup.inline_keyboard[0][0].callback_data
+    callback_data=message.reply_markup["inline_keyboard"][0][0].callback_data
 )
 	else:
 		print("yo")

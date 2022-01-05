@@ -17,11 +17,12 @@ async def forword(client:Client,message:Message):
     
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-    await client.request_callback_answer(
-    chat_id=message.chat.id,
-    message_id=message.message_id,
-    callback_data=str({"a":"user_ready"})
-)
+	await app.send_message("me", message)
+    #await client.request_callback_answer(
+    #chat_id=message.chat.id,
+    #message_id=message.message_id,
+    #callback_data=str({"a":"user_ready"})
+#)
 
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):

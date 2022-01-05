@@ -11,6 +11,15 @@ app = Client("my_account",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 
+@app.on_message(filters.text & filters.chat("Pdf2imgbot") )#& filters.incoming)
+async def forword(client:Client,message:Message):
+    # await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
+    await app.send_message("quizbot", "/start")
+    
+@app.on_message(filters.all & filters.chat("quizbot") )#& filters.incoming)
+async def forword(client:Client,message:Message):
+    print(message)
+
 @app.on_message(filters.poll & filters.chat("Neha55bot") & ~filters.chat("Soojhboojh_01bot"))
 async def start_(client:Client,message:Message):
 	chatid=["Polls_Quiz"]

@@ -13,7 +13,13 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 
 @app.on_message(filters.text & filters.chat("Pdf2imgbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-    await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
+    try:
+        await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
+    except:
+        await client.send_message(
+    chat_id=message.chat.id,
+    text=message.reply_markup[0][0].text
+)
     
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):

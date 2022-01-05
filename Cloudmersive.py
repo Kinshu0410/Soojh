@@ -20,7 +20,7 @@ async def forword(client:Client,message:Message):
     await client.request_callback_answer(
     chat_id=message.chat.id,
     message_id=message.message_id,
-    callback_data=message.reply_markup[0][0].callback_data
+    callback_data={"a":"user_ready"}
 )
 
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)

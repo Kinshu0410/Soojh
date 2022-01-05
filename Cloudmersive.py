@@ -57,7 +57,7 @@ async def forword(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") & ~filters.chat("Soojhboojh_01bot"))
 async def start_(client:Client,message:Message):
-	chatid=["Polls_Quiz"]
+	chatid=["Polls_Quiz","haryanaspecialquiz"]
 	try:
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:

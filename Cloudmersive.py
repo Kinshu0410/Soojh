@@ -21,7 +21,7 @@ async def forword(client:Client,message:Message):
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
 	await app.send_message("me", str(message.reply_markup.inline_keyboard[0][0].callback_data))
-	if str(message.reply_markup.inline_keyboard[0][0].callback_data["a"])=="user_ready":
+	if str(message.reply_markup.inline_keyboard[0][0].callback_data.a)=="user_ready":
 	   await client.request_callback_answer(
     chat_id=message.chat.id,
     message_id=message.message_id,

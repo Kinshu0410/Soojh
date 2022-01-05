@@ -15,9 +15,17 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 async def forword(client:Client,message:Message):
     await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
     
-@app.on_message(filters.all & filters.chat("quizbot") )#& filters.incoming)
+@app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-    await app.send_message("me", message.reply_markup.inline_keyboard)
+    await client.request_callback_answer(
+    chat_id=message.chat.id,
+    message_id=message.message_id,
+    callback_data=message.reply_markup[0][0].callback_data
+)
+
+@app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)
+async def forword(client:Client,message:Message):
+    await client.forward_messages(chat_id="POLLQZ",from_chat_id=message.chat.id,message_ids=message.message_id)
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") & ~filters.chat("Soojhboojh_01bot"))
 async def start_(client:Client,message:Message):

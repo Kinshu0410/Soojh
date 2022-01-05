@@ -17,7 +17,7 @@ async def forword(client:Client,message:Message):
         await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
     except:
         await client.send_message(
-    chat_id=message.chat.id,
+    "quizbot",
     text="/start"
 )
     

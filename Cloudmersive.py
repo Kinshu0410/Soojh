@@ -11,7 +11,7 @@ app = Client("my_account",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 
-@app.on_message(filters.text & filters.chat("Pdf2imgbot") )#& filters.incoming)
+@app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
 async def forword(client:Client,message:Message):
     try:
         await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
@@ -23,8 +23,9 @@ async def forword(client:Client,message:Message):
     
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-	await app.send_message("me", str(message.reply_markup.inline_keyboard[0][0].callback_data))
-	await client.request_callback_answer(
+	#await app.send_message("me", str(message.reply_markup.inline_keyboard[0][0].callback_data))
+	if message.reply_markup.inline_keyboard[0][0].callback_data.a=="user_ready":
+	   await client.request_callback_answer(
     chat_id=message.chat.id,
     message_id=message.message_id,
     callback_data=message.reply_markup.inline_keyboard[0][0].callback_data
@@ -32,7 +33,35 @@ async def forword(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-    await client.forward_messages(chat_id="POLLQZ",from_chat_id=message.chat.id,message_ids=message.message_id)
+	chatid=["POLLQZ"]
+	
+	#print(message.message_id)
+	try:
+		
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	except:
+	    mess=message.poll
+	#print(mess)
+	    #print(mess)
+	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
+	question=mess.question
+	question=reaaa.sub("\n","       ",question)
+	question=reaaa.sub(r"(@|#)\w*?(\s|)", "", question)
+	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
+	#
+	options=[o.text for o in mess.options]
+	correct_option_id = 0
+	for i in range(len(mess.options)):
+	       if mess.options[i]['correct']:
+	           correct_option_id = i
+	           break
+	#correct_option_id
+	#print(message)
+	#time.sleep(100)
+	for x in chatid:
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+	    #print(mess)
+	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") & ~filters.chat("Soojhboojh_01bot"))
 async def start_(client:Client,message:Message):

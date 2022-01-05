@@ -27,7 +27,7 @@ async def forword(client:Client,message:Message):
     message_id=message.message_id,
     callback_data=message.reply_markup.inline_keyboard[0][0].callback_data
 )
-	elif:
+	else:
 		print("yo")
 
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)

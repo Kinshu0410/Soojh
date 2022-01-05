@@ -13,12 +13,11 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 
 @app.on_message(filters.text & filters.chat("Pdf2imgbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-    # await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
-    await app.send_message("quizbot", "/start")
+    await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
     
 @app.on_message(filters.all & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-    print(message)
+    await app.send_message("me", message.reply_markup.inline_keyboard)
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") & ~filters.chat("Soojhboojh_01bot"))
 async def start_(client:Client,message:Message):

@@ -23,7 +23,7 @@ async def forword(client:Client,message:Message):
     
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-	await app.send_message("me", str(message.reply_markup[0][0].callback_data))
+	await app.send_message("me", str(message.reply_markup))
 	await client.request_callback_answer(
     chat_id=message.chat.id,
     message_id=message.message_id,

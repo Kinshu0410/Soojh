@@ -18,7 +18,7 @@ async def forword(client:Client,message:Message):
     except:
         await client.send_message(
     chat_id=message.chat.id,
-    text=message.reply_markup[0][0].text
+    text="/start"
 )
     
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)

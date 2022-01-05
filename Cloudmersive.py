@@ -16,20 +16,19 @@ async def forword(client:Client,message:Message):
     try:
         await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
     except:
-        await client.send_message(
-    "quizbot",
-    text="/start"
-)
+        pass
     
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-	#await app.send_message("me", str(message.reply_markup.inline_keyboard[0][0].callback_data))
-	if str(message.reply_markup.inline_keyboard[0][0].callback_data.a)=="user_ready":
+	await app.send_message("me", str(message.reply_markup.inline_keyboard[0][0].callback_data))
+	if str(message.reply_markup.inline_keyboard[0][0].callback_data["a"])=="user_ready":
 	   await client.request_callback_answer(
     chat_id=message.chat.id,
     message_id=message.message_id,
     callback_data=message.reply_markup.inline_keyboard[0][0].callback_data
 )
+	elif:
+		print("yo")
 
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):

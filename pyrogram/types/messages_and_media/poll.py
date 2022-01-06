@@ -70,7 +70,8 @@ class Poll(Object, Update):
         type: str = None,
         allows_multiple_answers: bool = None,
         # correct_option_id: int,
-        chosen_option: int = None
+        chosen_option: int = None,
+        #exp: str = None
     ):
         super().__init__(client)
 
@@ -84,9 +85,12 @@ class Poll(Object, Update):
         self.allows_multiple_answers = allows_multiple_answers
         # self.correct_option_id = correct_option_id
         self.chosen_option = chosen_option
+        #self.exp = exp
+        
 
     @staticmethod
     def _parse(client, media_poll: Union["raw.types.MessageMediaPoll", "raw.types.UpdateMessagePoll"]) -> "Poll":
+        
         poll = media_poll.poll  # type: raw.types.Poll
         results = media_poll.results.results
         chosen_option = None
@@ -109,6 +113,7 @@ class Poll(Object, Update):
                     text=answer.text,
                     voter_count=voter_count,
                     correct=correct,
+                    exp=media_poll.results.solution,
                     data=answer.option,
                     client=client
                 )
@@ -124,6 +129,7 @@ class Poll(Object, Update):
             type="quiz" if poll.quiz else "regular",
             allows_multiple_answers=poll.multiple_choice,
             chosen_option=chosen_option,
+            #exp=exp,
             client=client
         )
 
@@ -131,8 +137,9 @@ class Poll(Object, Update):
     def _parse_update(client, update: "raw.types.UpdateMessagePoll"):
         if update.poll is not None:
             return Poll._parse(client, update)
-
+        
         results = update.results.results
+        print("update==="+str(update))
         chosen_option = None
         options = []
 
@@ -145,10 +152,11 @@ class Poll(Object, Update):
                     text="",
                     voter_count=result.voters,
                     data=result.option,
+                    exp=None,
                     client=client
                 )
             )
-
+            
         return Poll(
             id=str(update.poll_id),
             question="",
@@ -156,5 +164,7 @@ class Poll(Object, Update):
             total_voter_count=update.results.total_voters,
             is_closed=False,
             chosen_option=chosen_option,
+            
+            #results=results,
             client=client
         )

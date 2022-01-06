@@ -106,5 +106,4 @@ async def texttopoll(quest,update, context):
             }
         }
         context.bot_data.update(payload)
-        if update.effective_chat.id<=0:
-            time.sleep(5)
+        

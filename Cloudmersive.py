@@ -298,6 +298,8 @@ def poll(update, context):
     #que = update.message.text()
     quest=(update.message.text)
     asyncio.run(texttopoll(quest,update,context))
+    if update.effective_chat.id<=0:
+            time.sleep(5)
    
    
 

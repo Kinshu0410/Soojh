@@ -139,7 +139,7 @@ class Poll(Object, Update):
             return Poll._parse(client, update)
         
         results = update.results.results
-        print("update==="+str(update))
+        #print("update==="+str(update))
         chosen_option = None
         options = []
 

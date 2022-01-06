@@ -293,13 +293,11 @@ from text_to_poll import texttopoll
 @run_async
 @send_typing_action
 def poll(update, context):
-    """Sends a predefined poll"""
-    questions = ["Math_quiz_ans", "Royalworldmathdoubt", "Maths_Quiz_Notes", "learnwithaditya", " makefuturebright", "soojhboojh"]
-    #que = update.message.text()
     quest=(update.message.text)
-    asyncio.run(texttopoll(quest,update,context))
     if update.effective_chat.id<=0:
             time.sleep(5)
+    asyncio.run(texttopoll(quest,update,context))
+    
    
    
 

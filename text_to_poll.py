@@ -58,7 +58,7 @@ async def texttopoll(quest,update, context):
             options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
         else:
             options5=options5
-            print("exp ===="+options5)
+        print("exp ===="+options5)
         #options5=reaaa.sub(r"\@\w.*", "", options5)
         #update.message.reply_text(options)
 

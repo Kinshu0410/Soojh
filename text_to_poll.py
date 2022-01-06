@@ -98,7 +98,7 @@ async def texttopoll(quest,update, context):
         # Save some info about the poll the bot_data for later use in receive_poll_answer
         payload = {
             message.poll.id: {
-                "questions": questions,
+                "questions": que,
                 "message_id": message.message_id,
                 "chat_id": update.effective_chat.id,
                 "answers": 0,

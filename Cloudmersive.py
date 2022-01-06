@@ -13,10 +13,8 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 
 @app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-    try:
+    if message.reply_markup:
         await app.send_message("quizbot", message.reply_markup["inline_keyboard"][0][0].url)
-    except:
-        pass
     
 @app.on_message(filters.all & ~ filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):

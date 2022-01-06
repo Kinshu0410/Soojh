@@ -273,12 +273,12 @@ def channels(update, context):
 def owner(update, context):
   update.message.reply_text("send your suggestions\n    1. @kinbin247 \n  2. @ANKITAdidi \n 3. comming soon \ud83d\ude1c")
 
-LIST_OF_ADMINS = ["Kinbin247", "Harsh_Avasthi", "TOXIC_MAVI"]
+LIST_OF_ADMINS = ["711296045", "555919730"]
 
 def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
-        userName = update.message.chat.username
+        userName = str(update.message.from_user.id)
         if userName not in LIST_OF_ADMINS:
             print("start")#update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return

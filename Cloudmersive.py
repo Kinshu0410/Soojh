@@ -298,8 +298,19 @@ def poll(update, context):
     if update.effective_chat.id<=0:
             time.sleep(5)
     asyncio.run(texttopoll(quest,update,context))
+    if update.effective_chat.id<=0:
+            time.sleep(5)
     
-   
+#@run_async
+@restricted
+@send_typing_action
+def receive_poll(update, context):
+    """On receiving polls, reply to it by a closed poll copying the received poll"""
+    actual_poll = update.effective_message.poll
+    asyncio.run(polltotext(actual_poll,update,context))
+    if update.effective_chat.id<=0:
+            time.sleep(5)
+    
    
 
 @restricted
@@ -511,16 +522,7 @@ def preview(update, context):
     )
 
 
-#@run_async
-@restricted
-@send_typing_action
-def receive_poll(update, context):
-    """On receiving polls, reply to it by a closed poll copying the received poll"""
-    actual_poll = update.effective_message.poll
-    asyncio.run(polltotext(actual_poll,update,context))
-    if update.effective_chat.id<=0:
-            time.sleep(5)
-    
+
     
 
 

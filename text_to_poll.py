@@ -29,7 +29,7 @@ import re as reaaa
 from telegram.ext.dispatcher import run_async
 
 async def texttopoll(quest,update, context):
-	quest=reaaa.sub(" "," ",quest)
+    quest=reaaa.sub(" "," ",quest)
     if 1==1:
         q=quest[0:-1]
         q=reaaa.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)

@@ -28,8 +28,8 @@ from telegram.ext import (
 import re as reaaa
 from telegram.ext.dispatcher import run_async
 async def polltotext(actual_poll,update, context):
-	ex =actual_poll.explanation
-    #update.message.reply_text("1")
+    ex =actual_poll.explanation
+    
     if ex is None:
         ex=""
     else:

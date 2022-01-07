@@ -32,6 +32,7 @@ async def texttopoll(quest,update, context):
     quest=reaaa.sub(" "," ",quest)
     if 1==1:
         q=quest[0:-1]
+        q=reaaa.sub(" ", " ", q)
         q=reaaa.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
         q=reaaa.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
         #q=reaaa.sub("(A|B|C|D)", "\n", q)
@@ -54,7 +55,7 @@ async def texttopoll(quest,update, context):
         options5=q[5::1]
         options5="\n".join(options5)
         options5=reaaa.sub(r"@\w*", "@kinbin247", options5)
-        if options5 == "":
+        elif options5 == "":
             options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
         else:
             options5=options5

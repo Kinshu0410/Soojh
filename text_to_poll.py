@@ -34,7 +34,7 @@ async def texttopoll(quest,update, context):
         q=quest[0:-1]
         q=reaaa.sub(" ", " ", q)
         q=reaaa.sub("(\n| )(\(a\) ){10,}|(\n| |)Sandeep Choudhary(\n| |)|(\n| |)🤗.*?🤗(\n| |)|Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.|🅰︎\n🅱︎\n🅲︎\n🅳︎\n", "\n", q)
-        q=reaaa.sub("(\n|\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
+        q=reaaa.sub("(\n|\ |\ )( |)(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|स|द|1|2|3|4|ए|ऐ|बी|सी|डी)(\)|\]|\.)(\.|\ |)", "\n", q)
         #q=reaaa.sub("(A|B|C|D)", "\n", q)
         q=reaaa.sub("\n{2,}", "\n", q)
         q=reaaa.sub("^\n", "", q)

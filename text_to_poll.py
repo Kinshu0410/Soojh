@@ -55,7 +55,7 @@ async def texttopoll(quest,update, context):
         options5=q[5::1]
         options5="\n".join(options5)
         options5=reaaa.sub(r"@\w*", "@kinbin247", options5)
-        elif options5 == "":
+        if options5 == "":
             options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
         else:
             options5=options5

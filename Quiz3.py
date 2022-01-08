@@ -1,42 +1,3 @@
-from __future__ import print_function
-
-__author__ = 'jcgregorio@google.com (Joe Gregorio)'
-
-import sys
-
-from oauth2client import client
-from googleapiclient import sample_tools
-Key = "AIzaSyA6bHvo2bklbRAtjsHoBn5WfgexYIkDOV0"
-BlogId = "6283375803864903384"
-service, flags = sample_tools.init(
-      sys.argv, 'blogger', 'v3', __doc__, __file__,
-      scope='https://www.googleapis.com/auth/blogger')
-import google.oauth2.credentials
-import google_auth_oauthlib.flow
-
-# Use the client_secret.json file to identify the application requesting
-# authorization. The client ID (from that file) and access scopes are required.
-flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-    'client_secret.json',
-    scopes=['https://www.googleapis.com/auth/drive.metadata.readonly'])
-
-# Indicate where the API server will redirect the user after the user completes
-# the authorization flow. The redirect URI is required. The value must exactly
-# match one of the authorized redirect URIs for the OAuth 2.0 client, which you
-# configured in the API Console. If this value doesn't match an authorized URI,
-# you will get a 'redirect_uri_mismatch' error.
-flow.redirect_uri = 'https://www.example.com/oauth2callback'
-
-# Generate URL for request to Google's OAuth 2.0 server.
-# Use kwargs to set optional request parameters.
-authorization_url, state = flow.authorization_url(
-    # Enable offline access so that you can refresh an access token without
-    # re-prompting the user for permission. Recommended for web server apps.
-    access_type='offline',
-    # Enable incremental authorization. Recommended as a best practice.
-    include_granted_scopes='true')
-
-
 from pymongo import MongoClient
 import dns
 
@@ -100,27 +61,6 @@ GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT, TIME, Re = range(9)
 
 import asyncio
 from create_results import save_results, save_photos
-
-blogs=service.posts()
-
-#thisusersblogs = blogs.listByUser(userId='self').execute()
-#for blog in thisusersblogs['items']:
-#    print(blog)
-thisusersblogs = blogs.list(blogId='6283375803864903384').execute()
-
-
-def current(update: Update, context: CallbackContext) -> None:
-    """Sends a message with three inline buttons attached."""
-    print(update)
-    URL=[]
-    for blog in thisusersblogs['items']:
-        if blog['url'].startswith("http://soojhboojhquiz.blogspot.com/2022/01"):
-            URL.append(blog['url'])
-    x=([[InlineKeyboardButton(i+j+1, url=URL[i+j]) for i in range(7)] for j in range(len(URL)//7)])
-    x.append([InlineKeyboardButton(y+1, url=URL[y]) for y in range(len(URL)-len(URL)%7 ,len(URL))])
-    reply_markup = InlineKeyboardMarkup(x)
-
-    context.bot.send_message(chat_id="711296045",text='January, Hindi current Affairs 2022', reply_markup=reply_markup)
 
 
 def send_typing_action(func):
@@ -258,7 +198,7 @@ def restrictedD(func):
             return
         chatiid=int(update.message.chat.id)
         if chatiid<=0:
-            if reaaa.findall("(.*?\n{1,}){4,}.*?",update.message.text) :
+            if reaaa.findall("(.*?\n{1,}){4,}.*?",update.message.text):
                 print("restrictedD wants to delete message")
                 context.bot.delete_message(chat_id=chatiid,message_id=update.message.message_id)
         return func(update, context, *args, **kwargs)
@@ -2261,7 +2201,6 @@ def main() -> None:
     dispatcher.add_handler(conv_handler012)
     dispatcher.add_handler(conv_handler0u)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
-    dispatcher.add_handler(CommandHandler('current', current))
     dp=dispatcher
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))

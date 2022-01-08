@@ -193,7 +193,7 @@ def restrictedD(func):
             context.job_queue.run_once(alarm, due, context=chat_id11, name=str(chat_id11))
         userName = str(update.message.chat.id)
         userName1=str(update.message.from_user.id)
-        if userName and userName1 not in LIST_OF_ADMINS:
+        if userName1 not in LIST_OF_ADMINS:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         chatiid=int(update.message.chat.id)
@@ -1246,6 +1246,7 @@ def poll(update, context):
     """Sends a predefined poll"""
     #que = update.message.text()
     quest=(update.message.text)
+    print("test")
     print("poll Conversation = "+update.message.text)
     try:
         q=quest[0:-1]

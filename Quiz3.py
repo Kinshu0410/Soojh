@@ -1,3 +1,17 @@
+from __future__ import print_function
+
+__author__ = 'jcgregorio@google.com (Joe Gregorio)'
+
+import sys
+
+from oauth2client import client
+from googleapiclient import sample_tools
+Key = "AIzaSyA6bHvo2bklbRAtjsHoBn5WfgexYIkDOV0"
+BlogId = "6283375803864903384"
+service, flags = sample_tools.init(
+      sys.argv, 'blogger', 'v3', __doc__, __file__,
+      scope='https://www.googleapis.com/auth/blogger')
+
 from pymongo import MongoClient
 import dns
 
@@ -61,6 +75,27 @@ GENDER, PHOTO, LOCATION, BIO, QUIZ, DELETE, RESULT, TIME, Re = range(9)
 
 import asyncio
 from create_results import save_results, save_photos
+
+blogs=service.posts()
+
+#thisusersblogs = blogs.listByUser(userId='self').execute()
+#for blog in thisusersblogs['items']:
+#    print(blog)
+thisusersblogs = blogs.list(blogId='6283375803864903384').execute()
+
+
+def current(update: Update, context: CallbackContext) -> None:
+    """Sends a message with three inline buttons attached."""
+    print(update)
+    URL=[]
+    for blog in thisusersblogs['items']:
+        if blog['url'].startswith("http://soojhboojhquiz.blogspot.com/2022/01"):
+            URL.append(blog['url'])
+    x=([[InlineKeyboardButton(i+j+1, url=URL[i+j]) for i in range(7)] for j in range(len(URL)//7)])
+    x.append([InlineKeyboardButton(y+1, url=URL[y]) for y in range(len(URL)-len(URL)%7 ,len(URL))])
+    reply_markup = InlineKeyboardMarkup(x)
+
+    context.bot.send_message(chat_id="711296045",text='January, Hindi current Affairs 2022', reply_markup=reply_markup)
 
 
 def send_typing_action(func):
@@ -2201,6 +2236,7 @@ def main() -> None:
     dispatcher.add_handler(conv_handler012)
     dispatcher.add_handler(conv_handler0u)
     dispatcher.add_handler(CommandHandler('quizlist', quizlist))
+    dispatcher.add_handler(CommandHandler('current', current))
     dp=dispatcher
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))

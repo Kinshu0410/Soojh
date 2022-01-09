@@ -884,7 +884,7 @@ def quizc(update,context):
                 ],
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
-            context.bot.send_message(chat_id=channelid,text='<b>'+userText+'</b>', reply_markup=reply_markup, parse_mode=ParseMode.HTML)
+            context.bot.send_message(chat_id=channelid,text='<b><tg-spoiler>'+userText+'</tg-spoiler></b>', reply_markup=reply_markup, parse_mode=ParseMode.HTML)
             context.bot.send_message(chat_id="@SOOJH_BOOJH_BOT_discussion_grouo",text='<b>'+userText+'</b>', reply_markup=reply_markup, parse_mode=ParseMode.HTML)
             
             
@@ -1436,7 +1436,7 @@ def pollf(update,context):
                 ],
             ]
                         reply_markup = InlineKeyboardMarkup(keyboard)
-                        context.bot.send_message(chat_id=chat___id,text='<b>'+quiz_name+'</b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML)
+                        context.bot.send_message(chat_id=chat___id,text='<b><tg-spoiler>'+quiz_name+'</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML)
                         #context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?start\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                     except Exception as e:
                         context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz hereaaa...\nerror name = "+str(e), parse_mode=ParseMode.HTML)
@@ -1493,7 +1493,7 @@ def pollf(update,context):
                 ],
             ]
                         reply_markup = InlineKeyboardMarkup(keyboard)
-                        context.bot.send_message(chat_id=chat___id,text='<b>'+quiz_name+'</b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML)
+                        context.bot.send_message(chat_id=chat___id,text='<b><tg-spoiler>'+quiz_name+'</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML)
                         #context.bot.send_message(chat_id=chat___id, text="<a href=\"https://telegram.me/Soojhboojh_01bot?start\">🌐 Click Sharing ☜ </a>", parse_mode=ParseMode.HTML,disable_web_page_preview = True)
                     except Exception as e:
                         context.bot.send_message(chat_id=chat___id, text="Give me Polls send permission to upload quiz hereaaa...\nerror name = "+str(e), parse_mode=ParseMode.HTML)

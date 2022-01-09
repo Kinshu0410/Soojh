@@ -2071,11 +2071,8 @@ def current(update,context):
     x=([[InlineKeyboardButton(i+j+1, url=URL[i+j]) for i in range(7)] for j in range(len(URL)//7)])
     x.append([InlineKeyboardButton(y+1, url=URL[y]) for y in range(len(URL)-len(URL)%7 ,len(URL))])
     reply_markup = InlineKeyboardMarkup(x)
-    channal=input("Channal ")
-    if channal=="":
-        channal="@polls_quiz"
-    channal=re.sub("(https://t.me/)","@",channal)
-    context.bot.send_message(chat_id=channal,text='<b>🔊 जनवरी 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b><tg-spoiler>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    
+    context.bot.send_message(chat_id=update.message.chat.id,text='<b>🔊 जनवरी 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b><tg-spoiler>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
 
 def main() -> None:

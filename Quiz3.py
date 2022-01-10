@@ -2073,7 +2073,7 @@ def current(update,context):
     x.append([InlineKeyboardButton(y+1, url=URL[y]) for y in range(len(URL)-len(URL)%7 ,len(URL))])
     reply_markup = InlineKeyboardMarkup(x)
     
-    context.bot.send_message(chat_id=update.message.chat.id,text='<b><tg-spoiler>🔊 जनवरी 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    context.bot.send_message(chat_id=update.message.chat.id,text='<b>🔊 जनवरी 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b><tg-spoiler>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
 
 def main() -> None:

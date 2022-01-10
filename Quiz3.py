@@ -196,11 +196,7 @@ def restrictedD(func):
         if userName1 not in LIST_OF_ADMINS:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
-        chatiid=int(update.message.chat.id)
-        if chatiid<=0:
-            if reaaa.findall("(.*?\n{1,}){4,}.*?",update.message.text):
-                print("restrictedD wants to delete message")
-                context.bot.delete_message(chat_id=chatiid,message_id=update.message.message_id)
+        
         return func(update, context, *args, **kwargs)
     return wrapped
 
@@ -1310,6 +1306,11 @@ def poll(update, context):
             allows_multiple_answers=False,
         )
         # Save some info about the poll the bot_data for later use in receive_poll_answer
+        chatiid=int(update.message.chat.id)
+        if chatiid<=0:
+            if reaaa.findall("(.*?\n{1,}){4,}.*?",update.message.text):
+                print("restrictedD wants to delete message")
+                context.bot.delete_message(chat_id=chatiid,message_id=update.message.message_id)
         time.sleep(5)
     except Exception as e:
         print(str(e))

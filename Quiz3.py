@@ -2063,7 +2063,7 @@ def current(update,context):
     URL=[]
     URL1=col.find_one(myquery1)["URL"]
     #print(URL1)
-    for x in URL1[0]:
+    for x in URL1:
     	print(x)
     	if x.startswith("https://soojhboojhquiz.blogspot.com/2022/01"):
     	    URL.append(x)

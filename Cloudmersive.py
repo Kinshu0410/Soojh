@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from pyrogram import Client
 from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters

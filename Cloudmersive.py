@@ -49,8 +49,8 @@ async def forword(client:Client,message:Message):
 		    pass
 		else:
 		    question=reaaa.sub(str(emoji[zz]),"",question)
-		    for yy in options:
-		        yy=reaaa.sub(zz,"",yy)
+		    #for yy in options:
+		        #yy=reaaa.sub(zz,"",yy)
 	#
 	
 	correct_option_id = 0

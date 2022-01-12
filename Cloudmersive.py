@@ -40,7 +40,7 @@ async def forword(client:Client,message:Message):
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
 	question=mess.question
 	#question=reaaa.sub("\n","       ",question)
-	question=reaaa.sub(r"(@|#)\w*+(\s|)", "", question)
+	question=reaaa.sub(r"(@|#)\w*(\s|$)", "", question)
 	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
 	options=[o.text for o in mess.options]
 	question=emojicut(question)

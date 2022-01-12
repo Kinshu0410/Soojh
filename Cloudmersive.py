@@ -43,7 +43,7 @@ async def forword(client:Client,message:Message):
 	question=reaaa.sub(r"(@|#)\w*?(\s|)", "", question)
 	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
 	options=[o.text for o in mess.options]
-	emojicut(question)
+	question=emojicut(question)
 	zzzz=[emojicut(yy) for yy in options]
 	options=zzzz
 	

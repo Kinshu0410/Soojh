@@ -41,7 +41,7 @@ async def forword(client:Client,message:Message):
 	question=mess.question
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"(@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|_|)", "", question)
-	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
+	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
 	options=[o.text for o in mess.options]
 	question=emojicut(question)
 	zzzz=[emojicut(yy) for yy in options]
@@ -164,7 +164,7 @@ async def start_command1(client:Client,message:Message):
 	question=reaaa.sub(r"(@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|)", "", question)
 	print("que se aage gye")
 	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
-	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
+	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|), "", question)
 	#
 	options=[o.text for o in mess.options]
 	correct_option_id = 0

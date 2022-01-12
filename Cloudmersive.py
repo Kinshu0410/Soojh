@@ -39,8 +39,8 @@ async def forword(client:Client,message:Message):
 	    #print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
 	question=mess.question
-	question=reaaa.sub("\n","       ",question)
-	question=reaaa.sub(r"(@|#)\w*?(\s|)", "", question)
+	#question=reaaa.sub("\n","       ",question)
+	question=reaaa.sub(r"(@|#)\w*+(\s|)", "", question)
 	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)|( |\n)(\@)(.*?)( |\n)", "", question)
 	options=[o.text for o in mess.options]
 	question=emojicut(question)
@@ -146,7 +146,7 @@ async def start_command(client:Client,message:Message):
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
 @app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot"))
-async def start_command(client:Client,message:Message):
+async def start_command1(client:Client,message:Message):
 	#print(message)
 	chatid=["POLLQZ"]
 	

@@ -70,7 +70,7 @@ async def start_(client:Client,message:Message):
 	await app.delete_messages(chat_id="Neha55bot", message_ids=message.message_id)
 	question=mess.question
 	question=reaaa.sub("\n","       ",question)
-	question=reaaa.sub(r"(@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|)", "", question)
+	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |)(Join|🔜)(\n| |))", "", question)
 	question=reaaa.sub(r"^((Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|)(\d{1,}\. |\d{1,}\.|)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
 	options=[o.text for o in mess.options]
 	correct_option_id = 0

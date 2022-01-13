@@ -1310,7 +1310,7 @@ def poll(update, context):
         if chatiid<=0:
             if reaaa.findall("(.*?\n{1,}){4,}.*?",update.message.text):
                 print("restrictedD wants to delete message")
-                context.bot.delete_message(chat_id=chatiid,message_id=update.message.message_id)
+                #context.bot.delete_message(chat_id=chatiid,message_id=update.message.message_id)
         time.sleep(5)
     except Exception as e:
         print(str(e))

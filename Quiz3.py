@@ -2070,7 +2070,7 @@ def current(update,context):
     	    
     	
     URL.reverse()
-    x=([[InlineKeyboardButton(i+j+1, url=URL[i+j]) for i in range(7)] for j in range(len(URL)//7)])
+    x=([[InlineKeyboardButton(i+j*7+1, url=URL[i+j]) for i in range(7)] for j in range(len(URL)//7)])
     x.append([InlineKeyboardButton(y+1, url=URL[y]) for y in range(len(URL)-len(URL)%7 ,len(URL))])
     reply_markup = InlineKeyboardMarkup(x)
     

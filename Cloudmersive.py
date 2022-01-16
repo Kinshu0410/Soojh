@@ -37,7 +37,7 @@ async def forword(client:Client,message:Message):
 	    mess=message.poll
 	#print(mess)
 	    #print(mess)
-	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
+	await app.delete_messages(chat_id="Neha55bot", message_ids=message.message_id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)

@@ -63,7 +63,7 @@ async def forword(client:Client,message:Message):
 	#print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
 	    #print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 

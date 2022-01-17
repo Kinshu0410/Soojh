@@ -27,7 +27,7 @@ async def forword(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
-	chatid=["Study_Quiz_India", "polls_quiz]
+	chatid=["Study_Quiz_India", "polls_quiz"]
 	
 	#print(message.message_id)
 	try:

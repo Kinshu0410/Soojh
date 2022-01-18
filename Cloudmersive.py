@@ -254,11 +254,12 @@ async def start_command1(client:Client,message:Message):
 	    #print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message(filters.text & filters.outgoing)
+@app.on_message(filters.regex("\d{1,}") & filters.outgoing)
 async def timer(client:Client,message:Message):
-	if message.text=="\d{1,}":
 		for x in range(int(message.text)):
 		    await app.edit_message_text(message.chat.id, message.message_id, str(int(message.text)-1-x))
+		    time.sleep(1)
+		
 		
 		
 		

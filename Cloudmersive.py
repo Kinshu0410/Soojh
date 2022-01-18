@@ -254,7 +254,11 @@ async def start_command1(client:Client,message:Message):
 	    #print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-
+@app.on_message(filters.text & filters.outgoing)
+async def timer(client:Client,message:Message):
+	if message.text=="yo":
+		await app.send_message("message.chat.id", message)
+	
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):
     #if message.forward_from_chat:

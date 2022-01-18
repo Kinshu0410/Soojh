@@ -256,8 +256,12 @@ async def start_command1(client:Client,message:Message):
 
 @app.on_message(filters.text & filters.outgoing)
 async def timer(client:Client,message:Message):
-	if message.text=="yo":
-		await app.send_message(message.chat.id, message)
+	if message.text=="\d{1,}":
+		for x in range(int(message.text)):
+		    await app.edit_message_text(message.chat.id, message.message_id, str(int(message.text)-1-x))
+		
+		
+		
 	
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):

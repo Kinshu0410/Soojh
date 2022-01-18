@@ -258,10 +258,10 @@ async def start_command1(client:Client,message:Message):
 async def timer(client:Client,message:Message):
 		timer=re.split(":",message.text)
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
-		for x in range(total):
-			mass=str((total-1-x)//3600)+":"+str((total-1-x)//60-((total-1-x)//3600)*60)+":"+str((total-1-x)-((total-1-x)//60-((total-1-x)//3600)*60)*60-((total-1-x)//3600)*3600)
+		for x in range(total)//5:
+			mass=str((total-1-x*5)//3600)+":"+str((total-1-x*5)//60-((total-1-x*5)//3600)*60)+":"+str((total-1-x*5)-((total-1-x*5)//60-((total-1-x*5)//3600)*60)*60-((total-1-x*5)//3600)*3600)
 			await app.edit_message_text(message.chat.id, message.message_id,mass)
-			time.sleep(1)
+			time.sleep(5)
 		
 		
 		

@@ -254,10 +254,13 @@ async def start_command1(client:Client,message:Message):
 	    #print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message(filters.regex("\d{1,}") & filters.outgoing)
+@app.on_message(filters.regex("\d{1}:\d{1,2}:\d{1,2}") & filters.outgoing)
 async def timer(client:Client,message:Message):
-		for x in range(int(message.text)):
-		    await app.edit_message_text(message.chat.id, message.message_id, str(int(message.text)-1-x))
+		timer=re.split(":",message.text)
+		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
+		for x in range(total):
+			mass=str((total-1-x)//3600)+":"+str((total-1-x)//60)+":"+str(total-1-x)
+		    await app.edit_message_text(message.chat.id, message.message_id,mass))
 		    time.sleep(1)
 		
 		

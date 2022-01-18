@@ -260,7 +260,7 @@ async def timer(client:Client,message:Message):
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
 		for x in range(total):
 			mass=str((total-1-x)//3600)+":"+str((total-1-x)//60)+":"+str(total-1-x)
-			await app.edit_message_text(message.chat.id, message.message_id,mass))
+			await app.edit_message_text(message.chat.id, message.message_id,mass)
 			time.sleep(1)
 		
 		

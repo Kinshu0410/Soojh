@@ -116,7 +116,7 @@ async def forword(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.chat("Pdf2imgbot") )#& filters.incoming)
 async def Biology(client:Client,message:Message):
-	chatid=["BiologyWarrior"]
+	chatid=["Biology_Quiz4U"]
 	
 	#print(message.message_id)
 	try:

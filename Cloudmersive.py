@@ -96,7 +96,7 @@ async def forword(client:Client,message:Message):
 	
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
-	question=reaaa.sub(r"🔰 C.A BY 🔰", "", question)
+	question=reaaa.sub(r"(\n| |){1,}(🔰|C\.A BY)(\n| |){1,}", "", question)
 	question=reaaa.sub(r"🔰", "", question)
 	options=[o.text for o in mess.options]
 	
@@ -116,7 +116,7 @@ async def forword(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.chat("Pdf2imgbot") )#& filters.incoming)
 async def Biology(client:Client,message:Message):
-	chatid=["Biology_Quiz4U"]
+	chatid=["BiologyWarrior"]
 	
 	#print(message.message_id)
 	try:

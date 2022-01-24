@@ -70,10 +70,7 @@ async def forword(client:Client,message:Message):
 	    #print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message( filters.chat("unacademyadmin") )#& filters.incoming)
-async def forworda(client:Client,message:Message):
-    
-        await app.send_message("me", message)
+
 	
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):

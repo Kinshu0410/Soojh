@@ -69,7 +69,7 @@ async def forword(client:Client,message:Message):
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
 	    #print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
-@app.on_message(filters.chat("unacademyadmin") & filters.outgoing)
+@app.on_message(filters.chat("unacademyadmin"))# & filters.outgoing)
 async def forworda(client:Client,message:Message):
     if message.reply_markup:
         await app.send_message("me", message)

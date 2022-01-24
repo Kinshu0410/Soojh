@@ -7,5 +7,5 @@ GitPython
 requests
 pysocks
 tgcrypto
-
+apscheduler
 

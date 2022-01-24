@@ -13,7 +13,7 @@ app = Client("my_account",
 #bot_token=ClientText["bot_token"],
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
-scheduler = AsyncIOScheduler()
+scheduler = AsyncIOScheduler(timezone="India")
 @app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
 async def forword(client:Client,message:Message):
     if message.reply_markup:

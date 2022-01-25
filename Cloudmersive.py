@@ -281,7 +281,7 @@ async def timer(client:Client,message:Message):
 
 async def job(client:Client,message:Message):
 		mess1=app.get_messages(message.chat.id, message.message_id)
-		print(mass1)
+		print(mess1)
 		timer=re.split(":",mess1.message.text)
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
 		

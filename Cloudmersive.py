@@ -47,7 +47,7 @@ async def job1(x,client:Client,message:Message):
 	else:
 		col.insert_one({"Nu":[0]})
 		Nu=[0]
-	await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"])[Nu[0]]
+	await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]])
 @app.on_message(filters.regex("Add_ .*?") )#& filters.incoming)
 async def add(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]

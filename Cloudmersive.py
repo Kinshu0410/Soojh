@@ -280,7 +280,7 @@ async def timer(client:Client,message:Message):
 	print("schedule")
 
 async def job(client:Client,message:Message):
-	timer=re.split(":",message.text)
+		timer=re.split(":",message.text)
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
 		if total//10>=1:
 			mass=str((total-10)//3600)+":"+str((total-10)//60-((total-10)//3600)*60)+":"+str((total-10)-((total-10)//60-((total-10)//3600)*60)*60-((total-10)//3600)*3600)

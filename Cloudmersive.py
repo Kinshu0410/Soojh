@@ -280,9 +280,9 @@ async def timer(client:Client,message:Message):
 	print("schedule")
 
 async def job(client:Client,message:Message):
-		mess1=app.get_messages(message.chat.id, message.message_id)
+		mess1=await app.get_messages(message.chat.id, message.message_id)
 		print(mess1)
-		timer=re.split(":",mess1.message.text)
+		timer=re.split(":",mess1.text)
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
 		
 		if total//10>=1:

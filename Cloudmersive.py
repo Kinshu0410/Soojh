@@ -37,7 +37,7 @@ async def job1(x,client:Client,message:Message):
 	myquery1 = {"Nu":{"$type":"array"}}
 	if col.find_one(myquery1):
 		Nu=col.find_one(myquery1)["Nu"]
-		if len(col.find_one({"data":{"$type":"array"}})["data"])==int(Nu):
+		if len(col.find_one({"data":{"$type":"array"}})["data"])==int(Nu[0]):
 			Nu=[0]
 		else :
 			Nu=[int(Nu[0])+1]

@@ -38,7 +38,7 @@ async def add(client:Client,message:Message):
 	await app.send_message(message.chat.id, "Quiz added") 
 
 @app.on_message(filters.regex("del_ .*?") )#& filters.incoming)
-async def del(client:Client,message:Message):
+async def dell(client:Client,message:Message):
 	col=client["group_schedule"][message.chat.id]
 	myquery1 = {"data":{"$type":"array"}}
 	if coll.find_one(myquery1):

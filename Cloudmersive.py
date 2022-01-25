@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from pymongo import MongoClient
 import dns
 
@@ -7,8 +9,6 @@ dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public 
 # as a test, dns.resolver.query('www.google.com') should return an answer, not an exception'''
 client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
 
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 from pyrogram import Client
 from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters

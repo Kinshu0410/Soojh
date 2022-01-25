@@ -70,6 +70,7 @@ async def add(client:Client,message:Message):
 		col.update_one(myquery1,newvalues1)
 	else:
 		col.insert_one({"data":[re.sub("Add_ ","",message.text)]})
+		col.insert_one({"Nu":[0]})
 	await app.send_message(message.chat.id, "Quiz added") 
 
 @app.on_message(filters.regex("Del_ .*?") )#& filters.incoming)

@@ -23,6 +23,12 @@ app = Client("my_account",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
+from datetime import datetime, time
+def in_between(now, start, end):
+    if start <= end:
+        return start <= now < end
+    else: # over midnight e.g., 23:30-04:15
+        return start <= now or now < end
 @app.on_message(filters.regex("cid") )#& filters.incoming)
 async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
@@ -31,8 +37,12 @@ async def cid(client:Client,message:Message):
 async def schedule_job(client:Client,message:Message):
 	name= clientmongo["group_schedule"].list_collection_names()
 	for x in name:
-		scheduler.add_job(job1, "interval", seconds=10 ,args=(x,client,message,) ,id=str(x))
-		#scheduler.start()
+		if in_between(datetime.now().time(), time(4), time(23)):
+			scheduler.add_job(job1, "interval", minutes=60 ,args=(x,client,message,) ,id=str(x))
+		else:
+			"good night"
+		
+		scheduler.start()
 async def job1(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]
 	myquery1 = {"Nu":{"$type":"array"}}
@@ -47,7 +57,10 @@ async def job1(x,client:Client,message:Message):
 	else:
 		col.insert_one({"Nu":[0]})
 		Nu=[0]
-	await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]])
+	try:
+		await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]])
+	except:
+		pass
 @app.on_message(filters.regex("Add_ .*?") )#& filters.incoming)
 async def add(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]

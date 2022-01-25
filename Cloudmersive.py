@@ -1,3 +1,12 @@
+from pymongo import MongoClient
+import dns
+
+'''import dns.resolver
+dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
+dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public dns server,  use whatever dns server you like here
+# as a test, dns.resolver.query('www.google.com') should return an answer, not an exception'''
+client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from pyrogram import Client
@@ -14,6 +23,33 @@ app = Client("my_account",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
+@app.on_message(filters.regex("add_ .*?") )#& filters.incoming)
+async def add(client:Client,message:Message):
+	col=client["group_schedule"][message.chat.id]
+	myquery1 = {"data":{"$type":"array"}}
+	
+	if coll.find_one(myquery1):
+		data=col.find_one(myquery1)["data"]
+		data.append(re.sub("add_ ","",message.text))
+		newvalues1 = { "$set": { "data":data} }
+		col.update_one(myquery1,newvalues1)
+	else:
+		col.insert_one({"data":[re.sub("add_ ","",message.text)]})
+	await app.send_message(message.chat.id, "Quiz added") 
+
+@app.on_message(filters.regex("del_ .*?") )#& filters.incoming)
+async def del(client:Client,message:Message):
+	col=client["group_schedule"][message.chat.id]
+	myquery1 = {"data":{"$type":"array"}}
+	if coll.find_one(myquery1):
+		data=col.find_one(myquery1)["data"]
+		data.remove(re.sub("del_ ","",message.text))
+		newvalues1 = { "$set": { "data":data} }
+		col.update_one(myquery1,newvalues1)
+		await app.send_message(message.chat.id, "Quiz Delete to schedule is successful.") 
+	else:
+		await app.send_message(message.chat.id, "Did not find quiz") 
+	
 @app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
 async def forword(client:Client,message:Message):
     if message.reply_markup:

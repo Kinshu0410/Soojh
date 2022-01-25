@@ -274,9 +274,11 @@ async def start_command1(client:Client,message:Message):
 @app.on_message(filters.regex("\d{1}:\d{1,2}:\d{1,2}") & filters.outgoing)
 async def timer(client:Client,message:Message):
 	timer=str(message.text)
-	
+	print("start schedule")
 	scheduler.add_job(job(timer,client,message), "interval", seconds=10)
+	print("job add")
 	scheduler.start()
+	print("start schedule")
 
 async def job(timer,client:Client,message:Message):
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])

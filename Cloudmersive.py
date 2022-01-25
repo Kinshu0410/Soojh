@@ -39,6 +39,7 @@ async def schedule_job(client:Client,message:Message):
 	for x in name:
 		scheduler.add_job(job1, "cron", hour='7-23' ,args=(x,client,message,) ,id=str(x))
 		scheduler.start()
+
 async def job1(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]
 	myquery1 = {"Nu":{"$type":"array"}}
@@ -55,10 +56,8 @@ async def job1(x,client:Client,message:Message):
 		Nu=[0]
 	try:
 		mass=await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]])
-		
-		
-	except:
-		pass
+	except Exception as e:
+		print("def job1 in vloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("Add_ .*?") )#& filters.incoming)
 async def add(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]

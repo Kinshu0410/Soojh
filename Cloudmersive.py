@@ -31,8 +31,8 @@ async def cid(client:Client,message:Message):
 async def schedule_job(client:Client,message:Message):
 	name= clientmongo["group_schedule"].list_collection_names()
 	for x in name:
-		scheduler.add_job(job1, "interval", minutes=1 ,args=(x,client,message,) ,id=str(x))
-		scheduler.start()
+		print(scheduler.add_job(job1, "interval", minutes=1 ,args=(x,client,message,) ,id=str(x)))
+	scheduler.start()
 
 async def job1(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]

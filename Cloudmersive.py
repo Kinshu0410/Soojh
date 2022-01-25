@@ -5,6 +5,7 @@ from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters
 from pyrogram.types import Message, ReplyKeyboardRemove, Poll
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 import  json
 import time
 import re as reaaa
@@ -839,7 +840,7 @@ def main():
     #dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
-    scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
+    
     app.run()
     updater.idle()
     

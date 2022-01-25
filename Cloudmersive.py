@@ -836,7 +836,7 @@ def main():
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
     app.run()
-    updater.idle()
+    updater.idle()#
     
 if __name__ == '__main__':
     main()

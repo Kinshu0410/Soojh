@@ -37,11 +37,7 @@ async def cid(client:Client,message:Message):
 async def schedule_job(client:Client,message:Message):
 	name= clientmongo["group_schedule"].list_collection_names()
 	for x in name:
-		if in_between(datetime.now().time(), time(4), time(23)):
-			scheduler.add_job(job1, "interval", minutes=60 ,args=(x,client,message,) ,id=str(x))
-		else:
-			"good night"
-		
+		scheduler.add_job(job1, "cron", hour='7-23' ,args=(x,client,message,) ,id=str(x))
 		scheduler.start()
 async def job1(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]

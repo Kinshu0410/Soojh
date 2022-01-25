@@ -27,28 +27,47 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
-
-@app.on_message(filters.regex("add_ .*?") )#& filters.incoming)
+@app.on_message(filters.regex("schedule_start") )#& filters.incoming)
+async def schedule_job(client:Client,message:Message):
+	name= clientmongo["group_schedule"].list_collection_names()
+	for x in name:
+		scheduler.add_job(job1, "interval", seconds=10 ,args=(x,client,message,) ,id=str(x))
+async def job1(x,client:Client,message:Message):
+	col=clientmongo["group_schedule"][str(x)]
+	myquery1 = {"Nu":{"$type":"array"}}
+	if col.find_one(myquery1):
+		Nu=col.find_one(myquery1)["Nu"]
+		if len(col.find_one({"data":{"$type":"array"}})["data"])==int(Nu):
+			Nu=[0]
+		else :
+			Nu=[int(Nu[0])+1]
+		newvalues1 = { "$set": { "data":data} }
+		col.update_one(myquery1,newvalues1)
+	else:
+		col.insert_one({"Nu":[0]})
+		Nu=[0]
+	await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"])[Nu[0]]
+@app.on_message(filters.regex("Add_ .*?") )#& filters.incoming)
 async def add(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]
 	myquery1 = {"data":{"$type":"array"}}
 	
 	if col.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]
-		data.append(re.sub("add_ ","",message.text))
+		data.append(re.sub("Add_ ","",message.text))
 		newvalues1 = { "$set": { "data":data} }
 		col.update_one(myquery1,newvalues1)
 	else:
 		col.insert_one({"data":[re.sub("add_ ","",message.text)]})
 	await app.send_message(message.chat.id, "Quiz added") 
 
-@app.on_message(filters.regex("del_ .*?") )#& filters.incoming)
+@app.on_message(filters.regex("Del_ .*?") )#& filters.incoming)
 async def dell(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]
 	myquery1 = {"data":{"$type":"array"}}
 	if col.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]
-		data.remove(re.sub("del_ ","",message.text))
+		data.remove(re.sub("Del_ ","",message.text))
 		newvalues1 = { "$set": { "data":data} }
 		col.update_one(myquery1,newvalues1)
 		await app.send_message(message.chat.id, "Quiz Delete to schedule is successful.") 

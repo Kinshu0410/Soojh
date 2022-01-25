@@ -840,7 +840,6 @@ def main():
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
     scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
-    
     app.run()
     updater.idle()
     

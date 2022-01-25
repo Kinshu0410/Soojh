@@ -13,7 +13,7 @@ app = Client("my_account",
 #bot_token=ClientText["bot_token"],
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
-scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
+
 @app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
 async def forword(client:Client,message:Message):
     if message.reply_markup:
@@ -836,6 +836,8 @@ def main():
     #dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
+    scheduler = AsyncIOScheduler(timezone="Asia/kolkata"
+    
     app.run()
     updater.idle()
     

@@ -26,9 +26,11 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 @app.on_message(filters.regex("cid") )#& filters.incoming)
 async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
+
+
 @app.on_message(filters.regex("add_ .*?") )#& filters.incoming)
 async def add(client:Client,message:Message):
-	col=client["group_schedule"][message.chat.id]
+	col=client["group_schedule"][str(message.chat.id)]
 	myquery1 = {"data":{"$type":"array"}}
 	
 	if coll.find_one(myquery1):
@@ -42,7 +44,7 @@ async def add(client:Client,message:Message):
 
 @app.on_message(filters.regex("del_ .*?") )#& filters.incoming)
 async def dell(client:Client,message:Message):
-	col=client["group_schedule"][message.chat.id]
+	col=client["group_schedule"][str(message.chat.id)]
 	myquery1 = {"data":{"$type":"array"}}
 	if coll.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]

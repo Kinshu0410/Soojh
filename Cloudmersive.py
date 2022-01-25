@@ -54,7 +54,9 @@ async def job1(x,client:Client,message:Message):
 		col.insert_one({"Nu":[0]})
 		Nu=[0]
 	try:
-		await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]])
+		mass=await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]])
+		
+		
 	except:
 		pass
 @app.on_message(filters.regex("Add_ .*?") )#& filters.incoming)
@@ -68,7 +70,7 @@ async def add(client:Client,message:Message):
 		newvalues1 = { "$set": { "data":data} }
 		col.update_one(myquery1,newvalues1)
 	else:
-		col.insert_one({"data":[re.sub("add_ ","",message.text)]})
+		col.insert_one({"data":[re.sub("Add_ ","",message.text)]})
 	await app.send_message(message.chat.id, "Quiz added") 
 
 @app.on_message(filters.regex("Del_ .*?") )#& filters.incoming)
@@ -83,6 +85,9 @@ async def dell(client:Client,message:Message):
 		await app.send_message(message.chat.id, "Quiz Delete to schedule is successful.") 
 	else:
 		await app.send_message(message.chat.id, "Did not find quiz") 
+	if len(col.find_one(myquery1)["data"])==0:
+		print("drop Quiz "+str(message.chat.id)+".      "+str(len(col.find_one(myquery1)["data"])))
+		col.drop()
 	
 @app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
 async def forword(client:Client,message:Message):

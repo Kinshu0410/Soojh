@@ -32,6 +32,7 @@ async def schedule_job(client:Client,message:Message):
 	name= clientmongo["group_schedule"].list_collection_names()
 	for x in name:
 		scheduler.add_job(job1, "interval", seconds=10 ,args=(x,client,message,) ,id=str(x))
+		#scheduler.start()
 async def job1(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]
 	myquery1 = {"Nu":{"$type":"array"}}
@@ -41,7 +42,7 @@ async def job1(x,client:Client,message:Message):
 			Nu=[0]
 		else :
 			Nu=[int(Nu[0])+1]
-		newvalues1 = { "$set": { "data":data} }
+		newvalues1 = { "$set": { "Nu":Nu} }
 		col.update_one(myquery1,newvalues1)
 	else:
 		col.insert_one({"Nu":[0]})

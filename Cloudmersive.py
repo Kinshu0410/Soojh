@@ -33,7 +33,7 @@ async def add(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]
 	myquery1 = {"data":{"$type":"array"}}
 	
-	if coll.find_one(myquery1):
+	if col.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]
 		data.append(re.sub("add_ ","",message.text))
 		newvalues1 = { "$set": { "data":data} }
@@ -46,7 +46,7 @@ async def add(client:Client,message:Message):
 async def dell(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]
 	myquery1 = {"data":{"$type":"array"}}
-	if coll.find_one(myquery1):
+	if col.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]
 		data.remove(re.sub("del_ ","",message.text))
 		newvalues1 = { "$set": { "data":data} }

@@ -7,7 +7,7 @@ import dns
 dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
 dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public dns server,  use whatever dns server you like here
 # as a test, dns.resolver.query('www.google.com') should return an answer, not an exception'''
-client=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
+clientmongo=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
 
 from pyrogram import Client
 from pyrogram.handlers import MessageHandler, PollHandler
@@ -30,7 +30,7 @@ async def cid(client:Client,message:Message):
 
 @app.on_message(filters.regex("add_ .*?") )#& filters.incoming)
 async def add(client:Client,message:Message):
-	col=client["group_schedule"][str(message.chat.id)]
+	col=clientmongo["group_schedule"][str(message.chat.id)]
 	myquery1 = {"data":{"$type":"array"}}
 	
 	if coll.find_one(myquery1):
@@ -44,7 +44,7 @@ async def add(client:Client,message:Message):
 
 @app.on_message(filters.regex("del_ .*?") )#& filters.incoming)
 async def dell(client:Client,message:Message):
-	col=client["group_schedule"][str(message.chat.id)]
+	col=clientmongo["group_schedule"][str(message.chat.id)]
 	myquery1 = {"data":{"$type":"array"}}
 	if coll.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]

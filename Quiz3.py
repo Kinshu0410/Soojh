@@ -1241,7 +1241,7 @@ def alarm(context: CallbackContext):
 def poll(update, context):
     """Sends a predefined poll"""
     if update.message.reply_markup:
-	    
+	    print(update.message.reply_markup.inline_keyboard[0][0].url)
 	    if reaaa.match("^https://t\.me/QuizBot\?startgroup\=JJGoHW80", update.message.reply_markup.inline_keyboard[0][0].url):
 		    print("huaa")
 		    y=context.bot.get_chat_administrators(chat_id=update.message.chat.id)

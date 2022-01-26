@@ -94,9 +94,9 @@ def restricted(func):
     @wraps(func)
     def wrapped(update, context, *args, **kwargs):
         
-        userName = str(update.message.chat.id)
+        #userName = str(update.message.chat.id)
         userName1=str(update.message.from_user.id)
-        if userName and userName1 not in LIST_OF_ADMINS:
+        if userName1 not in LIST_OF_ADMINS:
             #update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)
@@ -1240,28 +1240,27 @@ def alarm(context: CallbackContext):
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if update.message.chat.id==-1001412214082:
-	    print(update.message.reply_markup)
-    if reaaa.match("^https://t\.me/QuizBot\?start\=JJGoHW80", update.message.reply_markup.inline_keyboard[0][0].url):
-	    y=context.bot.get_chat_administrators(chat_id=update.message.chat.id)
-	    xid=[]
-	    for x in y:
-	    	xid.append(x['user']['id'])
-	    if update.message.from_user.id in xid:
-	    	qname=update.message.reply_markup.inline_keyboard[0][0].url[31:]
-	    	qdata=update.message.text
-	    	col=client["group_schedule"][str(message.chat.id)]
-	    	myquery1 = {"data":{"$type":"array"}}
-	    	
-	    	if col.find_one(myquery1):
-	    		data=col.find_one(myquery1)["data"]
-	    		data.append({qname:qdata})
-	    		newvalues1 = { "$set": { "data":data} }
-	    		col.update_one(myquery1,newvalues1)
-	    	else:
-	    		col.insert_one({"data":[{qname:qdata}]})
-	    		col.insert_one({"Nu":[0]})
-	    	context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added") 
+    if update.message.reply_markup:
+	    if reaaa.match("^https://t\.me/QuizBot\?startgroup\=JJGoHW80", update.message.reply_markup.inline_keyboard[0][0].url):
+		    y=context.bot.get_chat_administrators(chat_id=update.message.chat.id)
+		    xid=[]
+		    for x in y:
+		    	xid.append(x['user']['id'])
+		    if update.message.from_user.id in xid:
+		    	qname=update.message.reply_markup.inline_keyboard[0][0].url[36:]
+		    	qdata=update.message.text
+		    	col=client["group_schedule"][str(message.chat.id)]
+		    	myquery1 = {"data":{"$type":"array"}}
+		    	
+		    	if col.find_one(myquery1):
+		    		data=col.find_one(myquery1)["data"]
+		    		data.append({qname:qdata})
+		    		newvalues1 = { "$set": { "data":data} }
+		    		col.update_one(myquery1,newvalues1)
+		    	else:
+		    		col.insert_one({"data":[{qname:qdata}]})
+		    		col.insert_one({"Nu":[0]})
+		    	context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added") 
     elif str(update.message.from_user.id) in LIST_OF_ADMINS:
 	    quest=(update.message.text)
 	    print("test")

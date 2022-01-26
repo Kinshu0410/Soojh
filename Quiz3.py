@@ -1249,7 +1249,7 @@ def poll(update, context):
 		    for x in y:
 		    	xid.append(x['user']['id'])
 		    if update.message.from_user.id in xid:
-		    	qname=update.message.reply_markup.inline_keyboard[0][0].url[31:]
+		    	qname=update.message.reply_markup.inline_keyboard[0][0].url[27:]
 		    	qdata=update.message.text
 		    	col=client["group_schedule"][str(update.message.chat.id)]
 		    	myquery1 = {"data":{"$type":"array"}}

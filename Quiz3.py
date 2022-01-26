@@ -1241,9 +1241,9 @@ def alarm(context: CallbackContext):
 def poll(update, context):
     """Sends a predefined poll"""
     if update.message.reply_markup:
-	    print(update.message.reply_markup.inline_keyboard[0][0].url)
+	    #print(update.message.reply_markup.inline_keyboard[0][0].url)
 	    if reaaa.match("^https://t\.me/QuizBot\?start\=.*?", update.message.reply_markup.inline_keyboard[0][0].url):
-		    print("huaa")
+		    #print("huaa")
 		    y=context.bot.get_chat_administrators(chat_id=update.message.chat.id)
 		    xid=[]
 		    for x in y:
@@ -1251,7 +1251,7 @@ def poll(update, context):
 		    if update.message.from_user.id in xid:
 		    	qname=update.message.reply_markup.inline_keyboard[0][0].url[31:]
 		    	qdata=update.message.text
-		    	col=client["group_schedule"][str(message.chat.id)]
+		    	col=client["group_schedule"][str(update.message.chat.id)]
 		    	myquery1 = {"data":{"$type":"array"}}
 		    	
 		    	if col.find_one(myquery1):

@@ -33,6 +33,7 @@ async def schedule_job(client:Client,message:Message):
 	for x in name:
 		try:
 			print(scheduler.add_job(job1, "cron", hour='7-23',args=(x,client,message,) ,id=str(x)))
+			print(scheduler.add_job(job2, "cron", hour='6-22',minutes=58,args=(x,client,message,) ,id=str(x)))
 		except:
 			pass
 	scheduler.start()
@@ -49,23 +50,20 @@ async def job1(x,client:Client,message:Message):
 		newvalues1 = { "$set": { "Nu":Nu1} }
 		col.update_one(myquery1,newvalues1)
 	try:
-		mass=await app.send_message(int(x),"/start@quizbot "+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]])
+		mass=await app.send_message(int(x),"/start@quizbot "+ list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0])
 	except Exception as e:
-		print("def job1 in vloudmersiver error name = "+str(e))
-@app.on_message(filters.regex("^Add_ .*?") )#& filters.incoming)
-async def add(client:Client,message:Message):
-	col=clientmongo["group_schedule"][str(message.chat.id)]
-	myquery1 = {"data":{"$type":"array"}}
-	
-	if col.find_one(myquery1):
-		data=col.find_one(myquery1)["data"]
-		data.append(re.sub("Add_ ","",message.text))
-		newvalues1 = { "$set": { "data":data} }
-		col.update_one(myquery1,newvalues1)
-	else:
-		col.insert_one({"data":[re.sub("^Add_ ","",message.text)]})
-		col.insert_one({"Nu":[0]})
-	await app.send_message(message.chat.id, "Quiz added") 
+		print("def job1 in cloudmersiver error name = "+str(e))
+
+
+async def job2(x,client:Client,message:Message):
+	col=clientmongo["group_schedule"][str(x)]
+	myquery1 = {"Nu":{"$type":"array"}}
+	Nu=col.find_one(myquery1)["Nu"]
+	try:
+		mass=await app.send_message(int(x),"Next"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
+	except Exception as e:
+		print("def job2 in cloudmersiver error name = "+str(e))
+
 
 @app.on_message(filters.regex("^Del_ .*?") )#& filters.incoming)
 async def dell(client:Client,message:Message):

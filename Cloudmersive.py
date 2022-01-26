@@ -59,8 +59,13 @@ async def job2(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]
 	myquery1 = {"Nu":{"$type":"array"}}
 	Nu=col.find_one(myquery1)["Nu"]
+	now=""
 	try:
-		mass=await app.send_message(int(x),"Next"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
+		if int(time.ctime(time.time() +19800)[11:13])+1=>12:
+			now=str(int(time.ctime(time.time() +19800)[11:13])+1-12)+" PM"
+		else:
+			now=str(int(time.ctime(time.time() +19800)[11:13])+1)+" AM"
+		mass=await app.send_message(int(x)," NEXT QUIZ at "+now+"\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 

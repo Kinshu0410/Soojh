@@ -61,7 +61,7 @@ async def job2(x,client:Client,message:Message):
 	Nu=col.find_one(myquery1)["Nu"]
 	now=""
 	try:
-		if int(time.ctime(time.time() +19800)[11:13])+1=>12:
+		if int(time.ctime(time.time() +19800)[11:13])+1>=12:
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1-12)+" PM"
 		else:
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1)+" AM"

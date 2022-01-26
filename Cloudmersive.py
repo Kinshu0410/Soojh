@@ -32,8 +32,8 @@ async def schedule_job(client:Client,message:Message):
 	name= clientmongo["group_schedule"].list_collection_names()
 	for x in name:
 		try:
+			print(scheduler.add_job(job2, "cron", hour='6-22',minute=58,args=(x,client,message,) ,id=str(x)))
 			print(scheduler.add_job(job1, "cron", hour='7-23',args=(x,client,message,) ,id=str(x)))
-			print(scheduler.add_job(job2, "cron", hour='6-22',minutes=58,args=(x,client,message,) ,id=str(x)))
 		except:
 			pass
 	scheduler.start()
@@ -72,7 +72,7 @@ async def dell(client:Client,message:Message):
 	if col.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]
 		data.remove(re.sub("^Del_ ","",message.text))
-		newvalues1 = { "$set": { "data":data} }
+		newvalues1 = { "$set": { "data":{data:{"$type":"string"}}} }
 		col.update_one(myquery1,newvalues1)
 		await app.send_message(message.chat.id, "Quiz Delete to schedule is successful.") 
 	else:

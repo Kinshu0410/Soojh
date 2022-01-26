@@ -23,7 +23,7 @@ app = Client("my_account",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
-@app.on_message(filters.regex("cid") )#& filters.incoming)
+@app.on_message(filters.regex("^Cid") )#& filters.incoming)
 async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 

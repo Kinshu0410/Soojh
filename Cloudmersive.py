@@ -71,10 +71,11 @@ async def setting_time(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]
 	myquery1 = {"Time":{"$type":"string"}}
 	if col.find_one(myquery1):
-		newvalues1={"Time":re.sub("^Set time","",message.text)}
+		newvalues1= { "$set": {"Time":re.sub("^Set time","",message.text)}}
 		col.update_one(myquery1,newvalues1)
 	else:
 		col.insert_one({"Time":re.sub("^Set time","",message.text)})
+	
 	await app.send_message(int(message.chat.id),"Schedule Reset")
 
 async def job1(x,client:Client,message:Message):

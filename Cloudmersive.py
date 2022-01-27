@@ -75,6 +75,7 @@ async def setting_time(client:Client,message:Message):
 		col.update_one(myquery1,newvalues1)
 	else:
 		col.insert_one({"Time":re.sub("^Set time","",message.text)})
+	await app.send_message(int(message.chat.id),"Schedule Reset")
 
 async def job1(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]

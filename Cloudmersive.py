@@ -27,13 +27,40 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
+
+@app.on_message(filters.regex("^ The quiz '.*?"))#& filters.incoming)
+async def job2_ke_liye(client:Client,message:Message):
+	name= clientmongo["group_schedule"].list_collection_names()
+	if str(message.chat.id) in name:
+	    print(message)
+	    col=clientmongo["group_schedule"][str(message.chat.id)]
+	    Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
+	    hour1=col.find_one({"Time":{"$type":"string"}})["Time"]
+	    hour=re.split(",",re.sub(" ","",hour1))
+	    current_time=int(time.ctime(time.time() +19800)[11:13])
+	    for x in hour:
+	        if current_time<int(x):
+	            now=str(x)
+	            break
+	    if now:
+	        now=now
+	    else:
+	        now=str(hour[0])
+	    if int(now)>=12:
+	        now=str(int(now)-12)+" PM"
+	    else:
+	        now=now+" AM"
+	    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now+"\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
+	        
 @app.on_message(filters.regex("schedule_start") )#& filters.incoming)
 async def schedule_job(client:Client,message:Message):
 	name= clientmongo["group_schedule"].list_collection_names()
 	for x in name:
 		try:
-			print(scheduler.add_job(job2, "cron",hour='9-23', minute='58',args=(x,client,message,) ,id="job2"+str(x)))
-			print(scheduler.add_job(job1, "cron", hour='10-23',args=(x,client,message,) ,id="job1"+str(x)))
+			hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
+			print(str(x)+"=====Time====="+hour1)
+			#print(scheduler.add_job(job2, "cron",hour='9-23', minute='58',args=(x,client,message,) ,id="job2"+str(x)))
+			print(scheduler.add_job(job1, "cron", hour=hour1,args=(x,client,message,) ,id="job1"+str(x)))
 			await app.send_message(int(message.chat.id),"Schedule start for your quiz and other also")
 		except:
 			await app.send_message(int(message.chat.id),"Schedule Alreddy set...")
@@ -45,7 +72,7 @@ async def setting_time(client:Client,message:Message):
 	myquery1 = {"Time":{"$type":"string"}}
 	if col.find_one(myquery1):
 		newvalues1={"Time":re.sub("^Set time","",message.text)}
-		col.update_one(myquery1,newvalues1)({"Time":"10,12,17-22"})
+		col.update_one(myquery1,newvalues1)
 	else:
 		col.insert_one({"Time":re.sub("^Set time","",message.text)})
 

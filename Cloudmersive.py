@@ -62,7 +62,11 @@ async def schedule_job(client:Client,message:Message):
 		try:
 			hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
 			print(str(x)+"=====Time====="+hour1)
-			#print(scheduler.add_job(job2, "cron",hour='9-23', minute='58',args=(x,client,message,) ,id="job2"+str(x)))
+			hour=re.split(",",hour1)
+			zz=""
+			for x in range(len(hour)):
+			    zz=zz+str(int(hour[x])-1)+","
+			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',args=(x,client,message,) ,id="job2"+str(x)))
 			print(scheduler.add_job(job1, "cron", hour=hour1,args=(x,client,message,) ,id="job1"+str(x)))
 			await app.send_message(int(message.chat.id),"Schedule start for your quiz and other also")
 		except:

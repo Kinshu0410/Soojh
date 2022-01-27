@@ -28,7 +28,7 @@ async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
 
-@app.on_message(filters.regex("^ The quiz") )#& filters.incoming)
+@app.on_message(filters.regex("The quiz") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):
 	print(message)
 	name= clientmongo["group_schedule"].list_collection_names()

@@ -76,8 +76,10 @@ async def dell(client:Client,message:Message):
 	myquery1 = {"data":{"$type":"array"}}
 	if col.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]
-		data.remove(re.sub("^Del_ ","",message.text))
-		newvalues1 = { "$set": { "data":{data:{"$type":"string"}}} }
+		data=re.sub('{.'+re.sub("^Del_ ","",message.text)+'.*?}(, |)','',str(x))
+		data=re.sub('\'','\"',str(data))
+		data=json.loads(str(data))
+		newvalues1 = { "$set": { "data":data}} }
 		col.update_one(myquery1,newvalues1)
 		await app.send_message(message.chat.id, "Quiz Delete to schedule is successful.") 
 	else:

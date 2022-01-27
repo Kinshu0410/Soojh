@@ -33,7 +33,7 @@ async def schedule_job(client:Client,message:Message):
 	for x in name:
 		try:
 			print(scheduler.add_job(job2, "cron",hour='7-12', minute='1-59',args=(x,client,message,) ,id="job2"+str(x)))
-			print(scheduler.add_job(job1, "cron", hour='7-23',minute=1,args=(x,client,message,) ,id=="job1"+str(x)))
+			print(scheduler.add_job(job1, "cron", hour='7-23',minute=5,args=(x,client,message,) ,id="job1"+str(x)))
 		except:
 			pass
 	scheduler.start()

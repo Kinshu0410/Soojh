@@ -28,8 +28,8 @@ async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
 
-@app.on_message(filters.regex("The quiz") )#& filters.incoming)
-async def job2_ke_liye(client:Client,message:Message):
+@app.on_message(filters.regex("^The quiz") )#& filters.incoming)
+async def dell(client:Client,message:Message):
 	print("starttt")
 	name= clientmongo["group_schedule"].list_collection_names()
 	if str(message.chat.id) in name:

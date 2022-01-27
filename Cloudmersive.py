@@ -28,8 +28,9 @@ async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
 
-@app.on_message(filters.regex("^ The quiz '.*?"))#& filters.incoming)
+@app.on_message(filters.regex("^ The quiz .*?"))#& filters.incoming)
 async def job2_ke_liye(client:Client,message:Message):
+	print("starttt")
 	name= clientmongo["group_schedule"].list_collection_names()
 	if str(message.chat.id) in name:
 	    print(message)
@@ -74,7 +75,7 @@ async def setting_time(client:Client,message:Message):
 	
 	for member in members:
 		cid.append(member.user.id)
-	print(str(cid))
+	#print(str(cid))
 	if message.from_user.id in cid:
 		myquery1 = {"Time":{"$type":"string"}}
 		if col.find_one(myquery1):

@@ -34,9 +34,20 @@ async def schedule_job(client:Client,message:Message):
 		try:
 			print(scheduler.add_job(job2, "cron",hour='9-23', minute='58',args=(x,client,message,) ,id="job2"+str(x)))
 			print(scheduler.add_job(job1, "cron", hour='10-23',args=(x,client,message,) ,id="job1"+str(x)))
+			await app.send_message(int(message.chat.id),"Schedule start for your quiz and other also")
 		except:
-			pass
+			await app.send_message(int(message.chat.id),"Schedule Alreddy set...")
 	scheduler.start()
+
+@app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)
+async def setting_time(client:Client,message:Message):
+	col=clientmongo["group_schedule"][str(message.chat.id)]
+	myquery1 = {"Time":{"$type":"string"}}
+	if col.find_one(myquery1):
+		newvalues1={"Time":re.sub("^Set time","",message.text)}
+		col.update_one(myquery1,newvalues1)({"Time":"10,12,17-22"})
+	else:
+		col.insert_one({"Time":re.sub("^Set time","",message.text)})
 
 async def job1(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]

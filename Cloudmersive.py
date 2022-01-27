@@ -32,7 +32,7 @@ async def schedule_job(client:Client,message:Message):
 	name= clientmongo["group_schedule"].list_collection_names()
 	for x in name:
 		try:
-			print(scheduler.add_job(job2, "cron", hour='6-22',minute=35,args=(x,client,message,) ,id=str(x)))
+			print(scheduler.add_job(job2, "cron",hour='7-12', minute='1-59',args=(x,client,message,) ,id=str(x)))
 			print(scheduler.add_job(job1, "cron", hour='7-23',minute=37,args=(x,client,message,) ,id=str(x)))
 		except:
 			pass

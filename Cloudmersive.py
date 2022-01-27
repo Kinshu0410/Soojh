@@ -66,11 +66,12 @@ async def schedule_job(client:Client,message:Message):
 			zz=""
 			for x in range(len(hour)):
 			    zz=zz+str(int(hour[x])-1)+","
-			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',args=(x,client,message,) ,id="job2"+str(x)))
-			print(scheduler.add_job(job1, "cron", hour=hour1,args=(x,client,message,) ,id="job1"+str(x)))
-			await app.send_message(int(message.chat.id),"Schedule start for your quiz and other also")
+			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+			print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
+			
 		except:
 			pass#await app.send_message(int(message.chat.id),"Schedule Alreddy set...")
+	await app.send_message(int(message.chat.id),"Schedule update")
 	scheduler.start()
 
 @app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)

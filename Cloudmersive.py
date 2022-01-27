@@ -30,29 +30,30 @@ async def cid(client:Client,message:Message):
 
 @app.on_message(filters.regex("The quiz") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):
-	print(message)
-	name= clientmongo["group_schedule"].list_collection_names()
-	now=""
-	if str(message.chat.id) in name:
-	    #print(message)
-	    col=clientmongo["group_schedule"][str(message.chat.id)]
-	    Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
-	    hour1=col.find_one({"Time":{"$type":"string"}})["Time"]
-	    hour=re.split(",",re.sub(" ","",hour1))
-	    current_time=int(time.ctime(time.time() +19800)[11:13])
-	    for x in hour:
-	        if current_time<int(x):
-	            now=str(x)
-	            break
-	    if now:
-	        now=now
-	    else:
-	        now=str(hour[0])
-	    if int(now)>=12:
-	        now=str(int(now)-12)+" PM"
-	    else:
-	        now=now+" AM"
-	    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now+"\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
+	if message.reply_markup:
+		if message.reply_markup["inline_keyboard"][0][0].text=="Share quiz":
+			name= clientmongo["group_schedule"].list_collection_names()
+			now=""
+			if str(message.chat.id) in name:
+			    #print(message)
+			    col=clientmongo["group_schedule"][str(message.chat.id)]
+			    Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
+			    hour1=col.find_one({"Time":{"$type":"string"}})["Time"]
+			    hour=re.split(",",re.sub(" ","",hour1))
+			    current_time=int(time.ctime(time.time() +19800)[11:13])
+			    for x in hour:
+			        if current_time<int(x):
+			            now=str(x)
+			            break
+			    if now:
+			        now=now
+			    else:
+			        now=str(hour[0])
+			    if int(now)>=12:
+			        now=str(int(now)-12)+" PM"
+			    else:
+			        now=now+" AM"
+			    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now+"\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
 	        
 @app.on_message(filters.regex("schedule_start") )#& filters.incoming)
 async def schedule_job(client:Client,message:Message):

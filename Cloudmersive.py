@@ -69,6 +69,10 @@ async def schedule_job(client:Client,message:Message):
 @app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)
 async def setting_time(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]
+	cid=[]
+	for member in app.iter_chat_members(message.chat.id, filter="administrators"):
+		cid.append(member.user.first_name)
+	print(message)
 	myquery1 = {"Time":{"$type":"string"}}
 	if col.find_one(myquery1):
 		newvalues1= { "$set": {"Time":re.sub("^Set time","",message.text)}}

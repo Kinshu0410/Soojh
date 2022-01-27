@@ -70,7 +70,7 @@ async def schedule_job(client:Client,message:Message):
 async def setting_time(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]
 	cid=[]
-	for member in app.iter_chat_members(message.chat.id, filter="administrators"):
+	for member in await app.iter_chat_members(message.chat.id, filter="administrators"):
 		cid.append(member.user.first_name)
 	print(message)
 	myquery1 = {"Time":{"$type":"string"}}

@@ -30,7 +30,7 @@ async def cid(client:Client,message:Message):
 
 @app.on_message(filters.regex("^ The quiz .*? Congratulations to the winners!") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):
-	print("starttt")
+	print(message)
 	name= clientmongo["group_schedule"].list_collection_names()
 	now=""
 	if str(message.chat.id) in name:

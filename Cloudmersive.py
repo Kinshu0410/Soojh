@@ -29,9 +29,10 @@ async def cid(client:Client,message:Message):
 
 
 @app.on_message(filters.regex("^The quiz") )#& filters.incoming)
-async def dell(client:Client,message:Message):
+async def job2_partener(client:Client,message:Message):
 	print("starttt")
 	name= clientmongo["group_schedule"].list_collection_names()
+	now=""
 	if str(message.chat.id) in name:
 	    #print(message)
 	    col=clientmongo["group_schedule"][str(message.chat.id)]

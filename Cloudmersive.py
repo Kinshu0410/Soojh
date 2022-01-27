@@ -28,7 +28,7 @@ async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
 
-@app.on_message(filters.regex(" The quiz .*?") )#& filters.incoming)
+@app.on_message(filters.regex(".*?The quiz .*? Congratulations to the winners!") )#& filters.incoming)
 async def job2_ke_liye(client:Client,message:Message):
 	print("starttt")
 	name= clientmongo["group_schedule"].list_collection_names()
@@ -64,7 +64,7 @@ async def schedule_job(client:Client,message:Message):
 			print(scheduler.add_job(job1, "cron", hour=hour1,args=(x,client,message,) ,id="job1"+str(x)))
 			await app.send_message(int(message.chat.id),"Schedule start for your quiz and other also")
 		except:
-			await app.send_message(int(message.chat.id),"Schedule Alreddy set...")
+			pass#await app.send_message(int(message.chat.id),"Schedule Alreddy set...")
 	scheduler.start()
 
 @app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)

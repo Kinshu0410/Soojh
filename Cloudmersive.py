@@ -33,7 +33,7 @@ async def dell(client:Client,message:Message):
 	print("starttt")
 	name= clientmongo["group_schedule"].list_collection_names()
 	if str(message.chat.id) in name:
-	    print(message)
+	    #print(message)
 	    col=clientmongo["group_schedule"][str(message.chat.id)]
 	    Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
 	    hour1=col.find_one({"Time":{"$type":"string"}})["Time"]

@@ -39,8 +39,9 @@ for x in name111:
 			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
 			print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
 			
-		except:
-			pass
+		except Exception as e:
+			print("Error"+str(e))
+scheduler.start()
 @app.on_message(filters.regex("The quiz") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):
 	if message.reply_markup:

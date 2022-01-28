@@ -80,7 +80,7 @@ async def schedule_job(client:Client,message:Message):
 			zz=""
 			for x in range(len(hour)):
 			    zz=zz+str(int(hour[x])-1)+","
-			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='49',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
 			print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
 			print("गूढ़ schedule done")
 		except Exception as e:

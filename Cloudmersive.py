@@ -169,7 +169,6 @@ async def forworhd(client:Client,message:Message):
 	if reply_markup in message:
 		if from_user in message:
 			if str(message.from_user.id)=='983000232':
-	
 	    print(message)
 	    if message.reply_markup["inline_keyboard"][0][0].callback_data=='{"a":"user_ready"}':
 	        cid= clientmongo["group_schedule"].list_collection_names()

@@ -165,7 +165,7 @@ async def forword(client:Client,message:Message):
 @app.on_message(filters.all & ~ filters.poll)#& filters.incoming)
 async def forworhd(client:Client,message:Message):
 	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))
-	if message.from_user.chat.id==-983000232 and message.reply_markup:
+	if message.from_user.id==-983000232 and message.reply_markup:
 	    print(message)
 	    if message.reply_markup["inline_keyboard"][0][0].callback_data=='{"a":"user_ready"}':
 	        cid= clientmongo["group_schedule"].list_collection_names()

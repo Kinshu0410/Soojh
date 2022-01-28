@@ -54,6 +54,20 @@ async def job2_partener(client:Client,message:Message):
 			    else:
 			        now=now+" AM"
 			    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now+"\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
+			name= clientmongo["group_schedule"].list_collection_names()
+			for x in name:
+				try:
+					hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
+					#print(str(x)+"=====Time====="+hour1)
+					hour=re.split(",",hour1)
+					zz=""
+					for x in range(len(hour)):
+					    zz=zz+str(int(hour[x])-1)+","
+					print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+					print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
+					
+				except:
+					pass
 	        
 @app.on_message(filters.regex("schedule_start") )#& filters.incoming)
 async def schedule_job(client:Client,message:Message):

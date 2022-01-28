@@ -80,7 +80,7 @@ async def schedule_job(client:Client,message:Message):
 			zz=""
 			for y in range(len(hour)):
 			    zz=zz+str(int(hour[y])-1)+","
-			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='19',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
 			print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
 			print("गूढ़ schedule done")
 		except Exception as e:
@@ -126,7 +126,7 @@ async def job1(x,client:Client,message:Message):
 
 
 async def job2(x,client:Client,message:Message):
-	print(str(x))
+	#print(str(x))
 	col=clientmongo["group_schedule"][str(x)]
 	myquery1 = {"Nu":{"$type":"array"}}
 	Nu=col.find_one(myquery1)["Nu"]

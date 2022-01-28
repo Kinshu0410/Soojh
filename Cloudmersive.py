@@ -53,12 +53,12 @@ async def job2_partener(client:Client,message:Message):
 			        now=str(int(now)-12)+" PM"
 			    else:
 			        now=now+" AM"
-			    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now+"\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
+			    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now+"\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
 			name= clientmongo["group_schedule"].list_collection_names()
 			for x in name:
 				try:
 					hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
-					#print(str(x)+"=====Time====="+hour1)
+					print(str(x)+"=====Time====="+hour1)
 					hour=re.split(",",hour1)
 					zz=""
 					for x in range(len(hour)):
@@ -134,7 +134,7 @@ async def job2(x,client:Client,message:Message):
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1-12)+" PM"
 		else:
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1)+" AM"
-		mass=await app.send_message(int(x)," NEXT QUIZ play in 2 Minutes\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]])
+		mass=await app.send_message(int(x)," NEXT QUIZ play in 2 Minutes\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 

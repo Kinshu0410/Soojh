@@ -32,7 +32,7 @@ for x in name111:
 		try:
 			hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
 			print(str(x)+"=====Time====="+hour1)
-			hour=re.split(",",hour1)
+			hour=reaaa.split(",",hour1)
 			zz=""
 			for x in range(len(hour)):
 			    zz=zz+str(int(hour[x])-1)+","
@@ -53,7 +53,7 @@ async def job2_partener(client:Client,message:Message):
 			    col=clientmongo["group_schedule"][str(message.chat.id)]
 			    Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
 			    hour1=col.find_one({"Time":{"$type":"string"}})["Time"]
-			    hour=re.split(",",re.sub(" ","",hour1))
+			    hour=reaaa.split(",",reaaa.sub(" ","",hour1))
 			    current_time=int(time.ctime(time.time() +19800)[11:13])
 			    for x in hour:
 			        if current_time<int(x):
@@ -73,7 +73,7 @@ async def job2_partener(client:Client,message:Message):
 				try:
 					hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
 					print(str(x)+"=====Time====="+hour1)
-					hour=re.split(",",hour1)
+					hour=reaaa.split(",",hour1)
 					zz=""
 					for x in range(len(hour)):
 					    zz=zz+str(int(hour[x])-1)+","
@@ -90,7 +90,7 @@ async def schedule_job(client:Client,message:Message):
 		try:
 			hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
 			print(str(x)+"=====Time====="+hour1)
-			hour=re.split(",",hour1)
+			hour=reaaa.split(",",hour1)
 			zz=""
 			for x in range(len(hour)):
 			    zz=zz+str(int(hour[x])-1)+","
@@ -114,10 +114,10 @@ async def setting_time(client:Client,message:Message):
 	if message.from_user.id in cid:
 		myquery1 = {"Time":{"$type":"string"}}
 		if col.find_one(myquery1):
-			newvalues1= { "$set": {"Time":re.sub("^Set time","",message.text)}}
+			newvalues1= { "$set": {"Time":reaaa.sub("^Set time","",message.text)}}
 			col.update_one(myquery1,newvalues1)
 		else:
-			col.insert_one({"Time":re.sub("^Set time","",message.text)})
+			col.insert_one({"Time":reaaa.sub("^Set time","",message.text)})
 		
 		await app.send_message(int(message.chat.id),"Schedule Reset")
 	
@@ -159,8 +159,8 @@ async def dell(client:Client,message:Message):
 	myquery1 = {"data":{"$type":"array"}}
 	if col.find_one(myquery1):
 		data=col.find_one(myquery1)["data"]
-		data=re.sub('{.'+re.sub("^Del_ ","",message.text)+'.*?}(, |)','',str(x))
-		data=re.sub('\'','\"',str(data))
+		data=reaaa.sub('{.'+reaaa.sub("^Del_ ","",message.text)+'.*?}(, |)','',str(x))
+		data=reaaa.sub('\'','\"',str(data))
 		data=json.loads(str(data))
 		newvalues1 = { "$set": { "data":data}} 
 		col.update_one(myquery1,newvalues1)
@@ -439,7 +439,7 @@ async def timer(client:Client,message:Message):
 async def job(client:Client,message:Message):
 		mess1=await app.get_messages(message.chat.id, message.message_id)
 		#print(mess1)
-		timer=re.split(":",mess1.text)
+		timer=reaaa.split(":",mess1.text)
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
 		
 		if total//10>=1:
@@ -518,7 +518,7 @@ from telegram.ext import (
 )
 
 #1
-import re
+
 
 
 from telegram.ext.dispatcher import run_async

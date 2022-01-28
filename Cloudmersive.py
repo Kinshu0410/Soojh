@@ -63,11 +63,11 @@ async def job2_partener(client:Client,message:Message):
 					zz=""
 					for x in range(len(hour)):
 					    zz=zz+str(int(hour[x])-1)+","
-					print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='42',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+					print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='44',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
 					print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
 					print("गूढ़")
-				except:
-					pass
+				except Exception as e:
+					print("गूढ़"+str(e))
 	        
 @app.on_message(filters.regex("schedule_start") )#& filters.incoming)
 async def schedule_job(client:Client,message:Message):

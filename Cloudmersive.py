@@ -61,8 +61,8 @@ async def job2_partener(client:Client,message:Message):
 					print(str(x)+"=====Time====="+hour1)
 					hour=reaaa.split(",",hour1)
 					zz=""
-					for x in range(len(hour)):
-					    zz=zz+str(int(hour[x])-1)+","
+					for y in range(len(hour)):
+					    zz=zz+str(int(hour[y])-1)+","
 					print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
 					print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
 					print("गूढ़")
@@ -78,9 +78,9 @@ async def schedule_job(client:Client,message:Message):
 			print(str(x)+"=====Time====="+hour1)
 			hour=reaaa.split(",",hour1)
 			zz=""
-			for x in range(len(hour)):
-			    zz=zz+str(int(hour[x])-1)+","
-			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='14',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+			for y in range(len(hour)):
+			    zz=zz+str(int(hour[y])-1)+","
+			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='19',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
 			print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
 			print("गूढ़ schedule done")
 		except Exception as e:

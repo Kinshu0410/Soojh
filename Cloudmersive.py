@@ -27,20 +27,6 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 async def cid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
-name111= clientmongo["group_schedule"].list_collection_names()
-for x in name111:
-		try:
-			hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
-			print(str(x)+"=====Time====="+hour1)
-			hour=reaaa.split(",",hour1)
-			zz=""
-			for x in range(len(hour)):
-			    zz=zz+str(int(hour[x])-1)+","
-			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
-			print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
-			
-		except Exception as e:
-			print("Error"+str(e))
 scheduler.start()
 @app.on_message(filters.regex("The quiz") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):

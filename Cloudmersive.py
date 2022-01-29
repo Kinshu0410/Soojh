@@ -196,10 +196,10 @@ async def forworhd(client:Client,message:Message):
 	
 	
 	if hasattr(message, 'reply_markup'):
-		#if hasattr(message, 'from_user'):
+		print(message.reply_markup)#if hasattr(message, 'from_user'):
 			#if hasattr(message.from_user, 'id'):
 				#if str(message.from_user.id)=='983000232':
-					print(message.reply_markup)
+					
 		#if message.reply_markup["inline_keyboard"][0][0].callback_data=='{"a":"user_ready"}':
 		    #cid= clientmongo["group_schedule"].list_collection_names()
 		    #cid.append('983000232')

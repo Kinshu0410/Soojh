@@ -169,7 +169,7 @@ async def stop_quiz(client:Client,message:Message):
 	cid=[]
 	for member in await app.get_chat_members(message.chat.id, filter="administrators"):
 		cid.append(member.user.id)
-	if str(message.chat.id)  in  cid and str(message.chat.id)  in clientmongo["group_schedule"].list_collection_names() :
+	if str(message.chat.id)  in  cid:
 		print("स्टॉप")
 		await app.send_message(message.chat.id, '/stop@QuizBot')
 @app.on_message(filters.all & ~ filters.poll)#& filters.incoming)

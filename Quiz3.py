@@ -1262,7 +1262,10 @@ def poll(update, context):
 		    	else:
 		    		col.insert_one({"data":[{qname:qdata}]})
 		    		col.insert_one({"Nu":[0]})
-		    		col.insert_one({"Time":"10,12,19,20,21,22"})
+		    		if col.find_one({"Time":{"$type":"string"}}):
+			    		pass
+		    		else:
+			    		col.insert_one({"Time":"10,12,19,20,21,22"})
 		    	context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added") 
     elif str(update.message.from_user.id) in LIST_OF_ADMINS:
 	    quest=(update.message.text)

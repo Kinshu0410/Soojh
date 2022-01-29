@@ -49,7 +49,7 @@ async def job2_partener(client:Client,message:Message):
 			        now=now
 			    else:
 			        now=str(hour[0])
-			    if int(now)>=12:
+			    if int(now)>=13:
 			        now=str(int(now)-12)+" PM"
 			    else:
 			        now=now+" AM"
@@ -130,7 +130,7 @@ async def job2(x,client:Client,message:Message):
 	Nu=col.find_one(myquery1)["Nu"]
 	now=""
 	try:
-		if int(time.ctime(time.time() +19800)[11:13])+1>=12:
+		if int(time.ctime(time.time() +19800)[11:13])+1>=13:
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1-12)+" PM"
 		else:
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1)+" AM"

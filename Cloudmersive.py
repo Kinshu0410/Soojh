@@ -176,12 +176,7 @@ async def forworhd(client:Client,message:Message):
 		if hasattr(message, 'from_user'):
 			if str(message.from_user.id)=='983000232':
 			  print(message)
-		if message.reply_markup["inline_keyboard"][0][0].callback_data=='{"a":"user_ready"}':
-		    cid= clientmongo["group_schedule"].list_collection_names()
-		    cid.append('983000232')
-	        
-		    if str(message.chat.id) in cid:
-		        await client.request_callback_answer(chat_id=message.chat.id,message_id=message.message_id,callback_data=message.reply_markup["inline_keyboard"][0][0].callback_data)
+		
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") )#& filters.incoming)
 async def forwortd(client:Client,message:Message):

@@ -172,9 +172,10 @@ async def stop_quiz(client:Client,message:Message):
 		if int(message.from_user.id)  in  cid and str(message.chat.id) in clientmongo["group_schedule"].list_collection_names():
 			print("स्टॉप")
 			await app.send_message(message.chat.id, '/stop@QuizBot')
-@app.on_message(filters.all & ~ filters.poll)#& filters.incoming)
 	except:
 		pass
+
+@app.on_message(filters.all & ~ filters.poll)#& filters.incoming)
 async def forworhd(client:Client,message:Message):
 	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))
 	

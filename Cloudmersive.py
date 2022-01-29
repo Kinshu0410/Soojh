@@ -161,7 +161,11 @@ async def dell(client:Client,message:Message):
 async def forword(client:Client,message:Message):
     if message.reply_markup:
         await app.send_message("quizbot", message.reply_markup["inline_keyboard"][0][0].url)
-    
+
+@app.on_message(filters.regex("^Stop$") & ~ filters.poll)#& filters.incoming)
+async def forworhd(client:Client,message:Message):
+	if message.chat.id  in await app.get_chat_members(message.chat.id, filter="administrators"):
+		await app.send_message(message.chat.id, '/stop@QuizBot')
 @app.on_message(filters.all & ~ filters.poll)#& filters.incoming)
 async def forworhd(client:Client,message:Message):
 	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))

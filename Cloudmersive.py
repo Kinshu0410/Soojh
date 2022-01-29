@@ -162,7 +162,7 @@ async def forword(client:Client,message:Message):
     if message.reply_markup:
         await app.send_message("quizbot", message.reply_markup["inline_keyboard"][0][0].url)
 
-@app.on_message(filters.regex("^Stop$") & ~ filters.poll)#& filters.incoming)
+@app.on_message(filters.regex("^stop") & ~ filters.poll)#& filters.incoming)
 async def stop_quiz(client:Client,message:Message):
 	if message.chat.id  in await app.get_chat_members(message.chat.id, filter="administrators"):
 		print("स्टॉप")

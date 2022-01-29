@@ -170,6 +170,7 @@ async def delete_all_quiz(client:Client,message:Message):
 	try:
 		if int(message.from_user.id)  in  cid and str(message.chat.id) in clientmongo["group_schedule"].list_collection_names():
 			col=clientmongo["group_schedule"][str(message.chat.id)].find_one_and_delete({"data":{"$type":"array"}})
+			print("डिलीटेड")
 			col=clientmongo["group_schedule"][str(message.chat.id)].find_one_and_delete({"Nu":{"$type":"array"}})
 			print("डिलीटेड")
 			

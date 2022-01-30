@@ -119,8 +119,8 @@ async def job1(x,client:Client,message:Message):
 		col.update_one(myquery1,newvalues1)
 		try:
 			mass_id=await app.send_message(int(x),"/start@quizbot "+ list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0])
-			time.sleep(5)
-			await client.request_callback_answer(chat_id=message.chat.id,message_id=mass_id.message_id+1,callback_data='{"a":"user_ready"}')
+			time.sleep(2)
+			await client.request_callback_answer(message.chat.id,mass_id.message_id+1,callback_data='{"a":"user_ready"}')
 		except Exception as e:
 			print("def job1 in cloudmersiver error name = "+str(e))
 
@@ -214,28 +214,28 @@ async def stop_quiz(client:Client,message:Message):
 	except:
 		pass
 
-@app.on_message(filters.regex("yooo") & ~ filters.poll)#& filters.incoming)
+@app.on_message(filters.text & filters.chat("quizbot") )#& filters.incoming)
 async def forworhd(client:Client,message:Message):
 	
-	masss=(await app.get_messages(-1001495791558, 11061))
-	print(masss)
-	print(masss.reply_markup["inline_keyboard"][0][0].callback_data)
-	await client.request_callback_answer(-1001495791558,11061,callback_data='{"a":"user_ready"}')
+	#masss=(await app.get_messages(-1001495791558, 11061))
+	#print(masss)
+	#print(masss.reply_markup["inline_keyboard"][0][0].callback_data)
+	#await client.request_callback_answer(-1001495791558,11061,callback_data='{"a":"user_ready"}')
 	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))
 	
 	
-	#if hasattr(message, 'reply_markup'):
+	if hasattr(message, 'reply_markup'):
 		#if message.chat.id==-1001495791558:
 			#print(message)#if hasattr(message, 'from_user'):
 			#if hasattr(message.from_user, 'id'):
 				#if str(message.from_user.id)=='983000232':
 					
-		#if message.reply_markup["inline_keyboard"][0][0].callback_data=='{"a":"user_ready"}':
-		    #cid= clientmongo["group_schedule"].list_collection_names()
-		    #cid.append('983000232')
+		if message.reply_markup["inline_keyboard"][0][0].callback_data=='{"a":"user_ready"}':
+		    cid= clientmongo["group_schedule"].list_collection_names()
+		    cid.append('983000232')
 	        
-		    #if str(message.chat.id) in cid:
-		        #await client.request_callback_answer(chat_id=message.chat.id,message_id=message.message_id,callback_data=message.reply_markup["inline_keyboard"][0][0].callback_data)
+		    if str(message.chat.id) in cid:
+		        await client.request_callback_answer(chat_id=message.chat.id,message_id=message.message_id,callback_data=message.reply_markup["inline_keyboard"][0][0].callback_data)
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") )#& filters.incoming)
 async def forwortd(client:Client,message:Message):

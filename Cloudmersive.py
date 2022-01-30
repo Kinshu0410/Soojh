@@ -139,14 +139,16 @@ async def job2(x,client:Client,message:Message):
 		await app.send_message(int(x)," NEXT QUIZ play in 2 Minutes\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
 		time.sleep(5)
 		mass=await app.send_message(message.chat.id, "0:1:50")
-		print(scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(x,mass,client,message,) ,id="job3"+str(x)))
+		scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(mass,client,message,) ,id="job3"+str(x))
+		print("job3 added for = "+str(message.first_name))
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("^yooo$") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):
 		mass=await app.send_message(message.chat.id, "0:1:50")
 		x=message.chat.id
-		print(scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(x,mass,client,message,) ,id="job3"+str(x)))
+		scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(x,mass,client,message,) ,id="job3"+str(x))
+		print("job3 added for = "+str(message.first_name))
 async def job3(x,mass,client:Client,message:Message):
 		
 		mess1=await app.get_messages(x, mass.message_id)

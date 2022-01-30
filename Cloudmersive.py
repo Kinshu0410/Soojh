@@ -217,7 +217,7 @@ async def stop_quiz(client:Client,message:Message):
 @app.on_message(filters.regex("yooo") & ~ filters.poll)#& filters.incoming)
 async def forworhd(client:Client,message:Message):
 	
-	masss=(await app.get_messages(-1001495791558, 11048))
+	masss=(await app.get_messages(-1001495791558, 11061))
 	print(masss)
 	print(masss.reply_markup["inline_keyboard"][0][0].callback_data)
 	await client.request_callback_answer(-1001495791558,11061,callback_data='{"a":"user_ready"}')

@@ -120,7 +120,7 @@ async def job1(x,client:Client,message:Message):
 		try:
 			mass_id=await app.send_message(int(x),"/start@quizbot "+ list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0])
 			time.sleep(2)
-			await client.request_callback_answer(message.chat.id,mass_id.message_id+1,callback_data='{"a":"user_ready"}')
+			await client.request_callback_answer(int(x),int(mass_id.message_id)+1,callback_data='{"a":"user_ready"}')
 		except Exception as e:
 			print("def job1 in cloudmersiver error name = "+str(e))
 
@@ -137,6 +137,7 @@ async def job2(x,client:Client,message:Message):
 		else:
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1)+" AM"
 		await app.send_message(int(x)," NEXT QUIZ play in 2 Minutes\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
+		time.sleep(5)
 		mass=await app.send_message(message.chat.id, "0:1:50")
 		print(scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(x,mass,client,message,) ,id="job3"+str(x)))
 	except Exception as e:
@@ -145,21 +146,22 @@ async def job2(x,client:Client,message:Message):
 async def job3(x,mass,client:Client,message:Message):
 		
 		mess1=await app.get_messages(x, mass.message_id)
-		
-		timer=reaaa.split(":",mess1.text)
+		print(str(mess1.text))
+		print(str(mess1.message_id))
+		timer=reaaa.split(":",str(mess1.text))
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
 		try:
 			if total//10>=1:
-				text=str((total-10)//3600)+":"+str((total-10)//60-((total-10)//3600)*60)+":"+str((total-10)-((total-10)//60-((total-10)//3600)*60)*60-((total-10)//3600)*3600)
+				text1=str((total-10)//3600)+":"+str((total-10)//60-((total-10)//3600)*60)+":"+str((total-10)-((total-10)//60-((total-10)//3600)*60)*60-((total-10)//3600)*3600)
 				#mass=str((total-1-x*5)//3600)+":"+str((total-1-x*5)//60-((total-1-x*5)//3600)*60)+":"+str((total-1-x*5)-((total-1-x*5)//60-((total-1-x*5)//3600)*60)*60-((total-1-x*5)//3600)*3600)
-				await app.edit_message_text(message.chat.id, mess1.message_id,text)
+				await app.edit_message_text(int(x), int(mess1.message_id),text1)
 				
 			else:
-				await app.edit_message_text(message.chat.id, message.message_id,"Quiz is about to Play")
+				await app.edit_message_text(int(x), mess1.message_id,"Quiz is about to Play")
 				scheduler.shutdown(id="job3"+str(x))  
 				
 		except:
-			await app.edit_message_text(message.chat.id, message.message_id,"Some error comes...")
+			await app.edit_message_text(int(x), mess1.message_id,"Some error comes...")
 			scheduler.shutdown(id="job3"+str(x)) 
 			
 			

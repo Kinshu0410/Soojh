@@ -484,10 +484,10 @@ async def start_command1(client:Client,message:Message):
 	    #print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message(filters.regex("\d{1,2}:\d{1,2}:\d{1,2}") & filters.outgoing)
+@app.on_message(filters.regex("\d{1,2}:\d{1,2}:\d{1,2}") )#& filters.outgoing)
 async def timer(client:Client,message:Message):
-	print("start")
-	scheduler.add_job(job, "interval", seconds=10 ,args=(client,message,))
+	chatid=str(message.chat.id)
+	scheduler.add_job(job, "interval", seconds=10,id="simple timer"+str(message.chat.id) ,replace_existing=True,args=(client,message,))
 	print("add job")
 	scheduler.start()
 	print("schedule")
@@ -505,9 +505,11 @@ async def job(client:Client,message:Message):
 				
 			else:
 				await app.edit_message_text(message.chat.id, message.message_id,"Times Up!!!")
+				scheduler.shutdown(id="simple timer"+str(message.chat.id)) 
 				
 		except:
 			await app.edit_message_text(message.chat.id, message.message_id,"Some error comes...")
+			scheduler.shutdown(id="simple timer"+str(message.chat.id)) 
 			
 			
 

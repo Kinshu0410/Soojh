@@ -219,6 +219,7 @@ async def forworhd(client:Client,message:Message):
 	
 	masss=(await app.get_messages(-1001495791558, 11048))
 	print(masss)
+	print(masss.reply_markup["inline_keyboard"][0][0].callback_data)
 	await client.request_callback_answer(-1001495791558,11048,callback_data=masss.reply_markup["inline_keyboard"][0][0].callback_data)
 	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))
 	

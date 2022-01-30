@@ -190,14 +190,16 @@ async def stop_quiz(client:Client,message:Message):
 	except:
 		pass
 
-@app.on_message(filters.all & ~ filters.poll)#& filters.incoming)
+@app.on_message(filters.regex("yooo") & ~ filters.poll)#& filters.incoming)
 async def forworhd(client:Client,message:Message):
+	
+	print(await app.get_messages(-1001495791558, 11048))
 	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))
 	
 	
 	#if hasattr(message, 'reply_markup'):
-		if message.chat.id==-1001495791558:
-			print(message)#if hasattr(message, 'from_user'):
+		#if message.chat.id==-1001495791558:
+			#print(message)#if hasattr(message, 'from_user'):
 			#if hasattr(message.from_user, 'id'):
 				#if str(message.from_user.id)=='983000232':
 					

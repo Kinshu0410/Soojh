@@ -119,6 +119,8 @@ async def job1(x,client:Client,message:Message):
 		col.update_one(myquery1,newvalues1)
 		try:
 			await app.send_message(int(x),"/start@quizbot "+ list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0])
+			time.sleep(1)
+			await client.request_callback_answer(chat_id=message.chat.id,message_id=message.message_id+1,callback_data='{"a":"user_ready"}')
 		except Exception as e:
 			print("def job1 in cloudmersiver error name = "+str(e))
 

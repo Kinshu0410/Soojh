@@ -50,10 +50,14 @@ async def job2_partener(client:Client,message:Message):
 			    else:
 			        now=str(hour[0])
 			    if int(now)>=13:
-			        now=str(int(now)-12)+" PM"
+			        now=str(int(now)-12)+":00 PM"
 			    else:
-			        now=now+" AM"
-			    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now+"\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
+			        now=now+":00 AM"
+			    if len(now)==7:
+			        now="0"+now
+			    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now)
+			time.sleep(5)
+			await app.send_message(int(message.chat.id),col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
 			name= clientmongo["group_schedule"].list_collection_names()
 			for x in name:
 				try:
@@ -136,11 +140,13 @@ async def job2(x,client:Client,message:Message):
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1-12)+" PM"
 		else:
 			now=str(int(time.ctime(time.time() +19800)[11:13])+1)+" AM"
-		await app.send_message(int(x)," NEXT QUIZ play in 2 Minutes\n\n"+ col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
+		await app.send_message(int(x)," NEXT QUIZ play in 2 Minutes👇")
 		time.sleep(5)
-		mass=await app.send_message(message.chat.id, "0:1:50")
-		scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(mass,client,message,) ,id="job3"+str(x))
-		print("job3 added for = "+str(message.first_name))
+		await app.send_message(int(x),col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
+		time.sleep(5)
+		mass=await app.send_message(int(x), "0:1:50")
+		#scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(mass,client,message,) ,id="job3"+str(x))
+		#print("job3 added for = "+str(message.first_name))
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("^yooo$") )#& filters.incoming)

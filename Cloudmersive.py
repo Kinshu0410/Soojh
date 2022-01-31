@@ -55,7 +55,7 @@ async def job2_partener(client:Client,message:Message):
 			        now=now+":00 AM"
 			    if len(now)==7:
 			        now="0"+now
-			    await app.send_message(int(message.chat.id)," NEXT QUIZ at "+now)
+			    await app.send_message(int(message.chat.id)," NEXT QUIZ By Me at "+now)
 			time.sleep(5)
 			await app.send_message(int(message.chat.id),col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]],disable_web_page_preview=True)
 			name= clientmongo["group_schedule"].list_collection_names()

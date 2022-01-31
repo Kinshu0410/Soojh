@@ -1950,7 +1950,7 @@ def current(update,context):
     x=([[InlineKeyboardButton(i+j*7+1, url=URL[i+j*7]) for i in range(7)] for j in range(len(URL)//7)])
     x.append([InlineKeyboardButton(y+1, url=URL[y]) for y in range(len(URL)-len(URL)%7 ,len(URL))])
     reply_markup = InlineKeyboardMarkup(x)
-    if str(update.message.chat.id)=="711296045":
+    if str(update.message.chat.id)=="786181993":
     	x.append([InlineKeyboardButton("Maths Quiz", url="https://t.me/Maths_Quiz_Notes")])
     	x.append([InlineKeyboardButton("Study GK Quiz", url="https://t.me/Study_Quiz_India")])
     	x.append([InlineKeyboardButton("Current IQ Quiz", url="https://t.me/Current_Affairs_Quiz_Notes")])

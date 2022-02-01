@@ -149,9 +149,9 @@ async def job2_partener(client:Client,message:Message):
 		x=message.chat.id
 		scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(x,mass,client,message,) ,id="job3"+str(x))
 		print("job3 added for = "+str(message.first_name))
-async def job3(x,mass,client:Client,message:Message):
+async def job3(mass,client:Client,message:Message):
 		
-		mess1=await app.get_messages(x,mass.message_id)
+		mess1=await app.get_messages(mass.chat.id,mass.message_id)
 		print(str(mess1.text))
 		print(str(mess1.message_id))
 		timer=reaaa.split(":",str(mess1.text))
@@ -160,14 +160,14 @@ async def job3(x,mass,client:Client,message:Message):
 			if total//10>=1:
 				text1=str((total-10)//3600)+":"+str((total-10)//60-((total-10)//3600)*60)+":"+str((total-10)-((total-10)//60-((total-10)//3600)*60)*60-((total-10)//3600)*3600)
 				#mass=str((total-1-x*5)//3600)+":"+str((total-1-x*5)//60-((total-1-x*5)//3600)*60)+":"+str((total-1-x*5)-((total-1-x*5)//60-((total-1-x*5)//3600)*60)*60-((total-1-x*5)//3600)*3600)
-				await app.edit_message_text(int(x), int(mess1.message_id),text1)
+				await app.edit_message_text(int(mess1.chat.id), int(mess1.message_id),text1)
 				
 			else:
-				await app.delete_messages(int(x), mess1.message_id)
-				scheduler.shutdown(id="job3"+str(x))  
+				await app.delete_messages(int(mess1.chat.id), mess1.message_id)
+				scheduler.shutdown(id="job3"+str(mess1.chat.id))  
 				
 		except:
-			await app.edit_message_text(int(x), mess1.message_id,"Some error comes...")
+			await app.edit_message_text(int(mess1.chat.id), mess1.message_id,"Some error comes...")
 			scheduler.shutdown(id="job3"+str(x)) 
 			
 			

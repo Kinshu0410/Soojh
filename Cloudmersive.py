@@ -163,7 +163,8 @@ async def job3(x,mass,client:Client,message:Message):
 				await app.edit_message_text(int(x), int(mess1.message_id),text1)
 				
 			else:
-				await app.edit_message_text(int(x), mess1.message_id,"Quiz is about to Play")
+				await message
+app.delete_messages(int(x), mess1.message_id)
 				scheduler.shutdown(id="job3"+str(x))  
 				
 		except:

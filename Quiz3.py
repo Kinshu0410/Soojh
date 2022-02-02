@@ -1625,7 +1625,7 @@ def pdfc(update,context):
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     if bool(reaaa.match("^My_quiz\d{1,}$",query.data)):
-	       col=client["group_schedule"][str(update.message.chat.id)]
+	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quiz","",query.data))]
 	       data=col.find_one({"data":{"$type":"array"}})["data"]
 	       current_quiz=col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]]

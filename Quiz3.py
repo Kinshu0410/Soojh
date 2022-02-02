@@ -1245,7 +1245,15 @@ def poll(update, context):
         Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
         data=col.find_one({"data":{"$type":"array"}})["data"]
         current_quiz=col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]]
-        context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu)+"/"+str(len(data))+"\n\n"+str(Nu)+". Title:- "+current_quiz) 
+        keyboard=False
+        if Nu[0]==0:
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"0"), InlineKeyboardButton("After Next",callback_data="My_quiz"+"1")]]
+        elif Nu[0]+1==len(data):
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0])),InlineKeyboardButton("After Next",callback_data="My_quiz"+"0")]]
+        else:
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0])),InlineKeyboardButton("After Next",callback_data="My_quiz"+str(Nu[0]+1))]]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu[0])+" / "+str(len(data))+"\n\n"+str(Nu[0])+". Title👇👇👇\n"+current_quiz,reply_markup=reply_markup)
     elif update.message.reply_markup:
 	    #print(update.message.reply_markup.inline_keyboard[0][0].url)
 	    if reaaa.match("^https://t\.me/QuizBot\?start\=.*?", update.message.reply_markup.inline_keyboard[0][0].url):

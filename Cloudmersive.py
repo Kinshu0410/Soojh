@@ -426,7 +426,7 @@ async def Current_iq(client:Client,message:Message):
 	    #print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message(filters.poll & filters.chat("Science_iq_bot") )#& filters.incoming)
+@app.on_message(filters.poll & filters.chat(["Science_iq_bot","Scienceinhindincert"]) )#& filters.incoming)
 async def Science_iq_bot(client:Client,message:Message):
 	chatid=["ScienceInHindiNcert"]
 	

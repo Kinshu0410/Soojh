@@ -1253,7 +1253,7 @@ def poll(update, context):
         else:
             keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0])),InlineKeyboardButton("After Next",callback_data="My_quiz"+str(Nu[0]+1))]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu[0])+" / "+str(len(data))+"\n\n"+str(Nu[0])+". Title👇👇👇\n"+current_quiz,reply_markup=reply_markup)
+        context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu[0])+"/"+str(len(data))+"\n\n"+str(Nu[0])+". Title👇👇👇\n"+current_quiz,reply_markup=reply_markup)
     elif update.message.reply_markup:
 	    #print(update.message.reply_markup.inline_keyboard[0][0].url)
 	    if reaaa.match("^https://t\.me/QuizBot\?start\=.*?", update.message.reply_markup.inline_keyboard[0][0].url):
@@ -1624,11 +1624,12 @@ def pdfc(update,context):
 
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
-    if bool(reaaa.match("^My_quiz\d{1,}$",query.data)):
+    if bool(reaaa.match("^My_quiz\d{1,}$",query)):
 	       col=client["group_schedule"][str(update.message.chat.id)]
-	       Nu=[int(reaaa.sub("My_quiz","",query.data))]
+	       Nu=[int(reaaa.sub("My_quiz","",query))]
 	       data=col.find_one({"data":{"$type":"array"}})["data"]
 	       current_quiz=col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]]
+	       query.answer()
 	       keyboard=False
 	       if Nu[0]==0:
 	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"0"), InlineKeyboardButton("After Next",callback_data="My_quiz"+"1")]]
@@ -1637,7 +1638,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       else:
 	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0])),InlineKeyboardButton("After Next",callback_data="My_quiz"+str(Nu[0]+1))]]
 	       reply_markup = InlineKeyboardMarkup(keyboard)
-	       context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu[0])+" / "+str(len(data))+"\n\n"+str(Nu[0])+". Title👇👇👇\n"+current_quiz,reply_markup=reply_markup)
+	       query.edit_message_text(text="Quiz Number = "+str(Nu[0])+"/"+str(len(data))+" DATA\n\n"+str(Nu[0])+". Title👇👇👇\n"+current_quiz,reply_markup=reply_markup)
     else:
     	ddd=reaaa.split("_",query.data)
     	qN=ddd[0]

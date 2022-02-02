@@ -1240,7 +1240,13 @@ def alarm(context: CallbackContext):
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if update.message.reply_markup:
+    if update.message.text=="My_quiz":
+        col=client["group_schedule"][str(update.message.chat.id)]
+        Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
+        data=col.find_one({"data":{"$type":"array"}})["data"]
+        current_quiz=col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]]
+        context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu)+"/"+str(len(data))+"\n\n"+str(Nu)+". Title:- "+current_quiz) 
+    elif update.message.reply_markup:
 	    #print(update.message.reply_markup.inline_keyboard[0][0].url)
 	    if reaaa.match("^https://t\.me/QuizBot\?start\=.*?", update.message.reply_markup.inline_keyboard[0][0].url):
 		    #print("huaa")
@@ -1267,6 +1273,7 @@ def poll(update, context):
 		    		else:
 			    		col.insert_one({"Time":"10,12,19,20,21,22"})
 		    	context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added") 
+		    	time.sleep(5)
     elif str(update.message.from_user.id) in LIST_OF_ADMINS:
 	    quest=(update.message.text)
 	    print("test")

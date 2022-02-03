@@ -1244,6 +1244,7 @@ def poll(update, context):
         col=client["group_schedule"][str(update.message.chat.id)]
         Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
         data=col.find_one({"data":{"$type":"array"}})["data"]
+        Time=col.find_one({"Time":{"$type":"string"}})["Time"]
         current_quiz=col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]]
         keyboard=False
         if Nu[0]==0:
@@ -1253,7 +1254,7 @@ def poll(update, context):
         else:
             keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+"\n\n"+current_quiz,reply_markup=reply_markup)
+        context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+"\n\nSchedule Daily Time : - "+Time+"\n\n"+current_quiz,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     elif update.message.reply_markup:
 	    #print(update.message.reply_markup.inline_keyboard[0][0].url)
 	    if reaaa.match("^https://t\.me/QuizBot\?start\=.*?", update.message.reply_markup.inline_keyboard[0][0].url):
@@ -1627,6 +1628,7 @@ def button(update: Update, context: CallbackContext) -> None:
     if bool(reaaa.match("^My_quiz\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quiz","",query.data))]
+	       Time=col.find_one({"Time":{"$type":"string"}})["Time"]
 	       data=col.find_one({"data":{"$type":"array"}})["data"]
 	       current_quiz=col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]]
 	       query.answer()
@@ -1638,7 +1640,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       else:
 	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
 	       reply_markup = InlineKeyboardMarkup(keyboard)
-	       query.edit_message_text(text="Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+" DATA\n\n"+current_quiz,reply_markup=reply_markup)
+	       query.edit_message_text(text="Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+" DATA\n\nSchedule Daily Time : - "+Time+"\n\n"+current_quiz,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     else:
     	ddd=reaaa.split("_",query.data)
     	qN=ddd[0]

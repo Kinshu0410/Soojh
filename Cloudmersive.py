@@ -35,7 +35,10 @@ async def job2_partener(client:Client,message:Message):
 			name= clientmongo["group_schedule"].list_collection_names()
 			now=""
 			if str(message.chat.id) in name:
-			    ##print(message)
+			    name= clientmongo["channal_schedule"].list_collection_names()
+			    for x in name:
+			        scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
+			        scheduler.start()
 			    col=clientmongo["group_schedule"][str(message.chat.id)]
 			    Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
 			    hour1=col.find_one({"Time":{"$type":"string"}})["Time"]
@@ -68,9 +71,7 @@ async def job2_partener(client:Client,message:Message):
 					print("")
 				except Exception as e:
 					print(""+str(e))
-	name= clientmongo["channal_schedule"].list_collection_names()
-	for x in name:
-	    scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
+	
 			    
 	        
 @app.on_message(filters.regex("schedule_start") )#& filters.incoming)
@@ -91,6 +92,8 @@ async def schedule_job(client:Client,message:Message):
 			print(" schedule"+str(e))
 					
 	await app.send_message(int(message.chat.id),"Schedule update")
+	name= clientmongo["group_schedule"].list_collection_names()
+	
 	name= clientmongo["channal_schedule"].list_collection_names()
 	for x in name:
 	    scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))

@@ -35,7 +35,7 @@ async def job2_partener(client:Client,message:Message):
 			name= clientmongo["group_schedule"].list_collection_names()
 			now=""
 			if str(message.chat.id) in name:
-			    #print(message)
+			    ##print(message)
 			    col=clientmongo["group_schedule"][str(message.chat.id)]
 			    Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
 			    hour1=col.find_one({"Time":{"$type":"string"}})["Time"]
@@ -213,7 +213,7 @@ async def delete_all_quiz(client:Client,message:Message):
 			col=clientmongo["group_schedule"][str(message.chat.id)].find_one_and_delete({"Nu":{"$type":"array"}})
 			print("")
 			
-			await app.send_message(message.chat.id, 'Delete All sucessful \n   quiz add ')
+			await app.send_message(message.chat.id, 'Delete All Quiz sucessful \n अब ओर quiz add कीजिये')
 	except:
 		await app.send_message(message.chat.id, '       delete  ')
 @app.on_message(filters.regex("^Stop$") & ~ filters.poll)#& filters.incoming)

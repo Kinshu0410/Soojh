@@ -428,7 +428,7 @@ async def Current_iq(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.chat(["Science_iq_bot","rk_prajapati_11"]) )#& filters.incoming)
 def Science_iq_bot(client:Client,message:Message):
-	chatid=["ScienceInHindiNcert"]
+	chatid=["Polls_Quiz"]
 	
 	#print(message.message_id)
 	try:
@@ -470,7 +470,7 @@ def Science_iq_bot(client:Client,message:Message):
 	    #mess=(app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
 	    col=clientmongo["channal_schedule"][str(x)]
 	    col.insert_one({'que':question,'op':options,'cor':correct_option_id})
-	    scheduler.add_job(job4, "cron", hour="12",minutes="1-8",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
+	    scheduler.add_job(job4, "cron", hour="12",minutes="41-48",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
 
 async def job4(x,client:Client,message:Message):
     col=clientmongo["channal_schedule"][str(x)]

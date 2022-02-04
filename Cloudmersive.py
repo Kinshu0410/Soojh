@@ -1166,7 +1166,7 @@ def main():
     updater.start_polling()
     
     app.run()
-    app.send_message('me', 'schedule_start')
+    
     updater.idle()#
     
 if __name__ == '__main__':

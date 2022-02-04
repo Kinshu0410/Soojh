@@ -68,6 +68,10 @@ async def job2_partener(client:Client,message:Message):
 					print("")
 				except Exception as e:
 					print(""+str(e))
+	name= clientmongo["channal_schedule"].list_collection_names()
+	for x in name:
+	    scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
+			    
 	        
 @app.on_message(filters.regex("schedule_start") )#& filters.incoming)
 async def schedule_job(client:Client,message:Message):
@@ -87,6 +91,9 @@ async def schedule_job(client:Client,message:Message):
 			print(" schedule"+str(e))
 					
 	await app.send_message(int(message.chat.id),"Schedule update")
+	name= clientmongo["channal_schedule"].list_collection_names()
+	for x in name:
+	    scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
 	scheduler.start()
 
 @app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)
@@ -470,7 +477,7 @@ def Science_iq_bot(client:Client,message:Message):
 	    #mess=(app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
 	    col=clientmongo["channal_schedule"][str(x)]
 	    col.insert_one({'que':question,'op':options,'cor':correct_option_id})
-	    scheduler.add_job(job4, "cron", hour="10",minute="3-10",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
+	    scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
 	    #scheduler.start()
 async def job4(x,client:Client,message:Message):
     col=clientmongo["channal_schedule"][str(x)]

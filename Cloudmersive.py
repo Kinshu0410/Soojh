@@ -435,7 +435,7 @@ async def Current_iq(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.chat(["Science_iq_bot","rk_prajapati_11"]) )#& filters.incoming)
 def Science_iq_bot(client:Client,message:Message):
-	chatid=["Polls_Quiz"]
+	chatid=["Scienceinhindincert"]
 	
 	#print(message.message_id)
 	try:

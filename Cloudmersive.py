@@ -297,7 +297,7 @@ async def forwortd(client:Client,message:Message):
 	    #print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-app.send_message('me', 'schedule_start')
+
 	
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
@@ -1164,6 +1164,7 @@ def main():
     #dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
+    app.send_message('me', 'schedule_start')
     app.run()
     updater.idle()#
     

@@ -297,7 +297,7 @@ async def forwortd(client:Client,message:Message):
 	    #print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-
+app.send_message('me', 'schedule_start')
 	
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):
@@ -418,7 +418,6 @@ async def Current_iq(client:Client,message:Message):
 	question=reaaa.sub(r"", "", question)
 	
 	options=[o.text for o in mess.options]
-	
 	
 	correct_option_id = 0
 	for i in range(len(mess.options)):

@@ -1164,8 +1164,9 @@ def main():
     #dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
-    app.send_message('me', 'schedule_start')
+    
     app.run()
+    app.send_message('me', 'schedule_start')
     updater.idle()#
     
 if __name__ == '__main__':

@@ -39,7 +39,10 @@ async def job2_partener(client:Client,message:Message):
 			    for zz in name1:
 			        
 			        scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(zz,client,message,) ,id="job4"+str(zz))
-			        #scheduler.start()
+			        try:
+			            scheduler.start()
+			        except:
+			            pass
 			    col=clientmongo["group_schedule"][str(message.chat.id)]
 			    Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
 			    hour1=col.find_one({"Time":{"$type":"string"}})["Time"]

@@ -100,7 +100,7 @@ async def schedule_job(client:Client,message:Message):
 	
 	name= clientmongo["channal_schedule"].list_collection_names()
 	for x in name:
-	    scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
+	    scheduler.add_job(job4, "cron", hour="12",minute="17-24",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
 	scheduler.start()
 
 @app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)

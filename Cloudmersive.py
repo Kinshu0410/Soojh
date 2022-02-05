@@ -35,8 +35,8 @@ async def job2_partener(client:Client,message:Message):
 			name= clientmongo["group_schedule"].list_collection_names()
 			now=""
 			if str(message.chat.id) in name:
-			    name= clientmongo["channal_schedule"].list_collection_names()
-			    for x in name:
+			    name1= clientmongo["channal_schedule"].list_collection_names()
+			    for x in name1:
 			        scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
 			        scheduler.start()
 			    col=clientmongo["group_schedule"][str(message.chat.id)]

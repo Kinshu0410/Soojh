@@ -439,10 +439,11 @@ async def Current_iq(client:Client,message:Message):
 	    #print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message(filters.poll & filters.chat(["Science_iq_bot","rk_prajapati_11"]) )#& filters.incoming)
+@app.on_message(filters.poll & filters.chat(["Science_iq_bot","Ramesh_Karwasara"]) )#& filters.incoming)
 def Science_iq_bot(client:Client,message:Message):
 	chatid=["Scienceinhindincert"]
-	
+	if message.chat.username=="Ramesh_Karwasara":
+		chatid=["ReetAspirants"]
 	#print(message.message_id)
 	try:
 		

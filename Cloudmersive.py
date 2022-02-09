@@ -162,7 +162,7 @@ async def job2(x,client:Client,message:Message):
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):
     	xx=reaaa.split("-",message.text)
-    	for x in range(int(xx[0]),int(xx[1]+1)):
+    	for x in range(int(xx[0]),int(xx[1])+1):
     		try:
         		try:
         		    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))

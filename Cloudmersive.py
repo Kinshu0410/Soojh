@@ -172,6 +172,7 @@ async def job2_partener(client:Client,message:Message):
     		#print(functions.messages.GetPollResults(peer=types.InputPeerChat(chat_id=-1001495791558),msg_id=11079))
         		await app.send_message(message.chat.id, await app.send(functions.messages.GetPollVotes(peer= await app.resolve_peer(message.chat.id),id=x,limit=10)))
     		except Exception as e:
+    		    print(x)
     		    print(str(e))
 
 async def job3(mass,client:Client,message:Message):

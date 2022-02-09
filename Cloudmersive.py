@@ -161,7 +161,7 @@ async def job2(x,client:Client,message:Message):
 def job2_partener(client:Client,message:Message):
 		app.send_message(message.chat.id, str(app.GetPollVotes(peer="ONLY_FOR_US",id=11079))
 async def job3(mass,client:Client,message:Message):
-		
+		#
 		mess1=await app.get_messages(mass.chat.id,mass.message_id)
 		print(str(mess1.text))
 		print(str(mess1.message_id))

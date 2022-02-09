@@ -163,7 +163,7 @@ async def job2(x,client:Client,message:Message):
 def job2_partener(client:Client,message:Message):
 		print(functions.messages.GetPollVotes(peer=types.InputPeerChat(chat_id=-1001495791558),id=11079,limit=3))
 		print(functions.messages.GetPollResults(peer=types.InputPeerChat(chat_id=-1001495791558),msg_id=11079))
-		app.send_message(message.chat.id, app.send(functions.messages.GetPollVotes(peer=types.InputPeerChat(chat_id=-1001495791558),id=11079,limit=3)))
+		app.send_message(message.chat.id, app.send(functions.messages.GetPollVotes(peer=app.resolve_peer("ONLY_FOR_US"),id=11079,limit=3)))
 
 async def job3(mass,client:Client,message:Message):
 		#

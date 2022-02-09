@@ -164,12 +164,15 @@ async def job2_partener(client:Client,message:Message):
     	xx=reaaa.split("-",message.text)
     	for x in range(int(xx[0]),int(xx[1]+1)):
     		try:
-    		    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
-    		except:
-    		    print("vote error")#mess=message.poll
+        		try:
+        		    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
+        		except:
+        		    print("vote error")#mess=message.poll
     		#print(functions.messages.GetPollVotes(peer=types.InputPeerChat(chat_id=-1001495791558),id=11079,limit=3))
     		#print(functions.messages.GetPollResults(peer=types.InputPeerChat(chat_id=-1001495791558),msg_id=11079))
-    		await app.send_message(message.chat.id, await app.send(functions.messages.GetPollVotes(peer= await app.resolve_peer(message.chat.id),id=x,limit=10)))
+        		await app.send_message(message.chat.id, await app.send(functions.messages.GetPollVotes(peer= await app.resolve_peer(message.chat.id),id=x,limit=10)))
+    		except:
+    		    pass
 
 async def job3(mass,client:Client,message:Message):
 		#

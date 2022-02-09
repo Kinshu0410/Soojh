@@ -159,11 +159,17 @@ async def job2(x,client:Client,message:Message):
 		#print("job3 added for = "+str(message.first_name))
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
-@app.on_message(filters.regex("^yooo$") )#& filters.incoming)
-def job2_partener(client:Client,message:Message):
-		print(functions.messages.GetPollVotes(peer=types.InputPeerChat(chat_id=-1001495791558),id=11079,limit=3))
-		print(functions.messages.GetPollResults(peer=types.InputPeerChat(chat_id=-1001495791558),msg_id=11079))
-		app.send_message(message.chat.id, app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=11119,limit=10)))
+@app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
+async def job2_partener(client:Client,message:Message):
+    	xx=reaaa.split("-",message.text)
+    	for x in range(int(xx[0]),int(xx[1]+1)):
+    		try:
+    		    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
+    		except:
+    		    print("vote error")#mess=message.poll
+    		#print(functions.messages.GetPollVotes(peer=types.InputPeerChat(chat_id=-1001495791558),id=11079,limit=3))
+    		#print(functions.messages.GetPollResults(peer=types.InputPeerChat(chat_id=-1001495791558),msg_id=11079))
+    		await app.send_message(message.chat.id, await app.send(functions.messages.GetPollVotes(peer= await app.resolve_peer(message.chat.id),id=x,limit=10)))
 
 async def job3(mass,client:Client,message:Message):
 		#

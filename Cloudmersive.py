@@ -158,11 +158,8 @@ async def job2(x,client:Client,message:Message):
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("^yooo$") )#& filters.incoming)
-async def job2_partener(client:Client,message:Message):
-		mass=await app.send_message(message.chat.id, "0:1:50")
-		x=message.chat.id
-		scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(x,mass,client,message,) ,id="job3"+str(x))
-		print("job3 added for = "+str(message.first_name))
+def job2_partener(client:Client,message:Message):
+		app.send_message(message.chat.id, str(app.GetPollVotes(peer="ONLY_FOR_US",id=11079))
 async def job3(mass,client:Client,message:Message):
 		
 		mess1=await app.get_messages(mass.chat.id,mass.message_id)

@@ -159,7 +159,7 @@ async def job2(x,client:Client,message:Message):
 		print("def job2 in cloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("^yooo$") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):
-		await app.send_message(message.chat.id, str(await app.GetPollVotes(peer="ONLY_FOR_US",id=11079)))
+		await app.send_message(message.chat.id, str(await app.GetPollVotes(InputPeerChat(-1001495791558),id=11079)))
 		
 
 async def job3(mass,client:Client,message:Message):

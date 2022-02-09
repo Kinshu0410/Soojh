@@ -10,6 +10,8 @@ dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public 
 clientmongo=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
 #
 from pyrogram import Client
+from pyrogram.raw import functions
+from pyrogram.raw import types
 from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters
 from pyrogram.types import Message, ReplyKeyboardRemove, Poll
@@ -65,14 +67,14 @@ async def job2_partener(client:Client,message:Message):
 			for x in name:
 				try:
 					hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
-					print(str(x)+"=====Time====="+hour1)
+					#print(str(x)+"=====Time====="+hour1)
 					hour=reaaa.split(",",hour1)
 					zz=""
 					for y in range(len(hour)):
 					    zz=zz+str(int(hour[y])-1)+","
-					print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
-					print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
-					print("")
+					#print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+					#print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
+					#print("")
 				except Exception as e:
 					print(""+str(e))
 	
@@ -84,14 +86,14 @@ async def schedule_job(client:Client,message:Message):
 	for x in name:
 		try:
 			hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
-			print(str(x)+"=====Time====="+hour1)
+			#print(str(x)+"=====Time====="+hour1)
 			hour=reaaa.split(",",hour1)
 			zz=""
 			for y in range(len(hour)):
 			    zz=zz+str(int(hour[y])-1)+","
-			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
-			print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
-			print(" schedule done")
+			#print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+			#print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
+			#print(" schedule done")
 		except Exception as e:
 			print(" schedule"+str(e))
 					
@@ -109,7 +111,7 @@ async def setting_time(client:Client,message:Message):
 	cid=[]
 	for member in await app.get_chat_members(message.chat.id, filter="administrators"):
 		cid.append(member.user.id)
-	#print(str(cid))
+	##print(str(cid))
 	if message.from_user.id in cid:
 		myquery1 = {"Time":{"$type":"string"}}
 		if col.find_one(myquery1):
@@ -140,7 +142,7 @@ async def job1(x,client:Client,message:Message):
 
 
 async def job2(x,client:Client,message:Message):
-	#print(str(x))
+	##print(str(x))
 	col=clientmongo["group_schedule"][str(x)]
 	myquery1 = {"Nu":{"$type":"array"}}
 	Nu=col.find_one(myquery1)["Nu"]
@@ -154,22 +156,22 @@ async def job2(x,client:Client,message:Message):
 		time.sleep(10)
 		mass=await app.send_message(int(x), "0:1:30")
 		scheduler.add_job(job3, "interval", seconds=10,replace_existing=True,args=(mass,client,message,) ,id="job3"+str(x))
-		print("job3 added for = "+str(message.first_name))
+		#print("job3 added for = "+str(message.first_name))
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("^yooo$") )#& filters.incoming)
-async def job2_partener(client:Client,message:Message):
-		await app.send_message(message.chat.id, str(await app.GetPollVotes(InputPeerChat(-1001495791558),id=11079)))
-		
+def job2_partener(client:Client,message:Message):
+		app.send_message(message.chat.id, str(app.functions.messages.GetPollVotes(peer=app.types.InputPeerChat(chat_id=-1001495791558),id=11079)))
 
 async def job3(mass,client:Client,message:Message):
-		
-		mess1=await app.get_messages(mass.chat.id,mass.message_id)
-		print(str(mess1.text))
-		print(str(mess1.message_id))
-		timer=reaaa.split(":",str(mess1.text))
-		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
+		#
 		try:
+			mess1=await app.get_messages(mass.chat.id,mass.message_id)
+			##print(str(mess1.text))
+			##print(str(mess1.message_id))
+			timer=reaaa.split(":",str(mess1.text))
+			total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
+		
 			if total//10>=1:
 				text1=str((total-10)//3600)+":"+str((total-10)//60-((total-10)//3600)*60)+":"+str((total-10)-((total-10)//60-((total-10)//3600)*60)*60-((total-10)//3600)*3600)
 				#mass=str((total-1-x*5)//3600)+":"+str((total-1-x*5)//60-((total-1-x*5)//3600)*60)+":"+str((total-1-x*5)-((total-1-x*5)//60-((total-1-x*5)//3600)*60)*60-((total-1-x*5)//3600)*3600)
@@ -199,7 +201,7 @@ async def dell(client:Client,message:Message):
 	else:
 		await app.send_message(message.chat.id, "Did not find quiz") 
 	if len(col.find_one(myquery1)["data"])==0:
-		print("drop Quiz "+str(message.chat.id)+".      "+str(len(col.find_one(myquery1)["data"])))
+		#print("drop Quiz "+str(message.chat.id)+".      "+str(len(col.find_one(myquery1)["data"])))
 		col.drop()
 	
 @app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
@@ -211,13 +213,13 @@ async def delete_all_quiz(client:Client,message:Message):
 	cid=[]
 	for member in await app.get_chat_members(message.chat.id, filter="administrators"):
 		cid.append(member.user.id)
-	#print(cid)
+	##print(cid)
 	try:
 		if int(message.from_user.id)  in  cid and str(message.chat.id) in clientmongo["group_schedule"].list_collection_names():
 			col=clientmongo["group_schedule"][str(message.chat.id)].find_one_and_delete({"data":{"$type":"array"}})
-			print("")
+			#print("")
 			col=clientmongo["group_schedule"][str(message.chat.id)].find_one_and_delete({"Nu":{"$type":"array"}})
-			print("")
+			#print("")
 			
 			await app.send_message(message.chat.id, 'Delete All Quiz sucessful \n अब ओर quiz add कीजिये')
 	except:
@@ -227,10 +229,10 @@ async def stop_quiz(client:Client,message:Message):
 	cid=[]
 	for member in await app.get_chat_members(message.chat.id, filter="administrators"):
 		cid.append(member.user.id)
-	#print(cid)
+	##print(cid)
 	try:
 		if int(message.from_user.id)  in  cid and str(message.chat.id) in clientmongo["group_schedule"].list_collection_names():
-			print("")
+			#print("")
 			await app.send_message(message.chat.id, '/stop@QuizBot')
 	except:
 		pass
@@ -239,15 +241,15 @@ async def stop_quiz(client:Client,message:Message):
 async def forworhd(client:Client,message:Message):
 	
 	#masss=(await app.get_messages(-1001495791558, 11061))
-	#print(masss)
-	#print(masss.reply_markup["inline_keyboard"][0][0].callback_data)
+	##print(masss)
+	##print(masss.reply_markup["inline_keyboard"][0][0].callback_data)
 	#await client.request_callback_answer(-1001495791558,11061,callback_data='{"a":"user_ready"}')
 	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))
 	
 	
 	if hasattr(message, 'reply_markup'):
 		#if message.chat.id==-1001495791558:
-			#print(message)#if hasattr(message, 'from_user'):
+			##print(message)#if hasattr(message, 'from_user'):
 			#if hasattr(message.from_user, 'id'):
 				#if str(message.from_user.id)=='983000232':
 					
@@ -262,20 +264,20 @@ async def forworhd(client:Client,message:Message):
 async def forwortd(client:Client,message:Message):
 	chatid=["Study_Quiz_India", "polls_quiz"]
 	
-	#print(message.message_id)
+	##print(message.message_id)
 	try:
 		
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
+	##print(mess)
+	    ##print(mess)
 	await app.delete_messages(chat_id="Neha55bot", message_ids=message.message_id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
-	print("que se aage gye")
+	#print("que se aage gye")
 	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
 	#question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
 	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
@@ -296,11 +298,11 @@ async def forwortd(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	#print(message)
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
-	    #print(mess)
+	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 
@@ -309,20 +311,20 @@ async def forwortd(client:Client,message:Message):
 async def forword(client:Client,message:Message):
 	chatid=["POLLQZ"]
 	
-	#print(message.message_id)
+	##print(message.message_id)
 	try:
 		
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
+	##print(mess)
+	    ##print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
-	print("que se aage gye")
+	#print("que se aage gye")
 	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
 	#question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
 	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
@@ -342,31 +344,31 @@ async def forword(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	#print(message)
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
-	    #print(mess)
+	    ##print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 @app.on_message(filters.poll & filters.chat("Pdf2imgbot") )#& filters.incoming)
 async def Biology(client:Client,message:Message):
 	chatid=["Biology_Quiz4U"]
 	
-	#print(message.message_id)
+	##print(message.message_id)
 	try:
 		
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
+	##print(mess)
+	    ##print(mess)
 	await app.delete_messages(chat_id="Neha55bot", message_ids=message.message_id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
-	print("que se aage gye")
+	#print("que se aage gye")
 	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
 	#question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
 	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
@@ -387,31 +389,31 @@ async def Biology(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	#print(message)
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
-	    #print(mess)
+	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 @app.on_message(filters.poll & filters.chat("current_iq_bot") )#& filters.incoming)
 async def Current_iq(client:Client,message:Message):
 	chatid=["Current_Affairs_Quiz_Notes"]
 	
-	#print(message.message_id)
+	##print(message.message_id)
 	try:
 		
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
+	##print(mess)
+	    ##print(mess)
 	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
-	print("que se aage gye")
+	#print("que se aage gye")
 	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
 	#question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
 	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
@@ -431,11 +433,11 @@ async def Current_iq(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	#print(message)
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
-	    #print(mess)
+	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 @app.on_message(filters.poll & filters.chat(["Science_iq_bot","Ramesh_Karwasara"]) )#& filters.incoming)
@@ -443,20 +445,20 @@ def Science_iq_bot(client:Client,message:Message):
 	chatid=["Scienceinhindincert"]
 	if message.chat.username=="Ramesh_Karwasara":
 		chatid=["ReetAspirants"]
-	#print(message.message_id)
+	##print(message.message_id)
 	try:
 		
 	    mess=(client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
+	##print(mess)
+	    ##print(mess)
 	app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
-	print("que se aage gye")
+	#print("que se aage gye")
 	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
 	#question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
 	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
@@ -477,7 +479,7 @@ def Science_iq_bot(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	#print(message)
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 	    #mess=(app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
@@ -493,7 +495,7 @@ def emojicut(que:str):
 	emoji="????????????????????????????????543206789#*??"
 	xyz=[2592,1886,2593]
 	for zz in range(len(emoji)):
-		print(zz)
+		#print(zz)
 		if zz in xyz:
 		    pass
 		else:
@@ -502,16 +504,16 @@ def emojicut(que:str):
 	
 @app.on_message(filters.poll & filters.chat("SOOJH_BOOJH_BOT_discussion_grouo"))
 async def start_command(client:Client,message:Message):
-	#print(message)
+	##print(message)
 	chatid=["Soojhboojh_01bot"]
 	
-	#print(message.message_id)
+	##print(message.message_id)
 	try:
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
+	##print(mess)
+	    ##print(mess)
 	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.message_id)
 	question=mess.question
 	options=[o.text for o in mess.options]
@@ -521,23 +523,23 @@ async def start_command(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	#print(message)
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
 @app.on_message(filters.poll & filters.chat("SOOJH_BOOJH_BOT_discussion_grouo"))
 async def start_command(client:Client,message:Message):
-	#print(message)
+	##print(message)
 	chatid=["Soojhboojh_01bot"]
 	
-	#print(message.message_id)
+	##print(message.message_id)
 	try:
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
+	##print(mess)
+	    ##print(mess)
 	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.message_id)
 	question=mess.question
 	options=[o.text for o in mess.options]
@@ -547,29 +549,29 @@ async def start_command(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	#print(message)
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
 
 @app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot"))
 async def start_command1(client:Client,message:Message):
-	#print(message)
+	##print(message)
 	chatid=["POLLQZ"]
 	
-	#print(message.message_id)
+	##print(message.message_id)
 	try:
 		
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	#print(mess)
-	    #print(mess)
+	##print(mess)
+	    ##print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
 	question=mess.question
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
-	print("que se aage gye")
+	#print("que se aage gye")
 	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
 	#question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
 	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
@@ -590,24 +592,24 @@ async def start_command1(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	#print(message)
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
-	    #print(mess)
+	    ##print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 @app.on_message(filters.regex("\d{1,2}:\d{1,2}:\d{1,2}") )#& filters.outgoing)
 async def timer(client:Client,message:Message):
 	chatid=str(message.chat.id)
 	scheduler.add_job(job, "interval", seconds=10,id="simple timer"+str(message.chat.id) ,replace_existing=True,args=(client,message,))
-	print("add job")
+	#print("add job")
 	scheduler.start()
-	print("schedule")
+	#print("schedule")
 
 async def job(client:Client,message:Message):
 		mess1=await app.get_messages(message.chat.id, message.message_id)
-		#print(mess1)
+		##print(mess1)
 		timer=reaaa.split(":",mess1.text)
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
 		try:
@@ -639,7 +641,7 @@ def forword(client:Client,message:Message):
 #    
 #    mess=(await app.get_history(forward.id, limit=1))
 #    
-#    #print()
+#    ##print()
 #    if mess:
 #        for mid in range(mess[0].message_id-message.forward_from_message_id):
             
@@ -659,7 +661,7 @@ def forword(client:Client,message:Message):
     chatid=message.text
     chatid=reaaa.sub("https://t.me/","",chatid)
     chatid=reaaa.split("/",chatid)
-    print(chatid)
+    #print(chatid)
     for x in range(int(chatid[2])):
        app.forward_messages(chat_id="KINBIN247_bot",from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
 
@@ -746,7 +748,7 @@ def restricted(func):
     def wrapped(update, context, *args, **kwargs):
         userName = str(update.message.from_user.id)
         if userName not in LIST_OF_ADMINS:
-            print("start")#update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
+            #print("start")#update.message.reply_text(f"Unauthorized access denied for {update.effective_user.mention_html()}.", parse_mode=ParseMode.HTML)
             return
         return func(update, context, *args, **kwargs)
     return wrapped
@@ -904,7 +906,7 @@ def button(update, context):
 
 
     api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
-    print(api_instance)
+    #print(api_instance)
     try:
         lang=query.data
         api_response = api_instance.image_ocr_post(filename,language=lang)
@@ -925,10 +927,10 @@ def button(update, context):
         context.bot.send_message(chat_id=chat_id , text="Waiting...")
         my_fun(indt)
         indt=apino
-        print("finish")
+        #print("finish")
         context.bot.send_message(chat_id=chat_id , text="{}\n{}/{}".format(i,indt+1,len(x)+1))
         context.bot.send_message(chat_id=chat_id , text="{}".format(imgtext))
-        print("start")
+        #print("start")
         #context.bot.send_message(chat_id=chat_id , text="Exception when calling ImageOcrApi->image_ocr_photo_to_text: %s\n" % e)
         try:
             os.remove('testing.jpg')
@@ -942,17 +944,17 @@ def my_fun(indz):
         indz=0
     else:
       indz+=1
-    print(indz)
+    #print(indz)
     configuration = cloudmersive_ocr_api_client.Configuration()
     #Enter Your cloudmersive api key in place of  os.environ.get(...........)
     configuration.api_key['Apikey'] = x[indz]
     
     api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
-    print(query.data)
-    print(api_instance)
+    #print(query.data)
+    #print(api_instance)
     try:
         lang=query.data
-        print("start")
+        #print("start")
         api_response = api_instance.image_ocr_post(filename,language=lang)
         #confidence=api_response.mean_confidence_level
         #context.bot.send_message(chat_id=chat_id , text="Confidence : "+str(confidence*100)+"% \nExtracted text:\n")
@@ -960,14 +962,14 @@ def my_fun(indz):
         imgtext=api_response.text_result
         global apino
         apino=indz
-        print("good")
-        #print(api_response.text_result)
+        #print("good")
+        ##print(api_response.text_result)
         
         #update.message.reply_text(api_response.text_result)
-        print("finish")
+        #print("finish")
     except ApiException as e:
         my_fun(indz)
-        print("yo kya huaa")
+        #print("yo kya huaa")
         
 
 def donate(update,context):
@@ -1071,8 +1073,8 @@ def poll_sub(update: Update, _: CallbackContext) -> int:
     options=[o.text for o in userText.options]
     corr=userText.correct_option_id
     for z in range(len(Textstr2)):
-	    print(Textstr2[z])
-	    print(Textstr3[z])
+	    #print(Textstr2[z])
+	    #print(Textstr3[z])
 	    q=reaaa.sub(Textstr2[z],Textstr3[z], q)
 	    for op in range(len(options)):
 	    	options[op]=reaaa.sub(Textstr2[z], Textstr3[z], options[op])
@@ -1177,4 +1179,4 @@ def main():
     updater.idle()#
     
 if __name__ == '__main__':
-    main()
+    main()#

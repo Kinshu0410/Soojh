@@ -160,23 +160,40 @@ async def job2(x,client:Client,message:Message):
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
-def job2_partener(client:Client,message:Message):
+def job2_partener1(client:Client,message:Message):
     	xx=reaaa.split("-",message.text)
     	mess1="vote alreddy given"
+    	result={}
     	for x in range(int(xx[0]),int(xx[1])+1):
     		try:
         		try:
         		    mess1=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
         		except:
-        		    mess1=app.get_messages(message.chat.id,x)
+        		    mess1=app.get_messages(message.chat.id,x).poll
         		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=x,limit=int(mess1.poll.total_voter_count)))
+        		
         		#print(mess1.poll)
+        		#options = [option['text'] for option in mess1.options]
         		correct_option_id = 0
-        		for i in range(len(mess1.poll.options)):
-        		    if mess1.poll.options[i]['correct']:
+        		for i in range(len(mess1.options)):
+        		    if mess1.options[i]['correct']:
         		        correct_option_id = i
         		        break
-        		print(mess2)
+        		print("correct_option_id = "+str(correct_option_id))
+        		for mmid in range(len(mess2.votes)):
+        		    if mess2.votes[mmid].user_id not in result.keys():
+        		        if int(mess2.votes[mmid].get("option")) == correct_option_id:
+        		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid].get("first_name"),"Marks":4}
+        		        else:
+        		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid].get("first_name"),"Marks":-1}
+        		    else:
+        		        Marks=result.get(mess2.votes[mmid].user_id).get("Marks")
+        		        if int(mess2.votes[mmid].get("option")) == correct_option_id:
+        		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
+        		        else:
+        		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
+        		            
+        		print(result)
     		except Exception as e:
     		    #print(message.chat.id)
     		    print(str(e))

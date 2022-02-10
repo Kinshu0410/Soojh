@@ -87,15 +87,16 @@ async def schedule_job(client:Client,message:Message):
 		try:
 			hour1=clientmongo["group_schedule"][str(x)].find_one({"Time":{"$type":"string"}})["Time"]
 			#print(str(x)+"=====Time====="+hour1)
+			hour1=reaaa.sub(" ","",hour1)
 			hour=reaaa.split(",",hour1)
 			zz=""
 			for y in range(len(hour)):
 			    zz=zz+str(int(hour[y])-1)+","
-			#print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
-			#print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
+			print(scheduler.add_job(job2, "cron",hour=zz[:-1], minute='58',replace_existing=True,args=(x,client,message,) ,id="job2"+str(x)))
+			print(scheduler.add_job(job1, "cron", hour=hour1,replace_existing=True,args=(x,client,message,) ,id="job1"+str(x)))
 			#print(" schedule done")
 		except Exception as e:
-			print(" schedule"+str(e))
+			await app.send_message(int(message.chat.id),"schedule error in chat id = "+str(x)+"\nerror name = "+str(e))
 					
 	await app.send_message(int(message.chat.id),"Schedule update")
 	name= clientmongo["group_schedule"].list_collection_names()

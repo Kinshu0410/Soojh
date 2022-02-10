@@ -165,6 +165,7 @@ def job2_partener1(client:Client,message:Message):
     	xx=reaaa.split("-",message.text)
     	mess1="vote alreddy given"
     	result={}
+    	new_result = {}
     	for x in range(int(xx[0]),int(xx[1])+1):
     		try:
         		try:
@@ -194,11 +195,19 @@ def job2_partener1(client:Client,message:Message):
         		        else:
         		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
         		            
-        		print(result)
+        		
     		except Exception as e:
-    		    #print(message.chat.id)
     		    print(str(e))
-    		    #print(mess1)
+    		    
+    	for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
+    	    new_result[key] = result[key]
+    	print(new_result)
+    	zzz2=1
+    	f= open("Result.txt","w+")
+    	for zzz in new_result.keys():
+    	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"]+" got Marks = "+new_result[str(zzz)]["Marks"])
+    	f.close()
+    	app.send_document(massage.chat.id, "Result.txt")
 
 async def job3(mass,client:Client,message:Message):
 		#
@@ -429,7 +438,7 @@ async def Biology(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 

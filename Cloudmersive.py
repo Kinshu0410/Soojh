@@ -206,7 +206,7 @@ def job2_partener1(client:Client,message:Message):
     	    new_result[key] = result[key]
     	print(new_result)
     	zzz2=1
-    	f= open("Result.txt","w+")
+    	f= open('result.txt', 'w',encoding='utf-8')
     	for zzz in new_result.keys():
     	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"]+" got Marks = "+str(new_result[str(zzz)]["Marks"])+"\n")
     	f.close()

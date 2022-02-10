@@ -176,7 +176,7 @@ async def job2_partener1(client:Client,message:Message):
             		mess1=mess1.poll
             	off_set=None
             	for xxxx in range(mess1.total_voter_count//50+1):
-            		mess2=await app.send(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=1000,offset=off_set))
+            		mess2=await app.send(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=mess1.total_voter_count,offset=off_set))
             		off_set=mess2.next_offset
         		#print(str(mess1.total_voter_count))
         		#print(mess2.next_offset)

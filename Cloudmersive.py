@@ -207,7 +207,7 @@ def job2_partener1(client:Client,message:Message):
     	for zzz in new_result.keys():
     	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"]+" got Marks = "+new_result[str(zzz)]["Marks"])
     	f.close()
-    	app.send_document(massage.chat.id, "Result.txt")
+    	app.send_document(message.chat.id, "Result.txt")
 
 async def job3(mass,client:Client,message:Message):
 		#

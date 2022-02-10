@@ -172,7 +172,7 @@ def job2_partener1(client:Client,message:Message):
         		    mess1=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
         		except:
         		    mess1=app.get_messages(message.chat.id,x).poll
-        		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=x,limit=int(mess1.total_voter_count)))
+        		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(message.chat.id),id=x,limit=int(mess1.total_voter_count)))
         		
         		#print(mess1.poll)
         		#options = [option['text'] for option in mess1.options]
@@ -205,7 +205,7 @@ def job2_partener1(client:Client,message:Message):
     	zzz2=1
     	f= open("Result.txt","w+")
     	for zzz in new_result.keys():
-    	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"]+" got Marks = "+new_result[str(zzz)]["Marks"])
+    	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"]+" got Marks = "+str(new_result[str(zzz)]["Marks"]))
     	f.close()
     	app.send_document(message.chat.id, "Result.txt")
 

@@ -162,7 +162,7 @@ async def job2(x,client:Client,message:Message):
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 async def job2_partener(client:Client,message:Message):
     	xx=reaaa.split("-",message.text)
-    	mess=None
+    	mess="vote alreddy given"
     	for x in range(int(xx[0]),int(xx[1])+1):
     		try:
         		try:

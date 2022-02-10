@@ -162,20 +162,20 @@ async def job2(x,client:Client,message:Message):
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 def job2_partener(client:Client,message:Message):
     	xx=reaaa.split("-",message.text)
-    	mess="vote alreddy given"
+    	mess1="vote alreddy given"
     	for x in range(int(xx[0]),int(xx[1])+1):
     		try:
         		try:
-        		    mess=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
+        		    mess1=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
         		except:
-        		    print("yii")#print(await app.send(functions.messages.GetPollVotes(peer= await app.resolve_peer(-1001495791558),id=int(11127),limit=10)))#mess=message.poll
-        		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=11079,limit=10))
-        		app.send_message(message.chat.id, app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=11127,limit=10)))
+        		    mess1=app.get_messages(messages.chat.id,x)
+        		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=x,limit=10))
+        		print(mess2)
         
     		except Exception as e:
     		    print(message.chat.id)
     		    print(str(e))
-    		    print(mess)
+    		    print(mess1)
 
 async def job3(mass,client:Client,message:Message):
 		#

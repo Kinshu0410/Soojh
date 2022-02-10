@@ -183,12 +183,12 @@ def job2_partener1(client:Client,message:Message):
         		print("correct_option_id = "+str(correct_option_id))
         		for mmid in range(len(mess2.votes)):
         		    if mess2.votes[mmid].user_id not in result.keys():
-        		        if int(mess2.votes[mmid].get("option")) == correct_option_id:
+        		        if int(mess2.votes[mmid]["option"]) == correct_option_id:
         		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":4}
         		        else:
         		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":-1}
         		    else:
-        		        Marks=result.get(mess2.votes[mmid].user_id)["Marks"]
+        		        Marks=result[str(mess2.votes[mmid].user_id))]["Marks"]
         		        if int(mess2.votes[mmid]["option"]) == correct_option_id:
         		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
         		        else:

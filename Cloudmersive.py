@@ -169,8 +169,13 @@ def job2_partener(client:Client,message:Message):
         		    mess1=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
         		except:
         		    mess1=app.get_messages(message.chat.id,x)
-        		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=x,limit=10))
-        		print(mess1)
+        		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=x,limit=int(mess1.poll.total_voter_count)))
+        		#print(mess1.poll)
+        		correct_option_id = 0
+        		for i in range(len(mess1.poll.options)):
+        		    if mess1.poll.options[i]['correct']:
+        		        correct_option_id = i
+        		        break
         		print(mess2)
     		except Exception as e:
     		    print(message.chat.id)

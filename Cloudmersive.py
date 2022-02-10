@@ -183,7 +183,9 @@ def job2_partener1(client:Client,message:Message):
         		        break
         		print("correct_option_id = "+str(correct_option_id))
         		for mmid in range(len(mess2.votes)):
+        		    print(mess2.votes[mmid]["option"])
         		    if mess2.votes[mmid].user_id not in result.keys():
+        		        #print
         		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id:
         		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":4}
         		        else:

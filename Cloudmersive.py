@@ -184,13 +184,13 @@ def job2_partener1(client:Client,message:Message):
         		print("correct_option_id = "+str(correct_option_id))
         		for mmid in range(len(mess2.votes)):
         		    if mess2.votes[mmid].user_id not in result.keys():
-        		        if int(mess2.votes[mmid]["option"]) == correct_option_id:
+        		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id:
         		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":4}
         		        else:
         		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":-1}
         		    else:
         		        Marks=result[str(mess2.votes[mmid]["user_id"])]["Marks"]
-        		        if int(mess2.votes[mmid]["option"]) == correct_option_id:
+        		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id:
         		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
         		        else:
         		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
@@ -205,7 +205,7 @@ def job2_partener1(client:Client,message:Message):
     	zzz2=1
     	f= open("Result.txt","w+")
     	for zzz in new_result.keys():
-    	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"]+" got Marks = "+str(new_result[str(zzz)]["Marks"]))
+    	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"].encode("utf8")+" got Marks = "+str(new_result[str(zzz)]["Marks"]+"\n"))
     	f.close()
     	app.send_document(message.chat.id, "Result.txt")
 

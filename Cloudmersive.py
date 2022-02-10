@@ -188,7 +188,7 @@ def job2_partener1(client:Client,message:Message):
         		        else:
         		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":-1}
         		    else:
-        		        Marks=result[str(mess2.votes[mmid].user_id)]["Marks"]
+        		        Marks=result[str(mess2.votes[mmid]["user_id"])]["Marks"]
         		        if int(mess2.votes[mmid]["option"]) == correct_option_id:
         		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
         		        else:

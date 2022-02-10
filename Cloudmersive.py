@@ -188,15 +188,15 @@ def job2_partener1(client:Client,message:Message):
         		    if mess2.votes[mmid].user_id not in result.keys():
         		        #print
         		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
-        		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":4}
+        		            result[(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":4}
         		        else:
-        		            result[str(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":-1}
+        		            result[(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":-1}
         		    else:
-        		        Marks=result[str(mess2.votes[mmid]["user_id"])]["Marks"]
+        		        Marks=result[(mess2.votes[mmid]["user_id"])]["Marks"]
         		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
-        		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
+        		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
         		        else:
-        		            result[str(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
+        		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
         		            
         		
     		except Exception as e:

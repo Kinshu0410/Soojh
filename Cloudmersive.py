@@ -169,7 +169,9 @@ def job2_partener(client:Client,message:Message):
         		    mess=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
         		except:
         		    print("yii")#print(await app.send(functions.messages.GetPollVotes(peer= await app.resolve_peer(-1001495791558),id=int(11127),limit=10)))#mess=message.poll
-        		app.send_message(message.chat.id, app.send(functions.messages.GetPollVotes(peer= app.resolve_peer(-1001495791558),id=int(11127),limit=10)))
+        		app.send_message(message.chat.id, app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=11079,limit=10)))
+        		app.send_message(message.chat.id, app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=11127,limit=10)))
+        
     		except Exception as e:
     		    print(message.chat.id)
     		    print(str(e))

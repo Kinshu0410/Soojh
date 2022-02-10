@@ -205,10 +205,16 @@ def job2_partener1(client:Client,message:Message):
     	for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]
     	print(new_result)
-    	zzz2=1
-    	f= open('result.txt', 'w+',encoding='utf-8')
-    	for zzz in new_result.keys():
-    	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"]+" got Marks = "+str(new_result[str(zzz)]["Marks"])+"\n")
+    	text = []
+    	i = 0
+    	for chat_id in new_result.keys():
+    	    i += 1
+    	    fname = new_result[chat_id]['fname']
+    	    marks = new_result[chat_id]['Marks']
+    	    text.append(f"{i}. {fname} got {marks} marks")
+    	final_text = '\n'.join(text)
+    	with open('Result.txt', 'w',encoding='utf-8') as f:
+    	    f.write(final_text)
     	f.close()
     	app.send_document(message.chat.id, "Result.txt")
 

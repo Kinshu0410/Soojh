@@ -168,9 +168,8 @@ def job2_partener(client:Client,message:Message):
         		try:
         		    mess1=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
         		except:
-        		    mess1=app.get_messages(messages.chat.id,x)
+        		    mess1=app.get_messages(message.chat.id,x)
         		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(-1001495791558),id=x,limit=10))
-        		print(mess2)
         
     		except Exception as e:
     		    print(message.chat.id)

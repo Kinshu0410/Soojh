@@ -167,7 +167,7 @@ def job2_partener1(client:Client,message:Message):
     	result={}
     	new_result = {}
     	for x in range(int(xx[0]),int(xx[1])+1):
-    		print(str(result))
+    		#print(str(result))
     		try:
         		try:
         		    mess1=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
@@ -184,7 +184,7 @@ def job2_partener1(client:Client,message:Message):
         		        break
         		print("correct_option_id = "+str(correct_option_id))
         		for mmid in range(len(mess2.votes)):
-        		    print(mess2.votes[mmid]["option"])
+        		    #print(mess2.votes[mmid]["option"])
         		    if mess2.votes[mmid].user_id not in result.keys():
         		        #print
         		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:

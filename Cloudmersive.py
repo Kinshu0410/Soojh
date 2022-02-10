@@ -167,8 +167,8 @@ async def job2_partener(client:Client,message:Message):
         		try:
         		    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
         		except:
-        		    print("vote error")#mess=message.poll
-        		await app.send_message(message.chat.id, await app.send(functions.messages.GetPollVotes(peer= await app.resolve_peer(int(message.chat.id)),id=int(x),limit=10)))
+        		    print(functions.messages.GetPollVotes(peer= await app.resolve_peer(-1001495791558),id=int(11127),limit=10))#mess=message.poll
+        		await app.send_message(message.chat.id, await app.send(functions.messages.GetPollVotes(peer= await app.resolve_peer(-1001495791558),id=int(11127),limit=10)))
     		except Exception as e:
     		    print(message.chat.id)
     		    print(mess)

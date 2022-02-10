@@ -174,17 +174,17 @@ async def job2_partener1(client:Client,message:Message):
         		except:
         		    mess1=await app.get_messages(message.chat.id,x)
         		    mess1=mess1.poll
-        		mess2=await app.send(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=1000))
+        		mess2=await app.send(functions.messages.GetPollResults(peer=await app.resolve_peer(message.chat.id),id=x,limit=1000))
         		
-        		print(str(mess1.total_voter_count))
-        		print(mess2.votes)
-        		print(len(mess2.votes))
+        		#print(str(mess1.total_voter_count))
+        		print(mess2)
+        		#print(len(mess2.votes))
         		correct_option_id = 0
         		for i in range(len(mess1.options)):
         		    if mess1.options[i]['correct']:
         		        correct_option_id = i
         		        break
-        		print("correct_option_id = "+str(correct_option_id))
+        		#print("correct_option_id = "+str(correct_option_id))
         		for mmid in range(len(mess2.votes)):
         		    #print(mess2.votes[mmid]["option"])
         		    if mess2.votes[mmid].user_id not in result.keys():

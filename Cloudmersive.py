@@ -162,63 +162,65 @@ async def job2(x,client:Client,message:Message):
 		print("def job2 in cloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 async def job2_partener1(client:Client,message:Message):
-    	xx=reaaa.split("-",message.text)
-    	mess1="vote alreddy given"
-    	result={}
-    	new_result = {}
-    	for x in range(int(xx[0]),int(xx[1])+1):
+        xx=reaaa.split("-",message.text)
+        mess1="vote alreddy given"
+        result={}
+        new_result = {}
+        for x in range(int(xx[0]),int(xx[1])+1):
     		#print(str(result))
-    		try:
-        		try:
-        		    mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
-        		except:
-        		    mess1=await app.get_messages(message.chat.id,x)
-        		    mess1=mess1.poll
-        		mess2=await app.send(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=1000))
-        		
+            try:
+            	try:
+            		mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
+            	except:
+            		mess1=await app.get_messages(message.chat.id,x)
+            		mess1=mess1.poll
+            	off_set=False
+            	for xxxx in range(mess1.total_voter_count//50+1):
+            		mess2=await app.send(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=1000,offset=off_set))
+            		off_set=mess2.next_offset
         		#print(str(mess1.total_voter_count))
-        		print(mess2.next_offset)
+        		#print(mess2.next_offset)
         		#print(len(mess2.votes))
-        		correct_option_id = 0
-        		for i in range(len(mess1.options)):
-        		    if mess1.options[i]['correct']:
-        		        correct_option_id = i
-        		        break
-        		#print("correct_option_id = "+str(correct_option_id))
-        		for mmid in range(len(mess2.votes)):
-        		    #print(mess2.votes[mmid]["option"])
-        		    if mess2.votes[mmid].user_id not in result.keys():
-        		        #print
-        		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
-        		            result[(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":4}
-        		        else:
-        		            result[(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":-1}
-        		    else:
-        		        Marks=result[(mess2.votes[mmid]["user_id"])]["Marks"]
-        		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
-        		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
-        		        else:
-        		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
+            		correct_option_id = 0
+            		for i in range(len(mess1.options)):
+            		    if mess1.options[i]['correct']:
+            		        correct_option_id = i
+            		        break
+            		#print("correct_option_id = "+str(correct_option_id))
+            		for mmid in range(len(mess2.votes)):
+            		    #print(mess2.votes[mmid]["option"])
+            		    if mess2.votes[mmid].user_id not in result.keys():
+            		        #print
+            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		            result[(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":4}
+            		        else:
+            		            result[(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":-1}
+            		    else:
+            		        Marks=result[(mess2.votes[mmid]["user_id"])]["Marks"]
+            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
+            		        else:
+            		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
         		            
         		
-    		except Exception as e:
-    		    print(str(e))
+            except Exception as e:
+                print(str(e))
     		    
-    	for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
+        for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]
     	#print(new_result)
-    	text = []
-    	i = 0
-    	for chat_id in new_result.keys():
+        text = []
+        i = 0
+        for chat_id in new_result.keys():
     	    i += 1
     	    fname = new_result[chat_id]['fname']
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
-    	final_text = '\n'.join(text)
-    	with open('Result.txt', 'w',encoding='utf-8') as f:
+        final_text = '\n'.join(text)
+        with open('Result.txt', 'w',encoding='utf-8') as f:
     	    f.write(final_text)
-    	f.close()
-    	await app.send_document(message.chat.id, "Result.txt")
+        f.close()
+        await app.send_document(message.chat.id, "Result.txt")
 
 async def job3(mass,client:Client,message:Message):
 		#

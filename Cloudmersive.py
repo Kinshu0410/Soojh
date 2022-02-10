@@ -205,7 +205,7 @@ def job2_partener1(client:Client,message:Message):
     	zzz2=1
     	f= open("Result.txt","w+")
     	for zzz in new_result.keys():
-    	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"].encode("utf8")+" got Marks = "+str(new_result[str(zzz)]["Marks"]+"\n"))
+    	    f.write(str(zzz2)+". "+new_result[str(zzz)]["fname"]+" got Marks = "+str(new_result[str(zzz)]["Marks"]+"\n"))
     	f.close()
     	app.send_document(message.chat.id, "Result.txt")
 

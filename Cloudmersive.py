@@ -161,7 +161,7 @@ async def job2(x,client:Client,message:Message):
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
-def job2_partener1(client:Client,message:Message):
+async def job2_partener1(client:Client,message:Message):
     	xx=reaaa.split("-",message.text)
     	mess1="vote alreddy given"
     	result={}
@@ -170,10 +170,10 @@ def job2_partener1(client:Client,message:Message):
     		#print(str(result))
     		try:
         		try:
-        		    mess1=(client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
+        		    mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
         		except:
-        		    mess1=app.get_messages(message.chat.id,x).poll
-        		mess2=app.send(functions.messages.GetPollVotes(peer=app.resolve_peer(message.chat.id),id=x,limit=int(mess1.total_voter_count)))
+        		    mess1=await app.get_messages(message.chat.id,x).poll
+        		mess2=await app.send(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=int(mess1.total_voter_count)))
         		
         		#print(mess1.poll)
         		#options = [option['text'] for option in mess1.options]
@@ -216,7 +216,7 @@ def job2_partener1(client:Client,message:Message):
     	with open('Result.txt', 'w',encoding='utf-8') as f:
     	    f.write(final_text)
     	f.close()
-    	app.send_document(message.chat.id, "Result.txt")
+    	await app.send_document(message.chat.id, "Result.txt")
 
 async def job3(mass,client:Client,message:Message):
 		#

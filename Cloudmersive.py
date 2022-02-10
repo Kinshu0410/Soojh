@@ -178,9 +178,9 @@ def job2_partener(client:Client,message:Message):
         		        break
         		print(mess2)
     		except Exception as e:
-    		    print(message.chat.id)
+    		    #print(message.chat.id)
     		    print(str(e))
-    		    print(mess1)
+    		    #print(mess1)
 
 async def job3(mass,client:Client,message:Message):
 		#

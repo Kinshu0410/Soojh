@@ -206,7 +206,7 @@ async def job2_partener1(client:Client,message:Message):
     		    
     	for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]
-    	print(new_result)
+    	#print(new_result)
     	text = []
     	i = 0
     	for chat_id in new_result.keys():

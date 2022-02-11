@@ -172,7 +172,7 @@ async def job2_partene(client:Client,message:Message):
 	z=1
 	for x in m:
 		try:
-			await app.add_chat_members("Polls_Quiz", x)
+			await app.add_chat_members("Sudhir_Parihar_Sahwa", x)
 			print("सफल  = "+str(z))
 			z+=1
 		except:

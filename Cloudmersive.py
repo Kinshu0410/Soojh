@@ -166,9 +166,12 @@ async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)
 	m=await app.get_chat_members(int(xx))
 	y=0
+	z=1
 	for x in m:
 		try:
 			await app.add_chat_members("Polls_Quiz", x)
+			print("सफल  = "+str(z))
+			z+=1
 		except:
 			y+=1
 			print("असफल to add = "+str(y))

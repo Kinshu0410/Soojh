@@ -220,7 +220,13 @@ async def job2_partener1(client:Client,message:Message):
         with open('Result.txt', 'w',encoding='utf-8') as f:
     	    f.write(final_text)
         f.close()
-        await app.send_document(message.chat.id, "Result.txt")
+        try:
+            await app.send_document(message.chat.id, "Result.txt")
+        except:
+            for xy in range(len(text)//20+1):
+                final_text='\n'.join(text[xy*20:(xy+1)*20])
+                await app.send_message(message.chat.id, final_text)
+                time.sleep(10)
 
 async def job3(mass,client:Client,message:Message):
 		#

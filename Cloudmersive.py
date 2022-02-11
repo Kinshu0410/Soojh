@@ -164,7 +164,10 @@ async def job2(x,client:Client,message:Message):
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)
-	m=await app.get_chat_members(int(xx))
+	m=[]
+	for mem in app.iter_chat_members(xx):
+		m.append(member.user.id)
+	#m=await app.get_chat_members(int(xx))
 	y=0
 	z=1
 	for x in m:

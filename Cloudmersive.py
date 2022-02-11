@@ -161,9 +161,9 @@ async def job2(x,client:Client,message:Message):
 	except Exception as e:
 		print("def job2 in cloudmersiver error name = "+str(e))
 
-@app.on_message(filters.regex("^y") & filters.outgoing)
+@app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):
-	xx=reaaa.split("^y",message.text)
+	xx=reaaa.sub("^Y","",message.text)
 	m=await app.get_chat_members(int(xx))
 	y=0
 	for x in m:

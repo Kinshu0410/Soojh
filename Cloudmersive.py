@@ -166,7 +166,7 @@ async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)
 	m=[]
 	async for member in app.iter_chat_members(chat_id=int(xx)):# , ~ filter="bots"):
-		if member.user.is_bot::
+		if member.user.is_bot:
 		    m.append(member.user.id)
 	#m=await app.get_chat_members(int(xx))
 	y=0

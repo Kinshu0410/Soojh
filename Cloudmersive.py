@@ -1272,7 +1272,8 @@ def main():
     updater.start_polling()
     
     app.run()
-    
+    idle()
+    app.stop()
     updater.idle()#
     
 if __name__ == '__main__':

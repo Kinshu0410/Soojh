@@ -162,12 +162,13 @@ async def job2(x,client:Client,message:Message):
 		print("def job2 in cloudmersiver error name = "+str(e))
 
 from quickstart import Drive_OCR
+
 @app.on_message(filters.regex("^Z") & filters.outgoing)
 async def img_text(client:Client,message:Message):
 	#xx=reaaa.sub("^Z","",message.text)
-	await app.send_message(message.chat.id,str(Drive_OCR('sample.png').main())
+	await app.send_message(message.chat.id,str(Drive_OCR('sample.png').main()))
 	
-	
+
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)

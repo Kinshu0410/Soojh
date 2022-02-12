@@ -163,9 +163,10 @@ async def job2(x,client:Client,message:Message):
 
 from quickstart import Drive_OCR
 
-@app.on_message(filters.regex("^Z") & filters.outgoing)
+@app.on_message(filters.photo & filters.outgoing)
 async def img_text(client:Client,message:Message):
-	#xx=reaaa.sub("^Z","",message.text)
+	print("download start")
+	await app.download_media(message,file_name="sample.png")
 	await app.send_message(message.chat.id,str(Drive_OCR('sample.png').main()))
 	
 

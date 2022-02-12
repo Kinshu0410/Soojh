@@ -166,7 +166,8 @@ from quickstart import Drive_OCR
 @app.on_message(filters.photo & filters.outgoing)
 async def img_text(client:Client,message:Message):
 	print("download start")
-	await app.download_media(message,file_name="sample.png")
+	file=await app.download_media(message,file_name="sample.png")
+	print(file)
 	await app.send_message(message.chat.id,str(Drive_OCR('sample.png').main()))
 	
 

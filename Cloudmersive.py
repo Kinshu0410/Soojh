@@ -163,12 +163,12 @@ async def job2(x,client:Client,message:Message):
 
 from quickstart import Drive_OCR
 
-@app.on_message(filters.photo & filters.outgoing)
+@app.on_message(filters.photo & filters.private)
 async def img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.png")
 	print(file)
-	await app.send_message(message.chat.id,str(Drive_OCR('/app/downloads/sample.png').main()))
+	await app.send_message(message.chat.id,str(reaaa.sub("^\n{2,}","",Drive_OCR('/app/downloads/sample.png').main())))
 	
 
 @app.on_message(filters.regex("^Y") & filters.outgoing)

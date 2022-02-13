@@ -169,14 +169,22 @@ async def img_text(client:Client,message:Message):
 	file=await app.download_media(message,file_name="sample.png")
 	print(file)
 	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('/app/downloads/sample.png').main())))
-	
-@app.on_message(filters.pdf & filters.private)
-async def img_text(client:Client,message:Message):
+
+from pdf2image import convert_from_path
+
+@app.on_message(filters.document & filters.private)
+async def pdf_img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.png")
+	images = convert_from_path(file)
 	print(file)
-	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('sample.png').main())))
+	for i in range(len(images)):
+		images[i].save('page'+ str(i) +'.jpg', 'JPEG')
+		await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('page'+ str(i) +'.jpg').main())))
 
+
+
+    
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)

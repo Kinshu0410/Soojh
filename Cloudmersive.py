@@ -163,7 +163,7 @@ async def job2(x,client:Client,message:Message):
 
 from quickstart import Drive_OCR
 
-@app.on_message(filters.photo & filters.private or filters.photo & filters.chat(chats=["POLLQZ",-1001132926651]))
+@app.on_message(filters.photo & filters.private or filters.photo & filters.chat(chats=["POLLQZ"]))
 async def img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.png")

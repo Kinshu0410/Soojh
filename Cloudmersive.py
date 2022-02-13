@@ -200,7 +200,7 @@ async def pdf_img_text(client:Client,message:Message):
 		with open("Don't open in Chrome.txt", 'w',encoding='utf-8') as f:
 			f.write(z)
 		f.close()
-await app.send_document(message.chat.id, "Don't open in Chrome.txt",caption="total pages "+str(noOfPages))
+		await app.send_document(message.chat.id, "Don't open in Chrome.txt",caption="total pages "+str(noOfPages))
 			
 
 

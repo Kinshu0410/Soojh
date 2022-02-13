@@ -170,17 +170,20 @@ async def img_text(client:Client,message:Message):
 	print(file)
 	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('/app/downloads/sample.png').main())))
 
-from pdf2image import convert_from_path
+import fitz
 
 @app.on_message(filters.document & filters.private)
 async def pdf_img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.pdf")
-	images = convert_from_path(file)
-	print(file)
-	for i in range(len(images)):
-		images[i].save('page'+ str(i) +'.jpg', 'JPEG')
-		await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('page'+ str(i) +'.jpg').main())))
+	pdffile = file
+	doc = fitz.open(pdffile)
+	page = doc.loadPage(0)
+	pix = page.get_pixmap()
+	output = "outfile.png"
+	pix.save(output)
+	print( "dine")
+	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('page'+ str(i) +'.jpg').main())))
 
 
 

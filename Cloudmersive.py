@@ -193,6 +193,7 @@ async def pdf_img_text(client:Client,message:Message):
 				await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
 			except FloodWait as e:
 				await asyncio.sleep(e.x)
+				await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
 			
 
 

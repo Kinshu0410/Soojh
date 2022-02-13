@@ -176,7 +176,7 @@ from pdf2image import convert_from_path
 async def pdf_img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.png")
-	images = convert_from_path(file)
+	images = convert_from_path(file, 500)
 	print(file)
 	for i in range(len(images)):
 		images[i].save('page'+ str(i) +'.jpg', 'JPEG')

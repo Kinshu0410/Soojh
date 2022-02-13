@@ -172,7 +172,7 @@ async def img_text(client:Client,message:Message):
 
 import fitz
 
-@app.on_message(filters.document & filters.private)
+@app.on_message(filters.document & (filters.private or filters.chat(["POLLQZ",-1001132926651])
 async def pdf_img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.pdf")

@@ -180,6 +180,7 @@ async def pdf_img_text(client:Client,message:Message):
 		zoom = 2 
 		mat = fitz.Matrix(zoom, zoom)
 		noOfPages = doc.pageCount
+		await app.send_message(message.chat.id,"Last Page Number = "+str(noOfPages))
 		image_folder='/app/downloads/'
 		for pageNo in range(noOfPages):
 			#await app.send_message(message.chat.id,str(pageNo))

@@ -178,10 +178,12 @@ async def pdf_img_text(client:Client,message:Message):
 	file=await app.download_media(message,file_name="sample.pdf")
 	pdffile = file
 	doc = fitz.open(pdffile)
+	await app.send_message(message.chat.id,doc)
 	page = doc.loadPage(0)
 	pix = page.get_pixmap()
 	output = "outfile.png"
 	pix.save(output)
+	await app.send_message(message.chat.id,pix)
 	print( "dine")
 	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('page'+ str(i) +'.jpg').main())))
 

@@ -186,6 +186,7 @@ async def pdf_img_text(client:Client,message:Message):
 	z=""
 	fname=id_generator()
 	file=await app.download_media(message,file_name=fname+".pdf")
+	f=open(fname+".txt", 'w',encoding='utf-8')
 	with fitz.open(file) as doc:
 		zoom = 2 
 		mat = fitz.Matrix(zoom, zoom)
@@ -197,7 +198,7 @@ async def pdf_img_text(client:Client,message:Message):
 			page = doc.loadPage(pageNo)
 			pix = page.getPixmap(matrix = mat)
 			pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
-			z=z+str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\nPage - "+str(pageNo)+"\n\n"
+			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\n")
 			try:
 				if pageNo%10==0:
 					await app.edit_message_text(int(message.chat.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")
@@ -209,10 +210,9 @@ async def pdf_img_text(client:Client,message:Message):
 			#except FloodWait as e:
 				#await asyncio.sleep(e.x)
 				#await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
-		with open("Don't open in Chrome.txt", 'w',encoding='utf-8') as f:
-			f.write(z)
+		
 		f.close()
-		await app.send_document(message.chat.id, "Don't open in Chrome.txt",caption="total pages "+str(noOfPages))
+		await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(noOfPages))
 			
 
 

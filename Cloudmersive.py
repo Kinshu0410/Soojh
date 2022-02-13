@@ -168,9 +168,14 @@ from quickstart import Drive_OCR
 @app.on_message(filters.photo & filters.private )
 async def img_text(client:Client,message:Message):
 	print("download start")
-	file=await app.download_media(message,file_name="sample.png")
+	fname=id_generator()
+	file=await app.download_media(message,file_name=fname+"sample.png")
 	print(file)
-	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('/app/downloads/sample.png').main())))
+	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('/app/downloads/'+fname+'sample.png').main())))
+import string
+import random
+def id_generator(size=10, chars=string.ascii_uppercase):
+	return ''.join(random.choice(chars) for _ in range(size))
 
 import fitz
 @app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]))
@@ -179,7 +184,8 @@ async def pdf_img_text(client:Client,message:Message):
 	print("download start")
 	mess=await app.send_message(message.chat.id,"Prcessing your file")
 	z=""
-	file=await app.download_media(message,file_name="sample.pdf")
+	fname=id_generator()
+	file=await app.download_media(message,file_name=fname+".pdf")
 	with fitz.open(file) as doc:
 		zoom = 2 
 		mat = fitz.Matrix(zoom, zoom)
@@ -190,8 +196,8 @@ async def pdf_img_text(client:Client,message:Message):
 			#await app.send_message(message.chat.id,str(pageNo))
 			page = doc.loadPage(pageNo)
 			pix = page.getPixmap(matrix = mat)
-			pix.writePNG(image_folder+str(message.chat.id)+"sample2.png")
-			z=z+str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+"sample2.png").main()))+"\nPage - "+str(pageNo)+"\n\n"
+			pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
+			z=z+str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\nPage - "+str(pageNo)+"\n\n"
 			try:
 				if pageNo%10==0:
 					await app.edit_message_text(int(message.chat.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")

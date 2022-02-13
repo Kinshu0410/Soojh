@@ -177,7 +177,7 @@ import fitz
 @app.on_message(filters.document & filters.private )
 async def pdf_img_text(client:Client,message:Message):
 	print("download start")
-	await app.send_message(message.chat.id,"Prcessing your file")
+	mess=await app.send_message(message.chat.id,"Prcessing your file")
 	z=""
 	file=await app.download_media(message,file_name="sample.pdf")
 	with fitz.open(file) as doc:
@@ -190,8 +190,14 @@ async def pdf_img_text(client:Client,message:Message):
 			#await app.send_message(message.chat.id,str(pageNo))
 			page = doc.loadPage(pageNo)
 			pix = page.getPixmap(matrix = mat)
-			pix.writePNG(image_folder+"sample2.png")
-			z=z+str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main()))+"\nPage - "+str(pageNo)+"\n\n"
+			pix.writePNG(image_folder+str(message.chat.id)+"sample2.png")
+			z=z+str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+"sample2.png").main()))+"\nPage - "+str(pageNo)+"\n\n"
+			try:
+				if pageNo%10==0:
+					await app.edit_message_text(int(message.chat.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")
+			except FloodWait as e:
+				await asyncio.sleep(e.x)
+				await app.edit_message_text(int(message.chat.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")
 			#try:
 				#await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
 			#except FloodWait as e:

@@ -162,7 +162,7 @@ async def job2(x,client:Client,message:Message):
 		print("def job2 in cloudmersiver error name = "+str(e))
 
 from quickstart import Drive_OCR
-@app.on_message(filters.photo & filters.chat(chats=["POLLQZ"]))
+@app.on_message(filters.photo & filters.chat(chats=["POLLQZ",-1001132926651]))
 @app.on_message(filters.photo & filters.private )
 async def img_text(client:Client,message:Message):
 	print("download start")
@@ -171,8 +171,8 @@ async def img_text(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('/app/downloads/sample.png').main())))
 
 import fitz
-@app.on_message(filters.photo & filters.chat(chats=["POLLQZ",-1001132926651]))
-@app.on_message(filters.photo & filters.private )
+@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]))
+@app.on_message(filters.document & filters.private )
 async def pdf_img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.pdf")

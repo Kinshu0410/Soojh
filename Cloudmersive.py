@@ -185,7 +185,7 @@ async def pdf_img_text(client:Client,message:Message):
 	pix.save(output)
 	await app.send_message(message.chat.id,pix)
 	print( "dine")
-	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('page'+ str(i) +'.jpg').main())))
+	await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR('/app/downloads/outfile.png').main())))
 
 
 

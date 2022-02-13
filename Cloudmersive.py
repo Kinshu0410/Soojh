@@ -163,7 +163,7 @@ async def job2(x,client:Client,message:Message):
 
 from quickstart import Drive_OCR
 
-@app.on_message(filters.photo & filters.private)
+@app.on_message(filters.photo & (filters.private or filters.chat(["POLLQZ",-1001132926651])))
 async def img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.png")
@@ -172,7 +172,7 @@ async def img_text(client:Client,message:Message):
 
 import fitz
 
-@app.on_message(filters.document & (filters.private or filters.chat(["POLLQZ",-1001132926651])
+@app.on_message(filters.document & (filters.private or filters.chat(["POLLQZ",-1001132926651])))
 async def pdf_img_text(client:Client,message:Message):
 	print("download start")
 	file=await app.download_media(message,file_name="sample.pdf")

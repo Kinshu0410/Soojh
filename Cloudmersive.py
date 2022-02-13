@@ -182,11 +182,11 @@ async def pdf_img_text(client:Client,message:Message):
 		noOfPages = doc.pageCount
 		image_folder='/app/downloads/'
 		for pageNo in range(noOfPages):
-			#await app.send_message(message.chat.id,page.number)
+			#await app.send_message(message.chat.id,str(pageNo))
 			page = doc.loadPage(pageNo)
 			pix = page.getPixmap(matrix = mat)
-			pix.writePNG(output+"sample2.png")
-			await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(output+"sample2.png").main())))
+			pix.writePNG(image_folder+"sample2.png")
+			await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
 			
 
 

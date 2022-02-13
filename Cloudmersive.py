@@ -16,6 +16,8 @@ from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters
 from pyrogram.types import Message, ReplyKeyboardRemove, Poll
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+import asyncio
+from pyrogram.errors import FloodWait
 import  json
 import time
 import re as reaaa
@@ -187,7 +189,10 @@ async def pdf_img_text(client:Client,message:Message):
 			page = doc.loadPage(pageNo)
 			pix = page.getPixmap(matrix = mat)
 			pix.writePNG(image_folder+"sample2.png")
-			await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
+			try:
+				await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
+			except FloodWait as e:
+				await asyncio.sleep(e.x)
 			
 
 

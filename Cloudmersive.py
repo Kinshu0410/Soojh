@@ -201,8 +201,10 @@ async def pdf_img_text(client:Client,message:Message):
 			pix = page.getPixmap(matrix = mat)
 			pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
 			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\n")
+			print(image_folder+str(message.chat.id)+fname+".png")
 			try:
 				if pageNo%10==0:
+					
 					await app.edit_message_text(int(message.chat.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")
 			except FloodWait as e:
 				await asyncio.sleep(e.x)

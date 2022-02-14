@@ -237,8 +237,10 @@ async def job2_partene(client:Client,message:Message):
 	chunk_size = 256
 	r = requests.get(xx, stream=True)
 	with open(fname+".mp4", "wb") as f:
+		print("in file")
 		for chunk in r.iter_content(chunk_size=chunk_size):
 			f.write(chunk)
+			print("file created")
 	#f = open(fname+".MP4",'wb')
 	#f.write(r.content)
 	

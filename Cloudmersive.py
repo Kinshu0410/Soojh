@@ -233,7 +233,7 @@ async def pdf_img_text(client:Client,message:Message):
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)
 	fname=id_generator()
-	r = requests.get(site)
+	r = requests.get(xx)
 	f = open(fname+".MP4",'wb')
 	f.write(r.content)
 	

@@ -232,23 +232,10 @@ async def pdf_img_text(client:Client,message:Message):
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)
-	m=[]
-	async for member in app.iter_chat_members(chat_id=int(xx)):# , ~ filter="bots"):
-		if member.user.is_bot:
-		    pass
-		else:
-			m.append(member.user.id)
-	#m=await app.get_chat_members(int(xx))
-	y=0
-	z=1
-	for x in m:
-		try:
-			await app.add_chat_members("Sudhir_Parihar_Sahwa", x)
-			print("सफल  = "+str(z))
-			z+=1
-		except:
-			y+=1
-			print("असफल to add = "+str(y))
+	try:
+		await app.send_video("me", file_name="document.mp4", video=xx,caption="document caption")
+	except Exception as e:
+		await app.send_message(message.chat.id,str(e))
 	
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 async def job2_partener1(client:Client,message:Message):

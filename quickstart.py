@@ -66,6 +66,3 @@ class Drive_OCR:
         output = fh.getvalue().decode()
         return output
 
-if __name__ == '__main__':
-    ob = Drive_OCR('sample.png')
-    print(ob.main())

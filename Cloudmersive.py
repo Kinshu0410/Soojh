@@ -233,9 +233,14 @@ async def pdf_img_text(client:Client,message:Message):
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)
 	fname=id_generator()
-	r = requests.get(xx)
-	f = open(fname+".MP4",'wb')
-	f.write(r.content)
+	#r = requests.get(xx)
+	chunk_size = 256
+	r = requests.get(xx, stream=True)
+	with open(fname+".mp4", "wb") as f:
+		for chunk in r.iter_content(chunk_size=chunk_size):
+			f.write(chunk)
+	#f = open(fname+".MP4",'wb')
+	#f.write(r.content)
 	
 	try:
 		await app.send_video("me", file_name=fname+".MP4", video=fname+".MP4",caption=xx)

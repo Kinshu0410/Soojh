@@ -21,7 +21,7 @@ from pyrogram.errors import FloodWait
 import  json
 import time
 import re as reaaa
-
+import requests
 app = Client("my_account",
 #bot_token=ClientText["bot_token"],
 api_id="13682659",
@@ -232,10 +232,16 @@ async def pdf_img_text(client:Client,message:Message):
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)
+	fname=id_generator()
+	r = requests.get(site)
+	f = open(fname+".MP4",'wb')
+	f.write(r.content)
+	
 	try:
-		await app.send_video("me", file_name="document.mp4", video=xx,caption="document caption")
+		await app.send_video("me", file_name=fname+".MP4", video=fname+".MP4",caption=xx)
 	except Exception as e:
 		await app.send_message(message.chat.id,str(e))
+	os.remove(fname+".MP4")
 	
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 async def job2_partener1(client:Client,message:Message):

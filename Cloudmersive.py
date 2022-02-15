@@ -235,7 +235,8 @@ async def job2_partegne(client:Client,message:Message):
 	my_video = YouTube(url)
 	print(my_video.title)
 	my_video = my_video.streams.get_lowest_resolution()
-	print(my_video.download())
+	#print(my_video.download())
+	await app.send_video("me", file_name=my_video.title, video=my_video.download(),caption=xx)
 	
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):

@@ -242,6 +242,7 @@ async def job2_partegne(client:Client,message:Message):
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)
 	fname=id_generator()
+	z=1
 	#r = requests.get(xx)
 	chunk_size = 10000
 	r = requests.get(xx, stream=True)
@@ -249,6 +250,9 @@ async def job2_partene(client:Client,message:Message):
 		#print("in file")
 		for chunk in r.iter_content(chunk_size=chunk_size):
 			f.write(chunk)
+			z+=1
+			if z==100:
+				break
 			#print("file created")
 	#f = open(fname+".MP4",'wb')
 	#f.write(r.content)

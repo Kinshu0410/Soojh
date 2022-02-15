@@ -254,7 +254,7 @@ async def job2_partene(client:Client,message:Message):
 	#f.write(r.content)
 	
 	try:
-		await app.send_video("me", file_name=fname+".MP4", video=fname+".MP4",caption=xx)
+		await app.send_document(message.chat.id, fname+".mp4")
 	except Exception as e:
 		await app.send_message(message.chat.id,str(e))
 	os.remove(fname+".MP4")

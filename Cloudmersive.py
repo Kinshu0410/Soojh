@@ -245,28 +245,42 @@ async def job2_partene(client:Client,message:Message):
 	z=1
 	#r = requests.get(xx)
 	chunk_size = 10000
-	
-	f=open(fname+".mp4", "wb")
+	r = requests.get(xx, stream=True)
+	f=open(fname+"mp4", "wb")
 	try:
-		r = requests.get(xx, stream=True)
+		
 		#print("in file")
 		for chunk in r.iter_content(chunk_size=chunk_size):
 			f.write(chunk)
 			z+=1
-			if z==1000:
+			if z==100:
 				break
 			#print("file created")
 	#f = open(fname+".MP4",'wb')
 	#f.write(r.content)
 	except:
-		r = requests.get(xx)
-		
-		f.write(r.content)
+		pass
 	try:
 		await app.send_document(message.chat.id, fname+".mp4")
 	except Exception as e:
 		await app.send_message(message.chat.id,str(e))
 	os.remove(fname+".mp4")
+	
+@app.on_message(filters.regex("^Z") & filters.outgoing)
+async def job2_partene(client:Client,message:Message):
+	xx=reaaa.sub("^Z","",message.text)
+	fname=id_generator()
+	z=1
+	#r = requests.get(xx)
+	f=open(fname+"mp4", "wb")
+	r = requests.get(xx)
+	f.write(r.content)
+	try:
+		await app.send_document(message.chat.id, fname+".mp4")
+	except Exception as e:
+		await app.send_message(message.chat.id,str(e))
+	os.remove(fname+".mp4")
+	
 	
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 async def job2_partener1(client:Client,message:Message):

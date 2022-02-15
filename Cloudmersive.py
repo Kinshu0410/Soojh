@@ -227,8 +227,15 @@ async def pdf_img_text(client:Client,message:Message):
 			
 
 
-
-    
+from pytube import YouTube
+@app.on_message(filters.regex("^X") & filters.outgoing)
+async def job2_partene(client:Client,message:Message):
+	xx=reaaa.sub("^X","",message.text)
+	url=xx
+	my_video = YouTube(url)
+	my_video = my_video.streams.get_lowest_resolution()
+	print(my_video.download())
+	
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):
 	xx=reaaa.sub("^Y","",message.text)

@@ -245,18 +245,23 @@ async def job2_partene(client:Client,message:Message):
 	z=1
 	#r = requests.get(xx)
 	chunk_size = 10000
-	r = requests.get(xx, stream=True)
-	with open(fname+".mp4", "wb") as f:
+	
+	f=open(fname+".mp4", "wb")
+	try:
+		r = requests.get(xx, stream=True)
 		#print("in file")
 		for chunk in r.iter_content(chunk_size=chunk_size):
 			f.write(chunk)
 			z+=1
-			if z==100:
+			if z==1000:
 				break
 			#print("file created")
 	#f = open(fname+".MP4",'wb')
 	#f.write(r.content)
-	
+	except:
+		r = requests.get(xx)
+		
+		f.write(r.content)
 	try:
 		await app.send_document(message.chat.id, fname+".mp4")
 	except Exception as e:

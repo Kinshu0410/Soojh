@@ -270,9 +270,6 @@ async def job2_hhpartene(client:Client,message:Message):
 	with open(fname+".mp4", "wb") as f:
 		#print("in file")
 		f.write(r.content)
-			z+=1
-			if z==100:
-				break
 	
 	try:
 		await app.send_document(message.chat.id, fname+".mp4")

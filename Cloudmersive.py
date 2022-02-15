@@ -257,7 +257,7 @@ async def job2_partene(client:Client,message:Message):
 		await app.send_document(message.chat.id, fname+".mp4")
 	except Exception as e:
 		await app.send_message(message.chat.id,str(e))
-	os.remove(fname+".MP4")
+	os.remove(fname+".mp4")
 	
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 async def job2_partener1(client:Client,message:Message):

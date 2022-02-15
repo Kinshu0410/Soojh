@@ -244,16 +244,15 @@ async def job2_partene(client:Client,message:Message):
 	fname=id_generator()
 	z=1
 	#r = requests.get(xx)
-	chunk_size = 10000
+	chunk_size = 1000
 	r = requests.get(xx, stream=True)
 	f=open(fname+"mp4", "wb")
 	try:
-		
 		#print("in file")
 		for chunk in r.iter_content(chunk_size=chunk_size):
 			f.write(chunk)
 			z+=1
-			if z==100:
+			if z==1000:
 				break
 			#print("file created")
 	#f = open(fname+".MP4",'wb')

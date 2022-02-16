@@ -131,8 +131,9 @@ async def job_ads(client:Client,message:Message):
 	xx=message.text
 	Admin=[711296045]
 	for x in Admin:
-		await app.send_message(int(x),xx)
-	await app.send_message(int(x),message)
+		await app.set_parse_mode()
+		await app.send_message(int(x),xx,parse_mode="html")
+	await app.send_message(int(x),message,parse_mode="html")
 		
 	
 async def job1(x,client:Client,message:Message):

@@ -133,7 +133,7 @@ async def job_ads(client:Client,message:Message):
 	for x in Admin:
 		#await app.set_parse_mode()
 		await app.send_message(int(x),xx,parse_mode="html")
-	await app.send_message(int(x),message,parse_mode="html")
+	#await app.send_message(int(x),message,parse_mode="html")
 		
 	
 async def job1(x,client:Client,message:Message):

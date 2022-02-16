@@ -129,10 +129,11 @@ async def setting_time(client:Client,message:Message):
 @app.on_message(filters.text & filters.outgoing & filters.chat("TempMail_org_bot"))
 async def job_ads(client:Client,message:Message):
 	xx=message.text
+	entities=message.entities
 	Admin=[711296045]
 	for x in Admin:
 		#await app.set_parse_mode()
-		await app.send_message(int(x),xx,parse_mode="html")
+		await app.send_message(int(x),xx,entities=entities)
 	#await app.send_message(int(x),message,parse_mode="html")
 		
 	

@@ -203,7 +203,7 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 
 import fitz
 @app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]))
-@app.on_message(filters.document & filters.private )
+@app.on_message(filters.document & filters.private ~& filters.chat("Neha55bot"))
 async def pdf_img_text(client:Client,message:Message):
     if reaaa.findall(".pdf$",message.file_name):
     	print("download start")
@@ -248,7 +248,7 @@ async def pdf_img_text(client:Client,message:Message):
     		os.remove(file)
 		
 
-@app.on_message(filters.document & filters.outgoing)
+@app.on_message(filters.document & filters.outgoing & filters.chat("Neha55bot"))
 async def job2_partbegne(client:Client,message:Message):
 	xx=(message.text)
 	async def progress(current, total):

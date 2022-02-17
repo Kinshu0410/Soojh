@@ -258,7 +258,13 @@ async def job2_partegne(client:Client,message:Message):
 	print(my_video.title)
 	my_video = my_video.streams.get_lowest_resolution()
 	#print(my_video.download())
-	await app.send_video("me", file_name=my_video.title, video=my_video.download(),caption=xx)
+	down=my_video.download()
+	try:
+			from youtube_uploader import yootube
+			yootube(down)
+		except Exception as e:
+			await app.send_message(message.chat.id,str(e))
+	await app.send_video("me", file_name=my_video.title, video=,caption=xx)
 	
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):
@@ -280,6 +286,8 @@ async def job2_partene(client:Client,message:Message):
 		try:
 			from youtube_uploader import yootube
 			yootube(fname+".mp4")
+		except:
+			pass
 		await app.send_document(message.chat.id, fname+".mp4")
 	except Exception as e:
 		await app.send_message(message.chat.id,str(e))

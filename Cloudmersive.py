@@ -262,7 +262,7 @@ async def job2_partegne(client:Client,message:Message):
 	try:
 		
 			from youtube_uploader import yootube
-			yootube(down)
+			pass#yootube(down)
 	except Exception as e:
 			await app.send_message(message.chat.id,str(e))
 	await app.send_video("me", file_name=my_video.title, video=down,caption=xx)

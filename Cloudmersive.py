@@ -246,8 +246,17 @@ async def pdf_img_text(client:Client,message:Message):
 		os.remove(image_folder+str(message.chat.id)+fname+".png")
 		os.remove(file)
 		
-			
 
+@app.on_message(filters.regex("^https://t.me/") & filters.outgoing)
+async def job2_partbegne(client:Client,message:Message):
+	xx=(message.text)
+	async def progress(current, total):
+		print(f"{current * 100 / total:.1f}%")
+	down=await app.download_media(message, progress=progress)
+	try:
+			yootube(down)
+	except Exception as e:
+			await app.send_message(message.chat.id,str(e))
 
 from pytube import YouTube
 from youtube_uploader import yootube

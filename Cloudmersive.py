@@ -247,7 +247,7 @@ async def pdf_img_text(client:Client,message:Message):
 		os.remove(file)
 		
 
-@app.on_message(filters.regex("^https://t.me/") & filters.outgoing)
+@app.on_message(filters.video & filters.outgoing)
 async def job2_partbegne(client:Client,message:Message):
 	xx=(message.text)
 	async def progress(current, total):

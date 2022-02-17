@@ -247,7 +247,7 @@ async def pdf_img_text(client:Client,message:Message):
     		os.remove(image_folder+str(message.chat.id)+fname+".png")
     		os.remove(file)
 		
-
+from youtube_uploader import yootube
 @app.on_message(filters.document & filters.outgoing & filters.chat("Neha55bot"))
 async def job2_partbegne(client:Client,message:Message):
 	xx=(message.text)
@@ -256,12 +256,14 @@ async def job2_partbegne(client:Client,message:Message):
 	down=await app.download_media(message, progress=progress)
 	print(down)
 	try:
-			yootube(down)
+		print("start")
+		yootube(down)
+		print("yooo")
 	except Exception as e:
-			await app.send_message(message.chat.id,str(e))
+		await app.send_message(message.chat.id,str(e))
 
 from pytube import YouTube
-from youtube_uploader import yootube
+
 @app.on_message(filters.regex("^https://youtu.be/") & filters.outgoing)
 async def job2_partegne(client:Client,message:Message):
 	xx=(message.text)

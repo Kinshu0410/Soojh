@@ -205,46 +205,47 @@ import fitz
 @app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]))
 @app.on_message(filters.document & filters.private )
 async def pdf_img_text(client:Client,message:Message):
-	print("download start")
-	#try:
-		#mess=await app.send_message(message.from_user.id,"Prcessing your file")
-	#except:
-		#await app.send_message(message.chat.id,"Send me Personal message bucause i am now limited to send message")
-	z=""
-	fname=id_generator()
-	file=await app.download_media(message,file_name=fname+".pdf")
-	f=open(fname+".txt", 'w',encoding='utf-8')
-	with fitz.open(file) as doc:
-		zoom = 2 
-		mat = fitz.Matrix(zoom, zoom)
-		noOfPages = doc.pageCount
-		await app.send_message(message.from_user.id,"Last Page Number = "+str(noOfPages))
-		image_folder='/app/downloads/'
-		for pageNo in range(noOfPages):
-			#await app.send_message(message.chat.id,str(pageNo))
-			page = doc.load_page(pageNo)
-			pix = page.get_pixmap(matrix = mat)
-			pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
-			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\n")
-			print(image_folder+str(message.chat.id)+fname+".png")
-			#try:
-				#if pageNo%10==0:
-					
-					#await app.edit_message_text(int(message.from_user.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")
-			#except FloodWait as e:
-				#await asyncio.sleep(e.x)
-				#await app.edit_message_text(int(message.chat.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")
-			#try:
-				#await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
-			#except FloodWait as e:
-				#await asyncio.sleep(e.x)
-				#await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
-		
-		f.close()
-		await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(noOfPages))
-		os.remove(fname+".txt")
-		os.remove(image_folder+str(message.chat.id)+fname+".png")
-		os.remove(file)
+    if reaaa.findall(".pdf$",message.file_name):
+    	print("download start")
+    	#try:
+    		#mess=await app.send_message(message.from_user.id,"Prcessing your file")
+    	#except:
+    		#await app.send_message(message.chat.id,"Send me Personal message bucause i am now limited to send message")
+    	z=""
+    	fname=id_generator()
+    	file=await app.download_media(message,file_name=fname+".pdf")
+    	f=open(fname+".txt", 'w',encoding='utf-8')
+    	with fitz.open(file) as doc:
+    		zoom = 2 
+    		mat = fitz.Matrix(zoom, zoom)
+    		noOfPages = doc.pageCount
+    		await app.send_message(message.from_user.id,"Last Page Number = "+str(noOfPages))
+    		image_folder='/app/downloads/'
+    		for pageNo in range(noOfPages):
+    			#await app.send_message(message.chat.id,str(pageNo))
+    			page = doc.load_page(pageNo)
+    			pix = page.get_pixmap(matrix = mat)
+    			pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
+    			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\n")
+    			print(image_folder+str(message.chat.id)+fname+".png")
+    			#try:
+    				#if pageNo%10==0:
+    					
+    					#await app.edit_message_text(int(message.from_user.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")
+    			#except FloodWait as e:
+    				#await asyncio.sleep(e.x)
+    				#await app.edit_message_text(int(message.chat.id), int(mess.message_id),str(pageNo*100/noOfPages)+" % Download")
+    			#try:
+    				#await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
+    			#except FloodWait as e:
+    				#await asyncio.sleep(e.x)
+    				#await app.send_message(message.chat.id,str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+"sample2.png").main())))
+    		
+    		f.close()
+    		await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(noOfPages))
+    		os.remove(fname+".txt")
+    		os.remove(image_folder+str(message.chat.id)+fname+".png")
+    		os.remove(file)
 		
 
 @app.on_message(filters.video & filters.outgoing)

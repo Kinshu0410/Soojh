@@ -257,7 +257,7 @@ async def job2_partegne(client:Client,message:Message):
 	url=xx
 	my_video = YouTube(url)
 	print(my_video.title)
-	my_video = my_video.streams.get_lowest_resolution()
+	my_video = my_video.streams.get_highest_resolution()
 	#print(my_video.download())
 	down=my_video.download()
 	print(down)

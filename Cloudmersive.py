@@ -260,6 +260,7 @@ async def job2_partegne(client:Client,message:Message):
 	#print(my_video.download())
 	down=my_video.download()
 	try:
+		try:
 			from youtube_uploader import yootube
 			yootube(down)
 		except Exception as e:

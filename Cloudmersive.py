@@ -260,6 +260,7 @@ async def job2_partegne(client:Client,message:Message):
 	my_video = my_video.streams.get_lowest_resolution()
 	#print(my_video.download())
 	down=my_video.download()
+	print(down)
 	try:
 			yootube(down)
 	except Exception as e:

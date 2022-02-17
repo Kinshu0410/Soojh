@@ -265,7 +265,7 @@ async def job2_partegne(client:Client,message:Message):
 			yootube(down)
 		except Exception as e:
 			await app.send_message(message.chat.id,str(e))
-	await app.send_video("me", file_name=my_video.title, video=,caption=xx)
+	await app.send_video("me", file_name=my_video.title, video=down,caption=xx)
 	
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):

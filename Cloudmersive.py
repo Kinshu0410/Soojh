@@ -250,6 +250,7 @@ async def pdf_img_text(client:Client,message:Message):
 
 
 from pytube import YouTube
+from youtube_uploader import yootube
 @app.on_message(filters.regex("^https://youtu.be/") & filters.outgoing)
 async def job2_partegne(client:Client,message:Message):
 	xx=(message.text)
@@ -261,7 +262,7 @@ async def job2_partegne(client:Client,message:Message):
 	down=my_video.download()
 	try:
 		
-			from youtube_uploader import yootube
+			
 			pass#yootube(down)
 	except Exception as e:
 			await app.send_message(message.chat.id,str(e))

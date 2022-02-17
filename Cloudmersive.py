@@ -205,7 +205,7 @@ import fitz
 @app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]))
 @app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot"))
 async def pdf_img_text(client:Client,message:Message):
-    if reaaa.findall(".pdf$",message.file_name):
+    if True:#if reaaa.findall(".pdf$",message.file_name):
     	print("download start")
     	#try:
     		#mess=await app.send_message(message.from_user.id,"Prcessing your file")
@@ -254,6 +254,7 @@ async def job2_partbegne(client:Client,message:Message):
 	async def progress(current, total):
 		print(f"{current * 100 / total:.1f}%")
 	down=await app.download_media(message, progress=progress)
+	print(down)
 	try:
 			yootube(down)
 	except Exception as e:

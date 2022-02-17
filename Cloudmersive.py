@@ -277,6 +277,9 @@ async def job2_partene(client:Client,message:Message):
 				break
 	
 	try:
+		try:
+			from youtube_uploader import yootube
+			yootube(fname+".mp4")
 		await app.send_document(message.chat.id, fname+".mp4")
 	except Exception as e:
 		await app.send_message(message.chat.id,str(e))

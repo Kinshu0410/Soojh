@@ -1975,7 +1975,7 @@ def current(update,context):
     #print(URL1)
     for x in URL1:
     	print(x)
-    	if x.startswith("https://soojhboojhquiz.blogspot.com/2022/02"):
+    	if x.startswith("https://"):
     	    URL.append(x)
     	    
     	

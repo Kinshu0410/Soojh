@@ -203,7 +203,7 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 
 import fitz
 @app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]))
-@app.on_message(filters.document & filters.private ~& filters.chat("Neha55bot"))
+@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot"))
 async def pdf_img_text(client:Client,message:Message):
     if reaaa.findall(".pdf$",message.file_name):
     	print("download start")

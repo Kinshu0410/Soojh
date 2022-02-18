@@ -271,7 +271,7 @@ async def yoo(cred,down,client,message):
 			Nu=0
 		else :
 			Nu+=1
-		clientmongo["youtube"]["token"].update_one({},"$set": { "Nu":Nu} })
+		clientmongo["youtube"]["token"].update_one({},{"$set": { "Nu":Nu} })
 		await app.send_message(message.chat.id,"Trying to another Api")
 		yoo(cred,down,client,message):
 		

@@ -270,14 +270,14 @@ async def yoo(cred,down,client,message):
 			await app.send_message(message.chat.id,"sucessful")
 		except FloodWait as e:
 			await asyncio.sleep(e.x)
-	except Exception as e:
+	except Exception as zz:
 		if Nu == len(cred):
 			Nu=0
 		else :
 			Nu+=1
 		clientmongo["youtube"]["token"].update_one({},{"$set": { "Nu":Nu} })
 		try:
-			await app.send_message(message.chat.id,"Trying to another Api")
+			await app.send_message(message.chat.id,"Trying to another Api = "str(zz))
 		except FloodWait as e:
 			await asyncio.sleep(e.x)
 		return await yoo(cred,down,client,message)

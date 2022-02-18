@@ -260,7 +260,7 @@ async def job2_partbegne(client:Client,message:Message):
 	for file in os.listdir("you_c"):
 		if file.endswith(".json"):
 			cred.append(os.path.join("you_c", file))
-	return yoo(cred,client,message)
+	return yoo(cred,down,client,message)
 
 async def yoo(cred,down,client,message):
 	Nu=clientmongo["youtube"]["token"].find_one({})["Nu"]

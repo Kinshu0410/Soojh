@@ -248,20 +248,33 @@ async def pdf_img_text(client:Client,message:Message):
     		os.remove(file)
 		
 from youtube_uploader import yootube
+
 @app.on_message(filters.document & filters.outgoing & filters.chat("Neha55bot"))
 async def job2_partbegne(client:Client,message:Message):
 	xx=(message.text)
+	cred=[]
 	async def progress(current, total):
 		print(f"{current * 100 / total:.1f}%")
 	down=await app.download_media(message, progress=progress)
 	print(down)
-	try:
-		print("start")
-		yootube(down)
-		print("yooo")
-	except Exception as e:
-		await app.send_message(message.chat.id,str(e))
+	for file in os.listdir("you_c"):
+		if file.endswith(".json"):
+			cred.append(os.path.join("you_c", file))
+	return yoo(cred,client,message)
 
+async def yoo(cred,down,client,message):
+	Nu=clientmongo["youtube"]["token"].find_one({})["Nu"]
+	try:
+		yootube(down,cred[Nu])
+	except Exception as e:
+		if Nu == len(cred):
+			Nu=0
+		else :
+			Nu+=1
+		Nu=clientmongo["youtube"]["token"].update_one({},"$set": { "Nu":Nu} })
+		await app.send_message(message.chat.id,"Trying to another Api")
+		yoo(cred,down,client,message):
+		
 from pytube import YouTube
 
 @app.on_message(filters.regex("^https://youtu.be/") & filters.outgoing)

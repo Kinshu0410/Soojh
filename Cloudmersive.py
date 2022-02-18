@@ -248,7 +248,7 @@ async def pdf_img_text(client:Client,message:Message):
     		os.remove(file)
 		
 from youtube_uploader import yootube
-
+@app.on_message(filters.video & filters.outgoing & filters.chat("Neha55bot"))
 @app.on_message(filters.document & filters.outgoing & filters.chat("Neha55bot"))
 async def job2_partbegne(client:Client,message:Message):
 	xx=(message.text)

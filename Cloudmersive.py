@@ -260,7 +260,7 @@ async def job2_partbegne(client:Client,message:Message):
 	for file in os.listdir("you_c"):
 		if file.endswith(".json"):
 			cred.append(os.path.join("you_c", file))
-	return yoo(cred,down,client,message)
+	return await yoo(cred,down,client,message)
 
 async def yoo(cred,down,client,message):
 	Nu=clientmongo["youtube"]["token"].find_one({})["Nu"]
@@ -273,7 +273,7 @@ async def yoo(cred,down,client,message):
 			Nu+=1
 		clientmongo["youtube"]["token"].update_one({},{"$set": { "Nu":Nu} })
 		await app.send_message(message.chat.id,"Trying to another Api")
-		return yoo(cred,down,client,message)
+		return await yoo(cred,down,client,message)
 		
 from pytube import YouTube
 

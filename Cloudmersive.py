@@ -266,13 +266,20 @@ async def yoo(cred,down,client,message):
 	Nu=clientmongo["youtube"]["token"].find_one({})["Nu"]
 	try:
 		yootube(down,cred[Nu])
+		try:
+			await app.send_message(message.chat.id,"sucessful")
+		except FloodWait as e:
+			await asyncio.sleep(e.x)
 	except Exception as e:
 		if Nu == len(cred):
 			Nu=0
 		else :
 			Nu+=1
 		clientmongo["youtube"]["token"].update_one({},{"$set": { "Nu":Nu} })
-		await app.send_message(message.chat.id,"Trying to another Api")
+		try:
+			await app.send_message(message.chat.id,"Trying to another Api")
+		except FloodWait as e:
+			await asyncio.sleep(e.x)
 		return await yoo(cred,down,client,message)
 		
 from pytube import YouTube

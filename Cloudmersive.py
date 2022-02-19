@@ -265,7 +265,7 @@ async def job2_partbegne(client:Client,message:Message):
 async def yoo(cred,down,client,message):
 	Nu=clientmongo["youtube"]["token"].find_one({})["Nu"]
 	try:
-		#yootube(down,cred[Nu])
+		yootube(down,cred[Nu])
 		cred1=[]
 		for file in os.listdir("/app/downloads"):
 			#if file.endswith(".mp4"):
@@ -273,7 +273,7 @@ async def yoo(cred,down,client,message):
 		print(cred1)
 		for yy in cred1:
 			os.remove(yy)
-			print(yy)
+			#print(yy)
 		try:
 			await app.send_message(message.chat.id,"sucessful")#
 		except FloodWait as e:

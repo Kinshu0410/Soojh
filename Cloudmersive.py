@@ -709,7 +709,7 @@ async def Current_iq(client:Client,message:Message):
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 @app.on_message(filters.poll & filters.private)#& filters.incoming)
-asynco def private_polls(client:Client,message:Message):
+async def private_polls(client:Client,message:Message):
 	chatid=[]
 	if message.chat.id==1952288751:
 		chatid=[-1001612419726]

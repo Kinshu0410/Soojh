@@ -267,7 +267,7 @@ async def yoo(cred,down,client,message):
 	try:
 		yootube(down,cred[Nu])
 		try:
-			await app.send_message(message.chat.id,"sucessful")
+			await app.send_message(message.chat.id,"sucessful")#
 		except FloodWait as e:
 			await asyncio.sleep(e.x)
 	except Exception as zz:

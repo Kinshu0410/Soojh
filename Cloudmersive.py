@@ -296,17 +296,31 @@ from pytube import YouTube
 async def job2_partegne(client:Client,message:Message):
 	xx=(message.text)
 	url=xx
-	my_video = YouTube(url)
+	cred=[]
+	Nu=clientmongo["youtube"]["token"].find_one({})["Nu"]
+	for file in os.listdir("you_c"):
+		if file.endswith(".json"):
+			cred.append(os.path.join("you_c", file))
+	try:
+		my_video = YouTube(url)
+	except:
+		pass
 	print(my_video.title)
 	my_video = my_video.streams.get_highest_resolution()
 	#print(my_video.download())
 	down=my_video.download()
 	print(down)
 	try:
-			yootube(down)
+			yootube(down,cred[Nu])
 	except Exception as e:
-			await app.send_message(message.chat.id,str(e))
+			await app.send_message(message.chat.id,str(e)+str(Nu))
+			if Nu == len(cred):
+				Nu=0
+			else :
+				Nu+=1
+			clientmongo["youtube"]["token"].update_one({},{"$set": { "Nu":Nu} })
 	await app.send_video("me", file_name=my_video.title, video=down,caption=xx)
+	os.remove(down)
 	
 @app.on_message(filters.regex("^Y") & filters.outgoing)
 async def job2_partene(client:Client,message:Message):

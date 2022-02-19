@@ -709,7 +709,7 @@ async def Current_iq(client:Client,message:Message):
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 @app.on_message(filters.poll & filters.private)#& filters.incoming)
-async def Science_iq_bot(client:Client,message:Message):
+def Science_iq_bot(client:Client,message:Message):
 	chatid=[]
 	if message.chat.id==1952288751:
 		chatid=[-1001612419726]
@@ -718,44 +718,22 @@ async def Science_iq_bot(client:Client,message:Message):
 	##print(message.message_id)
 	try:
 		
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=( client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
-	##print(mess)
-	    ##print(mess)
 	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
 	question=mess.question
-	
-	#question=reaaa.sub("\n","       ",question)
-	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
-	#print("que se aage gye")
-	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
-	#question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
-	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
-	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
-	question=reaaa.sub(r"^(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
-	
-	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
-	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
-	question=reaaa.sub(r" C.A BY ", "", question)
-	question=reaaa.sub(r"", "", question)
-	
 	options=[o.text for o in mess.options]
-	
-	
 	correct_option_id = 0
 	for i in range(len(mess.options)):
 	       if mess.options[i]['correct']:
 	           correct_option_id = i
 	           break
-	#correct_option_id
-	##print(message)
-	#time.sleep(100)
 	for x in chatid:
 		try:
-			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
+			mess=( app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
 		except FloodWait as e:
-			await asyncio.sleep(e.x)
+			asyncio.sleep(e.x)
 	    #col=clientmongo["channal_schedule"][str(x)]
 	    #col.insert_one({'que':question,'op':options,'cor':correct_option_id})
 	    #scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))

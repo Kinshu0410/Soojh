@@ -709,7 +709,7 @@ async def Current_iq(client:Client,message:Message):
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
 @app.on_message(filters.poll & filters.private)#& filters.incoming)
-def Science_iq_bot(client:Client,message:Message):
+asynco def private_polls(client:Client,message:Message):
 	chatid=[]
 	if message.chat.id==1952288751:
 		chatid=[-1001612419726]
@@ -718,7 +718,7 @@ def Science_iq_bot(client:Client,message:Message):
 	##print(message.message_id)
 	try:
 		
-	    mess=( client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
 	except:
 	    mess=message.poll
 	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
@@ -729,11 +729,14 @@ def Science_iq_bot(client:Client,message:Message):
 	       if mess.options[i]['correct']:
 	           correct_option_id = i
 	           break
+	#correct_option_id
+	##print(message)
+	#time.sleep(100)
 	for x in chatid:
 		try:
-			mess=( app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
 		except FloodWait as e:
-			asyncio.sleep(e.x)
+			await asyncio.sleep(e.x)
 	    #col=clientmongo["channal_schedule"][str(x)]
 	    #col.insert_one({'que':question,'op':options,'cor':correct_option_id})
 	    #scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))

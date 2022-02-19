@@ -708,11 +708,13 @@ async def Current_iq(client:Client,message:Message):
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message(filters.poll & filters.chat(["Science_iq_bot","Ramesh_Karwasara"]) )#& filters.incoming)
+@app.on_message(filters.poll & filters.private)#& filters.incoming)
 def Science_iq_bot(client:Client,message:Message):
-	chatid=["Scienceinhindincert"]
-	if message.chat.username=="Ramesh_Karwasara":
-		chatid=["ReetAspirants"]
+	chatid=[]
+	if message.chat.id==1952288751:
+		chatid=[-1001612419726]
+		
+	#else
 	##print(message.message_id)
 	try:
 		
@@ -750,10 +752,10 @@ def Science_iq_bot(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    #mess=(app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
-	    col=clientmongo["channal_schedule"][str(x)]
-	    col.insert_one({'que':question,'op':options,'cor':correct_option_id})
-	    scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
+	    mess=(app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
+	    #col=clientmongo["channal_schedule"][str(x)]
+	    #col.insert_one({'que':question,'op':options,'cor':correct_option_id})
+	    #scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
 	    #scheduler.start()
 async def job4(x,client:Client,message:Message):
     col=clientmongo["channal_schedule"][str(x)]

@@ -398,7 +398,7 @@ async def job2_partener1(client:Client,message:Message):
             		    if mess2.votes[mmid].user_id not in result.keys():
             		        #print
             		        fname=mess2.users[mmid]["username"]
-            		        if uname is None:
+            		        if fname is None:
             		            fname=mess2.users[mmid]["first_name"]
             		        else:
             		            fname="@"+fname

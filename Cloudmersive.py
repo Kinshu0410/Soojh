@@ -432,7 +432,7 @@ async def job2_partener1(client:Client,message:Message):
     	    f.write(final_text)
         f.close()
         try:
-            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+len(new_result)'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+len(new_result)+'\n'.join(text[0:20]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

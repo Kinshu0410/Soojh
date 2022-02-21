@@ -393,7 +393,7 @@ async def job2_partener1(client:Client,message:Message):
             		    if mess1.options[i]['correct']:
             		        correct_option_id = i
             		        break
-            		tmarks+=4
+            		
             		#print("correct_option_id = "+str(correct_option_id))
             		for mmid in range(len(mess2.votes)):
             		    #print(mess2.votes[mmid]["option"])
@@ -414,8 +414,7 @@ async def job2_partener1(client:Client,message:Message):
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
             		        else:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
-        		            
-        		
+            	tmarks+=4
             except Exception as e:
                 print(str(e))
     		    

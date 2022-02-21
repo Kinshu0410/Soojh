@@ -35,6 +35,8 @@ def yootube(anime,cred):
         media_body=mediaFile
     ).execute()
     
+    print("done")
+    
 
 #service.thumbnails().set(
 #    videoId=response_upload.get('id'),

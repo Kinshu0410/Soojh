@@ -397,10 +397,15 @@ async def job2_partener1(client:Client,message:Message):
             		    #print(mess2.votes[mmid]["option"])
             		    if mess2.votes[mmid].user_id not in result.keys():
             		        #print
-            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
-            		            result[(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":4}
+            		        fname=mess2.users[mmid]["username"]
+            		        if uname is None:
+            		            fname=mess2.users[mmid]["first_name"]
             		        else:
-            		            result[(mess2.votes[mmid].user_id)]={"fname":mess2.users[mmid]["first_name"],"Marks":-1}
+            		            fname="@"+fname
+            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4}
+            		        else:
+            		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1}
             		    else:
             		        Marks=result[(mess2.votes[mmid]["user_id"])]["Marks"]
             		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
@@ -427,7 +432,7 @@ async def job2_partener1(client:Client,message:Message):
     	    f.write(final_text)
         f.close()
         try:
-            await app.send_document(message.chat.id, "Result.txt",caption='\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+len(new_result)'\n'.join(text[0:20]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

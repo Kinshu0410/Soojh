@@ -372,6 +372,7 @@ async def job2_partener1(client:Client,message:Message):
         mess1="vote alreddy given"
         result={}
         new_result = {}
+        tmarks=0
         for x in range(int(xx[0]),int(xx[1])+1):
     		#print(str(result))
             try:
@@ -392,6 +393,7 @@ async def job2_partener1(client:Client,message:Message):
             		    if mess1.options[i]['correct']:
             		        correct_option_id = i
             		        break
+            		    tmarks+=4
             		#print("correct_option_id = "+str(correct_option_id))
             		for mmid in range(len(mess2.votes)):
             		    #print(mess2.votes[mmid]["option"])
@@ -432,7 +434,7 @@ async def job2_partener1(client:Client,message:Message):
     	    f.write(final_text)
         f.close()
         try:
-            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+str(len(new_result))+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+str(len(new_result))+"&Total Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

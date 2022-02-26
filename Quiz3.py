@@ -1285,6 +1285,11 @@ def poll(update, context):
 		    	time.sleep(5)
     elif str(update.message.from_user.id) in LIST_OF_ADMINS:
 	    quest=(update.message.text)
+	    
+	    quest=reaaa.sub("Sol\.\(a\).*", "1", quest)
+	    quest=reaaa.sub("Sol\.\(b\).*", "2", quest)
+	    quest=reaaa.sub("Sol\.\(c\).*", "3", quest)
+	    quest=reaaa.sub("Sol\.\(d\).*", "4", quest)
 	    print("test")
 	    print("poll Conversation = "+update.message.text)
 	    try:

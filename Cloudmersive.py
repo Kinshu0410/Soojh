@@ -32,7 +32,7 @@ async def cyid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
 scheduler.start()
-@app.on_message(filters.regex("The quiz") )#& filters.incoming)
+@app.on_message(filters.regex("The quiz") & ~ filters.edited )#& filters.incoming )
 async def job2_partener(client:Client,message:Message):
 	if message.reply_markup:
 		if message.reply_markup["inline_keyboard"][0][0].text=="Share quiz":

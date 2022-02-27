@@ -725,6 +725,7 @@ def doc_poll(update,context):
         	    correct_option_id=2
         	elif ex[5]=="d":
         	    correct_option_id=3
+        
         	context.bot.send_poll(
         	chat_id=update.effective_chat.id,
                                 question=t[0],
@@ -735,7 +736,7 @@ def doc_poll(update,context):
                                 #explanation=exp,
                                 is_closed=False,
                                 is_anonymous=False,
-                                reply_markup=ReplyKeyboardRemove(),reply_markup=InlineKeyboardMarkup(keyboard),
+                                reply_markup=InlineKeyboardMarkup(keyboard),
                             )
     	
     	

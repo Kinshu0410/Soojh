@@ -741,6 +741,8 @@ async def private_polls(client:Client,message:Message):
 	chatid=[]
 	if message.chat.id==1952288751:
 		chatid=[-1001612419726]
+	else:
+		break
 		
 	#else
 	##print(message.message_id)

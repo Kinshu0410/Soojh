@@ -706,7 +706,7 @@ def doc_poll(update,context):
         qwer=newFile.download(filename)
         with open(qwer,"r") as poll_file:
             dbq = poll_file.read()
-        link=update.message.document.text
+        link=update.message.text
         q=reaaa.split("\n\n",dbq)
         X=0
         

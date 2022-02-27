@@ -700,6 +700,7 @@ def uploadfile(update,context):
 def doc_poll(update,context):
     if update.message.from_user.id==711296045:
         print("run")
+        filename="yo.txt"
         file_id = update.message.document.file_id
         newFile = context.bot.get_file(file_id)
         qwer=newFile.download(filename)

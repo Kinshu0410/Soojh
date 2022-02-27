@@ -696,6 +696,43 @@ def uploadfile(update,context):
     update.message.reply_text("send me file.")
     return UPLOAD
 
+async def doc_poll(update,context):
+    if update.message.from_user.chat==711296045:
+        print("run")
+        file_id = update.message.document.file_id
+        newFile = context.bot.get_file(file_id)
+        qwer=newFile.download(filename)
+        with open(qwer,"r") as poll_file:
+            dbq = poll_file.read()
+        q=reaaa.split("\n\n",dbq)
+        for x in q:
+        	x=reaaa.split("(?=Sol\.\(.\))",x)
+        	ex=x[1]
+        	t=reaaa.split("(?=\(a|b|c|d\))",x[0])
+        	if ex[5]=="a":
+        	    correct_option_id=0
+        	elif ex[5]=="b":
+        	    correct_option_id=1
+        	elif ex[5]=="c":
+        	    correct_option_id=2
+        	elif ex[5]=="d":
+        	    correct_option_id=3
+        	context.bot.send_poll(
+        	chat_id=channelid,
+                                question=t[0],
+                                options=t[1:],
+                                type=Poll.QUIZ,
+                                correct_option_id =correct_option_id,
+                                #open_period=int(Time),
+                                #explanation=exp,
+                                is_closed=False,
+                                is_anonymous=False,
+                                reply_markup=ReplyKeyboardRemove(),    
+                            )
+    	
+    	
+    	
+        
 def upload(update,context):
     global filename
     filename="testing.text"
@@ -2094,7 +2131,7 @@ def main() -> None:
     
     
     conv_handler0u = ConversationHandler(
-        entry_points=[CommandHandler('uploadfile', uploadfile)],
+        entry_points=[CommandHandler('gggg8', uploadfile)],
         states={
             UPLOAD: [MessageHandler(Filters.document, upload)],
         },
@@ -2149,6 +2186,7 @@ def main() -> None:
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))
     dp.add_handler(MessageHandler(Filters.poll, ghppp1))
+    dp.add_handler(MessageHandler(Filters.document,doc_poll))
     dp.add_handler(CommandHandler('current', current))
     # Start the Bot
     updater.start_polling(clean = True)

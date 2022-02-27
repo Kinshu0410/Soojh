@@ -717,6 +717,7 @@ def doc_poll(update,context):
         	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?&start="+str(10*X)+"&end=+start"+str(10*(X+1)))]]
         	    reply_markup=InlineKeyboardMarkup(keyboard)
         	x=reaaa.split("(?=Sol\.\(.\))",x)
+        	X+=1
         	ex=x[1]
         	t=reaaa.split("(?=\(a\)|\(b\)|\(c\)|\(d\))",x[0])
         	if ex[5]=="a":

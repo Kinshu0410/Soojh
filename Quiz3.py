@@ -710,7 +710,7 @@ def doc_poll(update,context):
         for x in q:
         	x=reaaa.split("(?=Sol\.\(.\))",x)
         	ex=x[1]
-        	t=reaaa.split("(?=(\(a|b|c|d\)))",x[0])
+        	t=reaaa.split("(?=\(a\)|\(b\)|\(c\)|\(d\))",x[0])
         	if ex[5]=="a":
         	    correct_option_id=0
         	elif ex[5]=="b":

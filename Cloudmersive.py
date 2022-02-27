@@ -738,39 +738,39 @@ async def Current_iq(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.private)#& filters.incoming)
 async def private_polls(client:Client,message:Message):
-	chatid=[]
-	if message.chat.id==1952288751:
-		chatid=[-1001612419726]
-	else:
-		break
+    chatid=[]
+    if message.chat.id==1952288751:
+        chatid=[-1001612419726]
+	
 		
 	#else
 	##print(message.message_id)
-	try:
-		
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
-	except:
-	    mess=message.poll
-	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
-	question=mess.question
-	options=[o.text for o in mess.options]
-	correct_option_id = 0
-	for i in range(len(mess.options)):
-	       if mess.options[i]['correct']:
-	           correct_option_id = i
-	           break
-	#correct_option_id
-	##print(message)
-	#time.sleep(100)
-	for x in chatid:
-		try:
-			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
-		except FloodWait as e:
-			await asyncio.sleep(e.x)
-	    #col=clientmongo["channal_schedule"][str(x)]
-	    #col.insert_one({'que':question,'op':options,'cor':correct_option_id})
-	    #scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
-	    #scheduler.start()
+    if len(chatid)!=0:
+    	try:
+    		
+    	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+    	except:
+    	    mess=message.poll
+    	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
+    	question=mess.question
+    	options=[o.text for o in mess.options]
+    	correct_option_id = 0
+    	for i in range(len(mess.options)):
+    	       if mess.options[i]['correct']:
+    	           correct_option_id = i
+    	           break
+    	#correct_option_id
+    	##print(message)
+    	#time.sleep(100)
+    	for x in chatid:
+    		try:
+    			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+    		except FloodWait as e:
+    			await asyncio.sleep(e.x)
+    	    #col=clientmongo["channal_schedule"][str(x)]
+    	    #col.insert_one({'que':question,'op':options,'cor':correct_option_id})
+    	    #scheduler.add_job(job4, "cron", hour="12",minute="5-12",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
+    	    #scheduler.start()
 async def job4(x,client:Client,message:Message):
     col=clientmongo["channal_schedule"][str(x)]
     data=col.find_one_and_delete({})

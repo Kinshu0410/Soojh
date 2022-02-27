@@ -698,7 +698,7 @@ def uploadfile(update,context):
 
 @run_async
 def doc_poll(update,context):
-    if update.message.from_user.chat==711296045:
+    if update.message.from_user.chat_id==711296045:
         print("run")
         file_id = update.message.document.file_id
         newFile = context.bot.get_file(file_id)

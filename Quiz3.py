@@ -714,7 +714,7 @@ def doc_poll(update,context):
         reply_markup=None
         for x in q:
         	if link is not None:
-        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?start="+str(10*X)+"&end="+str(10*(X+1))+"&version=3")]]
+        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?start="+str(15*X)+"&end="+str(15*(X+1))+"&version=3")]]
         	    reply_markup=InlineKeyboardMarkup(keyboard)
         	x=reaaa.split("(?=Sol\.\(.\))",x)
         	X+=1

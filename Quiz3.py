@@ -699,20 +699,20 @@ def uploadfile(update,context):
 @run_async
 def doc_poll(update,context):
     if update.message.from_user.id==711296045:
-        print(update)
+        #print(update)
         filename="yo.txt"
         file_id = update.message.document.file_id
         newFile = context.bot.get_file(file_id)
         qwer=newFile.download(filename)
         with open(qwer,"r") as poll_file:
             dbq = poll_file.read()
-        link=update.message.text
+        link=update.message.caption
         q=reaaa.split("\n\n",dbq)
         X=0
         
         keyboard=None
         for x in q:
-        	if link!="":
+        	if link not None:
         	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"start="+str(10*X)+"&end=+start"+str(10*(X+1)))]]
         	x=reaaa.split("(?=Sol\.\(.\))",x)
         	ex=x[1]

@@ -717,7 +717,7 @@ async def doc_poll(update,context):
         	    correct_option_id=2
         	elif ex[5]=="d":
         	    correct_option_id=3
-        	context.bot.send_poll(
+        	await context.bot.send_poll(
         	chat_id=channelid,
                                 question=t[0],
                                 options=t[1:],

@@ -696,7 +696,8 @@ def uploadfile(update,context):
     update.message.reply_text("send me file.")
     return UPLOAD
 
-async def doc_poll(update,context):
+@run_async
+def doc_poll(update,context):
     if update.message.from_user.chat==711296045:
         print("run")
         file_id = update.message.document.file_id
@@ -717,7 +718,7 @@ async def doc_poll(update,context):
         	    correct_option_id=2
         	elif ex[5]=="d":
         	    correct_option_id=3
-        	await context.bot.send_poll(
+        	context.bot.send_poll(
         	chat_id=channelid,
                                 question=t[0],
                                 options=t[1:],

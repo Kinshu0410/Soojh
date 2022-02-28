@@ -728,8 +728,11 @@ def doc_poll(update,context):
         	    correct_option_id=2
         	elif ex[5]=="d":
         	    correct_option_id=3
+        	
         
-        	context.bot.send_poll(
+        	try:
+        	  try:
+        	    context.bot.send_poll(
         	chat_id=update.effective_chat.id,
                                 question=t[0],
                                 options=t[1:],
@@ -741,6 +744,24 @@ def doc_poll(update,context):
                                 is_anonymous=False,
                                 reply_markup=reply_markup,
                             )
+        
+        	  except:
+        	    context.bot.send_poll(
+        	chat_id=update.effective_chat.id,
+                                question=t[0],
+                                options=t[1:],
+                                type=Poll.QUIZ,
+                                correct_option_id =correct_option_id,
+                                #open_period=int(Time),
+                                #explanation=exp,
+                                is_closed=False,
+                                is_anonymous=True,
+                                reply_markup=reply_markup,
+                            )
+        
+        	except:
+        	  context.bot.send_message(update.effective_chat.id, text="\n".join(t[:]),reply_markup=reply_markup)
+        	time.sleep(5)
     	
     	
     	

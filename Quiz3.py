@@ -755,7 +755,7 @@ def doc_poll(update,context):
                                 #open_period=int(Time),
                                 #explanation=exp,
                                 is_closed=False,
-                                is_anonymous=True,
+                                is_anonymous=False,
                                 reply_markup=reply_markup,
                             )
         
@@ -1397,7 +1397,7 @@ def poll(update, context):
 	            update.effective_chat.id,
 	            que,
 	            options,
-	            is_anonymous=True,
+	            is_anonymous=False,
 	            allows_multiple_answers=False,
 	        )
 	        elif options5 !="":
@@ -1409,7 +1409,7 @@ def poll(update, context):
 	            type=Poll.QUIZ,
 	            correct_option_id=co,
 	            explanation=options5,
-	            is_anonymous=True,
+	            is_anonymous=False,
 	            allows_multiple_answers=False,
 	        )
 	        elif options5 =="":

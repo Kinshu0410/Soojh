@@ -260,7 +260,7 @@ async def job2_partbegne(client:Client,message:Message):
 	for file in os.listdir("you_c"):
 		if file.endswith(".json"):
 			cred.append(os.path.join("you_c", file))
-	return await yoo(cred,down,client,message)
+	#return await yoo(cred,down,client,message)
 
 async def yoo(cred,down,client,message):
 	Nu=clientmongo["youtube"]["token"].find_one({})["Nu"]
@@ -311,7 +311,7 @@ async def job2_partegne(client:Client,message:Message):
 	down=my_video.download()
 	print(down)
 	try:
-			yootube(down,cred[Nu])
+			pass#yootube(down,cred[Nu])
 	except Exception as e:
 			await app.send_message(message.chat.id,str(e)+str(Nu))
 			if Nu == len(cred):
@@ -341,7 +341,7 @@ async def job2_partene(client:Client,message:Message):
 	try:
 		try:
 			from youtube_uploader import yootube
-			yootube(fname+".mp4")
+			pass#yootube(fname+".mp4")
 		except:
 			pass
 		await app.send_document(message.chat.id, fname+".mp4")
@@ -611,6 +611,7 @@ async def forword(client:Client,message:Message):
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
 	question=reaaa.sub(r"(\n| |){1,}(|C\.A BY)(\n| |){1,}", "", question)
+	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
 	question=reaaa.sub(r"", "", question)
 	options=[o.text for o in mess.options]
 	

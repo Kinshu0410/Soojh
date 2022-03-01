@@ -716,7 +716,7 @@ def doc_poll(update,context):
         Time=Xy.find_one({})["Time"]
         for x in q:
         	if link is not None:
-        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?start="+str(Time[X])+)]]
+        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?start="+str(Time[X]))]]
         	    reply_markup=InlineKeyboardMarkup(keyboard)
         	x=reaaa.split("(?=Sol\.\(.\))",x)
         	X+=1
@@ -2066,7 +2066,7 @@ def current(update,context):
     	x.append([InlineKeyboardButton("Current IQ", url="https://t.me/Current_Affairs_Quiz_Notes")])
     #elif str(update.message.chat.id)=="555919730":
     	#x.append([InlineKeyboardButton("Current GK", url="https://t.me/gk_current20")])
-    context.bot.send_message(chat_id=update.message.chat.id,text='<b>🔊 फरवरी 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b><tg-spoiler>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    context.bot.send_message(chat_id=update.message.chat.id,text='<b>🔊 मार्च 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b><tg-spoiler>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
 
 def main() -> None:

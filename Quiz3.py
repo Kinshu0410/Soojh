@@ -717,7 +717,7 @@ def doc_poll(update,context):
         yoo=0
         for x in q:
         	if link is not None:
-        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?start="+str(yoo))]]
+        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?t="+str(int(yoo)))]]
         	    reply_markup=InlineKeyboardMarkup(keyboard)
         	x=reaaa.split("(?=Sol\.\(.\))",x)
         	yoo=yoo+Time[X]

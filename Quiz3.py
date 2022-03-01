@@ -714,11 +714,13 @@ def doc_poll(update,context):
         reply_markup=None
         Xy=client["youtube"]["time"]
         Time=Xy.find_one({})["Time"]
+        yoo=0
         for x in q:
         	if link is not None:
-        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?start="+str(Time[X]))]]
+        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?start="+str(yoo))]]
         	    reply_markup=InlineKeyboardMarkup(keyboard)
         	x=reaaa.split("(?=Sol\.\(.\))",x)
+        	yoo=yoo+Time[X]
         	X+=1
         	ex=x[1]
         	t=reaaa.split("(?=\(a\)|\(b\)|\(c\)|\(d\))",x[0])

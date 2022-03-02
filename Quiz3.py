@@ -1164,8 +1164,9 @@ def ghppp1(update,context):
 	            try:
 	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
 	            except:
-	                pass
+	                print(x)
 	        time.sleep(5)
+	        print("do1111111111ne")
     else:
         cid=""
         id=""

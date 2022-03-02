@@ -1163,8 +1163,8 @@ def ghppp1(update,context):
 	        for x in ali:
 	            try:
 	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
-	            except:
-	                print(x)
+	            except Exception as e:
+	                print(str(x)+str(e))
 	        time.sleep(5)
 	        print("do1111111111ne")
     else:

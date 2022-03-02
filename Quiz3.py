@@ -1168,6 +1168,8 @@ def ghppp1(update,context):
 	                    te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))
 	                    te=reaaa.sub(" seconds","",str(te))
 	                    time.sleep(int(te))
+	                else:
+	                    client["user"]["sub"].find_one_and_delete({"Uid":x})
 		
 	        time.sleep(5)
 	        print("do1111111111ne")

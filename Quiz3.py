@@ -1141,7 +1141,10 @@ def ghn(update,context):
     except Exception as e:
         context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
-    
+
+ali=[-1001487436278,-1001135796728,-1001443924980,
+-1001472989895,-1001222891254,-1001517843177,-1001478660095,-1001173492501,-1001177789955,-1001342905358,-1001725784523,-1001664461759,-1001412214082,-1001412214082,-1001244305820,-1001393712887]
+[ali.append(x["Uid"]) for x in client["user"]["sub"].find({})]
 Man=[711296045,1001183009,776365745,1527108544,2020953330,1202919365,1309577346,875026044,5094761615,786181993,1341437687,1353892576,5028705992,781968811,2111134423]
 Group=[-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,-1001368097755,-1001222891254,-1001164423875,-1001487436278,-1001428838285,-1001664461759,-1001664461759,-1001415742406,-1001725784523]
 @restricted
@@ -1149,11 +1152,13 @@ def ghppp1(update,context):
     if update.message.chat.id==-1001682640576:
 	    if update.message.from_user.id==711296045:
 	        
-	        ali=[-1001487436278,-1001135796728,-1001443924980,
--1001472989895,-1001222891254,-1001517843177,-1001478660095,-1001173492501,-1001177789955,-1001342905358,-1001725784523,-1001664461759,-1001412214082,-1001412214082,-1001244305820,-1001393712887]
-	        [ali.append(x["Uid"]) for x in client["user"]["sub"].find({})]
+	        
+	        
 	        for x in ali:
-	            context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
+	            try:
+	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
+	            except:
+	                pass
 	        time.sleep(5)
     else:
         cid=""

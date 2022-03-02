@@ -1164,7 +1164,11 @@ def ghppp1(update,context):
 	            try:
 	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
 	            except Exception as e:
-	                print(str(x)+str(e))
+	                if reaaa.findall("Flood control exceeded. Retry in ",str(e)):
+	                    te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))
+	                    te=reaaa.sub(" seconds","",str(te))
+	                    time.sleep(int(te))
+		
 	        time.sleep(5)
 	        print("do1111111111ne")
     else:

@@ -1168,7 +1168,7 @@ def ghppp1(update,context):
 	                if reaaa.findall("Flood control exceeded. Retry in ",str(e)):
 	                    te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))
 	                    te=reaaa.sub(" seconds","",str(te))
-	                    print("sleeping for "+str(te))
+	                    context.bot.send_message(chat_id=update.message.chat_id, text="sleeping for "+str(te))
 	                    time.sleep(int(te)+1)
 	                    context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
 	                else:

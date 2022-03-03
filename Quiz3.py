@@ -1154,13 +1154,11 @@ ali=zzz
 zzz=None
 Man=[711296045,1001183009,776365745,1527108544,2020953330,1202919365,1309577346,875026044,5094761615,786181993,1341437687,1353892576,5028705992,781968811,2111134423]
 Group=[-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,-1001368097755,-1001222891254,-1001164423875,-1001487436278,-1001428838285,-1001664461759,-1001664461759,-1001415742406,-1001725784523]
+@run_async
 @restricted
-def ghppp1(update,context):
+def ghppp10(update,context):
     if update.message.chat.id==-1001682640576:
 	    if update.message.from_user.id==711296045:
-	        
-	        
-	        
 	        for x in ali:
 	            try:
 	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
@@ -1178,7 +1176,10 @@ def ghppp1(update,context):
 		
 	        time.sleep(5)
 	        context.bot.send_message(chat_id=update.message.chat_id, text="Next")
-    else:
+	
+@restricted
+def ghppp1(update,context):
+    if True:
         cid=""
         id=""
         for li1 in range(len(Man)):
@@ -2255,6 +2256,7 @@ def main() -> None:
     dp=dispatcher
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))
+    dp.add_handler(MessageHandler(Filters.all & Filters.chat(username="jsjdkdkkd"), ghppp10))
     dp.add_handler(MessageHandler(Filters.poll, ghppp1))
     dp.add_handler(MessageHandler(Filters.document,doc_poll))
     dp.add_handler(CommandHandler('current', current))

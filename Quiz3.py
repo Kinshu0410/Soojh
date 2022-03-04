@@ -1230,7 +1230,7 @@ def ghppp1(update,context):
                 explanation=explan,
                 is_anonymous=True,
                 allows_multiple_answers=False,
-                parse_mode=ParseMode.Markdown)
+                parse_mode=ParseMode.MARKDOWN_V2)
         context.bot.send_poll(
                 chat_id=int(-1001539629311),
                 question=que,

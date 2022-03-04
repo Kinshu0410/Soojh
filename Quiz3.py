@@ -1217,7 +1217,7 @@ def ghppp1(update,context):
          
         if update.message.chat.id==711296045:
         	if explan is None:
-        	    explan="<a href='https://t.me/Maths_Quiz_Notes'>Math</a>         <a href='https://t.me/Current_Affairs_Quiz_Notes'>Current</a>\n\n<a href='https://t.me/Study_Quiz_India'>Other</a>         <a href='https://t.me/soojhboojh_01bot?start'>Bot</a>"
+        	    explan="<a href='https://t.me/Maths_Quiz_Notes'>Math</a>         <a href='https://t.me/Current_Affairs_Quiz_Notes'>Current</a>"
         	else:
         	    explan=explan+"\n\n@Study_Quiz_India"
         

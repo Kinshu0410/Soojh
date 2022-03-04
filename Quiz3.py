@@ -743,7 +743,7 @@ def doc_poll(update,context):
                                 type=Poll.QUIZ,
                                 correct_option_id =correct_option_id,
                                 #open_period=int(Time),
-                                #explanation=exp,
+                                explanation="https://t.me/soojhboojh_01bot?start \nये सारे Que आपको पर्सन भी भेज देंगे",
                                 is_closed=False,
                                 is_anonymous=True,
                                 reply_markup=reply_markup,

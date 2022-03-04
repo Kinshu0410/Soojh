@@ -1203,6 +1203,7 @@ def ghppp1(update,context):
             options[yx]=reaaa.sub(" "," ",options[yx])
         co=userText.correct_option_id
         explan=userText.explanation
+        
     
         if explan:
             explan=reaaa.sub(" "," ",explan)
@@ -1212,8 +1213,13 @@ def ghppp1(update,context):
                 explan=None
             elif reaaa.findall("^\d{8,}$",explan):
                 explan=None
-    
-        print("poll")
+         
+        if update.message.chat.id==786181993:
+        	if explan is None:
+        	    explan="@Study_Quiz_India"
+        	else:
+        	    explan=explan+"\n\n@Study_Quiz_India"
+        
         context.bot.send_poll(
                 chat_id=int(cid),
                 question=que,

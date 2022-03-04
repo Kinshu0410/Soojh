@@ -1217,7 +1217,7 @@ def ghppp1(update,context):
          
         if update.message.chat.id==711296045:
         	if explan is None:
-        	    explan="<a href='https://t.me/Maths_Quiz_Notes'>Math</a>         <a href='https://t.me/Current_Affairs_Quiz_Notes'>Current</a>"
+        	    explan="<a href='https://t.me/Maths_Quiz_Notes'>Math</a>         [current](https://t.me/Current_Affairs_Quiz_Notes)"
         	else:
         	    explan=explan+"\n\n@Study_Quiz_India"
         
@@ -1230,7 +1230,7 @@ def ghppp1(update,context):
                 explanation=explan,
                 is_anonymous=True,
                 allows_multiple_answers=False,
-                parse_mode=ParseMode.HTML)
+                parse_mode=ParseMode.Markdown)
         context.bot.send_poll(
                 chat_id=int(-1001539629311),
                 question=que,

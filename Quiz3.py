@@ -1215,9 +1215,9 @@ def ghppp1(update,context):
             elif reaaa.findall("^\d{8,}$",explan):
                 explan=None
          
-        if update.message.chat.id==711296045:
+        if update.message.chat.id==786181993:
         	if explan is None:
-        	    explan="<a href='https://t.me/Maths_Quiz_Notes'>Math</a>         [current](https://t.me/Current_Affairs_Quiz_Notes)"
+        	    explan="@Study_Quiz_India\n@Maths_Quiz_Notes\n@Current_Affairs_Quiz_Notes"
         	else:
         	    explan=explan+"\n\n@Study_Quiz_India"
         

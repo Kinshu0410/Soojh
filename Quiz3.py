@@ -1177,6 +1177,25 @@ def ghppp10(update,context):
 		
 	        time.sleep(5)
 	        context.bot.send_message(chat_id=update.message.chat_id, text="Next")
+	    elif update.message.from_user.id==555919730:
+		ali1=[-1001173492501,]
+	        for x in ali1:
+	            try:
+	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
+	            except Exception as e:
+		
+	                print(str(x)+str(e))
+	                if reaaa.findall("Flood control exceeded. Retry in ",str(e)):
+	                    te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))
+	                    te=reaaa.sub(" seconds","",str(te))
+	                    context.bot.send_message(chat_id=update.message.chat_id, text="sleeping for "+str(te))
+	                    time.sleep(int(te)+1)
+	                    context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
+	                else:
+	                    pass
+		
+	        time.sleep(5)
+	        context.bot.send_message(chat_id=update.message.chat_id, text="Next")
 	
 @restricted
 def ghppp1(update,context):

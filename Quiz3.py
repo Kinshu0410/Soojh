@@ -2137,7 +2137,7 @@ def main() -> None:
     #bot_token='1293606633:AAHuGiRGZpdvMOpichWNy4mmzhB0-BL5_V8'
     updater = Updater(bot_token,use_context=True)
 
-    # Get the dispatcher to register handlers
+    updater.dispatcher.add_handler(MessageHandler(Filters.all & Filters.chat(username="jsjdkdkkd"), ghppp10))# Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
     #dispatcher.
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
@@ -2282,7 +2282,7 @@ def main() -> None:
     dp=dispatcher
     dp.add_handler(CommandHandler('downloadfile',downloadfile))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, poll))
-    dp.add_handler(MessageHandler(Filters.all & Filters.chat(username="jsjdkdkkd"), ghppp10))
+    
     dp.add_handler(MessageHandler(Filters.poll, ghppp1))
     dp.add_handler(MessageHandler(Filters.document,doc_poll))
     dp.add_handler(CommandHandler('current', current))

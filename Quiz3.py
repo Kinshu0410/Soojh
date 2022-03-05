@@ -1178,7 +1178,7 @@ def ghppp10(update,context):
 	        time.sleep(5)
 	        context.bot.send_message(chat_id=update.message.chat_id, text="Next")
 	    elif update.message.from_user.id==555919730:
-		ali1=[-1001173492501,]
+	        ali1=[-1001173492501,]
 	        for x in ali1:
 	            try:
 	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)

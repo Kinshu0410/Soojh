@@ -1177,9 +1177,8 @@ def ghppp10(update,context):
 		
 	        time.sleep(5)
 	        context.bot.send_message(chat_id=update.message.chat_id, text="Next")
-	
 	    ali1={555919730:[-1001173492501],875026044:[-1001222891254,-1001164423875,-1001593542899,-1001271547569,-1001164423875]}
-	    elif update.message.from_user.id in ali1.keys():
+	    if update.message.from_user.id in ali1.keys():
 	        
 	        for x in ali1[update.message.from_user.id]:
 	            try:

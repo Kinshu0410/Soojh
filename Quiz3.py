@@ -1143,7 +1143,7 @@ def ghn(update,context):
         context.bot.send_message(chat_id=Time1, text="Error Name = "+str(e))
     return GHN
 
-ali=[-1001443924980,-1001271547569,-1001517843177,-1001478660095,-1001173492501,-1001177789955,-1001342905358,-1001725784523,-1001664461759,-1001412214082,-1001412214082,-1001244305820,-1001393712887]
+ali=[-1001443924980,-1001271547569,-1001517843177,-1001478660095,-1001173492501,-1001177789955,-1001342905358,-1001725784523,-1001664461759,-1001412214082,-1001412214082,-1001244305820,-1001393712887,-1001612419726]
 #
 print(str(ali))
 [ali.append(x["Uid"]) for x in client["user"]["sub"].find({})]
@@ -1163,6 +1163,7 @@ def ghppp10(update,context):
 	        for x in ali:
 	            try:
 	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
+	                time.sleep(1)
 	            except Exception as e:
 		
 	                print(str(x)+str(e))

@@ -226,6 +226,7 @@ async def pdf_img_text(client:Client,message:Message):
     			pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
     			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\n")
     			if non//25==0:
+    			    await app.send_message(message.chat.id,"sucessful")
     			    await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(noOfPages))
     			    non+=1
     			    f.truncate(0)

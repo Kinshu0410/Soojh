@@ -1177,7 +1177,7 @@ def ghppp10(update,context):
 	                    client["user"]["sub"].find_one_and_delete({"Uid":x})
 		
 	        time.sleep(5)
-	        context.bot.send_message(chat_id=update.message.chat_id, text="Next")
+	        context.bot.send_message(chat_id=update.message.chat_id, text="Next Total subscriber "+str(len(ali)))
 	    ali1={555919730:[-1001173492501],875026044:[-1001222891254,-1001164423875,-1001593542899,-1001271547569]}
 	    if update.message.from_user.id in ali1.keys():
 	        

@@ -229,6 +229,7 @@ async def pdf_img_text(client:Client,message:Message):
     			    await app.send_message(message.chat.id,"sucessful")
     			    await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(noOfPages))
     			    non+=1
+    			    time.sleep(5)
     			    f.truncate(0)
     			print(image_folder+str(message.chat.id)+fname+".png")
     		

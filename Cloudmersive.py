@@ -206,7 +206,7 @@ import fitz
 @app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot"))
 async def pdf_img_text(client:Client,message:Message):
     if True:#if reaaa.findall(".pdf$",message.file_name):
-    	non=1
+    	non=0
     	
     	z=""
     	fname=id_generator()
@@ -225,11 +225,10 @@ async def pdf_img_text(client:Client,message:Message):
     			pix = page.get_pixmap(matrix = mat)
     			pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
     			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\n")
+    			non+=1
     			if non%25==0:
     			    #await app.send_message(message.chat.id,"sucessful")
     			    await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(noOfPages))
-    			    non+=1
-    			    
     			    f.truncate(0)
     			print(image_folder+str(message.chat.id)+fname+".png")
     		

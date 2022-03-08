@@ -205,7 +205,7 @@ import fitz, random
 
 @app.on_message(filters.regex("^.cp ") & filters.outgoing)
 async def crop_pdf(client:Client,message:Message):
-	print("start")
+	print(message.reply_to_message)
 	text=reaaa.sub("^\.cp","",message.text)
 	text=reaaa.sub(" ","",text)
 	text=reaaa.split(":",text)
@@ -233,7 +233,7 @@ async def crop_pdf(client:Client,message:Message):
 	os.remove(file)
 		
 		
-@app.on_message(filters.regex("^.c ") & filters.outgoing)
+@app.on_message(filters.regex("^.c ") & filters.private)
 async def crop(client:Client,message:Message):
 	print("start")
 	text=reaaa.sub("^\.c","",message.text)

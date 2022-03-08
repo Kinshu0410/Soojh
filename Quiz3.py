@@ -1161,6 +1161,7 @@ def ghppp10(update,context):
     if update.message.chat.id==-1001682640576:
     	if update.message.from_user.id==711296045:
     	    if hasattr(update.message,'text'):
+    	        print(str(update.message))
     	        if update.message.text.startswith("https://t.me/Study_Quiz_India/"):
 	                uid=reaaa.sub("https://t.me/","@",update.message.text)
 	                uid=reaaa.sub("/*","",uid)

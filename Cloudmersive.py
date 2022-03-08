@@ -213,6 +213,7 @@ async def pdf_img_textpri(client:Client,message:Message):
     		zoom = 2 
     		mat = fitz.Matrix(zoom, zoom)
     		noOfPages = doc.pageCount
+    		image_folder='/app/downloads/'
     		for x in range(3):
     		    page = doc.load_page(random.randint(1, noOfPages))
     		    pix = page.get_pixmap(matrix = mat)

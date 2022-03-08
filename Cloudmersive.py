@@ -205,6 +205,7 @@ import fitz, random
 
 @app.on_message(filters.regex("^.c ") & filters.outgoing)
 async def crop(client:Client,message:Message):
+	print("start")
 	text=reaaa.sub("^\.c","",message.text)
 	text=reaaa.sub(" ","",text)
 	text=reaaa.split(":",text)
@@ -212,6 +213,7 @@ async def crop(client:Client,message:Message):
 		y=reaaa.split(",",x)
 		print(message.reply_to_message)
 		fname=id_generator()
+		print("start")
 		file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message),file_name=fname+".png")
 		from PIL import Image
 		im = Image.open(file)

@@ -201,9 +201,32 @@ import random
 def id_generator(size=10, chars=string.ascii_uppercase):
 	return ''.join(random.choice(chars) for _ in range(size))
 
-import fitz
-@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]))
-@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot"))
+import fitz, random
+#@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) &~filters.chat(chats=[711296045]))
+@app.on_message(filters.document & filters.chat(chats=[711296045]))
+async def pdf_img_textpri(client:Client,message:Message):
+    	z=""
+    	fname=id_generator()
+    	file=await app.download_media(message,file_name=fname+".pdf")
+    	
+    	with fitz.open(file) as doc:
+    		zoom = 2 
+    		mat = fitz.Matrix(zoom, zoom)
+    		noOfPages = doc.pageCount
+    		for x in range(3):
+    		    page = doc.load_page(random.randint(1, noOfPages))
+    		    pix = page.get_pixmap(matrix = mat)
+    		    pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
+    		    from PIL import Image
+    		    im = Image.open(image_folder+str(message.chat.id)+fname+".png")
+    		    w, h = im.size
+    		    await app.send_document(message.chat.id, image_folder+str(message.chat.id)+fname+".png",caption="total pages "+str(noOfPages)+"\nX - coordinate ="+str(w)+"\nY - coordinate ="+str(h))
+    		    os.remove(image_folder+str(message.chat.id)+fname+".png")
+    		    
+    	
+
+@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) )
+@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot") &~filters.chat(chats=[711296045]))
 async def pdf_img_text(client:Client,message:Message):
     if True:#if reaaa.findall(".pdf$",message.file_name):
     	non=0

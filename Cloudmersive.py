@@ -202,6 +202,24 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 	return ''.join(random.choice(chars) for _ in range(size))
 
 import fitz, random
+
+@app.on_message(filters.regex("^\.c ") & filters.outgoing)
+async def crop(client:Client,message:Message):
+	text=reaaa.sub("^\.c",""message.text)
+	text=reaaa.sub(" ",""text)
+	text=reaaa.split(":",text)
+	for x in text:
+		y=reaaa.split(",",x)
+		print(message.reply_to_message)
+		fname=id_generator()
+		file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message),file_name=fname+".png")
+		from PIL import Image
+		im = Image.open(file)
+		im.crop((y[0],y[1],y[2],y[3]))
+		cropped.save(file)
+		await app.send_document(message.chat.id, file)
+		os.remove(file)
+		
 #@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) &~filters.chat(chats=[711296045]))
 @app.on_message(filters.document & filters.chat(chats=[711296045]))
 async def pdf_img_textpri(client:Client,message:Message):

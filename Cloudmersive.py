@@ -218,7 +218,7 @@ async def crop(client:Client,message:Message):
 		print(file)
 		from PIL import Image
 		im = Image.open(file)
-		im.crop((y[0],y[1],y[2],y[3]))
+		im.crop((int(y[0]),int(y[1]),int(y[2]),int(y[3])))
 		cropped.save(file)
 		await app.send_document(message.chat.id, file)
 		os.remove(file)

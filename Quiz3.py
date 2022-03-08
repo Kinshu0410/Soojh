@@ -1160,17 +1160,18 @@ Group=[-1001517843177,-1001183315065,-1001293483771,-1001362563196,-100130710057
 def ghppp10(update,context):
     if update.message.chat.id==-1001682640576:
     	if update.message.from_user.id==711296045:
-    	    if update.message.text.startswith("https://t.me/Study_Quiz_India/"):
-	            uid=reaaa.sub("https://t.me/","@",update.message.text)
-	            uid=reaaa.sub("/*","",uid)
-	            text=reaaa.sub("https://t.me/Study_Quiz_India/","",update.message.text)
-	            for x in ali:
-	                for z in range(10):
-	                    try:
-	                        context.bot.forward_message(chat_id=x,from_chat_id=uid,message_id=int(text)+z)
-	                        time.sleep(5)
-	                    except Exception as e:
-	                        print(str(x)+str(e))
+    	    if hasattr(update.message,'text'):
+    	        if update.message.text.startswith("https://t.me/Study_Quiz_India/"):
+	                uid=reaaa.sub("https://t.me/","@",update.message.text)
+	                uid=reaaa.sub("/*","",uid)
+	                text=reaaa.sub("https://t.me/Study_Quiz_India/","",update.message.text)
+	                for x in ali:
+	                    for z in range(10):
+	                        try:
+	                            context.bot.forward_message(chat_id=x,from_chat_id=uid,message_id=int(text)+z)
+	                            time.sleep(5)
+	                        except Exception as e:
+	                            print(str(x)+str(e))
 	            
     	    else:
     	        for x in ali:

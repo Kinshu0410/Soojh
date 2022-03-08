@@ -206,6 +206,7 @@ import fitz, random
 @app.on_message(filters.regex("^.cp ") & filters.outgoing)
 async def crop_pdf(client:Client,message:Message):
 	print(message.reply_to_message)
+	non=0
 	text=reaaa.sub("^\.cp","",message.text)
 	text=reaaa.sub(" ","",text)
 	text=reaaa.split(":",text)
@@ -217,6 +218,7 @@ async def crop_pdf(client:Client,message:Message):
 	image_folder='/app/downloads/'
 	for pageNo in noOfPages:
 		for x in text:
+			non+=0
 			y=reaaa.split(",",x)
 			fname=id_generator()
 			
@@ -226,6 +228,9 @@ async def crop_pdf(client:Client,message:Message):
 			cropped=im.crop((int(y[0]),int(y[1]),int(y[2]),int(y[3])))
 			cropped.save()
 			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+fname+".png").main()))+"\n")
+			if non%25==0:
+				await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(int(non/25))+"/"+str(noOfPages))
+				f.truncate(0)
 			os.remove(fname+".png")
 	f.close()
 	await app.send_document(message.chat.id, image_folder+fname1+".txt")
@@ -254,7 +259,9 @@ async def crop(client:Client,message:Message):
 		await app.send_document(message.chat.id, file)
 		os.remove(file)
 #@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) &~filters.chat(chats=[711296045]))
-@app.on_message(filters.document & filters.chat(chats=[711296045]))
+#@app.on_message(filters.document & filters.chat(chats=[711296045]))
+@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) )
+@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot"))
 async def pdf_img_textpri(client:Client,message:Message):
     	z=""
     	fname=id_generator()
@@ -272,13 +279,13 @@ async def pdf_img_textpri(client:Client,message:Message):
     		    from PIL import Image
     		    im = Image.open(image_folder+str(message.chat.id)+fname+".png")
     		    w, h = im.size
-    		    await app.send_document(message.chat.id, image_folder+str(message.chat.id)+fname+".png",caption="total pages "+str(noOfPages)+"\nX - coordinate ="+str(w)+"\nY - coordinate ="+str(h))
+    		    await app.send_document(message.chat.id, image_folder+str(message.chat.id)+fname+".png",caption="total pages "+str(noOfPages)+"\nX - coordinate ="+str(w)+"\nY - coordinate ="+str(h)+"\n\n.c 0,0,"+str(w)+","+str(h))
     		    os.remove(image_folder+str(message.chat.id)+fname+".png")
     		    
     	
 
-@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) )
-@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot") &~filters.chat(chats=[711296045]))
+#@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) )
+#@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot") &~filters.chat(chats=[711296045]))
 async def pdf_img_text(client:Client,message:Message):
     if True:#if reaaa.findall(".pdf$",message.file_name):
     	non=0

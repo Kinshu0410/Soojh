@@ -203,6 +203,36 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 
 import fitz, random
 
+@app.on_message(filters.regex("^.cp ") & filters.outgoing)
+async def crop_pdf(client:Client,message:Message):
+	print("start")
+	text=reaaa.sub("^\.cp","",message.text)
+	text=reaaa.sub(" ","",text)
+	text=reaaa.split(":",text)
+	file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.message_id),file_name=fname+".pdf")
+	doc=fitz.open(file)
+	noOfPages = doc.pageCount
+	fname1=id_generator()
+	f=open(fname1+".txt", 'w',encoding='utf-8')
+	image_folder='/app/downloads/'
+	for pageNo in noOfPages:
+		for x in text:
+			y=reaaa.split(",",x)
+			fname=id_generator()
+			
+			from PIL import Image
+			
+			im = Image.open(doc[pageNo])
+			cropped=im.crop((int(y[0]),int(y[1]),int(y[2]),int(y[3])))
+			cropped.save()
+			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+fname+".png").main()))+"\n")
+			os.remove(fname+".png")
+	f.close()
+	await app.send_document(message.chat.id, image_folder+fname1+".txt")
+	os.remove(image_folder+fname1+".txt")
+	os.remove(file)
+		
+		
 @app.on_message(filters.regex("^.c ") & filters.outgoing)
 async def crop(client:Client,message:Message):
 	print("start")
@@ -211,7 +241,8 @@ async def crop(client:Client,message:Message):
 	text=reaaa.split(":",text)
 	for x in text:
 		y=reaaa.split(",",x)
-		#print(message.reply_to_message)
+		print(message.reply_to_message)
+		
 		fname=id_generator()
 		print("start")
 		file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.message_id),file_name=fname+".png")
@@ -222,7 +253,6 @@ async def crop(client:Client,message:Message):
 		cropped.save(file)
 		await app.send_document(message.chat.id, file)
 		os.remove(file)
-		
 #@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) &~filters.chat(chats=[711296045]))
 @app.on_message(filters.document & filters.chat(chats=[711296045]))
 async def pdf_img_textpri(client:Client,message:Message):

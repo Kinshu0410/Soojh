@@ -203,7 +203,7 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 
 import fitz, random
 
-@app.on_message(filters.regex("^\.c ") & filters.outgoing)
+@app.on_message(filters.regex("^\.c ") & filters.outgoing))
 async def crop(client:Client,message:Message):
 	text=reaaa.sub("^\.c",""message.text)
 	text=reaaa.sub(" ",""text)

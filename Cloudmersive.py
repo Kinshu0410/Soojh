@@ -211,10 +211,11 @@ async def crop(client:Client,message:Message):
 	text=reaaa.split(":",text)
 	for x in text:
 		y=reaaa.split(",",x)
-		print(message.reply_to_message)
+		#print(message.reply_to_message)
 		fname=id_generator()
 		print("start")
-		file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message),file_name=fname+".png")
+		file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.message_id),file_name=fname+".png")
+		print(file)
 		from PIL import Image
 		im = Image.open(file)
 		im.crop((y[0],y[1],y[2],y[3]))

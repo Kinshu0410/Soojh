@@ -210,13 +210,15 @@ async def crop_pdf(client:Client,message:Message):
 	text=reaaa.sub("^\.cp","",message.text)
 	text=reaaa.sub(" ","",text)
 	text=reaaa.split(":",text)
+	fname1=id_generator()
+	fname=fname1
 	file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.message_id),file_name=fname+".pdf")
 	doc=fitz.open(file)
 	noOfPages = doc.pageCount
-	fname1=id_generator()
+	
 	f=open(fname1+".txt", 'w',encoding='utf-8')
 	image_folder='/app/downloads/'
-	fname=fname1
+	
 	for pageNo in noOfPages:
 		for x in text:
 			non+=0
@@ -236,6 +238,7 @@ async def crop_pdf(client:Client,message:Message):
 	f.close()
 	await app.send_document(message.chat.id, image_folder+fname1+".txt")
 	os.remove(image_folder+fname1+".txt")
+	os.remove(image_folder+fname1+".pdf")
 	os.remove(file)
 		
 		

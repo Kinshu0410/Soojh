@@ -216,6 +216,7 @@ async def crop_pdf(client:Client,message:Message):
 	fname1=id_generator()
 	f=open(fname1+".txt", 'w',encoding='utf-8')
 	image_folder='/app/downloads/'
+	fname=fname1
 	for pageNo in noOfPages:
 		for x in text:
 			non+=0

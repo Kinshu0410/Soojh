@@ -209,7 +209,9 @@ async def crop_pdf(client:Client,message:Message):
 	print(message.reply_to_message)
 	non=0
 	text=reaaa.sub("^\.cp","",message.text)
-	text=reaaa.sub(" ","",text)
+	te=reaaa.split("\n",text)
+	text=reaaa.sub(" ","",te[0])
+	tex=reaaa.split(",",te[1])
 	text=reaaa.split(":",text)
 	fname1=id_generator()
 	fname=fname1
@@ -221,7 +223,7 @@ async def crop_pdf(client:Client,message:Message):
 	f=open(fname1+".txt", 'w',encoding='utf-8')
 	image_folder='/app/downloads/'
 	
-	for pageNo in range(noOfPages):
+	for pageNo in range(int(tex[0]),int(tex[1])):
 		for x in text:
 			
 			y=reaaa.split(",",x)

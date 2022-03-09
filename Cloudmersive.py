@@ -217,7 +217,7 @@ async def crop_pdf(client:Client,message:Message):
 	doc=fitz.open(file)
 	noOfPages = doc.pageCount
 	
-	f=open('/app/downloads/'+fname1+".txt", 'w',encoding='utf-8')
+	f=open(fname1+".txt", 'w',encoding='utf-8')
 	image_folder='/app/downloads/'
 	
 	for pageNo in range(noOfPages):
@@ -238,13 +238,13 @@ async def crop_pdf(client:Client,message:Message):
 			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+fname+".png").main()))+"\n")
 			os.remove(image_folder+fname+".png")
 			if non%25==0:
-				await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(int(non/25))+"/"+str(noOfPages))
+				await app.send_document(message.chat.id, fname1+".txt",caption="total pages "+str(int(non/25))+"/"+str(noOfPages))
 				f.truncate(0)
 			
 	f.close()
-	await app.send_document(message.chat.id, image_folder+fname1+".txt")
-	os.remove(image_folder+fname1+".txt")
-	os.remove(image_folder+fname1+".pdf")
+	await app.send_document(message.chat.id, fname1+".txt")
+	os.remove(fname1+".txt")
+	#os.remove(image_folder+fname1+".pdf")
 	os.remove(file)
 		
 		

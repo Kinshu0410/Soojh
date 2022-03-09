@@ -219,7 +219,7 @@ async def crop_pdf(client:Client,message:Message):
 	f=open(fname1+".txt", 'w',encoding='utf-8')
 	image_folder='/app/downloads/'
 	
-	for pageNo in noOfPages:
+	for pageNo in range(noOfPages):
 		for x in text:
 			non+=0
 			y=reaaa.split(",",x)

@@ -236,7 +236,7 @@ async def crop_pdf(client:Client,message:Message):
 			cropped=im.crop((int(y[0]),int(y[1]),int(y[2]),int(y[3])))
 			cropped.save(image_folder+fname+".png")
 			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+fname+".png").main()))+"\n")
-			await app.send_document(message.chat.id, image_folder+fname+".png")
+			#await app.send_document(message.chat.id, image_folder+fname+".png")
 			os.remove(image_folder+fname+".png")
 			non+=1
 			if non%25==0:

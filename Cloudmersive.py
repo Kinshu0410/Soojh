@@ -240,9 +240,9 @@ async def crop_pdf(client:Client,message:Message):
 			#await app.send_document(message.chat.id, image_folder+fname+".png")
 			os.remove(image_folder+fname+".png")
 			non+=1
-			if non%25==0:
-				await app.send_document(message.chat.id, fname1+".txt",caption="total pages "+str(int(non/25))+"/"+str(int(noOfPages)/25))
-				f.truncate(0)
+			#if non%25==0:
+				#await app.send_document(message.chat.id, fname1+".txt",caption="total pages "+str(int(non/25))+"/"+str(int(noOfPages)/25))
+				#f.truncate(0)
 			
 	f.close()
 	await app.send_document(message.chat.id, fname1+".txt")

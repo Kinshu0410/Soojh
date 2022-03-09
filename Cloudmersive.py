@@ -227,7 +227,7 @@ async def crop_pdf(client:Client,message:Message):
 			
 			from PIL import Image
 			
-			im = Image.open(doc[pageNo])
+			im = Image.open(get_page_images(pageNo))
 			cropped=im.crop((int(y[0]),int(y[1]),int(y[2]),int(y[3])))
 			cropped.save()
 			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+fname+".png").main()))+"\n")

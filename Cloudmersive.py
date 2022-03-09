@@ -224,17 +224,21 @@ async def crop_pdf(client:Client,message:Message):
 			non+=0
 			y=reaaa.split(",",x)
 			fname=id_generator()
-			
+			zoom=0
+			mat = fitz.Matrix(zoom, zoom)
+			pix=page.get_pixmap(matrix = mat)
+			pix.writePNG(image_folder+fname+".png")
 			from PIL import Image
 			
-			im = Image.open(get_page_images(pageNo))
+			im = Image.open(image_folder+fname+".png")
 			cropped=im.crop((int(y[0]),int(y[1]),int(y[2]),int(y[3])))
-			cropped.save()
+			cropped.save(image_folder+fname+".png")
 			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+fname+".png").main()))+"\n")
+			os.remove(image_folder+fname+".png")
 			if non%25==0:
 				await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(int(non/25))+"/"+str(noOfPages))
 				f.truncate(0)
-			os.remove(fname+".png")
+			
 	f.close()
 	await app.send_document(message.chat.id, image_folder+fname1+".txt")
 	os.remove(image_folder+fname1+".txt")

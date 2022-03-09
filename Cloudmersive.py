@@ -253,7 +253,8 @@ async def crop_pdf(client:Client,message:Message):
 	os.remove(file)
 		
 		
-@app.on_message(filters.regex("^.c ") & filters.chat(chats=["POLLQZ",-1001132926651]) & filters.private)
+@app.on_message(filters.regex("^.c ") & filters.private)
+@app.on_message(filters.regex("^.c ") & filters.chat(chats=["POLLQZ",-1001132926651]))
 async def crop(client:Client,message:Message):
 	print("start")
 	text=reaaa.sub("^\.c","",message.text)

@@ -222,7 +222,7 @@ async def crop_pdf(client:Client,message:Message):
 	
 	for pageNo in range(noOfPages):
 		for x in text:
-			non+=0
+			
 			y=reaaa.split(",",x)
 			fname=id_generator()
 			zoom=2
@@ -237,6 +237,7 @@ async def crop_pdf(client:Client,message:Message):
 			cropped.save(image_folder+fname+".png")
 			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+fname+".png").main()))+"\n")
 			os.remove(image_folder+fname+".png")
+			non+=1
 			if non%25==0:
 				await app.send_document(message.chat.id, fname1+".txt",caption="total pages "+str(int(non/25))+"/"+str(noOfPages))
 				f.truncate(0)

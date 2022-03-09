@@ -225,6 +225,7 @@ async def crop_pdf(client:Client,message:Message):
 			y=reaaa.split(",",x)
 			fname=id_generator()
 			zoom=0
+			page=doc.load_page(pageNo)
 			mat = fitz.Matrix(zoom, zoom)
 			pix=page.get_pixmap(matrix = mat)
 			pix.writePNG(image_folder+fname+".png")

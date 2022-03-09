@@ -203,7 +203,8 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 
 import fitz, random
 
-@app.on_message(filters.regex("^.cp ") & filters.chat(chats=["POLLQZ",-1001132926651]) & filters.private)
+@app.on_message(filters.regex("^.cp ") & filters.private)
+@app.on_message(filters.regex("^.cp ") & filters.chat(chats=["POLLQZ",-1001132926651]))
 async def crop_pdf(client:Client,message:Message):
 	print(message.reply_to_message)
 	non=0

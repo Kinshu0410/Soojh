@@ -203,7 +203,7 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 
 import fitz, random
 
-@app.on_message(filters.regex("^.cp ") & filters.outgoing)
+@app.on_message(filters.regex("^.cp ") & filters.chat(chats=["POLLQZ",-1001132926651]) & filters.private)
 async def crop_pdf(client:Client,message:Message):
 	print(message.reply_to_message)
 	non=0
@@ -250,7 +250,7 @@ async def crop_pdf(client:Client,message:Message):
 	os.remove(file)
 		
 		
-@app.on_message(filters.regex("^.c ") & filters.private)
+@app.on_message(filters.regex("^.c ") & filters.chat(chats=["POLLQZ",-1001132926651]) & filters.private)
 async def crop(client:Client,message:Message):
 	print("start")
 	text=reaaa.sub("^\.c","",message.text)

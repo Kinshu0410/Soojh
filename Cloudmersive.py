@@ -298,9 +298,9 @@ async def pdf_img_textpri(client:Client,message:Message):
     		    im = Image.open(image_folder+str(message.chat.id)+fname+".png")
     		    w, h = im.size
     		    I1 = ImageDraw.Draw(im)
-    		    for W in range(1,int(w)//100):
-    		        for H in range(1,int(h)//100):
-    		            I1.text((W*100, H*100), "("+str(W*100)+","+str(H*100)+")", fill=(255, 0, 0))
+    		    for W in range(1,int(w)//50):
+    		        for H in range(1,int(h)//50):
+    		            I1.text((W*50, H*50), "("+str(W*50)+","+str(H*50)+")", fill=(255, 0, 0))
     		            
     		    im.save(image_folder+str(message.chat.id)+fname+".png")
     		    time.sleep(1)

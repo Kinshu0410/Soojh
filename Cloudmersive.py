@@ -288,13 +288,22 @@ async def pdf_img_textpri(client:Client,message:Message):
     		mat = fitz.Matrix(zoom, zoom)
     		noOfPages = doc.pageCount
     		image_folder='/app/downloads/'
+    		
     		for x in range(3):
     		    page = doc.load_page(random.randint(1, noOfPages))
     		    pix = page.get_pixmap(matrix = mat)
     		    pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
     		    from PIL import Image
+    		    from PIL import ImageDraw
     		    im = Image.open(image_folder+str(message.chat.id)+fname+".png")
     		    w, h = im.size
+    		    I1 = ImageDraw.Draw(im)
+    		    for W in range(1,int(w)//100):
+    		        for H in range(1,int(h)//100):
+    		            I1.text((W, H), "("+str(W)+","+str(H)+")", fill=(255, 0, 0))
+    		            
+    		    im.save(image_folder+str(message.chat.id)+fname+".png")
+    		    time.sleep(1)
     		    await app.send_document(message.chat.id, image_folder+str(message.chat.id)+fname+".png",caption="total pages "+str(noOfPages)+"\nX - coordinate ="+str(w)+"\nY - coordinate ="+str(h)+"\n\n.c 0,0,"+str(w)+","+str(h))
     		    os.remove(image_folder+str(message.chat.id)+fname+".png")
     		    

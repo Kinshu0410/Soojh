@@ -223,7 +223,7 @@ async def crop_pdf(client:Client,message:Message):
 	f=open(fname1+".txt", 'w',encoding='utf-8')
 	image_folder='/app/downloads/'
 	
-	for pageNo in range(int(tex[0]),int(tex[1])+1):
+	for pageNo in range(int(tex[0])-1,int(tex[1])):
 		for x in text:
 			
 			y=reaaa.split(",",x)
@@ -252,7 +252,7 @@ async def crop_pdf(client:Client,message:Message):
 	#os.remove(image_folder+fname1+".pdf")
 	os.remove(file)
 		
-		
+		#
 @app.on_message(filters.regex("^.c ") & filters.private)
 @app.on_message(filters.regex("^.c ") & filters.chat(chats=["POLLQZ",-1001132926651]))
 async def crop(client:Client,message:Message):

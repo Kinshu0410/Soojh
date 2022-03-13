@@ -1144,6 +1144,7 @@ def ghn(update,context):
     return GHN
 
 ali=[-1001443924980,-1001271547569,-1001517843177,-1001478660095,-1001173492501,-1001177789955,-1001342905358,-1001725784523,-1001664461759,-1001412214082,-1001412214082,-1001244305820,-1001393712887,-1001612419726,-1001569069801,-1001169740180,-1001702776152]
+ali2=[-1001443924980,-1001271547569,-1001517843177,-1001478660095,-1001173492501,-1001177789955,-1001342905358,-1001725784523,-1001664461759,-1001412214082,-1001412214082,-1001244305820,-1001393712887,-1001612419726,-1001569069801,-1001169740180,-1001702776152]
 #
 print(str(ali))
 [ali.append(x["Uid"]) for x in client["user"]["sub"].find({})]
@@ -1170,7 +1171,10 @@ def ghppp10(update,context):
 	                    for z in range(10):
 	                        try:
 	                            context.bot.forward_message(chat_id=x,from_chat_id=uid,message_id=int(text)+z)
-	                            time.sleep(5)
+	                            if x in ali2:
+	                                time.sleep(5)
+	                            else:
+	                                time.sleep(1)
 	                        except Exception as e:
 	                            if reaaa.findall("Flood control exceeded. Retry in ",str(e)):
 	                                te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))

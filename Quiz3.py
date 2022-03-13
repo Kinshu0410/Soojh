@@ -1162,10 +1162,10 @@ def ghppp10(update,context):
     	if update.message.from_user.id==711296045:
     	    if not hasattr(update.message,'poll'):
     	        print(str(update.message))
-    	        if update.message.text.startswith("https://t.me/Study_Quiz_India/"):
+    	        if update.message.text.startswith("https://t.me/ONLY_FOR_US/"):
 	                uid=reaaa.sub("https://t.me/","@",update.message.text)
-	                uid=reaaa.sub("/*","",uid)
-	                text=reaaa.sub("https://t.me/Study_Quiz_India/","",update.message.text)
+	                uid=reaaa.sub("/.*","",uid)
+	                text=int(reaaa.sub("https://t.me/ONLY_FOR_US/","",update.message.text))
 	                for x in ali:
 	                    for z in range(10):
 	                        try:
@@ -1179,7 +1179,7 @@ def ghppp10(update,context):
 	                                time.sleep(int(te)+1)
 	                                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
 	            
-    	    else:
+    	    elif False:
     	        for x in ali:
     	            try:
     	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)

@@ -22,10 +22,13 @@ import  json
 import time
 import re as reaaa
 import requests
-app = Client("my_account",
+#app = Client("my_account",
 #bot_token=ClientText["bot_token"],
-api_id="13682659",
-api_hash="b984d240c5258407ea911f042c9d75f6")
+#api_id="13682659",
+#api_hash="b984d240c5258407ea911f042c9d75f6")
+app=Client("BQCUZfDwLzu1AaGrGVOQZV03qGIkx08RFJLXFhiHFbkwyYK8LlRkOaUwW5wBxdTAxEqVaGRmuIKNQdit51JZpahdDKkvhgFtmu9J_EE694nzbyEIOxW79sTFn7vfhKwjtcsW_KcBkgVzAuafdR1GWTHcCojsguMQQySsroDKwOk75fAg31IC08ZYUxZhL6X2YDAIhbpo4-Yp2W-7xOkRbUxhGNYaNB8TCVvZPSHIh3HFZSkHxdFXWKhhm7W--qL1YxPD3DruWmDDxoXdAeVjKCWR6dRKhw1tOH_hn35Kr1WF-FrkEi-a0nOxwKtGcetxFliX3UShHApjYeWtFYSRRYszKmWELQA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
+
+
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 @app.on_message(filters.regex("^Cid") )#& filters.incoming)
 async def cyid(client:Client,message:Message):

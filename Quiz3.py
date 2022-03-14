@@ -1160,6 +1160,7 @@ Group=[-1001517843177,-1001183315065,-1001293483771,-1001362563196,-100130710057
 @restricted
 def ghppp10(update,context):
     if update.message.chat.id==-1001682640576:
+    	print(update)
     	if update.message.from_user.id==711296045:
     	    if not hasattr(update.message,'poll'):
     	        print(str(update.message))

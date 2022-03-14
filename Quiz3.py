@@ -1162,7 +1162,7 @@ def ghppp10(update,context):
     if update.message.chat.id==-1001682640576:
     	print(update)
     	if update.message.from_user.id==711296045:
-    	    if not hasattr(update.message,'poll'):
+    	    if hasattr(update.message,'text'):
     	        print(str(update.message))
     	        if update.message.text.startswith("https://t.me/ONLY_FOR_US/"):
 	                print("sst")

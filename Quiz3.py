@@ -1164,8 +1164,9 @@ def ghppp10(update,context):
     	    if not hasattr(update.message,'poll'):
     	        print(str(update.message))
     	        if update.message.text.startswith("https://t.me/ONLY_FOR_US/"):
+	                print("sst")
 	                uid=reaaa.sub("https://t.me/","@",update.message.text)
-	                uid=reaaa.sub("/.*","",uid)
+	                uid=reaaa.sub("/\d{1,}","",uid)
 	                text=int(reaaa.sub("https://t.me/ONLY_FOR_US/","",update.message.text))
 	                for x in ali:
 	                    for z in range(10):

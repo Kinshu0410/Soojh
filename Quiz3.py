@@ -743,7 +743,7 @@ def doc_poll(update,context):
                                 type=Poll.QUIZ,
                                 correct_option_id =correct_option_id,
                                 #open_period=int(Time),
-                                explanation="https://t.me/soojhboojh_01bot?start \n\nSubscribe Our Bot 👆👆👆",
+                                explanation="Subscribe On youtube : https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA👆👆👆",
                                 is_closed=False,
                                 is_anonymous=True,
                                 reply_markup=reply_markup,
@@ -1170,7 +1170,7 @@ def ghppp10(update,context):
 	                uid=reaaa.sub("/\d{1,}","",uid)
 	                text=int(reaaa.sub("https://t.me/ONLY_FOR_US/","",update.message.text))
 	                for x in ali:
-	                    for z in range(31):
+	                    for z in range(10):
 	                        try:
 	                            context.bot.forward_message(chat_id=x,from_chat_id=uid,message_id=int(text)+z)
 	                            #if x in ali2:

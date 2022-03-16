@@ -1165,12 +1165,13 @@ def ghppp10(update,context):
     	    if hasattr(update.message,'text'):
     	        print(str(update.message))
     	        if update.message.text.startswith("https://t.me/ONLY_FOR_US/"):
-	                print("sst")
+	                nn=int(reaaa.sub("https://t.me/ONLY_FOR_US/\d{1,}/","",update.message.text))
 	                uid=reaaa.sub("https://t.me/","@",update.message.text)
-	                uid=reaaa.sub("/\d{1,}","",uid)
+	                uid=reaaa.sub("/\d{1,}/\d{,}","",uid)
 	                text=int(reaaa.sub("https://t.me/ONLY_FOR_US/","",update.message.text))
+	                text=int(reaaa.sub("/\d{,}","",text))
 	                for x in ali:
-	                    for z in range(10):
+	                    for z in range(nn):
 	                        try:
 	                            context.bot.forward_message(chat_id=x,from_chat_id=uid,message_id=int(text)+z)
 	                            #if x in ali2:
@@ -1185,22 +1186,22 @@ def ghppp10(update,context):
 	                                time.sleep(int(te)+1)
 	                                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
 	            
-    	    elif False:
-    	        for x in ali:
-    	            try:
-    	                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
-    	                time.sleep(5)
-    	            except Exception as e:
-    		
-    	                print(str(x)+str(e))
-    	                if reaaa.findall("Flood control exceeded. Retry in ",str(e)):
-    	                    te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))
-    	                    te=reaaa.sub(" seconds","",str(te))
-    	                    context.bot.send_message(chat_id=update.message.chat_id, text="sleeping for "+str(te))
-    	                    time.sleep(int(te)+1)
+    	        else:
+    	            for x in ali:
+    	                try:
     	                    context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
-    	                else:
-    	                    client["user"]["sub"].find_one_and_delete({"Uid":x})
+    	                    time.sleep(5)
+    	                except Exception as e:
+    		
+    	                    print(str(x)+str(e))
+    	                    if reaaa.findall("Flood control exceeded. Retry in ",str(e)):
+    	                        te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))
+    	                        te=reaaa.sub(" seconds","",str(te))
+    	                        context.bot.send_message(chat_id=update.message.chat_id, text="sleeping for "+str(te))
+    	                        time.sleep(int(te)+1)
+    	                        context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
+    	                    else:
+    	                        client["user"]["sub"].find_one_and_delete({"Uid":x})
     		
     	        time.sleep(5)
     	        context.bot.send_message(chat_id=update.message.chat_id, text="Next Total subscriber "+str(len(ali)))

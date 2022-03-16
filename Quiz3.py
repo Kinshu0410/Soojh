@@ -1173,10 +1173,10 @@ def ghppp10(update,context):
 	                    for z in range(10):
 	                        try:
 	                            context.bot.forward_message(chat_id=x,from_chat_id=uid,message_id=int(text)+z)
-	                            if x in ali2:
-	                                time.sleep(5)
-	                            else:
-	                                time.sleep(1)
+	                            #if x in ali2:
+	                                #time.sleep(5)
+	                            #else:
+	                                #time.sleep(1)
 	                        except Exception as e:
 	                            if reaaa.findall("Flood control exceeded. Retry in ",str(e)):
 	                                te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))

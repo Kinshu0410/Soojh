@@ -1165,10 +1165,11 @@ def ghppp10(update,context):
     	    if hasattr(update.message,'text'):
     	        print(str(update.message))
     	        if update.message.text.startswith("https://t.me/ONLY_FOR_US/"):
-	                nn=int(reaaa.sub("https://t.me/ONLY_FOR_US/\d{1,}/","",update.message.text))
+	                nn=int(reaaa.sub("https://t.me/ONLY_FOR_US/\d{,}/","",update.message.text))
+	                print(nn)
 	                uid=reaaa.sub("https://t.me/","@",update.message.text)
 	                uid=reaaa.sub("/\d{1,}/\d{,}","",uid)
-	                text=int(reaaa.sub("https://t.me/ONLY_FOR_US/","",update.message.text))
+	                text=reaaa.sub("https://t.me/ONLY_FOR_US/","",update.message.text)
 	                text=int(reaaa.sub("/\d{,}","",text))
 	                for x in ali:
 	                    for z in range(nn):

@@ -1044,7 +1044,7 @@ def forword(client:Client,message:Message):
     app.delete_messages(chat_id="KINBIN247_bot",message_ids=message.message_id)
 
 
-@app.on_message(filters.regex("https://t.me/.*?/\d{1,}/\d{1,}") & filters.chat("jsjdkdkkd") & filters.outgoing )
+#@app.on_message(filters.regex("https://t.me/.*?/\d{1,}/\d{1,}") & filters.chat("jsjdkdkkd") & filters.outgoing )
 def forword(client:Client,message:Message):
     chatid=message.text
     chatid=reaaa.sub("https://t.me/","",chatid)

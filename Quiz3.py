@@ -743,7 +743,7 @@ def doc_poll(update,context):
                                 type=Poll.QUIZ,
                                 correct_option_id =correct_option_id,
                                 #open_period=int(Time),
-                                explanation="Subscribe On youtube : https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA👆👆👆",
+                                explanation="Subscribe On youtube : https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA\n\n👆👆👆",
                                 is_closed=False,
                                 is_anonymous=True,
                                 reply_markup=reply_markup,

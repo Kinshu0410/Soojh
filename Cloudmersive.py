@@ -557,6 +557,7 @@ async def job3(mass,client:Client,message:Message):
 				
 			else:
 				await app.delete_messages(int(mess1.chat.id), mess1.message_id)
+				print("job3")
 				scheduler.shutdown(id="job3"+str(mess1.chat.id))  
 				
 		except:
@@ -785,6 +786,7 @@ async def Current_iq(client:Client,message:Message):
 	##print(mess)
 	    ##print(mess)
 	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
+	print("Current_iq")
 	question=mess.question
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
@@ -855,6 +857,7 @@ async def private_polls(client:Client,message:Message):
     	except:
     	    mess=message.poll
     	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
+    	print("private_polls")
     	question=mess.question
     	options=[o.text for o in mess.options]
     	correct_option_id = 0
@@ -928,6 +931,7 @@ async def start_command(client:Client,message:Message):
 	##print(mess)
 	    ##print(mess)
 	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.message_id)
+	print("start_command")
 	question=mess.question
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
@@ -955,6 +959,7 @@ async def start_command1(client:Client,message:Message):
 	##print(mess)
 	    ##print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
+	print("start_command1")
 	question=mess.question
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)

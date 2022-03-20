@@ -1163,6 +1163,7 @@ def ghppp10(update,context):
     	print(update)
     	if update.message.from_user.id==711296045:
     	    if hasattr(update.message,'text'):
+    	        newv=-1
     	        print(str(update.message))
     	        if update.message.text.startswith("https://t.me/ONLY_FOR_US/"):
 	                nn=int(reaaa.sub("https://t.me/ONLY_FOR_US/\d{,}/","",update.message.text))
@@ -1173,6 +1174,7 @@ def ghppp10(update,context):
 	                text=int(reaaa.sub("/\d{,}","",text))
 	                for x in ali:
 	                    for z in range(nn):
+	                        newv+=1
 	                        try:
 	                            context.bot.forward_message(chat_id=x,from_chat_id=uid,message_id=int(text)+z)
 	                            #if x in ali2:
@@ -1183,7 +1185,7 @@ def ghppp10(update,context):
 	                            if reaaa.findall("Flood control exceeded. Retry in ",str(e)):
 	                                te=reaaa.sub("Flood control exceeded. Retry in ","",str(e))
 	                                te=reaaa.sub(" seconds","",str(te))
-	                                context.bot.send_message(chat_id=update.message.chat_id, text="sleeping for "+str(te))
+	                                context.bot.send_message(chat_id=update.message.chat_id, text="sleeping for "+str(te)+"\ntotal send message = "+str(newv))
 	                                time.sleep(int(te)+1)
 	                                context.bot.send_message(chat_id=update.message.chat_id, text="Bot now activate")
 	                                context.bot.forward_message(chat_id=x,from_chat_id=update.message.chat_id,message_id=update.message.message_id)

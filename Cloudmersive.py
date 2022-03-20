@@ -561,8 +561,10 @@ async def job3(mass,client:Client,message:Message):
 				scheduler.shutdown(id="job3"+str(mess1.chat.id))  
 				
 		except:
-			await app.edit_message_text(int(mess1.chat.id), mess1.message_id,"Some error comes...")
-			scheduler.shutdown(id="job3"+str(x)) 
+			#await app.edit_message_text(int(mess1.chat.id), mess1.message_id,"Some error comes...")
+			
+			scheduler.shutdown(id="job3"+str(x))
+			
 			
 			
 @app.on_message(filters.regex("^Del_ .*?") )#& filters.incoming)
@@ -840,7 +842,7 @@ async def Current_iq(client:Client,message:Message):
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message(filters.poll & filters.private)#& filters.incoming)
+@app.on_message(filters.poll & filters.private & filters.incoming)
 async def private_polls(client:Client,message:Message):
     chatid=[]
     if message.chat.id==1952288751:

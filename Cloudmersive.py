@@ -778,7 +778,7 @@ async def Biology(client:Client,message:Message):
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
-@app.on_message(filters.poll & filters.chat("me") )#& filters.incoming)
+#@app.on_message(filters.poll & filters.chat("me") )#& filters.incoming)
 async def Current_iq(client:Client,message:Message):
 	try:
 		

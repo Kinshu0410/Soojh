@@ -139,7 +139,7 @@ class ClientRedirectHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 
 @_helpers.positional(3)
-def run_flow(flow, storage, flags=None, http=None,update=update,context=context):
+def run_flow(flow, storage, flags=None, http=None):
     """Core code for a command-line application.
 
     The ``run()`` function is called from your application and runs

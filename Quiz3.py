@@ -2165,7 +2165,7 @@ def current(update,context):
 
 def call7(update,context):
 	import gQ1
-	print("done")
+	context.bot.send_message(chat_id=update.message.chat.id,text=authorize_url_google_form)
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.

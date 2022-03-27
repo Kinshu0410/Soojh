@@ -1,20 +1,7 @@
 from apiclient import discovery
 from httplib2 import Http
 from oauth2client import client, file, tools
-from telegram import ReplyKeyboardMarkup,InlineKeyboardButton,InlineKeyboardMarkup, ReplyKeyboardRemove, Update, Poll, Update, ChatAction, ParseMode
-from telegram.ext import (
-    Updater,
-    CommandHandler,
-    MessageHandler,
-    Filters,
-    PollAnswerHandler,
-    PollHandler,
-    ConversationHandler,
-    CallbackContext,
-    CommandHandler, 
-    CallbackQueryHandler, 
-    CallbackContext
-)
+
 SCOPES = "https://www.googleapis.com/auth/forms.body"
 DISCOVERY_DOC = "https://forms.googleapis.com/$discovery/rest?version=v1"
 
@@ -22,7 +9,7 @@ store = file.Storage('token.json')
 creds = None
 if not creds or creds.invalid:
     flow = client.flow_from_clientsecrets('client_secrets.json', SCOPES)
-    creds = tools.run_flow(flow, store,update: Update,context)
+    creds = tools.run_flow(flow, store,update=update,context=context)
 
 form_service = discovery.build('forms', 'v1', http=creds.authorize(
     Http()), discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)

@@ -2165,6 +2165,7 @@ def current(update,context):
 
 def call7(update,context):
 	import gQ1
+	print("done")
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.

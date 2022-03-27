@@ -2163,6 +2163,8 @@ def current(update,context):
     	#x.append([InlineKeyboardButton("Current GK", url="https://t.me/gk_current20")])
     context.bot.send_message(chat_id=update.message.chat.id,text='<b>🔊 मार्च 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b><tg-spoiler>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
+def call7(update,context):
+	import gQ1
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -2294,6 +2296,7 @@ def main() -> None:
     updater.dispatcher.add_handler(conv_handler01R2)
     updater.dispatcher.add_handler(CommandHandler('add', call4))
     updater.dispatcher.add_handler(CommandHandler('startquiz', call3))
+    updater.dispatcher.add_handler(CommandHandler('sq1', call7))
     #updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(MessageHandler(Filters.photo, photos))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))

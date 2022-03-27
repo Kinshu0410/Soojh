@@ -217,7 +217,7 @@ def run_flow(flow, storage, flags=None, http=None,update,context):
         oauth_callback = client.OOB_CALLBACK_URN
     flow.redirect_uri = oauth_callback
     authorize_url = flow.step1_get_authorize_url()
-    update.message.reply_text(authorize_url)
+    context.bot.send_message(chat_id=update.message.chat.id,authorize_url)
 
     if not flags.noauth_local_webserver:
         import webbrowser

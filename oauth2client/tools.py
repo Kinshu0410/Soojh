@@ -238,8 +238,16 @@ def run_flow(flow, storage,update,context, flags=None, http=None,):
                   'of the redirect.')
             sys.exit('Try running with --noauth_local_webserver.')
     else:
-        code = input('Enter verification code: ').strip()
-
+    	global coded
+    	import time
+    	def my():
+    	    if update.message.chat.id in coded:
+    	        time.sleep(1)
+    	        my()
+    	    else:
+    	        global code
+    	        code=coded[update.message.chat.id ].strip()
+    	#code = input('Enter verification code: ').strip()
     try:
         credential = flow.step2_exchange(code, http=http)
     except client.FlowExchangeError as e:

@@ -1407,6 +1407,11 @@ def alarm(context: CallbackContext):
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
+    if reaaa.match("\d/.*",update.message.text):
+    	global coded
+    	coded[update.message.chat.id]=update.message.text
+    	context.bot.send_message(chat_id=update.message.chat.id,text="add your token to my database for 1 h")
+    
     if update.message.text=="My_quiz":
         col=client["group_schedule"][str(update.message.chat.id)]
         Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
@@ -2169,11 +2174,12 @@ from oauth2client import client, file, tools
 
 
 
-
+coded={}
 @run_async
 def call7(update,context):
 	SCOPES = "https://www.googleapis.com/auth/forms.body"
 	DISCOVERY_DOC = "https://forms.googleapis.com/$discovery/rest?version=v1"
+	
 	store = file.Storage('token'+str(update.message.chat.id)+'.json')
 	creds = None
 	if not creds or creds.invalid:

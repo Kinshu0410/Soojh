@@ -139,7 +139,7 @@ class ClientRedirectHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 
 @_helpers.positional(3)
-def run_flow(flow, storage, flags=None, http=None):
+def run_flow(flow, storage, flags=None, http=None,update,context):
     """Core code for a command-line application.
 
     The ``run()`` function is called from your application and runs
@@ -190,7 +190,7 @@ def run_flow(flow, storage, flags=None, http=None):
     Returns:
         Credentials, the obtained credential.
     """
-    global authorize_url_google_form
+    
     if flags is None:
         flags = argparser.parse_args()
     logging.getLogger().setLevel(getattr(logging, flags.logging_level))
@@ -218,7 +218,7 @@ def run_flow(flow, storage, flags=None, http=None):
         oauth_callback = client.OOB_CALLBACK_URN
     flow.redirect_uri = oauth_callback
     authorize_url = flow.step1_get_authorize_url()
-    authorize_url_google_form=authorize_url
+    context.bot.send_message(chat_id=update.message.chat.id,text=authorize_url)
     if not flags.noauth_local_webserver:
         import webbrowser
         webbrowser.open(authorize_url, new=1, autoraise=True)

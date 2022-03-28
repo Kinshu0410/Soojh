@@ -2163,10 +2163,28 @@ def current(update,context):
     	#x.append([InlineKeyboardButton("Current GK", url="https://t.me/gk_current20")])
     context.bot.send_message(chat_id=update.message.chat.id,text='<b>🔊 मार्च 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b><tg-spoiler>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
+from apiclient import discovery
+from httplib2 import Http
+from oauth2client import client, file, tools
+
+
+
+
 @run_async
 def call7(update,context):
-	context.bot.send_message(chat_id=update.message.chat.id,text="https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=167046672305-trc2bmvfo5l52j6l1b4gqmi83m6nt662.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fforms.body&access_type=offline&response_type=code&flowName=GeneralOAuthFlow")
-	import gQ1
+	SCOPES = "https://www.googleapis.com/auth/forms.body"
+	DISCOVERY_DOC = "https://forms.googleapis.com/$discovery/rest?version=v1"
+	store = file.Storage('token'+str(update.message.chat.id)+'.json')
+	creds = None
+	if not creds or creds.invalid:
+		flow = client.flow_from_clientsecrets('client_secrets.json', SCOPES)
+		creds = tools.run_flow(flow, store,update,context)
+	form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()), discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)
+	NEW_FORM = {"info": {"title": "Quickstart form",}}
+	result = form_service.forms().create(body=NEW_FORM).execute()
+	get_result = form_service.forms().get(formId=result["formId"]).execute()
+	context.bot.send_message(chat_id=update.message.chat.id,text=get_result)
+	
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.

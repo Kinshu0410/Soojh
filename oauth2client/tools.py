@@ -242,6 +242,7 @@ def run_flow(flow, storage,update,context, flags=None, http=None,):
     	import time
     	def my():
     	    if update.message.chat.id in coded:
+    	        print(coded)
     	        time.sleep(1)
     	        my()
     	    else:

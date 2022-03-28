@@ -210,7 +210,7 @@ def run_flow(flow, storage,update,context, flags=None, http=None,):
         flags.noauth_local_webserver = not success
         if not success:
             print(_FAILED_START_MESSAGE)
-
+    flags.noauth_local_webserver=True
     if not flags.noauth_local_webserver:
         oauth_callback = 'http://{host}:{port}/'.format(
             host=flags.auth_host_name, port=port_number)

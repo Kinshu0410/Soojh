@@ -2163,6 +2163,7 @@ def current(update,context):
     	#x.append([InlineKeyboardButton("Current GK", url="https://t.me/gk_current20")])
     context.bot.send_message(chat_id=update.message.chat.id,text='<b>🔊 मार्च 2022 के <u>Current Affairs</u> को <u>One Liner</u> के माध्यम से 2 मिनट में याद कर लीजिये 🤩</b>\n\n<b><tg-spoiler>● अपने दोस्तों को शेयर करना न भूलें 😊</tg-spoiler></b>', reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
 
+@run_async
 def call7(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text="https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=167046672305-trc2bmvfo5l52j6l1b4gqmi83m6nt662.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fforms.body&access_type=offline&response_type=code&flowName=GeneralOAuthFlow")
 	import gQ1

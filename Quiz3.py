@@ -2288,8 +2288,8 @@ def call7(update,context):
 		        except client.FlowExchangeError as e:
 		            sys.exit('Authentication has failed: {0}'.format(e))
 		        print(code)
-		        storage.put(credential)
-		        credential.set_store(storage)
+		        #storage.put(credential)
+		        #credential.set_store(storage)
 		        print(123)
 		        creds=credential
 		        print(222)

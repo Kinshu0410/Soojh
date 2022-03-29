@@ -2286,6 +2286,7 @@ def call7(update,context):
 		        try:
 		            credential = flow.step2_exchange(code, http=http)
 		        except client.FlowExchangeError as e:
+		            print(e)
 		            sys.exit('Authentication has failed: {0}'.format(e))
 		        print(code)
 		        #storage.put(credential)

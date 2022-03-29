@@ -2280,16 +2280,19 @@ def call7(update,context):
 		    try:
 		        global coded
 		        global form_service
-		        print("teasting")
+		        
 		        code=coded[update.message.chat.id]
-		        print(code)
+		        
 		        try:
 		            credential = flow.step2_exchange(code, http=http)
 		        except client.FlowExchangeError as e:
 		            sys.exit('Authentication has failed: {0}'.format(e))
-		        store.put(credential)
-		        credential.set_store(store)
+		        print(coded)
+		        storage.put(credential)
+		        credential.set_store(storage)
+		        print(123)
 		        creds=credential
+		        print(222)
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)
 		        context.bot.send_message(chat_id=update.message.chat.id,text=code)
 		        coded.pop(update.message.chat.id)

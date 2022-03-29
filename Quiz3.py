@@ -2290,8 +2290,8 @@ def call7(update,context):
 		            print(str(e))
 		            sys.exit('Authentication has failed: {0}'.format(e))
 		        print(coded)
-		        #storage.put(credential)
-		        #credential.set_store(storage)
+		        store.put(credential)
+		        credential.set_store(store)
 		        print(123)
 		        creds=credential
 		        print(222)

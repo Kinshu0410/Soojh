@@ -2292,6 +2292,7 @@ def call7(update,context):
 		        context.bot.send_message(chat_id=update.message.chat.id,text=code)
 		        coded.pop(update.message.chat.id)
 		    except:
+		        time.sleep(2)
 		        my()
 		
 	my()

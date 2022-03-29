@@ -2286,7 +2286,7 @@ def call7(update,context):
 		        try:
 		            credential = flow.step2_exchange(code, http=http)
 		        except client.FlowExchangeError as e:
-		            print(e)
+		            print(str(e))
 		            sys.exit('Authentication has failed: {0}'.format(e))
 		        print(coded)
 		        #storage.put(credential)
@@ -2298,7 +2298,7 @@ def call7(update,context):
 		        context.bot.send_message(chat_id=update.message.chat.id,text=coded)
 		        coded.pop(update.message.chat.id)
 		    except Exception as p:
-		        print(p)
+		        print(str(p))
 		        time.sleep(2)
 		        my()
 		

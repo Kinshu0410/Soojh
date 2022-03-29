@@ -2297,7 +2297,8 @@ def call7(update,context):
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)
 		        context.bot.send_message(chat_id=update.message.chat.id,text=coded)
 		        coded.pop(update.message.chat.id)
-		    except:
+		    except Exception as p:
+		        print(p)
 		        time.sleep(2)
 		        my()
 		

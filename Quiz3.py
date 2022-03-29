@@ -2249,6 +2249,7 @@ def call7(update,context):
 	
 	store = file.Storage('token'+str(update.message.chat.id)+'.json')
 	creds = None
+	form_service=None
 	if not creds or creds.invalid:
 		flow = client.flow_from_clientsecrets('client_secrets.json', SCOPES)
 		flags=None
@@ -2288,12 +2289,12 @@ def call7(update,context):
 		        credential.set_store(store)
 		        creds=credential
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)
-		        
+		        context.bot.send_message(chat_id=update.message.chat.id,text=code)
 		        coded.pop(update.message.chat.id)
 		    except:
 		        my()
 		
-	 
+	my()
 	NEW_FORM = {"info": {"title": "Quickstart form",}}
 	result = form_service.forms().create(body=NEW_FORM).execute()
 	get_result = form_service.forms().get(formId=result["formId"]).execute()

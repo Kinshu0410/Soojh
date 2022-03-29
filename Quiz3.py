@@ -2172,11 +2172,78 @@ from apiclient import discovery
 from httplib2 import Http
 from oauth2client import client, file, tools
 
+import logging
+import socket
+import sys
+from six.moves import BaseHTTPServer
+from six.moves import http_client
+from six.moves import input
+from six.moves import urllib
+
+from oauth2client import _helpers
+
+def _CreateArgumentParser():
+    try:
+        import argparse
+    except ImportError:  # pragma: NO COVER
+        return None
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument('--auth_host_name', default='localhost',
+                        help='Hostname when running a local web server.')
+    parser.add_argument('--noauth_local_webserver', action='store_true',
+                        default=False, help='Do not run a local web server.')
+    parser.add_argument('--auth_host_port', default=[8080, 8090], type=int,
+                        nargs='*', help='Port web server should listen on.')
+    parser.add_argument(
+        '--logging_level', default='ERROR',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
+        help='Set the logging level of detail.')
+    return parser
+
+class ClientRedirectServer(BaseHTTPServer.HTTPServer):
+    """A server to handle OAuth 2.0 redirects back to localhost.
+
+    Waits for a single request and parses the query parameters
+    into query_params and then stops serving.
+    """
+    query_params = {}
+
+class ClientRedirectHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+    """A handler for OAuth 2.0 redirects back to localhost.
+
+    Waits for a single request and parses the query parameters
+    into the servers query_params and then stops serving.
+    """
+
+    def do_GET(self):
+        """Handle a GET request.
+
+        Parses the query parameters and prints a message
+        if the flow has completed. Note that we can't detect
+        if an error occurred.
+        """
+        self.send_response(http_client.OK)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        parts = urllib.parse.urlparse(self.path)
+        query = _helpers.parse_unique_urlencoded(parts.query)
+        self.server.query_params = query
+        self.wfile.write(
+            b'<html><head><title>Authentication Status</title></head>')
+        self.wfile.write(
+            b'<body><p>The authentication flow has completed.</p>')
+        self.wfile.write(b'</body></html>')
+
+    def log_message(self, format, *args):
+        """Do not log messages to stdout while running as cmd. line program."""
 
 
-coded={}
+argparser = _CreateArgumentParser()
+
+
 @run_async
 def call7(update,context):
+	from oauth2client import client
 	SCOPES = "https://www.googleapis.com/auth/forms.body"
 	DISCOVERY_DOC = "https://forms.googleapis.com/$discovery/rest?version=v1"
 	
@@ -2184,12 +2251,38 @@ def call7(update,context):
 	creds = None
 	if not creds or creds.invalid:
 		flow = client.flow_from_clientsecrets('client_secrets.json', SCOPES)
-		creds = tools.run_flow(flow, store,update=update,context=context)
-	form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()), discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)
-	NEW_FORM = {"info": {"title": "Quickstart form",}}
-	result = form_service.forms().create(body=NEW_FORM).execute()
-	get_result = form_service.forms().get(formId=result["formId"]).execute()
-	context.bot.send_message(chat_id=update.message.chat.id,text=get_result)
+		if flags is None:
+		    flags = argparser.parse_args()
+		logging.getLogger().setLevel(getattr(logging, flags.logging_level))
+		if not flags.noauth_local_webserver:
+		     success = False
+		     port_number = 0
+		     for port in flags.auth_host_port:
+		          port_number = port
+		          try:
+		              httpd = ClientRedirectServer((flags.auth_host_name, port),
+                                             ClientRedirectHandler)
+		          except socket.error:
+		              pass
+		          else:
+		              success = True
+		              break
+		     flags.noauth_local_webserver = not success
+		     flags.noauth_local_webserver=True
+		     if not flags.noauth_local_webserver:
+		          oauth_callback = 'http://{host}:{port}/'.format(
+		          host=flags.auth_host_name, port=port_number)
+		     flow.redirect_uri = oauth_callback
+		     authorize_url = flow.step1_get_authorize_url()
+		     context.bot.send_message(chat_id=update.message.chat.id,text=authorize_url)
+		code = None
+		
+		
+	#form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()), discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)
+#	NEW_FORM = {"info": {"title": "Quickstart form",}}
+#	result = form_service.forms().create(body=NEW_FORM).execute()
+#	get_result = form_service.forms().get(formId=result["formId"]).execute()
+#	context.bot.send_message(chat_id=update.message.chat.id,text=get_result)
 	
 
 def main() -> None:

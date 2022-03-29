@@ -2269,10 +2269,8 @@ def call7(update,context):
 		              success = True
 		              break
 		     flags.noauth_local_webserver = not success
-		     flags.noauth_local_webserver=True
-		     if not flags.noauth_local_webserver:
-		          oauth_callback = 'http://{host}:{port}/'.format(
-		          host=flags.auth_host_name, port=port_number)
+		     oauth_callback = client.OOB_CALLBACK_URN
+		     
 		     flow.redirect_uri = oauth_callback
 		     authorize_url = flow.step1_get_authorize_url()
 		     context.bot.send_message(chat_id=update.message.chat.id,text=authorize_url)

@@ -2240,7 +2240,7 @@ class ClientRedirectHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 argparser = _CreateArgumentParser()
 
-
+coded={}
 @run_async
 def call7(update,context):
 	from oauth2client import client
@@ -2275,13 +2275,29 @@ def call7(update,context):
 		     authorize_url = flow.step1_get_authorize_url()
 		     context.bot.send_message(chat_id=update.message.chat.id,text=authorize_url)
 		code = None
+		def my():
+		    try:
+		        global coded
+		        global form_service
+		        code=coded[update.message.chat.id]
+		        try:
+		            credential = flow.step2_exchange(code, http=http)
+		        except client.FlowExchangeError as e:
+		            sys.exit('Authentication has failed: {0}'.format(e))
+		        store.put(credential)
+		        credential.set_store(store)
+		        creds=credential
+		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)
+		        
+		        coded.pop(update.message.chat.id)
+		    except:
+		        my()
 		
-		
-	#form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()), discoveryServiceUrl=DISCOVERY_DOC, static_discovery=False)
-#	NEW_FORM = {"info": {"title": "Quickstart form",}}
-#	result = form_service.forms().create(body=NEW_FORM).execute()
-#	get_result = form_service.forms().get(formId=result["formId"]).execute()
-#	context.bot.send_message(chat_id=update.message.chat.id,text=get_result)
+	 
+	NEW_FORM = {"info": {"title": "Quickstart form",}}
+	result = form_service.forms().create(body=NEW_FORM).execute()
+	get_result = form_service.forms().get(formId=result["formId"]).execute()
+	context.bot.send_message(chat_id=update.message.chat.id,text=get_result)
 	
 
 def main() -> None:

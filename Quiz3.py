@@ -2251,6 +2251,7 @@ def call7(update,context):
 	creds = None
 	if not creds or creds.invalid:
 		flow = client.flow_from_clientsecrets('client_secrets.json', SCOPES)
+		flags=None
 		if flags is None:
 		    flags = argparser.parse_args()
 		logging.getLogger().setLevel(getattr(logging, flags.logging_level))

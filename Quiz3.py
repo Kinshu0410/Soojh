@@ -2284,6 +2284,7 @@ def call7(update,context):
 		        code=coded[update.message.chat.id].strip()
 		        
 		        try:
+		            http=None
 		            credential = flow.step2_exchange(code, http=http)
 		        except client.FlowExchangeError as e:
 		            print(str(e))

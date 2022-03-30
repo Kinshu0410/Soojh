@@ -2308,124 +2308,14 @@ def call7(update,context):
 	result = form_service.forms().create(body=NEW_FORM).execute()
 	get_result = form_service.forms().get(formId=result["formId"]).execute()
 	context.bot.send_message(chat_id=update.message.chat.id,text=get_result)
-	NEW_FORM = {"info": {"title": "yoo"}}
-	result = form_service.forms().create(body=NEW_FORM).execute()
-	context.bot.send_message(chat_id=update.message.chat.id,text=str(data[update.message.chat.id]['info']))
-	update = {
-    "requests": [
-        {
-            "updateSettings": {
-                "settings": {
-                    "quizSettings": {
-                        "isQuiz": True
-                    }
-                },
-                "updateMask": "quizSettings.isQuiz"
-            }
-        }
-    ]
-}
-	form_service.forms().batchUpdate(formId=result["formId"],
-                                                    body=update).execute()
-	for x in data[update.message.chat.id]['Q']:
-	    form_service.forms().batchUpdate(
-    formId=result["formId"], body=x).execute()
-	get_result = form_service.forms().get(formId=result["formId"]).execute()
-	context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
 	
-
-
-AA,BB,CC= range(3)
-data={}
-@run_async
-def call8(update,context):
-    context.bot.send_message(chat_id=update.message.chat.id,text="title: ... \n discription: ")
-    return BB
-def gfm(update,context):
-    global data
-    info = update.message.text
-    #data[update.message.chat.id]["info"].append=info
-    data={update.message.chat.id:{'info':info,"Q":[]}}
-    return AA
-def gfp(update,context):
-    global data
-    actual_poll = update.message.poll
-    question= actual_poll.question
-    opt=[o.text for o in actual_poll.options]
-    options=[{"value": o.text} for o in actual_poll.options]
-    correct_option_id=actual_poll.correct_option_id
-    
-    pollq={
-    "requests": [{
-        "createItem": {
-            "item": {
-                "title": question,
-                "questionItem": {
-                    "question": {
-                        "required": True,
-                        "grading":{"pointValue":1,"correctAnswers": {"answers": [{"value": opt[correct_option_id]}]}},
-                        "choiceQuestion": {
-                            "type": "RADIO",
-                            "options":options,
-                            "shuffle": False
-                        }
-                    }
-                },
-            },
-            "location": {
-                "index": 0
-            }
-       }
-    }]
-}
-    data[update.message.chat.id]["Q"].append(pollq)
-    context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /sq2 or /cancel \n\n"+str(data))
-    return AA
-def gft(update,context):
-    text = update.message.text
-    Q={
-    "requests": [{
-        "createItem": {
-            "item": {
-                "title": "In what year did the United States land a mission on the moon?",
-                "questionItem": {
-                    "question": {
-                        "required": True,
-                        "choiceQuestion": {
-                            "type": "RADIO",
-                            "options": [
-                                {"value": "1965"},
-                                {"value": "1967"},
-                                {"value": "1969"},
-                                {"value": "1971"}
-                            ],
-                            "shuffle": True
-                        }
-                    }
-                },
-            },
-            "location": {
-                "index": 0
-            }
-       }
-    }]
-}
-    data[update.message.chat.id]["Q"].append(text)
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
     bot_token=os.environ.get("BOT_TOKEN", "")
     #bot_token='1293606633:AAHuGiRGZpdvMOpichWNy4mmzhB0-BL5_V8'
     updater = Updater(bot_token,use_context=True)
-    conv_handlerGF= ConversationHandler(
-        entry_points=[CommandHandler('sq1', call8)],
-        states={
-        #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, gft),MessageHandler(Filters.poll, gfp), ],
-            BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
-        },
-        fallbacks=[CommandHandler('cancel', cancel)],
-    )
+
     updater.dispatcher.add_handler(MessageHandler(Filters.all & Filters.chat(username="jsjdkdkkd"), ghppp10))# Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
     #dispatcher.
@@ -2546,12 +2436,11 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
-    updater.dispatcher.add_handler(conv_handlerGF)
     updater.dispatcher.add_handler(conv_handler01R1)
     updater.dispatcher.add_handler(conv_handler01R2)
     updater.dispatcher.add_handler(CommandHandler('add', call4))
     updater.dispatcher.add_handler(CommandHandler('startquiz', call3))
-    updater.dispatcher.add_handler(CommandHandler('sq2', call7))
+    updater.dispatcher.add_handler(CommandHandler('sq1', call7))
     #updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(MessageHandler(Filters.photo, photos))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))

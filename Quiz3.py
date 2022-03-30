@@ -2296,6 +2296,8 @@ def call7(update,context):
 		        creds=credential
 		        
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
+		        NEW_FORM = {"info": {"title": "Quickstart form",}}
+		        y = form_service.forms().create(body=NEW_FORM).execute()
 		        context.bot.send_message(chat_id=update.message.chat.id,text=coded)
 		        coded.pop(update.message.chat.id)
 		    except Exception as p:

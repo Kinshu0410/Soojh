@@ -2374,7 +2374,7 @@ def gfp(update,context):
     }]
 }
     data[update.message.chat.id]["Q"].append(pollq)
-    context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /sq2")
+    context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /sq2 or /cancel \n\n"+str(data))
     return AA
 def gft(update,context):
     text = update.message.text

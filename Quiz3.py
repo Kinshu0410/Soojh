@@ -2304,6 +2304,10 @@ def call7(update,context):
 		        my()
 		
 	my()
+	NEW_FORM = {"info": {"title": "Quickstart form",}}
+	result = form_service.forms().create(body=NEW_FORM).execute()
+	get_result = form_service.forms().get(formId=result["formId"]).execute()
+	context.bot.send_message(chat_id=update.message.chat.id,text=get_result)
 	NEW_FORM = {"info": {"title": "yoo"}}
 	result = form_service.forms().create(body=NEW_FORM).execute()
 	context.bot.send_message(chat_id=update.message.chat.id,text=str(data[update.message.chat.id]['info']))

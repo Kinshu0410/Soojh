@@ -2296,24 +2296,9 @@ def call7(update,context):
 		        creds=credential
 		        
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
-		        NEW_FORM = {"info": {"title": "Quickstart form",}}
-		        y = form_service.forms().create(body=NEW_FORM).execute()
-		        context.bot.send_message(chat_id=update.message.chat.id,text=coded)
-		        coded.pop(update.message.chat.id)
-		    except Exception as p:
-		        print(str(p))
-		        time.sleep(2)
-		        my()
-		
-	my()
-	NEW_FORM = {"info": {"title": "Quickstart form",}}
-	result = form_service.forms().create(body=NEW_FORM).execute()
-	get_result = form_service.forms().get(formId=result["formId"]).execute()
-	context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
-	NEW_FORM = {"info": {"title": "yoo"}}
-	result = form_service.forms().create(body=NEW_FORM).execute()
-	context.bot.send_message(chat_id=update.message.chat.id,text=str(data[update.message.chat.id]['info']))
-	update = {
+		        NEW_FORM = {"info": {"title": "yoo"}}
+		        result = form_service.forms().create(body=NEW_FORM).execute()
+		        update1 = {
     "requests": [
         {
             "updateSettings": {
@@ -2327,15 +2312,19 @@ def call7(update,context):
         }
     ]
 }
-	form_service.forms().batchUpdate(formId=result["formId"],
-                                                    body=update).execute()
-	for x in data[update.message.chat.id]['Q']:
-	    form_service.forms().batchUpdate(
-    formId=result["formId"], body=x).execute()
-	get_result = form_service.forms().get(formId=result["formId"]).execute()
-	context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
-	
-
+		        form_service.forms().batchUpdate(formId=result["formId"],
+                                                    body=update1).execute()
+		        for x in data[update.message.chat.id]['Q']:
+		            form_service.forms().batchUpdate(formId=result["formId"], body=x).execute()
+		        get_result = form_service.forms().get(formId=result["formId"]).execute()
+		        context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
+		        coded.pop(update.message.chat.id)
+		    except Exception as p:
+		        print(str(p))
+		        time.sleep(2)
+		        my()
+		
+	my()
 
 AA,BB,CC= range(3)
 data={}

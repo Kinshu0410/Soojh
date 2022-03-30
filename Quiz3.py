@@ -2316,6 +2316,7 @@ def call7(update,context):
                                                     body=update1).execute()
 		        for x in data[update.message.chat.id]['Q']:
 		            form_service.forms().batchUpdate(formId=result["formId"], body=x).execute()
+		        time.sleep(5)
 		        get_result = form_service.forms().get(formId=result["formId"]).execute()
 		        context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
 		        coded.pop(update.message.chat.id)
@@ -2370,7 +2371,7 @@ def gfp(update,context):
     }]
 }
     data[update.message.chat.id]["Q"].append(pollq)
-    context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /sq2 or /cancel \n\n"+str(data))
+    context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /sq2 or /cancel")
     return AA
 def gft(update,context):
     text = update.message.text

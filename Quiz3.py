@@ -2304,9 +2304,9 @@ def call7(update,context):
 		        my()
 		
 	my()
-	NEW_FORM = {"info": {"title": data[update.message.chat.id]['info'],}}
+	NEW_FORM = {"info": {"title": "yoo"}}
 	result = form_service.forms().create(body=NEW_FORM).execute()
-	context.bot.send_message(chat_id=update.message.chat.id,text=str("form"))
+	context.bot.send_message(chat_id=update.message.chat.id,text=str(data[update.message.chat.id]['info']))
 	update = {
     "requests": [
         {

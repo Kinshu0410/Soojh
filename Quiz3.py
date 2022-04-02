@@ -1461,6 +1461,7 @@ def poll(update, context):
 	        from excle_c import main
 	        data=main(update.message.text)
 	        import xlsxwriter
+	        context.bot.send_message(chat_id=update.message.chat.id, text=str(data))
 	        workbook = xlsxwriter.Workbook('Result.xlsx')
 	        worksheet = workbook.add_worksheet()
 	        context.bot.send_message(chat_id=update.message.chat.id, text=str(data))
@@ -1468,11 +1469,11 @@ def poll(update, context):
 	            for y in range(len(data[x])):
 	                worksheet.write(x,y, data[x][y])
 	        workbook.close()
-	        context.bot.send_message(chat_id=update.message.chat.id, text=str(data))
+	        
 	        #context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added")
 	        context.bot.send_document(update.message.chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
-	    except:
-	        pass
+	    except Exception as e:
+	        context.bot.send_message(chat_id=update.message.chat.id, text=str(e))
 	    quest=(update.message.text)
 	    
 	    quest=reaaa.sub("Sol\.\(a\).*", "1", quest)

@@ -2315,7 +2315,7 @@ def call7(update,context):
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
 		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']}}
 		        result = form_service.forms().create(body=NEW_FORM).execute()
-		        context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
+		        #context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
 		        update1 = {
     "requests": [
         {

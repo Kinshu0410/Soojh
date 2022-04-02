@@ -2188,7 +2188,7 @@ def current(update,context):
 
 from apiclient import discovery
 from httplib2 import Http
-from oauth2client import client, file, tools
+
 
 import logging
 import socket
@@ -2202,6 +2202,7 @@ from oauth2client import _helpers
 
 def _CreateArgumentParser():
     try:
+    	from oauth2client import client, file, tools
         import argparse
     except ImportError:  # pragma: NO COVER
         return None
@@ -2224,6 +2225,7 @@ class ClientRedirectServer(BaseHTTPServer.HTTPServer):
     Waits for a single request and parses the query parameters
     into query_params and then stops serving.
     """
+    from oauth2client import client, file, tools
     query_params = {}
 
 class ClientRedirectHandler(BaseHTTPServer.BaseHTTPRequestHandler):
@@ -2240,6 +2242,7 @@ class ClientRedirectHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         if the flow has completed. Note that we can't detect
         if an error occurred.
         """
+        from oauth2client import client, file, tools
         self.send_response(http_client.OK)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
@@ -2261,7 +2264,9 @@ argparser = _CreateArgumentParser()
 coded={}
 @run_async
 def call7(update,context):
-	from oauth2client import client
+	
+	#from oauth2client import client
+	from oauth2client import client, file, tools
 	SCOPES = "https://www.googleapis.com/auth/forms.body"
 	DISCOVERY_DOC = "https://forms.googleapis.com/$discovery/rest?version=v1"
 	

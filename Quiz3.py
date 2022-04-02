@@ -1407,6 +1407,7 @@ def alarm(context: CallbackContext):
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
+    
     if reaaa.match("\d/.*",update.message.text):
     	global coded
     	coded[update.message.chat.id]=update.message.text
@@ -1456,6 +1457,19 @@ def poll(update, context):
 		    	context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added") 
 		    	time.sleep(5)
     elif str(update.message.from_user.id) in LIST_OF_ADMINS:
+    	try:
+    	    from excle_c import main
+    	    data=main(update.message.text)
+    	    import xlsxwriter
+    	    workbook = xlsxwriter.Workbook('Result.xlsx')
+    	    worksheet = workbook.add_worksheet()
+    	    for x in range(len(data)):
+    	        for y in range(len(data[x])):
+    	            worksheet.write(x,y, data[x][y])
+    	    workbook.close()
+    	    context.bot.send_document(update.effective_chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+    	except:
+    	    pass
 	    quest=(update.message.text)
 	    
 	    quest=reaaa.sub("Sol\.\(a\).*", "1", quest)
@@ -2296,8 +2310,9 @@ def call7(update,context):
 		        creds=credential
 		        
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
-		        NEW_FORM = {"info": {"title": "yoo"}}
+		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']}}
 		        result = form_service.forms().create(body=NEW_FORM).execute()
+		        context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
 		        update1 = {
     "requests": [
         {
@@ -2318,7 +2333,7 @@ def call7(update,context):
 		            form_service.forms().batchUpdate(formId=result["formId"], body=x).execute()
 		        time.sleep(5)
 		        get_result = form_service.forms().get(formId=result["formId"]).execute()
-		        context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
+		        
 		        coded.pop(update.message.chat.id)
 		    except Exception as p:
 		        print(str(p))

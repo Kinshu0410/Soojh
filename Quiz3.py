@@ -2315,7 +2315,7 @@ def call7(update,context):
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
 		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']}}
 		        result = form_service.forms().create(body=NEW_FORM).execute()
-		        #context.bot.send_message(chat_id=update.message.chat.id,text=str(get_result))
+		        
 		        update1 = {
     "requests": [
         {
@@ -2336,7 +2336,7 @@ def call7(update,context):
 		            form_service.forms().batchUpdate(formId=result["formId"], body=x).execute()
 		        time.sleep(5)
 		        get_result = form_service.forms().get(formId=result["formId"]).execute()
-		        
+		        context.bot.send_message(chat_id=update.message.chat.id,text=str(result))
 		        coded.pop(update.message.chat.id)
 		    except Exception as p:
 		        print(str(p))

@@ -1468,7 +1468,7 @@ def poll(update, context):
 	                worksheet.write(x,y, data[x][y])
 	        workbook.close()
 	        context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added")
-	        context.bot.send_document(chat_id=update.message.chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+	        context.bot.send_document(update.message.chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	    except:
 	        pass
 	    quest=(update.message.text)

@@ -1458,7 +1458,6 @@ def poll(update, context):
 		    	time.sleep(5)
     elif str(update.message.from_user.id) in LIST_OF_ADMINS:
 	    try:
-	        context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added")
 	        from excle_c import main
 	        data=main(update.message.text)
 	        import xlsxwriter
@@ -1469,6 +1468,7 @@ def poll(update, context):
 	                worksheet.write(x,y, data[x][y])
 	        workbook.close()
 	        
+	        context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added")
 	        context.bot.send_document(update.message.chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	    except:
 	        pass

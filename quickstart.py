@@ -98,13 +98,13 @@ class Drive_OCR:
             body=file_metadata,
             media_body=MediaFileUpload(self.filename, mimetype=mime)
         ).execute()
-        url=('https://docs.google.com/spreadsheets/d/%s/export?format=pdf' % file.get('id'))
-        import requests, time
-        print(url)
-        time.sleep(5)
+        #url=('https://docs.google.com/spreadsheets/d/%s/export?format=pdf' % file.get('id'))
+        #import requests, time
+        #print(url)
+        #time.sleep(5)
         #r = requests.get(url, allow_redirects=True)
         #open('Result.pdf', 'wb').write(r.content)
-        time.sleep(5)
+        #time.sleep(5)
         # It will export drive image into Doc
         request = service.files().export_media(fileId=file.get('id'),mimeType='application/pdf')
         print(request)

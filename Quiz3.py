@@ -1468,8 +1468,10 @@ def poll(update, context):
 	        for x in range(len(data)):
 	            for y in range(len(data[x])):
 	                worksheet.write(x,y, data[x][y])
+	        from quickstart import Drive_OCR
+	        filename=Drive_OCR('Result.xlsx').excle_to_pdf()
 	        workbook.close()
-	        context.bot.send_document(update.message.chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+	        context.bot.send_document(update.message.chat.id, open(filename, "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	        
 	        
 	        #context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added")

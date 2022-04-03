@@ -1470,7 +1470,10 @@ def poll(update, context):
 	                worksheet.write(x,y, data[x][y])
 	        workbook.close()
 	        from win32com import client
+	        import win32api
 	        excel = client.Dispatch("Excel.Application")
+	        excel.Interactive = False
+	        excel.Visible = False
 	        sheets = excel.Workbooks.Open('Result.xlsx')
 	        work_sheets = sheets.Worksheets[0] 
 	        work_sheets.ExportAsFixedFormat(0,'Result.pdf')

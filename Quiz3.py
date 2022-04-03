@@ -1481,7 +1481,7 @@ def poll(update, context):
 	    except Exception as e:
 	        pass#context.bot.send_message(chat_id=update.message.chat.id, text=str(e))
 	    quest=(update.message.text)
-	    
+	    #
 	    quest=reaaa.sub("Sol\.\(a\).*", "1", quest)
 	    quest=reaaa.sub("Sol\.\(b\).*", "2", quest)
 	    quest=reaaa.sub("Sol\.\(c\).*", "3", quest)

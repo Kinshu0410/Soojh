@@ -127,7 +127,7 @@ class Drive_OCR:
         shutil.copyfileobj(fh,open(self.filename+".pdf", 'wb'))
         return self.filename+".pdf"
 
-   def main2(self) -> str:
+    def main2(self) -> str:
         """Shows basic usage of the Drive v3 API.
         Prints the names and ids of the first 10 files the user has access to.
         """

@@ -1470,8 +1470,8 @@ def poll(update, context):
 	                worksheet.write(x,y, data[x][y])
 	        workbook.close()
 	        #context.bot.send_document(update.message.chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
-	        from quickstart1 import Drive_OCR1
-	        filename1=Drive_OCR1(filename+'.xlsx').main()
+	        from quickstart import Drive_OCR
+	        filename1=Drive_OCR(filename+'.xlsx').main1()
 	        
 	        context.bot.send_document(update.message.chat.id, open(filename1, "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	        
@@ -2325,7 +2325,9 @@ def call7(update,context):
 		        creds=credential
 		        
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
-		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']}}
+		        from quickstart import Drive_OCR
+		        file=Drive_OCR(data[update.message.chat.id]['info']+" (Responce).xlsx").main2()
+		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']},"responderUri":file}
 		        result = form_service.forms().create(body=NEW_FORM).execute()
 		        
 		        update1 = {
@@ -2349,6 +2351,7 @@ def call7(update,context):
 		        time.sleep(5)
 		        get_result = form_service.forms().get(formId=result["formId"]).execute()
 		        context.bot.send_message(chat_id=update.message.chat.id,text=str(result))
+		        context.bot.send_message(chat_id=update.message.chat.id,text=str(file))
 		        coded.pop(update.message.chat.id)
 		    except Exception as p:
 		        print(str(p))
@@ -2367,7 +2370,9 @@ def gfm(update,context):
     global data
     info = update.message.text
     #data[update.message.chat.id]["info"].append=info
-    data={update.message.chat.id:{'info':info,"Q":[]}}
+    
+    
+    data={update.message.chat.id:{'info':info,"Q":[]})
     return AA
 def gfp(update,context):
     global data

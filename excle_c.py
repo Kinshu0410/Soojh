@@ -28,7 +28,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # '15yw6CLCsqhaU97cyg_l-GWf_Np-njLfr/ The ID and range of a sample spreadsheet.
  
-SAMPLE_RANGE_NAME = 'B:C'
+
 
 
 def main(y):
@@ -56,18 +56,11 @@ def main(y):
 
     try:
         service = build('sheets', 'v4', credentials=creds)
-        #res=service.spreadsheets().values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,range='A:B').execute()
-        requests ={"requests":[{
-      'updateCells':{
-          'rows': {"values":[{'userEnteredValue':{'stringValue':"yo"}}]},
-          "fields":'*',
-          'range':{"startColumnIndex": 0, "end_row_index":1,'start_column_index':0,'endColumnIndex': 1}
-    }}]}
         
-        
-        #res = service.spreadsheets().batchUpdate(body=requests, spreadsheetId=SAMPLE_SPREADSHEET_ID).execute()
         
         sheet = service.spreadsheets()
+        res=sheet.get(spreadsheetId=SAMPLE_SPREADSHEET_ID).execute()
+        SAMPLE_RANGE_NAME = 'B:'+int(res.sheets.properties.gridProperties.columnCount)
         result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                     range=SAMPLE_RANGE_NAME).execute()
         values = result.get('values', [])

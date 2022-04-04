@@ -164,7 +164,8 @@ class Drive_OCR:
             media_body=MediaFileUpload(self.filename, mimetype=mime)
         ).execute()
         print(file)
-        print(file['id'])
-        request = service.files().get_media(fileId=file['id'])
-        print(request)
+        return "https://docs.google.com/forms/d/e/"+file['id']+"/viewform"
+        
+        #request = service.files().get_media(fileId=file['id'])
+        #print(request)
         

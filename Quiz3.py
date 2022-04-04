@@ -2326,9 +2326,8 @@ def call7(update,context):
 		        
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
 		        from quickstart import Drive_OCR
-		        file=Drive_OCR(data[update.message.chat.id]['info']+".xlsx").main2()
-		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']}}#"responderUri":file}
-		        context.bot.send_message(chat_id=update.message.chat.id,text=str(file))
+		        file=Drive_OCR(data[update.message.chat.id]['info']+" (Responce).xlsx").main2()
+		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']},"responderUri":file}
 		        result = form_service.forms().create(body=NEW_FORM).execute()
 		        
 		        update1 = {
@@ -2373,7 +2372,7 @@ def gfm(update,context):
     #data[update.message.chat.id]["info"].append=info
     
     
-    data={update.message.chat.id:{'info':info,"Q":[]}}
+    data={update.message.chat.id:{'info':info,"Q":[]})
     return AA
 def gfp(update,context):
     global data

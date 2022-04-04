@@ -2372,7 +2372,7 @@ def gfm(update,context):
     #data[update.message.chat.id]["info"].append=info
     
     
-    data={update.message.chat.id:{'info':info,"Q":[]})
+    data={update.message.chat.id:{'info':info,"Q":[]}}
     return AA
 def gfp(update,context):
     global data

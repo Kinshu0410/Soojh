@@ -60,7 +60,7 @@ def main(y):
         
         sheet = service.spreadsheets()
         res=sheet.get(spreadsheetId=SAMPLE_SPREADSHEET_ID).execute()
-        SAMPLE_RANGE_NAME = 'B:'+int(res.sheets.properties.gridProperties.columnCount)
+        SAMPLE_RANGE_NAME = 'B:C'#+int(res.sheets.properties.gridProperties.columnCount)
         result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                     range=SAMPLE_RANGE_NAME).execute()
         values = result.get('values', [])

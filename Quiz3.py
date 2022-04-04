@@ -1469,7 +1469,7 @@ def poll(update, context):
 	            for y in range(len(data[x])):
 	                worksheet.write(x,y, data[x][y])
 	        workbook.close()
-	        context.bot.send_document(update.message.chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+	        context.bot.send_document(update.message.chat.id, open(filename+'.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	        from quickstart import Drive_OCR
 	        filename1=Drive_OCR(filename+'.xlsx').main1()
 	        

@@ -85,6 +85,5 @@ def main(y):
         print(err)
 
 
-    x=main('11qgMaRA0ttkck2VAddHoexGBHk_C5k-GlyW12qCicOI')
-    print(x)
+    
 # [END sheets_quickstart]

@@ -65,11 +65,11 @@ class Drive_OCR1:
         service.files().delete(fileId=file.get('id')).execute()
         fh.seek(0)
         import shutil
-        shutil.copyfileobj(fh,open(self.filename+'1.pdf', 'wb'))
+        shutil.copyfileobj(fh,open(self.filename[:-5]+'.pdf', 'wb'))
 
         # It will print data into terminal
         #output = fh.getvalue().decode()
-        return self.filename+'1.pdf'
+        return self.filename[:-5]+'.pdf'
 
 
 

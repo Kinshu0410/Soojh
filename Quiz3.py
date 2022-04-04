@@ -2325,9 +2325,9 @@ def call7(update,context):
 		        creds=credential
 		        
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
-		        from quickstart import Drive_OCR
-		        file=Drive_OCR(data[update.message.chat.id]['info']+" (Responce).xlsx").main2()
-		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']},"linkedSheetId":file}
+		        #from quickstart import Drive_OCR
+		        #file=Drive_OCR(data[update.message.chat.id]['info']+" (Responce).xlsx").main2()
+		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']}}#,#"linkedSheetId":file}
 		        
 		        result = form_service.forms().create(body=NEW_FORM).execute()
 		        #context.bot.send_message(chat_id=update.message.chat.id,text=str(file))

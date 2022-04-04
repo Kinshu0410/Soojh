@@ -1477,7 +1477,7 @@ def poll(update, context):
 	        
 	        
 	        #context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added")
-	        context.bot.send_document(update.message.chat.id, open('Result.pdf', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+	        #context.bot.send_document(update.message.chat.id, open('Result.pdf', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	    except Exception as e:
 	        pass#context.bot.send_message(chat_id=update.message.chat.id, text=str(e))
 	    quest=(update.message.text)

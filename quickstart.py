@@ -66,7 +66,7 @@ class Drive_OCR:
         output = fh.getvalue().decode()
         return output
 
-    def excle_to_pdf(self) -> str:
+    def main1(self) -> str:
         """Shows basic usage of the Drive v3 API.
         Prints the names and ids of the first 10 files the user has access to.
         """

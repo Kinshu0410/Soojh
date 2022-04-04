@@ -1459,10 +1459,10 @@ def poll(update, context):
     elif str(update.message.from_user.id) in LIST_OF_ADMINS:
 	    try:
 	        from excle_c import main
-	        data=main(update.message.text)
+	        data,filename=main(update.message.text)
 	        import xlsxwriter
 	        #context.bot.send_message(chat_id=update.message.chat.id, text=str(data))
-	        workbook = xlsxwriter.Workbook('Result.xlsx')
+	        workbook = xlsxwriter.Workbook(filename+'.xlsx')
 	        worksheet = workbook.add_worksheet()
 	        #context.bot.send_message(chat_id=update.message.chat.id, text=str(data))
 	        for x in range(len(data)):
@@ -1471,9 +1471,9 @@ def poll(update, context):
 	        workbook.close()
 	        #context.bot.send_document(update.message.chat.id, open('Result.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	        from quickstart1 import Drive_OCR1
-	        filename=Drive_OCR1('Result.xlsx').main()
+	        filename1=Drive_OCR1(filename+'.xlsx').main()
 	        
-	        context.bot.send_document(update.message.chat.id, open(filename, "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+	        context.bot.send_document(update.message.chat.id, open(filename1, "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	        
 	        
 	        #context.bot.send_message(chat_id=update.message.chat.id, text="Quiz added")

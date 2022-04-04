@@ -222,7 +222,7 @@ class Drive_OCR:
         ).execute()
         print(file)
         print(file['id'])
-        return "https://docs.google.com/forms/d/e/"+file['id']+"/viewform"
+        return file['id']
         
         #
         

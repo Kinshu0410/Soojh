@@ -2327,10 +2327,10 @@ def call7(update,context):
 		        form_service = discovery.build('forms', 'v1', http=creds.authorize(Http()),discoveryServiceUrl=DISCOVERY_DOC)
 		        from quickstart import Drive_OCR
 		        file=Drive_OCR(data[update.message.chat.id]['info']+" (Responce).xlsx").main2()
-		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']}}#"responderUri":file}
+		        NEW_FORM = {"info": {"title": data[update.message.chat.id]['info']},"linkedSheetId":file}
 		        
 		        result = form_service.forms().create(body=NEW_FORM).execute()
-		        context.bot.send_message(chat_id=update.message.chat.id,text=str(file))
+		        #context.bot.send_message(chat_id=update.message.chat.id,text=str(file))
 		        update1 = {
     "requests": [
         {
@@ -2352,7 +2352,7 @@ def call7(update,context):
 		        time.sleep(5)
 		        get_result = form_service.forms().get(formId=result["formId"]).execute()
 		        context.bot.send_message(chat_id=update.message.chat.id,text=str(result))
-		        context.bot.send_message(chat_id=update.message.chat.id,text=str(file))
+		        #context.bot.send_message(chat_id=update.message.chat.id,text=str(file))
 		        coded.pop(update.message.chat.id)
 		    except Exception as p:
 		        print(str(p))

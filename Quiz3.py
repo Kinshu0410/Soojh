@@ -2440,6 +2440,9 @@ def gft(update,context):
 }
     data[update.message.chat.id]["Q"].append(text)
 
+def gfph(update,context):
+	context.bot.send_message(chat_id=update.message.chat.id,text=(str(update.message))
+
 def main() -> None:
     # Create the Updater and pass it your bot's token.
     bot_token=os.environ.get("BOT_TOKEN", "")
@@ -2449,7 +2452,7 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, gft),MessageHandler(Filters.poll, gfp), ],
+            AA: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, gft),MessageHandler(Filters.poll, gfp), MessageHandler(Filters.photo,gfph)],
             BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
         },
         fallbacks=[CommandHandler('cancel', cancel)],

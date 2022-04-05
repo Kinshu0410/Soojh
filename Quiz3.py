@@ -2441,7 +2441,7 @@ def gft(update,context):
     data[update.message.chat.id]["Q"].append(text)
 
 def gfph(update,context):
-	context.bot.send_message(chat_id=update.message.chat.id,text=(str(update.message))
+	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.

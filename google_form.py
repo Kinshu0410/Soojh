@@ -70,7 +70,7 @@ def main4(x):
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('gform.json', 'w') as token:
-            gform.write(creds.to_json())
+            token.write(creds.to_json())
 
     try:
         service = build('script', 'v1', credentials=creds)

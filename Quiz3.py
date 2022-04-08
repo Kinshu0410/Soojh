@@ -2429,11 +2429,18 @@ def gfph(update,context):
 def done(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
-    from google_form import main4
-    main4(data+"\n}")
-    update.message.reply_text(
+    try:
+    	from google_form import main4
+    	main4(data+"\n}")
+    	update.message.reply_text(
         'https://script.google.com/home/projects/1mWCV-kS59FbRsalsaMRH_TvvAYJLWuAUUInWTzBYFgBYgSEEQhwxd8f1/edit', reply_markup=ReplyKeyboardRemove()
     )
+    except Exception as e :
+    	update.message.reply_text(str(e))
+    	
+    
+    
+    
 
     return ConversationHandler.END
 

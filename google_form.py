@@ -69,8 +69,8 @@ def main4(x):
                 'credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open('gform.json', 'w') as token:
-            token(write(creds.to_json())
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
 
     try:
         service = build('script', 'v1', credentials=creds)
@@ -84,7 +84,7 @@ def main4(x):
         # Upload two files to the project
         request = {
             'files': [{
-                'name': 'code',
+                'name': 'hello',
                 'type': 'SERVER_JS',
                 'source': SAMPLE_CODE
             }, {
@@ -102,5 +102,3 @@ def main4(x):
     except errors.HttpError as error:
         # The API encountered a problem.
         print(error.content)
-
-

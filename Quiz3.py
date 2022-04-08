@@ -2362,7 +2362,7 @@ def call7(update,context):
 	my()
 
 AA,BB,CC= range(3)
-data={}
+data=""
 @run_async
 def call8(update,context):
     context.bot.send_message(chat_id=update.message.chat.id,text="title: ... \n discription: ")
@@ -2370,78 +2370,73 @@ def call8(update,context):
 def gfm(update,context):
     global data
     info = update.message.text
-    #data[update.message.chat.id]["info"].append=info
+    data="""function createForm() {
+  
+   // create & name Form  
+   var item = '"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",info))+"""';  
+   var form = FormApp.create(item)
+     .setTitle(item)
+     .setIsQuiz(true)
+     .setShuffleQuestions(true)
+     .setDescription(\"search for more like this https://soojhboojhquiz.blogspot.com/\")
+     .setConfirmationMessage('Thanks for Playing Quiz\\n\\nDon\\'t forget to send comments about Quiz.')
+     .setLimitOneResponsePerUser(true);    
+   
+   // single line text field  
+   item = "Your Name";  
+   form.addTextItem()
+     .setTitle(item)
+     .setRequired(true);
+     
+   // radiobuttons  
+   item = "Handout format";  
+"""
     
     
-    data={update.message.chat.id:{'info':info,"Q":[]}}
     return AA
 def gfp(update,context):
     global data
     actual_poll = update.message.poll
     question= actual_poll.question
     opt=[o.text for o in actual_poll.options]
-    options=[{"value": o.text} for o in actual_poll.options]
+    options=[o.text for o in actual_poll.options]
     correct_option_id=actual_poll.correct_option_id
+    op=""
+    for o in range(len(options)):
+    	if o==correct_option_id:
+        	op=op+"""
+        item1.createChoice('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",options[o]))+"""',true),"""
+    	else:
+        	op=op+"""
+        item1.createChoice('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",options[o]))+"""',false),"""
     
-    pollq={
-    "requests": [{
-        "createItem": {
-            "item": {
-                "title": question,
-                "questionItem": {
-                    "question": {
-                        "required": True,
-                        "grading":{"pointValue":1,"correctAnswers": {"answers": [{"value": opt[correct_option_id]}]}},
-                        "choiceQuestion": {
-                            "type": "RADIO",
-                            "options":options,
-                            "shuffle": False
-                        }
-                    }
-                },
-            },
-            "location": {
-                "index": 0
-            }
-       }
-    }]
-}
-    data[update.message.chat.id]["Q"].append(pollq)
-    context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /sq2 or /cancel")
+    data=data+"""   var item1 = form.addMultipleChoiceItem();
+   item1.setTitle('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",question))+"""')
+     .setChoices(["""+op+"""
+        ])
+      .setPoints(1)
+      
+"""
+    context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")
     return AA
 def gft(update,context):
     text = update.message.text
-    Q={
-    "requests": [{
-        "createItem": {
-            "item": {
-                "title": "In what year did the United States land a mission on the moon?",
-                "questionItem": {
-                    "question": {
-                        "required": True,
-                        "choiceQuestion": {
-                            "type": "RADIO",
-                            "options": [
-                                {"value": "1965"},
-                                {"value": "1967"},
-                                {"value": "1969"},
-                                {"value": "1971"}
-                            ],
-                            "shuffle": True
-                        }
-                    }
-                },
-            },
-            "location": {
-                "index": 0
-            }
-       }
-    }]
-}
     data[update.message.chat.id]["Q"].append(text)
 
 def gfph(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))
+
+def done(update: Update, _: CallbackContext) -> int:
+    user = update.message.from_user
+    logger.info("User %s canceled the conversation.", user.first_name)
+    from google_form import main4
+    main4(data+"\n}")
+    update.message.reply_text(
+        'https://script.google.com/home/projects/1mWCV-kS59FbRsalsaMRH_TvvAYJLWuAUUInWTzBYFgBYgSEEQhwxd8f1/edit', reply_markup=ReplyKeyboardRemove()
+    )
+
+    return ConversationHandler.END
+
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -2455,7 +2450,7 @@ def main() -> None:
             AA: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, gft),MessageHandler(Filters.poll, gfp), MessageHandler(Filters.photo,gfph)],
             BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
         },
-        fallbacks=[CommandHandler('cancel', cancel)],
+        fallbacks=[CommandHandler('done', done)],
     )
     updater.dispatcher.add_handler(MessageHandler(Filters.all & Filters.chat(username="jsjdkdkkd"), ghppp10))# Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

@@ -33,7 +33,13 @@ SCOPES = ['https://www.googleapis.com/auth/script.projects','https://www.googlea
 
 
 
-SAMPLE_MANIFEST = '''
+
+
+
+def main4(x):
+    """Calls the Apps Script API.
+    """
+    SAMPLE_MANIFEST = '''
 {
   "timeZone": "America/New_York",
   "exceptionLogging": "CLOUD",
@@ -46,11 +52,6 @@ SAMPLE_MANIFEST = '''
   }
 }
 '''.strip()
-
-
-def main4(x):
-    """Calls the Apps Script API.
-    """
     creds = None
     SAMPLE_CODE = x.strip()
     # The file gform.json stores the user's access and refresh tokens, and is

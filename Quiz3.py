@@ -2378,7 +2378,7 @@ def gfm(update,context):
      .setTitle(item)
      .setIsQuiz(true)
      .setShuffleQuestions(false)
-     .setDescription(\"please subscribe channal \n\n https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA")
+     .setDescription("Please subscribe channal  \n\nhttps://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA")
      .setConfirmationMessage('Thanks for Playing Quiz\\n\\nDon\\'t forget to subscribe https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA')
      .setLimitOneResponsePerUser(true);    
    

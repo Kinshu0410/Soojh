@@ -2377,9 +2377,9 @@ def gfm(update,context):
    var form = FormApp.create(item)
      .setTitle(item)
      .setIsQuiz(true)
-     .setShuffleQuestions(true)
-     .setDescription(\"search for more like this https://soojhboojhquiz.blogspot.com/\")
-     .setConfirmationMessage('Thanks for Playing Quiz\\n\\nDon\\'t forget to send comments about Quiz.')
+     .setShuffleQuestions(false)
+     .setDescription(\"please subscribe channal \n\n https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA")
+     .setConfirmationMessage('Thanks for Playing Quiz\\n\\nDon\\'t forget to subscribe https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA')
      .setLimitOneResponsePerUser(true);    
    
    // single line text field  

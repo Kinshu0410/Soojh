@@ -72,7 +72,7 @@ def main4(x):
         with open('gform.json', 'w') as token:
             token.write(creds.to_json())#
 
-    try:
+    if True:
         service = build('script', 'v1', credentials=creds)
 
         # Call the Apps Script API
@@ -99,6 +99,4 @@ def main4(x):
         return ('https://script.google.com/d/' + script_id + '/edit')
         request = {"function": "getFoldersUnderRoot"}
         
-    except errors.HttpError as error:
-        # The API encountered a problem.
-        print(error.content)
+    

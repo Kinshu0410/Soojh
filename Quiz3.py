@@ -2420,12 +2420,16 @@ def gfp(update,context):
     context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")
     return AA
 def gft(update,context):
+    context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message.text))
     text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
+    context.bot.send_message(chat_id=update.message.chat.id,text=text)
     global data
     x=None
     for y in reaaa.finditer("item1\.setTitle\(\'.*?\'\)",data):
     	x=y.group()
+    context.bot.send_message(chat_id=update.message.chat.id,text=x)
     data=reaaa.sub(x,text,data)
+    return AA
     
 
 def gfph(update,context):

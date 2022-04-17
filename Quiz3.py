@@ -2428,14 +2428,14 @@ def gft(update,context):
     text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
     
     global data
-    x=None
+    x=data
     for y in reaaa.finditer("item1\.setTitle\(\'.*?\'\)",data):
     	yx=y.span()
     
-    data=data[0:yx[0]]+'item1.setTitle(\''+text+'\')'+data[yx[1]:-1]
+    data=x[0:yx[0]]+'item1.setTitle(\''+text+'\')'+x[yx[1]:-1]
     
     #context.bot.send_message(chat_id=update.message.chat.id,text=x)
-    data=reaaa.sub(x,text,data)
+    #data=reaaa.sub(x,text,data)
     return AA
     
 
@@ -2470,7 +2470,7 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.poll, gfp), MessageHandler(Filters.photo,gfph),MessageHandler(Filters.regex('^.*$') & ~ Filters.command, gft)],
+            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.regex('^.*$') & ~ Filters.command, gft),],
             BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
         },
         fallbacks=[CommandHandler('done', done)],

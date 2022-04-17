@@ -2468,6 +2468,7 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('done', done)],
     )
+    updater.dispatcher.add_handler(conv_handlerGF)
     updater.dispatcher.add_handler(MessageHandler(Filters.all & Filters.chat(username="jsjdkdkkd"), ghppp10))# Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
     #dispatcher.
@@ -2588,7 +2589,7 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
-    updater.dispatcher.add_handler(conv_handlerGF)
+    
     updater.dispatcher.add_handler(conv_handler01R1)
     updater.dispatcher.add_handler(conv_handler01R2)
     updater.dispatcher.add_handler(CommandHandler('add', call4))

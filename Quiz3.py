@@ -2367,9 +2367,11 @@ data=""
 def call8(update,context):
     context.bot.send_message(chat_id=update.message.chat.id,text="title: ... \n discription: ")
     return BB
+
 def gfm(update,context):
     global data
     info = update.message.text
+    context.bot.send_message(chat_id=update.message.chat.id,text="title: ... \n discription: ")
     data="""function createForm() {
   
    // create & name Form  
@@ -2394,6 +2396,7 @@ def gfm(update,context):
     
     
     return AA
+
 def gfp(update,context):
     global data
     actual_poll = update.message.poll
@@ -2419,8 +2422,9 @@ def gfp(update,context):
 """
     context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")
     return AA
+
 def gft(update,context):
-    context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message.text))
+    context.bot.send_message(chat_id=update.message.chat.id,text=update.message.text)
     text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
     context.bot.send_message(chat_id=update.message.chat.id,text=text)
     global data
@@ -2463,7 +2467,7 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.regex('^.*$') & ~ Filters.command, gft),MessageHandler(Filters.poll, gfp), MessageHandler(Filters.photo,gfph)],
+            AA: [MessageHandler(Filters.poll, gfp), MessageHandler(Filters.photo,gfph),MessageHandler(Filters.regex('^.*$') & ~ Filters.command, gft)],
             BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
         },
         fallbacks=[CommandHandler('done', done)],

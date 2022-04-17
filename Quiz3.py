@@ -2424,14 +2424,17 @@ def gfp(update,context):
     return AA
 
 def gft(update,context):
-    context.bot.send_message(chat_id=update.message.chat.id,text=update.message.text)
+    
     text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
-    context.bot.send_message(chat_id=update.message.chat.id,text=text)
+    
     global data
     x=None
     for y in reaaa.finditer("item1\.setTitle\(\'.*?\'\)",data):
-    	x=y.group()
-    context.bot.send_message(chat_id=update.message.chat.id,text=x)
+    	yx=y.span()
+    
+    data=data[0:yx[0]]+'item1.setTitle(\''+text+'\')'+data[yx[1]:-1]
+    
+    #context.bot.send_message(chat_id=update.message.chat.id,text=x)
     data=reaaa.sub(x,text,data)
     return AA
     

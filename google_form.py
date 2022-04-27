@@ -29,7 +29,7 @@ from googleapiclient import errors
 from googleapiclient.discovery import build
 
 # If modifying these scopes, delete the file gform.json.
-SCOPES = ['https://www.googleapis.com/auth/script.projects','https://www.googleapis.com/auth/documents',"https://www.googleapis.com/auth/spreadsheets"]
+SCOPES = ['https://www.googleapis.com/auth/script.projects','https://www.googleapis.com/auth/documents']
 
 
 
@@ -45,7 +45,7 @@ def main4(x):
   "exceptionLogging": "CLOUD",
   "oauthScopes": [
     "https://www.googleapis.com/auth/drive",
-    "https://www.googleapis.com/auth/forms"
+    "https://www.googleapis.com/auth/forms","https://www.googleapis.com/auth/spreadsheets"
   ],
   "executionApi": {
     "access": "ANYONE"

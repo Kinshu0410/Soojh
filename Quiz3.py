@@ -2453,6 +2453,7 @@ def done(update: Update, _: CallbackContext) -> int:
     )
     except Exception as e :
     	update.message.reply_text(str(e))
+    	update.message.reply_text(str(data))
     	
     
     

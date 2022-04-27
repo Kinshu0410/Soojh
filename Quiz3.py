@@ -2470,7 +2470,7 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.regex('^.*$') & ~ Filters.command, gft),],
+            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),],
             BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
         },
         fallbacks=[CommandHandler('done', done)],

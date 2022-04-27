@@ -2365,11 +2365,13 @@ AA,BB,CC= range(3)
 data=""
 @run_async
 def call8(update,context):
-    context.bot.send_message(chat_id=update.message.chat.id,text="title: ... \n yo jjn discription: ")
+    context.bot.send_message(chat_id=update.message.chat.id,text="title: ...h \n discription: any thing")
     return BB
+
 def gfm(update,context):
     global data
     info = update.message.text
+    context.bot.send_message(chat_id=update.message.chat.id,text="title: ... \n discription: ")
     data="""function createForm() {
   
    // create & name Form  
@@ -2394,6 +2396,7 @@ def gfm(update,context):
     
     
     return AA
+
 def gfp(update,context):
     global data
     actual_poll = update.message.poll
@@ -2419,9 +2422,22 @@ def gfp(update,context):
 """
     context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")
     return AA
+
 def gft(update,context):
-    text = update.message.text
-    data[update.message.chat.id]["Q"].append(text)
+    
+    text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
+    
+    global data
+    x=data
+    for y in reaaa.finditer("item1\.setTitle\(\'.*?\'\)",data):
+    	yx=y.span()
+    
+    data=x[0:yx[0]]+'item1.setTitle(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:-1]
+    
+    #context.bot.send_message(chat_id=update.message.chat.id,text=x)
+    #data=reaaa.sub(x,text,data)
+    return AA
+    
 
 def gfph(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))
@@ -2443,7 +2459,7 @@ def done(update: Update, _: CallbackContext) -> int:
     
 
     return ConversationHandler.END
-#
+
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -2454,11 +2470,12 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, gft),MessageHandler(Filters.poll, gfp), MessageHandler(Filters.photo,gfph)],
+            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.regex('^.*$') & ~ Filters.command, gft),],
             BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
         },
         fallbacks=[CommandHandler('done', done)],
     )
+    updater.dispatcher.add_handler(conv_handlerGF)
     updater.dispatcher.add_handler(MessageHandler(Filters.all & Filters.chat(username="jsjdkdkkd"), ghppp10))# Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
     #dispatcher.
@@ -2579,7 +2596,7 @@ def main() -> None:
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
-    updater.dispatcher.add_handler(conv_handlerGF)
+    
     updater.dispatcher.add_handler(conv_handler01R1)
     updater.dispatcher.add_handler(conv_handler01R2)
     updater.dispatcher.add_handler(CommandHandler('add', call4))
@@ -2621,4 +2638,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main() 
-    #
+    #1

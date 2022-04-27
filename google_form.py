@@ -29,7 +29,7 @@ from googleapiclient import errors
 from googleapiclient.discovery import build
 
 # If modifying these scopes, delete the file gform.json.
-SCOPES = ['https://www.googleapis.com/auth/script.projects','https://www.googleapis.com/auth/documents']
+SCOPES = ['https://www.googleapis.com/auth/script.projects','https://www.googleapis.com/auth/documents',"https://www.googleapis.com/auth/spreadsheets"]
 
 
 

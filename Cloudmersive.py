@@ -537,6 +537,7 @@ async def job2_partener1(client:Client,message:Message):
         f.close()
         name2=Drive_OCR('Result.txt').main2()
         try:
+            await app.send_message(message.chat.id,name2)
             await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
         except:
             for xy in range(len(text)//20+1):

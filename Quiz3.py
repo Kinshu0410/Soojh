@@ -2375,7 +2375,8 @@ def gfm(update,context):
     data="""function createForm() {
   
    // create & name Form  
-   var item = '"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",info))+"""';  
+   var item = '"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",info))+"""';
+   var ss = SpreadsheetApp.create(item);
    var form = FormApp.create(item)
      .setTitle(item)
      .setIsQuiz(true)
@@ -2390,7 +2391,8 @@ def gfm(update,context):
      .setTitle(item)
      .setRequired(true);
      
-   // radiobuttons  
+   // radiobuttons
+   Utilities.sleep(240000);
    item = "Handout format";  
 """
     

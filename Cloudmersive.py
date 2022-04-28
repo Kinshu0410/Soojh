@@ -250,8 +250,11 @@ async def crop_pdf(client:Client,message:Message):
 				#f.truncate(0)
 			
 	f.close()
-	await app.send_document(message.chat.id, fname1+".txt")
+	name2=Drive_OCR(fname1+".txt").main2()
+	await app.send_document(message.chat.id,name2 )
+	
 	os.remove(fname1+".txt")
+	os.remove(fname1+".pdf")
 	#os.remove(image_folder+fname1+".pdf")
 	os.remove(file)
 		

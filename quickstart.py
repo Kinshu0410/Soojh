@@ -183,7 +183,7 @@ class Drive_OCR:
 
         # It will print data into terminal
         #output = fh.getvalue().decode()
-        return self.filename+'1.pdf'
+        return reaaa.sub("\.(txt|jpeg|jpg|png)","",self.filename)+".pdf"
 
     def main3(self) -> str:
         """Shows basic usage of the Drive v3 API.

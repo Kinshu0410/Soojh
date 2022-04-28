@@ -1,5 +1,6 @@
 # first import all required Module
 import io
+import re as reaaa
 import pickle
 import os.path
 from googleapiclient.discovery import build
@@ -178,13 +179,13 @@ class Drive_OCR:
         service.files().delete(fileId=file.get('id')).execute()
         fh.seek(0)
         import shutil
-        shutil.copyfileobj(fh,open(self.filename+'1.pdf', 'wb'))
+        shutil.copyfileobj(fh,open(reaaa.sub("\.(txt|jpeg|jpg|png)","",self.filename)+".pdf", 'wb'))
 
         # It will print data into terminal
         #output = fh.getvalue().decode()
         return self.filename+'1.pdf'
 
-    def main2(self) -> str:
+    def main3(self) -> str:
         """Shows basic usage of the Drive v3 API.
         Prints the names and ids of the first 10 files the user has access to.
         """

@@ -343,6 +343,7 @@ async def pdf_img_text(client:Client,message:Message):
     			print(image_folder+str(message.chat.id)+fname+".png")
     		
     		f.close()
+    		
     		await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(noOfPages))
     		os.remove(fname+".txt")
     		os.remove(image_folder+str(message.chat.id)+fname+".png")
@@ -530,11 +531,13 @@ async def job2_partener1(client:Client,message:Message):
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
         final_text = '\n'.join(text)
+        from quickstart import Drive_OCR
         with open('Result.txt', 'w',encoding='utf-8') as f:
     	    f.write(final_text)
         f.close()
+        Drive_OCR('Result.txt').main2()
         try:
-            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, "Result.pdf",caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

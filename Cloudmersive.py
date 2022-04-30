@@ -15,6 +15,7 @@ from pyrogram.raw import types
 from pyrogram.handlers import MessageHandler, PollHandler
 from pyrogram import filters
 from pyrogram.types import Message, ReplyKeyboardRemove, Poll
+from pyrogram.enums import PollType
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import asyncio
 from pyrogram.errors import FloodWait
@@ -488,7 +489,7 @@ async def job2_partener1(client:Client,message:Message):
             		mess1=mess1.poll
             	off_set=None
             	for xxxx in range(mess1.total_voter_count//50+1):
-            		mess2=await app.send(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=mess1.total_voter_count,offset=off_set))
+            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=mess1.total_voter_count,offset=off_set))
             		off_set=mess2.next_offset
         		#print(str(mess1.total_voter_count))
         		#print(mess2.next_offset)
@@ -689,7 +690,7 @@ async def forwortd(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type=PollType.QUIZ))
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
@@ -736,7 +737,7 @@ async def forword(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
 	    ##print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
@@ -781,7 +782,7 @@ async def Biology(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
@@ -845,7 +846,7 @@ async def Current_iq(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type="quiz"))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type=PollType.QUIZ))
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
 
@@ -879,7 +880,7 @@ async def private_polls(client:Client,message:Message):
     	#time.sleep(100)
     	for x in chatid:
     		try:
-    			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+    			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
     		except FloodWait as e:
     			await asyncio.sleep(e.x)
     	    #col=clientmongo["channal_schedule"][str(x)]
@@ -889,7 +890,7 @@ async def private_polls(client:Client,message:Message):
 async def job4(x,client:Client,message:Message):
     col=clientmongo["channal_schedule"][str(x)]
     data=col.find_one_and_delete({})
-    mess=(await app.send_poll(chat_id=x,question=data["que"],options=data["op"],correct_option_id= data["cor"],is_anonymous=True,type="quiz"))
+    mess=(await app.send_poll(chat_id=x,question=data["que"],options=data["op"],correct_option_id= data["cor"],is_anonymous=True,type=PollType.QUIZ))
 def emojicut(que:str):
 	emoji="????????????????????????????????543206789#*??"
 	xyz=[2592,1886,2593]
@@ -925,7 +926,7 @@ async def start_command(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
+	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ)#reply_markup=ReplyKeyboardRemove())
 
 @app.on_message(filters.poll & filters.chat("SOOJH_BOOJH_BOT_discussion_grouo"))
 async def start_command(client:Client,message:Message):
@@ -952,7 +953,7 @@ async def start_command(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz")#reply_markup=ReplyKeyboardRemove())
+	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ)#reply_markup=ReplyKeyboardRemove())
 
 @app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot"))
 async def start_command1(client:Client,message:Message):
@@ -997,7 +998,7 @@ async def start_command1(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type="quiz"))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
 	    ##print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
 

@@ -30,13 +30,14 @@ import requests
 app=Client("my_account",session_string="BQAP-U6-cm4xdNm9jmEKLhjFxFDRcoLbdMJzB4Lx3eswzwltqPle0C0NlPLbdBJi1kBcRS1VAqW4zEiNwjVnZT_2n3NcIAVAlH5cU6s6tdt-gJUl7Z8_3tsg4-Zca9JXKMnpRe6Z-Mdf1AEjBLxbk2EY9fi9DPTXYvdE7njdjuuK1-VvFlxj5Hqf4wLuVQP4uVYB67jeur0M33DFeByQNWo4NdqDTQaIhy4RJIj4_SbAh2WILBia2bT5-GbjIerRZcB1dOnSC7W2J9dAFcci0wibTmb3A85j37FszHT-rUW1C0__9LvYhn_KxOw_CeAH4NVS6vtJhVj0E1suQLhLOYeFKmWELQA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
 
 
+from pyrogram.enums import PollType
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 @app.on_message(filters.regex("^Cid") )#& filters.incoming)
 async def cyid(client:Client,message:Message):
 	await app.send_message(message.chat.id,str(message.chat.id))  
 
 scheduler.start()
-@app.on_message(filters.regex("The quiz") )#& filters.incoming )
+@app.on_message(filters.regex("The quiz") & ~ filters.edited )#& filters.incoming )
 async def job2_partener(client:Client,message:Message):
 	if message.reply_markup:
 		if message.reply_markup["inline_keyboard"][0][0].text=="Share quiz":
@@ -165,7 +166,7 @@ async def job1(x,client:Client,message:Message):
 		try:
 			mass_id=await app.send_message(int(x),"/start@quizbot "+ list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0])
 			time.sleep(2)
-			await client.request_callback_answer(int(x),int(mass_id.message_id)+1,callback_data='{"a":"user_ready"}')
+			await client.request_callback_answer(int(x),int(mass_id.id)+1,callback_data='{"a":"user_ready"}')
 		except Exception as e:
 			print("def job1 in cloudmersiver error name = "+str(e))
 
@@ -219,7 +220,7 @@ async def crop_pdf(client:Client,message:Message):
 	text=reaaa.split(":",text)
 	fname1=id_generator()
 	fname=fname1
-	file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.message_id),file_name=fname+".pdf")
+	file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.id),file_name=fname+".pdf")
 	print(file)
 	doc=fitz.open(file)
 	noOfPages = doc.pageCount
@@ -251,11 +252,8 @@ async def crop_pdf(client:Client,message:Message):
 				#f.truncate(0)
 			
 	f.close()
-	name2=Drive_OCR(fname1+".txt").main2()
-	await app.send_document(message.chat.id,name2 )
-	
+	await app.send_document(message.chat.id, fname1+".txt")
 	os.remove(fname1+".txt")
-	os.remove(fname1+".pdf")
 	#os.remove(image_folder+fname1+".pdf")
 	os.remove(file)
 		
@@ -273,7 +271,7 @@ async def crop(client:Client,message:Message):
 		
 		fname=id_generator()
 		print("start")
-		file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.message_id),file_name=fname+".png")
+		file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.id),file_name=fname+".png")
 		print(file)
 		from PIL import Image
 		im = Image.open(file)
@@ -347,7 +345,6 @@ async def pdf_img_text(client:Client,message:Message):
     			print(image_folder+str(message.chat.id)+fname+".png")
     		
     		f.close()
-    		
     		await app.send_document(message.chat.id, fname+".txt",caption="total pages "+str(noOfPages))
     		os.remove(fname+".txt")
     		os.remove(image_folder+str(message.chat.id)+fname+".png")
@@ -496,7 +493,7 @@ async def job2_partener1(client:Client,message:Message):
         		#print(len(mess2.votes))
             		correct_option_id = 0
             		for i in range(len(mess1.options)):
-            		    if mess1.options[i]['correct']:
+            		    if mess1.options[i]['correct'][0]:
             		        correct_option_id = i
             		        break
             		
@@ -535,14 +532,11 @@ async def job2_partener1(client:Client,message:Message):
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
         final_text = '\n'.join(text)
-        from quickstart import Drive_OCR
         with open('Result.txt', 'w',encoding='utf-8') as f:
     	    f.write(final_text)
         f.close()
-        name2=Drive_OCR('Result.txt').main2()
         try:
-            await app.send_message(message.chat.id,name2)
-            await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])
@@ -552,24 +546,24 @@ async def job2_partener1(client:Client,message:Message):
 async def job3(mass,client:Client,message:Message):
 		#
 		try:
-			mess1=await app.get_messages(mass.chat.id,mass.message_id)
+			mess1=await app.get_messages(mass.chat.id,mass.id)
 			##print(str(mess1.text))
-			##print(str(mess1.message_id))
+			##print(str(mess1.id))
 			timer=reaaa.split(":",str(mess1.text))
 			total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
 		
 			if total//10>=1:
 				text1=str((total-10)//3600)+":"+str((total-10)//60-((total-10)//3600)*60)+":"+str((total-10)-((total-10)//60-((total-10)//3600)*60)*60-((total-10)//3600)*3600)
 				#mass=str((total-1-x*5)//3600)+":"+str((total-1-x*5)//60-((total-1-x*5)//3600)*60)+":"+str((total-1-x*5)-((total-1-x*5)//60-((total-1-x*5)//3600)*60)*60-((total-1-x*5)//3600)*3600)
-				await app.edit_message_text(int(mess1.chat.id), int(mess1.message_id),text1)
+				await app.edit_message_text(int(mess1.chat.id), int(mess1.id),text1)
 				
 			else:
-				await app.delete_messages(int(mess1.chat.id), mess1.message_id)
+				await app.delete_messages(int(mess1.chat.id), mess1.id)
 				print("job3")
 				scheduler.shutdown(id="job3"+str(mess1.chat.id))  
 				
 		except:
-			#await app.edit_message_text(int(mess1.chat.id), mess1.message_id,"Some error comes...")
+			#await app.edit_message_text(int(mess1.chat.id), mess1.id,"Some error comes...")
 			
 			scheduler.shutdown(id="job3"+str(x))
 			
@@ -647,21 +641,21 @@ async def forworhd(client:Client,message:Message):
 		    cid.append('983000232')
 	        
 		    if str(message.chat.id) in cid:
-		        await client.request_callback_answer(chat_id=message.chat.id,message_id=message.message_id,callback_data=message.reply_markup["inline_keyboard"][0][0].callback_data)
+		        await client.request_callback_answer(chat_id=message.chat.id,message_id=message.id,callback_data=message.reply_markup["inline_keyboard"][0][0].callback_data)
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") )#& filters.incoming)
 async def forwortd(client:Client,message:Message):
 	chatid=["Study_Quiz_India", "polls_quiz"]
 	
-	##print(message.message_id)
+	##print(message.id)
 	try:
 		
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
 	except:
 	    mess=message.poll
 	##print(mess)
 	    ##print(mess)
-	await app.delete_messages(chat_id="Neha55bot", message_ids=message.message_id)
+	await app.delete_messages(chat_id="Neha55bot", message_ids=message.id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
@@ -692,7 +686,7 @@ async def forwortd(client:Client,message:Message):
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type=PollType.QUIZ))
 	    ##print(mess)
-	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
+	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 
 
 	
@@ -700,15 +694,15 @@ async def forwortd(client:Client,message:Message):
 async def forword(client:Client,message:Message):
 	chatid=["POLLQZ"]
 	
-	##print(message.message_id)
+	##print(message.id)
 	try:
 		
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
 	except:
 	    mess=message.poll
 	##print(mess)
 	    ##print(mess)
-	await app.delete_messages(chat_id="POLLQZ", message_ids=message.message_id)
+	await app.delete_messages(chat_id="POLLQZ", message_ids=message.id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
@@ -739,21 +733,21 @@ async def forword(client:Client,message:Message):
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
 	    ##print(mess)
-	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
+	    await app.stop_poll(chat_id=x,message_id=mess.id)
 
 @app.on_message(filters.poll & filters.chat("Pdf2imgbot") )#& filters.incoming)
 async def Biology(client:Client,message:Message):
 	chatid=["Biology_Quiz4U"]
 	
-	##print(message.message_id)
+	##print(message.id)
 	try:
 		
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
 	except:
 	    mess=message.poll
 	##print(mess)
 	    ##print(mess)
-	await app.delete_messages(chat_id="Neha55bot", message_ids=message.message_id)
+	await app.delete_messages(chat_id="Neha55bot", message_ids=message.id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
@@ -784,18 +778,18 @@ async def Biology(client:Client,message:Message):
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
 	    ##print(mess)
-	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
+	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 
 #@app.on_message(filters.poll & filters.chat("me") )#& filters.incoming)
 async def Current_iq(client:Client,message:Message):
 	try:
 		
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
 	except:
 	    mess=message.poll
 	##print(mess)
 	    ##print(mess)
-	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
+	await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
 	print("Current_iq")
 	question=mess.question
 	options=[o.text for o in mess.options]
@@ -810,15 +804,15 @@ async def Current_iq(client:Client,message:Message):
 async def Current_iq(client:Client,message:Message):
 	chatid=["Current_Affairs_Quiz_Notes"]
 	
-	##print(message.message_id)
+	##print(message.id)
 	try:
 		
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
 	except:
 	    mess=message.poll
 	##print(mess)
 	    ##print(mess)
-	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
+	await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
 	question=mess.question
 	
 	#question=reaaa.sub("\n","       ",question)
@@ -848,7 +842,7 @@ async def Current_iq(client:Client,message:Message):
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type=PollType.QUIZ))
 	    ##print(mess)
-	    #await app.stop_poll(chat_id=x,message_id=mess.message_id)
+	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 
 @app.on_message(filters.poll & filters.private & filters.incoming)
 async def private_polls(client:Client,message:Message):
@@ -859,14 +853,14 @@ async def private_polls(client:Client,message:Message):
         chatid=[-1001309576992]
 		
 	#else#
-	##print(message.message_id)
+	##print(message.id)
     if len(chatid)!=0:
     	try:
     		
-    	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+    	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
     	except:
     	    mess=message.poll
-    	await app.delete_messages(chat_id=message.chat.id, message_ids=message.message_id)
+    	await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
     	print("private_polls")
     	question=mess.question
     	options=[o.text for o in mess.options]
@@ -907,14 +901,14 @@ async def start_command(client:Client,message:Message):
 	##print(message)
 	chatid=["Soojhboojh_01bot"]
 	
-	##print(message.message_id)
+	##print(message.id)
 	try:
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
 	except:
 	    mess=message.poll
 	##print(mess)
 	    ##print(mess)
-	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.message_id)
+	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.id)
 	question=mess.question
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
@@ -933,14 +927,14 @@ async def start_command(client:Client,message:Message):
 	##print(message)
 	chatid=["Soojhboojh_01bot"]
 	
-	##print(message.message_id)
+	##print(message.id)
 	try:
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
 	except:
 	    mess=message.poll
 	##print(mess)
 	    ##print(mess)
-	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.message_id)
+	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.id)
 	print("start_command")
 	question=mess.question
 	options=[o.text for o in mess.options]
@@ -960,10 +954,10 @@ async def start_command1(client:Client,message:Message):
 	##print(message)
 	chatid=["POLLQZ"]
 	
-	##print(message.message_id)
+	##print(message.id)
 	try:
 		
-	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.message_id,options=1))
+	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
 	except:
 	    mess=message.poll
 	##print(mess)
@@ -1000,7 +994,7 @@ async def start_command1(client:Client,message:Message):
 	for x in chatid:
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
 	    ##print(mess)
-	    await app.stop_poll(chat_id=x,message_id=mess.message_id)
+	    await app.stop_poll(chat_id=x,message_id=mess.id)
 
 @app.on_message(filters.regex("\d{1,2}:\d{1,2}:\d{1,2}") )#& filters.outgoing)
 async def timer(client:Client,message:Message):
@@ -1011,7 +1005,7 @@ async def timer(client:Client,message:Message):
 	#print("schedule")
 
 async def job(client:Client,message:Message):
-		mess1=await app.get_messages(message.chat.id, message.message_id)
+		mess1=await app.get_messages(message.chat.id, message.id)
 		##print(mess1)
 		timer=reaaa.split(":",mess1.text)
 		total=int(timer[0])*3600+int(timer[1])*60+int(timer[2])
@@ -1019,14 +1013,14 @@ async def job(client:Client,message:Message):
 			if total//10>=1:
 				mass=str((total-10)//3600)+":"+str((total-10)//60-((total-10)//3600)*60)+":"+str((total-10)-((total-10)//60-((total-10)//3600)*60)*60-((total-10)//3600)*3600)
 				#mass=str((total-1-x*5)//3600)+":"+str((total-1-x*5)//60-((total-1-x*5)//3600)*60)+":"+str((total-1-x*5)-((total-1-x*5)//60-((total-1-x*5)//3600)*60)*60-((total-1-x*5)//3600)*3600)
-				await app.edit_message_text(message.chat.id, message.message_id,mass)
+				await app.edit_message_text(message.chat.id, message.id,mass)
 				
 			else:
-				await app.edit_message_text(message.chat.id, message.message_id,"Times Up!!!")
+				await app.edit_message_text(message.chat.id, message.id,"Times Up!!!")
 				scheduler.shutdown(id="simple timer"+str(message.chat.id)) 
 				
 		except:
-			await app.edit_message_text(message.chat.id, message.message_id,"Some error comes...")
+			await app.edit_message_text(message.chat.id, message.id,"Some error comes...")
 			scheduler.shutdown(id="simple timer"+str(message.chat.id)) 
 			
 			
@@ -1046,17 +1040,17 @@ def forword(client:Client,message:Message):
 #    
 #    ##print()
 #    if mess:
-#        for mid in range(mess[0].message_id-message.forward_from_message_id):
+#        for mid in range(mess[0].id-message.forward_from_message_id):
             
-            client.forward_messages(chat_id="KINBIN247_bot",from_chat_id=message.chat.id,message_ids=message.message_id)
-            app.delete_messages(chat_id="KINBIN247_bot",message_ids=message.message_id)
+            client.forward_messages(chat_id="KINBIN247_bot",from_chat_id=message.chat.id,message_ids=message.id)
+            app.delete_messages(chat_id="KINBIN247_bot",message_ids=message.id)
 #    
 
 @app.on_message(filters.poll & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):
     
-    client.forward_messages(chat_id="Soojhboojh_01bot",from_chat_id=message.chat.id,message_ids=message.message_id)
-    app.delete_messages(chat_id="KINBIN247_bot",message_ids=message.message_id)
+    client.forward_messages(chat_id="Soojhboojh_01bot",from_chat_id=message.chat.id,message_ids=message.id)
+    app.delete_messages(chat_id="KINBIN247_bot",message_ids=message.id)
 
 
 #@app.on_message(filters.regex("https://t.me/.*?/\d{1,}/\d{1,}") & filters.chat("jsjdkdkkd") & filters.outgoing )
@@ -1067,7 +1061,6 @@ def forword(client:Client,message:Message):
     #print(chatid)
     for x in range(int(chatid[2])):
        app.forward_messages(chat_id="KINBIN247_bot",from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
-
 
 import telegram
 

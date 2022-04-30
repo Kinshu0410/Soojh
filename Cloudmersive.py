@@ -493,7 +493,9 @@ async def job2_partener1(client:Client,message:Message):
         		#print(len(mess2.votes))
             		correct_option_id = 0
             		for i in range(len(mess1.options)):
-            		    if mess1.options[i]['correct'][0]:
+            	
+            		    print(mess1)
+            		    if mess1.options[i].correct[0]:
             		        correct_option_id = i
             		        break
             		

@@ -108,7 +108,7 @@ class Poll(Object, Update):
                 types.PollOption(
                     text=answer.text,
                     voter_count=voter_count,
-                    correct=correct[0],
+                    correct=correct,
                     data=answer.option,
                     client=client
                 )

@@ -988,7 +988,7 @@ async def start_command1(client:Client,message:Message):
 	correct_option_id = 0
 	for i in range(len(mess.options)):
 	       print(mess)
-	       if mess.options[i]['correct']:
+	       if mess.options[i].correct[0]:
 	           correct_option_id = i
 	           break
 	#correct_option_id

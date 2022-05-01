@@ -575,7 +575,7 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
-            	
+            	print(question)
             	correct_option_id = 0
             	for i in range(len(mess1.options)):
             	    if mess1.options[i].correct[0]:
@@ -586,7 +586,7 @@ async def job2_partener2(client:Client,message:Message):
             	time.sleep(30)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=xx[0],message_ids=mess2.id)
             	app.delete_messages(chat_id=xx[0],message_ids=mess2.id)
-            	
+            	print("26262662")
             	
             	
             	

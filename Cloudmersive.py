@@ -726,7 +726,7 @@ async def forword(client:Client,message:Message):
 	
 	correct_option_id = 0
 	for i in range(len(mess.options)):
-	       if mess.options[i]['correct']:
+	       if mess.options[i].correct[0]:
 	           correct_option_id = i
 	           break
 	#correct_option_id

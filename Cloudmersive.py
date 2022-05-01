@@ -559,7 +559,7 @@ async def job2_partener2(client:Client,message:Message):
         print(xx)
         for x in range(int(xx[1]),int(xx[1])+int(xx[2])):
     		#print(str(result))
-            if True:#try:
+            try:
             	try:
             		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))
             		#await app.send_message(message.chat.id,str(mess1))
@@ -646,7 +646,7 @@ async def job2_partener2(client:Client,message:Message):
             		        else:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             	tmarks+=4
-            #except Exception as e:
+            except Exception as e:
                 #await app.send_message(message.chat.id, (str(e)))
     		    
         for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):

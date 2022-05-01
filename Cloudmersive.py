@@ -562,10 +562,10 @@ async def job2_partener2(client:Client,message:Message):
             		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))
             		await app.send_message(message.chat.id,str(mess1))
             	except Exception as e:
-            		await app.send_message(message.chat.id,str(mess1))
+            		#await app.send_message(message.chat.id,str(mess1))
             		await app.send_message(message.chat.id, (str(e)))
             		mess1=(await app.get_messages(xx[0],x))
-            		mess1=mess1.poll
+            	mess1=mess1.poll
             	off_set=None
             	question=mess1.question
             	print(question)

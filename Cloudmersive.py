@@ -545,6 +545,122 @@ async def job2_partener1(client:Client,message:Message):
                 await app.send_message(message.chat.id, final_text)
                 time.sleep(10)
 
+@app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") )#& filters.incoming)
+async def job2_partener2(client:Client,message:Message):
+        xx=reaaa.sub("https://t.me/","",message.text)
+        tt=""
+        xx=reaaa.split("/",xx)
+        mess1="vote alreddy given"
+        result={}
+        new_result = {}
+        tmarks=0
+        for x in range(int(xx[1]),int(xx[2])+1):
+    		#print(str(result))
+            try:
+            	try:
+            		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))
+            	except:
+            		mess1=await app.get_messages(xx[0],x)
+            		mess1=mess1.poll
+            	off_set=None
+            	question=mess1.question
+            	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
+            	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
+            	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
+            	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+            	question=reaaa.sub(r"^(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+            	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+            	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
+            	question=reaaa.sub(r"(\n| |){1,}(|C\.A BY)(\n| |){1,}", "", question)
+            	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
+            	question=reaaa.sub(r"", "", question)
+            	options=[o.text for o in mess1.options]
+            	
+            	correct_option_id = 0
+            	for i in range(len(mess.options)):
+            	    if mess.options[i].correct[0]:
+            	        correct_option_id = i
+            	        break
+            	mess2=(await app.send_poll(chat_id=xx[0],question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=30))
+            	tt=tt+question+"\n"+"\n".join(options)+str(correct_option_id+1)+"\n\n"
+            	time.sleep(30)
+            	mess1=await client.forward_messages(chat_id="KINBIN247_bot",from_chat_id=xx[0],message_ids=mess2.id)
+            	app.delete_messages(chat_id=xx[0],message_ids=mess2.id)
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	for xxxx in range(mess1.total_voter_count//50+1):
+            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=mess1.total_voter_count,offset=off_set))
+            		off_set=mess2.next_offset
+        		#print(str(mess1.total_voter_count))
+        		#print(mess2.next_offset)
+        		#print(len(mess2.votes))
+            		correct_option_id = 0
+            		for i in range(len(mess1.options)):
+            	
+            		    print(mess1)
+            		    if mess1.options[i].correct[0]:
+            		        correct_option_id = i
+            		        break
+            		
+            		#print("correct_option_id = "+str(correct_option_id))
+            		for mmid in range(len(mess2.votes)):
+            		    #print(mess2.votes[mmid]["option"])
+            		    if mess2.votes[mmid].user_id not in result.keys():
+            		        #print
+            		        fname=mess2.users[mmid]["username"]
+            		        if fname is None:
+            		            fname=mess2.users[mmid]["first_name"]
+            		        else:
+            		            fname="@"+fname
+            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4}
+            		        else:
+            		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1}
+            		    else:
+            		        Marks=result[(mess2.votes[mmid]["user_id"])]["Marks"]
+            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
+            		        else:
+            		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
+            	tmarks+=4
+            except Exception as e:
+                print(str(e))
+    		    
+        for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
+    	    new_result[key] = result[key]
+    	#print(new_result)
+        text = []
+        i = 0
+        for chat_id in new_result.keys():
+    	    i += 1
+    	    fname = new_result[chat_id]['fname']
+    	    marks = new_result[chat_id]['Marks']
+    	    text.append(f"{i}. {fname} got {marks} marks")
+        final_text = '\n'.join(text)+"\n\n\n\n\n"+tt
+        with open('Result.txt', 'w',encoding='utf-8') as f:
+    	    f.write(final_text)
+        f.close()
+        try:
+            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+        except:
+            for xy in range(len(text)//20+1):
+                final_text='\n'.join(text[xy*20:(xy+1)*20])
+                await app.send_message(message.chat.id, final_text)
+                time.sleep(10)
+
 async def job3(mass,client:Client,message:Message):
 		#
 		try:

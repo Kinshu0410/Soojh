@@ -647,7 +647,7 @@ async def job2_partener2(client:Client,message:Message):
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             	tmarks+=4
             except Exception as e:
-                #await app.send_message(message.chat.id, (str(e)))
+                print(e)#await app.send_message(message.chat.id, (str(e)))
     		    
         for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]

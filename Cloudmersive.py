@@ -557,7 +557,7 @@ async def job2_partener2(client:Client,message:Message):
         print(xx)
         for x in range(int(xx[1]),int(xx[1])+int(xx[2])):
     		#print(str(result))
-            try:
+            if True:#try:
             	try:
             		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))
             		#await app.send_message(message.chat.id,str(mess1))
@@ -593,10 +593,10 @@ async def job2_partener2(client:Client,message:Message):
             	time.sleep(10)
             	await app.delete_messages(chat_id=message.chat.id,message_ids=mess2.id)
             	time.sleep(10)
-            	print(mess1)
+            	#print(mess1)
             	mess1=(await app.get_messages(-608479342,mess1.id)).poll
-            	await app.send_message(message.chat.id, mess1)
-            	await app.send_message(message.chat.id, mess1.total_voter_count)
+            	#await app.send_message(message.chat.id, mess1)
+            	#await app.send_message(message.chat.id, mess1.total_voter_count)
             	
             	
             	
@@ -612,7 +612,7 @@ async def job2_partener2(client:Client,message:Message):
             		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(-608479342),id=mess1.id,limit=mess1.total_voter_count,offset=off_set))
             		off_set=mess2.next_offset
         		#print(str(mess1.total_voter_count))
-        		#print(mess2.next_offset)
+        		print(off_set)
         		#print(len(mess2.votes))
             		correct_option_id = 0
             		for i in range(len(mess1.options)):
@@ -622,7 +622,7 @@ async def job2_partener2(client:Client,message:Message):
             		        correct_option_id = i
             		        break
             		
-            		#print("correct_option_id = "+str(correct_option_id))
+            		print(off_set)
             		for mmid in range(len(mess2.votes)):
             		    #print(mess2.votes[mmid]["option"])
             		    if mess2.votes[mmid].user_id not in result.keys():
@@ -643,8 +643,8 @@ async def job2_partener2(client:Client,message:Message):
             		        else:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             	tmarks+=4
-            except Exception as e:
-                await app.send_message(message.chat.id, (str(e)))
+            #except Exception as e:
+                #await app.send_message(message.chat.id, (str(e)))
     		    
         for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]

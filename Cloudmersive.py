@@ -560,7 +560,8 @@ async def job2_partener2(client:Client,message:Message):
             try:
             	try:
             		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))
-            	except:
+            	except Exception as e:
+            		await app.send_message(message.chat.id, final_text)(str(e))
             		mess1=await app.get_messages(xx[0],x)
             		mess1=mess1.poll
             	off_set=None
@@ -639,7 +640,7 @@ async def job2_partener2(client:Client,message:Message):
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             	tmarks+=4
             except Exception as e:
-                print(str(e))
+                await app.send_message(message.chat.id, (str(e))
     		    
         for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]

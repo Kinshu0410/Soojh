@@ -593,8 +593,8 @@ async def job2_partener2(client:Client,message:Message):
             	time.sleep(10)
             	await app.delete_messages(chat_id=message.chat.id,message_ids=mess2.id)
             	time.sleep(10)
-            	#print(mess2)
-            	mess1=(await app.get_messages(-608479342,mess2.id)).poll
+            	print(mess1)
+            	mess1=(await app.get_messages(-608479342,mess1.id)).poll
             	
             	
             	

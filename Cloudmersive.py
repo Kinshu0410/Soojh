@@ -560,15 +560,15 @@ async def job2_partener2(client:Client,message:Message):
             try:
             	try:
             		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))
-            		await app.send_message(message.chat.id,str(mess1))
+            		#await app.send_message(message.chat.id,str(mess1))
             	except Exception as e:
             		#await app.send_message(message.chat.id,str(mess1))
             		await app.send_message(message.chat.id, (str(e)))
             		mess1=(await app.get_messages(xx[0],x))
-            	mess1=mess1.poll
+            		mess1=mess1.poll
             	off_set=None
             	question=mess1.question
-            	print(question)
+            	await app.send_message(message.chat.id, question)
             	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
             	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
             	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)

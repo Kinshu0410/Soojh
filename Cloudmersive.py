@@ -615,7 +615,7 @@ async def job2_partener2(client:Client,message:Message):
         		#print(off_set)
         		#print(len(mess2.votes))
             		correct_option_id = 0
-            		mess1=mess1.poll
+            		mess1=json.load(mess1.poll)
             		for i in range(len(mess1.options)):
             	
             		    print(mess1)

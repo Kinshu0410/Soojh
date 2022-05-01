@@ -594,7 +594,7 @@ async def job2_partener2(client:Client,message:Message):
             	await app.delete_messages(chat_id=message.chat.id,message_ids=mess2.id)
             	time.sleep(10)
             	#print(mess1)
-            	mess1=(await app.get_messages(-608479342,mess1.id)).poll
+            	mess1=(await app.get_messages(-608479342,mess1.id))
             	#await app.send_message(message.chat.id, mess1)
             	#await app.send_message(message.chat.id, mess1.total_voter_count)
             	
@@ -608,13 +608,14 @@ async def job2_partener2(client:Client,message:Message):
             	
             	
             	
-            	for xxxx in range(mess1.total_voter_count//50+1):
-            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(-608479342),id=mess1.id,limit=mess1.total_voter_count,offset=off_set))
+            	for xxxx in range(mess1.poll.total_voter_count//50+1):
+            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(-608479342),id=mess1.id,limit=mess1.poll.total_voter_count,offset=off_set))
             		off_set=mess2.next_offset
         		#print(str(mess1.total_voter_count))
         		#print(off_set)
         		#print(len(mess2.votes))
             		correct_option_id = 0
+            		mess1=mess1.poll
             		for i in range(len(mess1.options)):
             	
             		    print(mess1)

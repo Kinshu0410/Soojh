@@ -587,7 +587,7 @@ async def job2_partener2(client:Client,message:Message):
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=xx[0],message_ids=mess2.id)
             	app.delete_messages(chat_id=xx[0],message_ids=mess2.id)
             	print("26262662")
-            	
+            	mess1=await app.get_messages(-608479342,mess1.id).poll
             	
             	
             	

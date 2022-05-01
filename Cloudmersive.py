@@ -589,7 +589,7 @@ async def job2_partener2(client:Client,message:Message):
             	        correct_option_id = i
             	        break
             	mess2=(await app.send_poll(chat_id=message.chat.id,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=30))
-            	tt=tt+question+"\n"+"\n".join(options)+str(correct_option_id+1)+"\n\n"
+            	tt=tt+"𝐐𝐮𝐞𝐬𝐭𝐢𝐨𝐧. "+question+"?\n"+"\n".join(options)+'\n\n𝐀𝐧𝐬𝐰𝐞𝐫:- '+options[correct_option_id]+"✅\n\n\n"
             	time.sleep(10)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
             	time.sleep(20)

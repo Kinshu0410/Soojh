@@ -628,18 +628,18 @@ async def job2_partener2(client:Client,message:Message):
             		    #print(mess2.votes[mmid]["option"])
             		    if mess2.votes[mmid].user_id not in result.keys():
             		        #print
-            		        fname=mess2.users[mmid]["username"]
+            		        fname=mess2.users[mmid].username
             		        if fname is None:
-            		            fname=mess2.users[mmid]["first_name"]
+            		            fname=mess2.users[mmid].first_name
             		        else:
             		            fname="@"+fname
-            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		        if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
             		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4}
             		        else:
             		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1}
             		    else:
-            		        Marks=result[(mess2.votes[mmid]["user_id"])]["Marks"]
-            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		        Marks=result[(mess2.votes[mmid].user_id)]["Marks"]
+            		        if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
             		        else:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1

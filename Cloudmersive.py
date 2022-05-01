@@ -555,7 +555,7 @@ async def job2_partener2(client:Client,message:Message):
         new_result = {}
         tmarks=0
         print(xx)
-        for x in range(int(xx[1]),int(xx[1])+int(xx[2])+1):
+        for x in range(int(xx[1]),int(xx[1])+int(xx[2])):
     		#print(str(result))
             try:
             	try:
@@ -563,7 +563,7 @@ async def job2_partener2(client:Client,message:Message):
             		#await app.send_message(message.chat.id,str(mess1))
             	except Exception as e:
             		#await app.send_message(message.chat.id,str(mess1))
-            		await app.send_message(message.chat.id, (str(e)))
+            		#await app.send_message(message.chat.id, (str(e)))
             		mess1=(await app.get_messages(xx[0],x))
             		mess1=mess1.poll
             	off_set=None
@@ -580,17 +580,17 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
-            	print(question)
+            	#print(question)
             	correct_option_id = 0
             	for i in range(len(mess1.options)):
             	    if mess1.options[i].correct[0]:
             	        correct_option_id = i
             	        break
-            	mess2=(await app.send_poll(chat_id=xx[0],question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=30))
+            	mess2=(await app.send_poll(chat_id=message.chat.id,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=30))
             	tt=tt+question+"\n"+"\n".join(options)+str(correct_option_id+1)+"\n\n"
             	time.sleep(30)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=xx[0],message_ids=mess2.id)
-            	app.delete_messages(chat_id=xx[0],message_ids=mess2.id)
+            	app.delete_messages(chat_id=message.chat.id,message_ids=mess2.id)
             	print("26262662")
             	mess1=(await app.get_messages(-608479342,mess1.id)).poll
             	

@@ -504,18 +504,18 @@ async def job2_partener1(client:Client,message:Message):
             		    #print(mess2.votes[mmid]["option"])
             		    if mess2.votes[mmid].user_id not in result.keys():
             		        #print
-            		        fname=mess2.users[mmid]["username"]
+            		        fname=mess2.users[mmid].username
             		        if fname is None:
-            		            fname=mess2.users[mmid]["first_name"]
+            		            fname=mess2.users[mmid].first_name
             		        else:
             		            fname="@"+fname
-            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		        if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
             		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4}
             		        else:
             		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1}
             		    else:
-            		        Marks=result[(mess2.votes[mmid]["user_id"])]["Marks"]
-            		        if int.from_bytes(mess2.votes[mmid]["option"], "big") == correct_option_id or int.from_bytes(mess2.votes[mmid]["option"], "big") -48== correct_option_id:
+            		        Marks=result[(mess2.votes[mmid].user_id)]["Marks"]
+            		        if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
             		        else:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
@@ -534,11 +534,13 @@ async def job2_partener1(client:Client,message:Message):
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
         final_text = '\n'.join(text)
+        from quickstart import Drive_OCR
         with open('Result.txt', 'w',encoding='utf-8') as f:
     	    f.write(final_text)
         f.close()
+        name2=Drive_OCR('Result.txt').main2()
         try:
-            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])
@@ -661,8 +663,10 @@ async def job2_partener2(client:Client,message:Message):
         with open('Result.txt', 'w',encoding='utf-8') as f:
     	    f.write(final_text)
         f.close()
+        from quickstart import Drive_OCR
+        name2=Drive_OCR('Result.txt').main2()
         try:
-            await app.send_document(message.chat.id, "Result.txt",caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

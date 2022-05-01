@@ -590,7 +590,7 @@ async def job2_partener2(client:Client,message:Message):
             	tt=tt+question+"\n"+"\n".join(options)+str(correct_option_id+1)+"\n\n"
             	time.sleep(30)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
-            	await app.send_message(message.chat.id, mess2)
+            	await app.send_message(message.chat.id, str(mess2))
             	await app.delete_messages(chat_id=message.chat.id,message_ids=mess2.id)
             	print(mess2)
             	mess1=(await app.get_messages(-608479342,mess1.id)).poll

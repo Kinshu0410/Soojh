@@ -40,7 +40,7 @@ scheduler.start()
 @app.on_message(filters.regex("The quiz")  )#& filters.incoming )
 async def job2_partener(client:Client,message:Message):
 	if message.reply_markup:
-		if message.reply_markup["inline_keyboard"][0][0].text=="Share quiz":
+		if message.reply_markup.inline_keyboard[0][0].text=="Share quiz":
 			name= clientmongo["group_schedule"].list_collection_names()
 			now=""
 			if str(message.chat.id) in name:
@@ -592,7 +592,7 @@ async def dell(client:Client,message:Message):
 @app.on_message(filters.text & filters.chat("POLLQZ") )#& filters.incoming)
 async def forword(client:Client,message:Message):
     if message.reply_markup:
-        await app.send_message("quizbot", message.reply_markup["inline_keyboard"][0][0].url)
+        await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
 @app.on_message(filters.regex("^Del_All$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
 	cid=[]
@@ -627,9 +627,9 @@ async def forworhd(client:Client,message:Message):
 	
 	#masss=(await app.get_messages(-1001495791558, 11061))
 	##print(masss)
-	##print(masss.reply_markup["inline_keyboard"][0][0].callback_data)
+	##print(masss.reply_markup.inline_keyboard[0][0].callback_data)
 	#await client.request_callback_answer(-1001495791558,11061,callback_data='{"a":"user_ready"}')
-	#await app.send_message("me", str(message.reply_markup["inline_keyboard"][0][0].callback_data))
+	#await app.send_message("me", str(message.reply_markup.inline_keyboard[0][0].callback_data))
 	
 	
 	if hasattr(message, 'reply_markup'):
@@ -638,12 +638,12 @@ async def forworhd(client:Client,message:Message):
 			#if hasattr(message.from_user, 'id'):
 				#if str(message.from_user.id)=='983000232':
 					
-		if message.reply_markup["inline_keyboard"][0][0].callback_data=='{"a":"user_ready"}':
+		if message.reply_markup.inline_keyboard[0][0].callback_data=='{"a":"user_ready"}':
 		    cid= clientmongo["group_schedule"].list_collection_names()
 		    cid.append('983000232')
 	        
 		    if str(message.chat.id) in cid:
-		        await client.request_callback_answer(chat_id=message.chat.id,message_id=message.id,callback_data=message.reply_markup["inline_keyboard"][0][0].callback_data)
+		        await client.request_callback_answer(chat_id=message.chat.id,message_id=message.id,callback_data=message.reply_markup.inline_keyboard[0][0].callback_data)
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") )#& filters.incoming)
 async def forwortd(client:Client,message:Message):

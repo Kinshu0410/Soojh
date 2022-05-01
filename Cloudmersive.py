@@ -577,8 +577,8 @@ async def job2_partener2(client:Client,message:Message):
             	options=[o.text for o in mess1.options]
             	
             	correct_option_id = 0
-            	for i in range(len(mess.options)):
-            	    if mess.options[i].correct[0]:
+            	for i in range(len(mess1.options)):
+            	    if mess1.options[i].correct[0]:
             	        correct_option_id = i
             	        break
             	mess2=(await app.send_poll(chat_id=xx[0],question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=30))

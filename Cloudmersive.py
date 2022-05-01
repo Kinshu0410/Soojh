@@ -609,13 +609,13 @@ async def job2_partener2(client:Client,message:Message):
             	
             	
             	for xxxx in range(mess1.poll.total_voter_count//50+1):
-            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(-608479342),id=mess1.id,limit=mess1.poll.total_voter_count,offset=off_set))
+            		mess1=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(-608479342),id=mess1.id,limit=mess1.poll.total_voter_count,offset=off_set))
             		off_set=mess2.next_offset
         		#print(str(mess1.total_voter_count))
         		#print(off_set)
         		#print(len(mess2.votes))
             		correct_option_id = 0
-            		mess1=json.load(mess1.poll)
+            		mess1=(mess1.poll)
             		for i in range(len(mess1.options)):
             	
             		    print(mess1)

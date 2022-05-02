@@ -555,8 +555,9 @@ async def job2_partener2(client:Client,message:Message):
         result={}
         new_result = {}
         tmarks=0
+        nn=1
         print(xx)
-        for x in range(int(xx[1]),int(xx[1])+int(xx[2])):
+        for x in range(int(xx[1]),int(xx[1])+int(xx[2])+1):
     		#print(str(result))
             try:
             	try:
@@ -587,8 +588,9 @@ async def job2_partener2(client:Client,message:Message):
             	    if mess1.options[i].correct[0]:
             	        correct_option_id = i
             	        break
-            	mess2=(await app.send_poll(chat_id=message.chat.id,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=30))
-            	tt=tt+"𝐐𝐮𝐞𝐬𝐭𝐢𝐨𝐧. "+question+"?\n"+"\n".join(options)+'\n\n𝐀𝐧𝐬𝐰𝐞𝐫:- '+options[correct_option_id]+"✅\n\n\n"
+            	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=30))
+            	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n\n'+options[correct_option_id]+"✅\n\n\n"
+            	nn+=1
             	time.sleep(10)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
             	time.sleep(20)

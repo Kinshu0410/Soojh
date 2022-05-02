@@ -64,7 +64,7 @@ class Drive_OCR:
             print("Download %d%%." % int(status.progress() * 100))
 
         # It will delete file from drive base on ID
-        #service.files().delete(fileId=doc.get('documentId')).execute()
+        service.files().delete(fileId=doc.get('documentId')).execute()
         fh.seek(0)
         import shutil
         shutil.copyfileobj(fh,open(reaaa.sub("\.(txt|jpeg|jpg|png)","","Result")+".pdf", 'wb'))

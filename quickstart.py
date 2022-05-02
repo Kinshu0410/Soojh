@@ -42,17 +42,18 @@ class Drive_OCR:
 
         service = build('docs', 'v1', credentials=creds)
 
-        body = self.filename
+        body = {"title": 'Result.pdf'}
         print(body)
         doc = service.documents().create(body=body).execute()
+        body=self.filename
+        doc1 = service.documents().batchUpdate(body=body,documentId=doc.get('documentId')).execute()
         
-        
-        print('File ID: %s' % doc.get('documentId'))
+        #print( doc.get('documentId') +"\n"+doc1.get('documentId') )
         
         service = build('drive', 'v3', credentials=creds)
 
         # It will export drive image into Doc
-        request = service.files().export_media(fileId=doc.get('documentId'),mimeType="text/plain")
+        request = service.files().export_media(fileId=doc.get('documentId'),mimeType='application/pdf')
 
         # For Downloading Doc Image data by request
         fh = io.BytesIO()
@@ -63,7 +64,7 @@ class Drive_OCR:
             print("Download %d%%." % int(status.progress() * 100))
 
         # It will delete file from drive base on ID
-        service.files().delete(fileId=doc.get('documentId')).execute()
+        #service.files().delete(fileId=doc.get('documentId')).execute()
         fh.seek(0)
         import shutil
         shutil.copyfileobj(fh,open(reaaa.sub("\.(txt|jpeg|jpg|png)","","Result")+".pdf", 'wb'))

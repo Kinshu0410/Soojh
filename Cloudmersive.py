@@ -535,10 +535,9 @@ async def job2_partener1(client:Client,message:Message):
     	    text.append(f"{i}. {fname} got {marks} marks")
         final_text = '\n'.join(text)
         from quickstart import Drive_OCR
-        with open('Result.txt', 'w',encoding='utf-8') as f:
-    	    f.write(final_text)
-        f.close()
-        name2=Drive_OCR('Result.txt').main2()
+        Text=final_text
+        body = {"requests": [{"insertText": {"text": Text,"location": {"segmentId": "","index": 1},},}],}
+        name2=(Drive_OCR(body).text())
         try:
             await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
         except:
@@ -660,11 +659,10 @@ async def job2_partener2(client:Client,message:Message):
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
         final_text = '\n'.join(text)+"\n\n\n\n\n"+tt
-        with open('Result.txt', 'w',encoding='utf-8') as f:
-    	    f.write(final_text)
-        f.close()
         from quickstart import Drive_OCR
-        name2=Drive_OCR('Result.txt').main2()
+        Text=final_text
+        body = {"requests": [{"insertText": {"text": Text,"location": {"segmentId": "","index": 1},},}],}
+        name2=(Drive_OCR(body).text())
         try:
             await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
         except:

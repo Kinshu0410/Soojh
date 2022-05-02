@@ -11,9 +11,67 @@ print("mohit")
 class Drive_OCR:
     def __init__(self,filename) -> None:
         self.filename = filename
-        self.SCOPES = ['https://www.googleapis.com/auth/drive']
+        self.SCOPES = ['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/documents']
         self.credentials = "./credentia.json"
         self.pickle = "token.pickle"
+        #print(self.filename)
+
+    def text(self) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
+
+        service = build('docs', 'v1', credentials=creds)
+
+        body = self.filename
+        print(body)
+        doc = service.documents().create(body=body).execute()
+        
+        
+        print('File ID: %s' % doc.get('documentId'))
+        
+        service = build('drive', 'v3', credentials=creds)
+
+        # It will export drive image into Doc
+        request = service.files().export_media(fileId=doc.get('documentId'),mimeType="text/plain")
+
+        # For Downloading Doc Image data by request
+        fh = io.BytesIO()
+        downloader = MediaIoBaseDownload(fh, request)
+        done = False
+        while done is False:
+            status, done = downloader.next_chunk()
+            print("Download %d%%." % int(status.progress() * 100))
+
+        # It will delete file from drive base on ID
+        service.files().delete(fileId=doc.get('documentId')).execute()
+        fh.seek(0)
+        import shutil
+        shutil.copyfileobj(fh,open(reaaa.sub("\.(txt|jpeg|jpg|png)","","Result")+".pdf", 'wb'))
+
+        # It will print data into terminal
+        #output = fh.getvalue().decode()
+        return reaaa.sub("\.(txt|jpeg|jpg|png)","","Result")+".pdf"
+
 
     def main(self) -> str:
         """Shows basic usage of the Drive v3 API.

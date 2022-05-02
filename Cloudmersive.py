@@ -9,7 +9,7 @@ dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public 
 # as a test, dns.resolver.query('www.google.com') should return an answer, not an exception'''
 clientmongo=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
 #
-from pyrogram import Client
+from pyrogram import Client, enums
 from pyrogram.raw import functions
 from pyrogram.raw import types
 from pyrogram.handlers import MessageHandler, PollHandler
@@ -117,7 +117,7 @@ async def schedule_job(client:Client,message:Message):
 async def setting_time(client:Client,message:Message):
 	col=clientmongo["group_schedule"][str(message.chat.id)]
 	cid=[]
-	for member in await app.get_chat_members(message.chat.id, filter="administrators"):
+	for member in await app.get_chat_members(message.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
 		cid.append(member.user.id)
 	##print(str(cid))
 	if message.from_user.id in cid:
@@ -724,7 +724,7 @@ async def forword(client:Client,message:Message):
 @app.on_message(filters.regex("^Del_All$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
 	cid=[]
-	for member in await app.get_chat_members(message.chat.id, filter="administrators"):
+	for member in await app.get_chat_members(message.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
 		cid.append(member.user.id)
 	##print(cid)
 	try:
@@ -740,7 +740,7 @@ async def delete_all_quiz(client:Client,message:Message):
 @app.on_message(filters.regex("^Stop$") & ~ filters.poll)#& filters.incoming)
 async def stop_quiz(client:Client,message:Message):
 	cid=[]
-	for member in await app.get_chat_members(message.chat.id, filter="administrators"):
+	for member in await app.get_chat_members(message.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
 		cid.append(member.user.id)
 	##print(cid)
 	try:

@@ -567,7 +567,7 @@ async def job2_partener2(client:Client,message:Message):
         tmarks=0
         nn=1
         print(xx)
-        for x in range(int(xx[1]),int(xx[1])+int(xx[2])+1):
+        for x in range(int(xx[1]),int(xx[1])+int(xx[2])):
     		#print(str(result))
     
             try:

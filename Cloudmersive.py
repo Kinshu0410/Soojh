@@ -558,10 +558,6 @@ Tt=[]
 @app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") )#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
-        
-        
-        except:
-        	
         tt=""
         xx=reaaa.split("/",xx)
         mess1="vote alreddy given"

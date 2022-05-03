@@ -545,10 +545,19 @@ async def job2_partener1(client:Client,message:Message):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])
                 await app.send_message(message.chat.id, final_text)
                 time.sleep(10)
-
+@app.on_message(filters.regex("^s.t {,}\d{1,}$") )#& filters.incoming)
+async def job2_partener12(client:Client,message:Message):
+	global Tt
+	try:
+		tim=reaaa.sub("s.t {,}","",message.text)
+		Tt[message.chat.id]=tim
+	except:
+		pass
+Tt=[]
 @app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") )#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
+        tt1=Tt.get(message.chat.id,30)
         tt=""
         xx=reaaa.split("/",xx)
         mess1="vote alreddy given"
@@ -591,9 +600,9 @@ async def job2_partener2(client:Client,message:Message):
             	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=22))
             	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n\n'+options[correct_option_id]+"✅\n\n\n"
             	nn+=1
-            	await asyncio.sleep(10)
+            	#await asyncio.sleep(10)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
-            	await asyncio.sleep(12)
+            	await asyncio.sleep(tt1)
             	await app.delete_messages(chat_id=message.chat.id,message_ids=mess2.id)
             	await asyncio.sleep(1)
             	#print(mess1)

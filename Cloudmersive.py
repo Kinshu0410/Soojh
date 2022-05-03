@@ -974,7 +974,7 @@ async def Current_iq(client:Client,message:Message):
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 
-@app.on_message(filters.poll & filters.private & filters.incoming)
+@app.on_message(filters.poll & filters.private )#& filters.incoming)
 async def private_polls(client:Client,message:Message):
     chatid=[]
     if message.chat.id==1952288751:

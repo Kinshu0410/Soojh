@@ -545,7 +545,8 @@ async def job2_partener1(client:Client,message:Message):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])
                 await app.send_message(message.chat.id, final_text)
                 time.sleep(10)
-@app.on_message(filters.regex("^s.t {,}\d{1,}$") )#& filters.incoming)
+
+@app.on_message(filters.regex("^s\.t {,}\d{1,}$") )#& filters.incoming)
 async def job2_partener12(client:Client,message:Message):
 	global Tt
 	try:
@@ -557,7 +558,10 @@ Tt=[]
 @app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") )#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
-        tt1=Tt.get(message.chat.id,30)
+        
+        
+        except:
+        	
         tt=""
         xx=reaaa.split("/",xx)
         mess1="vote alreddy given"
@@ -568,6 +572,11 @@ async def job2_partener2(client:Client,message:Message):
         print(xx)
         for x in range(int(xx[1]),int(xx[1])+int(xx[2])+1):
     		#print(str(result))
+    
+            try:
+                tt1=Tt[message.chat.id]
+            except:
+                tt1=30
             try:
             	try:
             		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))

@@ -551,10 +551,11 @@ async def job2_partener12(client:Client,message:Message):
 	global Tt
 	try:
 		tim=reaaa.sub("s.t {,}","",message.text)
-		Tt[message.chat.id]=tim
+		Tt[message.chat.id]=int(tim)
+		await app.send_message(message.chat.id, "👍")
 	except:
-		pass
-Tt=[]
+		await app.send_message(message.chat.id, "👎")
+Tt={}
 @app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") )#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)

@@ -591,9 +591,9 @@ async def job2_partener2(client:Client,message:Message):
             	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=22))
             	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n\n'+options[correct_option_id]+"✅\n\n\n"
             	nn+=1
-            	time.sleep(10)
+            	asyncio.sleep(10)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
-            	time.sleep(12)
+            	asyncio.sleep(12)
             	await app.delete_messages(chat_id=message.chat.id,message_ids=mess2.id)
             	time.sleep(1)
             	#print(mess1)

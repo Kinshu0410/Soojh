@@ -556,10 +556,23 @@ async def job2_partener12(client:Client,message:Message):
 	except:
 		await app.send_message(message.chat.id, "👎")
 Tt={}
+
+@app.on_message(filters.regex("^/start@quizbot") & ~ filters.scheduled)#& filters.incoming)
+async def job2_partener21(client:Client,message:Message):
+        try:
+            app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
+        except:
+            await app.send_message(message.chat.id,str("Give me Delete Permission"))
+        	
+
 @app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled)#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
         tt=""
+        try:
+            app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
+        except:
+            await app.send_message(message.chat.id,str("Give me Delete Permission"))
         xx=reaaa.split("/",xx)
         mess1="vote alreddy given"
         result={}

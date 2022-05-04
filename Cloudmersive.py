@@ -27,7 +27,7 @@ import requests
 #bot_token=ClientText["bot_token"],
 #api_id="13682659",
 #api_hash="b984d240c5258407ea911f042c9d75f6")
-app=Client("my_account",session_string="BQDQx-MAAkwCRbLEibwFgifJsO5BoNlzz751WrNoXO4X7guUXyl4_T-_hZveYYJGVZpBACenpZT7eRx8yGzTrWlhT31UcCBAlc6L_020krksDMj_o0tYVMAybck8XeLbUhyWbozoOa2GxRssIl5z-crbKJrBBM2i-Hv5PGEUzKQsGsMOJ8zQABpbnLT3jDCepLoqdXRJ7ybGf-fKysC__n546Rx19DHH_4OmnCb7qhWqJE-ekeShTSWMtSVaO_MkgEygwHFp8DUS-1TptLA5xAvns4mI2Tp4fE0o5mvADUJU24YPrvpJv78MtFUL981EzIimiJbVYTgJxm8zBd2WuHY8EIIV-gAAAAAqZYQtAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
+app=Client("my_account",session_string="BQDQx-MAL2w301SuMPrA1aIWVIIlgOUsIM6Sx7dPLt8EkCw_Zb9sLfam_Nwc4Rl_olVerTp_rBUsXmd-bxt6Rha2Qz9nVQvkbgsh_dVFJMqwcwbkACayZ56GFO0kP17tBeLybD0ppR7u1us4t04HoXvtnJpotQgZtsGRnTdi21wiI67GPiBuG8yFkWqvOjD7y4pUBFUcCNf77i-ToPNPZ9Pq60BXXSK9nPBCSp4GQLiW31lwy8QFSC6cNnQ5penmbT-9648dwLEGYz2Kq859ok8O_qIgPZJPKcKgLFlOdrSxpggaCuEe6o433x4raUUbfWgO_WEzmd-tTKmnaV6Pkih9fjAzjwAAAAAqZYQtAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
 
 
 from pyrogram.enums import PollType
@@ -562,7 +562,7 @@ async def job2_partener21(client:Client,message:Message):
         try:
             await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
         except:
-            await app.send_message(message.chat.id,str("Give me Delete Permission"))
+            pass
         	
 
 @app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled)#& filters.incoming)
@@ -572,7 +572,7 @@ async def job2_partener2(client:Client,message:Message):
         try:
             await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
         except:
-            await app.send_message(message.chat.id,str("Give me Delete Permission"))
+            pass
         xx=reaaa.split("/",xx)
         mess1="vote alreddy given"
         result={}

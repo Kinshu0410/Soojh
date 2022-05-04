@@ -560,7 +560,7 @@ Tt={}
 @app.on_message(filters.regex("^/start@quizbot") & ~ filters.scheduled)#& filters.incoming)
 async def job2_partener21(client:Client,message:Message):
         try:
-            app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
+            await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
         except:
             await app.send_message(message.chat.id,str("Give me Delete Permission"))
         	
@@ -570,7 +570,7 @@ async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
         tt=""
         try:
-            app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
+            await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
         except:
             await app.send_message(message.chat.id,str("Give me Delete Permission"))
         xx=reaaa.split("/",xx)

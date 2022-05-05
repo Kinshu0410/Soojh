@@ -712,7 +712,7 @@ async def job2_partener2(client:Client,message:Message):
         final_text = '\n'.join(text)+"\n\n\n\n\n"+tt
         from quickstart import Drive_OCR
         Text=final_text
-        body = {"requests": [{"insertText": {"text": Text,"location": {"segmentId": "","index": 0},},}],}
+        body = {"requests": [{"insertText": {"text": Text,"location": {"segmentId": "","index": 1},},}],}
         name2=(Drive_OCR(body).text())
         try:
             await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))

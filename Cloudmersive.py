@@ -495,7 +495,7 @@ async def job2_partener1(client:Client,message:Message):
             		for i in range(len(mess1.options)):
             	
             		    print(mess1)
-            		    if mess1.options[i].correct[0]:
+            		    if mess1.options[i].correct:
             		        correct_option_id = i
             		        break
             		
@@ -602,7 +602,7 @@ async def job2_partener2(client:Client,message:Message):
             	off_set=None
             	question=mess1.question
             	explanation=mess1.exp
-            	print(explanation)
+            	
             	if explanation is not None:
             	    explanation=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", explanation)
             	    explanation=reaaa.sub(r"http.*? |@.*? |t.me.*? ", "", explanation)
@@ -623,32 +623,32 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
             	lis=[]
-            	print(explanation)
+            	
             	for x in range(len(options)):
             	    options[x]=reaaa.sub("^(\[|\(|)(a|b|c|d|A|B|C|D|E|F|e|f)(\]|\)|)(\. |\.|)","",options[x])
             	    lis.append(x)
-            	print(explanation)
+            	
             	#await app.send_message(message.chat.id,str(lis))
             	random.shuffle(lis)
             	#await app.send_message(message.chat.id,str(lis))
-            	print(explanation)
+            	
             	correct_option_id = 0
             	for i in range(len(mess1.options)):
-            	    if mess1.options[i].correct[0]:
+            	    if mess1.options[i].correct:
             	        correct_option_id = i
             	        break
             	
-            	print(explanation)
+            	
             	for i in range(len(lis)):
             	    if lis[i]==correct_option_id:
             	        correct_option_id = i
             	        break
             	options=[options[op] for op in lis]
-            	print(explanation)
+            	
             	for o in range(len(options)):
             	    options[o]=bytes('\\u004'+str(o), 'utf-8').decode('unicode-escape')+") "+options[o]#
             	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
-            	print(explanation)
+            	
             	if explanation is None:
             	    explanation=""
             	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n'+options[correct_option_id]+"✅\nExplanation : "+explanation+"\n\n"
@@ -684,7 +684,7 @@ async def job2_partener2(client:Client,message:Message):
             		for i in range(len(mess1.options)):
             	
             		    #print(mess1)
-            		    if mess1.options[i].correct[0]:
+            		    if mess1.options[i].correct:
             		        correct_option_id = i
             		        break
             		
@@ -869,7 +869,7 @@ async def forwortd(client:Client,message:Message):
 	
 	correct_option_id = 0
 	for i in range(len(mess.options)):
-	       if mess.options[i].correct[0]:
+	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
 	#correct_option_id
@@ -916,7 +916,7 @@ async def forword(client:Client,message:Message):
 	
 	correct_option_id = 0
 	for i in range(len(mess.options)):
-	       if mess.options[i].correct[0]:
+	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
 	#correct_option_id
@@ -961,7 +961,7 @@ async def Biology(client:Client,message:Message):
 	
 	correct_option_id = 0
 	for i in range(len(mess.options)):
-	       if mess.options[i].correct[0]:
+	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
 	#correct_option_id
@@ -987,7 +987,7 @@ async def Current_iq(client:Client,message:Message):
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
 	for i in range(len(mess.options)):
-	       if mess.options[i].correct[0]:
+	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
 	await app.send_message("me", question+"\n"+"\n".join(options)+"\n"+str(correct_option_id))
@@ -1025,7 +1025,7 @@ async def Current_iq(client:Client,message:Message):
 	
 	correct_option_id = 0
 	for i in range(len(mess.options)):
-	       if mess.options[i].correct[0]:
+	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
 	#correct_option_id
@@ -1058,7 +1058,7 @@ async def private_polls(client:Client,message:Message):
     	options=[o.text for o in mess.options]
     	correct_option_id = 0
     	for i in range(len(mess.options)):
-    	       if mess.options[i].correct[0]:
+    	       if mess.options[i].correct:
     	           correct_option_id = i
     	           break
     	#correct_option_id
@@ -1105,7 +1105,7 @@ async def start_command(client:Client,message:Message):
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
 	for i in range(len(mess.options)):
-	       if mess.options[i].correct[0]:
+	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
 	#correct_option_id
@@ -1132,7 +1132,7 @@ async def start_command(client:Client,message:Message):
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
 	for i in range(len(mess.options)):
-	       if mess.options[i].correct[0]:
+	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
 	#correct_option_id
@@ -1178,7 +1178,7 @@ async def start_command1(client:Client,message:Message):
 	correct_option_id = 0
 	for i in range(len(mess.options)):
 	       print(mess)
-	       if mess.options[i].correct[0]:
+	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
 	#correct_option_id

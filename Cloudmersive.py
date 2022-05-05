@@ -582,6 +582,7 @@ async def job2_partener2(client:Client,message:Message):
         print(xx)
         li=[x for x in range(int(xx[1]),int(xx[1])+int(xx[2]))]
         random.shuffle(li)
+        await app.send_message(message.chat.id,str(li))
         for x in li:
     		#print(str(result))
     

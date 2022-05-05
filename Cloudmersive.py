@@ -618,7 +618,7 @@ async def job2_partener2(client:Client,message:Message):
             	    options[x]=reaaa.sub("^(\[|\(|)(a|b|c|d|A|B|C|D|E|F|e|f)(\]|\)|)(\. |\.|)","",options[x])
             	    lis.append(x)
             	await app.send_message(message.chat.id,str(lis))
-            	random.shuffle(li)
+            	random.shuffle(lis)
             	await app.send_message(message.chat.id,str(lis))
             	correct_option_id = 0
             	for i in range(len(mess1.options)):

@@ -602,7 +602,7 @@ async def job2_partener2(client:Client,message:Message):
             	off_set=None
             	question=mess1.question
             	explanation=mess1.exp
-            	if explanation not None:
+            	if explanation is not None:
             	    explanation=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", explanation)
             	    explanation=reaaa.sub(r"http.*? |@.*? |t.me.*? ", "", explanation)
             	    

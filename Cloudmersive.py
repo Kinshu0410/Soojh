@@ -640,9 +640,11 @@ async def job2_partener2(client:Client,message:Message):
             	        correct_option_id = i
             	        break
             	options=[options[op] for op in lis]
+            	print(explanation)
             	for o in range(len(options)):
             	    options[o]=bytes('\\u004'+str(o), 'utf-8').decode('unicode-escape')+") "+options[o]#
             	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
+            	print(explanation)
             	if explanation is None:
             	    explanation=""
             	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n'+options[correct_option_id]+"✅\nExplanation : "+explanation+"\n\n"

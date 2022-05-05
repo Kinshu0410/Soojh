@@ -45,11 +45,13 @@ class PollOption(Object):
         text: str,
         voter_count: int,
         data: bytes,
-        correct: bool = None
+        correct: bool = None,
+        exp: str
     ):
         super().__init__(client)
 
         self.text = text
         self.voter_count = voter_count
-        self.correct = correct,
+        self.correct = correct
+        self.exp = exp
         self.data = data

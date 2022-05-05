@@ -601,11 +601,15 @@ async def job2_partener2(client:Client,message:Message):
             		mess1=mess1.poll
             	off_set=None
             	question=mess1.question
-            	explanation=mess1.explanation
+            	explanation=mess1.exp
+            	if explanation not None:
+            	    explanation=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", explanation)
+            	    explanation=reaaa.sub(r"http.*? |@.*? |t.me.*? ", "", explanation)
+            	    
             	#await app.send_message(message.chat.id, question)
             	
-            	explanation=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", explanation)
-            	explanation=reaaa.sub(r"http.*? |@.*? |t.me.*? ", "", explanation)
+            	
+            	
             	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
             	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
             	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
@@ -638,6 +642,8 @@ async def job2_partener2(client:Client,message:Message):
             	for o in range(len(options)):
             	    options[o]=bytes('\\u004'+str(o), 'utf-8').decode('unicode-escape')+") "+options[o]#
             	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
+            	if explanation is None:
+            	    explanation=""
             	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n'+options[correct_option_id]+"✅\nExplanation : "+explanation+"\n\n"
             	nn+=1
             	#await asyncio.sleep(10)

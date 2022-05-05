@@ -70,7 +70,8 @@ class Poll(Object, Update):
         type: "enums.PollType" = None,
         allows_multiple_answers: bool = None,
         # correct_option_id: int,
-        chosen_option: int = None
+        chosen_option: int = None,
+        exp: str = None
     ):
         super().__init__(client)
 
@@ -83,7 +84,8 @@ class Poll(Object, Update):
         self.type = type
         self.allows_multiple_answers = allows_multiple_answers
         # self.correct_option_id = correct_option_id
-        self.chosen_option = chosen_option
+        self.chosen_option = chosen_option,
+        self.exp = exp
 
     @staticmethod
     def _parse(client, media_poll: Union["raw.types.MessageMediaPoll", "raw.types.UpdateMessagePoll"]) -> "Poll":
@@ -91,6 +93,7 @@ class Poll(Object, Update):
         results = media_poll.results.results
         chosen_option = None
         options = []
+        exp = None
 
         for i, answer in enumerate(poll.answers):
             voter_count = 0
@@ -109,6 +112,7 @@ class Poll(Object, Update):
                     text=answer.text,
                     voter_count=voter_count,
                     correct=correct,
+                    exp=None,
                     data=answer.option,
                     client=client
                 )
@@ -118,6 +122,7 @@ class Poll(Object, Update):
             id=str(poll.id),
             question=poll.question,
             options=options,
+            exp=media_poll.results.solution,
             total_voter_count=media_poll.results.total_voters,
             is_closed=poll.closed,
             is_anonymous=not poll.public_voters,
@@ -135,6 +140,7 @@ class Poll(Object, Update):
         results = update.results.results
         chosen_option = None
         options = []
+        #print(update.results)
 
         for i, result in enumerate(results):
             if result.chosen:
@@ -145,6 +151,7 @@ class Poll(Object, Update):
                     text="",
                     voter_count=result.voters,
                     data=result.option,
+                    exp=None,
                     client=client
                 )
             )

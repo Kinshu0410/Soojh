@@ -20,7 +20,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import asyncio
 from pyrogram.errors import FloodWait
 import  json
-import time
+import time, random
 import re as reaaa
 import requests
 #app = Client("my_account",
@@ -580,7 +580,9 @@ async def job2_partener2(client:Client,message:Message):
         tmarks=0
         nn=1
         print(xx)
-        for x in range(int(xx[1]),int(xx[1])+int(xx[2])):
+        li=[x for x in range(int(xx[1]),int(xx[1])+int(xx[2]))]
+        random.shuffle(li)
+        for x in li:
     		#print(str(result))
     
             try:

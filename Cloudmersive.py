@@ -612,12 +612,22 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
-            	#print(question)
+            	lis=[]
+            	for x in range(len(options)):
+            	    options[x]=reaaa.sub("^(\[|\(|)(a|b|c|d|A|B|C|D|E|F|e|f)(\]|\)|)(\. |\.|)","",options[x])
+            	    lis.append(x)
+            	random.shuffle(li)
             	correct_option_id = 0
             	for i in range(len(mess1.options)):
             	    if mess1.options[i].correct[0]:
             	        correct_option_id = i
             	        break
+            	
+            	for i in lis:
+            	    if i==correct_option_id:
+            	        correct_option_id = i
+            	        break
+            	options=[options[op] for op in lis]
             	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1))
             	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n\n'+options[correct_option_id]+"✅\n\n\n"
             	nn+=1

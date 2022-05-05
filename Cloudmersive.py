@@ -601,7 +601,11 @@ async def job2_partener2(client:Client,message:Message):
             		mess1=mess1.poll
             	off_set=None
             	question=mess1.question
+            	explanation=mess1.explanation
             	#await app.send_message(message.chat.id, question)
+            	
+            	explanation=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", explanation)
+            	explanation=reaaa.sub(r"http.*? |@.*? |t.me.*? ", "", explanation)
             	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
             	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
             	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
@@ -631,8 +635,8 @@ async def job2_partener2(client:Client,message:Message):
             	        correct_option_id = i
             	        break
             	options=[options[op] for op in lis]
-            	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1))
-            	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n\n'+options[correct_option_id]+"✅\n\n\n"
+            	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
+            	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n'+options[correct_option_id]+"✅\nExplanation : "+explanation+"\n\n"
             	nn+=1
             	#await asyncio.sleep(10)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
@@ -706,7 +710,7 @@ async def job2_partener2(client:Client,message:Message):
         final_text = '\n'.join(text)+"\n\n\n\n\n"+tt
         from quickstart import Drive_OCR
         Text=final_text
-        body = {"requests": [{"insertText": {"text": Text,"location": {"segmentId": "","index": 1},},}],}
+        body = {"requests": [{"insertText": {"text": Text,"location": {"segmentId": "","index": 0},},}],}
         name2=(Drive_OCR(body).text())
         try:
             await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))

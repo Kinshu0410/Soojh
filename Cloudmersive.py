@@ -656,7 +656,6 @@ async def job2_partener2(client:Client,message:Message):
             	nn+=1
             	#await asyncio.sleep(10)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
-            	await asyncio.sleep(tt1)
             	if yy is not None:
             	    try:
             	        await app.delete_messages(chat_id=message.chat.id,message_ids=yy)
@@ -664,7 +663,8 @@ async def job2_partener2(client:Client,message:Message):
             	    except:
             	        pass
             	yy=mess2.id
-            	await asyncio.sleep(1)
+            	await asyncio.sleep(tt1+1)
+            	#await asyncio.sleep(1)
             	#print(mess1)
             	mess1=(await app.get_messages(-608479342,mess1.id))
             	#await app.send_message(message.chat.id, mess1)

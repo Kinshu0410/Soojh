@@ -552,7 +552,7 @@ async def job2_partener12(client:Client,message:Message):
 	try:
 		tim=reaaa.sub("s.t {,}","",message.text)
 		Tt[message.chat.id]=int(tim)
-		await app.send_message(message.chat.id, "👍")
+		await app.delete_messages(chat_id=message.chat.id,message_ids=message.id)
 	except:
 		await app.send_message(message.chat.id, "👎")
 Tt={}
@@ -579,6 +579,7 @@ async def job2_partener2(client:Client,message:Message):
         new_result = {}
         tmarks=0
         nn=1
+        yy=None
         print(xx)
         li=[x for x in range(int(xx[1]),int(xx[1])+int(xx[2]))]
         random.shuffle(li)
@@ -656,7 +657,13 @@ async def job2_partener2(client:Client,message:Message):
             	#await asyncio.sleep(10)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
             	await asyncio.sleep(tt1)
-            	await app.delete_messages(chat_id=message.chat.id,message_ids=mess2.id)
+            	if yy is not None:
+            	    try:
+            	        await app.delete_messages(chat_id=message.chat.id,message_ids=yy)
+            	        
+            	    except:
+            	        pass
+            	yy=mess2.id
             	await asyncio.sleep(1)
             	#print(mess1)
             	mess1=(await app.get_messages(-608479342,mess1.id))
@@ -712,6 +719,10 @@ async def job2_partener2(client:Client,message:Message):
             except Exception as e:
                 print(e)#await app.send_message(message.chat.id, (str(e)))
     		    
+        try:
+            await app.delete_messages(chat_id=message.chat.id,message_ids=yy)
+        except:
+            pass
         for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]
     	#print(new_result)

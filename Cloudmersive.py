@@ -546,7 +546,7 @@ async def job2_partener1(client:Client,message:Message):
                 await app.send_message(message.chat.id, final_text)
                 time.sleep(10)
 
-@app.on_message(filters.regex("^s\.t {,}\d{1,}$") )#& filters.incoming)
+@app.on_message(filters.regex("^s\.t {,}\d{1,}$") & ~ filters.private )#& filters.incoming)
 async def job2_partener12(client:Client,message:Message):
 	global Tt
 	try:
@@ -565,7 +565,7 @@ async def job2_partener21(client:Client,message:Message):
             pass
         	
 
-@app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled)#& filters.incoming)
+@app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private))#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
         tt=""

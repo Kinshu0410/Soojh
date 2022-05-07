@@ -565,7 +565,7 @@ async def job2_partener21(client:Client,message:Message):
             pass
         	
 
-@app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private))#& filters.incoming)
+@app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
         tt=""

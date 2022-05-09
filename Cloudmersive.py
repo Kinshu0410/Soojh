@@ -579,7 +579,9 @@ async def job2_partener2(client:Client,message:Message):
         new_result = {}
         tmarks=0
         nn=1
+        id=Drive_OCR(body).create()
         yy=None
+        count=1
         print(xx)
         li=[x for x in range(int(xx[1]),int(xx[1])+int(xx[2]))]
         random.shuffle(li)
@@ -624,7 +626,10 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
             	lis=[]
-            	
+            	Text=question+"\n"
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
             	for x in range(len(options)):
             	    options[x]=reaaa.sub("^(\[|\(|)(a|b|c|d|A|B|C|D|E|F|e|f)(\]|\)|)(\. |\.|)","",options[x])
             	    lis.append(x)
@@ -647,12 +652,29 @@ async def job2_partener2(client:Client,message:Message):
             	options=[options[op] for op in lis]
             	
             	for o in range(len(options)):
-            	    options[o]=bytes('(\\u004'+str(o+1), 'utf-8').decode('unicode-escape')+") "+options[o]#
+            	    options[o]=bytes('(\\u004'+str(o+1), 'utf-8').decode('unicode-escape')+") "+options[o]
+            	Text="\n".join(options)+"\n"
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
             	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
             	
             	if explanation is None:
-            	    explanation=""
-            	tt=tt+"Q"+str(nn)+". "+question+"?\n"+"\n".join(options)+'\n'+options[correct_option_id]+"✅\nExplanation : "+explanation+"\n\n"
+            	    explanation="\n"
+            	else:
+            	    explanation="Explanation : "+explanation+"\n\n"
+            	Text="\n".join(options)+"\n"
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
+            	Text=options[correct_option_id]+"✅\n"
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
+            	Text=explanation
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":1,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
             	nn+=1
             	#await asyncio.sleep(10)
             	mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
@@ -736,10 +758,14 @@ async def job2_partener2(client:Client,message:Message):
         final_text = '\n'.join(text)+"\n\n\n\n\n"+tt
         from quickstart import Drive_OCR
         Text=final_text
-        body = {"requests": [{"insertText": {"text": Text,"location": {"segmentId": "","index": 1},},}],}
-        name2=(Drive_OCR(body).text())
+        
+        Text=explanation
+        body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":1,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+        count=count+len(Text)
+        Drive_OCR(body).update(id)
         try:
-            await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            Drive_OCR(body).delete(id),
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

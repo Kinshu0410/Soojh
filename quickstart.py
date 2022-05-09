@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
-print("mohit")
+
 class Drive_OCR:
     def __init__(self,filename) -> None:
         self.filename = filename
@@ -16,7 +16,7 @@ class Drive_OCR:
         self.pickle = "token.pickle"
         #print(self.filename)
 
-    def text(self) -> str:
+    def create(self) -> str:
         """Shows basic usage of the Drive v3 API.
         Prints the names and ids of the first 10 files the user has access to.
         """
@@ -40,38 +40,103 @@ class Drive_OCR:
             with open(self.pickle, 'wb') as token:
                 pickle.dump(creds, token)
 
+        
         service = build('docs', 'v1', credentials=creds)
-
+    
         body = {"title": 'Result.pdf'}
-        print(body)
+            
         doc = service.documents().create(body=body).execute()
+        return doc.get('documentId')
+        
+    def update(self,id) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
+        service = build('docs', 'v1', credentials=creds)
         body=self.filename
-        doc1 = service.documents().batchUpdate(body=body,documentId=doc.get('documentId')).execute()
+        doc1 = service.documents().batchUpdate(body=body,documentId=id).execute()
         
-        #print( doc.get('documentId') +"\n"+doc1.get('documentId') )
+    def download(self,id) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
         
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
         service = build('drive', 'v3', credentials=creds)
-
-        # It will export drive image into Doc
-        request = service.files().export_media(fileId=doc.get('documentId'),mimeType='application/pdf')
-
-        # For Downloading Doc Image data by request
+        request = service.files().export_media(fileId=id,mimeType='application/pdf')
         fh = io.BytesIO()
         downloader = MediaIoBaseDownload(fh, request)
         done = False
         while done is False:
             status, done = downloader.next_chunk()
-            print("Download %d%%." % int(status.progress() * 100))
-
-        # It will delete file from drive base on ID#
-        service.files().delete(fileId=doc.get('documentId')).execute()
+                
         fh.seek(0)
         import shutil
         shutil.copyfileobj(fh,open(reaaa.sub("\.(txt|jpeg|jpg|png)","","Result")+".pdf", 'wb'))
-
-        # It will print data into terminal
-        #output = fh.getvalue().decode()
         return reaaa.sub("\.(txt|jpeg|jpg|png)","","Result")+".pdf"
+    def delete(self,id) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
+        service = build('drive', 'v3', credentials=creds)
+        service.files().delete(fileId=id).execute()
+
+        
 
 
     def main(self) -> str:

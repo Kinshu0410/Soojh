@@ -579,6 +579,7 @@ async def job2_partener2(client:Client,message:Message):
         new_result = {}
         tmarks=0
         nn=1
+        from quickstart import Drive_OCR
         id=Drive_OCR(body).create()
         yy=None
         count=1

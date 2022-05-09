@@ -472,6 +472,10 @@ async def job2_hhpartene(client:Client,message:Message):
 @app.on_message(filters.regex("^\d{1,}-\d{1,}$") )#& filters.incoming)
 async def job2_partener1(client:Client,message:Message):
         xx=reaaa.split("-",message.text)
+        count=1
+        from quickstart import Drive_OCR
+        body = {"title": 'Result.pdf'}
+        id=Drive_OCR(body).create()
         mess1="vote alreddy given"
         result={}
         new_result = {}
@@ -534,12 +538,14 @@ async def job2_partener1(client:Client,message:Message):
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
         final_text = '\n'.join(text)
-        from quickstart import Drive_OCR
-        Text=final_text
-        body = {"requests": [{"insertText": {"text": Text,"location": {"segmentId": "","index": 1},},}],}
-        name2=(Drive_OCR(body).text())
+        Text=explanation
+        body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+        count=count+len(Text)
+        Drive_OCR(body).update(id)
+        
         try:
-            await app.send_document(message.chat.id, name2,caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            Drive_OCR(body).delete(id)
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])
@@ -579,11 +585,12 @@ async def job2_partener2(client:Client,message:Message):
         new_result = {}
         tmarks=0
         nn=1
+        count=1
         from quickstart import Drive_OCR
         body = {"title": 'Result.pdf'}
         id=Drive_OCR(body).create()
         yy=None
-        count=1
+        
         print(xx)
         li=[x for x in range(int(xx[1]),int(xx[1])+int(xx[2]))]
         random.shuffle(li)

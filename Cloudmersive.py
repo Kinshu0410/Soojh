@@ -663,7 +663,7 @@ async def job2_partener2(client:Client,message:Message):
             	for o in range(len(options)):
             	    options[o]=bytes('(\\u004'+str(o+1), 'utf-8').decode('unicode-escape')+") "+options[o]
             	Text="\n".join(options)+"\n"
-            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	mess2=(await app.send_poll(chat_id=message.chat.id,question="Q "+str(int(xx[2])-nn+1)+". "+question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))

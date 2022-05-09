@@ -665,10 +665,7 @@ async def job2_partener2(client:Client,message:Message):
             	    explanation="\n"
             	else:
             	    explanation="Explanation : "+explanation+"\n\n"
-            	Text="\n".join(options)+"\n"
-            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
-            	count=count+len(Text)
-            	Drive_OCR(body).update(id)
+            	
             	Text=options[correct_option_id]+"✅\n"
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)

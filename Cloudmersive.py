@@ -636,7 +636,7 @@ async def job2_partener2(client:Client,message:Message):
             	options=[o.text for o in mess1.options]
             	lis=[]
             	Text=question+"\n"
-            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"bold","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	for x in range(len(options)):
@@ -674,7 +674,7 @@ async def job2_partener2(client:Client,message:Message):
             	    explanation="Explanation : "+explanation+"\n\n"
             	
             	Text=options[correct_option_id]+"✅\n"
-            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"bold","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	Text=explanation

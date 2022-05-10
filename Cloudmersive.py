@@ -538,7 +538,7 @@ async def job2_partener1(client:Client,message:Message):
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
         final_text = '\n'.join(text)
-        Text=explanation
+        Text=final_text
         body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
         count=count+len(Text)
         Drive_OCR(body).update(id)

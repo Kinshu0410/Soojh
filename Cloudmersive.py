@@ -635,7 +635,7 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
             	lis=[]
-            	Text=question+"\n"
+            	Text="Q "+str(nn)+". "+question+"\n"
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)

@@ -806,7 +806,7 @@ async def job2_partener2(client:Client,message:Message):
         count=count+len(Text)
         Drive_OCR(body).update(id)
         try:
-            await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
             Drive_OCR(body).delete(id),
         except:
             for xy in range(len(text)//20+1):

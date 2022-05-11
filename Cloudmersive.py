@@ -763,7 +763,10 @@ async def job2_partener2(client:Client,message:Message):
         print(new_result)
         body={"requests":[{"insertTable":{"endOfSegmentLocation":{"segmentId":""},"columns":3,"rows":len(new_result)+1,},},]}
         
-        Drive_OCR(body).update(id)
+        try:
+            Drive_OCR(body).update(id)
+        except Exception as e:
+            print(e)
         count=2
         new={0: {'fname': 'First Name', 'Marks': 'Marks',"Rank":"Rank"}}
         new.update(new_result)

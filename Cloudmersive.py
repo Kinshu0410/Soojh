@@ -775,7 +775,7 @@ async def job2_partener2(client:Client,message:Message):
             Drive_OCR(body).update(id)
         except Exception as e:
             print(e)
-        count=2
+        count+=1
         new={0: {'fname': 'First Name', 'Marks': 'Marks',"Rank":"Rank"}}
         new.update(new_result)
         for x in new:

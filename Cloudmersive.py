@@ -804,7 +804,7 @@ async def job2_partener2(client:Client,message:Message):
                 except Exception as e:
                     print(e)
         count=count+len(Text)
-        Drive_OCR(body).update(id)
+        #Drive_OCR(body).update(id)
         try:
             await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
             Drive_OCR(body).delete(id),

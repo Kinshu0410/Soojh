@@ -641,7 +641,7 @@ async def job2_partener2(client:Client,message:Message):
             	Drive_OCR(body).update(id)
             	for x in range(len(options)):
             	    options[x]=reaaa.sub("^(\[|\(|)(a|b|c|d|A|B|C|D|E|F|e|f)(\]|\)|)(\. |\.|)","",options[x])
-            	    lis.append(x)
+            	    lis.append(x)#
             	
             	#await app.send_message(message.chat.id,str(lis))
             	random.shuffle(lis)

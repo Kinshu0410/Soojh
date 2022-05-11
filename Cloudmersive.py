@@ -753,20 +753,45 @@ async def job2_partener2(client:Client,message:Message):
             pass
         for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]
-    	#print(new_result)
-        text = []
-        i = 0
-        for chat_id in new_result.keys():
-    	    i += 1
-    	    fname = new_result[chat_id]['fname']
-    	    marks = new_result[chat_id]['Marks']
-    	    text.append(f"{i}. {fname} got {marks} marks")
-        final_text = '\n'.join(text)+"\n\n\n\n\n"+tt
-        from quickstart import Drive_OCR
-        Text=final_text
+    	
+        z=1
+        for x in new_result:
+            print(x)
+            new_result[x]["Rank"]=z
+            z+=1
+        #count=len(Text)+1
+        print(new_result)
+        body={"requests":[{"insertTable":{"endOfSegmentLocation":{"segmentId":""},"columns":3,"rows":len(new_result)+1,},},]}
         
-        #Text=explanation
-        body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+        Drive_OCR(body).update(id)
+        count=2
+        new={0: {'fname': 'First Name', 'Marks': 'Marks',"Rank":"Rank"}}
+        new.update(new_result)
+        for x in new:
+            for key in ["Rank",'fname','Marks']:
+                new[x][key] = new[x].pop(key)
+        new_result=new
+        
+        for x in new_result:
+            zz=len(new_result[x])
+            
+            for y in new_result[x]:
+                print("=========="+str(zz))
+                if zz==3:
+                    count=count+3
+                else:
+                    count=count+2
+                zz-=1
+                
+                body={"requests":[{"insertText":{"location":{"index":count},"text":str(new_result[x][y])},},],}
+                count=count+len(str(new_result[x][y]))
+                print(len(str(new_result[x][y])))
+                print(body)
+                try:
+                    Drive_OCR(body).update(id)
+                
+                except Exception as e:
+                    print(e)
         count=count+len(Text)
         Drive_OCR(body).update(id)
         try:

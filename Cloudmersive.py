@@ -590,7 +590,7 @@ async def job2_partener1(client:Client,message:Message):
                 time.sleep(10)
 
 @app.on_message(filters.regex("^force stop$") & ~ filters.private )#& filters.incoming)
-async def job2_partener12(client:Client,message:Message):
+async def job2_partener1212(client:Client,message:Message):
 	global Tt
 	try:
 		tim=message.text
@@ -610,7 +610,7 @@ async def job2_partener12(client:Client,message:Message):
 		await app.send_message(message.chat.id, "👎")
 Tt={}
 
-@app.on_message(filters.regex("^/start@quizbot") & ~ filters.scheduled)#& filters.incoming)
+@app.on_message(filters.regex("^/start@quizbot.*?") & ~ filters.scheduled)#& filters.incoming)
 async def job2_partener21(client:Client,message:Message):
         try:
             await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)

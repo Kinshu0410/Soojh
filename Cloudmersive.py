@@ -589,12 +589,22 @@ async def job2_partener1(client:Client,message:Message):
                 await app.send_message(message.chat.id, final_text)
                 time.sleep(10)
 
+@app.on_message(filters.regex("^force stop$") & ~ filters.private )#& filters.incoming)
+async def job2_partener12(client:Client,message:Message):
+	global Tt
+	try:
+		tim=message.text
+		Tt[message.chat.id]["s"]=(tim)
+		await app.delete_messages(chat_id=message.chat.id,message_ids=message.id)
+	except:
+		pass
+
 @app.on_message(filters.regex("^s\.t {,}\d{1,}$") & ~ filters.private )#& filters.incoming)
 async def job2_partener12(client:Client,message:Message):
 	global Tt
 	try:
 		tim=reaaa.sub("s.t {,}","",message.text)
-		Tt[message.chat.id]=int(tim)
+		Tt[message.chat.id]["t"]=int(tim)
 		await app.delete_messages(chat_id=message.chat.id,message_ids=message.id)
 	except:
 		await app.send_message(message.chat.id, "👎")
@@ -636,7 +646,13 @@ async def job2_partener2(client:Client,message:Message):
     		#print(str(result))
     
             try:
-                tt1=Tt[message.chat.id]
+                if Tt[message.chat.id["s"]]=="force stop":
+                    tt1=30
+                    break
+            except:
+                pass
+            try:
+                tt1=Tt[message.chat.id["t"]]
             except:
                 tt1=30
             try:

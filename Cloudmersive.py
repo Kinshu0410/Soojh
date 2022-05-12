@@ -1011,7 +1011,7 @@ async def forword(client:Client,message:Message):
 	##print(mess)
 	    ##print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.id)
-	question=mess.question
+	question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", mess.question)
 	
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)

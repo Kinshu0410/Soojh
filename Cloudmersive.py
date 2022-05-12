@@ -635,7 +635,7 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
             	lis=[]
-            	Text="Q "+str(nn)+". "+question+"\n"
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", "Q "+str(nn)+". "+question+"\n")
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -677,7 +677,7 @@ async def job2_partener2(client:Client,message:Message):
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
-            	Text=explanation
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", explanation)
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":1,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -794,7 +794,7 @@ async def job2_partener2(client:Client,message:Message):
                     count=count+2
                 zz-=1
                 
-                body={"requests":[{"insertText":{"location":{"index":count},"text":str(new_result[x][y])},},],}
+                body={"requests":[{"insertText":{"location":{"index":count},"text":re.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", str(new_result[x][y]))},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)

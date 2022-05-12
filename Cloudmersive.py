@@ -594,6 +594,7 @@ async def job2_partener1212(client:Client,message:Message):
 	global Tt
 	try:
 		tim=message.text
+		Tt[message.chat.id]={}
 		Tt[message.chat.id]["s"]=(tim)
 		await app.delete_messages(chat_id=message.chat.id,message_ids=message.id)
 	except:
@@ -604,6 +605,7 @@ async def job2_partener12(client:Client,message:Message):
 	global Tt
 	try:
 		tim=reaaa.sub("s.t {,}","",message.text)
+		Tt[message.chat.id]={}
 		Tt[message.chat.id]["t"]=int(tim)
 		await app.delete_messages(chat_id=message.chat.id,message_ids=message.id)
 	except:
@@ -646,13 +648,13 @@ async def job2_partener2(client:Client,message:Message):
     		#print(str(result))
     
             try:
-                if Tt[message.chat.id["s"]]=="force stop":
+                if Tt[message.chat.id]["s"]=="force stop":
                     tt1=30
                     break
             except:
                 pass
             try:
-                tt1=Tt[message.chat.id["t"]]
+                tt1=Tt[message.chat.id]["t"]
             except:
                 tt1=30
             try:

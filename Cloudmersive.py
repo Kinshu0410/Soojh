@@ -537,15 +537,52 @@ async def job2_partener1(client:Client,message:Message):
     	    fname = new_result[chat_id]['fname']
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
-        final_text = '\n'.join(text)
-        Text=final_text
-        body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
-        count=count+len(Text)
-        Drive_OCR(body).update(id)
+        z=1
+        for x in new_result:
+            print(x)
+            new_result[x]["Rank"]=z
+            z+=1
+        #count=len(Text)+1
+        print(new_result)
+        body={"requests":[{"insertTable":{"endOfSegmentLocation":{"segmentId":""},"columns":3,"rows":len(new_result)+1,},},]}
         
         try:
-            await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
-            Drive_OCR(body).delete(id)
+            Drive_OCR(body).update(id)
+        except Exception as e:
+            print(e)
+        count+=1
+        new={0: {'fname': 'First Name', 'Marks': 'Marks',"Rank":"Rank"}}
+        new.update(new_result)
+        for x in new:
+            for key in ["Rank",'fname','Marks']:
+                new[x][key] = new[x].pop(key)
+        new_result=new
+        
+        for x in new_result:
+            zz=len(new_result[x])
+            
+            for y in new_result[x]:
+                print("=========="+str(zz))
+                if zz==3:
+                    count=count+3
+                else:
+                    count=count+2
+                zz-=1
+                
+                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", str(new_result[x][y]))},},],}
+                count=count+len(str(new_result[x][y]))
+                print(len(str(new_result[x][y])))
+                print(body)
+                try:
+                    Drive_OCR(body).update(id)
+                
+                except Exception as e:
+                    print(e)
+        count=count+len(Text)
+        #Drive_OCR(body).update(id)
+        try:
+            await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            Drive_OCR(body).delete(id),
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

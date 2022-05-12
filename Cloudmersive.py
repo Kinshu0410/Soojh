@@ -794,7 +794,7 @@ async def job2_partener2(client:Client,message:Message):
                     count=count+2
                 zz-=1
                 
-                body={"requests":[{"insertText":{"location":{"index":count},"text":re.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", str(new_result[x][y]))},},],}
+                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", str(new_result[x][y]))},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)

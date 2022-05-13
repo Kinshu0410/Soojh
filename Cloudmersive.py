@@ -584,7 +584,7 @@ async def job2_partener1(client:Client,message:Message):
                 
                 except Exception as e:
                     print(e)
-        count=count+len(Text)
+        count=count+len(reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))
         #Drive_OCR(body).update(id)
         try:
             await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
@@ -864,7 +864,7 @@ async def job2_partener2(client:Client,message:Message):
                 
                 except Exception as e:
                     print(e)
-        count=count+len(Text)
+        count=count+len(reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))
         #Drive_OCR(body).update(id)
         try:
             await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))

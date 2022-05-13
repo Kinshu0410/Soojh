@@ -489,22 +489,21 @@ async def job2_partener1(client:Client,message:Message):
             		mess1=await app.get_messages(message.chat.id,x)
             		mess1=mess1.poll
             	off_set=None
-            	for xxxx in range(mess1.poll.total_voter_count//50+1):
-            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(-608479342),id=mess1.id,limit=mess1.poll.total_voter_count,offset=off_set))
+            	for xxxx in range(mess1.total_voter_count//50+1):
+            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=mess1.total_voter_count,offset=off_set))
             		off_set=mess2.next_offset
         		#print(str(mess1.total_voter_count))
-        		#print(off_set)
+        		#print(mess2.next_offset)
         		#print(len(mess2.votes))
             		correct_option_id = 0
-            		mess1=(mess1.poll)
             		for i in range(len(mess1.options)):
             	
-            		    #print(mess1)
+            		    print(mess1)
             		    if mess1.options[i].correct:
             		        correct_option_id = i
             		        break
             		
-            		print(off_set)
+            		#print("correct_option_id = "+str(correct_option_id))
             		for mmid in range(len(mess2.votes)):
             		    #print(mess2.votes[mmid]["option"])
             		    if mess2.votes[mmid].user_id not in result.keys():
@@ -526,15 +525,10 @@ async def job2_partener1(client:Client,message:Message):
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             	tmarks+=4
             except Exception as e:
-                print(e)#await app.send_message(message.chat.id, (str(e)))
+                print(str(e))
     		    
-        try:
-            await app.delete_messages(chat_id=message.chat.id,message_ids=yy)
-        except:
-            pass
         for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]
-    	
     	#print(new_result)
         text = []
         i = 0
@@ -563,7 +557,7 @@ async def job2_partener1(client:Client,message:Message):
             for key in ["Rank",'fname','Marks']:
                 new[x][key] = new[x].pop(key)
         new_result=new
-        
+        Text=""
         for x in new_result:
             zz=len(new_result[x])
             
@@ -574,8 +568,8 @@ async def job2_partener1(client:Client,message:Message):
                 else:
                     count=count+2
                 zz-=1
-                
-                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
+                Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))
+                body={"requests":[{"insertText":{"location":{"index":count},"text":Text},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)
@@ -584,7 +578,7 @@ async def job2_partener1(client:Client,message:Message):
                 
                 except Exception as e:
                     print(e)
-        count=count+len(reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y])))
+        count=count+len(Text)
         #Drive_OCR(body).update(id)
         try:
             await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
@@ -843,7 +837,7 @@ async def job2_partener2(client:Client,message:Message):
             for key in ["Rank",'fname','Marks']:
                 new[x][key] = new[x].pop(key)
         new_result=new
-        
+        Text=""
         for x in new_result:
             zz=len(new_result[x])
             
@@ -854,8 +848,8 @@ async def job2_partener2(client:Client,message:Message):
                 else:
                     count=count+2
                 zz-=1
-                
-                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
+                Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))
+                body={"requests":[{"insertText":{"location":{"index":count},"text":Text},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)
@@ -864,7 +858,7 @@ async def job2_partener2(client:Client,message:Message):
                 
                 except Exception as e:
                     print(e)
-        count=count+len(reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y])))
+        count=count+len(Text)
         #Drive_OCR(body).update(id)
         try:
             await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))

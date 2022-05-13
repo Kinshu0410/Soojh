@@ -1250,7 +1250,7 @@ def ghppp1(update,context):
         que=reaaa.sub("(\n| |)🤗.*?🤗(\n| |)","",que)
         que=reaaa.sub("(\n){1,}","\n",que)
         que=reaaa.sub("^\n","",que)
-        que= reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020])","", reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/\.])", "", que))
+        que= reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", reaaa.sub(r"(@\w*)|(http(s|)://[a-zA-Z0-9_/\.])", "", que))
         options=[o.text for o in userText.options]
         for yx in range(len(options)):
             options[yx]=reaaa.sub(" "," ",options[yx])

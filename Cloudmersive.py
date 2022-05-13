@@ -569,7 +569,7 @@ async def job2_partener1(client:Client,message:Message):
                     count=count+2
                 zz-=1
                 
-                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020])","", str(new_result[x][y]))},},],}
+                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)
@@ -690,7 +690,7 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
             	lis=[]
-            	Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020])","", "Q "+str(nn)+". "+question+"\n")
+            	Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", "Q "+str(nn)+". "+question+"\n")
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -721,7 +721,7 @@ async def job2_partener2(client:Client,message:Message):
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
-            	mess2=(await app.send_poll(chat_id=message.chat.id,question=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020])","","Q "+str(int(xx[2])-nn+1)+". "+question),options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
+            	mess2=(await app.send_poll(chat_id=message.chat.id,question=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","","Q "+str(int(xx[2])-nn+1)+". "+question),options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
             	
             	if explanation is None:
             	    explanation="\n"
@@ -732,7 +732,7 @@ async def job2_partener2(client:Client,message:Message):
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
-            	Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020])","", explanation)
+            	Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", explanation)
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":1,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -849,7 +849,7 @@ async def job2_partener2(client:Client,message:Message):
                     count=count+2
                 zz-=1
                 
-                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020])","", str(new_result[x][y]))},},],}
+                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)
@@ -1029,7 +1029,7 @@ async def forword(client:Client,message:Message):
 	##print(mess)
 	    ##print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.id)
-	question=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020])","", mess.question)
+	question=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", mess.question)
 	
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)

@@ -27,7 +27,7 @@ import requests
 #bot_token=ClientText["bot_token"],
 #api_id="13682659",
 #api_hash="b984d240c5258407ea911f042c9d75f6")
-app=Client("my_account",session_string="BQDQx-MAIz-kHOYJrgIs2tB4Oos2kNPG-e_GhyWBNCYry5qf2Z4MfywILEDaDmTBZFoP-UZuwqy3OVHIoC0i-MGDGorfzubyqaVhl83KUZu6UmAvp7EaMI4tgXUBo7oA99evFzrPq42rvSGSk8SbcPc2H-jHuHYf0j9UVeDZlT7-MFQg6On2pEc8RrhnN6N6cwuqwbU0ELmSgvf3lnNurISYALDXvDHbotpU14OPQLEUNQxQf_eGjz5Uwk_LRi4GCXGC_40dOvQKwzTNQzVsC1KgFCoEPX0oPJibZolkQiCK5jMFsk4Hde19OvlrDn0UwVygg0gBAtjeIL9lFYnCzHv5gBu4ogAAAAAqZYQtAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
+app=Client("my_account",session_string="BQDQx-MAL2w301SuMPrA1aIWVIIlgOUsIM6Sx7dPLt8EkCw_Zb9sLfam_Nwc4Rl_olVerTp_rBUsXmd-bxt6Rha2Qz9nVQvkbgsh_dVFJMqwcwbkACayZ56GFO0kP17tBeLybD0ppR7u1us4t04HoXvtnJpotQgZtsGRnTdi21wiI67GPiBuG8yFkWqvOjD7y4pUBFUcCNf77i-ToPNPZ9Pq60BXXSK9nPBCSp4GQLiW31lwy8QFSC6cNnQ5penmbT-9648dwLEGYz2Kq859ok8O_qIgPZJPKcKgLFlOdrSxpggaCuEe6o433x4raUUbfWgO_WEzmd-tTKmnaV6Pkih9fjAzjwAAAAAqZYQtAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
 
 
 from pyrogram.enums import PollType
@@ -568,8 +568,8 @@ async def job2_partener1(client:Client,message:Message):
                 else:
                     count=count+2
                 zz-=1
-                
-                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
+                Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", str(new_result[x][y]))
+                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", str(new_result[x][y]))},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)
@@ -690,7 +690,7 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
             	lis=[]
-            	Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", "Q "+str(nn)+". "+question+"\n")
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", "Q "+str(nn)+". "+question+"\n")
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -721,7 +721,7 @@ async def job2_partener2(client:Client,message:Message):
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
-            	mess2=(await app.send_poll(chat_id=message.chat.id,question=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","","Q "+str(int(xx[2])-nn+1)+". "+question),options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
+            	mess2=(await app.send_poll(chat_id=message.chat.id,question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","","Q "+str(int(xx[2])-nn+1)+". "+question),options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
             	
             	if explanation is None:
             	    explanation="\n"
@@ -732,7 +732,7 @@ async def job2_partener2(client:Client,message:Message):
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
-            	Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", explanation)
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", explanation)
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":1,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -848,8 +848,8 @@ async def job2_partener2(client:Client,message:Message):
                 else:
                     count=count+2
                 zz-=1
-                
-                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
+                Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", str(new_result[x][y]))
+                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", str(new_result[x][y]))},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)
@@ -1029,7 +1029,7 @@ async def forword(client:Client,message:Message):
 	##print(mess)
 	    ##print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.id)
-	question=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", mess.question)
+	question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F])","", mess.question)
 	
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)

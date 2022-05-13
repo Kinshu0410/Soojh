@@ -557,7 +557,7 @@ async def job2_partener1(client:Client,message:Message):
             for key in ["Rank",'fname','Marks']:
                 new[x][key] = new[x].pop(key)
         new_result=new
-        Text=""
+        
         for x in new_result:
             zz=len(new_result[x])
             
@@ -568,8 +568,8 @@ async def job2_partener1(client:Client,message:Message):
                 else:
                     count=count+2
                 zz-=1
-                Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))
-                body={"requests":[{"insertText":{"location":{"index":count},"text":Text},},],}
+                
+                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)
@@ -837,7 +837,7 @@ async def job2_partener2(client:Client,message:Message):
             for key in ["Rank",'fname','Marks']:
                 new[x][key] = new[x].pop(key)
         new_result=new
-        Text=""
+        
         for x in new_result:
             zz=len(new_result[x])
             
@@ -848,8 +848,8 @@ async def job2_partener2(client:Client,message:Message):
                 else:
                     count=count+2
                 zz-=1
-                Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))
-                body={"requests":[{"insertText":{"location":{"index":count},"text":Text},},],}
+                
+                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
                 count=count+len(str(new_result[x][y]))
                 print(len(str(new_result[x][y])))
                 print(body)

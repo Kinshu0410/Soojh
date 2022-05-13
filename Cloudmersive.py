@@ -489,21 +489,22 @@ async def job2_partener1(client:Client,message:Message):
             		mess1=await app.get_messages(message.chat.id,x)
             		mess1=mess1.poll
             	off_set=None
-            	for xxxx in range(mess1.total_voter_count//50+1):
-            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=mess1.total_voter_count,offset=off_set))
+            	for xxxx in range(mess1.poll.total_voter_count//50+1):
+            		mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(-608479342),id=mess1.id,limit=mess1.poll.total_voter_count,offset=off_set))
             		off_set=mess2.next_offset
         		#print(str(mess1.total_voter_count))
-        		#print(mess2.next_offset)
+        		#print(off_set)
         		#print(len(mess2.votes))
             		correct_option_id = 0
+            		mess1=(mess1.poll)
             		for i in range(len(mess1.options)):
             	
-            		    print(mess1)
+            		    #print(mess1)
             		    if mess1.options[i].correct:
             		        correct_option_id = i
             		        break
             		
-            		#print("correct_option_id = "+str(correct_option_id))
+            		print(off_set)
             		for mmid in range(len(mess2.votes)):
             		    #print(mess2.votes[mmid]["option"])
             		    if mess2.votes[mmid].user_id not in result.keys():
@@ -525,10 +526,15 @@ async def job2_partener1(client:Client,message:Message):
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             	tmarks+=4
             except Exception as e:
-                print(str(e))
+                print(e)#await app.send_message(message.chat.id, (str(e)))
     		    
+        try:
+            await app.delete_messages(chat_id=message.chat.id,message_ids=yy)
+        except:
+            pass
         for key in sorted(result, key=lambda x: result[x]['Marks'], reverse=True):
     	    new_result[key] = result[key]
+    	
     	#print(new_result)
         text = []
         i = 0

@@ -1029,8 +1029,8 @@ async def forword(client:Client,message:Message):
 	##print(mess)
 	    ##print(mess)
 	await app.delete_messages(chat_id="POLLQZ", message_ids=message.id)
-	question=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F\u0030-\u0039])","", mess.question)
 	
+	question=mess.question
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
 	#print("que se aage gye")
@@ -1043,6 +1043,7 @@ async def forword(client:Client,message:Message):
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
 	question=reaaa.sub(r"(\n| |){1,}(|C\.A BY)(\n| |){1,}", "", question)
+	question=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F\u0030-\u0039])","",question)
 	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
 	question=reaaa.sub(r"", "", question)
 	options=[o.text for o in mess.options]

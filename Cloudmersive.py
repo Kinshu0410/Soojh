@@ -570,9 +570,9 @@ async def job2_partener1(client:Client,message:Message):
                 zz-=1
                 Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))
                 body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
-                count=count+len(str(new_result[x][y]))
-                print(len(str(new_result[x][y])))
-                print(body)
+                count=count+len(Text)
+                #print(len(str(new_result[x][y])))
+                #print(body)
                 try:
                     Drive_OCR(body).update(id)
                 
@@ -850,9 +850,9 @@ async def job2_partener2(client:Client,message:Message):
                 zz-=1
                 Text=reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))
                 body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0041-\u005a\u0061-\u007a\u0040\u0020\u0900-\u097F])","", str(new_result[x][y]))},},],}
-                count=count+len(str(new_result[x][y]))
-                print(len(str(new_result[x][y])))
-                print(body)
+                count=count+len(Text)
+                #print(len(str(new_result[x][y])))
+                #print(body)
                 try:
                     Drive_OCR(body).update(id)
                 

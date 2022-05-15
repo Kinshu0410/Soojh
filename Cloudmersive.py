@@ -630,6 +630,10 @@ async def job2_partener2(client:Client,message:Message):
             pass
         xx=reaaa.split("/",xx)
         mess1="vote alreddy given"
+        try:
+        	xx[0]=int(xx[0])
+        except:
+        	pass
         result={}
         new_result = {}
         tmarks=0

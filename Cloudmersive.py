@@ -594,7 +594,7 @@ async def job2_partener1212(client:Client,message:Message):
 	global Tt
 	try:
 		tim=message.text
-		Tt[message.chat.id]={}
+		
 		Tt[message.chat.id]["s"]=(tim)
 		await app.delete_messages(chat_id=message.chat.id,message_ids=message.id)
 	except:
@@ -605,7 +605,7 @@ async def job2_partener12(client:Client,message:Message):
 	global Tt
 	try:
 		tim=reaaa.sub("s.t {,}","",message.text)
-		Tt[message.chat.id]={}
+		
 		Tt[message.chat.id]["t"]=int(tim)
 		await app.delete_messages(chat_id=message.chat.id,message_ids=message.id)
 	except:
@@ -623,6 +623,8 @@ async def job2_partener21(client:Client,message:Message):
 @app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
+        global Tt
+        
         tt=""
         try:
             await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
@@ -660,6 +662,8 @@ async def job2_partener2(client:Client,message:Message):
             try:
                 tt1=Tt[message.chat.id]["t"]
             except:
+                Tt[message.chat.id]={}
+                Tt[message.chat.id]["t"]=30
                 tt1=30
             try:
             	try:
@@ -844,9 +848,10 @@ async def job2_partener2(client:Client,message:Message):
         
         for x in new_result:
             zz=len(new_result[x])
-            
+            if len(new_result)==1:
+                break
             for y in new_result[x]:
-                print("=========="+str(zz))
+                
                 if zz==3:
                     count=count+3
                 else:
@@ -862,7 +867,8 @@ async def job2_partener2(client:Client,message:Message):
                 
                 except Exception as e:
                     print(e)
-        count=count+len(Text)
+        if len(new_result)!=1:
+            count=count+len(Text)
         #Drive_OCR(body).update(id)
         try:
             await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))

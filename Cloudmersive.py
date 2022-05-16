@@ -832,8 +832,8 @@ async def job2_partener2(client:Client,message:Message):
             z+=1
         #count=len(Text)+1
         print(new_result)
-        body={"requests":[{"insertTable":{"endOfSegmentLocation":{"segmentId":""},"columns":3,"rows":len(new_result)+1,},},]}
-        
+        if len(new_result)!=0:
+            body={"requests":[{"insertTable":{"endOfSegmentLocation":{"segmentId":""},"columns":3,"rows":len(new_result)+1,},},]}
         try:
             Drive_OCR(body).update(id)
         except Exception as e:

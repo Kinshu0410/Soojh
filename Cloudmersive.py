@@ -577,7 +577,7 @@ async def job2_partener1(client:Client,message:Message):
                     Drive_OCR(body).update(id)
                 
                 except Exception as e:
-                    print(e)
+                    await app.send_message(message.chat.id,str(e))
         count=count+len(Text)
         #Drive_OCR(body).update(id)
         try:

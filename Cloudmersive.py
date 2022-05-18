@@ -557,7 +557,7 @@ async def job2_partener1(client:Client,message:Message):
             for key in ["Rank",'fname','Marks']:
                 new[x][key] = new[x].pop(key)
         new_result=new
-        
+        eee=[]
         for x in new_result:
             zz=len(new_result[x])
             
@@ -569,15 +569,17 @@ async def job2_partener1(client:Client,message:Message):
                     count=count+2
                 zz-=1
                 Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","", str(new_result[x][y]))
-                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","", str(new_result[x][y]))},},],}
+                eee.append({"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","", str(new_result[x][y]))},})
                 count=count+len(Text)
                 #print(len(str(new_result[x][y])))
                 #print(body)
-                try:
-                    Drive_OCR(body).update(id)
+        try:
+            body={"requests":eee}
+            print(body)
+            Drive_OCR(body).update(id)
                 
-                except Exception as e:
-                    await app.send_message(message.chat.id, (str(e)))
+        except Exception as e:
+            await app.send_message(message.chat.id, (str(e)))
         count=count+len(Text)
         #Drive_OCR(body).update(id)
         try:

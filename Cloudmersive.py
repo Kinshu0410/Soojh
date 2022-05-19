@@ -575,14 +575,14 @@ async def job2_partener1(client:Client,message:Message):
                 #print(body)
         try:
             body={"requests":eee}
-            Drive_OCR(body).update(id)
-        except Exception as e:
             id2=Drive_OCR({"title": 'Result.pdf'}).create()
             Drive_OCR(body).update(id2)
-            Drive_OCR({"requests":[{"insertText":{"text":str(e),"location":{"segmentId":"","index":1},},},],}).update(id2)
+            Drive_OCR({"requests":[{"insertText":{"text":str(eee),"location":{"segmentId":"","index":1},},},],}).update(id2)
             await app.send_document(message.chat.id, Drive_OCR(body).download(id2))
             Drive_OCR(body).delete(id2)
-            #print(str(e))
+            Drive_OCR(body).update(id)
+        except Exception as e:
+            print(str(e))
         count=count+len(Text)
         #Drive_OCR(body).update(id)
         try:

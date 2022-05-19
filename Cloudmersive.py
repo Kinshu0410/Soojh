@@ -575,7 +575,7 @@ async def job2_partener1(client:Client,message:Message):
                 #print(body)
         try:
             body={"requests":eee}
-            print(body)
+            await app.send_message(message.chat.id, body)
             Drive_OCR(body).update(id)
                 
         except Exception as e:

@@ -576,7 +576,10 @@ async def job2_partener1(client:Client,message:Message):
         try:
             body={"requests":eee}
             #id2=Drive_OCR({"title": 'Result.pdf'}).create()
-            open("demofile2.txt", "a").write(str(body)).close()
+            
+            f=open("demofile2.txt", "a")
+            f.write(str(body))
+            f.close()
             #Drive_OCR({"requests":[{"insertText":{"text":str(eee),"location":{"segmentId":"","index":1},},},],}).update(id2)
             await app.send_document(message.chat.id, "demofile2.txt")
             #Drive_OCR(body).delete(id2)

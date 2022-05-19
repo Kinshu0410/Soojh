@@ -577,7 +577,7 @@ async def job2_partener1(client:Client,message:Message):
             body={"requests":eee}
             #id2=Drive_OCR({"title": 'Result.pdf'}).create()
             
-            f=open("demofile2.txt", "a")
+            f=open("demofile2.txt" ,"w")
             f.write(str(body))
             f.close()
             #Drive_OCR({"requests":[{"insertText":{"text":str(eee),"location":{"segmentId":"","index":1},},},],}).update(id2)

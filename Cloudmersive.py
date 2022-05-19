@@ -574,18 +574,21 @@ async def job2_partener1(client:Client,message:Message):
                 #print(len(str(new_result[x][y])))
                 #print(body)
         try:
+            id2=Drive_OCR({"title": 'Result.pdf'}).create()
+            Drive_OCR(body).update(id2)
             body={"requests":eee}
-            await app.send_message(message.chat.id, body)
+            Drive_OCR({"requests":[{"insertText":{"text":str(eee),"location":{"segmentId":"","index":1},},},],}).update(id2)
+            await app.send_document(message.chat.id, Drive_OCR(body).download(id2))
+            Drive_OCR(body).delete(id2)
             Drive_OCR(body).update(id)
-                
         except Exception as e:
-            await app.send_message(message.chat.id, (str(e)))
+            print(str(e))
         count=count+len(Text)
         #Drive_OCR(body).update(id)
         try:
             await asyncio.sleep(10)
             await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
-            Drive_OCR(body).delete(id),
+            Drive_OCR(body).delete(id)
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

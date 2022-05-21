@@ -185,7 +185,7 @@ class Drive_OCR:
             print("Download %d%%." % int(status.progress() * 100))
 
         # It will delete file from drive base on ID
-        #service.files().delete(fileId=file.get('id')).execute()
+        service.files().delete(fileId=file.get('id')).execute()
 
         # It will print data into terminal
         output = fh.getvalue().decode()
@@ -246,7 +246,7 @@ class Drive_OCR:
         #open("Result.pdf", "wb").write(fh)
 
         # It will delete file from drive base on ID
-        #service.files().delete(fileId=file.get('id')).execute()
+        service.files().delete(fileId=file.get('id')).execute()
         fh.seek(0)
         import shutil
         shutil.copyfileobj(fh,open(self.filename+".pdf", 'wb'))
@@ -300,7 +300,7 @@ class Drive_OCR:
         #open("Result.pdf", "wb").write(fh)
 
         # It will delete file from drive base on ID
-        #service.files().delete(fileId=file.get('id')).execute()
+        service.files().delete(fileId=file.get('id')).execute()
         fh.seek(0)
         import shutil
         shutil.copyfileobj(fh,open(reaaa.sub("\.(txt|jpeg|jpg|png)","",self.filename)+".pdf", 'wb'))

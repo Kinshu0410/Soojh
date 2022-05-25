@@ -873,7 +873,7 @@ async def job2_partener2(client:Client,message:Message):
         
         #Drive_OCR(body).update(id)
         try:
-            #await app.send_message(message.chat.id, daata)
+            await app.send_message(message.chat.id, daata)
             await app.send_document(message.chat.id, Drive_OCR(body).download(id))
             Drive_OCR(body).delete(id),
             await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))

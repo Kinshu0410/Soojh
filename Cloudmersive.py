@@ -867,7 +867,7 @@ async def job2_partener2(client:Client,message:Message):
         	yyy.append(str(new_result[x]["Marks"]))
         	daata.append(yyy)
         worksheet.add_table('A1:C'+str(len(new_result)+1), {'data': daata,
-                               'total_row': 1,
+                               'total_row': 2,
                                'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'}]})
         workbook.close()
         

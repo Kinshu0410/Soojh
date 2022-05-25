@@ -862,12 +862,12 @@ async def job2_partener2(client:Client,message:Message):
         
         for x in ((new_result)):
         	yyy=[]
-        	yyy.append(str(new_result[x]["Rank"]))
-        	yyy.append(str(new_result[x]["fname"]))
-        	yyy.append(str(new_result[x]["Marks"]))
+        	yyy.append((new_result[x]["Rank"]))
+        	yyy.append((new_result[x]["fname"]))
+        	yyy.append((new_result[x]["Marks"]))
         	daata.append(yyy)
-        worksheet.add_table('A1:C'+str(len(new_result)+1), {'data': daata,
-                               'total_row': 2,
+        worksheet.add_table('A2:C'+str(len(new_result)), {'data': daata,
+                               'total_row': 1,
                                'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'}]})
         workbook.close()
         

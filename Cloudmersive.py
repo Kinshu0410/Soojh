@@ -842,14 +842,9 @@ async def job2_partener2(client:Client,message:Message):
             z+=1
         #count=len(Text)+1
         print(new_result)
-        if len(new_result)!=0:
-            body={"requests":[{"insertTable":{"endOfSegmentLocation":{"segmentId":""},"columns":3,"rows":len(new_result)+1,},},]}
-        try:
-            Drive_OCR(body).update(id)
-        except Exception as e:
-            print(e)
-        count+=1
-        new={0: {'fname': 'First Name', 'Marks': 'Marks',"Rank":"Rank"}}
+        
+        
+        new={}
         new.update(new_result)
         for x in new:
             for key in ["Rank",'fname','Marks']:
@@ -858,24 +853,20 @@ async def job2_partener2(client:Client,message:Message):
         import xlsxwriter
         workbook = xlsxwriter.Workbook('Result.xlsx')
         worksheet = workbook.add_worksheet()
-        cell_format = workbook.add_format()
-        cell_format1 = workbook.add_format()
-        cell_format.set_align('center')
-        cell_format1.set_align('center')
-        cell_format1.set_font_color('green')
-        cell_format1.set_bold()
-        worksheet.set_column('A:A', 5)
-        worksheet.set_column('B:B', 47)
-        worksheet.set_column('C:C', 17)
-        worksheet.write(0,0, "Rank",cell_format)
-        worksheet.write(0,1, 'First Name',cell_format)
-        worksheet.write(0,2, 'Marks',cell_format1)
+
+        worksheet.set_column('A:A', 9)
+        worksheet.set_column('B:B', 45)
+        worksheet.set_column('C:C', 20)
         yyy=1
+        daata=[]
+        
         for x in ((new_result)):
-            worksheet.write(1+yyy,0, new_result[x]["Rank"],cell_format)
-            worksheet.write(1+yyy,1, new_result[x]['fname'],cell_format)
-            worksheet.write(1+yyy,2, new_result[x]['Marks'],cell_format1)
-            yyy+=1
+        	daata.append(new_result[x]["Rank"])
+        	daata.append(new_result[x]["fname"])
+        	daata.append(new_result[x]["Marks"])
+        worksheet.add_table('A1:C'+str(len(new_result)+1), {'data': daata,
+                               'total_row': 1,
+                               'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'}]})
         workbook.close()
         
         #Drive_OCR(body).update(id)

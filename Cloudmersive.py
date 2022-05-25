@@ -856,6 +856,7 @@ async def job2_partener2(client:Client,message:Message):
 
         worksheet.set_column('A:A', 9)
         worksheet.set_column('B:B', 45)
+        worksheet.set_column('B:B', 45)
         worksheet.set_column('C:C', 20)
         yyy=1
         daata=[]
@@ -866,7 +867,7 @@ async def job2_partener2(client:Client,message:Message):
         	yyy.append((new_result[x]["fname"]))
         	yyy.append((new_result[x]["Marks"]))
         	daata.append(yyy)
-        worksheet.add_table('A1:D'+str(len(new_result)+1), {'data': daata,
+        worksheet.add_table('A1:C'+str(len(new_result)+1), {'data': daata,
                                
                                'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'}]})
         workbook.close()

@@ -868,9 +868,9 @@ async def job2_partener2(client:Client,message:Message):
         worksheet.set_column('B:B', 47)
         worksheet.set_column('C:C', 17)
         worksheet.write(0,0, "Rank",cell_format)
-        worksheet.write(0,1, 'fname',cell_format)
+        worksheet.write(0,1, 'First Name',cell_format)
         worksheet.write(0,2, 'Marks',cell_format1)
-        yyy=0
+        yyy=1
         for x in ((new_result)):
             worksheet.write(1+yyy,0, new_result[x]["Rank"],cell_format)
             worksheet.write(1+yyy,1, new_result[x]['fname'],cell_format)

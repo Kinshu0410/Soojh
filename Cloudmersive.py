@@ -855,33 +855,28 @@ async def job2_partener2(client:Client,message:Message):
             for key in ["Rank",'fname','Marks']:
                 new[x][key] = new[x].pop(key)
         new_result=new
+        import xlsxwriter
+        workbook = xlsxwriter.Workbook('Result.xlsx')
+        worksheet = workbook.add_worksheet()
+        cell_format = workbook.add_format()
+        cell_format1 = workbook.add_format()
+        cell_format.set_align('center')
+        cell_format1.set_align('center')
+        cell_format1.set_font_color('green')
+        cell_format1.set_bold()
+        worksheet.set_column('A:A', 5)
+        worksheet.set_column('B:B', 47)
+        worksheet.set_column('C:C', 17)
+        for x in len(new_result):
+            worksheet.write(x,y, new_result[x][0],cell_format)
+            worksheet.write(x,y, new_result[x][1],cell_format)
+            worksheet.write(x,y, new_result[x][2],cell_format1)
+        workbook.close()
         
-        for x in new_result:
-            zz=len(new_result[x])
-            if len(new_result)==1:
-                break
-            for y in new_result[x]:
-                
-                if zz==3:
-                    count=count+3
-                else:
-                    count=count+2
-                zz-=1
-                Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","", str(new_result[x][y]))
-                body={"requests":[{"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","", str(new_result[x][y]))},},],}
-                count=count+len(Text)
-                #print(len(str(new_result[x][y])))
-                #print(body)
-                try:
-                    Drive_OCR(body).update(id)
-                
-                except Exception as e:
-                    print(e)
-        if len(new_result)!=1:
-            count=count+len(Text)
         #Drive_OCR(body).update(id)
         try:
-            await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
+            await app.send_document(message.chat.id, Drive_OCR().main1('Result.xlsx'),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
+            await app.send_document(message.chat.id, Drive_OCR(body).download(id))
             Drive_OCR(body).delete(id),
         except:
             for xy in range(len(text)//20+1):

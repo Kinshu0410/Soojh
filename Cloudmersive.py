@@ -867,15 +867,18 @@ async def job2_partener2(client:Client,message:Message):
         worksheet.set_column('A:A', 5)
         worksheet.set_column('B:B', 47)
         worksheet.set_column('C:C', 17)
-        for x in len(new_result):
-            worksheet.write(x,y, new_result[x][0],cell_format)
-            worksheet.write(x,y, new_result[x][1],cell_format)
-            worksheet.write(x,y, new_result[x][2],cell_format1)
+        worksheet.write(0,0, "Rank",cell_format)
+        worksheet.write(0,1, 'fname',cell_format)
+        worksheet.write(0,2, 'Marks',cell_format1)
+        for x in range(len(new_result)-1):
+            worksheet.write(1+x,0, new_result[x]["Rank"],cell_format)
+            worksheet.write(1+x,1, new_result[x]['fname'],cell_format)
+            worksheet.write(1+x,2, new_result[x]['Marks'],cell_format1)
         workbook.close()
         
         #Drive_OCR(body).update(id)
         try:
-            await app.send_document(message.chat.id, Drive_OCR().main1('Result.xlsx'),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
+            await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
             await app.send_document(message.chat.id, Drive_OCR(body).download(id))
             Drive_OCR(body).delete(id),
         except:

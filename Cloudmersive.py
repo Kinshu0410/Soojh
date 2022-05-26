@@ -599,7 +599,7 @@ async def job2_partener1(client:Client,message:Message):
                 await app.send_message(message.chat.id, final_text)
                 time.sleep(10)
 
-@app.on_message(filters.regex("^force stop$") & ~ filters.private )#& filters.incoming)
+@app.on_message(filters.regex("^force stop$") & ~ filters.private & ~ filters.scheduled )#& filters.incoming)
 async def job2_partener1212(client:Client,message:Message):
 	global Tt
 	try:
@@ -629,10 +629,11 @@ async def job2_partener21(client:Client,message:Message):
         except:
             pass
         	
-
+@app.on_message(filters.regex("^Me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
 @app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("https://t.me/","",message.text)
+        xx=reaaa.sub("Me/","",message.text)
         xx=reaaa.sub("c/","-100",xx)
         global Tt
         
@@ -666,7 +667,7 @@ async def job2_partener2(client:Client,message:Message):
     
             try:
                 if Tt[message.chat.id]["s"]=="force stop":
-                    #tt1=30
+                    Tt[message.chat.id]["s"]=None
                     break
             except:
                 pass

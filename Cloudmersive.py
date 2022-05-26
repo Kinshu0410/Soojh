@@ -480,6 +480,8 @@ async def job2_partener1(client:Client,message:Message):
         result={}
         new_result = {}
         tmarks=0
+        
+        
         for x in range(int(xx[0]),int(xx[1])+1):
     		#print(str(result))
             try:
@@ -514,15 +516,21 @@ async def job2_partener1(client:Client,message:Message):
             		        else:
             		            fname="@"+fname
             		        if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
-            		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4}
+            		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4,"right":1,"wrong":0}
+            		            
             		        else:
-            		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1}
+            		            result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1,"right":0,"wrong":1}
+            		            
             		    else:
             		        Marks=result[(mess2.votes[mmid].user_id)]["Marks"]
+            		        right=result[(mess2.votes[mmid].user_id)]["right"]
+            		        wrong=result[(mess2.votes[mmid].user_id)]["wrong"]
             		        if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
+            		            result[(mess2.votes[mmid].user_id)]["right"]=right+1
             		        else:
             		            result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
+            		            result[(mess2.votes[mmid].user_id)]["wrong"]=wrong+1
             	tmarks+=4
             except Exception as e:
                 print(str(e))
@@ -547,7 +555,7 @@ async def job2_partener1(client:Client,message:Message):
         new={}
         new.update(new_result)
         for x in new:
-            for key in ["Rank",'fname','Marks']:
+            for key in ["Rank",'fname','Marks',"right","wrong"]:
                 new[x][key] = new[x].pop(key)
         new_result=new
         import xlsxwriter
@@ -555,10 +563,13 @@ async def job2_partener1(client:Client,message:Message):
         worksheet = workbook.add_worksheet()
         fa=workbook.add_format()
         fa.set_align('center')
-        worksheet.set_column('A:A', 4)
+        worksheet.set_column('A:A', 9)
         #worksheet.set_column('B:B', 30)
-        worksheet.set_column('B:B', 30,fa)
-        worksheet.set_column('C:C', 5)
+        worksheet.set_column('B:B', 40,fa)
+        worksheet.set_column('C:C', 9)
+        worksheet.set_column('D:D', 9)
+        worksheet.set_column('E:E', 9)
+        worksheet.set_column('F:F', 9)
         yyy=1
         daata=[]
         
@@ -567,10 +578,13 @@ async def job2_partener1(client:Client,message:Message):
         	yyy.append((new_result[x]["Rank"]))
         	yyy.append((new_result[x]["fname"]))
         	yyy.append((new_result[x]["Marks"]))
+        	yyy.append((new_result[x]["right"]))
+        	yyy.append((new_result[x]["wrong"]))
+        	yyy.append((tmarks//4-new_result[x]["right"]-new_result[x]["wrong"]))
         	daata.append(yyy)
-        worksheet.add_table('A1:C'+str(len(new_result)+1), {'data': daata,
+        worksheet.add_table('A1:F'+str(len(new_result)+1), {'data': daata,
                                
-                               'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'}]})
+                               'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'},{'header': '✅'},{'header': '❌'},{'header': 'Skip'}]})
         workbook.close()
         
         #Drive_OCR(body).update(id)
@@ -578,7 +592,7 @@ async def job2_partener1(client:Client,message:Message):
             #await app.send_message(message.chat.id, daata)
             #await app.send_document(message.chat.id, Drive_OCR(body).download(id))
             Drive_OCR(body).delete(id),
-            await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
+            await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

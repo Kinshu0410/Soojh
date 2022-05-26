@@ -666,7 +666,7 @@ async def job2_partener2(client:Client,message:Message):
     
             try:
                 if Tt[message.chat.id]["s"]=="force stop":
-                    tt1=30
+                    #tt1=30
                     break
             except:
                 pass

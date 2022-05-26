@@ -544,54 +544,41 @@ async def job2_partener1(client:Client,message:Message):
             z+=1
         #count=len(Text)+1
         print(new_result)
-        body={"requests":[{"insertTable":{"endOfSegmentLocation":{"segmentId":""},"columns":3,"rows":len(new_result)+1,},},]}#
-        
-        try:
-            Drive_OCR(body).update(id)
-        except Exception as e:
-            print(e)
-        count+=1
-        new={0: {'fname': 'First Name', 'Marks': 'Marks',"Rank":"Rank"}}
+        new={}
         new.update(new_result)
         for x in new:
             for key in ["Rank",'fname','Marks']:
                 new[x][key] = new[x].pop(key)
         new_result=new
-        eee=[]
-        for x in new_result:
-            zz=len(new_result[x])
-            
-            for y in new_result[x]:
-                print("=========="+str(zz))
-                if zz==3:
-                    count=count+3
-                else:
-                    count=count+2
-                zz-=1
-                Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","", str(new_result[x][y]))
-                eee.append({"insertText":{"location":{"index":count},"text":reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","", str(new_result[x][y]))},})
-                count=count+len(Text)
-                #print(len(str(new_result[x][y])))
-                #print(body)
-        try:
-            body={"requests":eee}
-            #id2=Drive_OCR({"title": 'Result.pdf'}).create()
-            
-            f=open("demofile2.txt" ,"w")
-            f.write(str(body))
-            f.close()
-            #Drive_OCR({"requests":[{"insertText":{"text":str(eee),"location":{"segmentId":"","index":1},},},],}).update(id2)
-            await app.send_document(message.chat.id, "demofile2.txt")
-            #Drive_OCR(body).delete(id2)
-            Drive_OCR(body).update(id)
-        except Exception as e:
-            print(str(e))
-        count=count+len(Text)
+        import xlsxwriter
+        workbook = xlsxwriter.Workbook('Result.xlsx')
+        worksheet = workbook.add_worksheet()
+        fa=workbook.add_format()
+        fa.set_align('center')
+        worksheet.set_column('A:A', 4)
+        #worksheet.set_column('B:B', 30)
+        worksheet.set_column('B:B', 30,fa)
+        worksheet.set_column('C:C', 5)
+        yyy=1
+        daata=[]
+        
+        for x in ((new_result)):
+        	yyy=[]
+        	yyy.append((new_result[x]["Rank"]))
+        	yyy.append((new_result[x]["fname"]))
+        	yyy.append((new_result[x]["Marks"]))
+        	daata.append(yyy)
+        worksheet.add_table('A1:C'+str(len(new_result)+1), {'data': daata,
+                               
+                               'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'}]})
+        workbook.close()
+        
         #Drive_OCR(body).update(id)
         try:
-            await asyncio.sleep(10)
-            await app.send_document(message.chat.id, Drive_OCR(body).download(id),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:20]))
-            Drive_OCR(body).delete(id)
+            #await app.send_message(message.chat.id, daata)
+            #await app.send_document(message.chat.id, Drive_OCR(body).download(id))
+            Drive_OCR(body).delete(id),
+            await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])
@@ -853,11 +840,12 @@ async def job2_partener2(client:Client,message:Message):
         import xlsxwriter
         workbook = xlsxwriter.Workbook('Result.xlsx')
         worksheet = workbook.add_worksheet()
-
-        worksheet.set_column('A:A', 5)
-        worksheet.set_column('B:B', 45)
-        worksheet.set_column('B:B', 45)
-        worksheet.set_column('C:C', 15)
+        fa=workbook.add_format()
+        fa.set_align('center')
+        worksheet.set_column('A:A', 4)
+        #worksheet.set_column('B:B', 30)
+        worksheet.set_column('B:B', 30,fa)
+        worksheet.set_column('C:C', 5)
         yyy=1
         daata=[]
         

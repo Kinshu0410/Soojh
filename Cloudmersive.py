@@ -629,11 +629,11 @@ async def job2_partener21(client:Client,message:Message):
         except:
             pass
         	
-@app.on_message(filters.regex("^Me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
-@app.on_message(filters.regex("^https://t.me/.*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
+
+@app.on_message(filters.regex("^(https://t.me/|Me/).*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
-        xx=reaaa.sub("https://t.me/","",message.text)
-        xx=reaaa.sub("Me/","",message.text)
+        xx=reaaa.sub("^(https://t.me/|Me/)","",message.text)
+        #xx=reaaa.sub("","",message.text)
         xx=reaaa.sub("c/","-100",xx)
         global Tt
         

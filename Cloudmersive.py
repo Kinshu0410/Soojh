@@ -947,6 +947,12 @@ async def dell(client:Client,message:Message):
 async def forword(client:Client,message:Message):
     if message.reply_markup:
         await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
+        
+        
+@app.on_message(filters.regex("^polls$") & ~ filters.poll)#& filters.incoming)
+async def delete_all_quiz(client:Client,message:Message):
+	global chattt
+	chattt=message.chat.id
 @app.on_message(filters.regex("^Del_All$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
 	cid=[]
@@ -1001,7 +1007,7 @@ async def forworhd(client:Client,message:Message):
 
 @app.on_message(filters.poll & filters.chat("Neha55bot") )#& filters.incoming)
 async def forwortd(client:Client,message:Message):
-	chatid=["Poll2text_bot"]
+	chatid=[chattt]
 	
 	##print(message.id)
 	try:

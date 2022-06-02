@@ -952,6 +952,8 @@ async def forword(client:Client,message:Message):
 @app.on_message(filters.regex("^polls$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
 	global chattt
+	global tttt
+	tttt=-30
 	chattt=message.chat.id
 @app.on_message(filters.regex("^Del_All$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
@@ -1008,7 +1010,9 @@ async def forworhd(client:Client,message:Message):
 @app.on_message(filters.poll & filters.chat("Neha55bot") )#& filters.incoming)
 async def forwortd(client:Client,message:Message):
 	chatid=[chattt]
-	
+	global tttt
+	tttt+=30
+	await asyncio.sleep(tttt)
 	##print(message.id)
 	try:
 		

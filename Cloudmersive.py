@@ -1051,9 +1051,9 @@ async def forwortd(client:Client,message:Message):
 	#time.sleep(100)
 	for x in chatid:
 		try:
-	        mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
+		    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
 		except:
-	        mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
+		    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 

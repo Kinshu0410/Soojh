@@ -1047,7 +1047,7 @@ async def forwortd(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	##print(message)#
+	##print(message)
 	#time.sleep(100)
 	for x in chatid:
 		try:

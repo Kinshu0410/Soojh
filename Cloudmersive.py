@@ -953,7 +953,7 @@ async def forword(client:Client,message:Message):
 async def delete_all_quiz(client:Client,message:Message):
 	global chattt
 	global tttt
-	tttt=-30
+	tttt=-5
 	chattt=message.chat.id
 @app.on_message(filters.regex("^Del_All$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
@@ -1011,7 +1011,7 @@ async def forworhd(client:Client,message:Message):
 async def forwortd(client:Client,message:Message):
 	chatid=[chattt]
 	global tttt
-	tttt+=30
+	tttt+=5
 	await asyncio.sleep(tttt)
 	##print(message.id)
 	try:
@@ -1050,10 +1050,17 @@ async def forwortd(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-		try:
-		    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
-		except:
-		    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
+	    xy=True
+	    while xy:
+	        try:
+	            try:
+	                mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
+	                xy=False
+	            except:
+	                mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
+	                xy=False
+	        except:
+	            await asyncio.sleep(5)
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 

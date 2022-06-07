@@ -1413,19 +1413,25 @@ def poll(update, context):
     	print(NewVar1)
     	for x in NewVar1:
     	    NewVar=reaaa.sub("https://t\.me/", "",x)
+    	    try:
+    	        Qn=int(NewVar[3])
+    	    
+    	    except:
+    	        Qn=1
     	    NewVar=reaaa.split("/", NewVar)
     	    NewVar2=reaaa.split(",", NewVar[2])
     	    for y in NewVar2:
     	        
     	        context.bot.send_poll(
 	            "@"+NewVar[0],
-	            "Go To Tag Photo👆👆👆",
+	            "Question Number "+str(Qn),
 	            ["Option (A)","Option (B)","Option (C)","Option (D)"],
 	            is_anonymous=False,type=Poll.QUIZ,
 	            correct_option_id=int(y)-1,
 	            reply_to_message_id=int(NewVar[1]),
 	            allows_multiple_answers=False,
 	        )
+    	        Qn+=1
     
     if reaaa.match("\d/.*",update.message.text):
     	global coded

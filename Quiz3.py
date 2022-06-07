@@ -1416,9 +1416,9 @@ def poll(update, context):
     	    NewVar=reaaa.split("/", NewVar)
     	    NewVar2=reaaa.split(",", NewVar[2])
     	    for y in NewVar2:
-    	        print(NewVar[0])
+    	        
     	        context.bot.send_poll(
-	            NewVar[0],
+	            "@"+NewVar[0],
 	            "Go To Tag Photo👆👆👆",
 	            ["Option (A)","Option (B)","Option (C)","Option (D)"],
 	            is_anonymous=False,type=Poll.QUIZ,

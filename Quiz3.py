@@ -1410,8 +1410,9 @@ def poll(update, context):
     
     if reaaa.match("https://t.me/.*?/\d{1,}/.*?",update.message.text):
     	NewVar1=reaaa.split(r"\n", update.message.text)
+    	    print(NewVar)
     	for x in NewVar1:
-    	    NewVar=reaaa.sub("^https://t.me/", "",x)
+    	    NewVar=reaaa.sub("https://t.me/", "",x)
     	    NewVar=reaaa.split(r"/", NewVar)
     	    NewVar2=reaaa.split(r",", NewVar[2])
     	    for y in NewVar2:

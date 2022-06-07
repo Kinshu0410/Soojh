@@ -1408,6 +1408,23 @@ def alarm(context: CallbackContext):
 def poll(update, context):
     """Sends a predefined poll"""
     
+    if reaaa.match("https://t.me/.*?/\d{1,}/.*?",update.message.text):
+    	NewVar1=reaaa.split(r"\n", update.message.text)
+    	for x in NewVar1:
+    	    NewVar=reaaa.sub("^https://t.me/", "",x)
+    	    NewVar=reaaa.split(r"/", NewVar)
+    	    NewVar2=reaaa.split(r",", NewVar[2])
+    	    for y in NewVar2:
+    	        context.bot.send_poll(
+	            NewVar[0],
+	            "Go To Tag Photo👆👆👆",
+	            ["Option (A)","Option (B)","Option (C)","Option (D)"],
+	            is_anonymous=False,type=Poll.QUIZ,
+	            correct_option_id=int(y)-1,
+	            reply_to_message_id=int(NewVar[1]),
+	            allows_multiple_answers=False,
+	        )
+    
     if reaaa.match("\d/.*",update.message.text):
     	global coded
     	coded[update.message.chat.id]=update.message.text

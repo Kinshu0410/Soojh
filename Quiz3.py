@@ -1412,10 +1412,11 @@ def poll(update, context):
     	NewVar1=reaaa.split(r"\n", update.message.text)
     	print(NewVar1)
     	for x in NewVar1:
-    	    NewVar=reaaa.sub("https://t.me/", "",x)
-    	    NewVar=reaaa.split(r"/", NewVar)
-    	    NewVar2=reaaa.split(r",", NewVar[2])
+    	    NewVar=reaaa.sub("https://t\.me/", "",x)
+    	    NewVar=reaaa.split("/", NewVar)
+    	    NewVar2=reaaa.split(",", NewVar[2])
     	    for y in NewVar2:
+    	        print(NewVar[0])
     	        context.bot.send_poll(
 	            NewVar[0],
 	            "Go To Tag Photo👆👆👆",

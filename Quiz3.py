@@ -1413,12 +1413,11 @@ def poll(update, context):
     	print(NewVar1)
     	for x in NewVar1:
     	    NewVar=reaaa.sub("https://t\.me/", "",x)
+    	    NewVar=reaaa.split("/", NewVar)
     	    try:
     	        Qn=int(NewVar[3])
-    	    
     	    except:
     	        Qn=1
-    	    NewVar=reaaa.split("/", NewVar)
     	    NewVar2=reaaa.split(",", NewVar[2])
     	    for y in NewVar2:
     	        

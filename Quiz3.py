@@ -1433,11 +1433,12 @@ def poll(update, context):
 	            "Question Number "+str(Qn),
 	            ["Option (A)","Option (B)","Option (C)","Option (D)"],
 	            is_anonymous=False,type=Poll.QUIZ,
-	            correct_option_id=int(y)-1,
+	            correct_option_id=int(y)-1,explanation="find more on @polls_quiz",
 	            reply_to_message_id=int(NewVar[1]),
 	            allows_multiple_answers=False,
 	        )
     	        Qn+=1
+    	        time.sleep(5)
     
     if reaaa.match("\d/.*",update.message.text):
     	global coded

@@ -1412,8 +1412,8 @@ def poll(update, context):
     	NewVar1=reaaa.split(r"\n", update.message.text)
     	print(NewVar1)
     	for x in NewVar1:
-    	    NewVar=reaaa.sub("https://t\.me/", "",x)
-    	    NewVar=reaaa.sub("c/", "-100",x)
+    	    NewVar=reaaa.sub("^https://t\.me/", "",x)
+    	    NewVar=reaaa.sub("^c/", "-100",x)
     	    NewVar=reaaa.split("/", NewVar)
     	    try:
     	        NewVar[0]=int(NewVar[0])
@@ -1424,6 +1424,9 @@ def poll(update, context):
     	    except:
     	        Qn=1
     	    NewVar2=reaaa.split(",", NewVar[2])
+    	    print(NewVar)
+    	    print(NewVar1)
+    	    print(NewVar2)
     	    for y in NewVar2:
     	        
     	        context.bot.send_poll(

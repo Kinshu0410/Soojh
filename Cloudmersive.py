@@ -1048,7 +1048,7 @@ async def forwortd(client:Client,message:Message):
 	           break
 	#correct_option_id
 	##print(message)
-	await app.send_message(chat_id="SukhrajGharu", question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz\n"+str(correct_option_id+1))
+	await app.send_message(chat_id=5065756688, text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz\n"+str(correct_option_id+1))
 	for x in chatid:
 	    xy=True
 	    while xy:
@@ -1175,7 +1175,7 @@ async def Current_iq(client:Client,message:Message):
 	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
-	#await app.send_message("me", question+"\n"+"\n".join(options)+"\n"+str(correct_option_id))
+	await app.send_message("me", question+"\n"+"\n".join(options)+"\n"+str(correct_option_id))
 
 @app.on_message(filters.poll & filters.chat("current_iq_bot") )#& filters.incoming)
 async def Current_iq(client:Client,message:Message):

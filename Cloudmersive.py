@@ -1175,7 +1175,7 @@ async def Current_iq(client:Client,message:Message):
 	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
-	await app.send_message("me", question+"\n"+"\n".join(options)+"\n"+str(correct_option_id))
+	#await app.send_message("me", question+"\n"+"\n".join(options)+"\n"+str(correct_option_id))
 
 @app.on_message(filters.poll & filters.chat("current_iq_bot") )#& filters.incoming)
 async def Current_iq(client:Client,message:Message):

@@ -1047,8 +1047,8 @@ async def forwortd(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	##print(message)
-	await app.send_message(chat_id="SukhrajGharu", text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz\n"+str(correct_option_id+1))
+	if message.chat.id==-1001517843177:
+	    await app.send_message(chat_id="SukhrajGharu", text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz\n"+str(correct_option_id+1))
 	for x in chatid:
 	    xy=True
 	    while xy:
@@ -1064,7 +1064,9 @@ async def forwortd(client:Client,message:Message):
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 
-
+@app.on_message(filters.new_chat_members & filters.chat(-1001551893872) )#& filters.incoming)
+async def join_char(client:Client,message:Message):
+	await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
 	
 @app.on_message(filters.poll & filters.chat("quizbot") )#& filters.incoming)
 async def forword(client:Client,message:Message):

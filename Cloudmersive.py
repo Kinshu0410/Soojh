@@ -1048,7 +1048,7 @@ async def forwortd(client:Client,message:Message):
 	           break
 	#correct_option_id
 	##print(message)
-	#await app.send_message(chat_id=5065756688, text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz\n"+str(correct_option_id+1))
+	await app.send_message(chat_id="SukhrajGharu", text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz\n"+str(correct_option_id+1))
 	for x in chatid:
 	    xy=True
 	    while xy:

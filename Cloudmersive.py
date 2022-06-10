@@ -1023,7 +1023,10 @@ async def forwortd(client:Client,message:Message):
 	    ##print(mess)
 	await app.delete_messages(chat_id="Neha55bot", message_ids=message.id)
 	question=mess.question
-	
+	if mess.exp:
+		expl="\n"+mess.exp
+	else:
+		expl=""
 	#question=reaaa.sub("\n","       ",question)
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
 	#print("que se aage gye")
@@ -1048,13 +1051,13 @@ async def forwortd(client:Client,message:Message):
 	           break
 	#correct_option_id
 	if message.chat.id==-1001517843177:
-	    await app.send_message(chat_id="SukhrajGharu", text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz\n"+str(correct_option_id+1))
+	    await app.send_message(chat_id="SukhrajGharu", text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz"+expl+"\n"+str(correct_option_id+1))
 	for x in chatid:
 	    xy=True
 	    while xy:
 	        try:
 	            try:
-	                mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
+	                mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,explanation="find more on @Polls_Quiz"+expl,type=PollType.QUIZ))
 	                xy=False
 	            except:
 	                mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))

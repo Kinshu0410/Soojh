@@ -1050,7 +1050,7 @@ async def forwortd(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	#correct_option_id
-	if message.chat.id==-1001517843177:
+	if chattt==-1001517843177:
 	    await app.send_message(chat_id="SukhrajGharu", text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz"+expl+"\n"+str(correct_option_id+1))
 	for x in chatid:
 	    xy=True
@@ -1060,7 +1060,7 @@ async def forwortd(client:Client,message:Message):
 	                mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,explanation="find more on @Polls_Quiz"+expl,type=PollType.QUIZ))
 	                xy=False
 	            except:
-	                mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,explanation="find more on @Polls_Quiz",type=PollType.QUIZ))
+	                mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,explanation="find more on @Polls_Quiz"+expl,type=PollType.QUIZ))
 	                xy=False
 	        except:
 	            await asyncio.sleep(5)

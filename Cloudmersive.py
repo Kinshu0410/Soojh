@@ -951,7 +951,7 @@ async def forword(client:Client,message:Message):
         
 @app.on_message(filters.regex("^polls$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
-	global chattt
+	global chattt#
 	global tttt
 	tttt=-5
 	chattt=message.chat.id

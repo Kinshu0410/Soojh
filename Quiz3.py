@@ -1424,7 +1424,7 @@ def poll(update, context):
     	        Qn=int(NewVar[3])
     	    except:
     	        Qn=1
-    	    NewVar2=reaaa.split(",", NewVar[2])
+    	    NewVar2=reaaa.split("(|,)", NewVar[2])
     	    
     	    for y in NewVar2:
     	        

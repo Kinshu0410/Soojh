@@ -1567,7 +1567,7 @@ def poll(update, context):
 	            type=Poll.QUIZ,
 	            correct_option_id=co,
 	            explanation=options5,
-	            is_anonymous=True,
+	            is_anonymous=False,
 	            allows_multiple_answers=False,
 	        )
 	        elif options5 =="":
@@ -1578,7 +1578,7 @@ def poll(update, context):
 	            options,
 	            type=Poll.QUIZ,
 	            correct_option_id=co,#explanation=options5,
-	            is_anonymous=True,
+	            is_anonymous=False,
 	            allows_multiple_answers=False,
 	        )
 	        # Save some info about the poll the bot_data for later use in receive_poll_answer

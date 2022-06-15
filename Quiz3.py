@@ -1425,7 +1425,7 @@ def poll(update, context):
     	    except:
     	        Qn=1
     	    NewVar2=reaaa.split("(,|)", NewVar[2])
-    	    
+    	    while '' in NewVar2: NewVar2.remove('')
     	    for y in NewVar2:
     	        
     	        context.bot.send_poll(

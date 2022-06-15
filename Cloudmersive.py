@@ -984,6 +984,24 @@ async def stop_quiz(client:Client,message:Message):
 	except:
 		pass
 
+
+@app.on_message(filters.all & filters.chat(-1001551893872) & ~ filters.poll & ~ filters.photo )#& filters.incoming)
+async def forworhd(client:Client,message:Message):
+    try:
+    	cid=[]
+    	async for member in app.get_chat_members(message.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
+    		cid.append(member.user.id)
+    	
+    	if message.from_user.id in cid:
+    		pass
+    	else:
+    		await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
+    		mess=await app.send_message("me", str("you can send poll and photo \n\nThis message delete in 3 miniuts"))
+    		await asyncio.sleep(180)
+    		await app.delete_messages(chat_id=message.chat.id, message_ids=mess.id)
+    except:
+        pass
+
 @app.on_message(filters.text & filters.chat("quizbot") )#& filters.incoming)
 async def forworhd(client:Client,message:Message):
 	

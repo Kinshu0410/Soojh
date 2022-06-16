@@ -995,9 +995,9 @@ async def forworhd(client:Client,message:Message):
     	if message.from_user.id in cid:
     		pass
     	else:
-    		await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
+    		await asyncio.sleep(6000)
     		#mess=(await app.send_message(chat_id=message.chat.id, text=str("you can send poll and photo \n\nThis message delete in 10 seconds")))
-    		#await asyncio.sleep(9)
+    		await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
     		#await app.delete_messages(chat_id=message.chat.id, message_ids=mess.id)
     except:
         pass

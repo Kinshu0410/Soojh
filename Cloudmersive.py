@@ -282,8 +282,15 @@ async def crop(client:Client,message:Message):
 
 @app.on_message(filters.document & filters.chat("KINBIN247_bot"))
 async def text_2_poll(client:Client,message:Message):
-	await app.send_message(chat_id=message.chat.id,text=str(message))
 	
+	fname=id_generator()
+    file=await app.download_media(message,file_name=fname+".pdf")
+    f = open(file, "r").read()
+    f=reaaa.sub("\n{2,}","\n\n",f)
+    f=reaaa.split("\n\n",f)
+    cap=message.caption
+    for x in range(len(f)):
+    	await app.send_message(chat_id=message.chat.id,text=f[x]+cap[x])
     
 #@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) &~filters.chat(chats=[711296045]))
 #@app.on_message(filters.document & filters.chat(chats=[711296045]))

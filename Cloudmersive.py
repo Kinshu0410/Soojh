@@ -282,8 +282,7 @@ async def crop(client:Client,message:Message):
 
 @app.on_message(filters.document & filters.chat("KINBIN247_bot"))
 async def text_2_poll(client:Client,message:Message):
-	
-	fname=id_generator()
+    fname=id_generator()
     file=await app.download_media(message,file_name=fname+".pdf")
     f = open(file, "r").read()
     f=reaaa.sub("\n{2,}","\n\n",f)

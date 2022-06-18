@@ -279,10 +279,16 @@ async def crop(client:Client,message:Message):
 		cropped.save(file)
 		await app.send_document(message.chat.id, file)
 		os.remove(file)
+
+@app.on_message(filters.document & filters.chat("KINBIN247_bot"))
+async def pdf_img_textpri(client:Client,message:Message):
+	await app.send_message(chat_id=message.chat.id,text=message)
+	
+    
 #@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) &~filters.chat(chats=[711296045]))
 #@app.on_message(filters.document & filters.chat(chats=[711296045]))
 @app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) )
-@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot"))
+@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot") & ~ chat("KINBIN247_bot"))
 async def pdf_img_textpri(client:Client,message:Message):
     	z=""
     	fname=id_generator()

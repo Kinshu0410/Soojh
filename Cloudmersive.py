@@ -285,7 +285,10 @@ async def text_2_poll(client:Client,message:Message):
     fname=id_generator()
     file=await app.download_media(message,file_name=fname+".pdf")
     f = open(file, "r").read()
-    f=reaaa.sub("\n{2,}","\n\n",f)
+    f=reaaa.sub("\n{2,}","■",f)
+    f=reaaa.sub("\n"," ",f)
+    f=reaaa.sub(" {1,}"," ",f)
+    f=reaaa.sub("■","\n\n",f)
     f=reaaa.split("\n\n",f)
     cap=message.caption
     for x in range(len(f)):

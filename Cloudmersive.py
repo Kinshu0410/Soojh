@@ -281,8 +281,8 @@ async def crop(client:Client,message:Message):
 		os.remove(file)
 
 @app.on_message(filters.document & filters.chat("KINBIN247_bot"))
-async def pdf_img_textpri(client:Client,message:Message):
-	await app.send_message(chat_id=message.chat.id,text=message)
+async def text_2_poll(client:Client,message:Message):
+	await app.send_message(chat_id=message.chat.id,text=str(message))
 	
     
 #@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) &~filters.chat(chats=[711296045]))

@@ -288,7 +288,7 @@ async def text_2_poll(client:Client,message:Message):
 #@app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) &~filters.chat(chats=[711296045]))
 #@app.on_message(filters.document & filters.chat(chats=[711296045]))
 @app.on_message(filters.document & filters.chat(chats=["POLLQZ",-1001132926651]) )
-@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot") & ~ chat("KINBIN247_bot"))
+@app.on_message(filters.document & filters.private & ~filters.chat("Neha55bot") & ~ filters.chat("KINBIN247_bot"))
 async def pdf_img_textpri(client:Client,message:Message):
     	z=""
     	fname=id_generator()

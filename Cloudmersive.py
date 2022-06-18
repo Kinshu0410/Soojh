@@ -1000,8 +1000,8 @@ async def stop_quiz(client:Client,message:Message):
 		pass
 
 
-@app.on_message(filters.all & filters.chat(-1001551893872) & ~ filters.poll & ~ filters.photo )#& filters.incoming)
-async def forworhd(client:Client,message:Message):
+#@app.on_message(filters.all & filters.chat(-1001551893872) & ~ filters.poll & ~ filters.photo )#& filters.incoming)
+async def forworhd1(client:Client,message:Message):
     try:
     	cid=[]
     	async for member in app.get_chat_members(message.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):

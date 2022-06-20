@@ -998,7 +998,15 @@ async def stop_quiz(client:Client,message:Message):
 			await app.send_message(message.chat.id, '/stop@QuizBot')
 	except:
 		pass
-
+@app.on_message(filters.regex("^P(1|2|3|4){1,}$" & filters.chat(-1001551893872) )#& filters.incoming)
+async def forworhd1(client:Client,message:Message):
+    try:
+    	t=reaaa.sub("^P","",message)
+    	for x in t:
+    	    await app.send_poll(chat_id=message.chat.id,question="👆👆👆",options=["Option A","Option B","Option C","Option D"],correct_option_id =int(x)-1,reply_to_message_id=reply_to_message,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ)
+    except:
+    	pass
+    
 
 #@app.on_message(filters.all & filters.chat(-1001551893872) & ~ filters.poll & ~ filters.photo )#& filters.incoming)
 async def forworhd1(client:Client,message:Message):

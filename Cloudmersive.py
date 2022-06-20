@@ -1004,7 +1004,7 @@ async def forworhd11(client:Client,message:Message):
     try:
     	t=reaaa.sub("^P","",message)
     	for x in t:
-    	    await app.send_poll(chat_id=message.chat.id,question="👆👆👆",options=["Option A","Option B","Option C","Option D"],correct_option_id =int(x)-1,reply_to_message_id=reply_to_message,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ)
+    	    await app.send_poll(chat_id=message.chat.id,question="👆👆👆",options=["Option A","Option B","Option C","Option D"],correct_option_id =int(x)-1,reply_to_message_id=message.reply_to_message_id,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ)
     except Exception as e:
     	print(str(e))
     

@@ -1002,10 +1002,11 @@ async def stop_quiz(client:Client,message:Message):
 @app.on_message(filters.regex("P(1|2|3|4){1,}") & filters.chat(-1001551893872) )#& filters.incoming)
 async def forworhd11(client:Client,message:Message):
     try:
-    	#print(str(message))
     	t=reaaa.sub("^P","",message)
+    	print(str(t))
     	for x in t:
-    	    await app.send_poll(chat_id=message.chat.id,question="👆👆👆",options=["Option A","Option B","Option C","Option D"],correct_option_id =int(x)-1,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ)
+    	    print(str(x))
+    	    await app.send_poll(chat_id=message.chat.id,question="👆👆👆",options=["Option A","Option B","Option C","Option D"],correct_option_id =int(x)-1,reply_to_message_id=message.reply_to_message.id,is_anonymous=False,explanation="find more on @Polls_Quiz",type=PollType.QUIZ)
     except Exception as e:
     	print(str(e))
     

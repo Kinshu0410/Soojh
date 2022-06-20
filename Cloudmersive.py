@@ -999,8 +999,8 @@ async def stop_quiz(client:Client,message:Message):
 	except:
 		pass
 
-@app.on_message(filters.regex("^P(1|2|3|4){1,}$") & filters.chat(-1001551893872) )#& filters.incoming)
-async def forworhd1(client:Client,message:Message):
+@app.on_message(filters.regex("P(1|2|3|4){1,}") & filters.chat(-1001551893872) )#& filters.incoming)
+async def forworhd11(client:Client,message:Message):
     try:
     	t=reaaa.sub("^P","",message)
     	for x in t:

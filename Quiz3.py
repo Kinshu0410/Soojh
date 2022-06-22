@@ -1867,7 +1867,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       for x in y:
 	         print(x['user']['id'])
 	         xid.append(x['user']['id'])
-	       if query.data.from.id in xid:
+	       if query.from_user.id in xid:
 	         col.update_one({"Nu":{"$type":"array"}},{"$set":{"Nu":Nu}})
 	         query.answer("Set Successfully")
 	       else:

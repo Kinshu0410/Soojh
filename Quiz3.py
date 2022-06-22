@@ -1863,6 +1863,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       Nu=[int(reaaa.sub("My_quizset","",query.data))]
 	       y=context.bot.get_chat_administrators(chat_id=query.message.chat.id)
 	       xid=[]
+	       print(str(query.message))
 	       for x in y:
 	         print(x['user']['id'])
 	         xid.append(x['user']['id'])

@@ -1861,9 +1861,16 @@ def button(update: Update, context: CallbackContext) -> None:
     if bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quizset","",query.data))]
-	       
-	       col.update_one({"Nu":{"$type":"array"}},{"$set":{"Nu":Nu}})
-	       query.answer("Set Successfully")
+	       y=context.bot.get_chat_administrators(chat_id=query.message.chat.id)
+	       xid=[]
+	       for x in y:
+	         print(x['user']['id'])
+	         xid.append(x['user']['id'])
+	       if query.message.user.id in xid:
+	         col.update_one({"Nu":{"$type":"array"}},{"$set":{"Nu":Nu}})
+	         query.answer("Set Successfully")
+	       else:
+	         query.answer("You are'not admin in this Group")
     elif bool(reaaa.match("^My_quiz\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quiz","",query.data))]

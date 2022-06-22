@@ -1860,10 +1860,10 @@ def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     if bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
-	       Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
+	       Nu=[int(reaaa.sub("My_quizset","",query.data))]
 	       
 	       col.update_one({"Nu":{"$type":"array"}},{"$set":{"Nu":Nu}})
-	       query.answer()
+	       query.answer("Set Successfully")
     elif bool(reaaa.match("^My_quiz\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quiz","",query.data))]

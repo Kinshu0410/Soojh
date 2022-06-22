@@ -1858,7 +1858,13 @@ def pdfc(update,context):
 
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
-    if bool(reaaa.match("^My_quiz\d{1,}$",query.data)):
+    if bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
+	       col=client["group_schedule"][str(query.message.chat.id)]
+	       Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
+	       
+	       col.update_one({"Nu":{"$type":"array"}},{"$set":{"Nu":Nu}})
+	       query.answer()
+    elif bool(reaaa.match("^My_quiz\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quiz","",query.data))]
 	       Time=col.find_one({"Time":{"$type":"string"}})["Time"]
@@ -1867,11 +1873,11 @@ def button(update: Update, context: CallbackContext) -> None:
 	       query.answer()
 	       keyboard=False
 	       if Nu[0]==0:
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set0"),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
 	       elif Nu[0]+1==len(data):
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(0))]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(0))]]
 	       else:
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
 	       reply_markup = InlineKeyboardMarkup(keyboard)
 	       query.edit_message_text(text="Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+" DATA\n\nSchedule Daily Time : - "+Time+"\n\n"+current_quiz,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     else:

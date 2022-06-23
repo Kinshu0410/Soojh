@@ -58,7 +58,8 @@ async def job2_partener(client:Client,message:Message):
 			    hour=reaaa.split(",",reaaa.sub(" ","",hour1))
 			    current_time=int(time.ctime(time.time() +19800)[11:13])
 			    for x in hour:
-			        if current_time<int(x):
+			        y=reaaa.split(":",x)
+			        if current_time<int(y[0]):
 			            now=str(x)
 			            break
 			    if now:

@@ -1432,7 +1432,7 @@ def poll(update, context):
     	        reply_markup=None
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+str(NewVar[0])+"/"+str(NewVar[1])+"/"+str(NewVar2[y]))]])
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+str(NewVar[0])[1:]+"/"+str(NewVar[1])+"/"+str(NewVar2[y]))]])
     	        else:
     	            explanation=None
     	            reply_markup=None
@@ -1681,7 +1681,7 @@ def pollf(update,context):
                 try:
                     x[0]=int(x[0])
                 except:
-                    pass
+                    x[0]="@"+(x[0])
                 for y in range(x[1],x[2]+1):
                     context.bot.forward_message(chat_id=query.message.chat.id,from_chat_id=x[0],message_id=int(NewVar[1]))
             elif update.message.text.startswith("/start@Soojhboojh_01bot Share"):

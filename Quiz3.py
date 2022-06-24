@@ -1434,7 +1434,7 @@ def poll(update, context):
     	        reply_markup=None
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(NewVar2[y]))]])
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(NewVar2[0])+"moum"+str(NewVar2[-1]))]])
     	        else:
     	            explanation=None
     	            reply_markup=None
@@ -1678,14 +1678,15 @@ def pollf(update,context):
         try:
             if update.message.text.startswith("/start@Soojhboojh_01bot share_quiz"):
                 print(update.message.text)
-                x=reaaa.sub("/start@Soojhboojh_01bot share_quiz","",query.data)
+                x=reaaa.sub("/start@Soojhboojh_01bot share_quiz","",update.message.text)
                 x=reaaa.split("moum",x)
                 try:
                     x[0]=int(x[0])
                 except:
                     x[0]="@"+str(x[0])
-                for y in range(x[1],x[2]+1):
-                    context.bot.forward_message(chat_id=query.message.chat.id,from_chat_id=x[0],message_id=int(NewVar[1]))
+                context.bot.forward_message(chat_id=update.message.chat.id,from_chat_id=x[0],message_id=int(x[1]))
+                for y in range(x[2],x[3]+1):
+                    context.bot.forward_message(chat_id=update.message.chat.id,from_chat_id=x[0],message_id=int(y))
             elif update.message.text.startswith("/start@Soojhboojh_01bot Share"):
                 db = client.get_database('QuizList')
                 results = db.get_collection('quizlist')

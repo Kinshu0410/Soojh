@@ -1426,8 +1426,8 @@ def poll(update, context):
     	        Qn=1
     	    NewVar2=reaaa.split("(,|)", NewVar[2])
     	    while '' in NewVar2: NewVar2.remove('')
-    	    context.bot.forward_message(chat_id=-447664755,from_chat_id=NewVar[0],message_id=NewVar[1])
-    	    context.bot.send_message(chat_id=-447664755,text=update.message.text)
+    	    context.bot.forward_message(chat_id=-1001534819469,from_chat_id=NewVar[0],message_id=int(NewVar[1]))
+    	    context.bot.send_message(chat_id=-1001534819469,text=update.message.text)
                      text=
     	    for y in NewVar2:
     	        
@@ -1436,7 +1436,7 @@ def poll(update, context):
 	            "Question Number "+str(Qn),
 	            ["Option (A)","Option (B)","Option (C)","Option (D)"],
 	            is_anonymous=False,type=Poll.QUIZ,
-	            correct_option_id=int(y)-1,explanation="find more on @polls_quiz",
+	            correct_option_id=int(y)-1,explanation="Thanks for Attempt.",
 	            reply_to_message_id=int(NewVar[1]),
 	            allows_multiple_answers=False,
 	        )

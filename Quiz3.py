@@ -1438,7 +1438,7 @@ def poll(update, context):
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
     	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(int(zzz)+int(NewVar2[-1])))
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(int(zzz)+int(NewVar2[-1])))]])
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="t.e/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(int(zzz)+int(NewVar2[-1])))]])
     	        else:
     	            explanation=None
     	            reply_markup=None

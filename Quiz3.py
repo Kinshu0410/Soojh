@@ -1426,6 +1426,9 @@ def poll(update, context):
     	        Qn=1
     	    NewVar2=reaaa.split("(,|)", NewVar[2])
     	    while '' in NewVar2: NewVar2.remove('')
+    	    context.bot.forward_message(chat_id=-447664755,from_chat_id=NewVar[0],message_id=NewVar[1])
+    	    context.bot.send_message(chat_id=-447664755,text=update.message.text)
+                     text=
     	    for y in NewVar2:
     	        
     	        context.bot.send_poll(

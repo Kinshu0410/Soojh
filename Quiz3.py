@@ -1432,7 +1432,7 @@ def poll(update, context):
     	        
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=Share_Quiz"+str(NewVar[0])+"/"+str(NewVar[1])+"/"+str(NewVar2[y]))]])
+    	            reply_markup=None#InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=Share_Quiz"+str(NewVar[0])+"/"+str(NewVar[1])+"/"+str(NewVar2[y]))]])
     	        else:
     	            explanation=None
     	            reply_markup=False

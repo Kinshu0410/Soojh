@@ -1432,7 +1432,7 @@ def poll(update, context):
     	        reply_markup=None
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=Share_Quiz"+str(NewVar[0])+"/"+str(NewVar[1])+"/"+str(NewVar2[y]))]])
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+str(NewVar[0])+"/"+str(NewVar[1])+"/"+str(NewVar2[y]))]])
     	        else:
     	            explanation=None
     	            reply_markup=None
@@ -1674,8 +1674,9 @@ def pollf(update,context):
     Ccc=update.message.from_user.id
     if chat___id<=0:
         try:
-            if update.message.text.startswith("/start@Soojhboojh_01bot Share_Quiz"):
-                x=reaaa.sub("Share_Quiz","",query.data)
+            if update.message.text.startswith("/start@Soojhboojh_01bot share_quiz"):
+                print(update.message.text)
+                x=reaaa.sub("/start@Soojhboojh_01bot share_quiz","",query.data)
                 x=reaaa.split("/",x)
                 try:
                     x[0]=int(x[0])

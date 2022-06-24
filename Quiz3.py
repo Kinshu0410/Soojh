@@ -1454,8 +1454,8 @@ def poll(update, context):
     	        Qn+=1
     	        
     	        if y==0:
-    	            print(str(mess))
-    	            zzz=mess.message.id
+    	            #print(str(mess))
+    	            zzz=mess.message_id
     	        time.sleep(5)
     
     if reaaa.match("\d/.*",update.message.text):

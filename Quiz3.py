@@ -1454,6 +1454,7 @@ def poll(update, context):
     	        Qn+=1
     	        
     	        if y==0:
+    	            print(str(zzz))
     	            zzz=mess.message.id
     	        time.sleep(5)
     

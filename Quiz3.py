@@ -1437,7 +1437,7 @@ def poll(update, context):
     	        zzz=int(NewVar[1])+1
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            context.bot.send_message(chat_id=update.message.chat.id,text="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(NewVar[1])+int(NewVar2[0]))+"moum"+str(int(NewVar[1])+int(NewVar2[-1])))
+    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(zzz+NewVar2[-1]))
     	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(zzz+NewVar2[-1]))]])
     	        else:
     	            explanation=None

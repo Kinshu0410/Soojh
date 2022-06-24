@@ -1674,7 +1674,7 @@ def pollf(update,context):
     Ccc=update.message.from_user.id
     if chat___id<=0:
         try:
-            update.message.text.startswith("/start@Soojhboojh_01bot Share_Quiz")):
+            if update.message.text.startswith("/start@Soojhboojh_01bot Share_Quiz")):
                 x=reaaa.sub("Share_Quiz","",query.data)
                 x=reaaa.split("/",x)
                 try:

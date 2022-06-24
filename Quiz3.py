@@ -1443,7 +1443,7 @@ def poll(update, context):
 	            is_anonymous=False,type=Poll.QUIZ,
 	            correct_option_id=int(NewVar2[y])-1,explanation=explanation,
 	            reply_to_message_id=int(NewVar[1]),
-	            allows_multiple_answers=False,reply_markup= (reply_markup),parse_mode=ParseMode.HTML,disable_web_page_preview = True
+	            allows_multiple_answers=False,reply_markup= InlineKeyboardMarkup(reply_markup),parse_mode=ParseMode.HTML,disable_web_page_preview = True
 	        )
     	        Qn+=1
     	        time.sleep(5)

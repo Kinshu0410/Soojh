@@ -155,7 +155,7 @@ def restricted2(func):
         try:
             y=context.bot.get_chat_administrators(chat_id=chatiid)
             xid=[]
-            xid.append(update.message.chat.id)
+            #xid.append(update.message.chat.id)
             for x in y:
                 print(x['user']['id'])
                 xid.append(x['user']['id'])

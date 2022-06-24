@@ -1432,10 +1432,10 @@ def poll(update, context):
     	        
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            keyboard=[[InlineKeyboardButton("Share Quiz",callback_data="Share_Quiz"+str(NewVar[0])+"/"+NewVar[1]+"/"+str(NewVar2[y]))]]
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=Share_Quiz"+str(NewVar[0])+"/"+str(NewVar[1])+"/"+str(NewVar2[y]))]])
     	        else:
     	            explanation=None
-    	            keyboard=False
+    	            reply_markup=False
     	        context.bot.send_poll(
 	            NewVar[0],
 	            "Question Number "+str(Qn),
@@ -1443,7 +1443,7 @@ def poll(update, context):
 	            is_anonymous=False,type=Poll.QUIZ,
 	            correct_option_id=int(NewVar2[y])-1,explanation=explanation,
 	            reply_to_message_id=int(NewVar[1]),
-	            allows_multiple_answers=False,reply_markup= InlineKeyboardMarkup(keyboard),
+	            allows_multiple_answers=False,reply_markup= reply_markup,
 	        )
     	        Qn+=1
     	        time.sleep(5)
@@ -1674,7 +1674,16 @@ def pollf(update,context):
     Ccc=update.message.from_user.id
     if chat___id<=0:
         try:
-            if update.message.text.startswith("/start@Soojhboojh_01bot Share"):
+            update.message.text.startswith("/start@Soojhboojh_01bot Share_Quiz")):
+                x=reaaa.sub("Share_Quiz","",query.data)
+                x=reaaa.split("/",x)
+                try:
+                    x[0]=int(x[0])
+                except:
+                    pass
+                for y in range(x[1],x[2]+1):
+                    context.bot.forward_message(chat_id=query.message.chat.id,from_chat_id=x[0],message_id=int(NewVar[1]))
+            elif update.message.text.startswith("/start@Soojhboojh_01bot Share"):
                 db = client.get_database('QuizList')
                 results = db.get_collection('quizlist')
                 unique_id=reaaa.sub("/start@Soojhboojh_01bot Share","",update.message.text)
@@ -1866,19 +1875,7 @@ def pdfc(update,context):
 
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
-    if bool(reaaa.match("^Share_Quiz.*/.*/.*$",query.data)):
-        x=reaaa.sub("Share_Quiz","",query.data)
-        x=reaaa.split("/",x)
-        try:
-            x[0]=int(x[0])
-        except:
-        	pass
-        for y in range(x[1],x[2]+1):
-            context.bot.forward_message(chat_id=query.message.chat.id,from_chat_id=x[0],message_id=int(NewVar[1]))
-        
-        
-        
-    elif bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
+    if bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quizset","",query.data))]
 	       y=context.bot.get_chat_administrators(chat_id=query.message.chat.id)

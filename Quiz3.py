@@ -1434,6 +1434,7 @@ def poll(update, context):
     	        reply_markup=None
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
+    	            context.bot.send_message(chat_id=update.message.chat.id,text="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(NewVar2[0])+"moum"+str(NewVar2[-1]))
     	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(NewVar2[0])+"moum"+str(NewVar2[-1]))]])
     	        else:
     	            explanation=None

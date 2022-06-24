@@ -1432,7 +1432,7 @@ def poll(update, context):
     	        
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            keyboard=[[InlineKeyboardButton("Share Quiz",callback_data="Share_Quiz"+str(NewVar[0])+"/"+NewVar[1]+"/"+str(len(NewVar2)))]]
+    	            keyboard=[[InlineKeyboardButton("Share Quiz",callback_data="Share_Quiz"+str(NewVar[0])+"/"+NewVar[1]+"/"+str(NewVar2[y]))]]
     	        else:
     	            explanation=None
     	            keyboard=False

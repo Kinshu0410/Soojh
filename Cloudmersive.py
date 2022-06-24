@@ -27,7 +27,7 @@ import requests
 #bot_token=ClientText["bot_token"],
 #api_id="13682659",
 #api_hash="b984d240c5258407ea911f042c9d75f6")
-app=Client("my_account",session_string="BQDQx-MAtSTI9hxAtdkoySwybXYS4HgoSUFi7_J9-7Dyj_yDYtPbzYPZN8PVwUkQ0gAJ3MJT9rRsdafJ7GbBeNKonzenjfB_f6t5S0OwMGAsJhE90LMO6_um0iFr8hzHe0nVQXMhVHXTrVkdr_nsDvOdfPM6VQ0X-QG6Uy5g_V7lB16M60Uc-iqp1Ssa5bDxCBpc-qF9QKmSjmh1dpcPrl9XDFvvvxVgL_y7Qp9M87X2hAopjILnSXrIk-LJRaRhgnqCjlXCf_At8rcMbvd2RLyfaQx-jLUjHlaN1rzyDMEBfIgXYB-djGMPOEF1MW2aBuMA7yFnyiyJmUUQx-mGgiZGSVbYbQAAAAAqZYQtAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
+app=Client("my_account",session_string="BQDQx-MAQn8DPKLA22kNcYIiwftclyai3t2BJMeE84XwheusAbDsK7jsFYaABMaSjwRNcTrc48ZsHfNUzG_DD_uX-CY2uZXG4JK6uOxGoXf9w6agqVdimQ3eRvcMZ7-6-FQnt-2W3sGIsvNbcveC1JJG8XYihTBySrfPWOfb6dOOgBLNE_mgs-sVmma_6jyHAak-hbd601vb5a6nq9s-pR1QULXi4GaXFS8__APSak8IY5kx2DKHalkIfdwn_cuQHLk3IEXcE4IEeKRb5Tkkh46eywHuIZCp6ylYXT4Z4J_3QfZf4LTjxRjHFuVIJwH8B1zn5TCX9tR7y1zXKHNd63hSyV5IZQAAAAAqZYQtAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
 
 
 from pyrogram.enums import PollType
@@ -646,7 +646,7 @@ async def job2_partener21(client:Client,message:Message):
             pass
         	
 
-@app.on_message(filters.regex("^(https://t.me/|Me/).*?/\d{1,}/\d{1,}$") & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
+@app.on_message(filters.regex("^(https://t.me/|Me/).*?/\d{1,}/\d{1,}$") & ~ filters.chat(-1001534819469) & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("^(https://t.me/|Me/)","",message.text)
         #xx=reaaa.sub("","",message.text)

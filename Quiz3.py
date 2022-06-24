@@ -1428,7 +1428,6 @@ def poll(update, context):
     	    while '' in NewVar2: NewVar2.remove('')
     	    context.bot.forward_message(chat_id=-1001534819469,from_chat_id=NewVar[0],message_id=int(NewVar[1]))
     	    context.bot.send_message(chat_id=-1001534819469,text=update.message.text)
-                     text=
     	    for y in NewVar2:
     	        
     	        context.bot.send_poll(

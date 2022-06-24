@@ -1433,14 +1433,16 @@ def poll(update, context):
     	    context.bot.send_message(chat_id=-1001534819469,text=update.message.text)
     	    for y in range(len(NewVar2)):
     	        reply_markup=None
+    	        
+    	        zzz=int(NewVar[1])+1
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
     	            context.bot.send_message(chat_id=update.message.chat.id,text="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(NewVar[1])+int(NewVar2[0]))+"moum"+str(int(NewVar[1])+int(NewVar2[-1])))
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(NewVar[1]+NewVar2[0])+"moum"+str(NewVar[1]+NewVar2[-1]))]])
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="https://telegram.me/Soojhboojh_01bot?startgroup=share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(zzz+NewVar2[-1]))]])
     	        else:
     	            explanation=None
     	            reply_markup=None
-    	        context.bot.send_poll(
+    	        mess=context.bot.send_poll(
 	            NewVar[0],
 	            "Question Number "+str(Qn),
 	            ["Option (A)","Option (B)","Option (C)","Option (D)"],
@@ -1450,6 +1452,9 @@ def poll(update, context):
 	            allows_multiple_answers=False,reply_markup= (reply_markup),parse_mode=ParseMode.HTML,disable_web_page_preview = True
 	        )
     	        Qn+=1
+    	        
+    	        if y==0:
+    	            zzz=mess.message.id
     	        time.sleep(5)
     
     if reaaa.match("\d/.*",update.message.text):

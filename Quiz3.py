@@ -1402,14 +1402,43 @@ def alarm(context: CallbackContext):
     
 
 
-
+import fitz
 #@restrictedD
 @run_async
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
     
-    if reaaa.match("https://t.me/(c/|).*?/\d{1,}/.*?",update.message.text):
+    if reaaa.match("Pdf\d{1,},\d{1,}",update.message.text):
+        x=reaaa.sub("Pdf","", update.message.text)
+        x=reaaa.split(r",", x)
+        context.bot.get_file(update.message.document).download()
+        with open("custom/file.pdf", 'wb') as f:
+            context.bot.get_file(update.message.document).download(out=f)
+        
+        doc=fitz.open("custom/file.pdf")
+        noOfPages = doc.pageCount
+        for pageNo in range(int(x[0])-1,int(x[1])):
+            zoom=2
+            page=doc.load_page(pageNo)
+            mat = fitz.Matrix(zoom, zoom)
+            pix=page.get_pixmap(matrix = mat)
+            pix.writePNG("soojh.png")
+            send_photo(chat_id=update.message.chat.id, photo="soojh.png")
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    elif reaaa.match("https://t.me/(c/|).*?/\d{1,}/.*?",update.message.text):
     	NewVar1=reaaa.split(r"\n", update.message.text)
     	print(NewVar1)
     	for x in NewVar1:

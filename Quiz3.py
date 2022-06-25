@@ -1438,8 +1438,8 @@ def poll(update, context):
     	        
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"/"+str(NewVar[1])+"/"+str(int(zzz)-NewVar[1])+"/"+str(int(zzz)+len(NewVar2)-NewVar[1]))
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="tg://share?text=/start@Soojhboojh_01bot share_quiz"+cid1+"/"+str(NewVar[1])+"/"+str(int(zzz)-NewVar[1])+"/"+str(int(zzz)+len(NewVar2)-NewVar[1]))]])
+    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(zzz)-NewVar[1])+"moum"+str(int(zzz)+len(NewVar2)-NewVar[1]))
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="tg://share?text=/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(zzz)-NewVar[1])+"moum"+str(int(zzz)+len(NewVar2)-NewVar[1]))]])
     	        else:
     	            explanation=None
     	            reply_markup=None
@@ -1694,7 +1694,7 @@ def pollf(update,context):
                     pass
                 print(update.message.text)
                 x=reaaa.sub("/start@Soojhboojh_01bot share_quiz","",update.message.text)
-                x=reaaa.split("/",x)
+                x=reaaa.split("moum",x)
                 try:
                     x[0]=int(x[0])
                 except:

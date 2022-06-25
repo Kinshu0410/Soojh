@@ -209,6 +209,34 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 
 import fitz, random
 
+@app.on_message(filters.regex("^Pdf\d{1,},\d{1,}") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
+async def pdf_photo(client:Client,message:Message):
+	print(message.reply_to_message)
+	non=0
+	text=reaaa.sub("^Pdf","",message.text)
+	te=reaaa.split(",",text)
+	fname1=id_generator()
+	fname=fname1
+	file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.id),file_name=fname+".pdf")
+	print(file)
+	doc=fitz.open(file)
+	noOfPages = doc.pageCount
+	
+	f=open(fname1+".txt", 'w',encoding='utf-8')
+	image_folder='/app/downloads/'
+	
+	for pageNo in range(int(te[0])-1,int(te[1])):
+		if True:
+			
+			
+			fname=id_generator()
+			zoom=2
+			page=doc.load_page(pageNo)
+			mat = fitz.Matrix(zoom, zoom)
+			pix=page.get_pixmap(matrix = mat)
+			pix.writePNG(image_folder+fname+".png")
+			await app.send_photo(message.chat.id, image_folder+fname+".png")
+
 @app.on_message(filters.regex("^.cp ") & filters.private)
 @app.on_message(filters.regex("^.cp ") & filters.chat(chats=["POLLQZ",-1001132926651]))
 async def crop_pdf(client:Client,message:Message):

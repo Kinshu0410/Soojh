@@ -164,7 +164,7 @@ def restricted2(func):
         if chatiid<=0:
             try:
                 try:
-                        context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
+                        pass#context.bot.delete_message(chat_id=str(chatiid),message_id=mid)
                 except:
                         pass
                 if uid in xid or uid==711296045:
@@ -1431,10 +1431,11 @@ def poll(update, context):
     	    while '' in NewVar2: NewVar2.remove('')
     	    context.bot.forward_message(chat_id=-1001534819469,from_chat_id=NewVar[0],message_id=int(NewVar[1]))
     	    context.bot.send_message(chat_id=-1001534819469,text=update.message.text)
+    	    zzz=int(NewVar[1])+1
     	    for y in range(len(NewVar2)):
     	        reply_markup=None
     	        
-    	        zzz=int(NewVar[1])+1
+    	        
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
     	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(int(zzz)+int(NewVar2[-1])))
@@ -1454,7 +1455,7 @@ def poll(update, context):
 	        )
     	            Qn+=1
     	            if y==0:
-    	                zzz=mess.message_id
+    	                zzz=int(mess.message_id)
     	        except:
     	            pass
     	        

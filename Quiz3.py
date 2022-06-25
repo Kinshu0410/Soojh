@@ -1438,8 +1438,8 @@ def poll(update, context):
     	        
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(int(zzz)+len(NewVar2)))
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="tg://share?text=/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(int(zzz)+len(NewVar2)))]])
+    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"/"+str(NewVar[1])+"/"+str(zzz)+"/"+str(int(zzz)+len(NewVar2)))
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="tg://share?text=/start@Soojhboojh_01bot share_quiz"+cid1+"/"+str(NewVar[1])+"/"+str(zzz)+"/"+str(int(zzz)+len(NewVar2)))]])
     	        else:
     	            explanation=None
     	            reply_markup=None
@@ -1694,7 +1694,7 @@ def pollf(update,context):
                     pass
                 print(update.message.text)
                 x=reaaa.sub("/start@Soojhboojh_01bot share_quiz","",update.message.text)
-                x=reaaa.split("moum",x)
+                x=reaaa.split("/",x)
                 try:
                     x[0]=int(x[0])
                 except:
@@ -2002,7 +2002,7 @@ def button(update: Update, context: CallbackContext) -> None:
     					#context.bot.sendPhoto(chat_id=int(uId), photo=(exp))#caption=caption)
     					query.answer(text="@soojhboojh_01bot Bot send you a file or Photo message please check\n\nsoojhboojh_01bot ने आपको message send किया है अभी", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
     				except:
-    					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏🙏", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
+    					query.answer(text="First go to @soojhboojh_01bot and start conversation.\n\nसबसे पहले @soojhboojh_01bot पर जाइये और /start button दबाइये🙏??", show_alert=True,url="https://t.me/Soojhboojh_01bot?start="+str(update.callback_query.data)+"_"+str(update.callback_query.message.chat.username)+"_701400400000000"+str(update.callback_query.message.message_id))
     			else:
     				try:
     					#context.bot.send_message(chat_id=int(uId), text=exp)

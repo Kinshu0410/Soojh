@@ -1442,7 +1442,8 @@ def poll(update, context):
     	        else:
     	            explanation=None
     	            reply_markup=None
-    	        mess=context.bot.send_poll(
+    	        try:
+    	            mess=context.bot.send_poll(
 	            NewVar[0],
 	            "Question Number "+str(Qn),
 	            ["Option (A)","Option (B)","Option (C)","Option (D)"],
@@ -1451,11 +1452,12 @@ def poll(update, context):
 	            reply_to_message_id=int(NewVar[1]),
 	            allows_multiple_answers=False,reply_markup= (reply_markup),parse_mode=ParseMode.HTML,disable_web_page_preview = True
 	        )
-    	        Qn+=1
-    	        
-    	        if y==0:
-    	            #print(str(mess))
+    	            Qn+=1
+    	            if y==0:
     	            zzz=mess.message_id
+    	        except:
+    	            pass
+    	        
     	        time.sleep(5)
     
     if reaaa.match("\d/.*",update.message.text):
@@ -1685,6 +1687,10 @@ def pollf(update,context):
     if chat___id<=0:
         try:
             if update.message.text.startswith("/start@Soojhboojh_01bot share_quiz"):
+                try:
+                    context.bot.delete_message(chat_id=update.message.id,message_id=update.message.message_id)
+                except:
+                    pass
                 print(update.message.text)
                 x=reaaa.sub("/start@Soojhboojh_01bot share_quiz","",update.message.text)
                 x=reaaa.split("moum",x)

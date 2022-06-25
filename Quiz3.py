@@ -1437,8 +1437,8 @@ def poll(update, context):
     	        
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(int(zzz)+len(NewVar2)))
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="tg://share?text=/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(zzz)+"moum"+str(int(zzz)+len(NewVar2)))]])
+    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(zzz)-int(NewVar[1]))+"moum"+str(int(zzz)+len(NewVar2)-int(NewVar[1])))
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="tg://share?text=/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(zzz))+"moum"+str(int(zzz)+len(NewVar2)-int(NewVar[1])))]])
     	        else:
     	            explanation=None
     	            reply_markup=None
@@ -1699,7 +1699,7 @@ def pollf(update,context):
                 except:
                     x[0]="@"+str(x[0])
                 context.bot.forward_message(chat_id=update.message.chat.id,from_chat_id=x[0],message_id=int(x[1]))
-                for y in range(int(x[2]),int(x[3])):
+                for y in range(int(x[1])+int(x[2]),int(x[1])+int(x[3])):
                     context.bot.forward_message(chat_id=update.message.chat.id,from_chat_id=x[0],message_id=int(y))
             elif update.message.text.startswith("/start@Soojhboojh_01bot Share"):
                 db = client.get_database('QuizList')

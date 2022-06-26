@@ -1431,16 +1431,16 @@ def poll(update, context):
     	    context.bot.forward_message(chat_id=-1001534819469,from_chat_id=NewVar[0],message_id=int(NewVar[1]))
     	    context.bot.send_message(chat_id=-1001534819469,text=update.message.text)
     	    zzz=int(NewVar[1])+1
+    	    last=int(zzz)+len(NewVar2)
     	    for y in range(len(NewVar2)):
     	        reply_markup=None
     	        
     	        
     	        if y+1==len(NewVar2):
     	            explanation="find more on @polls_quiz"
-    	            mas=context.bot.get_chat(chat_id=NewVar[0])
-    	            print(mas)
-    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(zzz)-int(NewVar[1]))+"moum"+str(int(zzz)+len(NewVar2)-int(NewVar[1])))
-    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="tg://share?text=/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(zzz)-int(NewVar[1]))+"moum"+str(int(zzz)+len(NewVar2)-int(NewVar[1])))]])
+    	            
+    	            context.bot.send_message(chat_id=update.message.chat.id,text="/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(zzz)-int(NewVar[1]))+"moum"+str(last-int(NewVar[1])))
+    	            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Share Quiz",url="tg://share?text=/start@Soojhboojh_01bot share_quiz"+cid1+"moum"+str(NewVar[1])+"moum"+str(int(zzz)-int(NewVar[1]))+"moum"+str(last-int(NewVar[1])))]])
     	        else:
     	            explanation=None
     	            reply_markup=None
@@ -1454,7 +1454,8 @@ def poll(update, context):
 	            reply_to_message_id=int(NewVar[1]),
 	            allows_multiple_answers=False,reply_markup= (reply_markup),parse_mode=ParseMode.HTML,disable_web_page_preview = True
 	        )
-    	            Qn+=1
+    	            if y+2==len(NewVar2):
+    	                last=int(mess.message_id)+1
     	            if y==0:
     	                zzz=int(mess.message_id)
     	        except:

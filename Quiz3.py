@@ -1703,7 +1703,7 @@ def pollf(update,context):
                     try:
                         context.bot.copy_message(chat_id=update.message.chat.id,from_chat_id=x[0],message_id=int(y))
                     except:
-                        
+                        pass
             elif update.message.text.startswith("/start@Soojhboojh_01bot Share"):
                 db = client.get_database('QuizList')
                 results = db.get_collection('quizlist')

@@ -1703,7 +1703,7 @@ def pollf(update,context):
                 except:
                     x[0]="@"+str(x[0])
                 context.bot.forward_message(chat_id=update.message.chat.id,from_chat_id=x[0],message_id=int(x[1]))
-                for y in range(int(x[1])+int(x[2]),int(x[1])+int(x[3])):
+                for y in range(int(x[1])+int(x[2]),int(x[1])+int(x[3])+1):
                     try:
                         context.bot.forward_message(chat_id=update.message.chat.id,from_chat_id=x[0],message_id=int(y))
                     except:

@@ -1454,7 +1454,7 @@ def poll(update, context):
 	            reply_to_message_id=int(NewVar[1]),
 	            allows_multiple_answers=False,reply_markup= (reply_markup),parse_mode=ParseMode.HTML,disable_web_page_preview = True
 	        )
-    	            Qn+=1
+    	            Qn+=1#
     	            if y+2==len(NewVar2):
     	                last=int(mess.message_id)+1
     	            if y==0:

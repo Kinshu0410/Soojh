@@ -2513,7 +2513,7 @@ def gfp(update,context):
     
     if exp is not None:
         data=data+"""
-     .setGeneralFeedback('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""')"""
+     .setGeneralFeedback(FormApp.createFeedback().setDisplayText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""'))"""
     data=data+"""
      .setPoints(1)
       

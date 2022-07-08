@@ -2514,7 +2514,7 @@ def gfp(update,context):
         data=data+"""
    item1.setFeedbackForIncorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');
    item1.setFeedbackForCorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');"""
-    data=date+"""
+    data=data+"""
       .setPoints(1)
       
 """

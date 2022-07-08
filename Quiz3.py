@@ -2512,10 +2512,10 @@ def gfp(update,context):
         ])"""
     if exp is not None:
         data=data+"""
-   item1.setFeedbackForIncorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');
-   item1.setFeedbackForCorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');"""
+     .setFeedbackForIncorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');
+     .setFeedbackForCorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');"""
     data=data+"""
-      .setPoints(1)
+     .setPoints(1)
       
 """
     context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")

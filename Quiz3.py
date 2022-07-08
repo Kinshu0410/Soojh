@@ -2516,8 +2516,8 @@ def gfp(update,context):
 """
     if exp is not None:
         data=data+"""
-     item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""'));
-     item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""'));"""
+   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""').build());
+   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""').build());"""
     
     context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")
     return AA

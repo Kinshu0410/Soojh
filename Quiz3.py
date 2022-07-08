@@ -2510,7 +2510,7 @@ def gfp(update,context):
    item1.setTitle('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",question))+"""')
      .setChoices(["""+op+"""
         ])"""
-    if exp is Note None:
+    if exp is not None:
         data=data+"""
    item1.setFeedbackForIncorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');
    item1.setFeedbackForCorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');"""

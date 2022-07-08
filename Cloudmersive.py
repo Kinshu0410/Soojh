@@ -1315,7 +1315,7 @@ async def private_polls(client:Client,message:Message):
         chatid=[-1001309576992]
     elif message.chat.id==1211101855:
         chatid=["@EasyScienceSajidSir"]
-		is_anonymous=True
+        is_anonymous=True
 	#else#
 	##print(message.id)
     if len(chatid)!=0:

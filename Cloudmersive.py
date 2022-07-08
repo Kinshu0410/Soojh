@@ -1308,13 +1308,14 @@ async def Current_iq(client:Client,message:Message):
 @app.on_message(filters.poll & filters.private )#& filters.incoming)
 async def private_polls(client:Client,message:Message):
     chatid=[]
+    is_anonymous=False
     if message.chat.id==1952288751:
         chatid=[-1001718523021]
     elif message.chat.id==388095945:
         chatid=[-1001309576992]
     elif message.chat.id==1211101855:
         chatid=["@EasyScienceSajidSir"]
-		
+		is_anonymous=True
 	#else#
 	##print(message.id)
     if len(chatid)!=0:
@@ -1337,7 +1338,7 @@ async def private_polls(client:Client,message:Message):
     	#time.sleep(100)
     	for x in chatid:
     		try:
-    			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
+    			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=is_anonymous,type=PollType.QUIZ))
     		except FloodWait as e:
     			await asyncio.sleep(e.x)
     	    #col=clientmongo["channal_schedule"][str(x)]

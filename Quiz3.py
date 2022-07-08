@@ -2470,9 +2470,11 @@ def gfm(update,context):
      .setIsQuiz(true)
      .setShuffleQuestions(false)
      .setDescription("Please subscribe channal \\n\\nhttps://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA")
-     .setConfirmationMessage('Thanks for Playing Quiz\\n\\nDon\\'t forget to subscribe https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA')
+     .setConfirmationMessage('Thanks for Playing Quiz\\n\\nId of this Quiz : '+ss.getId())
      .setLimitOneResponsePerUser(true);    
-   
+     
+   // Update the form's response destination.
+   form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
    // single line text field  
    item = "Your Name";  
    form.addTextItem()
@@ -2494,6 +2496,7 @@ def gfp(update,context):
     opt=[o.text for o in actual_poll.options]
     options=[o.text for o in actual_poll.options]
     correct_option_id=actual_poll.correct_option_id
+    exp=actual_poll.explanation
     op=""
     for o in range(len(options)):
     	if o==correct_option_id:
@@ -2506,7 +2509,12 @@ def gfp(update,context):
     data=data+"""   var item1 = form.addMultipleChoiceItem();
    item1.setTitle('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",question))+"""')
      .setChoices(["""+op+"""
-        ])
+        ])"""
+    if exp is Note None:
+        data=data+"""
+   item1.setFeedbackForIncorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');
+   item1.setFeedbackForCorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""');"""
+    data=date+"""
       .setPoints(1)
       
 """

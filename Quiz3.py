@@ -2513,8 +2513,7 @@ def gfp(update,context):
     
     if exp is not None:
         data=data+"""
-     .setFeedbackForIncorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""')
-     .setFeedbackForCorrect('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""')"""
+     .setGeneralFeedback('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",exp))+"""')"""
     data=data+"""
      .setPoints(1)
       

@@ -1531,8 +1531,8 @@ def poll(update, context):
 	            dataa.append(str(x))
 	            for y in range(1,len(data[x])+1):
 	                dataa.append(data[x][y-1])
-	        dat.append(dataa)
-	        dataa=[]
+	            dat.append(dataa)
+	            dataa=[]
 	        worksheet.add_table('A1:C'+str(len(dat)+1), {'data': dat[1:],
                                
                                'columns': [{'header': 'Rank'},{'header': 'Marks'},{'header': 'Name'}]})

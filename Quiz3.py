@@ -1531,7 +1531,10 @@ def poll(update, context):
 	        for x in range(len(data)+1):
 	            dataa.append(str(x))
 	            for y in range(len(data[x])):
-	                dataa.append(data[x][y])
+	                if x==0&y==0:
+	                    pass
+	                else:
+	                    dataa.append(data[x][y])
 	            print(str(dataa))
 	            dat.append(dataa)
 	            dataa=[]

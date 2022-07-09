@@ -64,6 +64,7 @@ def main(y):
         result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                     range=SAMPLE_RANGE_NAME).execute()
         values = result.get('values', [])
+        print(result)
 
         if not values:
             print('No data found.')

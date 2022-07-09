@@ -1540,10 +1540,8 @@ def poll(update, context):
 	            if len(dataa)==3:
 	                dat.append(dataa)
 	            dataa=[]
-	        context.bot.send_message(chat_id=update.message.chat.id, text=str(dat))
-	        worksheet.add_table('A1:C'+str(len(dat)+1), {'data': dat[1:],
-                               
-                               'columns': [{'header': 'Rank'},{'header': 'Marks'},{'header': 'Name'}]})
+	        #context.bot.send_message(chat_id=update.message.chat.id, text=str(dat))
+	        worksheet.add_table('A1:C'+str(len(dat)+1), {'data': dat,'columns': [{'header': 'Rank'},{'header': 'Marks'},{'header': 'Name'}]})
 	        workbook.close()
 	        #context.bot.send_document(update.message.chat.id, open(filename+'.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	        from quickstart import Drive_OCR

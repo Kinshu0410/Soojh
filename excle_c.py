@@ -66,7 +66,7 @@ def main(y):
         values = result.get('values', [])
         service = build('drive', 'v3', credentials=creds)
         req = service.files().get(fileId=SAMPLE_SPREADSHEET_ID).execute()
-        print("kinbin"+str(req))
+        
         if not values:
             print('No data found.')
             return
@@ -79,7 +79,7 @@ def main(y):
         data.append(values[0])
         for x in range(len(li)):
             data.append(values[li[x][1]])
-        return data,reaaa.sub("\'|\!.*","",result.get('range', None))
+        return data,reaaa.sub("\'|\!.*","",req.get('name', None))
         #for row in values:
 #            # Print columns A and E, which correspond to indices 0 and 4.
 #            print('%s, %s' % (row[0], row[4]))

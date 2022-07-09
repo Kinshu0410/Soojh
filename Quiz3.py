@@ -1523,15 +1523,26 @@ def poll(update, context):
 	        fa=workbook.add_format()
 	        fa.set_align('center')
 	        worksheet.set_column('A:A', 9)
-	        worksheet.set_column('B:B', 50,fa)
-	        worksheet.set_column('C:C', 15)
-	        for x in range(len(data)):
-	            if x==0:
-	                worksheet.write(0,0, str("Rank"))
-	            else:
-	                worksheet.write(x,0, str(x))
-	            for y in range(len(data[x])):
-	                worksheet.write(x+1,y+1, data[x][y])
+	        worksheet.set_column('C:C', 50,fa)
+	        worksheet.set_column('B:B', 15)
+	        daata=[]
+	        daata[0][0]="Rank"
+	        
+	        
+	        
+	        
+	        for x in range(len(data)+1):
+	            
+	            for y in range(len(data[x])+1):
+	                if y==0 & x==0:
+	                    dataa[x][0]="Rank"
+	                elif y==0 :
+	                    dataa[x][0]=str(x)
+	                else:
+	                    dataa[x][y+1]=data[x][y]
+	        worksheet.add_table('A1:C'+str(len(data)+1), {'data': daata,
+                               
+                               'columns': [{'header': 'Rank'},{'header': 'Marks'},{'header': 'Name'}]})
 	        workbook.close()
 	        #context.bot.send_document(update.message.chat.id, open(filename+'.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	        from quickstart import Drive_OCR

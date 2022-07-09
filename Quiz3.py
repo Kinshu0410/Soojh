@@ -1529,8 +1529,8 @@ def poll(update, context):
 	        dat=[]
 	        for x in range(len(data)+1):
 	            dataa.append(str(x))
-	            for y in range(1,len(data[x])+1):
-	                dataa.append(data[x][y-1])
+	            for y in range(len(data[x])):
+	                dataa.append(data[x][y])
 	            dat.append(dataa)
 	            dataa=[]
 	        context.bot.send_message(chat_id=update.message.chat.id, text=str(dat))

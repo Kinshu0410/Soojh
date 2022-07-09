@@ -1533,6 +1533,7 @@ def poll(update, context):
 	                dataa.append(data[x][y-1])
 	            dat.append(dataa)
 	            dataa=[]
+	        context.bot.send_message(chat_id=update.message.chat.id, text=str(dat))
 	        worksheet.add_table('A1:C'+str(len(dat)+1), {'data': dat[1:],
                                
                                'columns': [{'header': 'Rank'},{'header': 'Marks'},{'header': 'Name'}]})

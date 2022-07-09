@@ -1529,7 +1529,8 @@ def poll(update, context):
 	        dat=[]
 	        print("kinbin")
 	        for x in range(len(data)+1):
-	            dataa.append(str(x))
+	            if x!=0:
+	                dataa.append(str(x))
 	            for y in range(len(data[x])):
 	                if x==0&y==0:
 	                    pass

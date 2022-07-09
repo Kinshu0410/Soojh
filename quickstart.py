@@ -249,8 +249,8 @@ class Drive_OCR:
         service.files().delete(fileId=file.get('id')).execute()
         fh.seek(0)
         import shutil
-        shutil.copyfileobj(fh,open(self.filename+".pdf", 'wb'))
-        return self.filename+".pdf"
+        shutil.copyfileobj(fh,open(self.filename[:-5]+".pdf", 'wb'))
+        return self.filename[:-5]+".pdf"
 
     def main2(self) -> str:
         """Shows basic usage of the Drive v3 API.

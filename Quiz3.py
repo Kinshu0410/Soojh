@@ -1525,7 +1525,7 @@ def poll(update, context):
 	            for y in range(len(data[x])):
 	                worksheet.write(x,y, data[x][y])
 	        workbook.close()
-	        context.bot.send_document(update.message.chat.id, open(filename+'.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+	        #context.bot.send_document(update.message.chat.id, open(filename+'.xlsx', "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
 	        from quickstart import Drive_OCR
 	        filename1=Drive_OCR(filename+'.xlsx').main1()
 	        
@@ -2516,12 +2516,12 @@ def gfp(update,context):
 """
     if exp is not None:
         data=data+"""
-   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id])+"\n\n"+exp))+"""').addLink('https://t.me/Polls_Quiz').build());
-   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id])+"\n\n"+exp))+"""').addLink('https://t.me/Polls_Quiz').build());"""
+   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]+"\n\n"+exp))+"""').addLink('https://t.me/Polls_Quiz').build());
+   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]+"\n\n"+exp))+"""').addLink('https://t.me/Polls_Quiz').build());"""
     if exp is None:
         data=data+"""
-   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]))+"""').addLink('https://t.me/Polls_Quiz').build());
-   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]))+"""').addLink('https://t.me/Polls_Quiz').build());
+   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id])+"""').addLink('https://t.me/Polls_Quiz').build());
+   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id])+"""').addLink('https://t.me/Polls_Quiz').build());
     
     context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")
     return AA

@@ -1527,10 +1527,12 @@ def poll(update, context):
 	        worksheet.set_column('B:B', 15)
 	        dataa=[]
 	        dat=[]
+	        print("kinbin")
 	        for x in range(len(data)+1):
 	            dataa.append(str(x))
 	            for y in range(len(data[x])):
 	                dataa.append(data[x][y])
+	            print(str(dataa))
 	            dat.append(dataa)
 	            dataa=[]
 	        context.bot.send_message(chat_id=update.message.chat.id, text=str(dat))

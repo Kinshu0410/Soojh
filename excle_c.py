@@ -65,7 +65,7 @@ def main(y):
                                     range=SAMPLE_RANGE_NAME).execute()
         values = result.get('values', [])
         service = build('drive', 'v3', credentials=creds)
-        req = service.files().get(fileId=SAMPLE_SPREADSHEET_ID)
+        req = service.files().get(fileId=SAMPLE_SPREADSHEET_ID).execute()
         print("kinbin"+str(req))
         if not values:
             print('No data found.')

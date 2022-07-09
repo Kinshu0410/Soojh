@@ -1537,7 +1537,8 @@ def poll(update, context):
 	                else:
 	                    dataa.append(data[x][y])
 	            print(str(dataa))
-	            dat.append(dataa)
+	            if len(dataa)==3:
+	                dat.append(dataa)
 	            dataa=[]
 	        context.bot.send_message(chat_id=update.message.chat.id, text=str(dat))
 	        worksheet.add_table('A1:C'+str(len(dat)+1), {'data': dat[1:],

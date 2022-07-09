@@ -1525,22 +1525,12 @@ def poll(update, context):
 	        worksheet.set_column('A:A', 9)
 	        worksheet.set_column('C:C', 50,fa)
 	        worksheet.set_column('B:B', 15)
-	        daata=[]
-	        daata[0][0]="Rank"
-	        
-	        
-	        
-	        
+	        dataa=[]
 	        for x in range(len(data)+1):
-	            
-	            for y in range(len(data[x])+1):
-	                if y==0 & x==0:
-	                    dataa[x][0]="Rank"
-	                elif y==0 :
-	                    dataa[x][0]=str(x)
-	                else:
-	                    dataa[x][y+1]=data[x][y]
-	        worksheet.add_table('A1:C'+str(len(data)+1), {'data': daata,
+	            dataa[x][0]=str(x)
+	            for y in range(1,len(data[x])+1):
+	                dataa[x][y]=data[x][y-1]
+	        worksheet.add_table('A1:C'+str(len(data)+1), {'data': dataa,
                                
                                'columns': [{'header': 'Rank'},{'header': 'Marks'},{'header': 'Name'}]})
 	        workbook.close()

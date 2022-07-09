@@ -71,7 +71,7 @@ def main(y):
         li=[]
         data=[]
         #print((values))
-        for i in range(2,len(values)):
+        for i in range(1,len(values)):
             li.append([int(reaaa.sub(" / \d{,}","",values[i][0])),i])
         li.sort(reverse=True)
         data.append(values[0])

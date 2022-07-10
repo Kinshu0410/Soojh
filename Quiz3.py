@@ -2534,12 +2534,12 @@ def gfp(update,context):
 """
     if exp is not None:
         data=data+"""
-   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]+"\n\n"+exp))+"""').addLink('https://t.me/Polls_Quiz').build());
-   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]+"\n\n"+exp))+"""').addLink('https://t.me/Polls_Quiz').build());"""
+   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]+"\n\n"+exp))+"""').build());
+   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]+"\n\n"+exp))+"""').build());"""
     if exp is None:
         data=data+"""
-   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]))+"""').addLink('https://t.me/Polls_Quiz').build());
-   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]))+"""').addLink('https://t.me/Polls_Quiz').build());"""
+   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]))+"""').build());
+   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]))+"""').build());"""
     
     context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")
     return AA

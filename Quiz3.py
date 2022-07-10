@@ -1522,9 +1522,9 @@ def poll(update, context):
 	        worksheet = workbook.add_worksheet()
 	        fa=workbook.add_format()
 	        fa.set_align('center')
-	        worksheet.set_column('A:A', 9)
-	        worksheet.set_column('C:C', 50,fa)
-	        worksheet.set_column('B:B', 15)
+	        worksheet.set_column('A:A', 13,fa)
+	        worksheet.set_column('C:C', 55,fa)
+	        worksheet.set_column('B:B', 18,fa)
 	        dataa=[]
 	        dat=[]
 	        print("kinbin")

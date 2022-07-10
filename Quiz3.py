@@ -2488,7 +2488,7 @@ def gfm(update,context):
      .setIsQuiz(true)
      .setShuffleQuestions(false)
      .setDescription("Thanks for attempting Quiz \nPlease share this Quiz to yours friend or Telegram Group that you Own it.")
-     .setConfirmationMessage('Thanks for Playing Quiz\\n\\nI\'d of this Quiz : '+ss.getId()+'\n\nhttps://t.me/Polls_Quiz')
+     .setConfirmationMessage("Thanks for Playing Quiz\\n\\nI'd of this Quiz : "+ss.getId()+'\n\nhttps://t.me/Polls_Quiz')
      .setLimitOneResponsePerUser(true);    
      
    // Update the form's response destination.

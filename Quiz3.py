@@ -2487,8 +2487,8 @@ def gfm(update,context):
      .setTitle(item)
      .setIsQuiz(true)
      .setShuffleQuestions(false)
-     .setDescription("Please subscribe channal \\n\\nhttps://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA")
-     .setConfirmationMessage('Thanks for Playing Quiz\\n\\nId of this Quiz : '+ss.getId())
+     .setDescription("Thanks for attempting Quiz \nPlease share this Quiz to yours friend or Telegram Group that you Own it.")
+     .setConfirmationMessage('Thanks for Playing Quiz\\n\\nI\'d of this Quiz : '+ss.getId())
      .setLimitOneResponsePerUser(true);    
      
    // Update the form's response destination.

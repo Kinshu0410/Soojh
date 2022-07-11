@@ -1181,7 +1181,12 @@ async def forword(client:Client,message:Message):
 	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
 	question=reaaa.sub(r"", "", question)
 	options=[o.text for o in mess.options]
-	
+	exp=mess.exp
+	if exp is not None:
+		exp=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", exp)
+		exp=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", exp)
+		exp=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","",exp)
+		
 	
 	correct_option_id = 0
 	for i in range(len(mess.options)):
@@ -1192,7 +1197,7 @@ async def forword(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,explanation=exp,is_anonymous=False,type=PollType.QUIZ))
 	    ##print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.id)
 

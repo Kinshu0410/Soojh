@@ -760,7 +760,7 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
             	lis=[]
-            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c/u00B2/u00B3/u00B9/u0070-/u009F])","", "Q "+str(nn)+". "+question+"\n")
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u0070-\u009F])","", "Q "+str(nn)+". "+question+"\n")
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -791,7 +791,7 @@ async def job2_partener2(client:Client,message:Message):
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
-            	mess2=(await app.send_poll(chat_id=message.chat.id,question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c/u00B2/u00B3/u00B9/u0070-/u009F])","","Q "+str(int(xx[2])-nn+1)+". "+question),options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
+            	mess2=(await app.send_poll(chat_id=message.chat.id,question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u0070-\u009F])","","Q "+str(int(xx[2])-nn+1)+". "+question),options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
             	
             	if explanation is None:
             	    explanation="\n"
@@ -802,7 +802,7 @@ async def job2_partener2(client:Client,message:Message):
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
-            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c/u00B2/u00B3/u00B9/u0070-/u009F])","", explanation)
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u0070-\u009F])","", explanation)
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":1,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -1177,15 +1177,15 @@ async def forword(client:Client,message:Message):
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
 	question=reaaa.sub(r"(\n| |){1,}(|C\.A BY)(\n| |){1,}", "", question)
-	question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c/u00B2/u00B3/u00B9/u0070-/u009F])","",question)
+	question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u0070-\u009F])","",question)
 	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
 	question=reaaa.sub(r"", "", question)
-	options=[reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c/u00B2/u00B3/u00B9/u0070-/u009F])","",o.text) for o in mess.options]
+	options=[reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u0070-\u009F])","",o.text) for o in mess.options]
 	exp=mess.exp
 	if exp is not None:
 		exp=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", exp)
 		exp=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", exp)
-		exp=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c/u00B2/u00B3/u00B9/u0070-/u009F])","",exp)
+		exp=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u0070-\u009F])","",exp)
 		
 	
 	correct_option_id = 0

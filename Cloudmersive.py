@@ -1180,7 +1180,7 @@ async def forword(client:Client,message:Message):
 	question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","",question)
 	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
 	question=reaaa.sub(r"", "", question)
-	options=[o.text for o in mess.options]
+	options=[reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c])","",o.text) for o in mess.options]
 	exp=mess.exp
 	if exp is not None:
 		exp=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", exp)

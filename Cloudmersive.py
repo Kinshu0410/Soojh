@@ -223,15 +223,18 @@ async def pdf_photo(client:Client,message:Message):
 			mess2=mess1
 			mess1=mess1.poll
 			correct_option_id = 0
+			options=[o.text for o in mess1.options]
 			for i in range(len(mess1.options)):
 				if mess1.options[i].correct:
 					correct_option_id = i
 					break
 			try:
-				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
+				print(mess1.question)
+				
+				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
 			except Exception as e:
 				print("kinbin"+str(e))
-				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
+				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
 				
 
 

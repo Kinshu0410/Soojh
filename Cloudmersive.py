@@ -212,7 +212,7 @@ Admin = ["POLLQZ",711296045]
 @app.on_message(filters.regex("^.*$") & filters.chat(chats=Admin))
 async def pdf_photo(client:Client,message:Message):
 	if len(message.text)<300:
-		print(message)
+		#print(message)
 		mid=message.reply_to_message
 		if mid.poll:
 			exp=message.text
@@ -227,10 +227,10 @@ async def pdf_photo(client:Client,message:Message):
 					correct_option_id = i
 					break
 			try:
-				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,reply_to_message_id=mess1.reply_to_message.id,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
+				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,reply_to_message_id=mess1.reply_to_message_id,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
 			except Exception as e:
 				print("kinbin"+str(e))
-				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,reply_to_message_id=mess1.reply_to_message.id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
+				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,reply_to_message_id=mess1.reply_to_message_id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
 				
 
 

@@ -231,7 +231,7 @@ async def pdf_photo(client:Client,message:Message):
 				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
 			except Exception as e:
 				print("kinbin"+str(e))
-				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
+				await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=mess1.options,correct_option_id =correct_option_id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
 				
 
 

@@ -208,6 +208,21 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 	return ''.join(random.choice(chars) for _ in range(size))
 
 import fitz, random
+Admin = ["POLLQZ",-1001132926651,711296045]
+@app.on_message(filters.regex("^.*$") )#& filters.chat(chats=Admin))
+async def pdf_photo(client:Client,message:Message):
+	if len(message.text)<300:
+		mid=message.reply_to_message
+		exp=message.text
+		mess1=await app.get_messages(message.chat.id,mid)
+		if mess1.poll:
+			try:
+				await app.send_poll(chat_id=message.chat.id,question=mess1.poll.question,options=mess1.poll.options,correct_option_id =mess1.poll.correct_option_id,reply_to_message=mess1.reply_to_message,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
+			except Exception as e:
+				print("kinbin"+str(e))
+				await app.send_poll(chat_id=message.chat.id,question=mess1.poll.question,options=mess1.poll.options,correct_option_id =mess1.poll.correct_option_id,reply_to_message=mess1.reply_to_message,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
+				
+
 
 @app.on_message(filters.regex("^Pdf\d{1,},\d{1,}") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
 async def pdf_photo(client:Client,message:Message):

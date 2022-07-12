@@ -213,8 +213,10 @@ Admin = ["POLLQZ",-1001132926651,711296045]
 async def pdf_photo(client:Client,message:Message):
 	if len(message.text)<300:
 		mid=message.reply_to_message
+		print(mid)
 		exp=message.text
 		mess1=await app.get_messages(message.chat.id,mid)
+		print(mess1)
 		if mess1.poll:
 			try:
 				await app.send_poll(chat_id=message.chat.id,question=mess1.poll.question,options=mess1.poll.options,correct_option_id =mess1.poll.correct_option_id,reply_to_message=mess1.reply_to_message,is_anonymous=False,type=PollType.QUIZ,explanation=exp)

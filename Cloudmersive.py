@@ -213,16 +213,19 @@ Admin = ["POLLQZ",711296045]
 async def pdf_photo(client:Client,message:Message):
 	if len(message.text)<300:
 		mid=message.reply_to_message
-		print(mid)
-		exp=message.text
-		try:
-			mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=mid.id,options=1))
-		except:
-			mess1=await app.get_messages(message.chat.id,mid.id)
-		print(mess1)
-		if mess1.poll:
+		if mid.poll:
+			exp=message.text
 			try:
-				await app.send_poll(chat_id=message.chat.id,question=mess1.poll.question,options=mess1.poll.options,correct_option_id =mess1.poll.correct_option_id,reply_to_message=mess1.reply_to_message,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
+				mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=mid.id,options=1))
+			except:
+				mess1=await app.get_messages(message.chat.id,mid.id)
+			correct_option_id = 0
+			for i in range(len(mess1.options)):
+				if mess1.options[i].correct:
+					correct_option_id = i
+					break
+			try:
+				await app.send_poll(chat_id=message.chat.id,question=mess1.poll.question,options=mess1.poll.options,correct_option_id =correct_option_id,reply_to_message=mess1.reply_to_message,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
 			except Exception as e:
 				print("kinbin"+str(e))
 				await app.send_poll(chat_id=message.chat.id,question=mess1.poll.question,options=mess1.poll.options,correct_option_id =mess1.poll.correct_option_id,reply_to_message=mess1.reply_to_message,is_anonymous=True,type=PollType.QUIZ,explanation=exp)

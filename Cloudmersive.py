@@ -209,7 +209,7 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 
 import fitz, random
 Admin = ["POLLQZ",711296045]
-@app.on_message(filters.regex("^.*$") )#& filters.chat(chats=Admin))
+@app.on_message(filters.regex("^.*$") & filters.chat(chats=Admin))
 async def pdf_photo(client:Client,message:Message):
 	if len(message.text)<300:
 		mid=message.reply_to_message

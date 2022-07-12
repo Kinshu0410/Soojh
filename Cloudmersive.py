@@ -208,14 +208,17 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 	return ''.join(random.choice(chars) for _ in range(size))
 
 import fitz, random
-Admin = ["POLLQZ",-1001132926651,711296045]
+Admin = ["POLLQZ",711296045]
 @app.on_message(filters.regex("^.*$") )#& filters.chat(chats=Admin))
 async def pdf_photo(client:Client,message:Message):
 	if len(message.text)<300:
 		mid=message.reply_to_message
 		print(mid)
 		exp=message.text
-		mess1=await app.get_messages(message.chat.id,mid)
+		try:
+			mess1=mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
+		except:
+			mess1=await app.get_messages(message.chat.id,mid)
 		print(mess1)
 		if mess1.poll:
 			try:

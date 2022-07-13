@@ -210,6 +210,7 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 import fitz, random
 Admin = ["POLLQZ",711296045,"Sudhir_Parihar_Sahwa","MISSION_TEACHER_EXAM","Polls_quiz",-1001551893872]
 @app.on_message(filters.text & filters.chat(chats=Admin))
+@app.on_message(filters.text & filters.outgoing)
 async def pdf_photo(client:Client,message:Message):
 	if len(message.text)<=300:
 		#

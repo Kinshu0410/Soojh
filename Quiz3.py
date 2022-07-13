@@ -1273,7 +1273,12 @@ def ghppp1(update,context):
         	    explan="@Study_Quiz_India\n@Maths_Quiz_Notes\n@Current_Affairs_Quiz_Notes"
         	else:
         	    explan=explan+"\n\n@Study_Quiz_India"
-        
+        elif update.message.chat.id==1001183009:
+        	que="🔰 राजस्थान शिक्षक भर्ती चैनल 🔰\n\n"+que
+        	if explan is None:
+        	    explan="@SudhirParihar"
+        	else:
+        	    explan=explan+"\n\n@SudhirParihar"
         context.bot.send_poll(
                 chat_id=int(cid),
                 question=que,

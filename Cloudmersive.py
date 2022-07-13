@@ -208,10 +208,10 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 	return ''.join(random.choice(chars) for _ in range(size))
 
 import fitz, random
-Admin = ["POLLQZ",711296045,"Sudhir_Parihar_Sahwa","MISSION_TEACHER_EXAM","Polls_quiz"]
+Admin = ["POLLQZ",711296045,"Sudhir_Parihar_Sahwa","MISSION_TEACHER_EXAM","Polls_quiz",-1001551893872]
 @app.on_message(filters.text & filters.chat(chats=Admin))
 async def pdf_photo(client:Client,message:Message):
-	if len(message.text)<300:
+	if len(message.text)<=300:
 		#
 		mid=message.reply_to_message
 		if mid.poll:
@@ -235,7 +235,7 @@ async def pdf_photo(client:Client,message:Message):
 			except Exception as e:
 				#print("kinbin"+str(e))
 				mess=await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
-			if message.chat.id==-1001675398760:
+			if message.chat.id in [-1001675398760]:
 				await app.stop_poll(chat_id=message.chat.id,message_id=mess.id)
 				
 

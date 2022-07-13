@@ -2505,7 +2505,7 @@ def gfm(update,context):
      .setRequired(true);
      
    // radiobuttons
-   Utilities.sleep(240000);
+   Utilities.sleep(60);
    item = "Handout format";  
 """
     

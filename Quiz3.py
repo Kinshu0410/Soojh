@@ -2557,7 +2557,7 @@ def gft(update,context):
 		x=data
 		for y in reaaa.finditer("item1\.setTitle\(\'.*?\'\)",data):
 			yx=y.span()
-		data=x[0:yx[0]]+'item1.setTitle(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:-1]
+		data=x[0:yx[0]]+'item1.setTitle(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:]
 		
 	else:
 		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
@@ -2565,11 +2565,11 @@ def gft(update,context):
 		for y in reaaa.finditer("item1.setFeedbackForIncorrect\(FormApp.createFeedback\(\).setText\(\'.*?\'\)",data):
 			print(y.group())
 			yx=y.span()
-		data=x[0:yx[0]]+'item1.setFeedbackForIncorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:-1]
+		data=x[0:yx[0]]+'item1.setFeedbackForIncorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:]
 		x=data
 		for y in reaaa.finditer("item1\.setFeedbackForCorrect\(FormApp\.createFeedback\(\)\.setText\(\'.*?\'\)",data):
 			yx=y.span()
-		data=x[0:yx[0]]+'item1.setFeedbackForCorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:-1]
+		data=x[0:yx[0]]+'item1.setFeedbackForCorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:]
 		x=data
 	
 	return AA

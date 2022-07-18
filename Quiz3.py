@@ -2567,7 +2567,7 @@ def gft(update,context):
 			yx=y.span()
 		data=x[0:yx[0]]+'item1.setFeedbackForCorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:-1]
 	
-    return AA
+	return AA
     
 
 def gfph(update,context):

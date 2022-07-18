@@ -2563,7 +2563,7 @@ def gft(update,context):
 		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
 		x=data
 		for y in reaaa.finditer("item1.setFeedbackForIncorrect\(FormApp.createFeedback\(\).setText\(\'.*?\'\)",data):
-			print(y.match)
+			print(y.group())
 			yx=y.span()
 		data=x[0:yx[0]]+'item1.setFeedbackForIncorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:-1]
 		for y in reaaa.finditer("item1\.setFeedbackForCorrect\(FormApp\.createFeedback\(\)\.setText\(\'.*?\'\)",data):

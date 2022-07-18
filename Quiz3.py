@@ -2550,7 +2550,8 @@ def gfp(update,context):
 
 def gft(update,context):
 	global data
-	if message.reply_to_message:
+	print(update)
+	if update.reply_to_message:
 		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
 		x=data
 		for y in reaaa.finditer("item1\.setTitle\(\'.*?\'\)",data):

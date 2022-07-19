@@ -242,7 +242,8 @@ async def pdf_photo(client:Client,message:Message):
 
 @app.on_message(filters.regex("^Sub.*") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
 async def subscrip(client:Client,message:Message):
-	text=message.text
+	te=message.text
+	text=reaaa.sub("^Sub","",te)
 	text=reaaa.sub("0","₀",text)
 	text=reaaa.sub("1","₁",text)
 	text=reaaa.sub("2","₂",text)
@@ -253,7 +254,7 @@ async def subscrip(client:Client,message:Message):
 	text=reaaa.sub("7","₇",text)
 	text=reaaa.sub("8","₈",text)
 	text=reaaa.sub("9","₉",text)
-	await app.send_message(message.chat.id,text[3:])
+	await app.send_message(message.chat.id,text)
 	
 @app.on_message(filters.regex("^Pdf\d{1,},\d{1,}") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
 async def pdf_photo(client:Client,message:Message):

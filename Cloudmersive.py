@@ -240,7 +240,7 @@ async def pdf_photo(client:Client,message:Message):
 				await app.stop_poll(chat_id=message.chat.id,message_id=mess.id)
 				
 
-@app.on_message(filters.regex("^Sub.*") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
+@app.on_message(filters.regex("^Sub") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
 async def subscrip(client:Client,message:Message):
 	te=message.text
 	text=reaaa.sub("^Sub","",te)

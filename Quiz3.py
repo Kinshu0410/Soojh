@@ -2520,6 +2520,8 @@ def gfp(update,context):
     options=[o.text for o in actual_poll.options]
     correct_option_id=actual_poll.correct_option_id
     exp=actual_poll.explanation
+    context.bot.send_message(chat_id=update.message.chat.id,text=question)
+    context.bot.send_message(chat_id=update.message.chat.id,text=str(exp))
     op=""
     for o in range(len(options)):
     	if o==correct_option_id:
@@ -2558,6 +2560,7 @@ def gft(update,context):
 		for y in reaaa.finditer("item1\.setTitle\(\'.*?\'\)",data):
 			yx=y.span()
 		data=x[0:yx[0]]+'item1.setTitle(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:]
+		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Question Updated...")
 		
 	else:
 		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
@@ -2571,6 +2574,7 @@ def gft(update,context):
 			yx=y.span()
 		data=x[0:yx[0]]+'item1.setFeedbackForCorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:]#
 		x=data
+		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Explanation Updated...")
 	
 	return AA
     

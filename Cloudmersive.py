@@ -240,19 +240,19 @@ async def pdf_photo(client:Client,message:Message):
 				await app.stop_poll(chat_id=message.chat.id,message_id=mess.id)
 				
 
-@app.on_message(filters.regex("^sub.*") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
+@app.on_message(filters.regex("^Sub.*") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
 async def subscrip(client:Client,message:Message):
 	text=message.text
-	text=re.sub("0","₀",text)
-	text=re.sub("1","₁",text)
-	text=re.sub("2","₂",text)
-	text=re.sub("3","₃",text)
-	text=re.sub("4","₄",text)
-	text=re.sub("5","₅",text)
-	text=re.sub("6","₆",text)
-	text=re.sub("7","₇",text)
-	text=re.sub("8","₈",text)
-	text=re.sub("9","₉",text)
+	text=reaaa.sub("0","₀",text)
+	text=reaaa.sub("1","₁",text)
+	text=reaaa.sub("2","₂",text)
+	text=reaaa.sub("3","₃",text)
+	text=reaaa.sub("4","₄",text)
+	text=reaaa.sub("5","₅",text)
+	text=reaaa.sub("6","₆",text)
+	text=reaaa.sub("7","₇",text)
+	text=reaaa.sub("8","₈",text)
+	text=reaaa.sub("9","₉",text)
 	await app.send_message(message.chat.id,text[3:])
 	
 @app.on_message(filters.regex("^Pdf\d{1,},\d{1,}") )#& filters.chat(chats=["POLLQZ",-1001132926651]))

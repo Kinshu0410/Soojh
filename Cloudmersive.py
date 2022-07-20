@@ -33,7 +33,7 @@ app=Client("my_account",session_string="BQDQx-MAD62CGn-_l4hqeoG_F5jWwZKBiLMjGGPz
 from pyrogram.enums import PollType
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
-@app.on_message(filters.regex("^Sub") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
+@app.on_message(filters.regex("^Sup") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
 async def subscrip(client:Client,message:Message):
 	te=message.text
 	text=reaaa.sub("^Sup","",te)
@@ -49,7 +49,7 @@ async def subscrip(client:Client,message:Message):
 	text=reaaa.sub("9","⁹",text)
 	await app.send_message(message.chat.id,text)
 
-@app.on_message(filters.regex("^Sup") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
+@app.on_message(filters.regex("^Sub") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
 async def supscrip(client:Client,message:Message):
 	te=message.text
 	text=reaaa.sub("^Sub","",te)

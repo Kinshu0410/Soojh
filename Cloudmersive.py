@@ -36,6 +36,22 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 @app.on_message(filters.regex("^Sub") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
 async def subscrip(client:Client,message:Message):
 	te=message.text
+	text=reaaa.sub("^Sup","",te)
+	text=reaaa.sub("0","⁰",text)
+	text=reaaa.sub("1","¹",text)
+	text=reaaa.sub("2","²",text)
+	text=reaaa.sub("3","³",text)
+	text=reaaa.sub("4","⁴",text)
+	text=reaaa.sub("5","⁵",text)
+	text=reaaa.sub("6","⁶",text)
+	text=reaaa.sub("7","⁷",text)
+	text=reaaa.sub("8","⁸",text)
+	text=reaaa.sub("9","⁹",text)
+	await app.send_message(message.chat.id,text)
+
+@app.on_message(filters.regex("^Sup") )#& filters.chat(chats=["POLLQZ",-1001132926651]))
+async def supscrip(client:Client,message:Message):
+	te=message.text
 	text=reaaa.sub("^Sub","",te)
 	text=reaaa.sub("0","₀",text)
 	text=reaaa.sub("1","₁",text)
@@ -48,6 +64,7 @@ async def subscrip(client:Client,message:Message):
 	text=reaaa.sub("8","₈",text)
 	text=reaaa.sub("9","₉",text)
 	await app.send_message(message.chat.id,text)
+
 
 @app.on_message(filters.regex("^Cid") )#& filters.incoming)
 async def cyid(client:Client,message:Message):

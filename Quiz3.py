@@ -1570,7 +1570,7 @@ def poll(update, context):
 	    try:
 	        q=quest[0:-1]
 	        q=reaaa.sub("Poll to Text Bot\:\n|Soojh Boojh Bot - 02\:\n|NaN| Q.*\.|^\. |^\.", "", q)
-	        q=reaaa.sub(r"(\n| )(\(|\[|)(A|B|C|D|a|b|c|d|अ|ब|बी|स|सी|डी|ड|द|क|ख|ग|घ|1|2|3|4)(\)|\]|\.)(\.| |)", "\n", q)
+	        q=reaaa.sub(r"(\n| )(\(|\[|)(A|B|C|D|a|b|c|d|अ|ए|ब|बी|स|सी|डी|ड|द|क|ख|ग|घ|1|2|3|4)(\)|\]|\.)(\.| |)", "\n", q)
 	        q=reaaa.sub("\n{2,}", "\n", q)
 	        q=reaaa.sub("☞", "", q)
 	        q=reaaa.split(r"[\n]", q)

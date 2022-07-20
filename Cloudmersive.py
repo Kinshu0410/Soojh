@@ -1533,7 +1533,7 @@ async def job(client:Client,message:Message):
 
 		
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.outgoing)
-def forword(client:Client,message:Message):
+async def forword(client:Client,message:Message):
 	text=message.text
 	text=reaaa.split("\n{2,}",text)
 	for x in text:

@@ -1532,9 +1532,13 @@ async def job(client:Client,message:Message):
 			
 
 		
-		
-		
-	
+@app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.outgoing)
+def forword(client:Client,message:Message):
+	text=message.text
+	text=re.split("\n{2,}",text)
+	for x in text:
+		await app.send_message(message.chat.id,x)
+
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):
     #if message.forward_from_chat:

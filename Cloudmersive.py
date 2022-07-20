@@ -242,37 +242,6 @@ def id_generator(size=10, chars=string.ascii_uppercase):
 	return ''.join(random.choice(chars) for _ in range(size))
 
 import fitz, random
-Admin = [711296045,"MISSION_TEACHER_EXAM","Polls_quiz",-1001551893872]
-@app.on_message(filters.text & filters.chat(chats=Admin))
-@app.on_message(filters.text & filters.outgoing &~ filters.chat("soojhboojh_01bot"))
-async def pdf_photo(client:Client,message:Message):
-	if len(message.text)<=300:
-		#
-		mid=message.reply_to_message
-		if mid.poll:
-			exp=message.text
-			try:
-				mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=mid.id,options=1))
-			except:
-				mess1=await app.get_messages(message.chat.id,mid.id)
-			mess2=mess1
-			mess1=mess1.poll
-			correct_option_id = 0
-			options=[o.text for o in mess1.options]
-			for i in range(len(mess1.options)):
-				if mess1.options[i].correct:
-					correct_option_id = i
-					break
-			try:
-				
-				
-				mess=await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
-			except Exception as e:
-				#print("kinbin"+str(e))
-				mess=await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
-			if message.chat.id in [-1001675398760]:
-				await app.stop_poll(chat_id=message.chat.id,message_id=mess.id)
-				
 
 
 	
@@ -1598,6 +1567,37 @@ def forword(client:Client,message:Message):
     #print(chatid)
     for x in range(int(chatid[2])):
        app.forward_messages(chat_id="KINBIN247_bot",from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
+Admin = [711296045,"MISSION_TEACHER_EXAM","Polls_quiz",-1001551893872]
+@app.on_message(filters.text & filters.chat(chats=Admin))
+@app.on_message(filters.text & filters.outgoing &~ filters.chat("soojhboojh_01bot"))
+async def pdf_photo(client:Client,message:Message):
+	if len(message.text)<=300:
+		#
+		mid=message.reply_to_message
+		if mid.poll:
+			exp=message.text
+			try:
+				mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=mid.id,options=1))
+			except:
+				mess1=await app.get_messages(message.chat.id,mid.id)
+			mess2=mess1
+			mess1=mess1.poll
+			correct_option_id = 0
+			options=[o.text for o in mess1.options]
+			for i in range(len(mess1.options)):
+				if mess1.options[i].correct:
+					correct_option_id = i
+					break
+			try:
+				
+				
+				mess=await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=False,type=PollType.QUIZ,explanation=exp)
+			except Exception as e:
+				#print("kinbin"+str(e))
+				mess=await app.send_poll(chat_id=message.chat.id,question=mess1.question,options=options,correct_option_id =correct_option_id,reply_to_message_id=mess2.reply_to_message_id,is_anonymous=True,type=PollType.QUIZ,explanation=exp)
+			if message.chat.id in [-1001675398760]:
+				await app.stop_poll(chat_id=message.chat.id,message_id=mess.id)
+				
 
 import telegram
 

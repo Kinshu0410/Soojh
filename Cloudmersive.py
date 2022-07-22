@@ -1588,6 +1588,8 @@ async def pdf_photo(client:Client,message:Message):
 				mess1=await app.get_messages(message.chat.id,mid.id)
 			mess2=mess1
 			mess1=mess1.poll
+			print(str(mess2))
+			print(str(mess1))
 			correct_option_id = 0
 			options=[o.text for o in mess1.options]
 			for i in range(len(mess1.options)):

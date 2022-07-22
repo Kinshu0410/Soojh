@@ -1584,12 +1584,13 @@ async def pdf_photo(client:Client,message:Message):
 			exp=message.text
 			try:
 				mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=mid.id,options=1))
+				print(str(mess1))
+				mess1=mess1.poll
 			except:
 				mess1=await app.get_messages(message.chat.id,mid.id)
-			mess2=mess1
-			mess1=mess1.poll
-			print(str(mess2))
-			print(str(mess1))
+			
+			
+			
 			correct_option_id = 0
 			options=[o.text for o in mess1.options]
 			for i in range(len(mess1.options)):

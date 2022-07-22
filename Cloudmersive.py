@@ -1585,9 +1585,10 @@ async def pdf_photo(client:Client,message:Message):
 			try:
 				mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=mid.id,options=1))
 				print(str(mess1))
-				mess1=mess1.poll
+				
 			except:
 				mess1=await app.get_messages(message.chat.id,mid.id)
+				mess1=mess1.poll
 			
 			
 			

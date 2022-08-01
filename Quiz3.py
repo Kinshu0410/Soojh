@@ -2564,8 +2564,13 @@ def gft(update,context):
 		
 	else:
 		tt=""
-		if update.message.from_user.username:
-			tt=".addLink(\'https://t.me/"+update.message.from_user.username+"\',\'Explaintion creator\')"
+		if update.message.forward_from.username:
+			fname=""
+			if update.message.forward_from.last_name:
+				fname=update.message.forward_from.first_name+" "+update.message.forward_from.last_name
+			else:
+				fname=update.message.forward_from.first_name
+			tt=".addLink(\'https://t.me/"+update.message.forward_from.username+"\',\'Explaintion created by : "+fname+"\')"
 		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
 		x=data
 		for y in reaaa.finditer("item1.setFeedbackForIncorrect\(FormApp.createFeedback\(\).setText\(\'.*?\'\)",data):

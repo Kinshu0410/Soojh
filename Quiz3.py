@@ -2564,8 +2564,8 @@ def gft(update,context):
 		
 	else:
 		tt=""
-		if update.message.forward_from_chat.username:
-			tt=".addLink(\'https://t.me/"+update.message.forward_from_chat.username+"\',\'Explaintion creator\')"
+		if update.message.from_user.username:
+			tt=".addLink(\'https://t.me/"+update.message.from_user.username+"\',\'Explaintion creator\')"
 		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
 		x=data
 		for y in reaaa.finditer("item1.setFeedbackForIncorrect\(FormApp.createFeedback\(\).setText\(\'.*?\'\)",data):

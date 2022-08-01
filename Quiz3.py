@@ -2564,7 +2564,7 @@ def gft(update,context):
 		
 	else:
 		tt=""
-		if update.message.forward_from.username:
+		if update.message.forward_from:
 			fname=""
 			if update.message.forward_from.last_name:
 				fname=update.message.forward_from.first_name+" "+update.message.forward_from.last_name

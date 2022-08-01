@@ -1573,7 +1573,7 @@ def forword(client:Client,message:Message):
     #print(chatid)
     for x in range(int(chatid[2])):
        app.forward_messages(chat_id="KINBIN247_bot",from_chat_id=chatid[0],message_ids=int(chatid[1])+x)
-Admin = [711296045,"MISSION_TEACHER_EXAM","Polls_quiz",-1001551893872,"Exam_Dhurandhar"]
+Admin = [711296045,"MISSION_TEACHER_EXAM","Polls_quiz",-1001551893872]
 @app.on_message(filters.text & filters.chat(chats=Admin))
 @app.on_message(filters.text & filters.outgoing &~ filters.chat("soojhboojh_01bot"))
 async def pdf_photo(client:Client,message:Message):

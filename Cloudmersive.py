@@ -1356,6 +1356,8 @@ async def private_polls(client:Client,message:Message):
         chatid=[-1001309576992]
     elif message.chat.id==644570319:
         chatid=[-1001306495632]
+    elif message.chat.id==1468125551:
+        chatid=[-1001517843177]
         
     elif message.chat.id==1211101855:
         chatid=["@EasyScienceSajidSir"]

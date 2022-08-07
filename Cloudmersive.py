@@ -1181,7 +1181,9 @@ async def forwortd(client:Client,message:Message):
 	                xy=False
 	        except:
 	            await asyncio.sleep(5)
-	    ##print(mess)
+	await asyncio.sleep(600)
+	tttt=-5
+	
 	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 
 @app.on_message(filters.new_chat_members & filters.chat(-1001551893872) )#& filters.incoming)

@@ -1041,6 +1041,8 @@ async def delete_all_quiz(client:Client,message:Message):
 	global tttt
 	tttt=-5
 	chattt=message.chat.id
+	if chattt==-1001567122302:
+		chattt=-1001517843177
 @app.on_message(filters.regex("^Del_All$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
 	cid=[]

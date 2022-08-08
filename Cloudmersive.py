@@ -554,7 +554,7 @@ async def job2_partener1(client:Client,message:Message):
         xx=reaaa.split("-",message.text)
         count=1
         from quickstart import Drive_OCR
-        body = {"title": 'Result.pdf'}
+        body = {"title": 'Result.pdf',"documentStyle":{"pageSize":{"height":{"magnitude":20,"unit":"PT"},"width":{"unit":"PT","magnitude":300}}}}
         id=Drive_OCR(body).create()
         mess1="vote alreddy given"
         result={}

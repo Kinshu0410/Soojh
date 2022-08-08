@@ -554,8 +554,9 @@ async def job2_partener1(client:Client,message:Message):
         xx=reaaa.split("-",message.text)
         count=1
         from quickstart import Drive_OCR
-        body = {"title": 'Result.pdf',"documentStyle":{"pageSize":{"height":{"magnitude":20,"unit":"PT"},"width":{"unit":"PT","magnitude":300}}}}
+        body = {"title": 'Result.pdf'}
         id=Drive_OCR(body).create()
+        replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 0, "unit": "PT" },"pageSize": {"height":{"magnitude": 1000, "unit": "PT"},"width":{"magnitude": 500, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
         mess1="vote alreddy given"
         result={}
         new_result = {}

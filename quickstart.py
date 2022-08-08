@@ -74,6 +74,7 @@ class Drive_OCR:
         service = build('docs', 'v1', credentials=creds)
         body=self.filename
         doc1 = service.documents().batchUpdate(body=body,documentId=id).execute()
+        return doc1
         
     def download(self,id) -> str:
         """Shows basic usage of the Drive v3 API.

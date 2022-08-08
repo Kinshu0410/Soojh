@@ -978,12 +978,12 @@ async def job2_partener2(client:Client,message:Message):
         
         #Drive_OCR(body).update(id)
         try:
-            replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(nn)-1)*170, "unit": "PT"},"width":{"magnitude": 180, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
+            replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(nn)-1)*190, "unit": "PT"},"width":{"magnitude": 180, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
             replies=Drive_OCR({  "requests": [{"createFooter": {"type": "DEFAULT"}}, ] }).update(id)
-            replies=Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][0]["createFooter"]["footerId"], "index": 0 }, "text": "                    https://t.me/Polls_Quiz" } } ] }).update(id)
-            #for x in len(replies["replies"]):
-            	#xxxx=Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "                    https://t.me/Polls_Quiz" } } ] }).update(id)
-            	#Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "*","range": {"segmentId": xxxx["replies"][x]["createFooter"]["footerId"],"startIndex"=20,"endIndex"=30}}}]})
+            #replies=Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][0]["createFooter"]["footerId"], "index": 0 }, "text": "                    https://t.me/Polls_Quiz" } } ] }).update(id)
+            for x in range(len(replies["replies"])):
+            	xxxx=Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "                    https://t.me/Polls_Quiz" } } ] }).update(id)
+            	Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "*","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":20,"endIndex":30}}}]})
             
             #await app.send_message(message.chat.id, daata)
             await app.send_document(message.chat.id, Drive_OCR(body).download(id))

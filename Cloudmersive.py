@@ -982,7 +982,7 @@ async def job2_partener2(client:Client,message:Message):
             replies=Drive_OCR({  "requests": [{"createFooter": {"type": "DEFAULT"}}, ] }).update(id)
             for x in len(replies["replies"]):
             	replies=Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "                    Polls_Quiz" } } ] }).update(id)
-            	Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "*","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex"=20,"endIndex"=30}}}]})
+            	#Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "*","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex"=20,"endIndex"=30}}}]})
             
             #await app.send_message(message.chat.id, daata)
             await app.send_document(message.chat.id, Drive_OCR(body).download(id))

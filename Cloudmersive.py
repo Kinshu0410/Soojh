@@ -744,7 +744,7 @@ async def job2_partener2(client:Client,message:Message):
         body = {"title": 'Result.pdf'}
         id=Drive_OCR(body).create()
         yy=None
-        replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 0, "unit": "PT" },"pageSize": {"height":{"magnitude": 1000, "unit": "PT"},"width":{"magnitude": 500, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
+        
         print(xx)
         li=[x for x in range(int(xx[1]),int(xx[1])+int(xx[2]))]
         #random.shuffle(li)
@@ -916,6 +916,7 @@ async def job2_partener2(client:Client,message:Message):
                 print(e)#await app.send_message(message.chat.id, (str(e)))
     		    
         try:
+        	
             await app.delete_messages(chat_id=message.chat.id,message_ids=yy)
         except:
             pass
@@ -974,8 +975,10 @@ async def job2_partener2(client:Client,message:Message):
                                'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'},{'header': 'Right'},{'header': 'Wrong'},{'header': 'Skip'}]})
         workbook.close()
         
+        
         #Drive_OCR(body).update(id)
         try:
+        	replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 0, "unit": "PT" },"pageSize": {"height":{"magnitude":nn*320, "unit": "PT"},"width":{"magnitude": 250, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
             #await app.send_message(message.chat.id, daata)
             await app.send_document(message.chat.id, Drive_OCR(body).download(id))
             Drive_OCR(body).delete(id),

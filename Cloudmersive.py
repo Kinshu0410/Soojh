@@ -980,7 +980,7 @@ async def job2_partener2(client:Client,message:Message):
                                'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'},{'header': 'Right'},{'header': 'Wrong'},{'header': 'Skip'}]})
         workbook.close()
         for x in reaaa.split("\n",que1):
-            for y in range(len(x)//30):
+            for y in range(len(x)//30+1):
             	zzzz+=1
         
         

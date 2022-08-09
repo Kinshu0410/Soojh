@@ -995,31 +995,8 @@ async def job2_partener2(client:Client,message:Message):
             	Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":20,"endIndex":30}}}]}).update(id)
             
             #await app.send_message(message.chat.id, daata)
-            Drive_OCR(body).download(id)
-            Drive_OCR(body).delete(id)
-            from PyPDF2 import PdfFileReader, PdfFileWriter 
-            pdf_file_path = 'Result.pdf' 
-            file_base_name = "Question Bank"
-            pdf = PdfFileReader(pdf_file_path) 
-            pages = [0] # page 1, 3, 5 
-            pdfWriter = PdfFileWriter() 
-            
-            for page_num in pages:
-                pdfWriter.addPage(pdf.getPage(page_num))
-                with open(file_base_name+'.pdf', 'wb') as f:
-                    pdfWriter.write(f)
-            f.close()
-            await app.send_document(chat_id=message.chat.id, document="Result.pdf")
-            await app.send_document(chat_id=message.chat.id, document=file_base_name+'.pdf')
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            await app.send_document(message.chat.id, Drive_OCR(body).download(id))
+            Drive_OCR(body).delete(id),
             await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
         except:
             for xy in range(len(text)//20+1):
@@ -1532,7 +1509,7 @@ async def start_command1(client:Client,message:Message):
 	
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
 	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
-	question=reaaa.sub(r"\n{,}(??:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
+	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
 	question=reaaa.sub(r" C.A BY ", "", question)
 	question=reaaa.sub(r"", "", question)
 	options=[o.text for o in mess.options]

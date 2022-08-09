@@ -723,7 +723,7 @@ async def job2_partener2(client:Client,message:Message):
         #xx=reaaa.sub("","",message.text)
         xx=reaaa.sub("c/","-100",xx)
         global Tt
-        
+        que1=""
         tt=""
         try:
             await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
@@ -744,7 +744,7 @@ async def job2_partener2(client:Client,message:Message):
         body = {"title": 'Result.pdf'}
         id=Drive_OCR(body).create()
         yy=None
-        
+        zzzz=0
         print(xx)
         li=[x for x in range(int(xx[1]),int(xx[1])+int(xx[2]))]
         #random.shuffle(li)
@@ -796,8 +796,10 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
             	question=reaaa.sub(r"", "", question)
             	options=[o.text for o in mess1.options]
-            	lis=[]
+            	lis=[] 
             	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","", "Q "+str(nn)+". "+question+"\n")#question+"\n")
+            	que1=que1+"\n"+Text
+            	
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
@@ -826,6 +828,7 @@ async def job2_partener2(client:Client,message:Message):
             	    options[o]=bytes('(\\u004'+str(o+1), 'utf-8').decode('unicode-escape')+") "+options[o]
             	Text="\n".join(options)+"\n"
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	que1=que1+"\n"+Text
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	mess2=(await app.send_poll(chat_id=message.chat.id,question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","","Q "+str(int(xx[2])-nn+1)+". "+question),options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
@@ -837,10 +840,12 @@ async def job2_partener2(client:Client,message:Message):
             	
             	Text=options[correct_option_id]+"✅\n"
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	que1=que1+"\n"+Text
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","", explanation)
             	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":1,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	que1=que1+"\n"+Text
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	nn+=1
@@ -974,11 +979,14 @@ async def job2_partener2(client:Client,message:Message):
                                
                                'columns': [{'header': 'Rank'},{'header': 'First Name'},{'header': 'Marks'},{'header': 'Right'},{'header': 'Wrong'},{'header': 'Skip'}]})
         workbook.close()
+        for x in reaaa.split("\n",que1):
+            for y in range(len(x)//30):
+            	zzzz+=1
         
         
         #Drive_OCR(body).update(id)
         try:
-            replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(nn)-1)*190, "unit": "PT"},"width":{"magnitude": 180, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
+            replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(zzzz))*15, "unit": "PT"},"width":{"magnitude": 180, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
             replies=Drive_OCR({  "requests": [{"createFooter": {"type": "DEFAULT"}}, ] }).update(id)
             
             for x in range(len(replies["replies"])):

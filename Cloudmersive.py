@@ -1006,9 +1006,10 @@ async def job2_partener2(client:Client,message:Message):
             
             for page_num in pages:
                 pdfWriter.addPage(pdf.getPage(page_num))
-                with open('{0}_subset.pdf'.format(file_base_name), 'wb') as f:
+                with open('{0}.pdf'.format(file_base_name), 'wb') as f:
                     pdfWriter.write(f)
             f.close()
+            await app.send_document(message.chat.id, "Result.pdf")
             await app.send_document(message.chat.id, "Question Bank.pdf")
             
             

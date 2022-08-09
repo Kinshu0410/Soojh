@@ -1005,7 +1005,7 @@ async def job2_partener2(client:Client,message:Message):
             
             for page_num in pages:
                 pdfWriter.addPage(pdf.getPage(page_num))
-                with open('{0}.pdf'.format(file_base_name), 'wb') as f:
+                with open('{0}.pdf'.format("Result"), 'wb') as f:
                     pdfWriter.write(f)
             f.close()
             print('{0}.pdf'.format(file_base_name))

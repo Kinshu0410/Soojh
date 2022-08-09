@@ -996,7 +996,8 @@ async def job2_partener2(client:Client,message:Message):
             
             #await app.send_message(message.chat.id, daata)
             Drive_OCR(body).download(id)
-            Drive_OCR(body).delete(id),            from PyPDF2 import PdfFileReader, PdfFileWriter 
+            Drive_OCR(body).delete(id)
+            from PyPDF2 import PdfFileReader, PdfFileWriter 
             pdf_file_path = 'Result.pdf' 
             file_base_name = "Question Bank"
             pdf = PdfFileReader(pdf_file_path) 

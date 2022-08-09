@@ -1008,7 +1008,7 @@ async def job2_partener2(client:Client,message:Message):
                 with open('{0}.pdf'.format(file_base_name), 'wb') as f:
                     pdfWriter.write(f)
             f.close()
-            await app.send_document(message.chat.id, '{0}.pdf'.format(file_base_name))
+            await app.send_document(chat_id=message.chat.id, document='{0}.pdf'.format(file_base_name))
             Drive_OCR(body).delete(id),
             await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
         except:

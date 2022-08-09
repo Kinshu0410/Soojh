@@ -987,6 +987,7 @@ async def job2_partener2(client:Client,message:Message):
         #Drive_OCR(body).update(id)
         try:
             replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(zzzz)+2)*10, "unit": "PT"},"width":{"magnitude": 180, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
+            print(Drive_OCR( { "requests": [ { "insertPageBreak": {"location": {"segmentId": "", "index":count}} } ] }).update(id))
             replies=Drive_OCR({  "requests": [{"createFooter": {"type": "DEFAULT"}}, ] }).update(id)
             
             for x in range(len(replies["replies"])):

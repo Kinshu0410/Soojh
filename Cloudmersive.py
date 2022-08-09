@@ -995,10 +995,10 @@ async def job2_partener2(client:Client,message:Message):
             	Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":20,"endIndex":30}}}]}).update(id)
             
             #await app.send_message(message.chat.id, daata)
-            Drive_OCR(body).download(id)
+            yoo=Drive_OCR(body).download(id)
             from PyPDF2 import PdfFileReader, PdfFileWriter 
-            pdf_file_path = 'Result.pdf' 
-            file_base_name = "Result"
+            pdf_file_path = yoo
+            file_base_name = "Question Bank"
             pdf = PdfFileReader(pdf_file_path) 
             pages = [0] # page 1, 3, 5 
             pdfWriter = PdfFileWriter() 

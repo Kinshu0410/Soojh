@@ -1027,14 +1027,14 @@ async def job2_partener2(client:Client,message:Message):
                 time.sleep(10)
 
 @app.on_message(filters.regex("^(https://t.me/|Me/).*?/\d{1,}:https://t.me/|Me/).*?/\d{1,}$") & ~ filters.chat(-1001534819469) & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
-async def job2_partener2(client:Client,message:Message):
+async def job2_partener3(client:Client,message:Message):
         xx=reaaa.sub("(https://t.me/|Me/)","",message.text)
         
         xx=reaaa.split(":",xx)
         xx[0]=reaaa.sub("^c/","-100",xx[0])
         xx[1]=reaaa.sub("^c/","-100",xx[1])
         yy=reaaa.split("/",xx[0])
-        yy.append(reaaa.split("/",xx[1])[1]
+        yy.append(reaaa.split("/",xx[1])[1])
         xx=yy
         global Tt
         que1=""
@@ -1156,6 +1156,8 @@ async def job2_partener2(client:Client,message:Message):
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	nn+=1
+            except:
+            	pass
             	
         try:
             replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(zzzz)+2)*10, "unit": "PT"},"width":{"magnitude": 210, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)

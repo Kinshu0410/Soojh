@@ -1069,8 +1069,18 @@ async def job2_partener2(client:Client,message:Message):
         for x in li:
     		#print(str(result))
     
-            
-            
+            try:
+                if Tt[message.chat.id]["s"]=="force stop":
+                    Tt[message.chat.id]["s"]=None
+                    break
+            except:
+                pass
+            try:
+                tt1=Tt[message.chat.id]["t"]
+            except:
+                Tt[message.chat.id]={}
+                Tt[message.chat.id]["t"]=30
+                tt1=30
             try:
             	try:
             		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))
@@ -1156,9 +1166,28 @@ async def job2_partener2(client:Client,message:Message):
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	nn+=1
-            except Exception as e:
-            	await app.send_message(message.chat.id, str(e))#
+            	#await asyncio.sleep(10)
+            	#mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
             	
+            	    
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            except Exception as e:
+                print(e)#await app.send_message(message.chat.id, (str(e)))
+    		    
+        
+        
+        #Drive_OCR(body).update(id)
         try:
             replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(zzzz)+2)*10, "unit": "PT"},"width":{"magnitude": 210, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
             print(Drive_OCR( { "requests": [ { "insertPageBreak": {"location": {"segmentId": "", "index":count}} } ] }).update(id))
@@ -1195,8 +1224,10 @@ async def job2_partener2(client:Client,message:Message):
             Drive_OCR(body).delete(id),
             #await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
         except:
-            pass
-
+            for xy in range(len(text)//20+1):
+                final_text='\n'.join(text[xy*20:(xy+1)*20])
+                #await app.send_message(message.chat.id, final_text)
+                time.sleep(10)
 
 async def job3(mass,client:Client,message:Message):
 		#

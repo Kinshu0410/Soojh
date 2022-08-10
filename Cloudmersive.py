@@ -996,7 +996,7 @@ async def job2_partener2(client:Client,message:Message):
             
             #await app.send_message(message.chat.id, daata)
             yoo=Drive_OCR(body).download(id)
-            #await app.send_document(chat_id=message.chat.id, document="Result.pdf")
+            await app.send_document(chat_id=message.chat.id, document="Result.pdf")
             from PyPDF2 import PdfFileReader, PdfFileWriter 
             #print(yoo)
             pdf_file_path = "Result.pdf"

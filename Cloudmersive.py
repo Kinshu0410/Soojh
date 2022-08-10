@@ -1026,6 +1026,176 @@ async def job2_partener2(client:Client,message:Message):
                 await app.send_message(message.chat.id, final_text)
                 time.sleep(10)
 
+@app.on_message(filters.regex("^(https://t.me/|Me/).*?/\d{1,}:https://t.me/|Me/).*?/\d{1,}$") & ~ filters.chat(-1001534819469) & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
+async def job2_partener2(client:Client,message:Message):
+        xx=reaaa.sub("(https://t.me/|Me/)","",message.text)
+        
+        xx=reaaa.split(":",xx)
+        xx[0]=reaaa.sub("^c/","-100",xx[0])
+        xx[1]=reaaa.sub("^c/","-100",xx[1])
+        yy=reaaa.split("/",xx[0])
+        yy.append(reaaa.split("/",xx[1])[1]
+        xx=yy
+        global Tt
+        que1=""
+        tt=""
+        try:
+            await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
+        except:
+            pass
+        
+        
+        
+        
+        mess1="vote alreddy given"
+        try:
+        	xx[0]=int(xx[0])
+        except:
+        	pass
+        result={}
+        new_result = {}
+        tmarks=0
+        nn=1
+        count=1
+        from quickstart import Drive_OCR
+        body = {"title": 'Result.pdf'}
+        id=Drive_OCR(body).create()
+        yy=None
+        zzzz=0
+        print(xx)
+        li=[x for x in range(int(xx[1]),int(xx[1])+int(xx[2]))]
+        #random.shuffle(li)
+        #await app.send_message(message.chat.id,str(li))
+        for x in li:
+    		#print(str(result))
+    
+            
+            
+            try:
+            	try:
+            		mess1=(await client.vote_poll(chat_id=xx[0], message_id=x,options=1))
+            		#await app.send_message(message.chat.id,str(mess1))
+            	except Exception as e:
+            		#await app.send_message(message.chat.id,str(mess1))
+            		#await app.send_message(message.chat.id, (str(e)))
+            		mess1=(await app.get_messages(xx[0],x))
+            		mess1=mess1.poll
+            	off_set=None
+            	question=mess1.question
+            	explanation=mess1.exp
+            	
+            	if explanation is not None:
+            	    explanation=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", explanation)
+            	    explanation=reaaa.sub(r"http.*? |@.*?( |$)|t.me.*? ", "", explanation)
+            	    
+            	#await app.send_message(message.chat.id, question)
+            	
+            	
+            	
+            	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
+            	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
+            	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
+            	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+            	question=reaaa.sub(r"^(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+            	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+            	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
+            	question=reaaa.sub(r"(\n| |){1,}(|C\.A BY)(\n| |){1,}", "", question)
+            	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
+            	question=reaaa.sub(r"", "", question)
+            	options=[o.text for o in mess1.options]
+            	lis=[] 
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","", "Q "+str(nn)+". "+question+"\n")#question+"\n")
+            	que1=que1+"\n"+Text
+            	
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":1,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
+            	for x in range(len(options)):
+            	    options[x]=reaaa.sub("^(\[|\(|)(a|b|c|d|A|B|C|D|E|F|e|f)(\]|\)|)(\. |\.|)","",options[x])
+            	    lis.append(x)#
+            	
+            	#await app.send_message(message.chat.id,str(lis))
+            	#random.shuffle(lis)
+            	#await app.send_message(message.chat.id,str(lis))
+            	
+            	correct_option_id = 0
+            	for i in range(len(mess1.options)):
+            	    if mess1.options[i].correct:
+            	        correct_option_id = i
+            	        break
+            	
+            	
+            	for i in range(len(lis)):
+            	    if lis[i]==correct_option_id:
+            	        correct_option_id = i
+            	        break
+            	options=[options[op] for op in lis]
+            	
+            	for o in range(len(options)):
+            	    options[o]=bytes('(\\u004'+str(o+1), 'utf-8').decode('unicode-escape')+") "+options[o]
+            	Text="\n".join(options)+"\n"
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	que1=que1+"\n"+Text
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
+            	#mess2=(await app.send_poll(chat_id=message.chat.id,question=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","","Q "+str(int(xx[2])-nn+1)+". "+question),options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ,open_period=tt1,explanation=explanation))
+            	
+            	if explanation is None:
+            	    explanation="\n"
+            	else:
+            	    explanation="Explanation : "+explanation+"\n\n"
+            	
+            	Text=options[correct_option_id]+"✅\n"
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	que1=que1+"\n"+Text
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","", explanation)
+            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":1,"blue":0}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	que1=que1+"\n"+Text
+            	count=count+len(Text)
+            	Drive_OCR(body).update(id)
+            	nn+=1
+            	
+        try:
+            replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(zzzz)+2)*10, "unit": "PT"},"width":{"magnitude": 210, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
+            print(Drive_OCR( { "requests": [ { "insertPageBreak": {"location": {"segmentId": "", "index":count}} } ] }).update(id))
+            replies=Drive_OCR({  "requests": [{"createFooter": {"type": "DEFAULT"}}, ] }).update(id)
+            
+            for x in range(len(replies["replies"])):
+            	if message.from_user.id==711296045:
+            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "Ramji sir                    Polls_Quiz" } } ] }).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/ramji5198"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":9}}}]}).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":29,"endIndex":39}}}]}).update(id)
+            	else:
+            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "                    Polls_Quiz" } } ] }).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":20,"endIndex":30}}}]}).update(id)
+            	
+            
+            #await app.send_message(message.chat.id, daata)
+            yoo=Drive_OCR(body).download(id)
+            #await app.send_document(chat_id=message.chat.id, document="Result.pdf")
+            from PyPDF2 import PdfFileReader, PdfFileWriter 
+            #print(yoo)
+            pdf_file_path = "Result.pdf"
+            file_base_name = "Question Bank"
+            pdf = PdfFileReader(pdf_file_path) 
+            pages = [0] # page 1, 3, 5 
+            pdfWriter = PdfFileWriter() 
+            
+            for page_num in pages:
+                pdfWriter.addPage(pdf.getPage(page_num))
+                with open(file_base_name+'.pdf', 'wb') as f:
+                    pdfWriter.write(f)
+            f.close()
+            print(file_base_name+'.pdf')
+            await app.send_document(chat_id=message.chat.id, document=file_base_name+'.pdf')
+            Drive_OCR(body).delete(id),
+            #await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)-1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:2]))
+        except:
+            pass
+
+
 async def job3(mass,client:Client,message:Message):
 		#
 		try:

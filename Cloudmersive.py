@@ -1183,6 +1183,7 @@ async def job2_partener2(client:Client,message:Message):
             	
             	
             except Exception as e:
+                print(str(xx))
                 print(e)#await app.send_message(message.chat.id, (str(e)))
     		    
         

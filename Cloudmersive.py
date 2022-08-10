@@ -1051,7 +1051,7 @@ async def job2_partener2(client:Client,message:Message):
         try:
         	xx[0]=int(xx[0])
         except:
-        	xx[0]="@"+xx[0]
+        	xx[0]=xx[0]
         result={}
         new_result = {}
         tmarks=0
@@ -1091,7 +1091,9 @@ async def job2_partener2(client:Client,message:Message):
             		mess1=(await app.get_messages(xx[0],x))
             		mess1=mess1.poll
             	off_set=None
+            	print("question")
             	question=mess1.question
+            	print("question2")
             	explanation=mess1.exp
             	
             	if explanation is not None:

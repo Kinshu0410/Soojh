@@ -1051,7 +1051,7 @@ async def job2_partener2(client:Client,message:Message):
         try:
         	xx[0]=int(xx[0])
         except:
-        	pass
+        	xx[0]="@"+xx[0]
         result={}
         new_result = {}
         tmarks=0

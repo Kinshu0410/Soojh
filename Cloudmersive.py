@@ -27,7 +27,7 @@ import requests
 #bot_token=ClientText["bot_token"],
 #api_id="13682659",
 #api_hash="b984d240c5258407ea911f042c9d75f6")
-app=Client("my_account",session_string="BQDQx-MAWEKUmgqWa1XuF6n8yb68CqOtm7llVr0RvZZQT9FE_xgRQH3_8FokcEyvrVcUY1XzIgEIRa17bJ0Xf_L9nNY7Z5MKiu1bpLPdEgjCnnlsB1G42GoCVKdf91NfIzoMWsmYoeTzqsQddlo0DTe7z4zwnE66yFc-IVdbzjAkEbbpBT0DVlstHMtMH7vhQALjftXt3DqT8YGLgkDS-Y5ZqnYjUFXgEaHD5_uLtAwx2wLkxbUPpDB2cKLtCeWm4aNbZ1aK_KlDZTngI7QlxhHwDM1XWeYqj5R_R8l4txNlUNqvQrj7YVnLMkGHwvkzhiLz0FfWdgKNLadT0hRZLfh_j4m34gAAAAAqZYQtAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
+app=Client("my_account",session_string="BQDQx-MAI8lLOodOPt3vCkazuoNcouhVZj78PBh1CPl3PVafYrEfPbxwWwNBEXWmvzk0f4sZrUAdjBPHawrvJfIhrOWhfjKoxlTBaGApU-pnv-dLeKexDfkUp8oswVHsE6gziBKkR0W9xeMzQO-X4SgZ0cgCN_cw4u_psLXO3fw8oNnAQprlDk-Vka3b_16bZry3-b2qkr0-fYqwjLLtPPHyubmgbQJbtuGROZCaMcboW0tpB1b78oPf7-IbXnhV69msnmofFEMY3qHcq15kQPYyd0udb-QsUWTLUe3if9UeC0LYbRAz3jOfWB373OYnoB5YTRSvAceCJB6SyTK_7pWT9v2l6AAAAAAqZYQtAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
 
 
 from pyrogram.enums import PollType
@@ -986,7 +986,7 @@ async def job2_partener2(client:Client,message:Message):
         
         #Drive_OCR(body).update(id)
         try:
-            replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(zzzz)+2)*10, "unit": "PT"},"width":{"magnitude": 180, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
+            replies=Drive_OCR({ "requests": [ { "updateDocumentStyle": { "documentStyle": { "background":{"color":{"color": {"rgbColor": {"red": 1,"green": 1,"blue": 1}}}},"marginTop": { "magnitude": 10, "unit": "PT" },"marginBottom": { "magnitude": 10, "unit": "PT" },"marginLeft": { "magnitude": 10, "unit": "PT" }, "marginRight": { "magnitude": 10, "unit": "PT" },"marginHeader": { "magnitude":10, "unit": "PT" },"marginFooter": { "magnitude": 10, "unit": "PT" },"pageSize": {"height":{"magnitude":(int(zzzz)+2)*10, "unit": "PT"},"width":{"magnitude": 210, "unit": "PT"}}}, "fields": "*" } }] } ).update(id)
             print(Drive_OCR( { "requests": [ { "insertPageBreak": {"location": {"segmentId": "", "index":count}} } ] }).update(id))
             replies=Drive_OCR({  "requests": [{"createFooter": {"type": "DEFAULT"}}, ] }).update(id)
             

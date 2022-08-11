@@ -1113,11 +1113,8 @@ async def job2_partener2(client:Client,message:Message):
             	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
             	question=reaaa.sub(r"(\n| |){1,}(|C\.A BY)(\n| |){1,}", "", question)
             	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
-            	if message.from_user.id==711296045:
-            	    question=question+" Ramji Sir"
-            	    Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","", "Q "+str(nn)+". "+question+"\n")#question+"\n")
-            	else:
-            	    Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","", "Q "+str(nn)+". "+question+"\n")#question+"\n")
+            	
+            	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","", "Q "+str(nn)+". "+question+"\n")#question+"\n")
             	options=[o.text for o in mess1.options]
             	lis=[] 
             	Text=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","", "Q "+str(nn)+". "+question+"\n")#question+"\n")
@@ -1160,9 +1157,13 @@ async def job2_partener2(client:Client,message:Message):
             	    explanation="\n"
             	else:
             	    explanation="Explanation : "+explanation+"\n\n"
-            	
-            	Text=options[correct_option_id]+"✅\n"
-            	body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
+            	if message.from_user.id==711296045:
+            	    question=question+" Ramji Sir"
+            	    Text=options[correct_option_id]+"✅ Ramji Sir\n"
+            	    body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)-10}}},],}
+            	else:
+            	    Text=options[correct_option_id]+"✅\n"
+            	    body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
             	que1=que1+"\n"+Text
             	count=count+len(Text)
             	Drive_OCR(body).update(id)

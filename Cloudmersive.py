@@ -1063,7 +1063,7 @@ async def job2_partener2(client:Client,message:Message):
         yy=None
         zzzz=0
         print(xx)
-        li=[x for x in range(int(xx[1]),int(xx[2]))]
+        li=[x for x in range(int(xx[1]),int(xx[2])+1)]
         #random.shuffle(li)
         #await app.send_message(message.chat.id,str(li))
         for x in li:

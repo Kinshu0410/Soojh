@@ -1157,7 +1157,7 @@ async def job2_partener2(client:Client,message:Message):
             	    explanation="\n"
             	else:
             	    explanation="Explanation : "+explanation+"\n\n"
-            	if message.from_user.id==711296045:
+            	if message.from_user.id==803662180:
             	    question=question+" Ramji Sir"
             	    Text=options[correct_option_id]+"✅ Ramji Sir\n"
             	    body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)-10}}},],}
@@ -1204,7 +1204,7 @@ async def job2_partener2(client:Client,message:Message):
             replies=Drive_OCR({  "requests": [{"createFooter": {"type": "DEFAULT"}}, ] }).update(id)
             
             for x in range(len(replies["replies"])):
-            	if message.from_user.id==711296045:
+            	if message.from_user.id==803662180:
             	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "Ramji sir                    Polls_Quiz" } } ] }).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/ramji5198"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":9}}}]}).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":29,"endIndex":39}}}]}).update(id)

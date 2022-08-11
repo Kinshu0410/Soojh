@@ -1205,12 +1205,12 @@ async def job2_partener2(client:Client,message:Message):
             
             for x in range(len(replies["replies"])):
             	if message.from_user.id==803662180:
-            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "Ramji sir                    Polls_Quiz" } } ] }).update(id)
+            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "Ramji sir                         Polls_Quiz" } } ] }).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/ramji5198"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":9}}}]}).update(id)
-            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":29,"endIndex":39}}}]}).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":34,"endIndex":44}}}]}).update(id)
             	else:
-            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "                    Polls_Quiz" } } ] }).update(id)
-            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":20,"endIndex":30}}}]}).update(id)
+            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "                                  Polls_Quiz" } } ] }).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":34,"endIndex":44}}}]}).update(id)
             	
             
             #await app.send_message(message.chat.id, daata)

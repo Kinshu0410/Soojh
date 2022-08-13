@@ -1159,9 +1159,13 @@ async def job2_partener2(client:Client,message:Message):
             	else:
             	    explanation="Explanation : "+explanation+"\n\n"
             	if message.chat.id==803662180:
-            	    question=question+" Ramji Sir"
+            	    #question=question+" Ramji Sir"
             	    Text=options[correct_option_id]+"✅ Ramji Sir\n"
             	    body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)-10}}},],}
+            	elif message.chat.id==1252965850:
+            	    #question=question+" by J S"
+            	    Text=options[correct_option_id]+"✅ by J S\n"
+            	    body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)-7}}},],}
             	else:
             	    Text=options[correct_option_id]+"✅\n"
             	    body={"requests":[{"insertText":{"text":Text,"location":{"segmentId":"","index":count},},},{"updateTextStyle":{"textStyle":{"foregroundColor":{"color":{"rgbColor":{"red":0,"green":0,"blue":1}}}},"fields":"*","range":{"segmentId":"","startIndex":count,"endIndex":count+len(Text)}}},],}
@@ -1210,12 +1214,12 @@ async def job2_partener2(client:Client,message:Message):
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/ramji5198"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":9}}}]}).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":34,"endIndex":44}}}]}).update(id)
             	elif message.chat.id==1252965850:
-            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "राजस्थान अध्ययन                         Polls_Quiz" } } ] }).update(id)
+            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "राजस्थान अध्ययन                    Polls_Quiz" } } ] }).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/+Q3DQxXd8etFiNzg1"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":14}}}]}).update(id)
-            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":39,"endIndex":49}}}]}).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":34,"endIndex":44}}}]}).update(id)
             	else:
             	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "\nअगर आपको Quiz अच्छी लगीं हो तो join कीजिए Polls_Quiz" } } ] }).update(id)
-            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":43,"endIndex":53}}}]}).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":43,"endIndex":48}}}]}).update(id)
             	
             
             #await app.send_message(message.chat.id, daata)

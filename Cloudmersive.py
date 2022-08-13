@@ -991,13 +991,13 @@ async def job2_partener2(client:Client,message:Message):
             replies=Drive_OCR({  "requests": [{"createFooter": {"type": "DEFAULT"}}, ] }).update(id)
             
             for x in range(len(replies["replies"])):
-            	if message.from_user.id==711296045:
+            	if message.from_user.id==71129645:
             	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "Ramji sir                    Polls_Quiz" } } ] }).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/ramji5198"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":9}}}]}).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":29,"endIndex":39}}}]}).update(id)
             	else:
-            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "                    Polls_Quiz" } } ] }).update(id)
-            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":20,"endIndex":30}}}]}).update(id)
+            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "अगर आपको Quiz अच्छी लगीं हो तो join कीजिए Polls_Quiz" } } ] }).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":52,"endIndex":62}}}]}).update(id)
             	
             
             #await app.send_message(message.chat.id, daata)

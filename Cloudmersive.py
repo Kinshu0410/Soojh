@@ -1209,7 +1209,7 @@ async def job2_partener2(client:Client,message:Message):
             	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "Ramji sir                         Polls_Quiz" } } ] }).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/ramji5198"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":9}}}]}).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":34,"endIndex":44}}}]}).update(id)
-            	if message.chat.id==803662180:
+            	elif message.chat.id==1252965850:
             	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "राजस्थान अध्ययन                         Polls_Quiz" } } ] }).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/+Q3DQxXd8etFiNzg1"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":14}}}]}).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":39,"endIndex":49}}}]}).update(id)

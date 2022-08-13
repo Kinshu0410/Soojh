@@ -997,7 +997,7 @@ async def job2_partener2(client:Client,message:Message):
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":29,"endIndex":39}}}]}).update(id)
             	else:
             	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "अगर आपको Quiz अच्छी लगीं हो तो join कीजिए Polls_Quiz" } } ] }).update(id)
-            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":51,"endIndex":61}}}]}).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":30,"endIndex":50}}}]}).update(id)
             	
             
             #await app.send_message(message.chat.id, daata)
@@ -1174,7 +1174,7 @@ async def job2_partener2(client:Client,message:Message):
             	count=count+len(Text)
             	Drive_OCR(body).update(id)
             	nn+=1
-            	#await asyncio.sleep(10)
+            	await asyncio.sleep(5)
             	#mess1=await client.forward_messages(chat_id=-608479342,from_chat_id=message.chat.id,message_ids=mess2.id)
             	
             	    
@@ -1210,8 +1210,8 @@ async def job2_partener2(client:Client,message:Message):
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/ramji5198"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":0,"endIndex":9}}}]}).update(id)
             	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":34,"endIndex":44}}}]}).update(id)
             	else:
-            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "                                           Polls_Quiz" } } ] }).update(id)
-            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":43,"endIndex":53}}}]}).update(id)
+            	    Drive_OCR( { "requests": [ { "insertText": { "location": { "segmentId": replies["replies"][x]["createFooter"]["footerId"], "index": 0 }, "text": "अगर आपको Quiz अच्छी लगीं हो तो join कीजिए Polls_Quiz" } } ] }).update(id)
+            	    Drive_OCR( { "requests": [{"updateTextStyle": {"textStyle": {"link": {"url": "https://t.me/Polls_Quiz"}},"fields": "link","range": {"segmentId": replies["replies"][x]["createFooter"]["footerId"],"startIndex":30,"endIndex":50}}}]}).update(id)
             	
             
             #await app.send_message(message.chat.id, daata)

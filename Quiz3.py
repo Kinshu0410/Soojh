@@ -2588,6 +2588,12 @@ def gft(update,context):
 	
 	return AA
     
+def photo_2(update,context):
+	file_id = update.message.photo[-1]
+	newFile = update.context.bot.getFile(file_id)
+	newFile.download('test.jpg')
+	
+	bot.sendMessage(chat_id=update.message.chat_id, text="download succesfull")
 
 def gfph(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))

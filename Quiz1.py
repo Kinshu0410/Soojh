@@ -2481,11 +2481,11 @@ def call8(update,context):
 
 def gfm(update,context):
     global data
-    info = update.message.text
+    info1 = update.message.text
     context.bot.send_message(chat_id=update.message.chat.id,text="title:\ndiscription: ")
     data[update.message.from_user.id]={}
-    data[update.message.from_user.id]["title"]=reaaa.split("\n",info)[0]
-    data[update.message.from_user.id]["discription"]=reaaa.split("\n",info)[1:]
+    data[update.message.from_user.id]["title"]=reaaa.split("\n",info1)[0]
+    data[update.message.from_user.id]["discription"]=reaaa.split("\n",info1)[1:]
     data[update.message.from_user.id]["pack"]=[]
     update.message.reply_text(str(data))
     return AA

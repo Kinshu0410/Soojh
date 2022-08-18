@@ -33,8 +33,8 @@ async def polltotext(actual_poll,update, context):
     if ex is None:
         ex=""
     else:
-        ex=reaaa.sub(r"\@.*+\s", "", ex)
-        ex=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", ex)
+        ex=reaaa.sub(r"\@.*?(\n| |$)", "", ex)
+        ex=reaaa.sub(r"(http|ftp|https|t\.me|tg).*?(\n| |$)", "", ex)
     
     Ex=str(ex)        #ex=ex
     #update.message.reply_text(ex)

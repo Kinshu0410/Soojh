@@ -2543,7 +2543,8 @@ def done(update: Update, _: CallbackContext) -> int:
     xx=0
     try:
     	from quickstart import Drive_OCR
-    	id=Drive_OCR({ "title":data[update.message.from_user.id]["title"],"document_title": data[update.message.from_user.id]["discription"]} ).google_form_create()
+    	update.message.reply_text(str(data[update.message.from_user.id]["title"]))
+    	id=Drive_OCR({"title":data[update.message.from_user.id]["title"],"document_title": data[update.message.from_user.id]["title"]} ).google_form_create()
     	update.message.reply_text(str(id))
     	update.message.reply_text(id["responderUri"])
     	id=id["formId"]

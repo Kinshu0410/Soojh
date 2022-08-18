@@ -2543,7 +2543,7 @@ def done(update: Update, _: CallbackContext) -> int:
     xx=0
     try:
     	from quickstart import Drive_OCR
-    	id, doc=Drive_OCR(data[update.message.from_user.id]["title"]).google_form_create()
+    	id, doc=Drive_OCR({ "title":data[update.message.from_user.id]["title"],"document_title": data[update.message.from_user.id]["discription"]} ).google_form_create()
     	update.message.reply_text(doc)
     	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"}},]
     	pack=data[update.message.from_user.id]["pack"]

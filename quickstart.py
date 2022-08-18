@@ -80,7 +80,7 @@ class Drive_OCR:
         
         service = build('forms', 'v1', credentials=creds)
     
-        body={   "info": { "title":self.filename,"document_title": self.filename  } }#self.filename}}]}
+        body={"info":self.filename}]}
             
         doc = service.forms().create(body=body).execute()
         drive_service = build('drive', 'v3', credentials=creds)

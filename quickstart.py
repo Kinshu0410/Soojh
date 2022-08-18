@@ -53,7 +53,7 @@ class Drive_OCR:
         
         return doc
         
-    def geegle_form_create(self) -> str:
+    def google_form_create(self) -> str:
         """Shows basic usage of the Drive v3 API.
         Prints the names and ids of the first 10 files the user has access to.
         """
@@ -80,7 +80,7 @@ class Drive_OCR:
         
         service = build('forms', 'v1', credentials=creds)
     
-        body={   "info": { "title":"g","document_title": "gg"   } }#self.filename}}]}
+        body={   "info": { "title":self.filename,"document_title": self.filename  } }#self.filename}}]}
             
         doc = service.forms().create(body=body).execute()
         drive_service = build('drive', 'v3', credentials=creds)
@@ -97,7 +97,7 @@ class Drive_OCR:
         fields='id, parents'
     ).execute()
         print(file)
-        return doc.get('formId'), doc
+        return doc.get('formId'), doc.get('responderUri')
         
     def google_form_update(self,id) -> str:
         """Shows basic usage of the Drive v3 API.

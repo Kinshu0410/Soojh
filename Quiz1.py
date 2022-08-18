@@ -2487,7 +2487,7 @@ def gfm(update,context):
     data[update.message.from_user.id]["title"]=reaaa.split("\n",info)[0]
     data[update.message.from_user.id]["discription"]=reaaa.split("\n",info)[1:]
     data[update.message.from_user.id]["pack"]=[]
-    
+    update.message.reply_text(str(data))
     return AA
 
 def gfp(update,context):

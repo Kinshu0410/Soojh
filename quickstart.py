@@ -1,4 +1,6 @@
-# first import all required Module
+#!/usr/bin/python
+
+import json
 import io
 import re as reaaa
 import pickle
@@ -16,6 +18,119 @@ class Drive_OCR:
         self.pickle = "token.pickle"
         #print(self.filename)
 
+    def google_form_get(self,id) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
+
+        
+        service = build('forms', 'v1', credentials=creds)
+    
+        body =body={ "requests": self.filename}
+            
+        doc = service.forms().get(body=body,formId=id).execute()
+        
+        
+        
+        return doc
+        
+    def geegle_form_create(self) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
+
+        
+        service = build('forms', 'v1', credentials=creds)
+    
+        body={   "info": { "title":"g","document_title": "gg"   } }#self.filename}}]}
+            
+        doc = service.forms().create(body=body).execute()
+        drive_service = build('drive', 'v3', credentials=creds)
+        file_id = doc.get('formId')
+        folder_id = "10qRK4F2JWB6rzxo9ZsSOL-tiG6UsLNoD"
+        file = drive_service.files().get(fileId=file_id, fields='parents').execute()
+        print(file)
+        previous_parents = ",".join(file.get('parents'))
+        print(previous_parents)
+        file = drive_service.files().update(
+        fileId=file_id,
+        addParents=folder_id,
+        removeParents=previous_parents,
+        fields='id, parents'
+    ).execute()
+        print(file)
+        return doc.get('formId'), doc
+        
+    def google_form_update(self,id) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
+
+        
+        service = build('forms', 'v1', credentials=creds)
+    
+        body={ "requests": self.filename}
+            
+        doc = service.forms().batchUpdate(body=body,formId=id).execute()
+        return doc
+        
     def create(self) -> str:
         """Shows basic usage of the Drive v3 API.
         Prints the names and ids of the first 10 files the user has access to.

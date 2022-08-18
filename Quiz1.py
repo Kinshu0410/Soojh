@@ -2512,12 +2512,12 @@ def gft(update,context):
 	global data
 	print(update)
 	if update.message.reply_to_message:
-		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
+		text = update.message.text
 		data[update.message.from_user.id]["pack"][-1]["que"]=text
 		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Question Updated...")
 		
 	else:
-		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
+		text = update.message.text
 		data[update.message.from_user.id]["pack"][-1]["exp"]=text
 		
 		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Explanation Updated...")
@@ -2610,7 +2610,7 @@ def main() -> None:
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
             AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),],
-            BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
+            BB:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfm)]
         },
         fallbacks=[CommandHandler('done', done)],
     )

@@ -97,7 +97,7 @@ class Drive_OCR:
         fields='id, parents'
     ).execute()
         print(file)
-        return doc.get('formId'), doc.get('responderUri')
+        return doc
         
     def google_form_update(self,id) -> str:
         """Shows basic usage of the Drive v3 API.

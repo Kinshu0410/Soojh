@@ -2548,7 +2548,7 @@ def p_b(update,context):
 def gfph(update,context):
 	global data
 
-	data[update.message.from_user.id]["pack"].append({"page_braker":{},"que":update.message.text})
+	data[update.message.from_user.id]["pack"].append({"page_braker":True,"que":update.message.text})
 	return AA
 	
 	

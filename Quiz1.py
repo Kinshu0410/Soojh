@@ -2569,14 +2569,16 @@ def done(update,context):
     	pack=data[update.message.from_user.id]["pack"]
     	for x in range(len(pack)):
     	    try:
+    	        question=reaaa.split("\n",pack[x]["que"])[0]
     	        description=reaaa.split("\n",pack[x]["que"])[1:]
     	    except:
+    	        question=""
     	        description=""
     	    if pack[x].get("page_braker",False):
     	        pass
     	    elif pack[x].get("photo",False):
     	        option_choice=[{"value":x} for x in pack[x]["opt"]]
-    	        item=[{"createItem":{"item":{"title":reaaa.split("\n",pack[x]["que"])[0],"description":reaaa.split("\n",pack[x]["que"])[1:],"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}},"image": {"sourceUri": pack[x]["photo"],"altText": "testing","properties": {"alignment": "CENTER"}}}},"location": {"index":x}}}]
+    	        item=[{"createItem":{"item":{"title":question,"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}},"image": {"sourceUri": pack[x]["photo"],"altText": "testing","properties": {"alignment": "CENTER"}}}},"location": {"index":x}}}]
     	    else:
     	
     	        #update.message.reply_text("else playing")
@@ -2584,7 +2586,7 @@ def done(update,context):
     	        
     	        option_choice=[{"value":x} for x in pack[x]["opt"]]
     
-    	        item=[{"createItem":{"item":{"title":reaaa.split("\n",pack[x]["que"])[0],"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
+    	        item=[{"createItem":{"item":{"title":question,"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
     	        
     	        
     	    Drive_OCR(item).google_form_update(id=id)

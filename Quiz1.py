@@ -2577,9 +2577,9 @@ def done(update,context):
     	        description=""
     	    if pack[x].get("page_braker",False):
     	        try:
-    	            Drive_OCR( [{"createItem":{"item":{"pageBreakItem":{},"title":reaaa.split("\n",pack[x]["que"])[0] ,"description":"\n".join(reaaa.split("\n",pack[x]["que"])[1:])},"location": {"index":x}}}]).google_form_update(id=id)
+    	            item=( [{"createItem":{"item":{"pageBreakItem":{},"title":reaaa.split("\n",pack[x]["que"])[0] ,"description":"\n".join(reaaa.split("\n",pack[x]["que"])[1:])},"location": {"index":x}}}])
     	        except:
-    	            Drive_OCR( [{"createItem":{"item":{"pageBreakItem":{},"title":pack[x]["que"] ,"description":""},"location": {"index":x}}}]).google_form_update(id=id)
+    	            item=( [{"createItem":{"item":{"pageBreakItem":{},"title":pack[x]["que"] ,"description":""},"location": {"index":x}}}])
     	    elif pack[x].get("photo",False):
     	        option_choice=[{"value":x} for x in pack[x]["opt"]]
     	        item=[{"createItem":{"item":{"title":question,"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}},"image": {"sourceUri": pack[x]["photo"],"altText": "testing","properties": {"alignment": "CENTER"}}}},"location": {"index":x}}}]

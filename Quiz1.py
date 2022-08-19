@@ -2588,7 +2588,7 @@ def done(update,context):
     	        option_choice=[{"value":y} for y in pack[x]["opt"]]
     	        update.message.reply_text(str(option_choice))
     	        item=[{"createItem":{"item": {
-    "title": question,'description':description,
+    "title": question,
     "questionItem": {
         "question": {
             "required": True,

@@ -2571,7 +2571,7 @@ def done(update,context):
     	for x in range(len(pack)):
     	    try:
     	        question=reaaa.split("\n",pack[x]["que"])[0]
-    	        description=reaaa.split("\n",pack[x]["que"])[1:]
+    	        description="\n".join(reaaa.split("\n",pack[x]["que"])[1:])
     	    except:
     	        question=pack[x]["que"]
     	        description=""
@@ -2588,7 +2588,7 @@ def done(update,context):
     	        option_choice=[{"value":y} for y in pack[x]["opt"]]
     	        update.message.reply_text(str(option_choice))
     	        item=[{"createItem":{"item": {
-    "title": question,
+    "title": question,"description":description,
     "questionItem": {
         "question": {
             "required": True,

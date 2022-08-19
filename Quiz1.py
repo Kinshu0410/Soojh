@@ -2501,8 +2501,8 @@ def gfp(update,context):
     context.bot.send_message(chat_id=update.message.chat.id,text=question)
     context.bot.send_message(chat_id=update.message.chat.id,text=str(exp))
     
-    data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id})
-    context.bot.send_message(chat_id=update.message.chat.id,text="Question added sucessful\n\nyou can edit Question simply send me a text or send a photo with Caption\nyou can edit Explanation simply send me a tag text")
+    #data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id})
+    #context.bot.send_message(chat_id=update.message.chat.id,text="Question added sucessful\n\nyou can edit Question simply send me a text or send a photo with Caption\nyou can edit Explanation simply send me a tag text")
     
     
     
@@ -2549,6 +2549,7 @@ def gfph(update,context):
 	global data
 
 	data[update.message.from_user.id]["pack"].append({"page_braker":True,"que":update.message.text})
+	update.message.reply_text("Send me a poll first after this do as down blow.\n\n1. Edit last poll Question : send TEXT\n2. Edit last poll Explanation : send Tag TEXT\n3. Insert photo last poll : PHOTO(now unavailable)\n\n4. Add new Question: send POLL\n\n5. Create Page braker: /page_braker\n\n6. Finish Quiz: /done\n\nThis is all settings")
 	return AA
 	
 	
@@ -2589,7 +2590,7 @@ def done(update,context):
     	        
     	        
     	        option_choice=[{"value":y} for y in pack[x]["opt"]]
-    	        update.message.reply_text(str(option_choice))
+    	        #update.message.reply_text(str(option_choice))
     	        item=[{"createItem":{"item": {
     "title": question,"description":description,
     "questionItem": {

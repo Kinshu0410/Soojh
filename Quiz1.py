@@ -2565,7 +2565,7 @@ def done(update,context):
     	#update.message.reply_text(str(id))
     	update.message.reply_text(id["responderUri"])
     	id=id["formId"]
-    	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"}},]
+    	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"}}]
     	pack=data[update.message.from_user.id]["pack"]
     	for x in range(len(pack)):
     	    try:
@@ -2586,7 +2586,32 @@ def done(update,context):
     	        
     	        option_choice=[{"value":y} for y in pack[x]["opt"]]
     
-    	        item=[{"createItem":{"item":{"title":"WhichofthesesingerswasnotamemberofDestiny'sChild?","questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":"Rihanna"}]},"whenRight":{"text":"Yougotit!"},"whenWrong":{"text":"Sorry,that'swrong"}},"choiceQuestion":{"type":"RADIO","options":[{"value":"KellyRowland"},{"value":"Beyoncé"},{"value":"Rihanna"},{"value":"MichelleWilliams"}]}}}},"location": {"index":0}}}]
+    	        item={"createItem":{"item": {
+    "title": "Which of these singers was not a member of Destiny's Child?",'description':'chfhgjgjgjg\ngigigigig',
+    "questionItem": {
+        "question": {
+            "required": True,
+            "grading": {
+                "pointValue": 2,
+                "correctAnswers": {
+                    "answers": [{"value": "Rihanna"}]
+                },
+                "whenRight": {"text": "You got it!"},
+                "whenWrong": {"text": "Sorry, that's wrong"}
+            },
+            "choiceQuestion": {
+                "type": "RADIO",
+                "options": [
+                    {"value": "Kelly Rowland"},
+                    {"value": "Beyoncé"},
+                    {"value": "Rihanna"},
+                    {"value": "Michelle Williams"}
+                ]
+            }
+        }
+    }
+},"location": {"index":0}}}
+]
 
 #{"createItem":{"item":{"title":question,"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
     	        

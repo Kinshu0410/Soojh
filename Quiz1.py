@@ -2572,7 +2572,7 @@ def done(update,context):
     	        question=reaaa.split("\n",pack[x]["que"])[0]
     	        description=reaaa.split("\n",pack[x]["que"])[1:]
     	    except:
-    	        question=""
+    	        question=pack[x]["que"]
     	        description=""
     	    if pack[x].get("page_braker",False):
     	        pass
@@ -2584,7 +2584,7 @@ def done(update,context):
     	        #update.message.reply_text("else playing")
     	        
     	        
-    	        option_choice=[{"value":x} for x in pack[x]["opt"]]
+    	        option_choice=[{"value":y} for y in pack[x]["opt"]]
     
     	        item=[{"createItem":{"item":{"title":"WhichofthesesingerswasnotamemberofDestiny'sChild?","questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":"Rihanna"}]},"whenRight":{"text":"Yougotit!"},"whenWrong":{"text":"Sorry,that'swrong"}},"choiceQuestion":{"type":"RADIO","options":[{"value":"KellyRowland"},{"value":"Beyoncé"},{"value":"Rihanna"},{"value":"MichelleWilliams"}]}}}},"location": {"index":0}}}]
 

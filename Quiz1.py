@@ -2536,8 +2536,24 @@ def photo_2(update,context):
 	context.bot.sendMessage(chat_id=update.message.chat_id, text="photo Add sucessful to Last Question.")
 	return AA
 
+def p_b(update,context):
+	context.bot.send_message(chat_id=update.message.chat.id,text="send me Page\ntitle\ndiscription")
+	return CC
+	
+	
+	
+	
+	
+
 def gfph(update,context):
-	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))
+	global data
+
+	data[update.message.from_user.id]["pack"].append({"page_braker":{'title':reaaa.split("\n",info1)[0],"discription":"\n".join(reaaa.split("\n",info1)[1:])}})
+	return AA
+	
+	
+	
+	
 
 def done(update,context):
     xx=0
@@ -2554,7 +2570,7 @@ def done(update,context):
     	for x in range(len(pack)):
     	    if pack[x].get("page_braker",False):
     	        pass
-    	    elif pack[x]get("photo",False):
+    	    elif pack[x].get("photo",False):
     	        option_choice=[{"value":x} for x in pack[x]["opt"]]
     	        item=[{"createItem":{"item":{"title":reaaa.split("\n",pack[x]["que"])[0],"description":reaaa.split("\n",pack[x]["que"])[1:],"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}},"image": {"sourceUri": pack[x]["photo"],"altText": "testing","properties": {"alignment": "CENTER"}}}},"location": {"index":x}}}]
     	    else:
@@ -2581,8 +2597,7 @@ def photo_2(update,context):
 	
 	bot.sendMessage(chat_id=update.message.chat_id, text="download succesfull")
 
-def gfph(update,context):
-	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))
+
 
 
 
@@ -2596,7 +2611,8 @@ def main() -> None:
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
             AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),],
-            BB:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfm)]
+            BB:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfm),CommandHandler('page_braker', p_b)],
+            CC:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfph)]
         },
         fallbacks=[CommandHandler('done', done)],
     )

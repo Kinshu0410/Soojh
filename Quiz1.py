@@ -2586,7 +2586,7 @@ def done(update,context):
     	        
     	        option_choice=[{"value":x} for x in pack[x]["opt"]]
     
-    	        item=[{"createItem":{"item":{"title":question,"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
+    	        item=[{"createItem":{"item":{"title":question,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
     	        
     	        
     	    Drive_OCR(item).google_form_update(id=id)

@@ -2575,9 +2575,13 @@ def done(update,context):
     	        item=[{"createItem":{"item":{"title":reaaa.split("\n",pack[x]["que"])[0],"description":reaaa.split("\n",pack[x]["que"])[1:],"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}},"image": {"sourceUri": pack[x]["photo"],"altText": "testing","properties": {"alignment": "CENTER"}}}},"location": {"index":x}}}]
     	    else:
     	
-    	        update.message.reply_text("else playing")
+    	        #update.message.reply_text("else playing")
+    	        description=reaaa.split("\n",pack[x]["que"])[1:]
+    	        if description is None:
+    	            description=""
     	        option_choice=[{"value":x} for x in pack[x]["opt"]]
-    	        item=[{"createItem":{"item":{"title":reaaa.split("\n",pack[x]["que"])[0],"description":reaaa.split("\n",pack[x]["que"])[1:],"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
+    
+    	        item=[{"createItem":{"item":{"title":reaaa.split("\n",pack[x]["que"])[0],"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
     	        
     	        
     	    Drive_OCR(item).google_form_update(id=id)

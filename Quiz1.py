@@ -2501,7 +2501,7 @@ def gfp(update,context):
     context.bot.send_message(chat_id=update.message.chat.id,text=question)
     context.bot.send_message(chat_id=update.message.chat.id,text=str(exp))
     
-    data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id,"photo":None,"caption":None})
+    data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id})
     context.bot.send_message(chat_id=update.message.chat.id,text="Question added sucessful\n\nyou can edit Question simply send me a text or send a photo with Caption\nyou can edit Explanation simply send me a tag text")
     
     
@@ -2610,8 +2610,8 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),],
-            BB:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfm),CommandHandler('page_braker', p_b)],
+            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),CommandHandler('page_braker', p_b)],
+            BB:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfm)],
             CC:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfph)]
         },
         fallbacks=[CommandHandler('done', done)],

@@ -2587,34 +2587,9 @@ def done(update,context):
     	        
     	        option_choice=[{"value":y} for y in pack[x]["opt"]]
     	        update.message.reply_text(str(option_choice))
-    	        item=[{"createItem":{"item": {
-    "title": "Which of these singers was not a member of Destiny's Child?",'description':'chfhgjgjgjg\ngigigigig',
-    "questionItem": {
-        "question": {
-            "required": True,
-            "grading": {
-                "pointValue": 2,
-                "correctAnswers": {
-                    "answers": [{"value": "Rihanna"}]
-                },
-                "whenRight": {"text": "You got it!"},
-                "whenWrong": {"text": "Sorry, that's wrong"}
-            },
-            "choiceQuestion": {
-                "type": "RADIO",
-                "options": [
-                    {"value": "Kelly Rowland"},
-                    {"value": "Beyoncé"},
-                    {"value": "Rihanna"},
-                    {"value": "Michelle Williams"}
-                ]
-            }
-        }
-    }
-},"location": {"index":0}}}
-]
+    	        item=[{"createItem":{"item":{"title":question,"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
 
-#{"createItem":{"item":{"title":question,"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]
+
     	        
     	        
     	    Drive_OCR(item).google_form_update(id=id)

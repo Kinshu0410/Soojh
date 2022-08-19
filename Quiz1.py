@@ -2476,16 +2476,16 @@ AA,BB,CC= range(3)
 data={}
 @run_async
 def call8(update,context):
-    context.bot.send_message(chat_id=update.message.chat.id,text="title: ...h \n discription: any thing")
+    context.bot.send_message(chat_id=update.message.chat.id,text="title: ...h \n description: any thing")
     return BB
 
 def gfm(update,context):
     global data
     info1 = update.message.text
-    context.bot.send_message(chat_id=update.message.chat.id,text="title:\ndiscription: ")
+    context.bot.send_message(chat_id=update.message.chat.id,text="title:\ndescription: ")
     data[update.message.from_user.id]={}
     data[update.message.from_user.id]["title"]=reaaa.split("\n",info1)[0]
-    data[update.message.from_user.id]["discription"]="\n".join(reaaa.split("\n",info1)[1:])
+    data[update.message.from_user.id]["description"]="\n".join(reaaa.split("\n",info1)[1:])
     data[update.message.from_user.id]["pack"]=[]
     update.message.reply_text(str(data))
     return AA
@@ -2537,7 +2537,7 @@ def photo_2(update,context):
 	return AA
 
 def p_b(update,context):
-	context.bot.send_message(chat_id=update.message.chat.id,text="send me Page\ntitle\ndiscription")
+	context.bot.send_message(chat_id=update.message.chat.id,text="send me Page\ntitle\ndescription")
 	return CC
 	
 	
@@ -2548,7 +2548,7 @@ def p_b(update,context):
 def gfph(update,context):
 	global data
 
-	data[update.message.from_user.id]["pack"].append({"page_braker":{'title':reaaa.split("\n",info1)[0],"discription":"\n".join(reaaa.split("\n",info1)[1:])}})
+	data[update.message.from_user.id]["pack"].append({"page_braker":{'title':reaaa.split("\n",info1)[0],"description":"\n".join(reaaa.split("\n",info1)[1:])}})
 	return AA
 	
 	

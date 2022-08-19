@@ -2585,8 +2585,8 @@ def done(update,context):
     	        
     	        
     	        option_choice=[{"value":y} for y in pack[x]["opt"]]
-    
-    	        item={"createItem":{"item": {
+    	        update.message.reply_text(str(option_choice))
+    	        item=[{"createItem":{"item": {
     "title": "Which of these singers was not a member of Destiny's Child?",'description':'chfhgjgjgjg\ngigigigig',
     "questionItem": {
         "question": {

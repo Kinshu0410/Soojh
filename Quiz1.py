@@ -2606,7 +2606,7 @@ def done(update,context):
             },
             "choiceQuestion": {
                 "type": "RADIO",
-                "options": option_choice}}}},"location": {"index":0}}}]
+                "options": option_choice}}}},"location": {"index":x}}}]
 
 
     	        

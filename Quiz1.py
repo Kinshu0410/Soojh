@@ -2539,7 +2539,7 @@ def photo_2(update,context):
 def gfph(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))
 
-def done(update: Update, _: CallbackContext) -> int:
+def done(update,context):
     xx=0
     try:
     	from quickstart import Drive_OCR
@@ -2584,24 +2584,6 @@ def photo_2(update,context):
 def gfph(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))
 
-def done(update: Update, _: CallbackContext) -> int:
-    user = update.message.from_user
-    logger.info("User %s canceled the conversation.", user.first_name)
-    try:
-    	from google_form import main4
-    	main4(data+"\n}")
-    	update.message.reply_text(
-        'https://script.google.com/home/projects/1mWCV-kS59FbRsalsaMRH_TvvAYJLWuAUUInWTzBYFgBYgSEEQhwxd8f1/edit', reply_markup=ReplyKeyboardRemove()
-    )
-    except Exception as e :
-    	update.message.reply_text(str(e))
-    	update.message.reply_text(str(data))
-    	
-    
-    
-    
-
-    return ConversationHandler.END
 
 
 def main() -> None:

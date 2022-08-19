@@ -2569,7 +2569,7 @@ def done(update,context):
     	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"}}]
     	Drive_OCR(item).google_form_update(id=id)
     	pack=data[update.message.from_user.id]["pack"]
-    	item=[{"createItem":{"item": {"title": "Your Name","questionItem": {"question": {"required": True,"grading": {"pointValue": 0},"textQuestion":{"paragraph": False}}}},"location": {"index":0}}}]
+    	item=[{"createItem":{"item": {"title": "Your Name","questionItem": {"question": {"required": True,"textQuestion":{"paragraph": False}}}},"location": {"index":0}}}]
     	Drive_OCR(item).google_form_update(id=id)
     	for x in range(len(pack)):
     	    x+=1

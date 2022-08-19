@@ -2568,6 +2568,10 @@ def done(update,context):
     	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"}},]
     	pack=data[update.message.from_user.id]["pack"]
     	for x in range(len(pack)):
+    	    try:
+    	        description=reaaa.split("\n",pack[x]["que"])[1:]
+    	    except:
+    	        description=""
     	    if pack[x].get("page_braker",False):
     	        pass
     	    elif pack[x].get("photo",False):
@@ -2576,9 +2580,8 @@ def done(update,context):
     	    else:
     	
     	        #update.message.reply_text("else playing")
-    	        description=reaaa.split("\n",pack[x]["que"])[1:]
-    	        if description is None:
-    	            description=""
+    	        
+    	        
     	        option_choice=[{"value":x} for x in pack[x]["opt"]]
     
     	        item=[{"createItem":{"item":{"title":reaaa.split("\n",pack[x]["que"])[0],"description":description,"questionItem":{"question":{"required":True,"grading":{"pointValue":2,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]+1]}]},"whenRight":{"text":"Explanation : "+str(pack[x]["exp"])},"whenWrong":{"text":pack[x]["opt"][pack[x]["cor"]+1]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}}}},"location": {"index":x}}}]

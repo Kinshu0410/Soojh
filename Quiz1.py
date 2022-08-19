@@ -2487,7 +2487,7 @@ def gfm(update,context):
     data[update.message.from_user.id]["title"]=reaaa.split("\n",info1)[0]
     data[update.message.from_user.id]["description"]="\n".join(reaaa.split("\n",info1)[1:])
     data[update.message.from_user.id]["pack"]=[]
-    update.message.reply_text(str(data))
+    #update.message.reply_text(str(data))
     return AA
 
 def gfp(update,context):
@@ -2549,7 +2549,7 @@ def gfph(update,context):
 	global data
 
 	data[update.message.from_user.id]["pack"].append({"page_braker":True,"que":update.message.text})
-	update.message.reply_text("Send me a poll first after this do as down blow.\n\n1. Edit last poll Question : send TEXT\n2. Edit last poll Explanation : send Tag TEXT\n3. Insert photo last poll : PHOTO(now unavailable)\n\n4. Add new Question: send POLL\n\n5. Create Page braker: /page_braker\n\n6. Finish Quiz: /done\n\nThis is all settings")
+	update.message.reply_text("Send me a poll first after this do as down blow.\n\n1. Edit last poll Explanation : send TEXT\n2. Edit last poll Question : send Tag TEXT\n3. Insert photo last poll : PHOTO(now unavailable)\n\n4. Add new Question: send POLL\n\n5. Create Page braker: /page_braker\n\n6. Finish Quiz: /done\n\nThis is all settings")
 	return AA
 	
 	

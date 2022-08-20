@@ -2618,7 +2618,8 @@ def done(update,context):
 
 def photo_2(update,context):
 	global data
-	file_id = update.message.photo[-1]
+	update.message.reply_text("download succesfull")
+	file_id = update.message.photo[-1].file_id
 	newFile = update.context.bot.getFile(file_id)
 	newFile.download('test.jpg')
 	update.message.reply_text("download succesfull")

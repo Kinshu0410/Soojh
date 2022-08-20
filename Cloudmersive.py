@@ -288,7 +288,7 @@ async def crop_pdf(client:Client,message:Message):
 	file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.id),file_name=fname+".pdf")
 	print(file)
 	doc=fitz.open(file)
-	noOfPages = doc.pageCount
+	noOfPages = doc.pages()
 	
 	f=open(fname1+".txt", 'w',encoding='utf-8')
 	image_folder='/app/downloads/'

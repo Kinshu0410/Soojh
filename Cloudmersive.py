@@ -256,7 +256,8 @@ async def pdf_photo(client:Client,message:Message):
 	file=await app.download_media(await app.get_messages(message.chat.id, message.reply_to_message.id),file_name=fname+".pdf")
 	print(file)
 	doc=fitz.open(file)
-	noOfPages = doc.pageCount
+	noOfPages = doc.pages((
+
 	
 	f=open(fname1+".txt", 'w',encoding='utf-8')
 	image_folder='/app/downloads/'
@@ -371,7 +372,7 @@ async def pdf_img_textpri(client:Client,message:Message):
     	with fitz.open(file) as doc:
     		zoom = 2 
     		mat = fitz.Matrix(zoom, zoom)
-    		noOfPages = doc.pageCount
+    		noOfPages = doc.pages()
     		image_folder='/app/downloads/'
     		
     		for x in range(3):
@@ -407,7 +408,7 @@ async def pdf_img_text(client:Client,message:Message):
     	with fitz.open(file) as doc:
     		zoom = 2 
     		mat = fitz.Matrix(zoom, zoom)
-    		noOfPages = doc.pageCount
+    		noOfPages = doc.pages()
     		
     		await app.send_message(message.from_user.id,"Last Page Number = "+str(noOfPages))
     		image_folder='/app/downloads/'

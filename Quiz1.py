@@ -2524,17 +2524,7 @@ def gft(update,context):
 	
 	return AA
     
-def photo_2(update,context):
-	photo_file = update.message.photo[-1].get_file()
-	photo_file.download('test.jpg')
-	try:
-	    data[update.message.from_user.id]["pack"][-1]["photo"]=cloudinary.uploader.upload('test.jpg')["url"]
-	except Exception as e:
-	    context.bot.sendMessage(chat_id=update.message.chat_id, text=str(e))
-	if update.message.caption:
-	    data[update.message.from_user.id]["pack"][-1]["caption"]=reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.caption))
-	context.bot.sendMessage(chat_id=update.message.chat_id, text="photo Add sucessful to Last Question.")
-	return AA
+
 
 def p_b(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text="send me Page\ntitle\ndescription")
@@ -2627,13 +2617,27 @@ def done(update,context):
     return ConversationHandler.END
 
 def photo_2(update,context):
+	global data
 	file_id = update.message.photo[-1]
 	newFile = update.context.bot.getFile(file_id)
 	newFile.download('test.jpg')
+	update.message.reply_text("download succesfull")
+	photo1=photo_url('test.jpg')
+	data[update.message.from_user.id]["pack"][-1]["photo"]=photo1["url"]
 	
-	bot.sendMessage(chat_id=update.message.chat_id, text="download succesfull")
+	
+	return AA
 
-
+import cloudinary
+import cloudinary.uploader
+cloud_data=[["kinshu","543958332477526","U9d7hnl2pfF1xqJBO99jLx_rK7w"]]
+def photo_url(x):
+	try:
+		cloudinary.config( cloud_name = cloud_data[0][0], api_key = cloud_data[0][1], api_secret = cloud_data[0][2] )
+		return cloudinary.uploader.upload(x)
+		
+	except:
+		photo_url(x)
 
 
 
@@ -2646,7 +2650,7 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),CommandHandler('page_braker', p_b)],
+            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),CommandHandler('page_braker', p_b),MessageHandler(Filters.photo& ~Filters.command,photo_2)],
             BB:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfm)],
             CC:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfph)]
         },

@@ -271,7 +271,7 @@ async def pdf_photo(client:Client,message:Message):
 			page=doc.load_page(pageNo)
 			mat = fitz.Matrix(zoom, zoom)
 			pix=page.get_pixmap(matrix = mat)
-			pix.writePNG(image_folder+fname+".png")
+			pix.save(image_folder+fname+".png")
 			await app.send_photo(message.chat.id, image_folder+fname+".png")
 
 @app.on_message(filters.regex("^.cp ") & filters.private)
@@ -303,7 +303,7 @@ async def crop_pdf(client:Client,message:Message):
 			page=doc.load_page(pageNo)
 			mat = fitz.Matrix(zoom, zoom)
 			pix=page.get_pixmap(matrix = mat)
-			pix.writePNG(image_folder+fname+".png")
+			pix.save(image_folder+fname+".png")
 			from PIL import Image
 			
 			im = Image.open(image_folder+fname+".png")
@@ -379,7 +379,7 @@ async def pdf_img_textpri(client:Client,message:Message):
     		for x in range(3):
     		    page = doc.load_page(random.randint(1, noOfPages))
     		    pix = page.get_pixmap(matrix = mat)
-    		    pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
+    		    pix.save(image_folder+str(message.chat.id)+fname+".png")
     		    from PIL import Image
     		    from PIL import ImageDraw
     		    im = Image.open(image_folder+str(message.chat.id)+fname+".png")
@@ -417,7 +417,7 @@ async def pdf_img_text(client:Client,message:Message):
     			#await app.send_message(message.chat.id,str(pageNo))
     			page = doc.load_page(pageNo)
     			pix = page.get_pixmap(matrix = mat)
-    			pix.writePNG(image_folder+str(message.chat.id)+fname+".png")
+    			pix.save(image_folder+str(message.chat.id)+fname+".png")
     			f.write(str(reaaa.sub("^.*?\n.*?\n","",Drive_OCR(image_folder+str(message.chat.id)+fname+".png").main()))+"\n")
     			non+=1
     			if non%25==0:

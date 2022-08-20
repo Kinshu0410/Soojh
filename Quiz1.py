@@ -2625,7 +2625,7 @@ def photo_2(update,context):
 	update.message.reply_text("download succesfull")
 	photo1=photo_url('test.jpg')
 	data[update.message.from_user.id]["pack"][-1]["photo"]=photo1["url"]
-	cloudinary.uploader.destroy(photo1["public_id"])
+	
 	
 	
 	return AA

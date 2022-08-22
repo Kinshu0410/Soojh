@@ -2545,7 +2545,7 @@ def gfph(update,context):
 	
 	
 	
-
+@run_async
 def done(update,context):
     xx=0
     try:
@@ -2562,7 +2562,7 @@ def done(update,context):
     	item=[{"createItem":{"item": {"title": "Your Name","questionItem": {"question": {"required": True,"textQuestion":{"paragraph": False}}}},"location": {"index":0}}}]
     	Drive_OCR(item).google_form_update(id=id)
     	for x in range(len(pack)):
-    	    #x+=1
+    	    time.sleep(0.5)
     	    try:
     	        question=reaaa.split("\n",pack[x]["que"])[0]
     	        description="\n".join(reaaa.split("\n",pack[x]["que"])[1:])
@@ -2634,6 +2634,7 @@ import cloudinary
 import cloudinary.uploader
 cloud_data=[["kinshu","543958332477526","U9d7hnl2pfF1xqJBO99jLx_rK7w"]]
 def photo_url(x):
+	
 	try:
 		cloudinary.config( cloud_name = cloud_data[0][0], api_key = cloud_data[0][1], api_secret = cloud_data[0][2] )
 		return cloudinary.uploader.upload(x)

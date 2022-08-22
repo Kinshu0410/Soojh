@@ -18,6 +18,38 @@ class Drive_OCR:
         self.pickle = "token.pickle"
         #print(self.filename)
 
+    def google_sheet_create(self) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
+
+        
+        service = build('sheets', 'v4', credentials=creds)
+    
+        body=  self.filename
+            
+        doc = service.spreadsheets().create(body=body).execute()
+        return doc
+        
     def google_form_get(self,id) -> str:
         """Shows basic usage of the Drive v3 API.
         Prints the names and ids of the first 10 files the user has access to.

@@ -2539,7 +2539,7 @@ def gfph(update,context):
 	global data
 
 	data[update.message.from_user.id]["pack"].append({"page_braker":True,"que":update.message.text})
-	update.message.reply_text("Send me a poll first after this do as down blow.\n\n1. Edit last poll Explanation : send TEXT\n2. Edit last poll Question : send Tag TEXT\n3. Insert photo last poll : PHOTO(now unavailable)\n\n4. Add new Question: send POLL\n\n5. Create Page braker: /page_braker\n\n6. Finish Quiz: /done\n\nThis is all settings")
+	update.message.reply_text("Send me a poll first after this do as down blow.\n\n1. Edit last poll Explanation : send TEXT\n2. Edit last poll Question : send Tag TEXT\n3. Insert photo last poll : PHOTO\n\n4. Add new Question: send POLL\n\n5. Create Page braker: /page_braker\n\n6. Finish Quiz: /done\n\nThis is all settings")
 	return AA
 	
 	
@@ -2556,11 +2556,12 @@ def done(update,context):
     	#update.message.reply_text(str(id))
     	update.message.reply_text(id["responderUri"])
     	id=id["formId"]
-    	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"}}]
+    	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"},"updateFormInfo":{"info":{"discription":data[update.message.from_user.id]["description"]}}}]
     	Drive_OCR(item).google_form_update(id=id)
     	pack=data[update.message.from_user.id]["pack"]
     	item=[{"createItem":{"item": {"title": "Your Name","questionItem": {"question": {"required": True,"textQuestion":{"paragraph": False}}}},"location": {"index":0}}}]
     	Drive_OCR(item).google_form_update(id=id)
+    	time.sleep(120)
     	for x in range(len(pack)):
     	    time.sleep(0.5)
     	    try:

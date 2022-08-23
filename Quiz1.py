@@ -2552,10 +2552,10 @@ def done(update,context):
     	from quickstart import Drive_OCR
     	des=data[update.message.from_user.id]["description"]
     	#update.message.reply_text(str(data[update.message.from_user.id]["title"]))
-    	id=Drive_OCR({"title":data[update.message.from_user.id]["title"],"document_title": data[update.message.from_user.id]["title"]} ).google_form_create()
+    	id2=Drive_OCR({"title":data[update.message.from_user.id]["title"],"document_title": data[update.message.from_user.id]["title"]} ).google_form_create()
     	#update.message.reply_text(str(id))
-    	update.message.reply_text(id["responderUri"])
-    	id=id["formId"]
+    	update.message.reply_text(id2["responderUri"])
+    	id2=id2["formId"]
     	item=[{
       "updateFormInfo": {
         "info": {
@@ -2563,13 +2563,14 @@ def done(update,context):
         },
         "updateMask": "description"
       },}]
-    	Drive_OCR(item).google_form_update(id=id)
+    	Drive_OCR(item).google_form_update(id=id2)
     	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"},}]
     	#item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"},}]
-    	Drive_OCR(item).google_form_update(id=id)
+    	Drive_OCR(item).google_form_update(id=id2)
     	pack=data[update.message.from_user.id]["pack"]
     	item=[{"createItem":{"item": {"title": "Your Name","questionItem": {"question": {"required": True,"textQuestion":{"paragraph": False}}}},"location": {"index":0}}}]
-    	Drive_OCR(item).google_form_update(id=id)
+    	Drive_OCR(item).google_form_update(id=id2)
+    	id=id2
     	time.sleep(120)
     	for x in range(len(pack)):
     	    time.sleep(0.5)

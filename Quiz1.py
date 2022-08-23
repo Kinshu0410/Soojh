@@ -2550,7 +2550,7 @@ def done(update,context):
     xx=0
     try:
     	from quickstart import Drive_OCR
-    	#update.message.reply_text(str("ffffffff"))
+    	des=data[update.message.from_user.id]["description"]
     	#update.message.reply_text(str(data[update.message.from_user.id]["title"]))
     	id=Drive_OCR({"title":data[update.message.from_user.id]["title"],"document_title": data[update.message.from_user.id]["title"]} ).google_form_create()
     	#update.message.reply_text(str(id))
@@ -2559,7 +2559,7 @@ def done(update,context):
     	item=[{
       "updateFormInfo": {
         "info": {
-          "description": data[update.message.from_user.id]["description"],
+          "description": des,
         },
         "updateMask": "description"
       },}]

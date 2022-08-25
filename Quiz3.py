@@ -1419,6 +1419,7 @@ def poll(update, context):
     	NewVar1=reaaa.split(r"/.*",NewVar1)
     	
     	NewVar1=Drive_OCR("").google_form_get(NewVar1)
+    	context.bot.send_document(update.message.chat.id, open(NewVar1, "rb"))#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
     	filename1=Drive_OCR(NewVar1).main1()
     	context.bot.send_document(update.message.chat.id, open(filename1, "rb"))#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
     elif reaaa.match("https://t.me/(c/|).*?/\d{1,}/.*?",update.message.text):

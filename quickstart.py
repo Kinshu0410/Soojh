@@ -10,6 +10,59 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 
+def my(a,b):
+	import xlsxwriter
+	db={}
+	no_que=0
+	for x in a['items']:
+		if 'pageBreakItem' in x:
+			pass
+		
+		elif 'grading' in x['questionItem']['question']:
+			db[x['questionItem']['question']['questionId']]=[x['questionItem']['question']['grading']['correctAnswers']['answers'][y]['value'] for y in range(len(x['questionItem']['question']['grading']['correctAnswers']['answers']))]
+			no_que+=1
+	
+	result=[]
+	for x in b['responses']:
+		right=0
+		wrong=0
+		for y in x['answers'].keys():
+			if y in db.keys():
+				if x['answers'][y]['textAnswers']['answers'][0]['value'] in db[y]:
+					right+=1
+				else:
+					wrong+=1
+			else:
+				name=x['answers'][y]['textAnswers']['answers'][0]['value']
+		result.append({"rank":None,"name":name,"total":4*right-wrong,"right":right,"wrong":wrong,"skip":no_que-right-wrong})
+	temp=[]
+	def myFunc(e):
+		return e['total']
+	result.sort(reverse=True,key=myFunc)
+	for x in range(len(result)):
+	    result[x]["rank"]=x+1
+	data=[]
+	for x in range(len(result)):
+	    #data[x]=[]
+	    data.append([(result[x]['rank']),result[x]['name'],(result[x]['total']),(result[x]['right']),(result[x]['wrong']),result[x]["skip"]])
+	    
+	#print(data)
+	workbook = xlsxwriter.Workbook(str(a['info']['title'])+'.xlsx')
+	worksheet = workbook.add_worksheet()
+	fa=workbook.add_format()
+	fa.set_align('center')
+	
+	worksheet.set_column('A:A', 5)
+	worksheet.set_column('B:B', 45,fa)
+	worksheet.set_column('C:C', 9)
+	worksheet.set_column('D:D', 9)
+	worksheet.set_column('E:E', 9)
+	worksheet.set_column('F:F', 9)
+	worksheet.add_table('A1:F'+str(len(result)+1), {'data': data,'columns': [{'header': 'Rank'},{'header': 'First'},{'header': 'Marks'},{'header': 'Right'},{'header': 'Wrong'},{'header': 'Skip'}]})
+	workbook.close()
+	
+	return str(a['info']['title'])+'.xlsx'
+
 class Drive_OCR:
     def __init__(self,filename) -> None:
         self.filename = filename
@@ -77,11 +130,12 @@ class Drive_OCR:
         
         service = build('forms', 'v1', credentials=creds)
     
-        body =body={ "requests": self.filename}
+        #body =body={ "requests": self.filename}
             
-        doc = service.forms().get(body=body,formId=id).execute()
+        doc1 = service.forms().get(formId=id).execute()
+        doc2 = service.forms().responses().list(formId=id).execute()
         
-        
+        doc=my(doc1,doc2)
         
         return doc
         

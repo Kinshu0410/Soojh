@@ -1415,6 +1415,7 @@ def poll(update, context):
     """Sends a predefined poll"""
     if reaaa.match("https://docs.google.com/forms/d/e/",update.message.text):
     	print("kinin")
+    	from quickstart import Drive_OCR
     	NewVar1=reaaa.sub(r"https://docs.google.com/forms/d/e/", "",update.message.text)
     	NewVar1=reaaa.sub("/.*","",NewVar1)
     	

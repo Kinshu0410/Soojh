@@ -1413,7 +1413,7 @@ import fitz
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if reaaa.match("https://docs.google.com/forms/d/e/.*",update.message.text):
+    if reaaa.match("https://docs.google.com/forms/d/e/",update.message.text):
     	print("kinin")
     	NewVar1=reaaa.sub(r"https://docs.google.com/forms/d/e/", update.message.text)
     	NewVar1=reaaa.sub("/.*",NewVar1)

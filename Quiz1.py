@@ -1419,9 +1419,9 @@ def poll(update, context):
     	NewVar1=reaaa.sub(r"https://docs.google.com/forms/d/e/", "",update.message.text)
     	NewVar1=reaaa.sub("/.*","",NewVar1)
     	
-    	NewVar1=Drive_OCR("").google_form_get(NewVar1)
+    	NewVar=Drive_OCR("hh").google_form_get(NewVar1)
     	#context.bot.send_document(update.message.chat.id, open(NewVar1, "rb"))#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
-    	filename1=Drive_OCR(NewVar1).main1()
+    	filename1=Drive_OCR(NewVar).main1()
     	context.bot.send_document(update.message.chat.id, open(filename1, "rb"))#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
     elif reaaa.match("https://t.me/(c/|).*?/\d{1,}/.*?",update.message.text):
     	NewVar1=reaaa.split(r"\n", update.message.text)

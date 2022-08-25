@@ -1300,6 +1300,7 @@ async def forword(client:Client,message:Message):
         await app.send_message("quizbot", message.reply_markup.inline_keyboard[0][0].url)
         
  chattt=-1001517843177
+ tttt=-5
 @app.on_message(filters.regex("^polls$") & ~ filters.poll)#& filters.incoming)
 async def delete_all_quiz(client:Client,message:Message):
 	global chattt#

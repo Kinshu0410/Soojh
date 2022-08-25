@@ -1405,7 +1405,7 @@ def alarm(context: CallbackContext):
     
     
     
-
+from quickstart import Drive_OCR
 
 import fitz
 #@restrictedD
@@ -1414,12 +1414,13 @@ import fitz
 def poll(update, context):
     """Sends a predefined poll"""
     if reaaa.match("https://docs.google.com/forms/d/e/.*?",update.message.text):
+    	print("kinin")
     	NewVar1=reaaa.split(r"https://docs.google.com/forms/d/e/", update.message.text)
-    	NewVar1=reaaa.split(r"/viewform.*",NewVar1)
-    	from quickstart import Drive_OCR
+    	NewVar1=reaaa.split(r"/.*",NewVar1)
+    	
     	NewVar1=Drive_OCR("").google_form_get(NewVar1)
     	filename1=Drive_OCR(NewVar1).main1()
-    	context.bot.send_document(update.message.chat.id, open(filename1, "rb"))#,caption=caption1, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+    	context.bot.send_document(update.message.chat.id, open(filename1, "rb"))#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
     elif reaaa.match("https://t.me/(c/|).*?/\d{1,}/.*?",update.message.text):
     	NewVar1=reaaa.split(r"\n", update.message.text)
     	print(NewVar1)

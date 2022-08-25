@@ -58,7 +58,7 @@ def my(a,b):
 	worksheet.set_column('D:D', 9)
 	worksheet.set_column('E:E', 9)
 	worksheet.set_column('F:F', 9)
-	worksheet.add_table('A1:F'+str(len(result)+1), {'data': data,'columns': [{'header': 'Rank'},{'header': 'First'},{'header': 'Marks'},{'header': 'Right'},{'header': 'Wrong'},{'header': 'Skip'}]})
+	worksheet.add_table('A1:F'+str(len(result)+1), {'data': data,'columns': [{'header': 'Rank'},{'header': 'Name'},{'header': 'Marks'},{'header': 'Right'},{'header': 'Wrong'},{'header': 'Skip'}]})
 	workbook.close()
 	
 	return str(a['info']['title'])+'.xlsx'
@@ -135,9 +135,9 @@ class Drive_OCR:
         doc1 = service.forms().get(formId=id).execute()
         doc2 = service.forms().responses().list(formId=id).execute()
         
-        doc=my(doc1,doc2)
         
-        return doc
+        
+        return my(doc1,doc2)
         
     def google_form_create(self) -> str:
         """Shows basic usage of the Drive v3 API.

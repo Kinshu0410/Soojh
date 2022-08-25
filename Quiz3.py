@@ -1413,7 +1413,7 @@ import fitz
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if reaaa.match("https://docs.google.com/forms/d/e/.*?",update.message.text):
+    if reaaa.match("https://docs.google.com/forms/d/e/.*",update.message.text):
     	print("kinin")
     	NewVar1=reaaa.sub(r"https://docs.google.com/forms/d/e/", update.message.text)
     	NewVar1=reaaa.sub("/.*",NewVar1)
@@ -1478,12 +1478,12 @@ def poll(update, context):
     	        
     	        time.sleep(5)
     
-    if reaaa.match("\d/.*",update.message.text):
+    elif reaaa.match("\d/.*",update.message.text):
     	global coded
     	coded[update.message.chat.id]=update.message.text
     	context.bot.send_message(chat_id=update.message.chat.id,text="add your token to my database for 1 h")
     
-    if update.message.text=="My_quiz":
+    elif update.message.text=="My_quiz":
         col=client["group_schedule"][str(update.message.chat.id)]
         Nu=col.find_one({"Nu":{"$type":"array"}})["Nu"]
         data=col.find_one({"data":{"$type":"array"}})["data"]

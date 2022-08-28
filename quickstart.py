@@ -133,11 +133,12 @@ class Drive_OCR:
         #body =body={ "requests": self.filename}
             
         doc1 = service.forms().get(formId=id).execute()
+        link=doc1.get('responderUri')
         doc2 = service.forms().responses().list(formId=id).execute()
         
         
         
-        return my(doc1,doc2)
+        return my(doc1,doc2), link
         
     def google_form_create(self) -> str:
         """Shows basic usage of the Drive v3 API.

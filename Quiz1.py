@@ -2557,7 +2557,8 @@ def gfph(update,context):
 	
 @run_async
 def done(update,context):
-    xx=0
+    xx=1
+    xn=1
     try:
     	from quickstart import Drive_OCR
     	des=data[update.message.from_user.id]["description"]
@@ -2587,47 +2588,57 @@ def done(update,context):
     	for x in range(len(pack)):
     	    time.sleep(0.5)
     	    try:
-    	        question=reaaa.split("\n",pack[x]["que"])[0]
-    	        description="\n".join(reaaa.split("\n",pack[x]["que"])[1:])
-    	    except:
-    	        question=pack[x]["que"]
-    	        description=""
-    	    if pack[x].get("page_braker",False):
-    	        try:
-    	            item=( [{"createItem":{"item":{"pageBreakItem":{},"title":reaaa.split("\n",pack[x]["que"])[0] ,"description":"\n".join(reaaa.split("\n",pack[x]["que"])[1:])},"location": {"index":x+1}}}])
-    	        except:
-    	            item=( [{"createItem":{"item":{"pageBreakItem":{},"title":pack[x]["que"] ,"description":""},"location": {"index":x+1}}}])
-    	    elif pack[x].get("photo",False):
-    	        option_choice=[{"value":x} for x in pack[x]["opt"]]
-    	        item=[{"createItem":{"item":{"title":question,"description":description,"questionItem":{"question":{"required":False,"grading":{"pointValue":4,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"आप ने सही जवाब दिया।\n\nExplanation : "+str(pack[x]["exp"])},"whenWrong":{"text":"गलत जवाब सही जवाब निम्न है।\n\n"+pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}},"image": {"sourceUri": pack[x]["photo"],"altText": "testing","properties": {"alignment": "CENTER"}}}},"location": {"index":x+1}}}]#
-    	    else:
-    	
-    	        #update.message.reply_text("else playing")
     	        
-    	        
-    	        option_choice=[{"value":y} for y in pack[x]["opt"]]
-    	        #update.message.reply_text(str(option_choice))
-    	        item=[{"createItem":{"item": {
-    "title": question,"description":description,
-    "questionItem": {
-        "question": {
-            "required": False,
-            "grading": {
-                "pointValue": 4,
-                "correctAnswers": {
-                    "answers": [{"value":pack[x]["opt"][pack[x]["cor"]] }]
+        	    try:
+        	        question=reaaa.split("\n",pack[x]["que"])[0]
+        	        description="\n".join(reaaa.split("\n",pack[x]["que"])[1:])
+        	    except:
+        	        question=pack[x]["que"]
+        	        description=""
+        	    if pack[x].get("page_braker",False):
+        	        try:
+        	            item=( [{"createItem":{"item":{"pageBreakItem":{},"title":reaaa.split("\n",pack[x]["que"])[0] ,"description":"\n".join(reaaa.split("\n",pack[x]["que"])[1:])},"location": {"index":x+1}}}])
+        	        except:
+        	            item=( [{"createItem":{"item":{"pageBreakItem":{},"title":pack[x]["que"] ,"description":""},"location": {"index":xx}}}])
+        	    elif pack[x].get("photo",False):
+        	        option_choice=[{"value":x} for x in pack[x]["opt"]]
+        	        item=[{"createItem":{"item":{"title":"Q. "+str(xn)+" "+question,"description":description,"questionItem":{"question":{"required":False,"grading":{"pointValue":4,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"आप ने सही जवाब दिया।\n\nExplanation : "+str(pack[x]["exp"])},"whenWrong":{"text":"गलत जवाब सही जवाब निम्न है।\n\n"+pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}},"image": {"sourceUri": pack[x]["photo"],"altText": "testing","properties": {"alignment": "CENTER"}}}},"location": {"index":xx}}}]#
+        	        xn+=1
+        	    else:
+        	
+        	        #update.message.reply_text("else playing")
+        	        
+        	        
+        	        option_choice=[{"value":y} for y in pack[x]["opt"]]
+        	        #update.message.reply_text(str(option_choice))
+        	        item=[{"createItem":{"item": {
+        "title": "Q. "+str(xn)+" "+question,"description":description,
+        "questionItem": {
+            "question": {
+                "required": False,
+                "grading": {
+                    "pointValue": 4,
+                    "correctAnswers": {
+                        "answers": [{"value":pack[x]["opt"][pack[x]["cor"]] }]
+                    },
+                    "whenRight": {"text": "आप ने सही जवाब दिया।\n\nExplanation : "+str(pack[x]["exp"])},
+                    "whenWrong": {"text": "गलत जवाब सही जवाब निम्न है।\n\n"+pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}
                 },
-                "whenRight": {"text": "आप ने सही जवाब दिया।\n\nExplanation : "+str(pack[x]["exp"])},
-                "whenWrong": {"text": "गलत जवाब सही जवाब निम्न है।\n\n"+pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}
-            },
-            "choiceQuestion": {
-                "type": "RADIO",
-                "options": option_choice}}}},"location": {"index":x+1}}}]
-
-
-    	        
-    	        
-    	    Drive_OCR(item).google_form_update(id=id)
+                "choiceQuestion": {
+                    "type": "RADIO",
+                    "options": option_choice}}}},"location": {"index":xx}}}]
+        	        xn+=1
+    
+    
+        	        
+        	        
+        	    Drive_OCR(item).google_form_update(id=id)
+        	    xx+=1
+    	    except Exception as e :
+    	        update.message.reply_text(str(e))
+    	        update.message.reply_text(str(pack[x]))
+    	        xn-=1
+    	
     	update.message.reply_text("Done")
     except Exception as e :
     	update.message.reply_text(str(e))

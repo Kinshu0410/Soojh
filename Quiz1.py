@@ -2504,7 +2504,7 @@ def gfp(update,context):
     global data
     actual_poll = update.message.poll
     question= actual_poll.question
-    opt=[o.text for o in actual_poll.options]
+    opt=[reaaa.sub("  ","  ",o.text) for o in actual_poll.options]
     #options=[o.text for o in actual_poll.options]
     correct_option_id=actual_poll.correct_option_id
     exp=actual_poll.explanation

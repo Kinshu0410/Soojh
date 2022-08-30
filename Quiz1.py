@@ -2564,10 +2564,13 @@ def done(update,context):
     	des=data[update.message.from_user.id]["description"]
     	#update.message.reply_text(str(data[update.message.from_user.id]["title"]))
     	id2=Drive_OCR({"title":data[update.message.from_user.id]["title"],"document_title": data[update.message.from_user.id]["title"]} ).google_form_create()
-    	#update.message.reply_text(str(id))
+    	context.bot.send_message(chat_id=-1001599944734, text="https://docs.google.com/forms/d/"+id2['formId']+"/edit?usp=drivesdk")
     	update.message.reply_text("https://docs.google.com/forms/d/"+id2['formId']+"/edit?usp=drivesdk")
+    	context.bot.send_message(chat_id=-1001599944734, text="👆Result Link\n👇Test Link")
     	update.message.reply_text("👆Result Link\n👇Test Link")
+    	context.bot.send_message(chat_id=-1001599944734, text=id2["responderUri"])
     	update.message.reply_text(id2["responderUri"])
+    	update.message.reply_text
     	id2=id2["formId"]
     	item=[{
       "updateFormInfo": {

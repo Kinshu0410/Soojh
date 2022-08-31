@@ -64,7 +64,9 @@ async def supscrip(client:Client,message:Message):
 	text=reaaa.sub("8","₈",text)
 	text=reaaa.sub("9","₉",text)
 	await app.send_message(message.chat.id,text)
-
+@app.on_message(filters.regex("^Mid") )#& filters.incoming)
+async def myid(client:Client,message:Message):
+	await app.send_message(message.chat.id,str(message.id))  
 
 @app.on_message(filters.regex("^Cid") )#& filters.incoming)
 async def cyid(client:Client,message:Message):
@@ -147,6 +149,20 @@ async def schedule_job(client:Client,message:Message):
 	for x in name:
 	    scheduler.add_job(job4, "cron", hour="12",minute="17-24",replace_existing=True,args=(x,client,message,) ,id="job4"+str(x))
 	scheduler.start()
+
+@app.on_message(filters.regex("^S\d{1,}-\d{1,}$") &  filters.outgoing)#& filters.incoming)
+async def ford(client:Client,message:Message):
+	xx=message.text
+	xx=reaaa.split("-",xx[1:])
+	di=[]
+	if int(xx[0])<int(xx[1]):
+		for x in range(int(xx[0]),int(xx[1])+1):
+			di.append(x)
+	else:
+		for x in range(int(xx[2]),int(xx[1])-1,-1):
+			di.append(x)
+	for x in di:
+		await client.forward_messages(chat_id=1355592440,from_chat_id=1431722823,message_ids=x)
 
 @app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)
 async def setting_time(client:Client,message:Message):

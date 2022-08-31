@@ -163,7 +163,7 @@ async def ford(client:Client,message:Message):
 			di.append(x)
 	for x in di:
 		try:
-			await client.forward_messages(chat_id=1355592440,from_chat_id=1431722823,message_ids=x)
+			await client.forward_messages(chat_id=1431722823,from_chat_id=1355592440,message_ids=x)
 		except:
 			pass
 		

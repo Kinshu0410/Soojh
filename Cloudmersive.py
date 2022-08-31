@@ -66,7 +66,7 @@ async def supscrip(client:Client,message:Message):
 	await app.send_message(message.chat.id,text)
 @app.on_message(filters.regex("^Mid") )#& filters.incoming)
 async def myid(client:Client,message:Message):
-	await app.send_message(message.chat.id,str(message.id))  
+	await app.send_message(message.chat.id,str(message.reply_to_message_id))  
 
 @app.on_message(filters.regex("^Cid") )#& filters.incoming)
 async def cyid(client:Client,message:Message):
@@ -162,7 +162,11 @@ async def ford(client:Client,message:Message):
 		for x in range(int(xx[2]),int(xx[1])-1,-1):
 			di.append(x)
 	for x in di:
-		await client.forward_messages(chat_id=1355592440,from_chat_id=1431722823,message_ids=x)
+		try:
+			await client.forward_messages(chat_id=1355592440,from_chat_id=1431722823,message_ids=x)
+		except:
+			pass
+		
 
 @app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)
 async def setting_time(client:Client,message:Message):

@@ -1813,7 +1813,8 @@ async def forword(client:Client,message:Message):
 	text=reaaa.split("\n{2,}",text)
 	for x in text:
 		mess=(await app.send_message(message.chat.id,x))
-		await app.delete_messages(chat_id=message.chat.id,message_ids=mess.id)
+		if x[-1]!="1" or x[-1]!="2" or x[-1]!="3" or x[-1]!="4":
+		    await app.delete_messages(chat_id=message.chat.id,message_ids=mess.id)
 		
 
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)

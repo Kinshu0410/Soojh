@@ -63,15 +63,15 @@ async def texttopoll(quest,update, context):
         #options5=reaaa.sub(r"\@\w.*", "", options5)
         #update.message.reply_text(options)
 
-        if result is None:
+        '''if result is None:
           message = context.bot.send_poll(
             update.effective_chat.id,
             que,
             options,
             is_anonymous=False,
             allows_multiple_answers=False,
-        )
-        elif options5 !="":
+        )'''
+        if options5 !="":
           co=int(corr)-1
           message = context.bot.send_poll(
             update.effective_chat.id,

@@ -2526,7 +2526,7 @@ def gft(update,context):
 		data[update.message.from_user.id]["pack"][-1]["que"]=text
 		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Question Updated...")
 		
-	elif bool(reaaa.search("Q",update.message.text[0]))
+	elif bool(reaaa.search("Q",update.message.text[0])):
 		text = update.message.text
 		data[update.message.from_user.id]["pack"][-1]["que"]=text[1:]
 		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Question Updated...")

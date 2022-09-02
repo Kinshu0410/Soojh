@@ -2664,7 +2664,7 @@ def photo_2(update,context):
 	#newFile = update.context.bot.getFile(file_id)
 	newFile.download('test.jpg')
 	update.message.reply_text("download succesfull")
-	photo1=photo_url('test.jpg')
+	photo1=photo_url('test.jpg',0)
 	data[update.message.from_user.id]["pack"][-1]["photo"]=photo1["url"]
 	
 	
@@ -2674,14 +2674,14 @@ def photo_2(update,context):
 import cloudinary
 import cloudinary.uploader
 cloud_data=[["kinshu","543958332477526","U9d7hnl2pfF1xqJBO99jLx_rK7w"],["dljnv2yde","247615373857999","BGB-cS126ZrPamvjus1nXrtPLA4"],["dg6kbjizr","228119184734698","tz4inBsjZNSxhm2Rxr_F97MerpA"]]
-def photo_url(x):
+def photo_url(x,n):
 	
 	try:
-		cloudinary.config( cloud_name = cloud_data[0][0], api_key = cloud_data[0][1], api_secret = cloud_data[0][2] )
+		cloudinary.config( cloud_name = cloud_data[n][0], api_key = cloud_data[n][1], api_secret = cloud_data[n][2] )
 		return cloudinary.uploader.upload(x)
 		
 	except:
-		photo_url(x)
+		photo_url(x,n+1)
 
 
 

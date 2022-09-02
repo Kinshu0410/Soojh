@@ -12,7 +12,7 @@ from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 
 def my(a,b):
 	import xlsxwriter
-	name=None
+	
 	db={}
 	no_que=0
 	for x in a['items']:
@@ -25,6 +25,7 @@ def my(a,b):
 	
 	result=[]
 	for x in b['responses']:
+		name=None
 		right=0
 		wrong=0
 		for y in x['answers'].keys():

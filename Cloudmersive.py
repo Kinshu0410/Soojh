@@ -1983,7 +1983,7 @@ def channels(update, context):
 def owner(update, context):
   update.message.reply_text("send your suggestions\n    1. @kinbin247 \n  2. @ANKITAdidi \n 3. comming soon \ud83d\ude1c")
 
-LIST_OF_ADMINS = ["711296045", "555919730"]
+LIST_OF_ADMINS = ["711296045", "555919730","875026044"]
 
 def restricted(func):
     @wraps(func)

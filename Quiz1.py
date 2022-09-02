@@ -2673,7 +2673,7 @@ def photo_2(update,context):
 
 import cloudinary
 import cloudinary.uploader
-cloud_data=[["kinshu","543958332477526","U9d7hnl2pfF1xqJBO99jLx_rK7w"]]
+cloud_data=[["kinshu","543958332477526","U9d7hnl2pfF1xqJBO99jLx_rK7w"],["dljnv2yde","247615373857999","BGB-cS126ZrPamvjus1nXrtPLA4"],["dg6kbjizr","228119184734698","tz4inBsjZNSxhm2Rxr_F97MerpA"]]
 def photo_url(x):
 	
 	try:

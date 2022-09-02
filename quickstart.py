@@ -12,6 +12,7 @@ from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 
 def my(a,b):
 	import xlsxwriter
+	name=None
 	db={}
 	no_que=0
 	for x in a['items']:
@@ -32,7 +33,7 @@ def my(a,b):
 					right+=1
 				else:
 					wrong+=1
-			else:
+			elif name is None:
 				name=x['answers'][y]['textAnswers']['answers'][0]['value']
 		result.append({"rank":None,"name":name,"total":4*right-wrong,"right":right,"wrong":wrong,"skip":no_que-right-wrong})
 	temp=[]

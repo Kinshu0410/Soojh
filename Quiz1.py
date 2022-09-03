@@ -2671,6 +2671,50 @@ def photo_2(update,context):
 	
 	return AA
 
+from pyrogram import Client, enums
+from pyrogram.raw import functions
+from pyrogram.raw import types
+from pyrogram.handlers import MessageHandler, PollHandler
+from pyrogram import filters
+from pyrogram.types import Message, ReplyKeyboardRemove, Poll
+from pyrogram.enums import PollType
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+import asyncio
+from pyrogram.errors import FloodWait
+import  json
+import time, random
+import re as reaaa
+import requests
+#app = Client("my_account",
+#bot_token=ClientText["bot_token"],
+#api_id="13682659",
+#api_hash="b984d240c5258407ea911f042c9d75f6")
+app=Client("my_account",session_string="AgEBU-8ADAn12t06n3YMl9fZEc_97kGnUiYe1VLFNpFa22wd_mkxoZtPIBv12yjXTTUgD1RpWzyJPUFdDyrsf7t2119euFjzj8piOv1SLNDcn4UZpZidPOiRYBMo07cTvlwOWKQFKr5xn7xrvRMVDMGPAqA6VbOaA8fQBwe6TKhOzA-5CTpMPsIS974AIvjD8BtWZDOgkQI6smCdY-lUEt9cgiNH81lrANVGq6UllofmIjZo_bYyk6VhoOl_4YpHAp30cgQGda5VlwY73gr7XQV0DCx4gT0FAy-lVWQPbRKZHuj75bjErV1YVouvTA8070vd12qGmBqa67lc0A8_l-nwAqpdMQAAAAEvBILMAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
+
+
+from pyrogram.enums import PollType
+scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
+
+
+def allmem(update,context):
+	text=update.message.text
+	text=reaaa.sub("get_m_id ","",text)
+	app.start()
+	members=""
+	for member in app.get_chat_members(text):
+		members=str(members)+str(member)+"|"
+	app stop()
+	members=members[:-2]
+	f = open("chat members id.txt", "a")
+	f.write(members)
+	f.close()
+	context.bot.send_document(chat_id=update.effective_message.chat_id, open("Chat members id.txt", "rb"))
+
+	
+	
+	
+	
+
 import cloudinary
 import cloudinary.uploader
 cloud_data=[["kinshu","543958332477526","U9d7hnl2pfF1xqJBO99jLx_rK7w"],["dljnv2yde","247615373857999","BGB-cS126ZrPamvjus1nXrtPLA4"],["dg6kbjizr","228119184734698","tz4inBsjZNSxhm2Rxr_F97MerpA"]]
@@ -2824,6 +2868,7 @@ def main() -> None:
     
     updater.dispatcher.add_handler(conv_handler01R1)
     updater.dispatcher.add_handler(conv_handler01R2)
+    updater.dispatcher.add_handler(CommandHandler('get_m_id', allmem))
     updater.dispatcher.add_handler(CommandHandler('add', call4))
     updater.dispatcher.add_handler(CommandHandler('startquiz', call3))
     updater.dispatcher.add_handler(CommandHandler('sq2', call7))

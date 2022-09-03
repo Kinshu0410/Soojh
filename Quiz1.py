@@ -2700,15 +2700,26 @@ def allmem(update,context):
 	text=update.message.text
 	text=reaaa.sub("get_m_id ","",text)
 	app.start()
-	members=""
-	for member in app.get_chat_members(text):
-		members=str(members)+str(member)+"|"
-	app.stop()
-	members=members[:-2]
-	f = open("chat members id.txt", "a")
-	f.write(members)
-	f.close()
-	context.bot.send_document(update.effective_message.chat_id, open("Chat members id.txt", "rb"))
+	try:
+		members=""
+		for member in app.get_chat_members(text):
+			members=str(members)+str(member)+"|"
+		app.stop()
+		members=members[:-2]
+		f = open("chat members id.txt", "a")
+		f.write(members)
+		f.close()
+		context.bot.send_document(update.effective_message.chat_id, open("Chat members id.txt", "rb"))
+	except:
+		app.stop()
+	
+		
+	
+	
+	
+	
+	
+	
 
 	
 	

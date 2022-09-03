@@ -2672,12 +2672,12 @@ def photo_2(update,context):
 	return AA
 
 from pyrogram import Client, enums
-from pyrogram.raw import functions
-from pyrogram.raw import types
-from pyrogram.handlers import MessageHandler, PollHandler
-from pyrogram import filters
-from pyrogram.types import Message, ReplyKeyboardRemove, Poll
-from pyrogram.enums import PollType
+#from pyrogram.raw import functions
+#from pyrogram.raw import types
+#from pyrogram.handlers import MessageHandler, PollHandler
+#from pyrogram import filters
+#from pyrogram.types import Message, ReplyKeyboardRemove, Poll
+#from pyrogram.enums import PollType
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import asyncio
 from pyrogram.errors import FloodWait

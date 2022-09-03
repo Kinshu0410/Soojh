@@ -159,7 +159,7 @@ async def ford(client:Client,message:Message):
 		for x in range(int(xx[0]),int(xx[1])+1):
 			di.append(x)
 	else:
-		for x in range(int(xx[1]),int(xx[0])-1,-1):
+		for x in range(int(xx[0]),int(xx[1])-1,-1):
 			di.append(x)
 	for x in di:
 		try:

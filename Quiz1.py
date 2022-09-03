@@ -2703,7 +2703,7 @@ def allmem(update,context):
 	members=""
 	for member in app.get_chat_members(text):
 		members=str(members)+str(member)+"|"
-	app stop()
+	app.stop()
 	members=members[:-2]
 	f = open("chat members id.txt", "a")
 	f.write(members)

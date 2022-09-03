@@ -164,8 +164,8 @@ async def ford(client:Client,message:Message):
 	for x in di:
 		try:
 			await client.forward_messages(chat_id=1431722823,from_chat_id=1355592440,message_ids=x)
-		except:
-			pass
+		except Exception as e:
+			print(str(e))
 		
 
 @app.on_message(filters.regex("^Set time.*?") )#& filters.incoming)

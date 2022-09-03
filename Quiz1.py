@@ -2708,7 +2708,7 @@ def allmem(update,context):
 	f = open("chat members id.txt", "a")
 	f.write(members)
 	f.close()
-	context.bot.send_document(chat_id=update.effective_message.chat_id, open("Chat members id.txt", "rb"))
+	context.bot.send_document(update.effective_message.chat_id, open("Chat members id.txt", "rb"))
 
 	
 	

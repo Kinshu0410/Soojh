@@ -186,7 +186,7 @@ async def setting_time(client:Client,message:Message):
 		await app.send_message(int(message.chat.id),"Schedule Reset")
 	scheduler.start()
 
-@app.on_message(filters.text & filters.outgoing & filters.chat(-1001507348250))
+@app.on_message(filters.text & filters.chat(-1001507348250))
 async def text_delete_quizbot(client:Client,message:Message):
 	if bool(reaaa.search("Congratulations to the winners!|Get ready for the quiz|",message.text)):
 		pass

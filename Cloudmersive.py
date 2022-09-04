@@ -36,7 +36,7 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
 @app.on_message(filters.text & filters.chat(-1001507348250))
 async def text_delete_quizbot(client:Client,message:Message):
-	if bool(reaaa.search("Congratulations to the winners!|Get ready for the quiz|",message.text)):
+	if bool(reaaa.search("Congratulations to the winners!|Get ready for the quiz",message.text)):
 		
 		pass
 	elif message.from_user.id==983000232:

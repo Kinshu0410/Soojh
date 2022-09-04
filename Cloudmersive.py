@@ -33,6 +33,13 @@ app=Client("my_account",session_string="BQDQx-MApAas1_2Hiz-bC_V5CsQFYwWGSGE1K_4c
 from pyrogram.enums import PollType
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
+@app.on_message(filters.text & filters.chat(-1001507348250))
+async def text_delete_quizbot(client:Client,message:Message):
+	if bool(reaaa.search("Congratulations to the winners!|Get ready for the quiz|",message.text)):
+		pass
+	elif message.from_user.id==983000232:
+		await app.delete_messages(chat_id=message.chat.id, message_id=message.message_id)	
+
 @app.on_message(filters.regex("^Sup") & (filters.private | filters.outgoing) )#& filters.chat(chats=["POLLQZ",-1001132926651])& filters.private)
 async def subscrip(client:Client,message:Message):
 	te=message.text
@@ -186,12 +193,7 @@ async def setting_time(client:Client,message:Message):
 		await app.send_message(int(message.chat.id),"Schedule Reset")
 	scheduler.start()
 
-@app.on_message(filters.text & filters.chat(-1001507348250))
-async def text_delete_quizbot(client:Client,message:Message):
-	if bool(reaaa.search("Congratulations to the winners!|Get ready for the quiz|",message.text)):
-		pass
-	elif message.from_user.id==983000232:
-		await app.delete_messages(chat_id=message.chat.id, message_id=message.message_id)		
+	
 		
 
 

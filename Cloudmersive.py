@@ -9,7 +9,7 @@ dns.resolver.default_resolver.nameservers=['8.8.8.8'] # this is a google public 
 # as a test, dns.resolver.query('www.google.com') should return an answer, not an exception'''
 clientmongo=MongoClient('mongodb+srv://Kinshu04101:Qwert123@cluster0.ckcyx.mongodb.net/test?retryWrites=true&w=majority')
 #
-from pyrogram import Client, enums
+from pyrogram import Client, enums,idle
 from pyrogram.raw import functions
 from pyrogram.raw import types
 from pyrogram.handlers import MessageHandler, PollHandler

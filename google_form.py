@@ -29,11 +29,77 @@ from googleapiclient import errors
 from googleapiclient.discovery import build
 
 # If modifying these scopes, delete the file gform.json.
-SCOPES = ['https://www.googleapis.com/auth/script.projects','https://www.googleapis.com/auth/documents']
+SCOPES = ['https://www.googleapis.com/auth/script.projects','https://www.googleapis.com/auth/documents','https://www.googleapis.com/auth/drive',"https://www.googleapis.com/auth/forms"]
 
 
 
+def main_run(x):
+    """Calls the Apps Script API.
+    """
+    SAMPLE_MANIFEST = '''
+{
+  "timeZone": "Asia/Kolkata",
+  "dependencies": {},
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "exceptionLogging": "CLOUD",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/forms","https://www.googleapis.com/auth/spreadsheets"
+  ],
+  "executionApi": {
+    "access": "MYSELF"
+  }
+}
+'''.strip()
+    creds = None
+    SAMPLE_CODE = x.strip()
+    # The file gform.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    script_id='1mWCV-kS59FbRsalsaMRH_TvvAYJLWuAUUInWTzBYFgBYgSEEQhwxd8f1'
+    if os.path.exists('gform.json'):
+        creds = Credentials.from_authorized_user_file('gform.json', SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('gform.json', 'w') as token:
+            token.write(creds.to_json())#
 
+    if True:
+        service = build('script', 'v1', credentials=creds)
+
+        # Call the Apps Script API
+        # Create a new project
+        request = {'title': 'My Script'}
+        #response = service.projects().create(body=request).execute()
+        
+
+        # Upload two files to the project
+        request = {
+            'files': [{
+                'name': 'hello',
+                'type': 'SERVER_JS',
+                'source': SAMPLE_CODE
+            }, {
+                'name': 'appsscript',
+                'type': 'JSON',
+                'source': SAMPLE_MANIFEST
+            }]
+        }
+        response = service.run(
+            #body=request,
+            scriptId=script_id).execute()
+        return response
+        request = {"function": "getFoldersUnderRoot"}
+        
+    
 
 
 def main4(x):

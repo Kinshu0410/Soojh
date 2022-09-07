@@ -2497,6 +2497,7 @@ def gfm(update,context):
     data[update.message.from_user.id]["title"]=reaaa.split("\n",info1)[0]
     data[update.message.from_user.id]["description"]="\n".join(reaaa.split("\n",info1)[1:])
     data[update.message.from_user.id]["pack"]=[]
+    data[update.message.from_user.id]["password"]=False
     #update.message.reply_text(str(data))
     return AA
 
@@ -2511,7 +2512,7 @@ def gfp(update,context):
     context.bot.send_message(chat_id=update.message.chat.id,text=question)
     context.bot.send_message(chat_id=update.message.chat.id,text=str(exp))
     
-    data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id,"password":False})
+    data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id})
     #context.bot.send_message(chat_id=update.message.chat.id,text="Question added sucessful\n\nyou can edit Question simply send me a text or send a photo with Caption\nyou can edit Explanation simply send me a tag text")
     
     
@@ -2543,14 +2544,14 @@ def gft(update,context):
 def a_c(update,context):
 	global data
 	text=reaaa.sub("^.*/|@","",update.message.text)
-	data[update.message.from_user.id]["pack"]["password"]=text
+	data[update.message.from_user.id]["password"]=text
 	context.bot.send_message(chat_id=update.message.chat.id,text="Channel Added")
 	return CC
 	
 def a_p(update,context):
 	global data
 	text=reaaa.sub("^.*/|@","",update.message.text)
-	data[update.message.from_user.id]["pack"]["password"]="Polls_Quiz"
+	data[update.message.from_user.id]["password"]="Polls_Quiz"
 	context.bot.send_message(chat_id=update.message.chat.id,text="Send Me your channal Username or To set @Polls_Quiz (send Polls)")
 	return DD
 	
@@ -2655,8 +2656,8 @@ def done(update,context):
     	        update.message.reply_text(str(e))
     	        update.message.reply_text(str(pack[x]))
     	        xn-=1
-    	if data[update.message.from_user.id]["pack"]["password"]:
-    	    chann=data[update.message.from_user.id]["pack"]["password"]["password"]
+    	if data[update.message.from_user.id]["password"]:
+    	    chann=data[update.message.from_user.id]["password"]
     	    chann="https://t.me/Soojhboojh_01bot?start=g_f"+chann+"%20"+id
     	    from google_form import main_run,main4
     	    x="""

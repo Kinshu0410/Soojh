@@ -2511,7 +2511,7 @@ def gfp(update,context):
     context.bot.send_message(chat_id=update.message.chat.id,text=question)
     context.bot.send_message(chat_id=update.message.chat.id,text=str(exp))
     
-    data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id})
+    data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id,"password":False})
     #context.bot.send_message(chat_id=update.message.chat.id,text="Question added sucessful\n\nyou can edit Question simply send me a text or send a photo with Caption\nyou can edit Explanation simply send me a tag text")
     
     
@@ -2541,7 +2541,9 @@ def gft(update,context):
 
 
 def a_c(update,context):
-	context.bot.send_message(chat_id=update.message.chat.id,text="send me Page\ntitle\ndescription")
+	text=reaaa.sub("^.*/|@","",update.message.text)
+	data[update.message.from_user.id]["pack"].append({"password":True,{"password":text}}
+	context.bot.send_message(chat_id=update.message.chat.id,text="Channel Added")
 	return CC
 	
 def a_p(update,context):
@@ -2647,6 +2649,35 @@ def done(update,context):
     	        update.message.reply_text(str(e))
     	        update.message.reply_text(str(pack[x]))
     	        xn-=1
+    	if data[update.message.from_user.id]["pack"]["password"]:
+    	    chann=data[update.message.from_user.id]["pack"]["password"]["password"]
+    	    chann="https://t.me/Soojhboojh_01bot?start=g_f"+chann+"%20"+id
+    	    from google_form import main_run,main4
+    	    x="""
+function d() {
+
+   // create & name Form
+   var form = FormApp.openById('1zWw5f5e4CCe8UOVxaR0tTJhmTWr1qmMPOIOGnIwxPeY');
+
+   // single line text field
+   item = "Password";
+   form.addTextItem()
+     .setTitle(item)
+     .setRequired(true);
+     
+   
+   
+   var form = FormApp.openById('1zWw5f5e4CCe8UOVxaR0tTJhmTWr1qmMPOIOGnIwxPeY');
+   var items = form.getItems();
+   var item = items[items.length-1];
+   
+   form.moveItem(item,1);
+   
+}
+"""
+    	    main4(x)
+    	    main_run('d')
+    
     	
     	update.message.reply_text("Done")
     except Exception as e :

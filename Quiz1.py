@@ -2541,6 +2541,7 @@ def gft(update,context):
 
 
 def a_c(update,context):
+	global data
 	text=reaaa.sub("^.*/|@","",update.message.text)
 	data[update.message.from_user.id]["pack"].append({"password":True,{"password":text}}
 	context.bot.send_message(chat_id=update.message.chat.id,text="Channel Added")

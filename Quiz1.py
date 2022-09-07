@@ -2482,7 +2482,7 @@ def call7(update,context):
 		
 	my()
 
-AA,BB,CC= range(3)
+AA,BB,CC,DD= range(4)
 data={}
 @run_async
 def call8(update,context):
@@ -2540,11 +2540,13 @@ def gft(update,context):
     
 
 
-def p_b(update,context):
+def a_c(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text="send me Page\ntitle\ndescription")
 	return CC
 	
-	
+def a_p(update,context):
+	context.bot.send_message(chat_id=update.message.chat.id,text="Send Me your channal Username or To set @Polls_Quiz (send Polls)")
+	return DD
 	
 	
 	
@@ -2749,9 +2751,10 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),CommandHandler('page_braker', p_b),MessageHandler(Filters.photo& ~Filters.command,photo_2)],
+            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),CommandHandler('page_braker', p_b),CommandHandler('add_password', a_p),MessageHandler(Filters.photo& ~Filters.command,photo_2)],
             BB:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfm)],
-            CC:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfph)]
+            CC:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfph)],
+            DD:[MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, a_c)]
         },
         fallbacks=[CommandHandler('done', done)],
     )

@@ -2543,14 +2543,14 @@ def gft(update,context):
 def a_c(update,context):
 	global data
 	text=reaaa.sub("^.*/|@","",update.message.text)
-	data[update.message.from_user.id]["pack"].append({"password":True,{"password":text}})
+	data[update.message.from_user.id]["pack"]["password"]=text
 	context.bot.send_message(chat_id=update.message.chat.id,text="Channel Added")
 	return CC
 	
 def a_p(update,context):
 	global data
 	text=reaaa.sub("^.*/|@","",update.message.text)
-	data[update.message.from_user.id]["pack"].append({"password":True,{"password":"Polls_Quiz"}})
+	data[update.message.from_user.id]["pack"]["password"]="Polls_Quiz"
 	context.bot.send_message(chat_id=update.message.chat.id,text="Send Me your channal Username or To set @Polls_Quiz (send Polls)")
 	return DD
 	

@@ -2554,7 +2554,9 @@ def a_p(update,context):
 	context.bot.send_message(chat_id=update.message.chat.id,text="Send Me your channal Username or To set @Polls_Quiz (send Polls)")
 	return DD
 	
-	
+def p_b(update,context):
+	context.bot.send_message(chat_id=update.message.chat.id,text="send me Page\ntitle\ndescription")
+	return CC
 	
 
 def gfph(update,context):

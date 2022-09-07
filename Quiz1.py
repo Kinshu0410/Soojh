@@ -2664,7 +2664,7 @@ def done(update,context):
 function d() {
 
    // create & name Form
-   var form = FormApp.openById('1zWw5f5e4CCe8UOVxaR0tTJhmTWr1qmMPOIOGnIwxPeY');
+   var form = FormApp.openById('"""+id+"""');
 
    // single line text field
    item = "Password";
@@ -2674,7 +2674,7 @@ function d() {
      
    
    
-   var form = FormApp.openById('1zWw5f5e4CCe8UOVxaR0tTJhmTWr1qmMPOIOGnIwxPeY');
+   var form = FormApp.openById('"""+id+"""');
    var items = form.getItems();
    var item = items[items.length-1];
    

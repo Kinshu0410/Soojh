@@ -2610,7 +2610,7 @@ def gfph(update,context):
 	global data
 
 	data[update.message.from_user.id]["pack"].append({"page_braker":True,"que":update.message.text})
-	update.message.reply_text("Send me a poll first after this do as down blow.\n\n1. Edit last poll Explanation : send TEXT\n2. Edit last poll Question : send Tag TEXT\n3. Insert photo last poll : PHOTO\n\n4. Add new Question: send POLL\n\n5. Create Page braker: /page_braker\n\n6. Finish Quiz: /done\n\nThis is all settings")
+	update.message.reply_text("Send me a poll first after this do as down blow.\n\n1. Edit last poll Explanation : send TEXT\n2. Edit last poll Question : send Tag TEXT\n3. Insert photo last poll : PHOTO\n\n4. Add new Question: send POLL\n\n5. Create Page braker: /page_braker\n6. Add Password : /add_password\n\n7. Finish Quiz: /done\n\nThis is all settings")
 	return AA
 	
 	
@@ -2734,12 +2734,16 @@ function d() {
     	    reply_markup = InlineKeyboardMarkup(keyboard)
     	    context.bot.send_message(chat_id=update.message.chat.id, text="Google Form Quiz Time",reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	    
+    	if data[update.message.from_user.id]["password"]:
+    	    update.message.reply_text("Done\n\nNote: Since You add password so @soojhboojh_01bot must be Admin in your @"+data[update.message.from_user.id]["password"])
+    	else:
+    	    update.message.reply_text("Done")
     	    
         
         
     
     	
-    	update.message.reply_text("Done")
+    	
     except Exception as e :
     	update.message.reply_text(str(e))
     	update.message.reply_text(str(data))

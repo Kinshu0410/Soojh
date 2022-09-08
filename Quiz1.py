@@ -1720,7 +1720,7 @@ def pollf(update,context):
     global mesho01
     uurrl=""
     chat___id=int(update.message.chat.id)
-    Ccc=update.message.from_user.idel
+    Ccc=update.message.from_user.id
         
         
         

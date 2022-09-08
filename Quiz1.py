@@ -2733,6 +2733,9 @@ function d() {
     	    keyboard=[[InlineKeyboardButton("Password",url=chann),InlineKeyboardButton("Test",url=test)]]
     	    reply_markup = InlineKeyboardMarkup(keyboard)
     	    context.bot.send_message(chat_id=update.message.chat.id, text="Google Form Quiz Time",reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	else:
+    	    update.message.reply_text(test)
+    	
     	    
     	if data[update.message.from_user.id]["password"]:
     	    update.message.reply_text("Done\n\nNote: Since You add password so @soojhboojh_01bot must be Admin in your @"+data[update.message.from_user.id]["password"])

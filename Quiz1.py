@@ -1832,7 +1832,7 @@ def pollf(update,context):
 function d() {
    var form = FormApp.openById('"""+"".join(text[1:])+"""');
    var items = form.getItems();
-   var item = items[2];
+   var item = items[1];
    var textValidation = FormApp.createTextValidation()
      .setHelpText('join https://t.me/Polls_Quiz for getting Password')
      .requireTextContainsPattern('"""+zz+"""')
@@ -1847,7 +1847,7 @@ function d() {
     	    main_run('d')
     	    context.bot.send_message(chat_id=update.message.chat.id, text=(x))
     	    context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
-    	    context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password"))
+    	    context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
     	
     	
     	else:

@@ -1823,7 +1823,10 @@ def pollf(update,context):
     	if mem:
     	    global gofome
     	    gofome.append(mem.user.id)
-    	    gofome.append
+    	    zz=""
+    	    if mem.user.id is not in gofome:
+    	        for y in gofome:
+    	            zz=zz+"|"+y
     	    x="""
 function d() {
    var form = FormApp.openById('"""+"".join(text[1:])+"""');
@@ -1831,7 +1834,7 @@ function d() {
    var item = items[2];
    var textValidation = FormApp.createTextValidation()
      .setHelpText('join https://t.me/Polls_Quiz for getting Password')
-     .requireTextContainsPattern('good')
+     .requireTextContainsPattern('"""+zz[1:]+"""')
      .build();
    item.asTextItem().setValidation(textValidation);
    

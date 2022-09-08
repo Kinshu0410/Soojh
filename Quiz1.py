@@ -1817,7 +1817,7 @@ def pollf(update,context):
     elif update.message.text.startswith("/start g_f"):
     	text=reaaa.sub("/start g_f","",update.message.text)
     	context.bot.send_message(chat_id=update.message.chat.id, text=(text))
-    	text=reaaa.split("&id=",text)
+    	text=reaaa.split("idID",text)
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
     	context.bot.send_message(chat_id=-611934865, text=str(mem))
     	
@@ -2676,7 +2676,7 @@ def done(update,context):
     	        xn-=1
     	if data[update.message.from_user.id]["password"]:
     	    chann=data[update.message.from_user.id]["password"]
-    	    chann="https://t.me/Soojhboojh_01bot?start=g_f"+chann+"&id="+id
+    	    chann="https://t.me/Soojhboojh_01bot?start=g_f"+chann+"idID"+id
     	    from google_form import main_run,main4
     	    x="""
 function d() {

@@ -1828,7 +1828,7 @@ def pollf(update,context):
     	        gofome.append(mem.user.id)
     	        print("666")
     	        for y in gofome:
-    	            zz=zz+"|"+str(y)
+    	            zz=zz+"\|"+str(y)
     	    x="""
 function d() {
    var form = FormApp.openById('"""+"".join(text[1:])+"""');

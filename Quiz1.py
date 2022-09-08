@@ -1819,7 +1819,7 @@ def pollf(update,context):
     	context.bot.send_message(chat_id=update.message.chat.id, text=(text))
     	text=reaaa.split("idID",text)
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
-    	context.bot.send_message(chat_id=-611934865, text=str(mem))
+    	send_message(chat_id=update.message.chat.id,text=str(mem))
     	
     	
     	

@@ -1807,6 +1807,7 @@ def pollf(update,context):
         return POLLF
     elif update.message.text.startswith("/start g_f"):
         text=reaaa.sub("/start g_f","",update.message.text)
+        print(text)
         text=reaaa.splite("%20",text)
         mem=get_chat_member("@"+text[0],update.message.id)
         context.bot.send_message(chat_id=-611934865, text=str(mem))

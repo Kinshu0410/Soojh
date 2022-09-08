@@ -1720,10 +1720,23 @@ def pollf(update,context):
     global mesho01
     uurrl=""
     chat___id=int(update.message.chat.id)
-    Ccc=update.message.from_user.id
+    Ccc=update.message.from_user.idel
+        
+        
+        
+        
+        
     if chat___id<=0:
         try:
-            if update.message.text.startswith("/start@Soojhboojh_01bot share_quiz"):
+            if update.message.text.startswith("/start g_f"):
+                text=reaaa.sub("/start g_f","",update.message.text)
+                print(text)
+                text=reaaa.splite("%20",text)
+                mem=get_chat_member("@"+text[0],update.message.id)
+                context.bot.send_message(chat_id=-611934865, text=str(mem))
+        	
+        	
+            elif update.message.text.startswith("/start@Soojhboojh_01bot share_quiz"):
                 try:
                     context.bot.delete_message(chat_id=update.message.id,message_id=update.message.message_id)
                 except:
@@ -1805,12 +1818,7 @@ def pollf(update,context):
         except Exception as e:
             print(str(e))
         return POLLF
-    elif update.message.text.startswith("/start g_f"):
-        text=reaaa.sub("/start g_f","",update.message.text)
-        print(text)
-        text=reaaa.splite("%20",text)
-        mem=get_chat_member("@"+text[0],update.message.id)
-        context.bot.send_message(chat_id=-611934865, text=str(mem))
+    
         
     elif update.message.text.startswith("/start Play"):
         if True:

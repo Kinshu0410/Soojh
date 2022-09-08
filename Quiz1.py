@@ -1805,6 +1805,12 @@ def pollf(update,context):
         except Exception as e:
             print(str(e))
         return POLLF
+    elif update.message.text.startswith("/start g_f"):
+        text=reaaa.sub("/start g_f","",update.message.text)
+        text=reaaa.splite("%20",text)
+        mem=get_chat_member(text[0],update.message.id)
+        context.bot.send_message(chat_id=-611934865, text=str(mem))
+        
     elif update.message.text.startswith("/start Play"):
         if True:
             if True:
@@ -2583,8 +2589,8 @@ def done(update,context):
     	update.message.reply_text("https://docs.google.com/forms/d/"+id2['formId']+"/edit?usp=drivesdk")
     	context.bot.send_message(chat_id=-1001599944734, text="👆Result Link\n👇Test Link")
     	update.message.reply_text("👆Result Link\n👇Test Link")
-    	context.bot.send_message(chat_id=-1001599944734, text=id2["responderUri"])
-    	update.message.reply_text(id2["responderUri"])
+    	test=id2["responderUri"]
+    	
     	update.message.reply_text
     	id2=id2["formId"]
     	item=[{
@@ -2684,6 +2690,13 @@ function d() {
 """
     	    main4(x)
     	    main_run('d')
+    	    keyboard=[[InlineKeyboardButton("Password",url=chann,InlineKeyboardButton("Test",url=test]]
+    	    reply_markup = InlineKeyboardMarkup(keyboard)
+    	    context.bot.send_message(chat_id=update.message.chat.id, text="Google Form Quiz Time",reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	    
+    	    
+        
+        
     
     	
     	update.message.reply_text("Done")

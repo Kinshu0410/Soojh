@@ -1824,7 +1824,7 @@ def pollf(update,context):
     	    global gofome
     	    gofome.append(mem.user.id)
     	    zz=""
-    	    if mem.user.id is not in gofome:
+    	    if mem.user.id not in gofome:
     	        for y in gofome:
     	            zz=zz+"|"+y
     	    x="""

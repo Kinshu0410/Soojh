@@ -1826,7 +1826,7 @@ def pollf(update,context):
     	    zz=""
     	    if mem.user.id not in gofome:
     	        for y in gofome:
-    	            zz=zz+"|"+y
+    	            zz=zz+"|"+str(y)
     	    x="""
 function d() {
    var form = FormApp.openById('"""+"".join(text[1:])+"""');

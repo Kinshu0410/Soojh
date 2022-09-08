@@ -1728,15 +1728,10 @@ def pollf(update,context):
         
     if chat___id<=0:
         try:
-            if update.message.text.startswith("/start g_f"):
-                text=reaaa.sub("/start g_f","",update.message.text)
-                print(text)
-                text=reaaa.splite("&id=",text)
-                mem=get_chat_member("@"+text[0],update.message.id)
-                context.bot.send_message(chat_id=-611934865, text=str(mem))
+            
         	
         	
-            elif update.message.text.startswith("/start@Soojhboojh_01bot share_quiz"):
+            if update.message.text.startswith("/start@Soojhboojh_01bot share_quiz"):
                 try:
                     context.bot.delete_message(chat_id=update.message.id,message_id=update.message.message_id)
                 except:
@@ -1819,7 +1814,15 @@ def pollf(update,context):
             print(str(e))
         return POLLF
     
-        
+    elif update.message.text.startswith("/start g_f"):
+    	text=reaaa.sub("/start g_f","",update.message.text)
+    	print(text)
+    	text=reaaa.splite("&id=",text)
+    	mem=get_chat_member("@"+text[0],update.message.id)
+    	context.bot.send_message(chat_id=-611934865, text=str(mem))
+    	
+    	
+    	
     elif update.message.text.startswith("/start Play"):
         if True:
             if True:

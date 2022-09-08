@@ -1822,9 +1822,11 @@ def pollf(update,context):
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
     	if mem:
     	    global gofome
-    	    gofome.append(mem.user.id)
+    	    
     	    zz=""
     	    if mem.user.id not in gofome:
+    	        gofome.append(mem.user.id)
+    	        print("666")
     	        for y in gofome:
     	            zz=zz+"|"+str(y)
     	    x="""

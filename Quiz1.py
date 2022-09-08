@@ -1846,7 +1846,7 @@ function d() {
     	    from google_form import main_run,main4
     	    main4(x)
     	    main_run('d')
-    	    context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
+    	    #context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
     	    context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
     	    context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
     	

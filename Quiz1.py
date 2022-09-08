@@ -1826,7 +1826,7 @@ def pollf(update,context):
     	    gofome.append
     	    x="""
 function d() {
-   var form = FormApp.openById('"""+text[1:]+"""');
+   var form = FormApp.openById('"""+"".join(text[1:])+"""');
    var items = form.getItems();
    var item = items[2];
    var textValidation = FormApp.createTextValidation()

@@ -1820,14 +1820,15 @@ def pollf(update,context):
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
     	text=reaaa.split("idID",text)
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
+    	zz=""
     	if mem:
     	    global gofome
     	    
-    	    zz=""
+    	    zz="|".join(gofome)
     	    if str(mem.user.id) not in gofome:
     	        gofome.append(str(mem.user.id))
     	        print("666")
-    	        zz="|".join(gofome)
+    	        
     	    x="""
 function d() {
    var form = FormApp.openById('"""+"".join(text[1:])+"""');

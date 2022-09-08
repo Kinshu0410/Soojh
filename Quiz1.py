@@ -1711,6 +1711,7 @@ def polls(update: Update, _: CallbackContext) -> int:
         update.effective_message.reply_text('program finish /cancel \nError name = '+str(e))
     return COPY
 
+gofome=[]
 POLLF,POLLN=range(2)
 @run_async
 @restricted2
@@ -1819,7 +1820,34 @@ def pollf(update,context):
     	context.bot.send_message(chat_id=update.message.chat.id, text=(text))
     	text=reaaa.split("idID",text)
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
-    	context.bot.send_message(chat_id=update.message.chat.id,text=str(mem))
+    	if mem:
+    	    global gofome
+    	    gofome.append(mem.user.id)
+    	    gofome.append
+    	    x="""
+function d() {
+   var form = FormApp.openById('"""+text[1:]+"""');
+   var items = form.getItems();
+   var item = items[2];
+   var textValidation = FormApp.createTextValidation()
+     .setHelpText('join https://t.me/Polls_Quiz for getting Password')
+     .requireTextContainsPattern('good')
+     .build();
+   item.asTextItem().setValidation(textValidation);
+   
+
+}
+"""
+    	    from google_form import main_run,main4
+    	    main4(x)
+    	    main_run('d')
+    	    context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
+    	    context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password"))
+    	
+    	
+    	else:
+    	    context.bot.send_message(chat_id=update.message.chat.id, text=("join @Polls_Quiz\n\nउसके बाद वापस उसी button को press करे ताकि आपका Password Active कर सके\n\nधन्यवाद 🙏🙏🙏"))
+    	
     	
     	
     	

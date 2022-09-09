@@ -1832,7 +1832,11 @@ def pollf(update,context):
     	            context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
     	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
     	    else:
-    	            context.bot.send_message(chat_id=update.message.chat.id, text=("join @Polls_Quiz\n\nउसके बाद वापस उसी button को press करे ताकि आपका Password Active कर सके\n\nधन्यवाद 🙏🙏🙏"))
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Refresh Password",url=chann="https://t.me/Soojhboojh_01bot?start=g_f"+reaaa.sub("/start g_f","",update.message.text))]]
+    	            reply_markup = InlineKeyboardMarkup(keyboard)
+    	    
+    	            
+    	            context.bot.send_message(chat_id=update.message.chat.id, text="सबसे पहले Join कीजिए उसके पश्चात Refresh Password पर Click 🙏",reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	            print("666")
     	        
     	    x="""

@@ -1851,7 +1851,7 @@ function d() {
     	            reply_markup = InlineKeyboardMarkup(keyboard)
     	    
     	            
-    	            context.bot.send_message(chat_id=update.message.chat.id, text=mem.user.id,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=mem.user.id,reply_markup=None,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	            #context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
     	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
     	    else:

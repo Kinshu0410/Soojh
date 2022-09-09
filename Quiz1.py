@@ -1828,16 +1828,6 @@ def pollf(update,context):
     	    zz="|".join(gofome)
     	    if (str(mem.user.id) not in gofome):
     	            gofome.append(str(mem.user.id))
-    	    if str(mem.status) in ['creator', 'administrator', 'member']:
-    	            context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
-    	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
-    	    else:
-    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Refresh Password",url="https://t.me/Soojhboojh_01bot?start=g_f"+reaaa.sub("/start g_f","",update.message.text))]]
-    	            reply_markup = InlineKeyboardMarkup(keyboard)
-    	    
-    	            
-    	            context.bot.send_message(chat_id=update.message.chat.id, text="सबसे पहले Join कीजिए उसके पश्चात Refresh Password पर Click 🙏",reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
-    	            print("666")
     	        
     	    x="""
 function d() {
@@ -1856,6 +1846,21 @@ function d() {
     	    from google_form import main_run,main4
     	    main4(x)
     	    main_run('d')
+    	    if str(mem.status) in ['creator', 'administrator', 'member']:
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Test",url="https://docs.google.com/forms/d/e/"+"".join(text[1:])+"/viewform")]]
+    	            reply_markup = InlineKeyboardMarkup(keyboard)
+    	    
+    	            
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=mem.user.id,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	            #context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
+    	    else:
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Refresh Password",url="https://t.me/Soojhboojh_01bot?start=g_f"+reaaa.sub("/start g_f","",update.message.text))]]
+    	            reply_markup = InlineKeyboardMarkup(keyboard)
+    	    
+    	            
+    	            context.bot.send_message(chat_id=update.message.chat.id, text="सबसे पहले Join कीजिए उसके पश्चात Refresh Password पर Click 🙏",reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	            print("666")
     	    #context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
     	    
     	

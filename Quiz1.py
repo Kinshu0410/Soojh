@@ -1827,11 +1827,11 @@ def pollf(update,context):
     	    
     	    zz="|".join(gofome)
     	    if (str(mem.user.id) not in gofome):
-    	        if str(mem.status) in ['creator', 'administrator', 'member']:
     	            gofome.append(str(mem.user.id))
+    	    if str(mem.status) in ['creator', 'administrator', 'member']:
     	            context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
     	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
-    	        else:
+    	    else:
     	            context.bot.send_message(chat_id=update.message.chat.id, text=("join @Polls_Quiz\n\nउसके बाद वापस उसी button को press करे ताकि आपका Password Active कर सके\n\nधन्यवाद 🙏🙏🙏"))
     	            print("666")
     	        

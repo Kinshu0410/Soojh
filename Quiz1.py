@@ -1820,15 +1820,18 @@ def pollf(update,context):
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
     	text=reaaa.split("idID",text)
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
-    	context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
+    	#context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
     	zz=""
-    	if mem:
+    	try:
     	    global gofome
     	    
     	    zz="|".join(gofome)
-    	    if str(mem.user.id) not in gofome:
-    	        gofome.append(str(mem.user.id))
-    	        print("666")
+    	    if (str(mem.user.id) not in gofome):
+    	        if mem.user.status in ['creator', 'administrator', 'member']:
+    	    
+    	    
+    	            gofome.append(str(mem.user.id))
+    	            print("666")
     	        
     	    x="""
 function d() {
@@ -1852,7 +1855,7 @@ function d() {
     	    context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
     	
     	
-    	else:
+    	except:
     	    context.bot.send_message(chat_id=update.message.chat.id, text=("join @Polls_Quiz\n\nउसके बाद वापस उसी button को press करे ताकि आपका Password Active कर सके\n\nधन्यवाद 🙏🙏🙏"))
     	
     	

@@ -2747,7 +2747,7 @@ function d() {
     	    main_run('d')
     	    keyboard=[[InlineKeyboardButton("Password",url=chann),InlineKeyboardButton("Test",url=test)]]
     	    reply_markup = InlineKeyboardMarkup(keyboard)
-    	    context.bot.send_message(chat_id=update.message.chat.id, text="<b>"+data[update.message.from_user.id]["title"]+"</b>"+"\n"+ data[update.message.from_user.id]["title"],reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	    context.bot.send_message(chat_id=update.message.chat.id, text="<b>"+data[update.message.from_user.id]["title"]+"</b>"+"\n"+ data[update.message.from_user.id]["description"],reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	else:
     	    update.message.reply_text(test)
     	

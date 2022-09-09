@@ -1832,7 +1832,7 @@ def pollf(update,context):
     	            context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
     	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
     	    else:
-    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Refresh Password",url=chann="https://t.me/Soojhboojh_01bot?start=g_f"+reaaa.sub("/start g_f","",update.message.text)]]
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Refresh Password",url="https://t.me/Soojhboojh_01bot?start=g_f"+reaaa.sub("/start g_f","",update.message.text))]]
     	            reply_markup = InlineKeyboardMarkup(keyboard)
     	    
     	            

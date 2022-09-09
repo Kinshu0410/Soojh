@@ -1827,7 +1827,7 @@ def pollf(update,context):
     	    
     	    zz="|".join(gofome)
     	    if (str(mem.user.id) not in gofome):
-    	        if mem.user.status in ['creator', 'administrator', 'member']:
+    	        if str(mem.status) in ['creator', 'administrator', 'member']:
     	    
     	    
     	            gofome.append(str(mem.user.id))

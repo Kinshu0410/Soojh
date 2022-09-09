@@ -24,7 +24,7 @@ def my(a,b):
 		elif 'grading' in x['questionItem']['question']:
 			db[x['questionItem']['question']['questionId']]=[x['questionItem']['question']['grading']['correctAnswers']['answers'][y]['value'] for y in range(len(x['questionItem']['question']['grading']['correctAnswers']['answers']))]
 			no_que+=1
-	print(ndb)
+	#print(ndb)
 	result=[]
 	for x in b['responses']:
 		right=0
@@ -39,7 +39,7 @@ def my(a,b):
 				name=x['answers'][y]['textAnswers']['answers'][0]['value']
 		result.append({"rank":None,"name":name,"total":4*right-wrong,"right":right,"wrong":wrong,"skip":no_que-right-wrong})
 	temp=[]
-	print(result)
+	#print(result)
 	def myFunc(e):
 		return e['total']
 	result.sort(reverse=True,key=myFunc)

@@ -12,20 +12,21 @@ from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 
 def my(a,b):
 	import xlsxwriter
-	
 	db={}
+	ndb=[]
 	no_que=0
 	for x in a['items']:
-		if 'pageBreakItem' in x:
-			pass
-		
+		if x['title']=='Your Name':
+			ndb.append(x['questionItem']['question']['questionId'])
+		elif 'pageBreakItem' in x:
+		    pass
+		    
 		elif 'grading' in x['questionItem']['question']:
 			db[x['questionItem']['question']['questionId']]=[x['questionItem']['question']['grading']['correctAnswers']['answers'][y]['value'] for y in range(len(x['questionItem']['question']['grading']['correctAnswers']['answers']))]
 			no_que+=1
-	
+	print(ndb)
 	result=[]
 	for x in b['responses']:
-		name=None
 		right=0
 		wrong=0
 		for y in x['answers'].keys():
@@ -34,10 +35,11 @@ def my(a,b):
 					right+=1
 				else:
 					wrong+=1
-			elif name is None:
+			elif y in ndb:
 				name=x['answers'][y]['textAnswers']['answers'][0]['value']
 		result.append({"rank":None,"name":name,"total":4*right-wrong,"right":right,"wrong":wrong,"skip":no_que-right-wrong})
 	temp=[]
+	print(result)
 	def myFunc(e):
 		return e['total']
 	result.sort(reverse=True,key=myFunc)
@@ -68,7 +70,7 @@ def my(a,b):
 class Drive_OCR:
     def __init__(self,filename) -> None:
         self.filename = filename
-        self.SCOPES = ['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/documents']
+        self.SCOPES = ['https://www.googleapis.com/auth/script.projects','https://www.googleapis.com/auth/documents','https://www.googleapis.com/auth/drive']
         self.credentials = "./credentia.json"
         self.pickle = "token.pickle"
         #print(self.filename)
@@ -135,12 +137,12 @@ class Drive_OCR:
         #body =body={ "requests": self.filename}
             
         doc1 = service.forms().get(formId=id).execute()
-        link=doc1.get('responderUri')
+        
         doc2 = service.forms().responses().list(formId=id).execute()
+        #print(doc1)
         
         
-        
-        return my(doc1,doc2), link
+        return my(doc1,doc2)
         
     def google_form_create(self) -> str:
         """Shows basic usage of the Drive v3 API.
@@ -172,6 +174,7 @@ class Drive_OCR:
         body={"info":self.filename}
             
         doc = service.forms().create(body=body).execute()
+        print(doc)
         drive_service = build('drive', 'v3', credentials=creds)
         file_id = doc.get('formId')
         folder_id = "10qRK4F2JWB6rzxo9ZsSOL-tiG6UsLNoD"

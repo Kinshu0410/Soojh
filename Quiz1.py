@@ -1828,9 +1828,11 @@ def pollf(update,context):
     	    zz="|".join(gofome)
     	    if (str(mem.user.id) not in gofome):
     	        if str(mem.status) in ['creator', 'administrator', 'member']:
-    	    
-    	    
     	            gofome.append(str(mem.user.id))
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
+    	        else:
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=("join @Polls_Quiz\n\nउसके बाद वापस उसी button को press करे ताकि आपका Password Active कर सके\n\nधन्यवाद 🙏🙏🙏"))
     	            print("666")
     	        
     	    x="""
@@ -1851,8 +1853,7 @@ function d() {
     	    main4(x)
     	    main_run('d')
     	    #context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
-    	    context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
-    	    context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
+    	    
     	
     	
     	except:
@@ -2640,7 +2641,7 @@ def done(update,context):
     	context.bot.send_message(chat_id=-1001599944734, text="👆Result Link\n👇Test Link")
     	update.message.reply_text("👆Result Link\n👇Test Link")
     	test=id2["responderUri"]
-    	
+    	#test_mess=context.bot.send_message(chat_id=-1001539629311, text=test)
     	update.message.reply_text
     	id2=id2["formId"]
     	item=[{
@@ -2742,7 +2743,7 @@ function d() {
     	    main_run('d')
     	    keyboard=[[InlineKeyboardButton("Password",url=chann),InlineKeyboardButton("Test",url=test)]]
     	    reply_markup = InlineKeyboardMarkup(keyboard)
-    	    context.bot.send_message(chat_id=update.message.chat.id, text="Google Form Quiz Time",reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	    context.bot.send_message(chat_id=update.message.chat.id, text="<b>"+data[update.message.from_user.id]["title"]+"</b>"+"\n"+ data[update.message.from_user.id]["title"],reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	else:
     	    update.message.reply_text(test)
     	

@@ -2731,6 +2731,8 @@ function d() {
 
    // create & name Form
    var form = FormApp.openById('"""+id+"""');
+   form.setLimitOneResponsePerUser(true);
+   
 
    // single line text field
    item = "Password";
@@ -2754,6 +2756,15 @@ function d() {
     	    reply_markup = InlineKeyboardMarkup(keyboard)
     	    context.bot.send_message(chat_id=update.message.chat.id, text="<b>"+data[update.message.from_user.id]["title"]+"</b>"+"\n"+ data[update.message.from_user.id]["description"],reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	else:
+    	    from google_form import main_run,main4
+    	    x="""
+function d() {
+   // create & name Form
+   var form = FormApp.openById('"""+id+"""');
+   form.setLimitOneResponsePerUser(true);
+}"""
+    	    main4(x)
+    	    main_run('d')
     	    update.message.reply_text(test)
     	
     	    

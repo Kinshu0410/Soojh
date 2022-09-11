@@ -2729,7 +2729,7 @@ def done(update,context):
     	        xn-=1
     	if data[update.message.from_user.id]["password"]:
     	    chann=data[update.message.from_user.id]["password"]
-    	    chann="https://t.me/Soojhboojh_01bot?start=g_f"+chann+"idID"+id
+    	    chann="https://t.me/Soojhboojh_01bot?start=g_f"+chann+"idID"+id[:10]
     	    from google_form import main_run,main4
     	    x="""
 function d() {

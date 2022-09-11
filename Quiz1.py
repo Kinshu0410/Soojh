@@ -1827,9 +1827,9 @@ def pollf(update,context):
     	try:
     	    global gofome
     	    
-    	    zz="|".join(gofome)
     	    if (str(mem.user.id) not in gofome):
     	            gofome.append(str(mem.user.id))
+    	    zz="|".join(gofome)
     	    text[1]=Drive_OCR("g").google_drive_get(text[1])
     	    for yy in text[1]:
     	        x="""

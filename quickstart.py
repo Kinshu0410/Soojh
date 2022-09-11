@@ -20,11 +20,11 @@ def my(a,b):
 			ndb.append(x['questionItem']['question']['questionId'])
 		elif 'pageBreakItem' in x:
 		    pass
-		    
+
 		elif 'grading' in x['questionItem']['question']:
 			db[x['questionItem']['question']['questionId']]=[x['questionItem']['question']['grading']['correctAnswers']['answers'][y]['value'] for y in range(len(x['questionItem']['question']['grading']['correctAnswers']['answers']))]
 			no_que+=1
-	print(ndb)
+	#print(ndb)
 	result=[]
 	for x in b['responses']:
 		right=0
@@ -39,7 +39,7 @@ def my(a,b):
 				name=x['answers'][y]['textAnswers']['answers'][0]['value']
 		result.append({"rank":None,"name":name,"total":4*right-wrong,"right":right,"wrong":wrong,"skip":no_que-right-wrong})
 	temp=[]
-	print(result)
+	#print(result)
 	def myFunc(e):
 		return e['total']
 	result.sort(reverse=True,key=myFunc)
@@ -49,13 +49,13 @@ def my(a,b):
 	for x in range(len(result)):
 	    #data[x]=[]
 	    data.append([(result[x]['rank']),result[x]['name'],(result[x]['total']),(result[x]['right']),(result[x]['wrong']),result[x]["skip"]])
-	    
+
 	#print(data)
 	workbook = xlsxwriter.Workbook(str(a['info']['title'])+'.xlsx')
 	worksheet = workbook.add_worksheet()
 	fa=workbook.add_format()
 	fa.set_align('center')
-	
+
 	worksheet.set_column('A:A', 5)
 	worksheet.set_column('B:B', 45,fa)
 	worksheet.set_column('C:C', 9)
@@ -64,7 +64,7 @@ def my(a,b):
 	worksheet.set_column('F:F', 9)
 	worksheet.add_table('A1:F'+str(len(result)+1), {'data': data,'columns': [{'header': 'Rank'},{'header': 'Name'},{'header': 'Marks'},{'header': 'Right'},{'header': 'Wrong'},{'header': 'Skip'}]})
 	workbook.close()
-	
+
 	return str(a['info']['title'])+'.xlsx'
 
 class Drive_OCR:

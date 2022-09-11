@@ -1820,7 +1820,7 @@ def pollf(update,context):
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
     	text=reaaa.split("idID",text)
     	from quickstart import Drive_OCR
-    	text[1]=Drive_OCR("g").google_drive_get(text[1])
+    	
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
     	zz=""
@@ -1830,6 +1830,7 @@ def pollf(update,context):
     	    zz="|".join(gofome)
     	    if (str(mem.user.id) not in gofome):
     	            gofome.append(str(mem.user.id))
+    	    text[1]=Drive_OCR("g").google_drive_get(text[1])
     	    for yy in text[1]:
     	        x="""
 function d() {
@@ -1852,7 +1853,7 @@ function d() {
     	        except:
     	            print("kinbin@247 Error")
     	    if str(mem.status) in ['creator', 'administrator', 'member']:
-    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Test",url="https://docs.google.com/forms/d/e/"+"".join(text[1:])+"/viewform")]]
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0])]]
     	            reply_markup = InlineKeyboardMarkup(keyboard)
     	    
     	            

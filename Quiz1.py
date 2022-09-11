@@ -1819,6 +1819,8 @@ def pollf(update,context):
     	text=reaaa.sub("/start g_f","",update.message.text)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
     	text=reaaa.split("idID",text)
+    	from quickstart import Drive_OCR
+    	text[1]=Drive_OCR("g").google_drive_get(text[1])
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
     	zz=""
@@ -1828,10 +1830,10 @@ def pollf(update,context):
     	    zz="|".join(gofome)
     	    if (str(mem.user.id) not in gofome):
     	            gofome.append(str(mem.user.id))
-    	        
-    	    x="""
+    	    for yy in text[1]:
+    	        x="""
 function d() {
-   var form = FormApp.openById('"""+"".join(text[1:])+"""');
+   var form = FormApp.openById('"""+yy+"""');
    var items = form.getItems();
    var item = items[1];
    var textValidation = FormApp.createTextValidation()
@@ -1843,9 +1845,12 @@ function d() {
 
 }
 """
-    	    from google_form import main_run,main4
-    	    main4(x)
-    	    main_run('d')
+    	        from google_form import main_run,main4
+    	        main4(x)
+    	        try:
+    	            main_run('d')
+    	        except:
+    	            print("kinbin@247 Error")
     	    if str(mem.status) in ['creator', 'administrator', 'member']:
     	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Test",url="https://docs.google.com/forms/d/e/"+"".join(text[1:])+"/viewform")]]
     	            reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1865,8 +1870,8 @@ function d() {
     	    
     	
     	
-    	except:
-    	    context.bot.send_message(chat_id=update.message.chat.id, text=("join @Polls_Quiz\n\nउसके बाद वापस उसी button को press करे ताकि आपका Password Active कर सके\n\nधन्यवाद 🙏🙏🙏"))
+    	except Exception as e:
+    	    context.bot.send_message(chat_id=update.message.chat.id, text=("some error\n\ndetails: "+str(e)))
     	
     	
     	

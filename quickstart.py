@@ -24,7 +24,7 @@ def my(a,b):
 		elif 'grading' in x['questionItem']['question']:
 			db[x['questionItem']['question']['questionId']]=[x['questionItem']['question']['grading']['correctAnswers']['answers'][y]['value'] for y in range(len(x['questionItem']['question']['grading']['correctAnswers']['answers']))]
 			no_que+=1
-	#print(ndb)
+	print(ndb)
 	result=[]
 	for x in b['responses']:
 		right=0
@@ -39,7 +39,7 @@ def my(a,b):
 				name=x['answers'][y]['textAnswers']['answers'][0]['value']
 		result.append({"rank":None,"name":name,"total":4*right-wrong,"right":right,"wrong":wrong,"skip":no_que-right-wrong})
 	temp=[]
-	#print(result)
+	print(result)
 	def myFunc(e):
 		return e['total']
 	result.sort(reverse=True,key=myFunc)
@@ -74,7 +74,57 @@ class Drive_OCR:
         self.credentials = "./credentia.json"
         self.pickle = "token.pickle"
         #print(self.filename)
+    
+    def google_drive_get(self,id) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
 
+        
+        service = build('drive', 'v3', credentials=creds)
+        files = []
+        page_token = None
+        
+            # pylint: disable=maybe-no-member
+        response = service.files().list(q="mimeType='application/vnd.google-apps.form'",
+                                            spaces='drive',
+                                            fields='nextPageToken, '
+                                                   'files(id)',
+                                            pageToken=page_token).execute()
+        dic=[]
+        for x in response["files"]:
+        	
+        	if x['id'].startswith(id):
+        	    dic.append(x['id'])
+        	
+        
+        	
+        
+        return (dic)
+    
+        #body =body={ "requests": self.filename}
+            
+        
+    
     def google_sheet_create(self) -> str:
         """Shows basic usage of the Drive v3 API.
         Prints the names and ids of the first 10 files the user has access to.
@@ -137,12 +187,12 @@ class Drive_OCR:
         #body =body={ "requests": self.filename}
             
         doc1 = service.forms().get(formId=id).execute()
-        link=doc1.get('responderUri')
+        
         doc2 = service.forms().responses().list(formId=id).execute()
         #print(doc1)
         
         
-        return my(doc1,doc2),link
+        return my(doc1,doc2)
         
     def google_form_create(self) -> str:
         """Shows basic usage of the Drive v3 API.

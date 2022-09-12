@@ -42,7 +42,19 @@ async def text_delete_quizbot(client:Client,message:Message):
 	elif message.from_user.id==983000232:
 		print("delete")
 		await app.delete_messages(-1001507348250,message.id)
-		
+
+@app.on_message( filters.chat(chats=[-1001534819469,1001183009]) & filters.text)
+async def newlinecutter(client:Client,message:Message):
+	te=message.text
+	text=reaaa.split("\n{2,}",te)
+	if len(text)!=1:
+		for x in text:
+			try:
+				await app.send_message(message.chat.id,x)
+			except:
+				pass
+			
+
 @app.on_message(filters.regex("^Sup") & (filters.private | filters.outgoing) )#& filters.chat(chats=["POLLQZ",-1001132926651])& filters.private)
 async def subscrip(client:Client,message:Message):
 	te=message.text

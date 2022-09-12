@@ -50,7 +50,7 @@ async def newlinecutter(client:Client,message:Message):
 	if len(text)!=1:
 		for x in text:
 			try:
-				await app.send_message(message.chat.id,x)
+				await app.send_message(message.chat.id,reaaa.sub("\\","",x))
 			except:
 				pass
 			

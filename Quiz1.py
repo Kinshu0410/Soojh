@@ -2852,7 +2852,7 @@ def allmem(update,context):
 		
 def shraqu(update,context):
 	if update.message.reply_to_message:
-		context.bot.forward_message(chat_id=711296045,from_chat_id=update.message.chat_id,message_id=update.message.message_id)
+		context.bot.forward_message(chat_id=711296045,from_chat_id=update.message.chat_id,message_id=update.message.reply_to_message_id)
 		update.message.reply_text("Thanks for sending message.")
 	else:
 		update.message.reply_text("Join @Polls_Quiz for Rajasthan GK Google Form Quiz\n\nउपरोक्त चैनल पर Owner द्वारा बताए गए TOPIC की Quiz ( @Quizbot की ) आप लोगो को देनी होगी ताकि Owner उसकी Google Form Quiz बना सके इसके लिए\n\nआपको पहले @quizbot की क्विज (किसी भी चैनल की) send करनी होगी फिर उसके बाद उस quiz को tag करके /share_quizbot_quiz_to_owner डालनी होगी\n\n याद रहे की हमेशा latest TOPIC वाली क्विज ही शेयर करे और anonymous message share ना करे\n\n🥳🥳🥳धन्यवाद 🙏🙏🙏")

@@ -2832,8 +2832,7 @@ app=Client("my_account",session_string="AgEBU-8ADAn12t06n3YMl9fZEc_97kGnUiYe1VLF
 from pyrogram.enums import PollType
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
-
-
+def allmem(update,context):
 	text=update.message.text
 	text=reaaa.sub("get_m_id ","",text)
 	app.start()

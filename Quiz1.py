@@ -1838,7 +1838,7 @@ function d() {
    var items = form.getItems();
    var item = items[1];
    var textValidation = FormApp.createTextValidation()
-     .setHelpText('join https://t.me/Polls_Quiz for getting Password')
+     .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')
      .requireTextContainsPattern('"""+zz+"""')
      .build();
    item.asTextItem().setValidation(textValidation);

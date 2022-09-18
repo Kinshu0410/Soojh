@@ -1858,7 +1858,7 @@ function d() {
      .withItemResponse(item1.asTextItem().createResponse('"""+str(uid)+"""'))
      .toPrefilledUrl()
     
-    return res'
+    return res
    
 
 }

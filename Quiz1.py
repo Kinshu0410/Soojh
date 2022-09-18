@@ -1846,14 +1846,14 @@ function d() {
    var form = FormApp.openById('"""+yy+"""');
    var items = form.getItems();
    var item0 = items[0];
-   var item1 = items[0];
+   var item1 = items[1];
    var item = items[1];
    var textValidation = FormApp.createTextValidation()
      .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')
      .requireTextContainsPattern('"""+zz+"""')
      .build();
    item.asTextItem().setValidation(textValidation);
-   return """+res_url+"""'?usp=pp_url&entry.'+item0.getId()+'='"""+str(name)+"""&entry.'+ item1.getId()+'='"""+str(uid)+"""
+   return """+res_url+"""'?usp=pp_url&entry.='+item0.getId()+"""+str(name)+"""'&entry.'+ item1.getId()+'='"""+str(uid)+"""
    
 
 }

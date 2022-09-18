@@ -1824,6 +1824,12 @@ def pollf(update,context):
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
     	zz=""
+    	
+    	name=update.message.from_user.first_name
+    	if update.message.from_user.last_name:
+    	    name=name+" "+update.message.from_user.last_name
+    	uid=update.message.from_user.id
+    
     	try:
     	    global gofome
     	    
@@ -1831,33 +1837,40 @@ def pollf(update,context):
     	            gofome.append(str(mem.user.id))
     	    zz="|".join(gofome)
     	    text[1]=Drive_OCR("g").google_drive_get(text[1])
+    	    res_url=""
     	    for yy in text[1]:
+    	        
+    	        res_url=Drive_OCR("y").google_form_responce_url(yy)
     	        x="""
 function d() {
    var form = FormApp.openById('"""+yy+"""');
    var items = form.getItems();
+   var item0 = items[0];
+   var item1 = items[0];
    var item = items[1];
    var textValidation = FormApp.createTextValidation()
      .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')
      .requireTextContainsPattern('"""+zz+"""')
      .build();
    item.asTextItem().setValidation(textValidation);
+   return """+res_url+"""'?usp=pp_url&entry.'+item0.getId()+'='"""+str(name)+"""&entry.'+ item1.getId()+'='"""+str(uid)+"""
    
 
 }
 """
     	        from google_form import main_run,main4
     	        main4(x)
+    	        res_url=""
     	        try:
-    	            main_run('d')
+    	            res_url=main_run('d')['response']['result']
     	        except:
     	            print("kinbin@247 Error")
     	    if str(mem.status) in ['creator', 'administrator', 'member']:
-    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0])]]
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0])],[InlineKeyboardButton("Test Link",url=res_url]
     	            reply_markup = InlineKeyboardMarkup(keyboard)
     	    
     	            
-    	            context.bot.send_message(chat_id=update.message.chat.id, text=mem.user.id,reply_markup=None,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=mem.user.id,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     	            #context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
     	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
     	    else:

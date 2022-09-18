@@ -193,6 +193,43 @@ class Drive_OCR:
         
         
         return my(doc1,doc2), link
+
+    def google_form_responce_url(self,id) -> str:
+        """Shows basic usage of the Drive v3 API.
+        Prints the names and ids of the first 10 files the user has access to.
+        """
+        
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(self.pickle):
+            with open(self.pickle, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials, self.SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open(self.pickle, 'wb') as token:
+                pickle.dump(creds, token)
+
+        
+        service = build('forms', 'v1', credentials=creds)
+    
+        #body =body={ "requests": self.filename}
+            
+        doc1 = service.forms().get(formId=id).execute()
+        link=doc1.get('responderUri')
+        #doc2 = service.forms().responses().list(formId=id).execute()
+        #print(doc1)
+        
+        
+        return link
         
     def google_form_create(self) -> str:
         """Shows basic usage of the Drive v3 API.

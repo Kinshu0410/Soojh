@@ -1824,12 +1824,12 @@ def pollf(update,context):
     	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
     	zz=""
-    	import urllib
+    	
     	name=update.message.from_user.first_name
     	if update.message.from_user.last_name:
     	    name=name+" "+update.message.from_user.last_name
     	uid=update.message.from_user.id
-    	name=urllib.parse.quote(name)
+    	
     	try:
     	    global gofome
     	    
@@ -1853,7 +1853,12 @@ function d() {
      .requireTextContainsPattern('"""+zz+"""')
      .build();
    item.asTextItem().setValidation(textValidation);
-   return '"""+res_url+"""?usp=pp_url&entry.'+item0.getId()+'="""+name+"""&entry.'+item1.getId()+'="""+str(uid)+"""'
+   var res= form.createResponse()
+     .withItemResponse(item0.asTextItem().createResponse('"""+name+"""'))
+     .withItemResponse(item1.asTextItem().createResponse('"""+str(uid)+"""'))
+     .toPrefilledUrl()
+    
+    return res'
    
 
 }

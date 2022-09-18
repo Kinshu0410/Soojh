@@ -1866,7 +1866,7 @@ function d() {
     	        except:
     	            print("kinbin@247 Error")
     	    if str(mem.status) in ['creator', 'administrator', 'member']:
-    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0])],[InlineKeyboardButton("Test Link",url=res_url)]
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0])],[InlineKeyboardButton("Test Link",url=res_url)]]
     	            reply_markup = InlineKeyboardMarkup(keyboard)
     	    
     	            

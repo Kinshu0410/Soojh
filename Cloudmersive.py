@@ -1856,7 +1856,7 @@ async def job(client:Client,message:Message):
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.outgoing)
 async def forword(client:Client,message:Message):
 	text=message.text
-	text=reaaa.sub("(\n| ){,}\d{1,} points(\n| ){,}","\n",text)
+	text=reaaa.sub("(\n| ){,}(\d{1,} points|\d{1,}/\d{1,})(\n| ){,}","\n",text)
 	text=reaaa.split("\n{2,}",text)
 	for x in text:
 		x=reaaa.sub(" {,}$","",x)

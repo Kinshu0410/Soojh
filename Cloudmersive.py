@@ -1482,7 +1482,7 @@ async def forwortd(client:Client,message:Message):
 	if chattt==-1001517843177:
 	    await app.send_message(chat_id="SukhrajGharu", text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz"+expl+"\n"+str(correct_option_id+1))
 	
-	    await app.send_message(chat_id=726773241,text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz"+expl+"\n"+str(correct_option_id+1))
+	    await app.send_message(chat_id="FighterReet",    text=question+"\n"+"\n".join(options)+"\nfind more on @Polls_Quiz"+expl+"\n"+str(correct_option_id+1))
 	for x in chatid:
 	    xy=True
 	    while xy:

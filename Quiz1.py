@@ -2636,7 +2636,7 @@ def a_c(update,context):
 	text=reaaa.sub("^.*/|@","",update.message.text)
 	data[update.message.from_user.id]["password"]=text
 	context.bot.send_message(chat_id=update.message.chat.id,text="Channel Added")
-	return CC
+	return AA
 	
 def a_p(update,context):
 	global data

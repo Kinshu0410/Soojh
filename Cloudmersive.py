@@ -1551,7 +1551,7 @@ async def forword(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,explanation=exp,is_anonymous=False,type=PollType.QUIZ))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,explanation=exp,is_anonymous=True,type=PollType.QUIZ))
 	    ##print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.id)
 
@@ -1850,7 +1850,7 @@ async def start_command1(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ))
+	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type=PollType.QUIZ))
 	    ##print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.id)
 

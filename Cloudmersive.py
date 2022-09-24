@@ -1664,6 +1664,23 @@ async def Current_iq(client:Client,message:Message):
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 
+def question (question):
+	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
+	#print("que se aage gye")
+	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
+	#question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q|(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}|)", "", question)
+	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}(\d{1,}\. |\d{1,}\.)", "", question)
+	question=reaaa.sub(r"^(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+	question=reaaa.sub(r"^(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+	
+	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)(\[\d{1,}\/\d{1,}\] ){1,}", "", question)
+	question=reaaa.sub(r"^(Q_\. |Q_\.|Q_ |Q_|Q\. |Q\.|Q |Q)(\d{1,}\. |\d{1,}\.)", "", question)
+	question=reaaa.sub(r" C.A BY ", "", question)
+	question=reaaa.sub(r"", "", question)
+	question=reaaa.sub(r"(\n|)Sandeep Sonia", "", question)
+	return question
+
+
 @app.on_message(filters.poll & filters.private )#& filters.incoming)
 async def private_polls(client:Client,message:Message):
     chatid=[]
@@ -1680,6 +1697,9 @@ async def private_polls(client:Client,message:Message):
     elif message.chat.id==1211101855:
         chatid=["@EasyScienceSajidSir"]
         is_anonymous=True
+    elif message.chat.id==1001183009:
+        chatid=[-1001517843177]
+        is_anonymous=True
 	#else#
 	##print(message.id)
     if len(chatid)!=0:
@@ -1691,6 +1711,7 @@ async def private_polls(client:Client,message:Message):
     	await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
     	print("private_polls")
     	question=mess.question
+    	question=question(question)
     	options=[o.text for o in mess.options]
     	correct_option_id = 0
     	for i in range(len(mess.options)):

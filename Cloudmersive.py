@@ -1701,7 +1701,7 @@ async def private_polls(client:Client,message:Message):
         chatid=[-1001517843177]
         is_anonymous=True
 	#else#
-	mess=""
+    mess=""
     if len(chatid)!=0:
     	try:
     		
@@ -1720,7 +1720,6 @@ async def private_polls(client:Client,message:Message):
     	           break
     	exp=mess.exp
 	
-		
 		
 		
     	if exp is not None:

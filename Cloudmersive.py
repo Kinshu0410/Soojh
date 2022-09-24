@@ -1724,6 +1724,7 @@ async def private_polls(client:Client,message:Message):
     	for x in chatid:
     		try:
     			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=is_anonymous,type=PollType.QUIZ))
+    			await asyncio.sleep(5)
     		except FloodWait as e:
     			await asyncio.sleep(e.x)
     	    #col=clientmongo["channal_schedule"][str(x)]

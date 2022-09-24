@@ -1664,7 +1664,7 @@ async def Current_iq(client:Client,message:Message):
 	    ##print(mess)
 	    #await app.stop_poll(chat_id=x,message_id=mess.id)
 
-def question (question):
+def question_type (question):
 	question=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", question)
 	#print("que se aage gye")
 	question=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", question)
@@ -1701,7 +1701,7 @@ async def private_polls(client:Client,message:Message):
         chatid=[-1001517843177]
         is_anonymous=True
 	#else#
-	##print(message.id)
+	mess=""
     if len(chatid)!=0:
     	try:
     		
@@ -1711,19 +1711,27 @@ async def private_polls(client:Client,message:Message):
     	await app.delete_messages(chat_id=message.chat.id, message_ids=message.id)
     	print("private_polls")
     	question=mess.question
-    	question=question(question)
+    	question=question_type(question)
     	options=[o.text for o in mess.options]
     	correct_option_id = 0
     	for i in range(len(mess.options)):
     	       if mess.options[i].correct:
     	           correct_option_id = i
     	           break
-    	#correct_option_id
+    	exp=mess.exp
+	
+		
+		
+		
+    	if exp is not None:
+    	    exp=reaaa.sub(r"((@|#)([0-9A-Za-z\-\_\.])*(\s|\n{1,}|))|((\n| |){1,}(Join|)(\n| |)){1,}", "", exp)
+    	    exp=reaaa.sub(r"(http|ftp|https|t\.me|tg):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])", "", exp)
+    	    exp=reaaa.sub("([^\u0000-\u05C0\u2100-\u214F\u0900-\u097F\u002c\u00B2\u00B3\u00B9\u2070-\u209F\u2200-\u22FF])","",exp)
     	##print(message)
     	#time.sleep(100)
     	for x in chatid:
     		try:
-    			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=is_anonymous,type=PollType.QUIZ))
+    			mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=is_anonymous,explanation=exp,type=PollType.QUIZ))
     			await asyncio.sleep(5)
     		except FloodWait as e:
     			await asyncio.sleep(e.x)

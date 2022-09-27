@@ -1836,7 +1836,7 @@ async def start_command1(client:Client,message:Message):
 	question=reaaa.sub(r"\n{,}(🪴:~ 🪴|⃝༺⃝꧁⃝ pragyagauri꧂⃝༻⃝)\n{,}", "", question)
 	question=reaaa.sub(r" C.A BY ", "", question)
 	question=reaaa.sub(r"", "", question)
-	options=[reaaa.sub("^(\(|\[|\{|)(a|A|b|B|c|C|d|D|e|E|f|F|g|G|h|H)(\)|\]|\}\.)( |){1,}","",o.text) for o in mess.options]
+	options=[reaaa.sub("^(\(|\[|\{|)(a|A|b|B|c|C|d|D|e|E|f|F|g|G|h|H)(\)|\]|\}|\.)(\.| |){1,}","",o.text) for o in mess.options]
 	#question=emojicut(question)
 	#zzzz=[emojicut(yy) for yy in options]
 	#options=zzzz

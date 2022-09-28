@@ -1492,11 +1492,11 @@ def poll(update, context):
         current_quiz=col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]]
         keyboard=False
         if Nu[0]==0:
-            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
         elif Nu[0]+1==len(data):
-            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz0")]]
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz0")]]
         else:
-            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
         reply_markup = InlineKeyboardMarkup(keyboard)
         context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+"\n\nSchedule Daily Time : - "+Time+"\n\n"+current_quiz,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     elif update.message.reply_markup:
@@ -2046,11 +2046,11 @@ def button(update: Update, context: CallbackContext) -> None:
 	       query.answer()
 	       keyboard=False
 	       if Nu[0]==0:
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set0"),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set0"),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
 	       elif Nu[0]+1==len(data):
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(0))]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(0))]]
 	       else:
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
 	       reply_markup = InlineKeyboardMarkup(keyboard)
 	       query.edit_message_text(text="Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+" DATA\n\nSchedule Daily Time : - "+Time+"\n\n"+current_quiz,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     else:

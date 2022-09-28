@@ -682,12 +682,13 @@ async def job2_partener1(client:Client,message:Message):
     	    marks = new_result[chat_id]['Marks']
     	    text.append(f"{i}. {fname} got {marks} marks")
         z=1
+        print (len(new_result))
         for x in new_result:
-            print(x)
+            #print(x)
             new_result[x]["Rank"]=z
             z+=1
         #count=len(Text)+1
-        print(new_result)
+        #print(new_result)
         new={}
         new.update(new_result)
         for x in new:

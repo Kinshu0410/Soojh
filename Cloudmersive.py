@@ -619,7 +619,7 @@ async def job2_partener1(client:Client,message:Message):
             	except:
             		mess1=await app.get_messages(message.chat.id,x)
             		mess1=mess1.poll
-            	print(mess1.options)
+            	#print(mess1.options)
             	off_set=None
             	correct_option_id = 0
             	for i in range(len(mess1.options)):
@@ -627,8 +627,9 @@ async def job2_partener1(client:Client,message:Message):
             	        correct_option_id = i
             	        break
             	opi1=mess1.options
-            	opi1[0]=mess1.options[i]
-            	opi1[i]=mess1.options[0]
+            	opi2=opi1
+            	opi1[0]=opi2[i]
+            	opi1[i]=opi2[0]
             	print(opi1)
             	for opi in (opi1):
             		for xxxx in range(opi.voter_count//50+1):
@@ -681,7 +682,7 @@ async def job2_partener1(client:Client,message:Message):
             		                    result[(mess2.votes[mmid].user_id)]["wrong"]=wrong+1
             		    
             		        
-            		data2=[]
+            	data2=[]
             	tmarks+=4
             except Exception as e:
                 print(str(e))

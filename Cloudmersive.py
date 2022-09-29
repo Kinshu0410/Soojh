@@ -627,9 +627,9 @@ async def job2_partener1(client:Client,message:Message):
             	        correct_option_id = i
             	        break
             	opi1=mess1.options
-            	opi2=opi1
-            	opi1[0]=opi2[i]
-            	opi1[i]=opi2[0]
+            	
+            	opi1[0]=mess1.options[correct_option_id]
+            	opi1[correct_option_id]=mess1.options[0]
             	print(opi1)
             	for opi in (opi1):
             		for xxxx in range(opi.voter_count//50+1):

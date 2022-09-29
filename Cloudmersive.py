@@ -637,10 +637,11 @@ async def job2_partener1(client:Client,message:Message):
             		
             		#print("correct_option_id = "+str(correct_option_id))
             		    for mmid in range(len(mess2.votes)):
-            		        user1=await app.get_user(mess2.votes[mmid].user_id)
+            		        user1=""
             		        #print(user1)
             		        if mess2.votes[mmid].user_id not in result.keys():
             		        #print
+            		            user1=await app.get_users(mess2.votes[mmid].user_id)
             		            fname=user1.username
             		            if fname is None:
             		                fname=user1.first_name

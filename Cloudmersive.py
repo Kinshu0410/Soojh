@@ -625,17 +625,15 @@ async def job2_partener1(client:Client,message:Message):
             		for xxxx in range(opi.voter_count//50+1):
             		    mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=opi.voter_count,option=opi.data,offset=off_set))
             		    off_set=mess2.next_offset
-            		    print(str((mess2.votes[0])))
+            		    print(str((mess2.votes)))
         		#print(mess2.next_offset)
         		#print(len(mess2.votes))
-            		    correct_option_id = 0
-            		    for i in range(len(mess1.options)):
+            		    correct_option_id = opi.correct
+            		    
             	
-            		    #print(mess1)
-            		        if opi.correct:
-            		            correct_option_id = opi.correct
+            		    
             		            
-            		            break
+            		            
             		
             		#print("correct_option_id = "+str(correct_option_id))
             		    for mmid in range(len(mess2.votes)):

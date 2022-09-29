@@ -625,10 +625,10 @@ async def job2_partener1(client:Client,message:Message):
             		for xxxx in range(opi.voter_count//50+1):
             		    mess2=await app.invoke(functions.messages.GetPollVotes(peer=await app.resolve_peer(message.chat.id),id=x,limit=opi.voter_count,option=opi.data,offset=off_set))
             		    off_set=mess2.next_offset
-            		    print(str((mess2.votes)))
+            		    print(str(len(mess2.votes)))
         		#print(mess2.next_offset)
         		#print(len(mess2.votes))
-            		    correct_option_id = opi.correct
+            		    
             		    
             	
             		    
@@ -637,13 +637,14 @@ async def job2_partener1(client:Client,message:Message):
             		
             		#print("correct_option_id = "+str(correct_option_id))
             		    for mmid in range(len(mess2.votes)):
-            		    #print(mess2.votes[mmid]["option"])
+            		        user1=await app.get_users([mess2.votes[mmid].user_id])
+            		        #print(user1)
             		        if mess2.votes[mmid].user_id not in result.keys():
             		        #print
-            		            fname=mess2.users[mmid].username
+            		            fname=user1.username
             		            if fname is None:
-            		                fname=mess2.users[mmid].first_name
-            		                lname=mess2.users[mmid].last_name
+            		                fname=user1.first_name
+            		                lname=user1.last_name
             		                if lname is None:
             		                    fname=fname
             		                else:
@@ -651,7 +652,7 @@ async def job2_partener1(client:Client,message:Message):
             		            else:
             		                fname="@"+fname
             		        
-            		            if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
+            		            if opi.correct:
             		                result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4,"right":1,"wrong":0}
             		            
             		            else:
@@ -661,7 +662,7 @@ async def job2_partener1(client:Client,message:Message):
             		            Marks=result[(mess2.votes[mmid].user_id)]["Marks"]
             		            right=result[(mess2.votes[mmid].user_id)]["right"]
             		            wrong=result[(mess2.votes[mmid].user_id)]["wrong"]
-            		            if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
+            		            if opi.correct:
             		                result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
             		                result[(mess2.votes[mmid].user_id)]["right"]=right+1
             		            else:

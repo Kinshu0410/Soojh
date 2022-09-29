@@ -674,7 +674,7 @@ async def job2_partener1(client:Client,message:Message):
             		                result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             		                result[(mess2.votes[mmid].user_id)]["wrong"]=wrong+1
             		    
-            	data2=[]
+            		data2=[]
             	tmarks+=4
             except Exception as e:
                 print(str(e))

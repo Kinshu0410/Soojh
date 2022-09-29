@@ -612,7 +612,7 @@ async def job2_partener1(client:Client,message:Message):
         
         
         for x in range(int(xx[0]),int(xx[1])+1):
-    		data2=[]
+            data2=[]
             try:
             	try:
             		mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
@@ -641,7 +641,8 @@ async def job2_partener1(client:Client,message:Message):
             		        if mess2.votes[mmid].user_id not in data2:
             		            data2.append(mess2.votes[mmid].user_id)
             		        else:
-            		            await app.send_message(message.chat.id,await app.get_users(mess2.votes[mmid].user_id))
+            		            user1=await app.get_users(mess2.votes[mmid].user_id)
+            		            await app.send_message(message.chat.id,user1.first_name+str(mess2.votes[mmid].user_id))
             		        if mess2.votes[mmid].user_id not in result.keys():
             		            
             		            user1=await app.get_users(mess2.votes[mmid].user_id)
@@ -673,7 +674,7 @@ async def job2_partener1(client:Client,message:Message):
             		                result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             		                result[(mess2.votes[mmid].user_id)]["wrong"]=wrong+1
             		    
-    		    if data2
+    		    #if data2
             	tmarks+=4
             except Exception as e:
                 print(str(e))

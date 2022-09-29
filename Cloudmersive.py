@@ -628,47 +628,7 @@ async def job2_partener1(client:Client,message:Message):
             		    print(str(len(mess2.votes)))
         		#print(mess2.next_offset)
         		#print(len(mess2.votes))
-            		    correct_option_id = 0
-            		    for i in range(len(mess1.options)):
-            	
-            		    #print(mess1)
-            		        if mess1.options[i].correct:
-            		            correct_option_id = i
-            		            break
-            		
-            		#print("correct_option_id = "+str(correct_option_id))
-            		    for mmid in range(len(mess2.votes)):
-            		    #print(mess2.votes[mmid]["option"])
-            		        if mess2.votes[mmid].user_id not in result.keys():
-            		        #print
-            		            fname=mess2.users[mmid].username
-            		            if fname is None:
-            		                fname=mess2.users[mmid].first_name
-            		                lname=mess2.users[mmid].last_name
-            		                if lname is None:
-            		                    fname=fname
-            		                else:
-            		                    fname=fname+" "+lname
-            		            else:
-            		                fname="@"+fname
-            		        
-            		            if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
-            		                result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4,"right":1,"wrong":0}
-            		            
-            		            else:
-            		                result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1,"right":0,"wrong":1}
-            		            
-            		        else:
-            		            Marks=result[(mess2.votes[mmid].user_id)]["Marks"]
-            		            right=result[(mess2.votes[mmid].user_id)]["right"]
-            		            wrong=result[(mess2.votes[mmid].user_id)]["wrong"]
-            		            if int.from_bytes(mess2.votes[mmid].option, "big") == correct_option_id or int.from_bytes(mess2.votes[mmid].option, "big") -48== correct_option_id:
-            		                result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
-            		                result[(mess2.votes[mmid].user_id)]["right"]=right+1
-            		            else:
-            		                result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
-            		                result[(mess2.votes[mmid].user_id)]["wrong"]=wrong+1
-            	tmarks+=4
+            		    
             except Exception as e:
                 print(str(e))
     		    

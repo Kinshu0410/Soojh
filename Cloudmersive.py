@@ -640,40 +640,38 @@ async def job2_partener1(client:Client,message:Message):
             		        user1=""
             		        if mess2.votes[mmid].user_id not in data2:
             		            data2.append(mess2.votes[mmid].user_id)
-            		        else:
-            		            user1=await app.get_users(mess2.votes[mmid].user_id)
-            		            await app.send_message(message.chat.id,str(x)+user1.first_name+str(mess2.votes[mmid].user_id))
-            		        if mess2.votes[mmid].user_id not in result.keys():
-            		            
-            		            user1=await app.get_users(mess2.votes[mmid].user_id)
-            		            fname=user1.username
-            		            if fname is None:
-            		                fname=user1.first_name
-            		                lname=user1.last_name
-            		                if lname is None:
-            		                    fname=fname
+            		            if mess2.votes[mmid].user_id not in result.keys():
+            		                
+            		                user1=await app.get_users(mess2.votes[mmid].user_id)
+            		                fname=user1.username
+            		                if fname is None:
+            		                    fname=user1.first_name
+            		                    lname=user1.last_name
+            		                    if lname is None:
+            		                        fname=fname
+            		                    else:
+            		                        fname=fname+" "+lname
             		                else:
-            		                    fname=fname+" "+lname
-            		            else:
-            		                fname="@"+fname
-            		        
-            		            if opi.correct:
-            		                result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4,"right":1,"wrong":0}
+            		                    fname="@"+fname
             		            
+            		                if opi.correct:
+            		                    result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":4,"right":1,"wrong":0}
+            		                
+            		                else:
+            		                    result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1,"right":0,"wrong":1}
+            		                
             		            else:
-            		                result[(mess2.votes[mmid].user_id)]={"fname":fname,"Marks":-1,"right":0,"wrong":1}
-            		            
-            		        else:
-            		            Marks=result[(mess2.votes[mmid].user_id)]["Marks"]
-            		            right=result[(mess2.votes[mmid].user_id)]["right"]
-            		            wrong=result[(mess2.votes[mmid].user_id)]["wrong"]
-            		            if opi.correct:
-            		                result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
-            		                result[(mess2.votes[mmid].user_id)]["right"]=right+1
-            		            else:
-            		                result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
-            		                result[(mess2.votes[mmid].user_id)]["wrong"]=wrong+1
+            		                Marks=result[(mess2.votes[mmid].user_id)]["Marks"]
+            		                right=result[(mess2.votes[mmid].user_id)]["right"]
+            		                wrong=result[(mess2.votes[mmid].user_id)]["wrong"]
+            		                if opi.correct:
+            		                    result[(mess2.votes[mmid].user_id)]["Marks"]=Marks+4
+            		                    result[(mess2.votes[mmid].user_id)]["right"]=right+1
+            		                else:
+            		                    result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
+            		                    result[(mess2.votes[mmid].user_id)]["wrong"]=wrong+1
             		    
+            		        
             		data2=[]
             	tmarks+=4
             except Exception as e:

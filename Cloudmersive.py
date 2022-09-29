@@ -612,7 +612,7 @@ async def job2_partener1(client:Client,message:Message):
         
         
         for x in range(int(xx[0]),int(xx[1])+1):
-    		#print(str(result))
+    		data2=[]
             try:
             	try:
             		mess1=(await client.vote_poll(chat_id=message.chat.id, message_id=x,options=1))
@@ -638,9 +638,12 @@ async def job2_partener1(client:Client,message:Message):
             		#print("correct_option_id = "+str(correct_option_id))
             		    for mmid in range(len(mess2.votes)):
             		        user1=""
-            		        #print(user1)
+            		        if mess2.votes[mmid].user_id not in data2:
+            		            data2.append(mess2.votes[mmid].user_id)
+            		        else:
+            		            await app.send_message(message.chat.id,await app.get_users(mess2.votes[mmid].user_id))
             		        if mess2.votes[mmid].user_id not in result.keys():
-            		        #print
+            		            
             		            user1=await app.get_users(mess2.votes[mmid].user_id)
             		            fname=user1.username
             		            if fname is None:
@@ -669,6 +672,8 @@ async def job2_partener1(client:Client,message:Message):
             		            else:
             		                result[(mess2.votes[mmid].user_id)]["Marks"]=Marks-1
             		                result[(mess2.votes[mmid].user_id)]["wrong"]=wrong+1
+            		    
+    		    if data2
             	tmarks+=4
             except Exception as e:
                 print(str(e))
@@ -731,7 +736,7 @@ async def job2_partener1(client:Client,message:Message):
             #await app.send_message(message.chat.id, daata)
             #await app.send_document(message.chat.id, Drive_OCR(body).download(id))
             Drive_OCR(body).delete(id),
-            await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result))+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:3]))
+            await app.send_document(message.chat.id, Drive_OCR("Result.xlsx").main1(),caption="Total Number of Participents "+str(len(new_result)+1)+"\nTotal Marks "+str(tmarks)+"\n\n"+'\n'.join(text[0:3]))
         except:
             for xy in range(len(text)//20+1):
                 final_text='\n'.join(text[xy*20:(xy+1)*20])

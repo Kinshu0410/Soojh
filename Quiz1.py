@@ -715,8 +715,8 @@ def doc_poll(update,context):
         reply_markup=None
         
         for x in q:
-        	t=reaaa.split("(\(|\[|\{)(a|b|c|d|A|B|C|D)(\)|\]|\.)( |){1,}",x[:-1])
-        	
+        	t=reaaa.sub("(\(|\[|\{)(a|b|c|d|A|B|C|D)(\)|\]|\.)( |){1,}","\n",x[:-1])
+        	t=reaaa.split("\n",t)
         	
         
         	try:

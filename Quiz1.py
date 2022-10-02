@@ -713,26 +713,10 @@ def doc_poll(update,context):
         
         keyboard=None
         reply_markup=None
-        Xy=client["youtube"]["time"]
-        Time=Xy.find_one({})["Time"]
-        yoo=0
+        
         for x in q:
-        	if link is not None:
-        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?t="+str(int(yoo)))]]
-        	    reply_markup=InlineKeyboardMarkup(keyboard)
-        	x=reaaa.split("(?=Sol\.\(.\))",x)
-        	yoo=yoo+Time[X]
-        	X+=1
-        	ex=x[1]
-        	t=reaaa.split("(?=\(a\)|\(b\)|\(c\)|\(d\))",x[0])
-        	if ex[5]=="a":
-        	    correct_option_id=0
-        	elif ex[5]=="b":
-        	    correct_option_id=1
-        	elif ex[5]=="c":
-        	    correct_option_id=2
-        	elif ex[5]=="d":
-        	    correct_option_id=3
+        	t=reaaa.split("(\(|\[|\{)(a|b|c|d|A|B|C|D)(\)|\]|\.)( |){1,}",x[:-1])
+        	
         	
         
         	try:
@@ -740,11 +724,11 @@ def doc_poll(update,context):
         	    context.bot.send_poll(
         	chat_id=update.effective_chat.id,
                                 question=t[0],
-                                options=t[1:],
+                                options=t[1:5],
                                 type=Poll.QUIZ,
-                                correct_option_id =correct_option_id,
+                                correct_option_id =int(x[-1])-1,
                                 #open_period=int(Time),
-                                explanation="Subscribe On youtube : https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA\n\n👆👆👆",
+                                explanation=t[5:],
                                 is_closed=False,
                                 is_anonymous=True,
                                 reply_markup=reply_markup,
@@ -757,7 +741,7 @@ def doc_poll(update,context):
                                 question=t[0],
                                 options=t[1:],
                                 type=Poll.QUIZ,
-                                correct_option_id =correct_option_id,
+                                correct_option_id =int(x[-1])-1,
                                 #open_period=int(Time),
                                 #explanation=exp,
                                 is_closed=False,

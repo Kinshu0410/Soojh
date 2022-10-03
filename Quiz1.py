@@ -708,6 +708,7 @@ async def get_mess_py(x,y):
 	try:
 		await app.start()
 		return_mess=await app.get_messages(x,int(y))
+		await asyncio.sleep(5)
 		await app.stop()
 		return return_mess.text
 	except:

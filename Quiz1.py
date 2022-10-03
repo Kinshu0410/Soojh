@@ -706,6 +706,7 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 app.start()
 def get_mess_py(x,y):
 	try:
+		print( "kinbin@247")
 		return_mess=app.get_messages(x,int(y))
 		print( return_mess)
 		return return_mess.text

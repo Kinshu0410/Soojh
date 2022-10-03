@@ -2038,13 +2038,15 @@ import re as reaaa
 import time
 
 
-
+zza=1
 def get_mess_py(x,y):
 	try:
-		app.start()
+		if zza==1:
+		    app.start()
+		    zza+=1
 		return_mess= app.get_messages(x,int(y))
 		print(return_mess)
-		app.stop()
+		#app.stop()
 		return return_mess.text
 	except Exception as e:
 		#app.restart()

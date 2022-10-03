@@ -706,14 +706,14 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 app.start()
 def get_mess_py(x,y):
 	try:
-		
-		return_mess=(app.get_messages(x,int(y))).text
+		return_mess=app.get_messages(x,int(y))
+		return return_mess.text
 	except:
 		pass#app.stop()
 
 	
 	
-	return return_mess
+	
 def check_mess(x,y):
 	if len(x)<280:
 		

@@ -702,6 +702,8 @@ app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7P
 bot_token="1877489613:AAEWv36y-bbUjQPCemmJ53vSADAgKZB1A-U",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
+import asyncio
+
 async def get_mess_py(x,y):
 	try:
 		await app.start()
@@ -2055,12 +2057,12 @@ def pdfc(update,context):
 	return PDF
 	
 
-def button(update: Update, context: CallbackContext) -> None:
+async def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     print(str(query))
     if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
-	       mes=get_mess_py("PhotoQuiz",x[0])
+	       mes=await get_mess_py("PhotoQuiz",x[0])
 	       print (mes)
 	       mes=check_mess(mes,[])
 	       if x[1]==len(mes):

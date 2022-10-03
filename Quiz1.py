@@ -2040,6 +2040,7 @@ import time
 
 zza=1
 def get_mess_py(x,y):
+	global zza,app
 	try:
 		if zza==1:
 		    app.start()

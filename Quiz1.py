@@ -711,8 +711,8 @@ async def get_mess_py(x,y):
 		await idle()
 		
 		return return_mess.text
-	except:
-		await app.stop()
+	except Exception as e:
+		print(e)
 
 	
 	

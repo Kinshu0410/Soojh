@@ -2086,12 +2086,12 @@ def check_mess(X,Y):
 		res=reaaa.split("\n",x[:180])
 		y.append(reaaa.sub("^\n{1,}","","\n".join(res[:-2])))
 		x=reaaa.sub("\n".join(res[:-2]),"",x)
-		#print(y)
+		print(y)
 		return check_mess(x,y)
 	else:
-		res=(x[:180])
+		res=x[:180]
 		y.append(x[:180])
-		x=reaaa.sub(x[:180],"",x)
+		x=x[180:]
 		#print(y)
 		return check_mess(x,y)
 

@@ -702,16 +702,16 @@ app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7P
 bot_token="1877489613:AAEWv36y-bbUjQPCemmJ53vSADAgKZB1A-U",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
-
+app.start()
 
 def get_mess_py(x,y):
 	try:
-		app.start()
+		
 		return_mess=app.get_messages(x,int(y))
 		#app.stop()
 		return return_mess.text
 	except:
-		app.stop()
+		pass#app.stop()
 
 	
 	

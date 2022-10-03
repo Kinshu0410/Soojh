@@ -723,13 +723,17 @@ def doc_poll(update,context):
         	t=reaaa.sub("(\n| |)(\(|\[|\{|)(a|b|c|d|A|B|C|D)(\)|\]|\.)( |){1,}","\n",x[:-1])
         	t=reaaa.split("\n",t)
         	mes=check_mess("\n".join(t[5:]),[])
-        	print (str(mes))
-        	keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(x[0])+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
+        	mes1=123
+        	try:
+        	    mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="\n".join(t[5:])).message_id
+        	except:
+        	    mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="... Coming Soon").message_id
+        	keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(mes1)+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
         	reply_markup = InlineKeyboardMarkup(keyboard)
         
         	try:
         	  try:
-        	    mes=context.bot.send_message("@PhotoQuiz", text="\n".join(t[5:])).message_id
+        	    
         	    
         	    context.bot.send_poll(
         	chat_id="@Polls_Quiz",
@@ -746,7 +750,7 @@ def doc_poll(update,context):
                             )
         
         	  except:
-        	    mes=context.bot.send_message("@PhotoQuiz", text="... Coming Soon").message_id
+        	    
         	    
         	    context.bot.send_poll(
         	chat_id="@Polls_Quiz",
@@ -762,12 +766,6 @@ def doc_poll(update,context):
                             )
         
         	except:
-        	  mes=123
-        	  try:
-        	     mes=context.bot.send_message("@PhotoQuiz", text="\n".join(t[5:])).message_id
-        	  except:
-        	     mes=context.bot.send_message("Photo_Quiz_Soojh", text="... Coming Soon").message_id
-        	  
         	  
         	  context.bot.send_message(chat_id="@Polls_Quiz", text="\n".join(t[:5]),reply_markup=reply_markup)
         	time.sleep(5)
@@ -1603,17 +1601,25 @@ def poll(update, context):
 	        options5=q[5::1]
 	        options5="\n".join(options5)
 	        options5=reaaa.sub(r"@\w*", "", options5)
+	
 	        if options5 == "":
 	            options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
 	        else:
 	            options5=options5
 	            print(options5)
-	        #options5=reaaa.sub(r"\@\w.*", "", options5)
-	        #update.message.reply_text(options)
+	        if (update.message.chat.id) in (Man):
+	            cid=Group[update.message.chat.id]
+                
+	        try:
+	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text=options5).message_id
+	        except:
+	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="... Coming Soon").message_id
+	            keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(mes1)+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
+	            reply_markup = InlineKeyboardMarkup(keyboard)
 	
 	        if result is None:
 	          message = context.bot.send_poll(
-	            update.effective_chat.id,
+	            cid,
 	            que,
 	            options,
 	            is_anonymous=False,
@@ -1622,25 +1628,36 @@ def poll(update, context):
 	        elif options5 !="":
 	          co=int(corr)-1
 	          message = context.bot.send_poll(
-	            update.effective_chat.id,
+	            cid,
 	            que,
 	            options,
 	            type=Poll.QUIZ,
 	            correct_option_id=co,
 	            explanation=options5,
 	            is_anonymous=False,
-	            allows_multiple_answers=False,
+	            allows_multiple_answers=False,reply_markup=reply_markup
+	        )
+	          keyboard=[[InlineKeyboardButton(str(z+1),url="https://t.me/PhotoQuiz/"+str(mes1))]]
+	          message = context.bot.send_poll(
+	            update.effective_message.chat_id,,
+	            que,
+	            options,
+	            type=Poll.QUIZ,
+	            correct_option_id=co,
+	            explanation=options5,
+	            is_anonymous=False,
+	            allows_multiple_answers=False,reply_markup=reply_markup
 	        )
 	        elif options5 =="":
 	          co=int(corr)-1
 	          message = context.bot.send_poll(
-	            update.effective_chat.id,
+	            cid,
 	            que,
 	            options,
 	            type=Poll.QUIZ,
 	            correct_option_id=co,#explanation=options5,
 	            is_anonymous=False,
-	            allows_multiple_answers=False,
+	            allows_multiple_answers=False,reply_markup=reply_markup
 	        )
 	        # Save some info about the poll the bot_data for later use in receive_poll_answer
 	        chatiid=int(update.message.chat.id)

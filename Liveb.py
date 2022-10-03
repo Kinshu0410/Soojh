@@ -17,7 +17,7 @@ def get_mess_py(x,y):
 		return return_mess.text
 	except Exception as e:
 		#app.restart()
-		pass#get_mess_py(x,y)
+		print(e)
 
 	
 	

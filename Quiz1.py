@@ -702,16 +702,16 @@ app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7P
 bot_token="1877489613:AAEWv36y-bbUjQPCemmJ53vSADAgKZB1A-U",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
-app.start()
 
-def get_mess_py(x,y):
+
+async def get_mess_py(x,y):
 	try:
-		
-		return_mess=app.get_messages(x,int(y))
-		#app.stop()
+		await app.start()
+		return_mess=await app.get_messages(x,int(y))
+		await app.stop()
 		return return_mess.text
 	except:
-		pass#app.stop()
+		await app.stop()
 
 	
 	
@@ -2067,7 +2067,7 @@ def button(update: Update, context: CallbackContext) -> None:
     print(str(query))
     if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
-	       me1= get_mess_py("PhotoQuiz",x[0])
+	       me1= asyncio.run(get_mess_py("PhotoQuiz",x[0]))
 	       print (me1)
 	       mes=check_mess(me1,[])
 	       print (mes)

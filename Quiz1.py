@@ -2037,7 +2037,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       x=reaaa.split("_",query.data[4:])
 	       
 	       from Liveb import get_mess_py,check_mess
-	       me1= get_mess_py(-1001572334666,x[0])
+	       me1= get_mess_py(-1001572334666,int(x[0]))
 	       print (me1)
 	       mes=check_mess(me1,[])
 	       print (mes)

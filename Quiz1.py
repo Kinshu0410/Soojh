@@ -2060,15 +2060,21 @@ def check_mess(X,Y):
 	x=X
 	y=Y
 	print(len(x))
-	if len(x)<280:
+	if len(x)<180:
 		
 		y.append(x)
 		
 		return y
-	else:
-		res=reaaa.split("\n",x[:280])
+	elif bool(reaaa.search("\n",x[:180])):
+		res=reaaa.split("\n",x[:180])
 		y.append(reaaa.sub("^\n{1,}","","\n".join(res[:-2])))
 		x=reaaa.sub("\n".join(res[:-2]),"",x)
+		#print(y)
+		return check_mess(x,y)
+	else:
+		res=(x[:180])
+		y.append(x[:180])
+		x=reaaa.sub(x[:180],"",x)
 		#print(y)
 		return check_mess(x,y)
 

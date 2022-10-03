@@ -1288,6 +1288,13 @@ def ghppp1(update,context):
         	    explan="Created By Sudhir Parihar Sir ✍️\n\n🔜👉  https://t.me/SudhirParihar"
         	else:
         	    explan=explan+"\n\n🔜👉  https://t.me/SudhirParihar"
+        if explan is None or explan = "":
+        mes=context.bot.send_message("@PhotoQuiz", text=explan).message_id
+        keyboard = [
+                [
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1_1")]]
+        	    
+        reply_markup = InlineKeyboardMarkup(keyboard)
         context.bot.send_poll(
                 chat_id=int(cid),
                 question=que,
@@ -1297,7 +1304,7 @@ def ghppp1(update,context):
                 explanation=explan,
                 is_anonymous=True,
                 allows_multiple_answers=False,
-                parse_mode=ParseMode.MARKDOWN_V2)
+                parse_mode=ParseMode.MARKDOWN_V2,reply_markup=reply_markup)
         context.bot.send_poll(
                 chat_id=int(-1001539629311),
                 question=que,

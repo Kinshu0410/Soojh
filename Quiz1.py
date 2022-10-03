@@ -1607,7 +1607,7 @@ def poll(update, context):
 	        else:
 	            options5=options5
 	            print(options5)
-                
+            reply_markup=None 
 	        try:
 	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text=options5).message_id
 	        except:
@@ -1637,7 +1637,8 @@ def poll(update, context):
 	            is_anonymous=False,
 	            allows_multiple_answers=False,reply_markup=reply_markup
 	        )
-	          keyboard=[[InlineKeyboardButton(str(z+1),url="https://t.me/PhotoQuiz/"+str(mes1))]]
+	          keyboard=[[InlineKeyboardButton(str(z+1),url="https://t.me/PhotoQuiz/"+str(mes1))]
+	          reply_markup = InlineKeyboardMarkup(keyboard)
 	          message = context.bot.send_poll(
 	            update.effective_message.chat_id,
 	            que,

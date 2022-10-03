@@ -749,7 +749,7 @@ def doc_poll(update,context):
         	    mes=context.bot.send_message("@PhotoQuiz", text="\n".join(t[5:])).message_id
         	    keyboard = [
                 [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1")]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1_1")]]
         	    reply_markup = InlineKeyboardMarkup(keyboard)
         	    context.bot.send_poll.bot.send_poll(
         	chat_id=update.effective_chat.id,
@@ -769,7 +769,7 @@ def doc_poll(update,context):
         	    mes=context.bot.send_message("@PhotoQuiz", text="... Coming Soon").message_id
         	    keyboard = [
                 [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1")]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1_1")]]
         	    reply_markup = InlineKeyboardMarkup(keyboard)
         	    context.bot.send_poll(
         	chat_id=update.effective_chat.id,
@@ -793,7 +793,7 @@ def doc_poll(update,context):
         	  
         	  keyboard = [
                 [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1")]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1_1")]]
         	  reply_markup = InlineKeyboardMarkup(keyboard)
         	  context.bot.send_message(update.effective_chat.id, text="\n".join(t[:5]),reply_markup=reply_markup)
         	time.sleep(5)
@@ -2053,15 +2053,15 @@ def pdfc(update,context):
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     print(str(query))
-    if bool(reaaa.match("^Link\d{1,}_\d{1,}$",query.data)):
+    if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
 	       mes=get_mess_py("PhotoQuiz",x[0])
 	       mes=check_mess(mes,[])
 	       if x[1]==len(mes):
-	           query.answer(mes[int(query.text)-1])
+	           query.answer(mes[int(x[2])-1])
 	           
 	       else:
-	           keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(x[0])+"_"+str(len(mes))) for z in range(len(mes))]]
+	           keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(x[0])+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
 	           reply_markup = InlineKeyboardMarkup(keyboard)
 	           query.edit_message_reply_markup(reply_markup=reply_markup)
 	           

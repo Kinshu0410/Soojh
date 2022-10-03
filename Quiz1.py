@@ -2082,7 +2082,7 @@ def check_mess(X,Y):
 		y.append(x)
 		
 		return y
-	elif bool(reaaa.search("\n",x[:180])):
+	elif True:
 		res=reaaa.split("\n",x[:180])
 		y.append(reaaa.sub("^\n{1,}","","\n".join(res[:-2])))
 		x=reaaa.sub("\n".join(res[:-2]),"",x)

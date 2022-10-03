@@ -697,6 +697,30 @@ def uploadfile(update,context):
     update.message.reply_text("send me file.")
     return UPLOAD
 
+from pyrogram import Client
+app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7PWIIqkl6-0j_96Gq6apAJ1vRFPUQrWwbcHoNLj0ouYgn5yCAvkT-BW8iE-1lYomM1VwAzEKHNuUVqTYrFDpCsAZE2ko1DudXnRUWz1SBkxk8f6JzrDS57sBmx2oEgUBXfiyGjJXJYn2KC-TsCao4Cbt-x6pE3LWwPprjAqsN6LHY2y2WA4QnQVagTclIrp5_Cc4FZbRnyNcL_MwQ-7hLF_5psbi4c1hXOYXYCnjx3KQ0Q--f0ISiGSt8h3xRu39RozHP1ANrB3pz4e_Unmoe8ad7hmhzwuil8uVqaV1qspejkWDo_3cyyadzV2QAAAAAqZYQtAA",
+bot_token="1877489613:AAEWv36y-bbUjQPCemmJ53vSADAgKZB1A-U",
+api_id="13682659",
+api_hash="b984d240c5258407ea911f042c9d75f6")
+def get_mess_py(x,y):
+	app.start()
+	return_mess=app.get_messages(x,int(y))
+	app.stop()
+	return return_mess.text
+def check_mess(x,y):
+	if len(x)<280:
+		res=reaaa.split("\n",x[:280])
+		y.append("\n".join(res[:-2]))
+		#x=reaaa.sub("\n".join(res[:-2]),"",x)
+		return y
+	else:
+		res=reaaa.split("\n",x[:280])
+		y.append("\n".join(res[:-2]))
+		x=reaaa.sub("\n".join(res[:-2]),"",x)
+		check_mess(x,y)
+	
+	
+	
 @run_async
 def doc_poll(update,context):
     if update.message.from_user.id==711296045:
@@ -711,8 +735,9 @@ def doc_poll(update,context):
         q=reaaa.split("\n\n",dbq)
         X=0
         
+        #check_mess(x,y)
         keyboard=None
-        reply_markup=None
+        reply_markup = None
         
         for x in q:
         	t=reaaa.sub("(\n| |)(\(|\[|\{|)(a|b|c|d|A|B|C|D)(\)|\]|\.)( |){1,}","\n",x[:-1])
@@ -721,14 +746,19 @@ def doc_poll(update,context):
         
         	try:
         	  try:
-        	    context.bot.send_poll(
+        	    mes=context.bot.send_message("Photo_Quiz_Soojh", text=t[5:]).id
+        	    keyboard = [
+                [
+                    InlineKeyboardButton("Refresh", callback_data='Link'+str(mes)]]
+        	    reply_markup = InlineKeyboardMarkup(keyboard)
+        	    context.bot.send_poll.bot.send_poll(
         	chat_id=update.effective_chat.id,
                                 question=t[0],
                                 options=t[1:5],
                                 type=Poll.QUIZ,
                                 correct_option_id =int(x[-1])-1,
                                 #open_period=int(Time),
-                                explanation=t[5:],
+                                explanation="Explanation channal पर उपलब्ध है।\nCome and visit it🙏",
                                 is_closed=False,
                                 is_anonymous=True,
                                 reply_markup=reply_markup,
@@ -736,6 +766,11 @@ def doc_poll(update,context):
                             )
         
         	  except:
+        	    mes=context.bot.send_message("Photo_Quiz_Soojh", text="... Coming Soon").id
+        	    keyboard = [
+                [
+                    InlineKeyboardButton("Refresh", callback_data='Link'+str(mes)]]
+        	    reply_markup = InlineKeyboardMarkup(keyboard)
         	    context.bot.send_poll(
         	chat_id=update.effective_chat.id,
                                 question=t[0],
@@ -750,7 +785,17 @@ def doc_poll(update,context):
                             )
         
         	except:
-        	  context.bot.send_message(update.effective_chat.id, text="\n".join(t[:]),reply_markup=reply_markup)
+        	  mes=123
+        	  try:
+        	     mes=context.bot.send_message("Photo_Quiz_Soojh", text=t[5:]).id
+        	  except:
+        	     mes=context.bot.send_message("Photo_Quiz_Soojh", text="... Coming Soon").id
+        	  
+        	  keyboard = [
+                [
+                    InlineKeyboardButton("Refresh", callback_data='Link'+str(mes)]]
+        	  reply_markup = InlineKeyboardMarkup(keyboard)
+        	  context.bot.send_message(update.effective_chat.id, text="\n".join(t[:5]),reply_markup=reply_markup)
         	time.sleep(5)
     	
     	
@@ -2007,7 +2052,14 @@ def pdfc(update,context):
 
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
-    if bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
+    if bool(reaaa.match("^Link\d{1,}_\d{1,}$",query.data)):
+	       x=reaaa.split("_",query.data[4:])
+	       mes=get_mess_py("PhotoQuiz",x[0])
+	       mes=check_mess(mes,[])
+	       x[1]
+	       
+	       
+    elif bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quizset","",query.data))]
 	       y=context.bot.get_chat_administrators(chat_id=query.message.chat.id)
@@ -2810,29 +2862,9 @@ def photo_2(update,context):
 	
 	return AA
 
-from pyrogram import Client, enums
-#from pyrogram.raw import functions
-#from pyrogram.raw import types
-#from pyrogram.handlers import MessageHandler, PollHandler
-#from pyrogram import filters
-#from pyrogram.types import Message, ReplyKeyboardRemove, Poll
-#from pyrogram.enums import PollType
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
-import asyncio
-from pyrogram.errors import FloodWait
-import  json
-import time, random
-import re as reaaa
-import requests
-#app = Client("my_account",
-#bot_token=ClientText["bot_token"],
-#api_id="13682659",
-#api_hash="b984d240c5258407ea911f042c9d75f6")
-app=Client("my_account",session_string="AgEBU-8ADAn12t06n3YMl9fZEc_97kGnUiYe1VLFNpFa22wd_mkxoZtPIBv12yjXTTUgD1RpWzyJPUFdDyrsf7t2119euFjzj8piOv1SLNDcn4UZpZidPOiRYBMo07cTvlwOWKQFKr5xn7xrvRMVDMGPAqA6VbOaA8fQBwe6TKhOzA-5CTpMPsIS974AIvjD8BtWZDOgkQI6smCdY-lUEt9cgiNH81lrANVGq6UllofmIjZo_bYyk6VhoOl_4YpHAp30cgQGda5VlwY73gr7XQV0DCx4gT0FAy-lVWQPbRKZHuj75bjErV1YVouvTA8070vd12qGmBqa67lc0A8_l-nwAqpdMQAAAAEvBILMAA",api_id="13682659",api_hash="b984d240c5258407ea911f042c9d75f6")
 
 
-from pyrogram.enums import PollType
-scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
+
 
 def allmem(update,context):
 	text=update.message.text

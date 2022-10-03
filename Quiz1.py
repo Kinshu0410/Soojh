@@ -2061,7 +2061,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           query.answer(mes[int(query.text)-1])
 	           
 	       else:
-	           keyboard=[[InlineKeyboardButton("",callback_data="Link"+str(x[0])+"_"+str(z) for z in range(len(mes))]]
+	           keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(x[0])+"_"+str(len(mes))) for z in range(len(mes))]]
 	           reply_markup = InlineKeyboardMarkup(keyboard)
 	           query.edit_message_reply_markup(reply_markup=reply_markup)
 	           

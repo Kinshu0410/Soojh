@@ -2048,7 +2048,7 @@ def get_mess_py(x,y):
 		return_mess= app.get_messages(x,int(y))
 		#print(return_mess)
 		#app.stop()
-		return return_mess.text
+		return return_mess
 	except Exception as e:
 		#app.restart()
 		print(e)
@@ -2069,6 +2069,7 @@ def check_mess(X,Y):
 		res=reaaa.split("\n",x[:280])
 		y.append("\n".join(res[:-2]))
 		x=reaaa.sub("^"+"\n".join(res[:-2]),"",x)
+		print(x)
 		check_mess(x,y)
 
 def button(update: Update, context: CallbackContext) -> None:
@@ -2078,7 +2079,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       x=reaaa.split("_",query.data[4:])
 	       
 	       #from Liveb import get_mess_py,check_mess
-	       me1= get_mess_py(-1001572334666,int(x[0]))
+	       me1= get_mess_py(-1001572334666,int(x[0])).text
 	       print (me1)
 	       mes=check_mess(me1,[])
 	       print (mes)

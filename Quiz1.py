@@ -749,7 +749,7 @@ def doc_poll(update,context):
         	    mes=context.bot.send_message("@PhotoQuiz", text="\n".join(t[5:])).message_id
         	    keyboard = [
                 [
-                    InlineKeyboardButton("Refresh", callback_data='Link'+str(mes))]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes))]]
         	    reply_markup = InlineKeyboardMarkup(keyboard)
         	    context.bot.send_poll.bot.send_poll(
         	chat_id=update.effective_chat.id,
@@ -769,7 +769,7 @@ def doc_poll(update,context):
         	    mes=context.bot.send_message("@PhotoQuiz", text="... Coming Soon").message_id
         	    keyboard = [
                 [
-                    InlineKeyboardButton("Refresh", callback_data='Link'+str(mes))]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes))]]
         	    reply_markup = InlineKeyboardMarkup(keyboard)
         	    context.bot.send_poll(
         	chat_id=update.effective_chat.id,
@@ -793,7 +793,7 @@ def doc_poll(update,context):
         	  
         	  keyboard = [
                 [
-                    InlineKeyboardButton("Refresh", callback_data='Link'+str(mes))]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes))]]
         	  reply_markup = InlineKeyboardMarkup(keyboard)
         	  context.bot.send_message(update.effective_chat.id, text="\n".join(t[:5]),reply_markup=reply_markup)
         	time.sleep(5)
@@ -2058,12 +2058,12 @@ def button(update: Update, context: CallbackContext) -> None:
 	       mes=get_mess_py("PhotoQuiz",x[0])
 	       mes=check_mess(mes,[])
 	       if x[1]==len(mes)+1:
-	           query.answer(mes[int(query.text)-1)]
+	           query.answer(mes[int(query.text)-1])
 	           
 	       else:
 	           keyboard=[[InlineKeyboardButton("",callback_data="Link"+str(x[0])+"_"+str(z) for z in range(len(mes))]]
 	           reply_markup = InlineKeyboardMarkup(keyboard)
-	           #query.edit_message_text(text,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+	           query.edit_message_reply_markup(reply_markup=reply_markup)
 	           
 	       
 	       

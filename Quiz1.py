@@ -2036,17 +2036,14 @@ api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 import re as reaaa
 import time
-
+app.start()
 
 zza=1
 def get_mess_py(x,y):
-	global zza,app
-	try:
-		if zza==1:
-		    app.start()
-		    zza+=1
+	global app
+	
 		return_mess= app.get_messages(x,int(y))
-		print(return_mess)
+		#print(return_mess)
 		#app.stop()
 		return return_mess.text
 	except Exception as e:

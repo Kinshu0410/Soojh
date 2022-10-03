@@ -1608,6 +1608,7 @@ def poll(update, context):
 	            options5=options5
 	            print(options5)
 	        reply_markup=None
+	        mes1=123
 	        mes=""#check_mess("\n".join(t[5:]),[])
 	        try:
 	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text=options5).message_id

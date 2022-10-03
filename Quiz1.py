@@ -708,7 +708,7 @@ def get_mess_py(x,y):
 	try:
 		app.start()
 		return_mess=app.get_messages(x,int(y))
-		app.stop()
+		#app.stop()
 		return return_mess.text
 	except:
 		app.stop()

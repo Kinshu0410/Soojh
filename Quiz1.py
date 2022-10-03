@@ -2083,7 +2083,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       me1= get_mess_py(-1001572334666,int(x[0])).text
 	       print (me1)
 	       mes=check_mess(me1,[])
-	       print (mes)
+	       #print (mes)
 	       if int(x[1])==len(mes):
 	           query.answer(text=mes[int(x[2])-1], show_alert=True)
 	           

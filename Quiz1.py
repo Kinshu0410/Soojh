@@ -2063,15 +2063,14 @@ def check_mess(X,Y):
 	if len(x)<280:
 		
 		y.append(x)
-		print(y)
-		#x=reaaa.sub("\n".join(res[:-2]),"",x)
+		
 		return y
 	else:
 		res=reaaa.split("\n",x[:280])
 		y.append("\n".join(res[:-2]))
 		x=reaaa.sub("\n".join(res[:-2]),"",x)
-		print(y)
-		check_mess(x,y)
+		#print(y)
+		return check_mess(x,y)
 
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query

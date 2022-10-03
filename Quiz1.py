@@ -1607,8 +1607,6 @@ def poll(update, context):
 	        else:
 	            options5=options5
 	            print(options5)
-	        if (update.message.chat.id) in (Man):
-	            cid=Group[update.message.chat.id]
                 
 	        try:
 	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text=options5).message_id
@@ -1616,6 +1614,8 @@ def poll(update, context):
 	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="... Coming Soon").message_id
 	            keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(mes1)+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
 	            reply_markup = InlineKeyboardMarkup(keyboard)
+	        index = Man.index(update.message.chat.id)
+	        cid=Group[index]
 	
 	        if result is None:
 	          message = context.bot.send_poll(

@@ -2068,8 +2068,8 @@ def check_mess(X,Y):
 	else:
 		res=reaaa.split("\n",x[:280])
 		y.append("\n".join(res[:-2]))
-		x=reaaa.sub("^"+"\n".join(res[:-2]),"",x)
-		print(x)
+		x=reaaa.sub("\n".join(res[:-2]),"",x)
+		print(y)
 		check_mess(x,y)
 
 def button(update: Update, context: CallbackContext) -> None:

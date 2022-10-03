@@ -746,7 +746,7 @@ def doc_poll(update,context):
         
         	try:
         	  try:
-        	    mes=context.bot.send_message("Photo_Quiz_Soojh", text=t[5:]).id
+        	    mes=context.bot.send_message("@Photo_Quiz_Soojh", text=t[5:]).id
         	    keyboard = [
                 [
                     InlineKeyboardButton("Refresh", callback_data='Link'+str(mes))]]
@@ -766,7 +766,7 @@ def doc_poll(update,context):
                             )
         
         	  except:
-        	    mes=context.bot.send_message("Photo_Quiz_Soojh", text="... Coming Soon").id
+        	    mes=context.bot.send_message("@Photo_Quiz_Soojh", text="... Coming Soon").id
         	    keyboard = [
                 [
                     InlineKeyboardButton("Refresh", callback_data='Link'+str(mes))]]
@@ -787,7 +787,7 @@ def doc_poll(update,context):
         	except:
         	  mes=123
         	  try:
-        	     mes=context.bot.send_message("Photo_Quiz_Soojh", text=t[5:]).id
+        	     mes=context.bot.send_message("@Photo_Quiz_Soojh", text=t[5:]).id
         	  except:
         	     mes=context.bot.send_message("Photo_Quiz_Soojh", text="... Coming Soon").id
         	  

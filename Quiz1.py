@@ -1639,7 +1639,7 @@ def poll(update, context):
 	        )
 	          keyboard=[[InlineKeyboardButton(str(z+1),url="https://t.me/PhotoQuiz/"+str(mes1))]]
 	          message = context.bot.send_poll(
-	            update.effective_message.chat_id,,
+	            update.effective_message.chat_id,
 	            que,
 	            options,
 	            type=Poll.QUIZ,

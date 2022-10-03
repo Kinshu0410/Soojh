@@ -2040,8 +2040,11 @@ app.start()
 
 zza=1
 def get_mess_py(x,y):
-	global app
+	global zza,app
 	try:
+		if zza==1:
+		    app.start()
+		    zza+=1
 		return_mess= app.get_messages(x,int(y))
 		#print(return_mess)
 		#app.stop()

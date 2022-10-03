@@ -2057,7 +2057,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       x=reaaa.split("_",query.data[4:])
 	       mes=get_mess_py("PhotoQuiz",x[0])
 	       mes=check_mess(mes,[])
-	       if x[1]==len(mes)+1:
+	       if x[1]==len(mes):
 	           query.answer(mes[int(query.text)-1])
 	           
 	       else:

@@ -2067,7 +2067,7 @@ def check_mess(X,Y):
 		return y
 	else:
 		res=reaaa.split("\n",x[:280])
-		y.append("\n".join(res[:-2]))
+		y.append(reaaa.sub("^\n{1,}","","\n".join(res[:-2])))
 		x=reaaa.sub("\n".join(res[:-2]),"",x)
 		#print(y)
 		return check_mess(x,y)

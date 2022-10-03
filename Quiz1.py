@@ -2063,6 +2063,7 @@ def check_mess(X,Y):
 	if len(x)<280:
 		
 		y.append(x)
+		print(y)
 		#x=reaaa.sub("\n".join(res[:-2]),"",x)
 		return y
 	else:

@@ -2065,9 +2065,9 @@ def button(update: Update, context: CallbackContext) -> None:
     print(str(query))
     if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
-	       mes= get_mess_py("PhotoQuiz",x[0])
-	       #
-	       mes=check_mess(mes,[])
+	       me1= get_mess_py("PhotoQuiz",x[0])
+	       print (me1)
+	       mes=check_mess(me1,[])
 	       print (mes)
 	       if x[1]==len(mes):
 	           query.answer(mes[int(x[2])-1])

@@ -705,13 +705,13 @@ api_hash="b984d240c5258407ea911f042c9d75f6")
 async def get_mess_py(x,y):
 	try:
 		await app.start()
-		return_mess=await app.get_messages(x,int(y))
+		return_mess=(await app.get_messages(x,int(y))).text
 	except:
 		await app.stop()
 
 	
 	
-	return return_mess.text
+	return return_mess
 def check_mess(x,y):
 	if len(x)<280:
 		res=reaaa.split("\n",x[:280])

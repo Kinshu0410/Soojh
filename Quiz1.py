@@ -703,9 +703,14 @@ bot_token="1877489613:AAEWv36y-bbUjQPCemmJ53vSADAgKZB1A-U",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 def get_mess_py(x,y):
-	app.start()
-	return_mess=app.get_messages(x,int(y))
-	app.stop()
+	try:
+		app.start()
+		return_mess=app.get_messages(x,int(y))
+	except:
+		app.stop()
+
+	
+	
 	return return_mess.text
 def check_mess(x,y):
 	if len(x)<280:

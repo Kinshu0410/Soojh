@@ -1607,7 +1607,7 @@ def poll(update, context):
 	        else:
 	            options5=options5
 	            print(options5)
-            reply_markup=None 
+	        reply_markup=None 
 	        try:
 	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text=options5).message_id
 	        except:

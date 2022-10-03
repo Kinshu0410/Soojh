@@ -749,7 +749,7 @@ def doc_poll(update,context):
         	    mes=context.bot.send_message("@PhotoQuiz", text="\n".join(t[5:])).message_id
         	    keyboard = [
                 [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes))]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1")]]
         	    reply_markup = InlineKeyboardMarkup(keyboard)
         	    context.bot.send_poll.bot.send_poll(
         	chat_id=update.effective_chat.id,
@@ -769,7 +769,7 @@ def doc_poll(update,context):
         	    mes=context.bot.send_message("@PhotoQuiz", text="... Coming Soon").message_id
         	    keyboard = [
                 [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes))]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1")]]
         	    reply_markup = InlineKeyboardMarkup(keyboard)
         	    context.bot.send_poll(
         	chat_id=update.effective_chat.id,
@@ -793,7 +793,7 @@ def doc_poll(update,context):
         	  
         	  keyboard = [
                 [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes))]]
+                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1")]]
         	  reply_markup = InlineKeyboardMarkup(keyboard)
         	  context.bot.send_message(update.effective_chat.id, text="\n".join(t[:5]),reply_markup=reply_markup)
         	time.sleep(5)

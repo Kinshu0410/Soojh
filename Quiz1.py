@@ -707,9 +707,9 @@ app.start()
 
 async def get_mess_py(x,y):
 	try:
-		
+		print(x)
 		return_mess=await app.get_messages(x,int(y))
-		
+		print(y)
 		
 		return return_mess.text
 	except Exception as e:

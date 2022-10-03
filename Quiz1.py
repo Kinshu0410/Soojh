@@ -722,15 +722,15 @@ def doc_poll(update,context):
         for x in q:
         	t=reaaa.sub("(\n| |)(\(|\[|\{|)(a|b|c|d|A|B|C|D)(\)|\]|\.)( |){1,}","\n",x[:-1])
         	t=reaaa.split("\n",t)
-        	
+        	mes=check_mess("\n".join(t[5:]),[])
+        	print (str(mes))
+        	keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(x[0])+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
+        	reply_markup = InlineKeyboardMarkup(keyboard)
         
         	try:
         	  try:
         	    mes=context.bot.send_message("@PhotoQuiz", text="\n".join(t[5:])).message_id
-        	    keyboard = [
-                [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1_1")]]
-        	    reply_markup = InlineKeyboardMarkup(keyboard)
+        	    
         	    context.bot.send_poll(
         	chat_id="@Polls_Quiz",
                                 question=t[0],
@@ -747,10 +747,7 @@ def doc_poll(update,context):
         
         	  except:
         	    mes=context.bot.send_message("@PhotoQuiz", text="... Coming Soon").message_id
-        	    keyboard = [
-                [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1_1")]]
-        	    reply_markup = InlineKeyboardMarkup(keyboard)
+        	    
         	    context.bot.send_poll(
         	chat_id="@Polls_Quiz",
                                 question=t[0],
@@ -771,11 +768,8 @@ def doc_poll(update,context):
         	  except:
         	     mes=context.bot.send_message("Photo_Quiz_Soojh", text="... Coming Soon").message_id
         	  
-        	  keyboard = [
-                [
-                    InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1_1")]]
-        	  reply_markup = InlineKeyboardMarkup(keyboard)
-        	  context.bot.send_message(update.effective_chat.id, text="\n".join(t[:5]),reply_markup=reply_markup)
+        	  
+        	  context.bot.send_message(chat_id="@Polls_Quiz", text="\n".join(t[:5]),reply_markup=reply_markup)
         	time.sleep(5)
     	
     	

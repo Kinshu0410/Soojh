@@ -731,7 +731,7 @@ def doc_poll(update,context):
                 [
                     InlineKeyboardButton("1", callback_data='Link'+str(mes)+"_1_1")]]
         	    reply_markup = InlineKeyboardMarkup(keyboard)
-        	    context.bot.send_poll.bot.send_poll(
+        	    context.bot.send_poll(
         	chat_id="@Polls_Quiz",
                                 question=t[0],
                                 options=t[1:5],

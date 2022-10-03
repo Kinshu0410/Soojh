@@ -697,42 +697,7 @@ def uploadfile(update,context):
     update.message.reply_text("send me file.")
     return UPLOAD
 
-from pyrogram import Client, idle
-app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7PWIIqkl6-0j_96Gq6apAJ1vRFPUQrWwbcHoNLj0ouYgn5yCAvkT-BW8iE-1lYomM1VwAzEKHNuUVqTYrFDpCsAZE2ko1DudXnRUWz1SBkxk8f6JzrDS57sBmx2oEgUBXfiyGjJXJYn2KC-TsCao4Cbt-x6pE3LWwPprjAqsN6LHY2y2WA4QnQVagTclIrp5_Cc4FZbRnyNcL_MwQ-7hLF_5psbi4c1hXOYXYCnjx3KQ0Q--f0ISiGSt8h3xRu39RozHP1ANrB3pz4e_Unmoe8ad7hmhzwuil8uVqaV1qspejkWDo_3cyyadzV2QAAAAAqZYQtAA",
-bot_token="1877489613:AAEWv36y-bbUjQPCemmJ53vSADAgKZB1A-U",
-api_id="13682659",
-api_hash="b984d240c5258407ea911f042c9d75f6")
 
-app.start()
-
-def get_mess_py(x,y):
-	try:
-		print(x)
-		print(y)
-		return_mess= app.get_messages(x,int(y))
-		
-		return return_mess.text
-	except Exception as e:
-		#app.restart()
-		pass#get_mess_py(x,y)
-
-	
-	
-	
-def check_mess(X,Y):
-	x=X
-	y=Y
-	print(x)
-	if len(x)<280:
-		
-		y.append(x)
-		#x=reaaa.sub("\n".join(res[:-2]),"",x)
-		return y
-	else:
-		res=reaaa.split("\n",x[:280])
-		y.append("\n".join(res[:-2]))
-		x=reaaa.sub("^"+"\n".join(res[:-2]),"",x)
-		check_mess(x,y)
 	
 	
 	
@@ -2070,6 +2035,8 @@ def button(update: Update, context: CallbackContext) -> None:
     print(str(query))
     if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
+	       
+	       from Liveb import get_mess_py,check_mess
 	       me1= get_mess_py(-1001572334666,x[0])
 	       print (me1)
 	       mes=check_mess(me1,[])

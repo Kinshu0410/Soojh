@@ -1607,11 +1607,14 @@ def poll(update, context):
 	        else:
 	            options5=options5
 	            print(options5)
-	        reply_markup=None 
+	        reply_markup=None
+	        mes=""#check_mess("\n".join(t[5:]),[])
 	        try:
 	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text=options5).message_id
+	            mes=check_mess(options5),[])
 	        except:
 	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="... Coming Soon").message_id
+	            mes=check_mess("... Coming Soon"),[])
 	            keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(mes1)+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
 	            reply_markup = InlineKeyboardMarkup(keyboard)
 	        index = Man.index(update.message.chat.id)

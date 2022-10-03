@@ -2071,7 +2071,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       print (me1)
 	       mes=check_mess(me1,[])
 	       print (mes)
-	       if x[1]==len(mes):
+	       if int(x[1])==len(mes):
 	           query.answer(mes[int(x[2])-1])
 	           
 	       else:

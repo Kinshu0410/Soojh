@@ -714,7 +714,10 @@ def get_mess_py(x,y):
 	
 	
 	
-def check_mess(x,y):
+def check_mess(X,Y):
+	x=X
+	y=Y
+	print(x)
 	if len(x)<280:
 		
 		y.append(x)

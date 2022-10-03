@@ -2072,7 +2072,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       mes=check_mess(me1,[])
 	       print (mes)
 	       if int(x[1])==len(mes):
-	           query.answer(mes[int(x[2])-1])
+	           query.answer(text=mes[int(x[2])-1], show_alert=True)
 	           
 	       else:
 	           keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(x[0])+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]

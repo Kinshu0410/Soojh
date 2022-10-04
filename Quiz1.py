@@ -2138,11 +2138,14 @@ def check_mess(X,Y):
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     print(str(query))
-    if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}$",query.data)):
+    if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}_.*?$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
 	       
-	       #from Liveb import get_mess_py,check_mess
-	       me1= get_mess_py(-1001572334666,int(x[0])).text
+	       try:
+	           x[3]="@"+x[3]
+	       except:
+	           x[3]=-1001572334666
+	       me1= get_mess_py(x[3],int(x[0])).text
 	       print (me1)
 	       mes=check_mess(me1,[])
 	       print (str(mes))

@@ -1642,7 +1642,7 @@ def poll(update, context):
 	        else:
 	            options5=options5
 	            print(options5)
-	        if 
+	         
 	        reply_markup=None
 	        mes1=123
 	        mes=""#check_mess("\n".join(t[5:]),[])

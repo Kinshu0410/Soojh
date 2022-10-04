@@ -2076,7 +2076,7 @@ def get_mess_py(x,y):
 def check_mess(X,Y):
 	x=X
 	y=Y
-	print(len(x))
+	#print(len(x))
 	if len(x)<180:
 		
 		y.append(x)
@@ -2088,7 +2088,7 @@ def check_mess(X,Y):
 		    index=int(match.end())
 		y.append(x[:index])
 		x=x[index:]
-		print(y)
+		#print(y)
 		return check_mess(x,y)
 	else:
 		index=0
@@ -2096,10 +2096,10 @@ def check_mess(X,Y):
 		    index=int(match.end())
 		y.append(x[:index])
 		x=x[index:]
-		print(y)
+		#print(y)
 		return check_mess(x,y)
 
-@run_async
+#@run_async
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     print(str(query))

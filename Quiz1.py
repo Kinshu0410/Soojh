@@ -2083,9 +2083,11 @@ def check_mess(X,Y):
 		
 		return y
 	elif True:
-		res=reaaa.split("\n",x[:180])
-		y.append(reaaa.sub("^\n{1,}","","\n".join(res[:-2])))
-		x=reaaa.sub("\n".join(res[:-2]),"",x)
+		index=0
+		for match in re.finditer("\n",x[:180]):
+		    index=match.end()
+		y.append(x[:index])
+		x=x[index:]
 		print(y)
 		return check_mess(x,y)
 	else:

@@ -2082,7 +2082,7 @@ def check_mess(X,Y):
 		y.append(x)
 		
 		return y
-	elif True:
+	elif bool(reaaa.search("\n",x[:180])):
 		index=0
 		for match in re.finditer("\n",x[:180]):
 		    index=match.end()
@@ -2091,10 +2091,12 @@ def check_mess(X,Y):
 		print(y)
 		return check_mess(x,y)
 	else:
-		res=x[:180]
-		y.append(x[:180])
-		x=x[180:]
-		#print(y)
+		index=0
+		for match in re.finditer(" ",x[:180]):
+		    index=match.end()
+		y.append(x[:index])
+		x=x[index:]
+		print(y)
 		return check_mess(x,y)
 
 def button(update: Update, context: CallbackContext) -> None:

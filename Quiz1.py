@@ -1415,11 +1415,17 @@ import fitz
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if reaaa.match("https://t.me/.*?/\d{1,}:https://t.me/.*?/\d{1,}",update.message.text):
+    if reaaa.match("https://t.me/.*?/\d{1,}(:https://t.me/.*?/\d{1,}){1,}",update.message.text):
     	text=reaaa.sub("https://t.me/","",update.message.text)
     	text=reaaa.split(":|/",text)
-    	mes=check_mess(app.get_messages(text[2],int(text[3])).text,[])
-    	keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(text[3])+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
+    	keyboard=[]
+    	for x in range(len(text[2:])/2):
+    	    mes=check_mess(app.get_messages(text[2x+2],int(text[2x+3])).text,[])
+    	    keyboard.append([InlineKeyboardButton(str(z+1),callback_data="Link"+str(text[2x+3])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(text[2x+1])) for z in range(len(mes))])
+    	    
+    	    
+    	
+    	
     	reply_markup = InlineKeyboardMarkup(keyboard)
     	context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
   message_id = int(text[1]),

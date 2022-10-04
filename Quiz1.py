@@ -2060,7 +2060,7 @@ def get_mess_py(x,y):
 	global zza,app
 	try:
 		if zza==1:
-		    app.start()
+		    
 		    zza+=1
 		return_mess= app.get_messages(x,int(y))
 		#print(return_mess)
@@ -2931,19 +2931,8 @@ def photo_2(update,context):
 def allmem(update,context):
 	text=update.message.text
 	text=reaaa.sub("get_m_id ","",text)
-	app.start()
-	try:
-		members=""
-		for member in app.get_chat_members(text):
-			members=str(members)+str(member)+"|"
-		app.stop()
-		members=members[:-2]
-		f = open("chat members id.txt", "a")
-		f.write(members)
-		f.close()
-		context.bot.send_document(update.effective_message.chat_id, open("Chat members id.txt", "rb"))
-	except:
-		app.stop()
+	
+	
 	
 		
 def shraqu(update,context):
@@ -3151,6 +3140,7 @@ def main() -> None:
     dp.add_handler(CommandHandler('current', current))
     # Start the Bot
     updater.start_polling(clean = True)
+    app.run()
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since

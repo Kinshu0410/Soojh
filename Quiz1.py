@@ -2153,7 +2153,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           query.answer(text=mes[int(x[2])-1], show_alert=True)
 	           
 	       else:
-	           for y in query.reply_markup.inline_keyboard:
+	           for y in query.message.reply_markup.inline_keyboard:
 	               print(y)
 	               zz=reaaa.split("_",y[0][0].callback_data)
 	               mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])

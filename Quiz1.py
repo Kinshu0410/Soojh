@@ -1616,8 +1616,8 @@ def poll(update, context):
 	        except:
 	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="... Coming Soon").message_id
 	            mes=check_mess("... Coming Soon",[])
-	            keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(mes1)+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
-	            reply_markup = InlineKeyboardMarkup(keyboard)
+	        keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(mes1)+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
+	        reply_markup = InlineKeyboardMarkup(keyboard)
 	        index = Man.index(update.message.chat.id)
 	        cid=Group[index]
 	

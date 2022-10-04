@@ -1093,7 +1093,7 @@ async def job2_partener2(client:Client,message:Message):
                 await app.send_message(message.chat.id, final_text)
                 time.sleep(10)
 
-@app.on_message(filters.regex("^(https://t.me/|Me/).*?/\d{1,}:(https://t.me/|Me/).*?/\d{1,}$") & ~ filters.chat(-1001534819469) & ~ filters.scheduled &  filters.private)#& filters.incoming)
+@app.on_message(filters.regex("^(https://t.me/|Me/).*?/\d{1,}:(https://t.me/|Me/).*?/\d{1,}$") & ~ filters.chat(-1001534819469) & ~ filters.chat(1431722823) & ~ filters.scheduled &  filters.private)#& filters.incoming)
 async def job2_partener2(client:Client,message:Message):
         xx=reaaa.sub("(https://t.me/|Me/)","",message.text)
         

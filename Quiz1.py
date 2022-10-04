@@ -1420,8 +1420,8 @@ def poll(update, context):
     	text=reaaa.split(":|/",text)
     	keyboard=[]
     	for x in range(len(text[2:])/2):
-    	    mes=check_mess(app.get_messages(text[2x+2],int(text[2x+3])).text,[])
-    	    keyboard.append([InlineKeyboardButton(str(z+1),callback_data="Link"+str(text[2x+3])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(text[2x+1])) for z in range(len(mes))])
+    	    mes=check_mess(app.get_messages(text[2*x+2],int(text[2*x+3])).text,[])
+    	    keyboard.append([InlineKeyboardButton(str(z+1),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(text[2*x+1])) for z in range(len(mes))])
     	    
     	    
     	

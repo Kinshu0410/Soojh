@@ -2099,6 +2099,7 @@ def check_mess(X,Y):
 		print(y)
 		return check_mess(x,y)
 
+@run_async
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     print(str(query))

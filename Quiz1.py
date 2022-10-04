@@ -2085,7 +2085,7 @@ def check_mess(X,Y):
 	elif bool(reaaa.search("\n",x[:180])):
 		index=0
 		for match in re.finditer("\n",x[:180]):
-		    index=match.end()
+		    index=int(match.end())
 		y.append(x[:index])
 		x=x[index:]
 		print(y)
@@ -2093,7 +2093,7 @@ def check_mess(X,Y):
 	else:
 		index=0
 		for match in re.finditer(" ",x[:180]):
-		    index=match.end()
+		    index=int(match.end())
 		y.append(x[:index])
 		x=x[index:]
 		print(y)

@@ -1427,7 +1427,10 @@ def poll(update, context):
     	
     	
     	reply_markup = InlineKeyboardMarkup(keyboard)
-    	context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
+    	
+    	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
+    	if str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045:
+    	    context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
   message_id = int(text[1]),
   reply_markup=reply_markup)
     	

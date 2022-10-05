@@ -2145,10 +2145,13 @@ def button(update: Update, context: CallbackContext) -> None:
 	           x[3]="@"+x[3]
 	       except:
 	           x[3]="@PhotoQuiz"
-	       me1= get_mess_py(x[3],int(x[0])).text
-	       print (me1)
-	       mes=check_mess(me1,[])
-	       print (str(mes))
+	       try:
+	           me1= get_mess_py(x[3],int(x[0])).text
+	           print (me1)
+	           mes=check_mess(me1,[])
+	           print (str(mes))
+	       except:
+	           mes=[]
 	       if int(x[1])==len(mes):
 	           query.answer(text=mes[int(x[2])-1], show_alert=True)
 	           

@@ -2157,10 +2157,15 @@ def button(update: Update, context: CallbackContext) -> None:
 	           for y in query.message.reply_markup.inline_keyboard:
 	               print(y)
 	               zz=reaaa.split("_",y[0].callback_data[4:])
-	               mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
-	               keyboard.append([InlineKeyboardButton(str(z+1),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(zz[3])) for z in range(len(mes))])
+	               try:
+	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
+	                   keyboard.append([InlineKeyboardButton(str(z+1),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(zz[3])) for z in range(len(mes))])
+	               except:
+	                   pass
 	           
 	           reply_markup = InlineKeyboardMarkup(keyboard)
+	           if keyboard==[]:
+	               reply_markup=None
 	           query.edit_message_reply_markup(reply_markup=reply_markup)
 	           
 	       

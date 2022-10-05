@@ -1415,9 +1415,9 @@ import fitz
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if reaaa.match("https://t.me/.*?/\d{1,}(:https://t.me/.*?/\d{1,}){1,}",update.message.text):
+    if reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}https://t.me/.*?/\d{1,}){1,}",update.message.text):
     	text=reaaa.sub("https://t.me/","",update.message.text)
-    	text=reaaa.split(":|/",text)
+    	text=reaaa.split(":{1,}|\n{1,}|/",text)
     	keyboard=[]
     	for x in range(len(text[2:])//2):
     	    mes=check_mess(app.get_messages(text[2*x+2],int(text[2*x+3])).text,[])

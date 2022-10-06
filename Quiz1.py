@@ -2141,7 +2141,7 @@ def check_mess(X,Y):
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     print(str(query))
-    if bool(reaaa.match("^Link\d{1,}_\d{1,}_0_.*?$",query.data)):
+    if bool(reaaa.match("^Link\d{1,}_\d{1,}_0(_.*?|)$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
 	       #print(str(query))
 	       try:
@@ -2180,7 +2180,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           if keyboard==[]:
 	               reply_markup=None
 	           query.edit_message_reply_markup(reply_markup=reply_markup)
-    elif bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}_.*?$",query.data)):
+    elif bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}(_.*?|)$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
 	       
 	       try:

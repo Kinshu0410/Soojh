@@ -2162,7 +2162,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           
 	           query.answer(text="https://t.me/"+x[3][1:]+"/"+x[0],show_alert=False)
 	           
-	       if int(x[1])==len(mes):
+	       if int(x[1])==1+len(mes):
 	           pass
 	       else:
 	           keyboard=[]

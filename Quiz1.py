@@ -2155,7 +2155,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           print (str(mes))
 	       except:
 	           mes=[]
-	       mem=context.bot.get_chat_member("@"+text[3],update.message.from_user.id)
+	       mem=context.bot.get_chat_member("@"+x[3],update.message.from_user.id)
 	       if int(x[1])==len(mes):
 	           pass
 	       elif str(mem.status) in ['creator', 'administrator'] or (update.message.from_user.id==711296045):

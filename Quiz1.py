@@ -2158,7 +2158,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       mem=context.bot.get_chat_member("@"+text[3],update.message.from_user.id)
 	       if int(x[1])==len(mes):
 	           pass
-	       elif str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045):
+	       elif str(mem.status) in ['creator', 'administrator'] or (update.message.from_user.id==711296045):
 	           
 	           query.answer(text="https://t.me/"+x[3]+"/"+x[0],show_alert=False)
 	           

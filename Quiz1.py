@@ -2186,7 +2186,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       try:
 	           x[3]="@"+x[3]
 	       except:
-	           x[3]="@PhotoQuiz"
+	           x.append("@PhotoQuiz")
 	       try:
 	           me1= get_mess_py(x[3],int(x[0])).text
 	           print (me1)

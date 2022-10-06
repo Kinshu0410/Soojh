@@ -1421,7 +1421,7 @@ def poll(update, context):
     	keyboard=[]
     	for x in range(len(text[2:])//2):
     	    mes=check_mess(app.get_messages(text[2*x+2],int(text[2*x+3])).text,[])
-    	    keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
+    	    keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2]))])
     	    keyboard.append(keyboard1+[InlineKeyboardButton(str(z+1),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(text[2*x+2])) for z in range(len(mes))])
     	    
     	

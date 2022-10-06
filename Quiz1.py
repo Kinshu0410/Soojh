@@ -1421,8 +1421,8 @@ def poll(update, context):
     	keyboard=[]
     	for x in range(len(text[2:])//2):
     	    mes=check_mess(app.get_messages(text[2*x+2],int(text[2*x+3])).text,[])
-    	    keyboard.append([InlineKeyboardButton(str(z+1),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(text[2*x+2])) for z in range(len(mes))])
-    	    
+    	    keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
+    	    keyboard.append(keyboard1+[InlineKeyboardButton(str(z+1),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(text[2*x+2])) for z in range(len(mes))])
     	    
     	
     	
@@ -2141,6 +2141,43 @@ def check_mess(X,Y):
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     print(str(query))
+    if bool(reaaa.match("^Link\d{1,}_\d{1,}_0_.*?$",query.data)):
+	       x=reaaa.split("_",query.data[4:])
+	       
+	       try:
+	           x[3]="@"+x[3]
+	       except:
+	           x[3]="@PhotoQuiz"
+	       try:
+	           me1= get_mess_py(x[3],int(x[0])).text
+	           print (me1)
+	           mes=check_mess(me1,[])
+	           print (str(mes))
+	       except:
+	           mes=[]
+	       mem=context.bot.get_chat_member("@"+text[3],update.message.from_user.id)
+	       if int(x[1])==len(mes):
+	           pass
+	       elif str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045):
+	           
+	           query.answer(text="https://t.me/"+x[3]+"/"+x[0],show_alert=False)
+	           
+	       else:
+	           keyboard=[]
+	           for y in query.message.reply_markup.inline_keyboard:
+	               print(y)
+	               zz=reaaa.split("_",y[0].callback_data[4:])
+	               try:
+	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
+	                   keyboard.append(keyboard1+[InlineKeyboardButton(str(z+1),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(zz[3])) for z in range(len(mes))])
+	               except:
+	                   pass
+	           
+	           reply_markup = InlineKeyboardMarkup(keyboard)
+	           if keyboard==[]:
+	               reply_markup=None
+	           query.edit_message_reply_markup(reply_markup=reply_markup)
     if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}_.*?$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
 	       

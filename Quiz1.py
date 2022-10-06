@@ -2160,7 +2160,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           
-	           query.answer(text="https://t.me/"+x[3]+"/"+x[0],show_alert=False)
+	           query.answer(text="https://t.me/"+x[3][1:]+"/"+x[0],show_alert=False)
 	           
 	       if int(x[1])==len(mes):
 	           pass

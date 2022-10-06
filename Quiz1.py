@@ -2195,7 +2195,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       except:
 	           mes=[]
 	       if int(x[1])==len(mes):
-	           query.answer(text=mes[int(x[2])-1], show_alert=True)
+	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
 	           
 	       else:
 	           keyboard=[]

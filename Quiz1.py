@@ -2189,7 +2189,8 @@ def button(update: Update, context: CallbackContext) -> None:
 	                   keyboard.append(keyboard2+keyboard1)
 	                   #keyboard.append(keyboard3)
 	               except Exception as p:
-	                   print("44444"+str(p))
+	                   
+	                   print(str(keyboard))
 	           
 	           reply_markup = InlineKeyboardMarkup(keyboard)
 	           if keyboard==[]:

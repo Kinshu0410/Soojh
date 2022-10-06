@@ -2202,7 +2202,8 @@ def button(update: Update, context: CallbackContext) -> None:
 	               zz=reaaa.split("_",y[0].callback_data[4:])
 	               try:
 	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
-	                   keyboard.append([InlineKeyboardButton(str(z+1),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(zz[3])) for z in range(len(mes))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
+	                   keyboard.append(keyboard1+[InlineKeyboardButton(str(z+1),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(z+1)+"_"+str(zz[3])) for z in range(len(mes))])
 	               except:
 	                   pass
 	           

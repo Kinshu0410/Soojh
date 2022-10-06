@@ -2158,10 +2158,12 @@ def button(update: Update, context: CallbackContext) -> None:
 	       mem=context.bot.get_chat_member(x[3],query.from_user.id)
 	       if int(x[1])==len(mes):
 	           pass
-	       elif str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
+	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           
 	           query.answer(text="https://t.me/"+x[3]+"/"+x[0],show_alert=False)
 	           
+	       if int(x[1])==len(mes):
+	           pass
 	       else:
 	           keyboard=[]
 	           for y in query.message.reply_markup.inline_keyboard:
@@ -2178,7 +2180,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           if keyboard==[]:
 	               reply_markup=None
 	           query.edit_message_reply_markup(reply_markup=reply_markup)
-    if bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}_.*?$",query.data)):
+    elif bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}_.*?$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
 	       
 	       try:

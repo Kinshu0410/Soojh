@@ -2184,7 +2184,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           
 	           query.answer(url="https://t.me/Soojhboojh_01bot?start=link"+x[3][1:]+"%2F"+x[0],show_alert=False)
 	           
-	       if int(x[1])==1+len(mes):
+	       if int(x[1])==len(mes):
 	           pass
 	       else:
 	           keyboard=[]

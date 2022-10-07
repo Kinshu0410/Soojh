@@ -2126,7 +2126,7 @@ def get_mess_py(x,y):
 		    
 		    zza+=1
 		return_mess= app.get_messages(x,int(y))
-		#print(return_mess)
+		print(return_mess)
 		#app.stop()
 		return return_mess
 	except Exception as e:

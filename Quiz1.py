@@ -2166,11 +2166,16 @@ def button(update: Update, context: CallbackContext) -> None:
 	           pass
 	       else:
 	           keyboard=[]
-	           
+	           zz=""
+	           bd=[]
 	           num=1
 	           for y in query.message.reply_markup.inline_keyboard:
-	               print(y)
-	               zz=reaaa.split("_",y[0].callback_data[4:])
+	               #print(y)
+	               if y[0].callback_data[4:] not in bd:
+	                   bd.append(y[0].callback_data[4:])
+	           
+	           for y in bd:
+	               zz=reaaa.split("_",y)
 	               try:
 	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
 	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
@@ -2217,11 +2222,16 @@ def button(update: Update, context: CallbackContext) -> None:
 	           
 	       else:
 	           keyboard=[]
-	           
+	           zz=""
+	           bd=[]
 	           num=1
 	           for y in query.message.reply_markup.inline_keyboard:
-	               print(y)
-	               zz=reaaa.split("_",y[0].callback_data[4:])
+	               #print(y)
+	               if y[0].callback_data[4:] not in bd:
+	                   bd.append(y[0].callback_data[4:])
+	           
+	           for y in bd:
+	               zz=reaaa.split("_",y)
 	               try:
 	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
 	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])

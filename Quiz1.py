@@ -2168,7 +2168,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           keyboard=[]
 	           zz=""
 	           bd=[]
-	           बीडी
+	           
 	           bd1=[]
 	           num=1
 	           for y in query.message.reply_markup.inline_keyboard:
@@ -2228,10 +2228,12 @@ def button(update: Update, context: CallbackContext) -> None:
 	           keyboard=[]
 	           zz=""
 	           bd=[]
+	           bd1=[]
 	           num=1
 	           for y in query.message.reply_markup.inline_keyboard:
-	               #print(y)
-	               if y[0].callback_data[4:] not in bd:
+	               
+	               if reaaa.split("_",y[0].callback_data[4:])[0] not in bd1:
+	                   bd1.append(reaaa.split("_",y[0].callback_data[4:])[0])
 	                   bd.append(y[0].callback_data[4:])
 	           
 	           for y in bd:

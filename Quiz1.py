@@ -1421,20 +1421,20 @@ def poll(update, context):
     	keyboard=[]
     	for x in range(len(text[2:])//2):
     	    try:
-	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
-	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
+	                   mes=check_mess(get_mess_py(x[3],int(x[0])).text,[])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(x[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(x[3]))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]
 	                       for yy in range(5):
-	                           keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(num)+"_"+str(zz[3])))
+	                           keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(x[0])+"_"+str(len(mes))+"_"+str(num)+"_"+str(x[3])))
 	                           num+=1
 	                       keyboard.append(keyboard2)
 	                   
 	                   print(str(keyboard))
 	                   keyboard2=[]
 	                   for z in range(len(mes)%5):
-	                       keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(num)+"_"+str(zz[3])))
+	                       keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(x[0])+"_"+str(len(mes))+"_"+str(num)+"_"+str(x[3])))
 	                       num+=1
 	                   keyboard.append(keyboard2+keyboard1)
 	                   print(str(keyboard))

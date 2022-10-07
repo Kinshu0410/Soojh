@@ -1419,6 +1419,7 @@ def poll(update, context):
     	text=reaaa.sub("https://t.me/","",update.message.text)
     	text=reaaa.split(":{1,}|\n{1,}|/",text)
     	keyboard=[]
+    	num=1
     	for x in range(len(text[2:])//2):
     	    try:
 	                   mes=check_mess(get_mess_py(x[3],int(x[0])).text,[])

@@ -1447,7 +1447,7 @@ def poll(update, context):
     	
     	
     	reply_markup = InlineKeyboardMarkup(keyboard)
-    	
+    	print(str(keyboard))
     	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
     	if str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045:
     	    context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
@@ -2180,7 +2180,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           
-	           query.answer(text="https://t.me/"+x[3][1:]+"/"+x[0],show_alert=False)
+	           query.answer(url="https://t.me/Soojhboojh_01bot?start=link"+x[3][1:]+"%2F"+x[0],show_alert=False)
 	           
 	       if int(x[1])==1+len(mes):
 	           pass

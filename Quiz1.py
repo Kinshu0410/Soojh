@@ -1442,7 +1442,7 @@ def poll(update, context):
 	                   #keyboard.append(keyboard3)
     	    except Exception as p:
 	                   
-	                   print(str(keyboard))
+	                   print(str(p))
     	    
     	
     	

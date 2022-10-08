@@ -1423,7 +1423,7 @@ def poll(update, context):
     	count=0
     	
     	try:
-    	    count=app.get_discussion_replies_count(query.message.chat.id,query.message.message_id)
+    	    count=app.get_discussion_replies_count(update.message.chat.id,update.message.message_id)
     	except:
     	    pass
     	for x in range(len(text[2:])//2):
@@ -2193,7 +2193,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       except:
 	           mes=[]
 	       mem=context.bot.get_chat_member(x[3],query.from_user.id)
-	       if int(x[1])==len(mes):
+	       if int(x[1])==len(mes) or (query.message.reply_markup.inline_keyboard[-1][0].text==str(count)):
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           

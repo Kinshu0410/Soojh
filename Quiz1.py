@@ -1157,7 +1157,7 @@ for x in ali:
 ali=zzz
 zzz=None
 Man=[1468125551,711296045,1001183009,776365745,1527108544,2020953330,1202919365,1309577346,875026044,5094761615,786181993,1341437687,1353892576,5028705992,781968811,2111134423,1952288751,5259697190,644570319,1763193816]
-Group=[1431722823,-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,-1001368097755,-1001222891254,-1001164423875,-1001487436278,-1001428838285,-1001664461759,-1001664461759,-1001415742406,-1001725784523,-1001718523021,-1001459269318,-1001796946839]
+Group=[-1001231444581,-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,-1001368097755,-1001222891254,-1001164423875,-1001487436278,-1001428838285,-1001664461759,-1001664461759,-1001415742406,-1001725784523,-1001718523021,-1001459269318,-1001796946839]
 @run_async
 @restricted
 def ghppp10(update,context):
@@ -1420,20 +1420,13 @@ def poll(update, context):
     	text=reaaa.split(":{1,}|\n{1,}|/",text)
     	keyboard=[]
     	num=1
-    	count=0
-    	
-    	try:
-    	    print("@"+text[0]+str(text[1]))
-    	    count=app.get_discussion_replies_count("@"+text[0],int(text[1]))
-    	except Exception as p:
-    	    print(str(p))
     	for x in range(len(text[2:])//2):
     	    num1=1
     	    try:
 	                   mes=check_mess(get_mess_py("@"+text[2*x+2],int(text[2*x+3])).text,[])
 	                   #print(str(mes))
 	                   #print(1111111)
-	                   keyboard1=([InlineKeyboardButton(str(count),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str("📜"),url="https://t.me/"+str(text[0])+"/"+str(text[1])+"?comment="+str(1))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2]))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]
@@ -1449,8 +1442,7 @@ def poll(update, context):
 	                       keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(num1)+"_"+str(text[2*x+2])))
 	                       num+=1
 	                       num1+=1
-	                   keyboard.append(keyboard2)
-	                   keyboard.append(keyboard1)
+	                   keyboard.append(keyboard2+keyboard1)
 	                   print(str(keyboard))
 	                   #keyboard.append(keyboard3)
     	    except Exception as p:
@@ -2118,9 +2110,8 @@ def pdfc(update,context):
 	return PDF
 	
 from pyrogram import Client, idle
-app = Client("my_live_bot",
-#bot_token="1431722823:AAHk_VOD0WgepQ1us7eucQm3UQRYacHzmQM",
-session_string="AgEBU-8ADAn12t06n3YMl9fZEc_97kGnUiYe1VLFNpFa22wd_mkxoZtPIBv12yjXTTUgD1RpWzyJPUFdDyrsf7t2119euFjzj8piOv1SLNDcn4UZpZidPOiRYBMo07cTvlwOWKQFKr5xn7xrvRMVDMGPAqA6VbOaA8fQBwe6TKhOzA-5CTpMPsIS974AIvjD8BtWZDOgkQI6smCdY-lUEt9cgiNH81lrANVGq6UllofmIjZo_bYyk6VhoOl_4YpHAp30cgQGda5VlwY73gr7XQV0DCx4gT0FAy-lVWQPbRKZHuj75bjErV1YVouvTA8070vd12qGmBqa67lc0A8_l-nwAqpdMQAAAAEvBILMAA",
+app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7PWIIqkl6-0j_96Gq6apAJ1vRFPUQrWwbcHoNLj0ouYgn5yCAvkT-BW8iE-1lYomM1VwAzEKHNuUVqTYrFDpCsAZE2ko1DudXnRUWz1SBkxk8f6JzrDS57sBmx2oEgUBXfiyGjJXJYn2KC-TsCao4Cbt-x6pE3LWwPprjAqsN6LHY2y2WA4QnQVagTclIrp5_Cc4FZbRnyNcL_MwQ-7hLF_5psbi4c1hXOYXYCnjx3KQ0Q--f0ISiGSt8h3xRu39RozHP1ANrB3pz4e_Unmoe8ad7hmhzwuil8uVqaV1qspejkWDo_3cyyadzV2QAAAAAqZYQtAA",
+bot_token="1431722823:AAHk_VOD0WgepQ1us7eucQm3UQRYacHzmQM",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 import re as reaaa
@@ -2177,11 +2168,7 @@ def button(update: Update, context: CallbackContext) -> None:
     print(str(query))
     if bool(reaaa.match("^Link\d{1,}_\d{1,}_0(_.*?|)$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
-	       count=0
-	       try:
-	           count=app.get_discussion_replies_count(query.message.chat.id,query.message.message_id)
-	       except Ex:
-	           pass
+	       #print(str(query))
 	       try:
 	           x[3]="@"+x[3]
 	       except:
@@ -2194,7 +2181,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       except:
 	           mes=[]
 	       mem=context.bot.get_chat_member(x[3],query.from_user.id)
-	       if int(x[1])==len(mes) or (query.message.reply_markup.inline_keyboard[-1][0].text==str(count)):
+	       if int(x[1])==len(mes):
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           
@@ -2221,7 +2208,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	               zz=reaaa.split("_",y)
 	               try:
 	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
-	                   keyboard1=([InlineKeyboardButton(str(count),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3])),InlineKeyboardButton(str("📜"),url="https://t.me/"+query.message.chat.id+"/"+query.message.message_id+"?comment="+str(1))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]
@@ -2251,11 +2238,6 @@ def button(update: Update, context: CallbackContext) -> None:
     elif bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}(_.*?|)$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
 	       
-	       count=0
-	       try:
-	           count=app.get_discussion_replies_count(query.message.chat.id,query.message.message_id)
-	       except:
-	           pass
 	       try:
 	           x[3]="@"+x[3]
 	       except:
@@ -2267,7 +2249,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           print (str(mes))
 	       except:
 	           mes=[]
-	       if int(x[1])==len(mes) or (query.message.reply_markup.inline_keyboard[-1][0].text==str(count)):
+	       if int(x[1])==len(mes):
 	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
 	           
 	       else:
@@ -2286,7 +2268,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	               zz=reaaa.split("_",y)
 	               try:
 	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
-	                   keyboard1=([InlineKeyboardButton(str(count),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3])),InlineKeyboardButton(str("📜"),url="https://t.me/"+query.message.chat.id+"/"+query.message.message_id+"?comment="+str(1))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]

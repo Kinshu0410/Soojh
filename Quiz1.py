@@ -1423,7 +1423,7 @@ def poll(update, context):
     	count=0
     	
     	try:
-    	    count=app.get_discussion_replies_count(update.message.chat.id,update.message.message_id)
+    	    count=app.get_discussion_replies_count("@"+text[0],int(text[1]))
     	except Exception as p:
     	    print(str(p))
     	for x in range(len(text[2:])//2):

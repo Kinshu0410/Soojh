@@ -1424,8 +1424,8 @@ def poll(update, context):
     	
     	try:
     	    count=app.get_discussion_replies_count(update.message.chat.id,update.message.message_id)
-    	except:
-    	    pass
+    	except Exception as p:
+    	    print(str(p))
     	for x in range(len(text[2:])//2):
     	    num1=1
     	    try:
@@ -2179,7 +2179,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       count=0
 	       try:
 	           count=app.get_discussion_replies_count(query.message.chat.id,query.message.message_id)
-	       except:
+	       except Ex:
 	           pass
 	       try:
 	           x[3]="@"+x[3]

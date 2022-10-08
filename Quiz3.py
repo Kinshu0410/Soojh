@@ -88,7 +88,7 @@ def restrictedCQ(func):
     return wrapped
 
 
-LIST_OF_ADMINS = ["711296045","1001183009","776365745","1527108544","2020953330","1202919365","1309577346","875026044","5094761615","786181993","1341437687","1353892576","5028705992","781968811","2111134423","1952288751","5259697190","1211101855"]
+LIST_OF_ADMINS = ["711296045","1001183009","776365745","1527108544","2020953330","1202919365","1309577346","875026044","5094761615","786181993","1341437687","1353892576","5028705992","781968811","2111134423","1952288751","5259697190","1211101855","1763193816","1468125551"]
 
 def restricted(func):
     @wraps(func)
@@ -182,7 +182,7 @@ def restricted2(func):
     return wrapped
 
 
-LIST_OF_ADMINS = ["711296045","1001183009","776365745","2020953330","875026044","1468125551","1527108544","1202919365","1086189598","1309577346","5094761615","555919730","786181993","1341437687","1353892576","5028705992","781968811","2111134423","1952288751","5259697190"]
+LIST_OF_ADMINS = ["711296045","1001183009","776365745","2020953330","875026044","1468125551","1527108544","1202919365","1086189598","1309577346","5094761615","555919730","786181993","1341437687","1353892576","5028705992","781968811","2111134423","1952288751","5259697190","1763193816"]
 
 def restrictedD(func):
     @wraps(func)
@@ -697,6 +697,10 @@ def uploadfile(update,context):
     update.message.reply_text("send me file.")
     return UPLOAD
 
+
+	
+	
+	
 @run_async
 def doc_poll(update,context):
     if update.message.from_user.id==711296045:
@@ -711,40 +715,34 @@ def doc_poll(update,context):
         q=reaaa.split("\n\n",dbq)
         X=0
         
+        #check_mess(x,y)
         keyboard=None
-        reply_markup=None
-        Xy=client["youtube"]["time"]
-        Time=Xy.find_one({})["Time"]
-        yoo=0
+        reply_markup = None
+        
         for x in q:
-        	if link is not None:
-        	    keyboard=[[InlineKeyboardButton("Explanation", url=link+"?t="+str(int(yoo)))]]
-        	    reply_markup=InlineKeyboardMarkup(keyboard)
-        	x=reaaa.split("(?=Sol\.\(.\))",x)
-        	yoo=yoo+Time[X]
-        	X+=1
-        	ex=x[1]
-        	t=reaaa.split("(?=\(a\)|\(b\)|\(c\)|\(d\))",x[0])
-        	if ex[5]=="a":
-        	    correct_option_id=0
-        	elif ex[5]=="b":
-        	    correct_option_id=1
-        	elif ex[5]=="c":
-        	    correct_option_id=2
-        	elif ex[5]=="d":
-        	    correct_option_id=3
-        	
+        	t=reaaa.sub("(\n| |)(\(|\[|\{|)(a|b|c|d|A|B|C|D)(\)|\]|\.)( |){1,}","\n",x[:-1])
+        	t=reaaa.split("\n",t)
+        	mes=check_mess("\n".join(t[5:]),[])
+        	mes1=123
+        	try:
+        	    mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="\n".join(t[5:])).message_id
+        	except:
+        	    mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="... Coming Soon").message_id
+        	keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(mes1)+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
+        	reply_markup = InlineKeyboardMarkup(keyboard)
         
         	try:
         	  try:
+        	    
+        	    
         	    context.bot.send_poll(
-        	chat_id=update.effective_chat.id,
+        	chat_id="@Polls_Quiz",
                                 question=t[0],
-                                options=t[1:],
+                                options=t[1:5],
                                 type=Poll.QUIZ,
-                                correct_option_id =correct_option_id,
+                                correct_option_id =int(x[-1])-1,
                                 #open_period=int(Time),
-                                explanation="Subscribe On youtube : https://youtube.com/channel/UCDnlmiR6XtdjRe7kolFQHLA\n\n👆👆👆",
+                                explanation="Explanation channal पर उपलब्ध है।\nCome and visit it🙏",
                                 is_closed=False,
                                 is_anonymous=True,
                                 reply_markup=reply_markup,
@@ -752,12 +750,14 @@ def doc_poll(update,context):
                             )
         
         	  except:
+        	    
+        	    
         	    context.bot.send_poll(
-        	chat_id=update.effective_chat.id,
+        	chat_id="@Polls_Quiz",
                                 question=t[0],
                                 options=t[1:],
                                 type=Poll.QUIZ,
-                                correct_option_id =correct_option_id,
+                                correct_option_id =int(x[-1])-1,
                                 #open_period=int(Time),
                                 #explanation=exp,
                                 is_closed=False,
@@ -766,7 +766,8 @@ def doc_poll(update,context):
                             )
         
         	except:
-        	  context.bot.send_message(update.effective_chat.id, text="\n".join(t[:]),reply_markup=reply_markup)
+        	  
+        	  context.bot.send_message(chat_id="@Polls_Quiz", text="\n".join(t[:5]),reply_markup=reply_markup)
         	time.sleep(5)
     	
     	
@@ -1155,8 +1156,8 @@ for x in ali:
 		zzz.append(x)
 ali=zzz
 zzz=None
-Man=[711296045,1001183009,776365745,1527108544,2020953330,1202919365,1309577346,875026044,5094761615,786181993,1341437687,1353892576,5028705992,781968811,2111134423,1952288751,5259697190]
-Group=[-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,-1001368097755,-1001222891254,-1001164423875,-1001487436278,-1001428838285,-1001664461759,-1001664461759,-1001415742406,-1001725784523,-1001718523021,-1001459269318]
+Man=[1468125551,711296045,1001183009,776365745,1527108544,2020953330,1202919365,1309577346,875026044,5094761615,786181993,1341437687,1353892576,5028705992,781968811,2111134423,1952288751,5259697190,644570319,1763193816]
+Group=[1431722823,-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,-1001368097755,-1001222891254,-1001164423875,-1001487436278,-1001428838285,-1001664461759,-1001664461759,-1001415742406,-1001725784523,-1001718523021,-1001459269318,-1001796946839]
 @run_async
 @restricted
 def ghppp10(update,context):
@@ -1279,6 +1280,7 @@ def ghppp1(update,context):
         	    explan="Created By Sudhir Parihar Sir ✍️\n\n🔜👉  https://t.me/SudhirParihar"
         	else:
         	    explan=explan+"\n\n🔜👉  https://t.me/SudhirParihar"
+        
         context.bot.send_poll(
                 chat_id=int(cid),
                 question=que,
@@ -1405,7 +1407,7 @@ def alarm(context: CallbackContext):
     
     
     
-from quickstart import Drive_OCR
+
 
 import fitz
 #@restrictedD
@@ -1413,15 +1415,87 @@ import fitz
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if reaaa.match("https://docs.google.com/forms/d/e/.*",update.message.text):
-    	print("kinin")
-    	NewVar1=reaaa.sub(r"https://docs.google.com/forms/d/e/", update.message.text)
-    	NewVar1=reaaa.sub("/.*",NewVar1)
+    if reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}https://t.me/.*?/\d{1,}){1,}",update.message.text):
+    	text=reaaa.sub("https://t.me/","",update.message.text)
+    	text=reaaa.split(":{1,}|\n{1,}|/",text)
+    	keyboard=[]
+    	num=1
+    	#count=0
     	
-    	NewVar1=Drive_OCR("").google_form_get(NewVar1)
-    	context.bot.send_document(update.message.chat.id, open(NewVar1, "rb"))#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
-    	filename1=Drive_OCR(NewVar1).main1()
-    	context.bot.send_document(update.message.chat.id, open(filename1, "rb"))#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+    	try:
+    	    print("@"+text[0]+str(text[1]))
+    	    #count=app.get_discussion_replies_count("@"+text[0],int(text[1]))
+    	except Exception as p:
+    	    print(str(p))
+    	for x in range(len(text[2:])//2):
+    	    num1=1
+    	    try:
+	                   mes=check_mess(get_mess_py("@"+text[2*x+2],int(text[2*x+3])).text,[])
+	                   #print(str(mes))
+	                   #print(1111111)
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str("📜"),url="https://t.me/"+str(text[0])+"/"+str(text[1])+"?comment="+str(1))])
+	                   keyboard2=[]
+	                   for z in range(len(mes)//5):
+	                       keyboard2=[]
+	                       for yy in range(5):
+	                           keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(num1)+"_"+str(text[2*x+2])))
+	                           num+=1
+	                           num1+=1
+	                       keyboard.append(keyboard2)
+	                   
+	                   print(str(mes))
+	                   keyboard2=[]
+	                   for z in range(len(mes)%5):
+	                       keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(num1)+"_"+str(text[2*x+2])))
+	                       num+=1
+	                       num1+=1
+	                   keyboard.append(keyboard2)
+	                   keyboard.append(keyboard1)
+	                   print(str(keyboard))
+	                   #keyboard.append(keyboard3)
+    	    except Exception as p:
+	                   
+	                   print(str(p))
+    	    
+    	
+    	
+    	reply_markup = InlineKeyboardMarkup(keyboard)
+    	print(str(keyboard))
+    	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
+    	if str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045:
+    	    context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
+  message_id = int(text[1]),
+  reply_markup=reply_markup)
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    elif reaaa.match("https://docs.google.com/forms/d/",update.message.text):
+    	print("kinin")
+    	from quickstart import Drive_OCR
+    	NewVar1=reaaa.sub(r"https://docs.google.com/forms/d/", "",update.message.text)
+    	NewVar1=reaaa.sub("/.*","",NewVar1)
+    	
+    	NewVar,link=Drive_OCR("hh").google_form_get(NewVar1)
+    	#context.bot.send_document(update.message.chat.id, open(NewVar1, "rb"))#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
+    	filename1=Drive_OCR(NewVar).main1()
+    	context.bot.send_document(update.message.chat.id, open(filename1, "rb"),caption=link)#, parse_mode=ParseMode.HTML,reply_to_message_id=colmessage)
     elif reaaa.match("https://t.me/(c/|).*?/\d{1,}/.*?",update.message.text):
     	NewVar1=reaaa.split(r"\n", update.message.text)
     	print(NewVar1)
@@ -1491,11 +1565,11 @@ def poll(update, context):
         current_quiz=col.find_one({"data":{"$type":"array"}})["data"][Nu[0]][list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]]
         keyboard=False
         if Nu[0]==0:
-            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
         elif Nu[0]+1==len(data):
-            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz0")]]
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz0")]]
         else:
-            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
+            keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
         reply_markup = InlineKeyboardMarkup(keyboard)
         context.bot.send_message(chat_id=update.message.chat.id, text="Playing Next Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+"\n\nSchedule Daily Time : - "+Time+"\n\n"+current_quiz,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     elif update.message.reply_markup:
@@ -1598,17 +1672,29 @@ def poll(update, context):
 	        options5=q[5::1]
 	        options5="\n".join(options5)
 	        options5=reaaa.sub(r"@\w*", "", options5)
+	
 	        if options5 == "":
 	            options5=""#options5="👇👇👇 Ask your Doubts here 👇👇👇\n👇👇👇        Only for Math        👇👇👇\nhttps://soojhboojh.xyz/ask-question/"
 	        else:
 	            options5=options5
 	            print(options5)
-	        #options5=reaaa.sub(r"\@\w.*", "", options5)
-	        #update.message.reply_text(options)
+	        reply_markup=None
+	        mes1=123
+	        mes=""#check_mess("\n".join(t[5:]),[])
+	        try:
+	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text=options5).message_id
+	            mes=check_mess(options5,[])
+	        except:
+	            mes1=context.bot.send_message(chat_id="@PhotoQuiz", text="... Coming Soon").message_id
+	            mes=check_mess("... Coming Soon",[])
+	        keyboard=[[InlineKeyboardButton(str(z+1),callback_data="Link"+str(mes1)+"_"+str(len(mes))+"_"+str(z+1)) for z in range(len(mes))]]
+	        reply_markup = InlineKeyboardMarkup(keyboard)
+	        index = Man.index(update.message.chat.id)
+	        cid=Group[index]
 	
 	        if result is None:
 	          message = context.bot.send_poll(
-	            update.effective_chat.id,
+	            cid,
 	            que,
 	            options,
 	            is_anonymous=False,
@@ -1617,25 +1703,37 @@ def poll(update, context):
 	        elif options5 !="":
 	          co=int(corr)-1
 	          message = context.bot.send_poll(
-	            update.effective_chat.id,
+	            cid,
 	            que,
 	            options,
 	            type=Poll.QUIZ,
 	            correct_option_id=co,
-	            explanation=options5,
-	            is_anonymous=False,
-	            allows_multiple_answers=False,
+	            #explanation=,
+	            is_anonymous=True,
+	            allows_multiple_answers=False,reply_markup=reply_markup
+	        )
+	          keyboard=[[InlineKeyboardButton(str("Poll Explanation Location"),url="https://t.me/PhotoQuiz/"+str(mes1))]]
+	          reply_markup = InlineKeyboardMarkup(keyboard)
+	          message = context.bot.send_poll(
+	            update.effective_message.chat_id,
+	            que,
+	            options,
+	            type=Poll.QUIZ,
+	            correct_option_id=co,
+	            #explanation=options5,
+	            is_anonymous=True,
+	            allows_multiple_answers=False,reply_markup=reply_markup
 	        )
 	        elif options5 =="":
 	          co=int(corr)-1
 	          message = context.bot.send_poll(
-	            update.effective_chat.id,
+	            cid,
 	            que,
 	            options,
 	            type=Poll.QUIZ,
 	            correct_option_id=co,#explanation=options5,
-	            is_anonymous=False,
-	            allows_multiple_answers=False,
+	            is_anonymous=True,
+	            allows_multiple_answers=False,reply_markup=reply_markup
 	        )
 	        # Save some info about the poll the bot_data for later use in receive_poll_answer
 	        chatiid=int(update.message.chat.id)
@@ -1710,6 +1808,7 @@ def polls(update: Update, _: CallbackContext) -> int:
         update.effective_message.reply_text('program finish /cancel \nError name = '+str(e))
     return COPY
 
+gofome=[]
 POLLF,POLLN=range(2)
 @run_async
 @restricted2
@@ -1720,8 +1819,16 @@ def pollf(update,context):
     uurrl=""
     chat___id=int(update.message.chat.id)
     Ccc=update.message.from_user.id
+        
+        
+        
+        
+        
     if chat___id<=0:
         try:
+            
+        	
+        	
             if update.message.text.startswith("/start@Soojhboojh_01bot share_quiz"):
                 try:
                     context.bot.delete_message(chat_id=update.message.id,message_id=update.message.message_id)
@@ -1804,6 +1911,87 @@ def pollf(update,context):
         except Exception as e:
             print(str(e))
         return POLLF
+    
+    elif update.message.text.startswith("/start g_f"):
+    	text=reaaa.sub("/start g_f","",update.message.text)
+    	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
+    	text=reaaa.split("idID",text)
+    	from quickstart import Drive_OCR
+    	
+    	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
+    	#context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
+    	zz=""
+    	
+    	name=update.message.from_user.first_name
+    	if update.message.from_user.last_name:
+    	    name=name+" "+update.message.from_user.last_name
+    	uid=update.message.from_user.id
+    	
+    	try:
+    	    global gofome
+    	    
+    	    if (str(mem.user.id) not in gofome):
+    	            gofome.append(str(mem.user.id))
+    	    zz="|".join(gofome)
+    	    text[1]=Drive_OCR("g").google_drive_get(text[1])
+    	    res_url=""
+    	    for yy in text[1]:
+    	        
+    	        res_url=Drive_OCR("y").google_form_responce_url(yy)
+    	        x="""
+function d() {
+   var form = FormApp.openById('"""+yy+"""');
+   var items = form.getItems();
+   var item0 = items[0];
+   var item1 = items[1];
+   var item = items[1];
+   var textValidation = FormApp.createTextValidation()
+     .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')
+     .requireTextContainsPattern('"""+zz+"""')
+     .build();
+   item.asTextItem().setValidation(textValidation);
+   var res= form.createResponse()
+     .withItemResponse(item0.asTextItem().createResponse('"""+name+"""'))
+     .withItemResponse(item1.asTextItem().createResponse('"""+str(uid)+"""'))
+     .toPrefilledUrl()
+    
+    return res
+   
+
+}
+"""
+    	        from google_form import main_run,main4
+    	        main4(x)
+    	        res_url=""
+    	        try:
+    	            res_url=main_run('d')['response']['result']
+    	        except:
+    	            print("kinbin@247 Error")
+    	    if str(mem.status) in ['creator', 'administrator', 'member']:
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/Polls_Quiz")],[InlineKeyboardButton("Test Link",url=res_url)]]
+    	            reply_markup = InlineKeyboardMarkup(keyboard)
+    	    
+    	            
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=mem.user.id,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	            #context.bot.send_message(chat_id=update.message.chat.id, text=(mem.user.id))
+    	            context.bot.send_message(chat_id=update.message.chat.id, text=("👆Your Password\n\nDo not share your password. If you do I will block you."))
+    	    else:
+    	            keyboard=[[InlineKeyboardButton("Join",url="https://t.me/"+text[0]),InlineKeyboardButton("Refresh Password",url="https://t.me/Soojhboojh_01bot?start=g_f"+reaaa.sub("/start g_f","",update.message['text']))]]
+    	            reply_markup = InlineKeyboardMarkup(keyboard)
+    	    
+    	            
+    	            context.bot.send_message(chat_id=update.message.chat.id, text="सबसे पहले Join कीजिए उसके पश्चात Refresh Password पर Click 🙏",reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	            print("666")
+    	    #context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
+    	    
+    	
+    	
+    	except Exception as e:
+    	    context.bot.send_message(chat_id=update.message.chat.id, text=("some error\n\ndetails: "+str(e)))
+    	
+    	
+    	
+    	
     elif update.message.text.startswith("/start Play"):
         if True:
             if True:
@@ -1929,10 +2117,203 @@ def pdfc(update,context):
 	update.message.reply_text(KrutidevToUnicode.convert_to_unicode(x))
 	return PDF
 	
+from pyrogram import Client, idle
+app = Client("my_live_bot",
+#bot_token="1431722823:AAHk_VOD0WgepQ1us7eucQm3UQRYacHzmQM",
+session_string="AgEBU-8ADAn12t06n3YMl9fZEc_97kGnUiYe1VLFNpFa22wd_mkxoZtPIBv12yjXTTUgD1RpWzyJPUFdDyrsf7t2119euFjzj8piOv1SLNDcn4UZpZidPOiRYBMo07cTvlwOWKQFKr5xn7xrvRMVDMGPAqA6VbOaA8fQBwe6TKhOzA-5CTpMPsIS974AIvjD8BtWZDOgkQI6smCdY-lUEt9cgiNH81lrANVGq6UllofmIjZo_bYyk6VhoOl_4YpHAp30cgQGda5VlwY73gr7XQV0DCx4gT0FAy-lVWQPbRKZHuj75bjErV1YVouvTA8070vd12qGmBqa67lc0A8_l-nwAqpdMQAAAAEvBILMAA",
+api_id="13682659",
+api_hash="b984d240c5258407ea911f042c9d75f6")
+import re as reaaa
+import time
 
+
+zza=1
+def get_mess_py(x,y):
+	global zza,app
+	try:
+		if zza==1:
+		    
+		    zza+=1
+		return_mess= app.get_messages(x,int(y))
+		print(return_mess)
+		#app.stop()
+		return return_mess
+	except Exception as e:
+		#app.restart()
+		print(e)
+
+	
+	
+	
+def check_mess(X,Y):
+	x=X
+	y=Y
+	#print(len(x))
+	if len(x)<180:
+		
+		y.append(x)
+		
+		return y
+	elif bool(reaaa.search("\n",x[:180])):
+		index=0
+		for match in reaaa.finditer("\n",x[:180]):
+		    index=int(match.end())
+		y.append(x[:index])
+		x=x[index:]
+		#print(y)
+		return check_mess(x,y)
+	else:
+		index=0
+		for match in reaaa.finditer(" ",x[:180]):
+		    index=int(match.end())
+		y.append(x[:index])
+		x=x[index:]
+		#print(y)
+		return check_mess(x,y)
+
+#@run_async
 def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
-    if bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
+    print(str(query))
+    if bool(reaaa.match("^Link\d{1,}_\d{1,}_0(_.*?|)$",query.data)):
+	       x=reaaa.split("_",query.data[4:])
+	       count=0
+	       try:
+	           count=app.get_discussion_replies_count(query.message.chat.id,query.message.message_id)
+	       except Ex:
+	           pass
+	       try:
+	           x[3]="@"+x[3]
+	       except:
+	           x[3]="@PhotoQuiz"
+	       try:
+	           me1= get_mess_py(x[3],int(x[0])).text
+	           print (me1)
+	           mes=check_mess(me1,[])
+	           print (str(mes))
+	       except:
+	           mes=[]
+	       mem=context.bot.get_chat_member(x[3],query.from_user.id)
+	       if int(x[1])==len(mes) or (query.message.reply_markup.inline_keyboard[-1][0].text==str(count)):
+	           pass
+	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
+	           
+	           query.answer(url="https://t.me/Soojhboojh_01bot?start=link"+x[3][1:]+"%2F"+x[0],show_alert=False)
+	           
+	       if int(x[1])==len(mes):
+	           pass
+	       else:
+	           keyboard=[]
+	           zz=""
+	           bd=[]
+	           
+	           bd1=[]
+	           num=1
+	           for y in query.message.reply_markup.inline_keyboard:
+	               
+	               if reaaa.split("_",y[0].callback_data[4:])[0] not in bd1:
+	                   bd1.append(reaaa.split("_",y[0].callback_data[4:])[0])
+	                   bd.append(y[0].callback_data[4:])
+	
+	           
+	           for y in bd:
+	               num1=1
+	               zz=reaaa.split("_",y)
+	               try:
+	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
+	                   keyboard1=([InlineKeyboardButton(str(count),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3])),InlineKeyboardButton(str("📜"),url="https://t.me/"+query.message.chat.id+"/"+query.message.message_id+"?comment="+str(1))])
+	                   keyboard2=[]
+	                   for z in range(len(mes)//5):
+	                       keyboard2=[]
+	                       for yy in range(5):
+	                           keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(num1)+"_"+str(zz[3])))
+	                           num+=1
+	                           num1+=1
+	                       keyboard.append(keyboard2)
+	                   
+	                   print(str(keyboard))
+	                   keyboard2=[]
+	                   for z in range(len(mes)%5):
+	                       keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(num1)+"_"+str(zz[3])))
+	                       num+=1
+	                       num1+=1
+	                   keyboard.append(keyboard2+keyboard1)
+	                   print(str(keyboard))
+	                   #keyboard.append(keyboard3)
+	               except Exception as p:
+	                   
+	                   print(str(keyboard))
+	           
+	           reply_markup = InlineKeyboardMarkup(keyboard)
+	           if keyboard==[]:
+	               reply_markup=None
+	           query.edit_message_reply_markup(reply_markup=reply_markup)
+    elif bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}(_.*?|)$",query.data)):
+	       x=reaaa.split("_",query.data[4:])
+	       
+	       count=0
+	       try:
+	           count=app.get_discussion_replies_count(query.message.chat.id,query.message.message_id)
+	       except:
+	           pass
+	       try:
+	           x[3]="@"+x[3]
+	       except:
+	           x.append("@PhotoQuiz")
+	       try:
+	           me1= get_mess_py(x[3],int(x[0])).text
+	           print (me1)
+	           mes=check_mess(me1,[])
+	           print (str(mes))
+	       except:
+	           mes=[]
+	       if int(x[1])==len(mes) or (query.message.reply_markup.inline_keyboard[-1][0].text==str(count)):
+	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
+	           
+	       else:
+	           keyboard=[]
+	           zz=""
+	           bd=[]
+	           bd1=[]
+	           num=1
+	           for y in query.message.reply_markup.inline_keyboard:
+	               
+	               if reaaa.split("_",y[0].callback_data[4:])[0] not in bd1:
+	                   bd1.append(reaaa.split("_",y[0].callback_data[4:])[0])
+	                   bd.append(y[0].callback_data[4:])
+	           
+	           for y in bd:
+	               zz=reaaa.split("_",y)
+	               try:
+	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
+	                   keyboard1=([InlineKeyboardButton(str(count),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3])),InlineKeyboardButton(str("📜"),url="https://t.me/"+query.message.chat.id+"/"+query.message.message_id+"?comment="+str(1))])
+	                   keyboard2=[]
+	                   for z in range(len(mes)//5):
+	                       keyboard2=[]
+	                       for yy in range(5):
+	                           keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(num)+"_"+str(zz[3])))
+	                           num+=1
+	                       keyboard.append(keyboard2)
+	                   
+	                   print(str(keyboard))
+	                   keyboard2=[]
+	                   for z in range(len(mes)%5):
+	                       keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(num)+"_"+str(zz[3])))
+	                       num+=1
+	                   keyboard.append(keyboard2+keyboard1)
+	                   print(str(keyboard))
+	                   #keyboard.append(keyboard3)
+	               except Exception as p:
+	                   
+	                   print(str(keyboard))
+	           reply_markup = InlineKeyboardMarkup(keyboard)
+	           if keyboard==[]:
+	               reply_markup=None
+	           query.edit_message_reply_markup(reply_markup=reply_markup)
+	           
+	       
+	       
+    elif bool(reaaa.match("^My_quizset\d{1,}$",query.data)):
 	       col=client["group_schedule"][str(query.message.chat.id)]
 	       Nu=[int(reaaa.sub("My_quizset","",query.data))]
 	       y=context.bot.get_chat_administrators(chat_id=query.message.chat.id)
@@ -1955,11 +2336,11 @@ def button(update: Update, context: CallbackContext) -> None:
 	       query.answer()
 	       keyboard=False
 	       if Nu[0]==0:
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set0"),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(len(data)-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set0"),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+"1")]]
 	       elif Nu[0]+1==len(data):
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(0))]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(0))]]
 	       else:
-	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
+	           keyboard=[[InlineKeyboardButton("Previous",callback_data="My_quiz"+str(Nu[0]-1)),InlineKeyboardButton("Set Quiz",callback_data="My_quiz"+"set"+str(Nu[0])),InlineKeyboardButton("Play Now",url="tg://share?text=/start@quizbot "+list(col.find_one({"data":{"$type":"array"}})["data"][Nu[0]].keys())[0]),InlineKeyboardButton("Next Play",callback_data="My_quiz"+str(Nu[0]+1))]]
 	       reply_markup = InlineKeyboardMarkup(keyboard)
 	       query.edit_message_text(text="Quiz Number = "+str(Nu[0]+1)+"/"+str(len(data))+" DATA\n\nSchedule Daily Time : - "+Time+"\n\n"+current_quiz,reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
     else:
@@ -2481,141 +2862,236 @@ def call7(update,context):
 		
 	my()
 
-AA,BB,CC= range(3)
-data=""
+AA,BB,CC,DD= range(4)
+data={}
 @run_async
 def call8(update,context):
-    context.bot.send_message(chat_id=update.message.chat.id,text="title: ...h \n discription: any thing")
+    context.bot.send_message(chat_id=update.message.chat.id,text="title: ...h \n description: any thing")
     return BB
 
 def gfm(update,context):
     global data
-    info = update.message.text
-    context.bot.send_message(chat_id=update.message.chat.id,text="title: ... \n discription: ")
-    data="""function createForm() {
-  
-   // create & name Form  
-   var item = '"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",info))+"""';
-   var ss = SpreadsheetApp.create(item);
-   var form = FormApp.create(item)
-     .setTitle(item)
-     .setIsQuiz(true)
-     .setShuffleQuestions(false)
-     .setDescription("Thanks for attempting Quiz \\nPlease share this Quiz to yours friend or Telegram Group that you Own it.")
-     .setConfirmationMessage("Thanks for Playing Quiz\\n\\nI'd of this Quiz : "+ss.getId()+'\\n\\nhttps://t.me/Polls_Quiz')
-     .setLimitOneResponsePerUser(true);    
-     
-   // Update the form's response destination.
-   form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
-   // single line text field  
-   item = "Your Name";  
-   form.addTextItem()
-     .setTitle(item)
-     .setRequired(true);
-     
-   // radiobuttons
-   Utilities.sleep(60);
-   item = "Handout format";  
-"""
-    
-    
+    info1 = update.message.text
+    context.bot.send_message(chat_id=update.message.chat.id,text="use /page_braker")
+    data[update.message.from_user.id]={}
+    data[update.message.from_user.id]["title"]=reaaa.split("\n",info1)[0]
+    data[update.message.from_user.id]["description"]="\n".join(reaaa.split("\n",info1)[1:])
+    data[update.message.from_user.id]["pack"]=[]
+    data[update.message.from_user.id]["password"]=False
+    #update.message.reply_text(str(data))
     return AA
 
 def gfp(update,context):
     global data
     actual_poll = update.message.poll
     question= actual_poll.question
-    opt=[o.text for o in actual_poll.options]
-    options=[o.text for o in actual_poll.options]
+    opt=[reaaa.sub("  ","  ",o.text) for o in actual_poll.options]
+    #options=[o.text for o in actual_poll.options]
     correct_option_id=actual_poll.correct_option_id
     exp=actual_poll.explanation
     context.bot.send_message(chat_id=update.message.chat.id,text=question)
     context.bot.send_message(chat_id=update.message.chat.id,text=str(exp))
-    op=""
-    for o in range(len(options)):
-    	if o==correct_option_id:
-        	op=op+"""
-        item1.createChoice('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",options[o]))+"""',true),"""
-    	else:
-        	op=op+"""
-        item1.createChoice('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",options[o]))+"""',false),"""
     
-    data=data+"""   var item1 = form.addMultipleChoiceItem();
-   item1.setTitle('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",question))+"""')
-     .setChoices(["""+op+"""
-        ])"""
-    data=data+"""
-     .setPoints(1);
-      
-"""
-    if exp is not None:
-        data=data+"""
-   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]+"\n\n"+exp))+"""').build());
-   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]+"\n\n"+exp))+"""').build());"""
-    if exp is None:
-        data=data+"""
-   item1.setFeedbackForIncorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]))+"""').build());
-   item1.setFeedbackForCorrect(FormApp.createFeedback().setText('"""+reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'","Ans : "+options[correct_option_id]))+"""').build());"""
+    data[update.message.from_user.id]["pack"].append({"que":question,"opt":opt,"exp":exp,"cor":correct_option_id})
+    #context.bot.send_message(chat_id=update.message.chat.id,text="Question added sucessful\n\nyou can edit Question simply send me a text or send a photo with Caption\nyou can edit Explanation simply send me a tag text")
     
-    context.bot.send_message(chat_id=update.message.chat.id,text="send me next Que or /done")
+    
+    
     return AA
 
 def gft(update,context):
 	global data
 	print(update)
 	if update.message.reply_to_message:
-		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
-		x=data
-		for y in reaaa.finditer("item1\.setTitle\(\'.*?\'\)",data):
-			yx=y.span()
-		data=x[0:yx[0]]+'item1.setTitle(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+x[yx[1]:]
+		text = update.message.text
+		data[update.message.from_user.id]["pack"][-1]["que"]=text
 		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Question Updated...")
 		
+	elif bool(reaaa.search("Q",update.message.text[0])):
+		text = update.message.text
+		data[update.message.from_user.id]["pack"][-1]["que"]=text[1:]
+		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Question Updated...")
 	else:
-		tt=""
-		if update.message.forward_from:
-			if update.message.forward_from.username:
-				fname=""
-				if update.message.forward_from.last_name:
-					fname=update.message.forward_from.first_name+" "+update.message.forward_from.last_name
-				else:
-					fname=update.message.forward_from.first_name
-				tt=".addLink(\'https://t.me/"+update.message.forward_from.username+"\',\'Explaintion created by : "+fname+"\')"
-			
-		text = reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","\\'",update.message.text))
-		x=data
-		for y in reaaa.finditer("item1.setFeedbackForIncorrect\(FormApp.createFeedback\(\).setText\(\'.*?\'\)",data):
-			print(y.group())
-			yx=y.span()
-		data=x[0:yx[0]]+'item1.setFeedbackForIncorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+tt+x[yx[1]:]
-		x=data
-		for y in reaaa.finditer("item1\.setFeedbackForCorrect\(FormApp\.createFeedback\(\)\.setText\(\'.*?\'\)",data):
-			yx=y.span()
-		data=x[0:yx[0]]+'item1.setFeedbackForCorrect(FormApp.createFeedback().setText(\''+reaaa.sub("\ {2}","\xa0 ",reaaa.sub("\n",r"\\n",reaaa.sub("(\"|\')","'",text)))+'\')'+tt+x[yx[1]:]#
-		x=data
+		text = update.message.text
+		data[update.message.from_user.id]["pack"][-1]["exp"]=text
+		
 		context.bot.send_message(chat_id=update.message.chat.id,text="Poll Explanation Updated...")
 	
 	return AA
     
-def photo_2(update,context):
-	file_id = update.message.photo[-1]
-	newFile = update.context.bot.getFile(file_id)
-	newFile.download('test.jpg')
+
+
+def a_c(update,context):
+	global data
+	text=reaaa.sub("^.*/|@","",update.message.text)
+	data[update.message.from_user.id]["password"]=text
+	context.bot.send_message(chat_id=update.message.chat.id,text="Channel Added")
+	return AA
 	
-	bot.sendMessage(chat_id=update.message.chat_id, text="download succesfull")
+def a_p(update,context):
+	global data
+	text=reaaa.sub("^.*/|@","",update.message.text)
+	data[update.message.from_user.id]["password"]="Polls_Quiz"
+	context.bot.send_message(chat_id=update.message.chat.id,text="Send Me your channal Username or To set @Polls_Quiz (send Polls)")
+	return DD
+	
+def p_b(update,context):
+	context.bot.send_message(chat_id=update.message.chat.id,text="send me Page\ntitle\ndescription")
+	return CC
+	
 
 def gfph(update,context):
-	context.bot.send_message(chat_id=update.message.chat.id,text=str(update.message))
+	global data
 
-def done(update: Update, _: CallbackContext) -> int:
-    user = update.message.from_user
-    logger.info("User %s canceled the conversation.", user.first_name)
+	data[update.message.from_user.id]["pack"].append({"page_braker":True,"que":update.message.text})
+	update.message.reply_text("Send me a poll first after this do as down blow.\n\n1. Edit last poll Explanation : send TEXT\n2. Edit last poll Question : send Tag TEXT\n3. Insert photo last poll : PHOTO\n\n4. Add new Question: send POLL\n\n5. Create Page braker: /page_braker\n6. Add Password : /add_password\n\n7. Finish Quiz: /done\n\nThis is all settings")
+	return AA
+	
+	
+	
+	
+@run_async
+def done(update,context):
+    xx=1
+    xn=1
     try:
-    	from google_form import main4
-    	main4(data+"\n}")
-    	update.message.reply_text(
-        'https://script.google.com/home/projects/1mWCV-kS59FbRsalsaMRH_TvvAYJLWuAUUInWTzBYFgBYgSEEQhwxd8f1/edit', reply_markup=ReplyKeyboardRemove()
-    )
+    	from quickstart import Drive_OCR
+    	des=data[update.message.from_user.id]["description"]
+    	#update.message.reply_text(str(data[update.message.from_user.id]["title"]))
+    	id2=Drive_OCR({"title":data[update.message.from_user.id]["title"],"document_title": data[update.message.from_user.id]["title"]} ).google_form_create()
+    	context.bot.send_message(chat_id=-1001599944734, text="https://docs.google.com/forms/d/"+id2['formId']+"/edit?usp=drivesdk")
+    	update.message.reply_text("https://docs.google.com/forms/d/"+id2['formId']+"/edit?usp=drivesdk")
+    	context.bot.send_message(chat_id=-1001599944734, text="👆Result Link\n👇Test Link")
+    	update.message.reply_text("👆Result Link\n👇Test Link")
+    	test=id2["responderUri"]
+    	#test_mess=context.bot.send_message(chat_id=-1001539629311, text=test)
+    	update.message.reply_text
+    	id2=id2["formId"]
+    	item=[{
+      "updateFormInfo": {
+        "info": {
+          "description": des,
+        },
+        "updateMask": "description"
+      },}]
+    	Drive_OCR(item).google_form_update(id=id2)
+    	item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"},}]
+    	#item=[{"updateSettings":{"settings":{"quizSettings":{"isQuiz":True}},"updateMask":"quizSettings.isQuiz"},}]
+    	Drive_OCR(item).google_form_update(id=id2)
+    	pack=data[update.message.from_user.id]["pack"]
+    	item=[{"createItem":{"item": {"title": "Your Name","questionItem": {"question": {"required": True,"textQuestion":{"paragraph": False}}}},"location": {"index":0}}}]
+    	Drive_OCR(item).google_form_update(id=id2)
+    	id=id2
+    	time.sleep(120)
+    	for x in range(len(pack)):
+    	    time.sleep(0.5)
+    	    try:
+    	        
+        	    try:
+        	        question=reaaa.split("\n",pack[x]["que"])[0]
+        	        description="\n".join(reaaa.split("\n",pack[x]["que"])[1:])
+        	    except:
+        	        question=pack[x]["que"]
+        	        description=""
+        	    if pack[x].get("page_braker",False):
+        	        try:
+        	            item=( [{"createItem":{"item":{"pageBreakItem":{},"title":reaaa.split("\n",pack[x]["que"])[0] ,"description":"\n".join(reaaa.split("\n",pack[x]["que"])[1:])},"location": {"index":x+1}}}])
+        	        except:
+        	            item=( [{"createItem":{"item":{"pageBreakItem":{},"title":pack[x]["que"] ,"description":""},"location": {"index":xx}}}])
+        	    elif pack[x].get("photo",False):
+        	        option_choice=[{"value":x} for x in pack[x]["opt"]]
+        	        item=[{"createItem":{"item":{"title":"Q. "+str(xn)+" "+question,"description":description,"questionItem":{"question":{"required":False,"grading":{"pointValue":4,"correctAnswers":{"answers":[{"value":pack[x]["opt"][pack[x]["cor"]]}]},"whenRight":{"text":"आप ने सही जवाब दिया।\n\nExplanation : "+str(pack[x]["exp"])},"whenWrong":{"text":"गलत जवाब सही जवाब निम्न है।\n\n"+pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}},"choiceQuestion":{"type":"RADIO","options":option_choice}},"image": {"sourceUri": pack[x]["photo"],"altText": "testing","properties": {"alignment": "CENTER"}}}},"location": {"index":xx}}}]#
+        	        xn+=1
+        	    else:
+        	
+        	        #update.message.reply_text("else playing")
+        	        
+        	        
+        	        option_choice=[{"value":y} for y in pack[x]["opt"]]
+        	        #update.message.reply_text(str(option_choice))
+        	        item=[{"createItem":{"item": {
+        "title": "Q. "+str(xn)+" "+question,"description":description,
+        "questionItem": {
+            "question": {
+                "required": False,
+                "grading": {
+                    "pointValue": 4,
+                    "correctAnswers": {
+                        "answers": [{"value":pack[x]["opt"][pack[x]["cor"]] }]
+                    },
+                    "whenRight": {"text": "आप ने सही जवाब दिया।\n\nExplanation : "+str(pack[x]["exp"])},
+                    "whenWrong": {"text": "गलत जवाब सही जवाब निम्न है।\n\n"+pack[x]["opt"][pack[x]["cor"]]+"✅\n\nExplanation : "+str(pack[x]["exp"])}
+                },
+                "choiceQuestion": {
+                    "type": "RADIO",
+                    "options": option_choice}}}},"location": {"index":xx}}}]
+        	        xn+=1
+    
+    
+        	        
+        	        
+        	    Drive_OCR(item).google_form_update(id=id)
+        	    xx+=1
+    	    except Exception as e :
+    	        update.message.reply_text(str(e))
+    	        update.message.reply_text(str(pack[x]))
+    	        xn-=1
+    	if data[update.message.from_user.id]["password"]:
+    	    chann=data[update.message.from_user.id]["password"]
+    	    chann="https://t.me/Soojhboojh_01bot?start=g_f"+chann+"idID"+id[:10]
+    	    from google_form import main_run,main4
+    	    x="""
+function d() {
+
+   // create & name Form
+   var form = FormApp.openById('"""+id+"""');
+   form.setLimitOneResponsePerUser(true);
+   
+
+   // single line text field
+   item = "Password";
+   form.addTextItem()
+     .setTitle(item)
+     .setRequired(true);
+     
+   
+   
+   var form = FormApp.openById('"""+id+"""');
+   var items = form.getItems();
+   var item = items[items.length-1];
+   
+   form.moveItem(item,1);
+   
+}
+"""
+    	    main4(x)
+    	    main_run('d')
+    	    keyboard=[[InlineKeyboardButton("💬 टेस्ट के लिए क्लिक करे 📝",url=chann)]]
+    	    reply_markup = InlineKeyboardMarkup(keyboard)
+    	    context.bot.send_message(chat_id=update.message.chat.id, text="<b>"+data[update.message.from_user.id]["title"]+"</b>"+"\n"+ data[update.message.from_user.id]["description"],reply_markup=reply_markup,parse_mode=ParseMode.HTML,disable_web_page_preview = True)
+    	else:
+    	    from google_form import main_run,main4
+    	    x="""
+function d() {
+   // create & name Form
+   var form = FormApp.openById('"""+id+"""');
+   form.setLimitOneResponsePerUser(true);
+}"""
+    	    main4(x)
+    	    main_run('d')
+    	    update.message.reply_text(test)
+    	
+    	    
+    	if data[update.message.from_user.id]["password"]:
+    	    update.message.reply_text("Done\n\nNote: Since You add password so @soojhboojh_01bot must be Admin in your @"+data[update.message.from_user.id]["password"])
+    	else:
+    	    update.message.reply_text("Done")
+    	    
+        
+        
+    
+    	
+    	
     except Exception as e :
     	update.message.reply_text(str(e))
     	update.message.reply_text(str(data))
@@ -2625,6 +3101,63 @@ def done(update: Update, _: CallbackContext) -> int:
     
 
     return ConversationHandler.END
+
+def photo_2(update,context):
+	global data
+	#update.message.reply_text("download succesfull")
+	newFile = update.message.photo[-1].get_file()
+	#newFile = update.context.bot.getFile(file_id)
+	newFile.download('test.jpg')
+	update.message.reply_text("download succesfull")
+	photo1=photo_url('test.jpg',0)
+	data[update.message.from_user.id]["pack"][-1]["photo"]=photo1["url"]
+	
+	
+	
+	return AA
+
+
+
+
+
+def allmem(update,context):
+	text=update.message.text
+	text=reaaa.sub("get_m_id ","",text)
+	
+	
+	
+		
+def shraqu(update,context):
+	if update.message.reply_to_message:
+		#update.message.reply_text(str(update))
+		context.bot.forward_message(chat_id=711296045,from_chat_id=update.message.chat_id,message_id=update.message.reply_to_message.message_id)
+		update.message.reply_text("Thanks for sending message.")
+	else:
+		update.message.reply_text("Join @Polls_Quiz for Rajasthan GK Google Form Quiz\n\nउपरोक्त चैनल पर Owner द्वारा बताए गए TOPIC की Quiz ( @Quizbot की ) आप लोगो को देनी होगी ताकि Owner उसकी Google Form Quiz बना सके इसके लिए\n\nआपको पहले @quizbot की क्विज (किसी भी चैनल की) send करनी होगी फिर उसके बाद उस quiz को tag करके /share_quizbot_quiz_to_owner डालनी होगी\n\n याद रहे की हमेशा latest TOPIC वाली क्विज ही शेयर करे और anonymous message share ना करे\n\n🥳🥳🥳धन्यवाद 🙏🙏🙏")
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+
+import cloudinary
+import cloudinary.uploader
+cloud_data=[["kinshu","543958332477526","U9d7hnl2pfF1xqJBO99jLx_rK7w"],["dljnv2yde","247615373857999","BGB-cS126ZrPamvjus1nXrtPLA4"],["dg6kbjizr","228119184734698","tz4inBsjZNSxhm2Rxr_F97MerpA"]]
+def photo_url(x,n):
+	
+	try:
+		cloudinary.config( cloud_name = cloud_data[n][0], api_key = cloud_data[n][1], api_secret = cloud_data[n][2] )
+		return cloudinary.uploader.upload(x)
+		
+	except:
+		photo_url(x,n+1)
+
 
 
 def main() -> None:
@@ -2636,8 +3169,10 @@ def main() -> None:
         entry_points=[CommandHandler('sq1', call8)],
         states={
         #POLLN: [MessageHandler(Filters.regex('^.*$') & ~Filters.command, pollfsend),],
-            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),],
-            BB:[MessageHandler(Filters.regex('^.*$') & ~Filters.command, gfm)]
+            AA: [MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text & ~ Filters.command, gft),CommandHandler('page_braker', p_b),CommandHandler('add_password', a_p),MessageHandler(Filters.photo& ~Filters.command,photo_2)],
+            BB:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfm)],
+            CC:[MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, gfph)],
+            DD:[MessageHandler(Filters.poll, gfp),MessageHandler(Filters.text &~Filters.regex('^xx$') & ~Filters.command, a_c)]
         },
         fallbacks=[CommandHandler('done', done)],
     )
@@ -2765,6 +3300,8 @@ def main() -> None:
     
     updater.dispatcher.add_handler(conv_handler01R1)
     updater.dispatcher.add_handler(conv_handler01R2)
+    updater.dispatcher.add_handler(CommandHandler('share_quizbot_quiz_to_owner', shraqu))
+    updater.dispatcher.add_handler(CommandHandler('get_m_id', allmem))
     updater.dispatcher.add_handler(CommandHandler('add', call4))
     updater.dispatcher.add_handler(CommandHandler('startquiz', call3))
     updater.dispatcher.add_handler(CommandHandler('sq2', call7))
@@ -2795,6 +3332,7 @@ def main() -> None:
     dp.add_handler(CommandHandler('current', current))
     # Start the Bot
     updater.start_polling(clean = True)
+    app.run()
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since

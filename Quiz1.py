@@ -1429,7 +1429,7 @@ def poll(update, context):
     	for x in range(len(text[2:])//2):
     	    num1=1
     	    try:
-	                   mes=check_mess(get_mess_py("@"+text[2*x+2],int(text[2*x+3])).text,[])
+	                   mes=check_mess(get_mess_py("@"+text[0],int(text[1])).text,[])
 	                   #print(str(mes))
 	                   #print(1111111)
 	                   keyboard1=([InlineKeyboardButton(str(count),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str("📜"),url="https://t.me/"+str(text[2*x])+"/"+str(text[2*x+1])+"?comment="+str(1))])

@@ -1911,7 +1911,7 @@ def pollf(update,context):
     
     elif update.message.text.startswith("/start link"):
         
-    	text=reaaa.sub("/start g_f","",update.message.text)
+    	text=reaaa.sub("/start link","",update.message.text)
     	text=reaaa.split("_",text)
     	context.bot.send_message(chat_id=update.message.chat.id, text="https://t.me/"+text[0]+"/"+text[1])
     elif update.message.text.startswith("/start g_f"):

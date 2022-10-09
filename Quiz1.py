@@ -1909,6 +1909,11 @@ def pollf(update,context):
             print(str(e))
         return POLLF
     
+    elif update.message.text.startswith("/start link"):
+        
+    	text=reaaa.sub("/start g_f","",update.message.text)
+    	text=reaaa.split("_",text)
+    	context.bot.send_message(chat_id=update.message.chat.id, text="https://t.me/"+text[0]+"/"+text[1])
     elif update.message.text.startswith("/start g_f"):
     	text=reaaa.sub("/start g_f","",update.message.text)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
@@ -2190,7 +2195,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           
-	           query.answer(url="https://t.me/Soojhboojh_01bot?start=link"+x[3][1:]+"%2F"+x[0],show_alert=False)
+	           query.answer(url="https://t.me/Soojhboojh_01bot?start=link"+x[3][1:]+"_"+x[0],show_alert=False)
 	       else:
 	           query.answer(text="इस मैसेज को टैग ना करे चैनल पर स्थित किसी और मैसेज को टैग करे और लिंक इस मैसेज की डाले\n\nधन्यवाद 🙏 ...",show_alert=True)
 	       if int(x[1])==len(mes):

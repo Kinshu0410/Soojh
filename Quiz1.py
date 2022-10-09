@@ -1455,8 +1455,13 @@ def poll(update, context):
     	print(str(keyboard))
     	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
     	if str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045:
-    	    context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
+    	    try:
+    	        context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
   message_id = int(text[1]),
+  reply_markup=reply_markup)
+    	    except:
+    	        context.bot.send_message(chat_id = "@"+text[0],
+  text="Some information",reply_to_message_id=int(text[1]),
   reply_markup=reply_markup)
     	
     	

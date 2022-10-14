@@ -1407,15 +1407,128 @@ def alarm(context: CallbackContext):
     
     
     
+@app.on_message( my_chat)
+async def newlinecutter(client:Client,message:Mespy):
+	global Temp1,Temp2,my_chat,filpy
+	fm=await app.forward_messages(chat_id=-1001572334666,from_chat_id=message.chat.id,message_ids=message.id)
+	mess=(await app.get_messages(Temp2[message.chat.id][0], Temp2[message.chat.id][1]))
+	file=((await app.download_media(mess.document.file_id)))
+	os.rename(file,mess.document.file_name)
+	f=open(mess.document.file_name, "a")
+	f.write("\n"+str(message.chat.id)+"_PhotoQuiz_"+str(fm.id))
+	f.close()
+	f=open(mess.document.file_name, "r")
+	var1=str(f.read())
+	#print(var1+"\n"+str(message.chat.id)+"_PhotoQuiz_"+str(fm.id))
+	f.close()
+	await app.edit_message_media(Temp2[message.chat.id][0], Temp2[message.chat.id][1],
+    InputMediaDocument(mess.document.file_name))
+	
+	if ~bool(reaaa.search("\n",var1)):
+	    var2=reaaa.split("\n",var1)
+	else:
+	    var2=[var2]
+	print(var2)
+	mem=[]
+	for x in var2:
+	    y=reaaa.split("_",x)
+	    if y[0]=="":
+	        pass
+	    elif y[0] not in mem:
+	        mem.append(y[0])
+	print(mem)
+	for x in mem:
+	    await app.forward_messages(chat_id=int(x),from_chat_id=fm.chat.id,message_ids=fm.id)
+	    reply_markup=ikm([[ikb("Get All",callback_data="all_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1])),ikb("Last 5",callback_data="last5_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1])),ikb("Remove message",callback_data="remove_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1]))]])
+	    await app.send_message(chat_id=int(x),text="Get All : सभी मैसेज प्राप्त करने के लिए\nGet 5 : अंतिम 5 मैसेज (अगर 5 से ज्यादा लोगो ने मैसेज किए हो तब) प्राप्त करने के लिए\nRemove message : इससे आप अब auto मैसेज जो आते है उनको बंद कर पाएंगे और आगे मैसेज नही आयेंगे",reply_markup=reply_markup)
+	Temp1.remove(message.chat.id)
+	Temp2.pop(711296045)
+	print(my_chat.clear())
+	for x in Temp1:
+	    my_chat.add(x)
+	os.remove(mess.document.file_name)
 
+@app.on_message(filters.regex("^/cancel_message$") & ~ filters.chat(-1001534819469) & ~ filters.scheduled & ~ filters.private)#& filters.incoming)
+async def job2_part(client:Client,message:Message):
+    	global my_chat,Temp1,Temp2
+    	Temp1.remove(update.message.chat.id)
+    	Temp2.pop(update.message.chat.id)
+    	my_chat.remove(update.message.chat.id)
 
+@app.on_callback_query()
+async def answer(client, callback_query):
+    data=callback_query.data
+    #print(callback_query)
+    if data.startswith("all_"):
+        data=reaaa.sub("^.*?_","",data)
+        data=reaaa.split("_",data)
+        mess=(await app.get_messages(data[0],int(data[1])))
+        file=((await app.download_media(mess.document.file_id)))
+        f=open(file,"r")
+        text=f.read()
+        print(text)
+        f.close()
+        text=reaaa.split("\n",text)
+        for x in text[1:]:
+            y=reaaa.split("_",x)
+            try:
+                await app.forward_messages(callback_query.from_user.id,y[1],int(y[2]))
+            except:
+                pass
+        os.remove(file)
+    elif data.startswith("last5_"):
+        data=reaaa.sub("^.*?_","",data)
+        data=reaaa.split("_",data)
+        mess=(await app.get_messages(data[0],int(data[1])))
+        file=((await app.download_media(mess.document.file_id)))
+        f=open(file,"r")
+        text=f.read()
+        print(text)
+        f.close()
+        text=reaaa.split("\n",text)
+        for x in text[-5:]:
+            y=reaaa.split("_",x)
+            try:
+                await app.forward_messages(callback_query.from_user.id,y[1],int(y[2]))
+            except:
+                pass
+        os.remove(file)
+    elif data.startswith("remove_"):
+        data=reaaa.sub("^.*?_","",data)
+        data=reaaa.split("_",data)
+        mess=(await app.get_messages(data[0],int(data[1])))
+        file=((await app.download_media(mess.document.file_id)))
+        f=open(file,"r")
+        text=reaaa.sub(str(callback_query.from_user.id),"",f.read())
+        
+        os.rename(file,mess.document.file_name)
+        f=open(mess.document.file_name, "a")
+        os.remove(file)
+        f.write(text)
+        f.close()
+        await app.edit_message_media(data[0],int(data[1]),InputMediaDocument(mess.document.file_name))
+        os.remove(mess.document.file_name)
+        await app.send_message(callback_query.from_user.id,"Done")
+Temp1=[]
+Temp2={}
 import fitz
 #@restrictedD
 @run_async
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}https://t.me/.*?/\d{1,}){1,}",update.message.text):
+    if update.message.text.startswith("/start comm"):
+    	global my_chat,Temp1,Temp2
+    	text=reaaa.sub("/start comm","",update.message.text)
+    	text=reaaa.split("_",text)
+    	text[1]=int(text[1])
+    	Temp1.append(update.message.chat.id)
+    	Temp2[update.message.chat.id]=text
+    	
+    	my_chat.add(update.message.chat.id)
+    	context.bot.send_message(chat_id=update.message.chat.id,text="आप आपका message दे सकते है। याद रहे की message edit का option नही है अतः एक बार पुनः रेड करके डाले आपका मैसेज 😊\nआपके द्वारा डाला गया मैसेज ऑटो ही सबके पास पहुंच जाएगा\n अगर आप मैसेज नही देना चाहते हो तो /cancel_message करे \n\n            धन्यवाद🙏🙏")
+    
+    elif reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}https://t.me/.*?/\d{1,}){1,}",update.message.text):
     	text=reaaa.sub("https://t.me/","",update.message.text)
     	text=reaaa.split(":{1,}|\n{1,}|/",text)
     	keyboard=[]
@@ -1436,7 +1549,7 @@ def poll(update, context):
 	                   mes=check_mess(get_mess_py("@"+text[2*x+2],int(text[2*x+3])).text,[])
 	                   #print(str(mes))
 	                   #print(1111111)
-	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str(0),url="https://telegram.me/Soojhboojh_01bot?start=comm"+str(mess.chat.id)+"_"+str(mess.id))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str(0),url="https://telegram.me/Soojhboojh_01bot?start=comm"+str(mess.chat.username)+"_"+str(mess.id))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]
@@ -2123,6 +2236,8 @@ def pdfc(update,context):
 from pyrogram import Client, idle
 from pyrogram.types import Message as Mespy
 from pyrogram.types import InputMediaDocument
+from pyrogram.types import InlineKeyboardMarkup as ikm
+from pyrogram.types import InlineKeyboardButton as ikb
 from pyrogram import filters as filpy
 app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7PWIIqkl6-0j_96Gq6apAJ1vRFPUQrWwbcHoNLj0ouYgn5yCAvkT-BW8iE-1lYomM1VwAzEKHNuUVqTYrFDpCsAZE2ko1DudXnRUWz1SBkxk8f6JzrDS57sBmx2oEgUBXfiyGjJXJYn2KC-TsCao4Cbt-x6pE3LWwPprjAqsN6LHY2y2WA4QnQVagTclIrp5_Cc4FZbRnyNcL_MwQ-7hLF_5psbi4c1hXOYXYCnjx3KQ0Q--f0ISiGSt8h3xRu39RozHP1ANrB3pz4e_Unmoe8ad7hmhzwuil8uVqaV1qspejkWDo_3cyyadzV2QAAAAAqZYQtAA",
 bot_token="1431722823:AAHk_VOD0WgepQ1us7eucQm3UQRYacHzmQM",

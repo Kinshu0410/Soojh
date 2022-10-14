@@ -1549,7 +1549,7 @@ def poll(update, context):
 	                   mes=check_mess(get_mess_py("@"+text[2*x+2],int(text[2*x+3])).text,[])
 	                   #print(str(mes))
 	                   #print(1111111)
-	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str(0),url="https://telegram.me/Soojhboojh_01bot?start=comm"+str(mess.chat.username)+"_"+str(mess.id))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str(0)+ " Comments",url="https://telegram.me/Soojhboojh_01bot?start=comm"+str(mess.chat.username)+"_"+str(mess.id))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]

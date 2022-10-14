@@ -1424,10 +1424,12 @@ def poll(update, context):
     	filen=text[0]+"_"+str(text[1])+".txt"
     	try:
     	    
-    	    pass
+    	    f=open(filen, "a")
+    	    f.write(text[0]+"_"+str(text[1]))
+    	    f.close()
     	except Exception as p:
     	    print(str(p))
-    	mess= app.send_document(-1001572334666, open(filen, "a"))
+    	mess= app.send_document(-1001572334666, open(filen, "r"))
     	for x in range(len(text[2:])//2):
     	    num1=1
     	    try:

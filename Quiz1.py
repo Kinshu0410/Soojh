@@ -1417,9 +1417,10 @@ def alarm(context: CallbackContext):
     
     
     
-    
+Temp1=[]
+Temp2={}
 my_chat=filpy.chat(chats=Temp1)   
-@app.on_message( my_chat)
+@app.on_message(my_chat)
 async def newlinecutter(client:Client,message:Mespy):
 	global Temp1,Temp2,my_chat,filpy
 	fm=await app.forward_messages(chat_id=-1001572334666,from_chat_id=message.chat.id,message_ids=message.id)
@@ -1521,8 +1522,7 @@ async def answer(client, callback_query):
         await app.edit_message_media(data[0],int(data[1]),InputMediaDocument(mess.document.file_name))
         os.remove(mess.document.file_name)
         await app.send_message(callback_query.from_user.id,"Done")
-Temp1=[]
-Temp2={}
+
 import fitz
 #@restrictedD
 @run_async

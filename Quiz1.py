@@ -1424,7 +1424,7 @@ def poll(update, context):
     	filen=text[0]+"_"+str(text[1])+".txt"
     	try:
     	    
-    	    f=open(filen, "a")
+    	    f=open(filen, "w")
     	    f.write(str(update.message.chat.id)+"_"+text[0]+"_"+str(text[1]))
     	    f.close()
     	except Exception as p:

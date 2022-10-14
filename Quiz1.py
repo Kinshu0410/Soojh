@@ -1462,7 +1462,7 @@ async def newlinecutter(client:Client,message:Mespy):
 	os.remove(mess.document.file_name)
 
 @app.on_message(filpy.regex("^/cancel_message$"))#& filpy.incoming)
-async def job2_part(client:Client,message:Message):
+async def job2_part(client:Client,message:Mespy):
     	global my_chat,Temp1,Temp2
     	Temp1.remove(update.message.chat.id)
     	Temp2.pop(update.message.chat.id)

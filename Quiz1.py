@@ -1452,8 +1452,8 @@ async def newlinecutter(client:Client,message:Mespy):
 	print(mem)
 	for x in mem:
 	    await app.forward_messages(chat_id=int(x),from_chat_id=fm.chat.id,message_ids=fm.id)
-	    reply_markup=ikm([[ikb("Get All",callback_data="all_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1])),ikb("Last 5",callback_data="last5_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1])),ikb("Remove message",callback_data="remove_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1]))]])
-	    await app.send_message(chat_id=int(x),text="Get All : सभी मैसेज प्राप्त करने के लिए\nGet 5 : अंतिम 5 मैसेज (अगर 5 से ज्यादा लोगो ने मैसेज किए हो तब) प्राप्त करने के लिए\nRemove message : इससे आप अब auto मैसेज जो आते है उनको बंद कर पाएंगे और आगे मैसेज नही आयेंगे",reply_markup=reply_markup)
+	    reply_markup=ikm([[ikb("Get All",callback_data="all_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1])),ikb("Last 5",callback_data="last5_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1])),ikb("Unsubscribe",callback_data="remove_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1]))]])
+	    await app.send_message(chat_id=int(x),text="Get All : सभी मैसेज प्राप्त करने के लिए\nGet 5 : अंतिम 5 मैसेज (अगर 5 से ज्यादा लोगो ने मैसेज किए हो तब) प्राप्त करने के लिए\nUnsubscribe : इससे आप अब auto मैसेज जो आते है उनको बंद कर पाएंगे और आगे मैसेज नही आयेंगे",reply_markup=reply_markup)
 	Temp1.remove(message.chat.id)
 	Temp2.pop(711296045)
 	print(my_chat.clear())

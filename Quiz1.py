@@ -1418,7 +1418,7 @@ def alarm(context: CallbackContext):
     
     
     
- my_chat=filpy.chat(chats=Temp1)   
+my_chat=filpy.chat(chats=Temp1)   
 @app.on_message( my_chat)
 async def newlinecutter(client:Client,message:Mespy):
 	global Temp1,Temp2,my_chat,filpy

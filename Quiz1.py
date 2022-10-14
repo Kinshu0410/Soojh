@@ -1429,7 +1429,7 @@ def poll(update, context):
     	    f.close()
     	except Exception as p:
     	    print(str(p))
-    	mess= app.send_document(-1001572334666, open(filen, "r"))
+    	mess= app.send_document(-1001572334666, open(filen, "rb"))
     	for x in range(len(text[2:])//2):
     	    num1=1
     	    try:

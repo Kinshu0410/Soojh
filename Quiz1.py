@@ -1425,7 +1425,7 @@ def poll(update, context):
     	try:
     	    
     	    f=open(filen, "a")
-    	    f.write(text[0]+"_"+str(text[1]))
+    	    f.write(str(update.message.chat.id)+"_"+text[0]+"_"+str(text[1]))
     	    f.close()
     	except Exception as p:
     	    print(str(p))

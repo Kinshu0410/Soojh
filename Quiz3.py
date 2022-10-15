@@ -1461,7 +1461,8 @@ async def newlinecutter(client:Client,message:Mespy):
 	for x in Temp1:
 	    my_chat.add(x)
 	os.remove(mess.document.file_name)
-	mess=(await app.get_messages(data[1], int(data[2]))).reply_markup.inline_keyboard
+	mess=(await app.get_messages(data[1], int(data[2])))
+	mess=mess.reply_markup.inline_keyboard
 	mess[-1][0].text=str(len(reaaa.split("\n",var1))-1)+" Comments"
 	await app.edit_message_reply_markup(data[1], int(data[2]),mess)
 	

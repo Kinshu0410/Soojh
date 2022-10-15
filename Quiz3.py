@@ -1428,11 +1428,11 @@ async def newlinecutter(client:Client,message:Mespy):
 	file=((await app.download_media(mess.document.file_id)))
 	os.rename(file,mess.document.file_name)
 	f=open(mess.document.file_name, "a")
-	f.write("\n"+str(message.chat.id)+"_PhotoQuiz_"+str(fm.id))
+	f.write("\n"+str(message.chat.id)+"/PhotoQuiz/"+str(fm.id))
 	f.close()
 	f=open(mess.document.file_name, "r")
 	var1=str(f.read())
-	data=reaaa.split("_",reaaa.sub("\n.*?$","",var1))
+	data=reaaa.split("/",reaaa.sub("\n.*?$","",var1))
 	
 	f.close()
 	await app.edit_message_media(Temp2[message.chat.id][0], Temp2[message.chat.id][1],
@@ -1445,7 +1445,7 @@ async def newlinecutter(client:Client,message:Mespy):
 	print(var2)
 	mem=[]
 	for x in var2:
-	    y=reaaa.split("_",x)
+	    y=reaaa.split("/",x)
 	    if y[0]=="":
 	        pass
 	    elif y[0] not in mem:
@@ -1489,7 +1489,7 @@ async def answer(client, callback_query):
         f.close()
         text=reaaa.split("\n",text)
         for x in text[1:]:
-            y=reaaa.split("_",x)
+            y=reaaa.split("/",x)
             try:
                 await app.forward_messages(callback_query.from_user.id,y[1],int(y[2]))
             except:
@@ -1506,7 +1506,7 @@ async def answer(client, callback_query):
         f.close()
         text=reaaa.split("\n",text)
         for x in text[-5:]:
-            y=reaaa.split("_",x)
+            y=reaaa.split("/",x)
             try:
                 await app.forward_messages(callback_query.from_user.id,y[1],int(y[2]))
             except:
@@ -1543,7 +1543,7 @@ def poll(update, context):
     	try:
     	    
     	    f=open(filen, "w")
-    	    f.write(str(update.message.chat.id)+"_"+text[0]+"_"+str(text[1]))
+    	    f.write(str(update.message.chat.id)+"/"+text[0]+"/"+str(text[1]))
     	    f.close()
     	except Exception as p:
     	    print(str(p))

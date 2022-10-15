@@ -2332,8 +2332,8 @@ def button(update: Update, context: CallbackContext) -> None:
 	       text1=reaaa.sub(" .*?$","",query.message.reply_markup.inline_keyboard[-1][0].text)
 	       text=reaaa.split("/",reaaa.sub("https\://telegram\.me/|\?comment\=1","",query.message.reply_markup.inline_keyboard[-1][0].url))
 	       #m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
-	       n =str( app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1])))
-	       if int(x[1])==len(mes) & text1==n:
+	       n =str(app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1])))
+	       if (int(x[1])==len(mes) )& (text1==n):
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           
@@ -2407,7 +2407,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       text=reaaa.split("/",reaaa.sub("https\://telegram\.me/|\?comment\=1","",query.message.reply_markup.inline_keyboard[-1][0].url))
 	       #m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
 	       n =str( app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1])))
-	       if int(x[1])==len(mes) & text1==n:
+	       if (int(x[1])==len(mes) )& (text1==n):
 	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
 	           
 	       else:

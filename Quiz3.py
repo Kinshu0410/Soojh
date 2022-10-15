@@ -2033,11 +2033,27 @@ def pollf(update,context):
             print(str(e))
         return POLLF
     
+    
+    
+    
+    
     elif update.message.text.startswith("/start link"):
         
     	text=reaaa.sub("/start link","",update.message.text)
     	text=reaaa.split("_",text)
     	context.bot.send_message(chat_id=update.message.chat.id, text="https://t.me/"+text[0]+"/"+text[1])
+    elif update.message.text.startswith("/start comm"):
+    	global my_chat,Temp1,Temp2
+    	text=reaaa.sub("/start comm","",update.message.text)
+    	text=reaaa.split("_",text)
+    	text[1]=int(text[1])
+    	Temp1.append(update.message.chat.id)
+    	Temp2[update.message.chat.id]=text
+    	
+    	my_chat.add(update.message.chat.id)
+    	context.bot.send_message(chat_id=update.message.chat.id,text="आप आपका message दे सकते है। याद रहे की message edit का option नही है अतः एक बार पुनः रेड करके डाले आपका मैसेज 😊\nआपके द्वारा डाला गया मैसेज ऑटो ही सबके पास पहुंच जाएगा\n अगर आप मैसेज नही देना चाहते हो तो /cancel_message करे \n\n            धन्यवाद🙏🙏")
+    
+    
     elif update.message.text.startswith("/start g_f"):
     	text=reaaa.sub("/start g_f","",update.message.text)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))

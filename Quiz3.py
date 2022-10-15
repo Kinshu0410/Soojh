@@ -1464,7 +1464,7 @@ async def newlinecutter(client:Client,message:Mespy):
 	mess=(await app.get_messages(data[1], int(data[2])))
 	mess=mess.reply_markup.inline_keyboard
 	mess[-1][0].text=str(len(reaaa.split("\n",var1))-1)+" Comments"
-	await app.edit_message_reply_markup(data[1], int(data[2]),mess)
+	await app.edit_message_reply_markup(data[1], int(data[2]),ikm(mess))
 	
 
 @app.on_message(filpy.regex("^/cancel_message$"))#& filpy.incoming)

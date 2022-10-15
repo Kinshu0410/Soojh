@@ -1432,7 +1432,7 @@ async def newlinecutter(client:Client,message:Mespy):
 	f.close()
 	f=open(mess.document.file_name, "r")
 	var1=str(f.read())
-	data=reaaa.split("/",reaaa.sub("\n.*?$","",var1))
+	data=reaaa.split("/",reaaa.split("\n",var1)[0])
 	
 	f.close()
 	await app.edit_message_media(Temp2[message.chat.id][0], Temp2[message.chat.id][1],

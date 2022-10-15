@@ -1461,7 +1461,10 @@ async def newlinecutter(client:Client,message:Mespy):
 	for x in Temp1:
 	    my_chat.add(x)
 	os.remove(mess.document.file_name)
-	mess=(await app.get_messages(data[1], int(data[2])))
+	mess=(await app.get_messages(data[1], int(data[2]))).reply_markup.inline_keyboard
+	mess[-1][0].text=str(len(reaaa.split("\n",var1))-1)+" Comments"
+	await app.edit_message_reply_markup(data[1], int(data[2]),mess)
+	
 
 @app.on_message(filpy.regex("^/cancel_message$"))#& filpy.incoming)
 async def job2_part(client:Client,message:Mespy):
@@ -1550,7 +1553,7 @@ def poll(update, context):
 	                   mes=check_mess(get_mess_py("@"+text[2*x+2],int(text[2*x+3])).text,[])
 	                   #print(str(mes))
 	                   #print(1111111)
-	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str(0)+ " Comments",url="https://telegram.me/Soojhboojh_01bot?start=comm"+str(mess.chat.username)+"_"+str(mess.id))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]
@@ -1574,9 +1577,9 @@ def poll(update, context):
 	                   print(str(p))
     	    
     	
-    	
+    	keyboard.append([InlineKeyboardButton(str(0)+ " Comments",url="https://telegram.me/Soojhboojh_01bot?start=comm"+str(mess.chat.username)+"_"+str(mess.id))])
     	reply_markup = InlineKeyboardMarkup(keyboard)
-    	print(str(keyboard))
+    	#print(str(keyboard))
     	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
     	if str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045:
     	    try:
@@ -2375,7 +2378,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	               except Exception as p:
 	                   
 	                   print(str(keyboard))
-	           
+	           keyboard.append([query.message.reply_markup.inline_keyboard[-1][0]])
 	           reply_markup = InlineKeyboardMarkup(keyboard)
 	           if keyboard==[]:
 	               reply_markup=None
@@ -2433,6 +2436,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	               except Exception as p:
 	                   
 	                   print(str(keyboard))
+	           keyboard.append([query.message.reply_markup.inline_keyboard[-1][0]])
 	           reply_markup = InlineKeyboardMarkup(keyboard)
 	           if keyboard==[]:
 	               reply_markup=None

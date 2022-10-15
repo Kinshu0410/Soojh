@@ -29,8 +29,8 @@ from pyrogram.types import InputMediaDocument
 from pyrogram.types import InlineKeyboardMarkup as ikm
 from pyrogram.types import InlineKeyboardButton as ikb
 from pyrogram import filters as filpy
-app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7PWIIqkl6-0j_96Gq6apAJ1vRFPUQrWwbcHoNLj0ouYgn5yCAvkT-BW8iE-1lYomM1VwAzEKHNuUVqTYrFDpCsAZE2ko1DudXnRUWz1SBkxk8f6JzrDS57sBmx2oEgUBXfiyGjJXJYn2KC-TsCao4Cbt-x6pE3LWwPprjAqsN6LHY2y2WA4QnQVagTclIrp5_Cc4FZbRnyNcL_MwQ-7hLF_5psbi4c1hXOYXYCnjx3KQ0Q--f0ISiGSt8h3xRu39RozHP1ANrB3pz4e_Unmoe8ad7hmhzwuil8uVqaV1qspejkWDo_3cyyadzV2QAAAAAqZYQtAA",
-bot_token="1431722823:AAHk_VOD0WgepQ1us7eucQm3UQRYacHzmQM",
+app = Client("my_live_bot",session_string="BQDQx-MAONMIQ0BQgThOdS9tUOlNwp3wCLBTMfKWz5TKI6cCLY7mfNzmC0YcyU9pUayephCAehhzRHQmjZhekizXGxvIR6QthgFcz2ufvrfhsrM4yF2S06DMTX5wBcpwvnfjCMpM_DzF_LMpDG3It3tl16goXcuAIEk7kr9hwLbY672San-K_uWrMSiFcp-KoV-IuL6xjUWQJGSFByzpMtDLKhpGHL3vgP05iJDlFNXuGmY9UnbtSXKtS2ltEi7NevruyAXhuy8tl9K3By_nNe0WIHCvsXaRC0y91cf0-Ffz3cDC1aGKSPqalrNHHCU8tqnu8ZaqYyeNIeqllughH8T4zXJ28wAAAAAqZYQtAA",
+#bot_token="1431722823:AAHk_VOD0WgepQ1us7eucQm3UQRYacHzmQM",
 api_id="13682659",
 api_hash="b984d240c5258407ea911f042c9d75f6")
 
@@ -1537,17 +1537,16 @@ def poll(update, context):
     if reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}https://t.me/.*?/\d{1,}){1,}",update.message.text):
     	text=reaaa.sub("https://t.me/","",update.message.text)
     	text=reaaa.split(":{1,}|\n{1,}|/",text)
+    	try:
+    	        context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
+  message_id = int(text[1]),
+  reply_markup=None)
+    	except:
+    	        pass
     	keyboard=[]
     	num=1
-    	filen=text[0]+"_"+str(text[1])+".txt"
-    	try:
-    	    
-    	    f=open(filen, "w")
-    	    f.write(str(update.message.chat.id)+"/"+text[0]+"/"+str(text[1]))
-    	    f.close()
-    	except Exception as p:
-    	    print(str(p))
-    	mess= app.send_document(-1001572334666, open(filen, "rb"))
+    	
+    	
     	for x in range(len(text[2:])//2):
     	    num1=1
     	    try:
@@ -1577,8 +1576,9 @@ def poll(update, context):
 	                   
 	                   print(str(p))
     	    
-    	
-    	keyboard.append([InlineKeyboardButton(str(0)+ " Comments",url="https://telegram.me/Soojhboojh_01bot?start=comm"+str(mess.chat.username)+"_"+str(mess.id))])
+    	m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
+    	n = app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1]))
+    	keyboard.append([InlineKeyboardButton(str(n)+ " Comments",url="https://telegram.me/"+m.chat.username+"/"+str(m.id)+"?comment=1")])
     	reply_markup = InlineKeyboardMarkup(keyboard)
     	#print(str(keyboard))
     	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
@@ -2329,7 +2329,11 @@ def button(update: Update, context: CallbackContext) -> None:
 	       except:
 	           mes=[]
 	       mem=context.bot.get_chat_member(x[3],query.from_user.id)
-	       if int(x[1])==len(mes):
+	       text1=reaaa.sub(" .*?$","",query.message.reply_markup.inline_keyboard[-1][0].text)
+	       text=reaaa.split("/",reaaa.sub("https\://telegram\.me/|\?comment\=1","",query.message.reply_markup.inline_keyboard[-1][0].url))
+	       #m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
+	       n =str( app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1])))
+	       if int(x[1])==len(mes) & text1==n:
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           
@@ -2379,6 +2383,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	               except Exception as p:
 	                   
 	                   print(str(keyboard))
+	           query.message.reply_markup.inline_keyboard[-1][0].text=str(n)+" Comments"
 	           keyboard.append([query.message.reply_markup.inline_keyboard[-1][0]])
 	           reply_markup = InlineKeyboardMarkup(keyboard)
 	           if keyboard==[]:
@@ -2398,10 +2403,15 @@ def button(update: Update, context: CallbackContext) -> None:
 	           print (str(mes))
 	       except:
 	           mes=[]
-	       if int(x[1])==len(mes):
+	       text1=reaaa.sub(" .*?$","",query.message.reply_markup.inline_keyboard[-1][0].text)
+	       text=reaaa.split("/",reaaa.sub("https\://telegram\.me/|\?comment\=1","",query.message.reply_markup.inline_keyboard[-1][0].url))
+	       #m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
+	       n =str( app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1])))
+	       if int(x[1])==len(mes) & text1==n:
 	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
 	           
 	       else:
+	           query.answer(text="Some buttons Update please press 1 more time", show_alert=True)
 	           keyboard=[]
 	           zz=""
 	           bd=[]
@@ -2437,6 +2447,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	               except Exception as p:
 	                   
 	                   print(str(keyboard))
+	           query.message.reply_markup.inline_keyboard[-1][0].text=str(n)+" Comments"
 	           keyboard.append([query.message.reply_markup.inline_keyboard[-1][0]])
 	           reply_markup = InlineKeyboardMarkup(keyboard)
 	           if keyboard==[]:

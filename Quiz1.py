@@ -1432,7 +1432,8 @@ async def newlinecutter(client:Client,message:Mespy):
 	f.close()
 	f=open(mess.document.file_name, "r")
 	var1=str(f.read())
-	#print(var1+"\n"+str(message.chat.id)+"_PhotoQuiz_"+str(fm.id))
+	data=reaaa.split("_",reaaa.sub("\n.*?$","",var1))
+	
 	f.close()
 	await app.edit_message_media(Temp2[message.chat.id][0], Temp2[message.chat.id][1],
     InputMediaDocument(mess.document.file_name))
@@ -1460,6 +1461,9 @@ async def newlinecutter(client:Client,message:Mespy):
 	for x in Temp1:
 	    my_chat.add(x)
 	os.remove(mess.document.file_name)
+	mess=(await app.get_messages(data[1], int(data[2])))
+	
+	
 
 @app.on_message(filpy.regex("^/cancel_message$"))#& filpy.incoming)
 async def job2_part(client:Client,message:Mespy):

@@ -22,6 +22,18 @@ Send /start to initiate the conversation.
 Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
+
+from pyrogram import Client, idle
+from pyrogram.types import Message as Mespy
+from pyrogram.types import InputMediaDocument
+from pyrogram.types import InlineKeyboardMarkup as ikm
+from pyrogram.types import InlineKeyboardButton as ikb
+from pyrogram import filters as filpy
+app = Client("my_live_bot",#session_string="BQDQx-MAAcKa6bmK3-vwhmKd0v3v4-SXoQ7PWIIqkl6-0j_96Gq6apAJ1vRFPUQrWwbcHoNLj0ouYgn5yCAvkT-BW8iE-1lYomM1VwAzEKHNuUVqTYrFDpCsAZE2ko1DudXnRUWz1SBkxk8f6JzrDS57sBmx2oEgUBXfiyGjJXJYn2KC-TsCao4Cbt-x6pE3LWwPprjAqsN6LHY2y2WA4QnQVagTclIrp5_Cc4FZbRnyNcL_MwQ-7hLF_5psbi4c1hXOYXYCnjx3KQ0Q--f0ISiGSt8h3xRu39RozHP1ANrB3pz4e_Unmoe8ad7hmhzwuil8uVqaV1qspejkWDo_3cyyadzV2QAAAAAqZYQtAA",
+bot_token="1431722823:AAHk_VOD0WgepQ1us7eucQm3UQRYacHzmQM",
+api_id="13682659",
+api_hash="b984d240c5258407ea911f042c9d75f6")
+
 import time
 import re as reaaa
 import json
@@ -1157,7 +1169,7 @@ for x in ali:
 ali=zzz
 zzz=None
 Man=[1468125551,711296045,1001183009,776365745,1527108544,2020953330,1202919365,1309577346,875026044,5094761615,786181993,1341437687,1353892576,5028705992,781968811,2111134423,1952288751,5259697190,644570319,1763193816]
-Group=[1431722823,-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,-1001368097755,-1001222891254,-1001164423875,-1001487436278,-1001428838285,-1001664461759,-1001664461759,-1001415742406,-1001725784523,-1001718523021,-1001459269318,-1001796946839]
+Group=[1468125551,-1001517843177,-1001183315065,-1001293483771,-1001362563196,-1001307100573,-1001187254179,-1001368097755,-1001222891254,-1001164423875,-1001487436278,-1001428838285,-1001664461759,-1001664461759,-1001415742406,-1001725784523,-1001718523021,-1001459269318,-1001796946839]
 @run_async
 @restricted
 def ghppp10(update,context):
@@ -1407,7 +1419,110 @@ def alarm(context: CallbackContext):
     
     
     
+Temp1=[]
+Temp2={}
+my_chat=filpy.chat(chats=Temp1)   
+@app.on_message(my_chat &  filpy.incoming)
+async def newlinecutter(client:Client,message:Mespy):
+	global Temp1,Temp2,my_chat,filpy
+	fm=await app.forward_messages(chat_id=-1001572334666,from_chat_id=message.chat.id,message_ids=message.id)
+	mess=(await app.get_messages(Temp2[message.chat.id][0], Temp2[message.chat.id][1]))
+	file=((await app.download_media(mess.document.file_id)))
+	os.rename(file,mess.document.file_name)
+	f=open(mess.document.file_name, "a")
+	f.write("\n"+str(message.chat.id)+"_PhotoQuiz_"+str(fm.id))
+	f.close()
+	f=open(mess.document.file_name, "r")
+	var1=str(f.read())
+	#print(var1+"\n"+str(message.chat.id)+"_PhotoQuiz_"+str(fm.id))
+	f.close()
+	await app.edit_message_media(Temp2[message.chat.id][0], Temp2[message.chat.id][1],
+    InputMediaDocument(mess.document.file_name))
+	
+	if ~bool(reaaa.search("\n",var1)):
+	    var2=reaaa.split("\n",var1)
+	else:
+	    var2=[var2]
+	print(var2)
+	mem=[]
+	for x in var2:
+	    y=reaaa.split("_",x)
+	    if y[0]=="":
+	        pass
+	    elif y[0] not in mem:
+	        mem.append(y[0])
+	print(mem)
+	for x in mem:
+	    await app.forward_messages(chat_id=int(x),from_chat_id=fm.chat.id,message_ids=fm.id)
+	    reply_markup=ikm([[ikb("Get All",callback_data="all_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1])),ikb("Last 5",callback_data="last5_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1])),ikb("Unsubscribe",callback_data="remove_"+Temp2[message.chat.id][0]+"_"+str(Temp2[message.chat.id][1]))]])
+	    await app.send_message(chat_id=int(x),text="Get All : सभी मैसेज प्राप्त करने के लिए\nGet 5 : अंतिम 5 मैसेज (अगर 5 से ज्यादा लोगो ने मैसेज किए हो तब) प्राप्त करने के लिए\nUnsubscribe : इससे आप अब auto मैसेज जो आते है उनको बंद कर पाएंगे और आगे मैसेज नही आयेंगे",reply_markup=reply_markup)
+	Temp1.remove(message.chat.id)
+	Temp2.pop(711296045)
+	print(my_chat.clear())
+	for x in Temp1:
+	    my_chat.add(x)
+	os.remove(mess.document.file_name)
 
+@app.on_message(filpy.regex("^/cancel_message$"))#& filpy.incoming)
+async def job2_part(client:Client,message:Mespy):
+    	global my_chat,Temp1,Temp2
+    	Temp1.remove(update.message.chat.id)
+    	Temp2.pop(update.message.chat.id)
+    	my_chat.remove(update.message.chat.id)
+
+@app.on_callback_query()
+async def answer(client, callback_query):
+    data=callback_query.data
+    #print(callback_query)
+    if data.startswith("all_"):
+        data=reaaa.sub("^.*?_","",data)
+        data=reaaa.split("_",data)
+        mess=(await app.get_messages(data[0],int(data[1])))
+        file=((await app.download_media(mess.document.file_id)))
+        f=open(file,"r")
+        text=f.read()
+        print(text)
+        f.close()
+        text=reaaa.split("\n",text)
+        for x in text[1:]:
+            y=reaaa.split("_",x)
+            try:
+                await app.forward_messages(callback_query.from_user.id,y[1],int(y[2]))
+            except:
+                pass
+        os.remove(file)
+    elif data.startswith("last5_"):
+        data=reaaa.sub("^.*?_","",data)
+        data=reaaa.split("_",data)
+        mess=(await app.get_messages(data[0],int(data[1])))
+        file=((await app.download_media(mess.document.file_id)))
+        f=open(file,"r")
+        text=f.read()
+        print(text)
+        f.close()
+        text=reaaa.split("\n",text)
+        for x in text[-5:]:
+            y=reaaa.split("_",x)
+            try:
+                await app.forward_messages(callback_query.from_user.id,y[1],int(y[2]))
+            except:
+                pass
+        os.remove(file)
+    elif data.startswith("remove_"):
+        data=reaaa.sub("^.*?_","",data)
+        data=reaaa.split("_",data)
+        mess=(await app.get_messages(data[0],int(data[1])))
+        file=((await app.download_media(mess.document.file_id)))
+        os.rename(file,mess.document.file_name)
+        f=open(mess.document.file_name,"r")
+        text=reaaa.sub(str(callback_query.from_user.id),"",f.read())
+        f.close()
+        f=open(mess.document.file_name, "w")
+        f.write(text)
+        f.close()
+        await app.edit_message_media(data[0],int(data[1]),InputMediaDocument(mess.document.file_name))
+        os.remove(mess.document.file_name)
+        await app.send_message(callback_query.from_user.id,"Done")
 
 import fitz
 #@restrictedD
@@ -1420,20 +1535,22 @@ def poll(update, context):
     	text=reaaa.split(":{1,}|\n{1,}|/",text)
     	keyboard=[]
     	num=1
-    	#count=0
-    	
+    	filen=text[0]+"_"+str(text[1])+".txt"
     	try:
-    	    print("@"+text[0]+str(text[1]))
-    	    #count=app.get_discussion_replies_count("@"+text[0],int(text[1]))
+    	    
+    	    f=open(filen, "w")
+    	    f.write(str(update.message.chat.id)+"_"+text[0]+"_"+str(text[1]))
+    	    f.close()
     	except Exception as p:
     	    print(str(p))
+    	mess= app.send_document(-1001572334666, open(filen, "rb"))
     	for x in range(len(text[2:])//2):
     	    num1=1
     	    try:
 	                   mes=check_mess(get_mess_py("@"+text[2*x+2],int(text[2*x+3])).text,[])
 	                   #print(str(mes))
 	                   #print(1111111)
-	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str("📜"),url="https://t.me/"+str(text[0])+"/"+str(text[1])+"?comment="+str(1))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(0)+"_"+str(text[2*x+2])),InlineKeyboardButton(str(0)+ " Comments",url="https://telegram.me/Soojhboojh_01bot?start=comm"+str(mess.chat.username)+"_"+str(mess.id))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]
@@ -1449,8 +1566,7 @@ def poll(update, context):
 	                       keyboard2.append(InlineKeyboardButton(str(num),callback_data="Link"+str(text[2*x+3])+"_"+str(len(mes))+"_"+str(num1)+"_"+str(text[2*x+2])))
 	                       num+=1
 	                       num1+=1
-	                   keyboard.append(keyboard2)
-	                   keyboard.append(keyboard1)
+	                   keyboard.append(keyboard2+keyboard1)
 	                   print(str(keyboard))
 	                   #keyboard.append(keyboard3)
     	    except Exception as p:
@@ -1463,8 +1579,13 @@ def poll(update, context):
     	print(str(keyboard))
     	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
     	if str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045:
-    	    context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
+    	    try:
+    	        context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
   message_id = int(text[1]),
+  reply_markup=reply_markup)
+    	    except:
+    	        context.bot.send_message(chat_id = "@"+text[0],
+  text="Some information",reply_to_message_id=int(text[1]),
   reply_markup=reply_markup)
     	
     	
@@ -1912,6 +2033,11 @@ def pollf(update,context):
             print(str(e))
         return POLLF
     
+    elif update.message.text.startswith("/start link"):
+        
+    	text=reaaa.sub("/start link","",update.message.text)
+    	text=reaaa.split("_",text)
+    	context.bot.send_message(chat_id=update.message.chat.id, text="https://t.me/"+text[0]+"/"+text[1])
     elif update.message.text.startswith("/start g_f"):
     	text=reaaa.sub("/start g_f","",update.message.text)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
@@ -2117,14 +2243,7 @@ def pdfc(update,context):
 	update.message.reply_text(KrutidevToUnicode.convert_to_unicode(x))
 	return PDF
 	
-from pyrogram import Client, idle
-app = Client("my_live_bot",
-#bot_token="1431722823:AAHk_VOD0WgepQ1us7eucQm3UQRYacHzmQM",
-session_string="AgEBU-8ADAn12t06n3YMl9fZEc_97kGnUiYe1VLFNpFa22wd_mkxoZtPIBv12yjXTTUgD1RpWzyJPUFdDyrsf7t2119euFjzj8piOv1SLNDcn4UZpZidPOiRYBMo07cTvlwOWKQFKr5xn7xrvRMVDMGPAqA6VbOaA8fQBwe6TKhOzA-5CTpMPsIS974AIvjD8BtWZDOgkQI6smCdY-lUEt9cgiNH81lrANVGq6UllofmIjZo_bYyk6VhoOl_4YpHAp30cgQGda5VlwY73gr7XQV0DCx4gT0FAy-lVWQPbRKZHuj75bjErV1YVouvTA8070vd12qGmBqa67lc0A8_l-nwAqpdMQAAAAEvBILMAA",
-api_id="13682659",
-api_hash="b984d240c5258407ea911f042c9d75f6")
-import re as reaaa
-import time
+
 
 
 zza=1
@@ -2177,11 +2296,7 @@ def button(update: Update, context: CallbackContext) -> None:
     print(str(query))
     if bool(reaaa.match("^Link\d{1,}_\d{1,}_0(_.*?|)$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
-	       count=0
-	       try:
-	           count=app.get_discussion_replies_count(query.message.chat.id,query.message.message_id)
-	       except Ex:
-	           pass
+	       #print(str(query))
 	       try:
 	           x[3]="@"+x[3]
 	       except:
@@ -2194,12 +2309,13 @@ def button(update: Update, context: CallbackContext) -> None:
 	       except:
 	           mes=[]
 	       mem=context.bot.get_chat_member(x[3],query.from_user.id)
-	       if int(x[1])==len(mes) or (query.message.reply_markup.inline_keyboard[-1][0].text==str(count)):
+	       if int(x[1])==len(mes):
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):
 	           
-	           query.answer(url="https://t.me/Soojhboojh_01bot?start=link"+x[3][1:]+"%2F"+x[0],show_alert=False)
-	           
+	           query.answer(url="https://t.me/Soojhboojh_01bot?start=link"+x[3][1:]+"_"+x[0],show_alert=False)
+	       else:
+	           query.answer(text="इस मैसेज को टैग ना करे चैनल पर स्थित किसी और मैसेज को टैग करे और लिंक इस मैसेज की डाले\n\nधन्यवाद 🙏 ...",show_alert=True)
 	       if int(x[1])==len(mes):
 	           pass
 	       else:
@@ -2221,7 +2337,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	               zz=reaaa.split("_",y)
 	               try:
 	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
-	                   keyboard1=([InlineKeyboardButton(str(count),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3])),InlineKeyboardButton(str("📜"),url="https://t.me/"+query.message.chat.id+"/"+query.message.message_id+"?comment="+str(1))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]
@@ -2251,11 +2367,6 @@ def button(update: Update, context: CallbackContext) -> None:
     elif bool(reaaa.match("^Link\d{1,}_\d{1,}_\d{1,}(_.*?|)$",query.data)):
 	       x=reaaa.split("_",query.data[4:])
 	       
-	       count=0
-	       try:
-	           count=app.get_discussion_replies_count(query.message.chat.id,query.message.message_id)
-	       except:
-	           pass
 	       try:
 	           x[3]="@"+x[3]
 	       except:
@@ -2267,7 +2378,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           print (str(mes))
 	       except:
 	           mes=[]
-	       if int(x[1])==len(mes) or (query.message.reply_markup.inline_keyboard[-1][0].text==str(count)):
+	       if int(x[1])==len(mes):
 	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
 	           
 	       else:
@@ -2286,7 +2397,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	               zz=reaaa.split("_",y)
 	               try:
 	                   mes=check_mess(get_mess_py(zz[3],int(zz[0])).text,[])
-	                   keyboard1=([InlineKeyboardButton(str(count),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3])),InlineKeyboardButton(str("📜"),url="https://t.me/"+query.message.chat.id+"/"+query.message.message_id+"?comment="+str(1))])
+	                   keyboard1=([InlineKeyboardButton(str("⚙️"),callback_data="Link"+str(zz[0])+"_"+str(len(mes))+"_"+str(0)+"_"+str(zz[3]))])
 	                   keyboard2=[]
 	                   for z in range(len(mes)//5):
 	                       keyboard2=[]

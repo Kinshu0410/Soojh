@@ -1420,7 +1420,7 @@ def alarm(context: CallbackContext):
 Temp1=[]
 Temp2={}
 my_chat=filpy.chat(chats=Temp1)   
-@app.on_message(my_chat &  filpy.incoming)
+@app.on_message(my_chat &  filpy.incoming & ~ filpy.regex("^/cancel_message$"))
 async def newlinecutter(client:Client,message:Mespy):
 	global Temp1,Temp2,my_chat,filpy
 	fm=await app.forward_messages(chat_id=-1001572334666,from_chat_id=message.chat.id,message_ids=message.id)

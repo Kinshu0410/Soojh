@@ -2330,7 +2330,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           mes=[]
 	       mem=context.bot.get_chat_member(x[3],query.from_user.id)
 	       text1=reaaa.sub(" .*?$","",query.message.reply_markup.inline_keyboard[-1][0].text)
-	       text=reaaa.split("/",reaaa.sub("https\://telegram\.me/(c/)|\?thread\=\d{1,}","",query.message.reply_markup.inline_keyboard[-1][0].url))
+	       text=reaaa.split("/",reaaa.sub("https\://telegram\.me/(c/|)|\?thread\=\d{1,}","",query.message.reply_markup.inline_keyboard[-1][0].url))
 	       try:
 	           text[0]=int("-100"+text[0])
 	       except:

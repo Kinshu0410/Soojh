@@ -2349,7 +2349,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           
 	           bd1=[]
 	           num=1
-	           for y in query.message.reply_markup.inline_keyboard:
+	           for y in query.message.reply_markup.inline_keyboard[:-1]:
 	               
 	               if reaaa.split("_",y[0].callback_data[4:])[0] not in bd1:
 	                   bd1.append(reaaa.split("_",y[0].callback_data[4:])[0])

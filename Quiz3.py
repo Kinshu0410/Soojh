@@ -2414,9 +2414,9 @@ def button(update: Update, context: CallbackContext) -> None:
 	       try:
 	           text[0]=int("-100"+text[0])
 	       except:
-	           pass
+	           text[0]="@"+text[0]
 	       #m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
-	       n =str( app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1])))
+	       n =str( app.get_discussion_replies_count(chat_id = text[0],message_id = int(text[1])))
 	       if (int(x[1])==len(mes) )& (text1==n):
 	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
 	           

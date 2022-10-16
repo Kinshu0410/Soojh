@@ -1578,17 +1578,17 @@ def poll(update, context):
     	    
     	m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
     	n = app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1]))
-    	keyboard.append([InlineKeyboardButton(str(n)+ " Comments",url="https://telegram.me/"+m.chat.username+"/"+str(m.id)+"?comment=1")])
+    	keyboard.append([InlineKeyboardButton(str(n)+ " Comments",url="https://telegram.me/c/"+str(m.chat.id[3:])+"/"+str(m.id)+"?thread="+str(m.id))])
     	reply_markup = InlineKeyboardMarkup(keyboard)
     	#print(str(keyboard))
     	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
     	if str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045:
     	    try:
-    	        context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
+    	        context.bot.edit_message_reply_markup(chat_id = text[0],
   message_id = int(text[1]),
   reply_markup=reply_markup)
     	    except:
-    	        context.bot.send_message(chat_id = "@"+text[0],
+    	        context.bot.send_message(chat_id = text[0],
   text="Some information",reply_to_message_id=int(text[1]),
   reply_markup=reply_markup)
     	
@@ -2330,9 +2330,13 @@ def button(update: Update, context: CallbackContext) -> None:
 	           mes=[]
 	       mem=context.bot.get_chat_member(x[3],query.from_user.id)
 	       text1=reaaa.sub(" .*?$","",query.message.reply_markup.inline_keyboard[-1][0].text)
-	       text=reaaa.split("/",reaaa.sub("https\://telegram\.me/|\?comment\=1","",query.message.reply_markup.inline_keyboard[-1][0].url))
+	       text=reaaa.split("/",reaaa.sub("https\://telegram\.me/(c/)|\?thread\=\d{1,}","",query.message.reply_markup.inline_keyboard[-1][0].url))
+	       try:
+	           text[0]=int("-100"+text[0])
+	       except:
+	           pass
 	       #m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
-	       n =str(app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1])))
+	       n =str(app.get_discussion_replies_count(chat_id = text[0],message_id = int(text[1])))
 	       if (int(x[1])==len(mes) )& (text1==n):
 	           pass
 	       if str(mem.status) in ['creator', 'administrator'] or (query.from_user.id==711296045):

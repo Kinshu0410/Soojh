@@ -1578,7 +1578,7 @@ def poll(update, context):
     	    
     	m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
     	n = app.get_discussion_replies_count(chat_id = "@"+text[0],message_id = int(text[1]))
-    	keyboard.append([InlineKeyboardButton(str(n)+ " Comments",url="https://telegram.me/c/"+str(m.chat.id[3:])+"/"+str(m.id)+"?thread="+str(m.id))])
+    	keyboard.append([InlineKeyboardButton(str(n)+ " Comments",url="https://telegram.me/c/"+str(m.chat.id)[4:]+"/"+str(m.id)+"?thread="+str(m.id))])
     	reply_markup = InlineKeyboardMarkup(keyboard)
     	#print(str(keyboard))
     	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)

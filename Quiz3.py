@@ -1584,11 +1584,11 @@ def poll(update, context):
     	mem=context.bot.get_chat_member("@"+text[0],update.message.from_user.id)
     	if str(mem.status) in ['creator', 'administrator'] or update.message.from_user.id==711296045:
     	    try:
-    	        context.bot.edit_message_reply_markup(chat_id = text[0],
+    	        context.bot.edit_message_reply_markup(chat_id ="@"+ text[0],
   message_id = int(text[1]),
   reply_markup=reply_markup)
     	    except:
-    	        context.bot.send_message(chat_id = text[0],
+    	        context.bot.send_message(chat_id = "@"+text[0],
   text="Some information",reply_to_message_id=int(text[1]),
   reply_markup=reply_markup)
     	
@@ -2334,7 +2334,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	       try:
 	           text[0]=int("-100"+text[0])
 	       except:
-	           pass
+	           text[0]="@"+text[0]
 	       #m =  app.get_discussion_message(chat_id = "@"+text[0],message_id = int(text[1]))
 	       n =str(app.get_discussion_replies_count(chat_id = text[0],message_id = int(text[1])))
 	       if (int(x[1])==len(mes) )& (text1==n):

@@ -1793,10 +1793,10 @@ def emojicut(que:str):
 		    que=reaaa.sub(str(emoji[zz]),"",que)
 	return que
 	
-@app.on_message(filters.poll & filters.chat("SOOJH_BOOJH_BOT_discussion_grouo"))
+@app.on_message(filters.poll & filters.chat("me"))
 async def start_command(client:Client,message:Message):
 	##print(message)
-	chatid=["Soojhboojh_01bot"]
+	chatid=["Polls_quiz"]
 	
 	##print(message.id)
 	try:
@@ -1805,7 +1805,7 @@ async def start_command(client:Client,message:Message):
 	    mess=message.poll
 	##print(mess)
 	    ##print(mess)
-	await app.delete_messages(chat_id="SOOJH_BOOJH_BOT_discussion_grouo", message_ids=message.id)
+	await app.delete_messages(chat_id="me", message_ids=message.id)
 	question=mess.question
 	options=[o.text for o in mess.options]
 	correct_option_id = 0
@@ -1817,7 +1817,8 @@ async def start_command(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ)#reply_markup=ReplyKeyboardRemove())
+	    mess=await app.send_message(chat_id=x,text="<b><a href=\"https://t.me/Polls_Quiz\">"+question+"</a></b>"+"\n"+"\n".join(options),parse_mode=enums.ParseMode.HTML)
+	    mess=await app.send_message(chat_id="me",text="https://t.me/"+x+"/"+str(mess.id)+"\nhttps://t.me/PhotoQuiz/"+str(820+correct_option_id))
 
 @app.on_message(filters.poll & filters.chat("SOOJH_BOOJH_BOT_discussion_grouo"))
 async def start_command(client:Client,message:Message):

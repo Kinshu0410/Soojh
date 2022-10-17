@@ -39,6 +39,7 @@ def from_user_id(data):
         try:
             
             user_id=m.from_user.id
+            print(bool(user_id == data))
             return bool(user_id == data)
         except:
             return False

@@ -34,7 +34,7 @@ from pyrogram.enums import PollType
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
 def from_user_id(data):
-    async def func(flt, _, c: Client, m: Message):
+    async def func(_, c: Client, m: Message):
         user_id=m.from_user.id
         return bool(user_id == data)
     return filters.create(func, data=data)

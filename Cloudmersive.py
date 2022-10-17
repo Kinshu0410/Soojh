@@ -1373,7 +1373,7 @@ async def dell(client:Client,message:Message):
 	
 @app.on_message( filters.chat("POLLQZ") & filters.command(["pn"]))#& filters.incoming)
 async def forwor12(client:Client,message:Message):
-	mes=(await app.get_chat_history(chat_id="quizbot",limit=1))[0]
+	mes=( app.get_chat_history(chat_id="quizbot",limit=1))[0]
 	await client.request_callback_answer(chat_id=mes.chat.id,message_id=mes.id,callback_data=mes.reply_markup.inline_keyboard[0][0].callback_data)
 	await app.send_message("pollqz", "playing now")
     

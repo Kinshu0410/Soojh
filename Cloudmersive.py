@@ -35,7 +35,7 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
 def from_user_id(data):
     async def func(_, c: Client, m: Message):
-    	print(m.from_user)
+        print(m.from_user)
         try:
             
             user_id=m.from_user.id
@@ -47,13 +47,13 @@ def from_user_id(data):
 
 @app.on_message(filters.text & filters.chat([-1001507348250,-1001580039467,-1001412214082,-1001244305820]) & from_user_id(983000232))
 async def text_delete_quizbot(client:Client,message:Message):
-	print(message)
+	#print(message)
 	if bool(reaaa.search("(Congratulations to the winners!|Get ready for the quiz)",message.text)):
 		
 		pass
 	else:
 		print("delete")
-		await app.delete_messages(message.chat.id,message.id)
+		await app.delete_messages(message.id,message.id)
 
 @app.on_message( filters.chat(chats=[-1001534819469,1001183009]) & filters.text)
 async def newlinecutter(client:Client,message:Message):

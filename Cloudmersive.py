@@ -53,7 +53,7 @@ async def text_delete_quizbot(client:Client,message:Message):
 		pass
 	else:
 		print("delete")
-		await app.delete_messages(message.id,message.id)
+		await app.delete_messages(chat_id=message.chat.id,message_ids=message.id)
 
 @app.on_message( filters.chat(chats=[-1001534819469,1001183009]) & filters.text)
 async def newlinecutter(client:Client,message:Message):

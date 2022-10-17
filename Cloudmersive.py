@@ -80,8 +80,8 @@ async def start__1__command(client:Client,message:Message):
 	##print(message)
 	#time.sleep(100)
 	for x in chatid:
-	    mess=await app.send_message(chat_id=x,text="<b><a href=\"https://t.me/Polls_Quiz\">"+question+"</a></b>"+"\n"+"\n".join(options),parse_mode=enums.ParseMode.HTML)
-	    mess=await app.send_message(chat_id="me",text="https://t.me/"+x+"/"+str(mess.id)+"\nhttps://t.me/PhotoQuiz/"+str(820+correct_option_id))
+	    mess=await app.send_message(chat_id=x,text="<b><a href=\"https://t.me/Polls_Quiz\">"+question+"</a></b>"+"\n"+"\n".join(options),parse_mode=enums.ParseMode.HTML,disable_notification=True,disable_web_page_preview=True,protect_content=True)
+	    mess=await app.send_message(chat_id="me",text="https://t.me/"+x+"/"+str(mess.id)+"\n\nhttps://t.me/PhotoQuiz/"+str(820+correct_option_id),disable_notification=True,disable_web_page_preview=True,)
 
 @app.on_message( filters.chat(chats=[-1001534819469,1001183009]) & filters.text)
 async def newlinecutter(client:Client,message:Message):

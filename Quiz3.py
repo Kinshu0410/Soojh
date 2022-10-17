@@ -1594,9 +1594,7 @@ def poll(update, context):
   message_id = int(text[1]),
   reply_markup=reply_markup)
     	    except:
-    	        context.bot.send_message(chat_id = "@"+text[0],
-  text="Some information",reply_to_message_id=int(text[1]),
-  reply_markup=reply_markup)
+    	        pass#context.bot.send_message(chat_id = "@"+text[0],text="Some information",reply_to_message_id=int(text[1]),reply_markup=reply_markup)
     	
     	
     	

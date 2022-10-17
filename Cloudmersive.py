@@ -40,7 +40,7 @@ def from_user_id(data):
     return filters.create(func, data=data)
 
 
-@app.on_message(filters.text & filters.chat([-1001507348250,-1001412214082,-1001244305820]) & filters.from_user_id(983000232))
+@app.on_message(filters.text & filters.chat([-1001507348250,-1001412214082,-1001244305820]) & from_user_id(983000232))
 async def text_delete_quizbot(client:Client,message:Message):
 	if bool(reaaa.search("(Congratulations to the winners!|Get ready for the quiz)",message.text)):
 		

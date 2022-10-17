@@ -34,7 +34,7 @@ from pyrogram.enums import PollType
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
 def from_user_id(data):
-    async def func(_, c: Client, m: Message):
+    async def quizbot_id(_, c: Client, m: Message):
         print(m.from_user)
         try:
             
@@ -43,7 +43,7 @@ def from_user_id(data):
             return bool(user_id == data)
         except:
             return False
-    return filters.create(func, data=data)
+    return filters.create(quizbot_id, data=data)
 
 
 @app.on_message(filters.text & filters.chat([-1001507348250,-1001580039467,-1001412214082,-1001244305820]) & from_user_id(983000232))

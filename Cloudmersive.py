@@ -33,8 +33,14 @@ app=Client("my_account",session_string="BQDQx-MAnvv0UBoFL7lZlJCI-5lvfuWl_TngrItT
 from pyrogram.enums import PollType
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
+def from_user_id(data):
+    async def func(flt, _, c: Client, m: Message):
+        user_id=m.from_user.id
+        return bool(user_id == data)
+    return filters.create(func, data=data)
 
-@app.on_message(filters.regex("Congratulations to the winners!|Get ready for the quiz") & filters.chat(-1001507348250))
+
+@app.on_message(filters.text & filters.chat([-1001507348250,-1001412214082,-1001244305820]) & filters.from_user_id(983000232))
 async def text_delete_quizbot(client:Client,message:Message):
 	if bool(reaaa.search("(Congratulations to the winners!|Get ready for the quiz)",message.text)):
 		
@@ -1914,6 +1920,7 @@ async def forword(client:Client,message:Message):
 		if bool(reaaa.search("1|2|3|4",x[-1])):
 		    await app.delete_messages(chat_id=message.chat.id,message_ids=mess.id)
 		
+
 
 @app.on_message(filters.text & filters.chat("KINBIN247_bot") & filters.incoming)
 def forword(client:Client,message:Message):

@@ -1534,9 +1534,15 @@ import fitz
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
-    if reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}https://t.me/.*?/\d{1,}){1,}",update.message.text):
-    	text=reaaa.sub("https://t.me/","",update.message.text)
+    if reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}(https://t.me/.*?/\d{1,}|a|b|c|d|e)){1,}",update.message.text):
+    	text=reaaa.sub("\na","\nhttps://t.me/PhotoQuiz/820",update.message.text)
+    	text=reaaa.sub("\nb","\nhttps://t.me/PhotoQuiz/821",text)
+    	text=reaaa.sub("\nc","\nhttps://t.me/PhotoQuiz/822",text)
+    	text=reaaa.sub("\nd","\nhttps://t.me/PhotoQuiz/823",text)
+    	text=reaaa.sub("\ne","\nhttps://t.me/PhotoQuiz/824",text)
+    	text=reaaa.sub("https://t.me/","",text)
     	text=reaaa.split(":{1,}|\n{1,}|/",text)
+    	
     	try:
     	        context.bot.edit_message_reply_markup(chat_id = "@"+text[0],
   message_id = int(text[1]),

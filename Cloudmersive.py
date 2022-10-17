@@ -39,7 +39,7 @@ def from_user_id(data):
         try:
             
             user_id=m.from_user.id
-            print(bool(user_id == data))
+            #print(bool(user_id == data))
             return bool(user_id == data)
         except:
             return False
@@ -49,7 +49,7 @@ def from_user_id(data):
 @app.on_message(filters.text & filters.chat([-1001507348250,-1001580039467,-1001412214082,-1001244305820]) & from_user_id(983000232))
 async def text_delete_quizbot(client:Client,message:Message):
 	#print(message)
-	if bool(reaaa.search("(Congratulations to the winners!|Get ready for the quiz)",message.text)):
+	if bool(reaaa.search("(Congratulations to the winners!|Get ready for the quiz|⏸ The quiz )",message.text)):
 		
 		pass
 	else:

@@ -1530,7 +1530,7 @@ async def answer(client, callback_query):
 
 import fitz
 #@restrictedD
-@run_async
+#@run_async
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""

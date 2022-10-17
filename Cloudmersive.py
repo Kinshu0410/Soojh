@@ -35,10 +35,11 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
 def from_user_id(data):
     async def func(_, c: Client, m: Message):
-        user_id=m.from_user.id
-        #print(data)
-        #print(m.from_user)
-        return bool(user_id == data)
+        try:
+            user_id=m.from_user.id
+            return bool(user_id == data)
+        except:
+            return False
     return filters.create(func, data=data)
 
 

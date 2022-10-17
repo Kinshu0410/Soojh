@@ -35,8 +35,9 @@ scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
 
 def from_user_id(data):
     async def func(_, c: Client, m: Message):
+    	print(m.from_user)
         try:
-            print(m.from_user)
+            
             user_id=m.from_user.id
             return bool(user_id == data)
         except:
@@ -46,6 +47,7 @@ def from_user_id(data):
 
 @app.on_message(filters.text & filters.chat([-1001507348250,-1001580039467,-1001412214082,-1001244305820]) & from_user_id(983000232))
 async def text_delete_quizbot(client:Client,message:Message):
+	print(message)
 	if bool(reaaa.search("(Congratulations to the winners!|Get ready for the quiz)",message.text)):
 		
 		pass

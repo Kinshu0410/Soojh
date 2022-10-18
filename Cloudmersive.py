@@ -79,7 +79,7 @@ async def start__1__command(client:Client,message:Message):
 	           correct_option_id = i
 	           break
 	options=[o.text for o in mess.options]
-	for x in range(4):
+	for x in range(len(options)):
 		if x==correct_option_id:
 			options[x]="<b><a href=\"https://t.me/Polls_Quiz\">"+options[x]+"</a></b>"
 	for x in chatid:

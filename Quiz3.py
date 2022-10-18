@@ -1530,15 +1530,15 @@ async def answer(client, callback_query):
 
 import fitz
 #@restrictedD
-yx=5
+
 @run_async
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
     if reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}(https://t.me/.*?/\d{1,}|a|b|c|d|e)){1,}",update.message.text):
-    	global yx
-    	yx+=15
-    	asyncio.sleep(yx)
+    	
+    	
+    	
     	text=reaaa.sub("\na","\nhttps://t.me/PhotoQuiz/820",update.message.text)
     	text=reaaa.sub("\nb","\nhttps://t.me/PhotoQuiz/821",text)
     	text=reaaa.sub("\nc","\nhttps://t.me/PhotoQuiz/822",text)
@@ -1599,7 +1599,7 @@ def poll(update, context):
   reply_markup=reply_markup)
     	    except:
     	        pass#context.bot.send_message(chat_id = "@"+text[0],text="Some information",reply_to_message_id=int(text[1]),reply_markup=reply_markup)
-    	    yx-=15
+    	    
     	
     	
     	
@@ -2297,14 +2297,14 @@ def check_mess(X,Y):
 	x=X
 	y=Y
 	#print(len(x))
-	if len(x)<180:
+	if len(x)<200:
 		
 		y.append(x)
 		
 		return y
-	elif bool(reaaa.search("\n",x[:180])):
+	elif bool(reaaa.search("\n",x[:200])):
 		index=0
-		for match in reaaa.finditer("\n",x[:180]):
+		for match in reaaa.finditer("\n",x[:200]):
 		    index=int(match.end())
 		y.append(x[:index])
 		x=x[index:]
@@ -2312,7 +2312,7 @@ def check_mess(X,Y):
 		return check_mess(x,y)
 	else:
 		index=0
-		for match in reaaa.finditer(" ",x[:180]):
+		for match in reaaa.finditer(" ",x[:200]):
 		    index=int(match.end())
 		y.append(x[:index])
 		x=x[index:]
@@ -2353,7 +2353,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           
 	           query.answer(url="https://t.me/Soojhboojh_01bot?start=link"+x[3][1:]+"_"+x[0],show_alert=False)
 	       else:
-	           query.answer(text="इस मैसेज को टैग ना करे चैनल पर स्थित किसी और मैसेज को टैग करे और लिंक इस मैसेज की डाले\n\nधन्यवाद 🙏 ...",show_alert=True)
+	           query.answer(text="Comments पर click करके comments add कर लीजिए\n\nComments add करने के बाद 1,2,3 buttons में से कोई भी दबा दो ताकि comments channal पर update हो सक\n\n धन्यवाद ...✍️",show_alert=True)
 	       if int(x[1])==len(mes):
 	           pass
 	       else:
@@ -2430,7 +2430,7 @@ def button(update: Update, context: CallbackContext) -> None:
 	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
 	           
 	       else:
-	           query.answer(text="Some buttons Update please press 1 more time", show_alert=True)
+	           query.answer(text=reaaa.sub("^\n{1,}|\n{1,}$","",mes[int(x[2])-1]), show_alert=True)
 	           keyboard=[]
 	           zz=""
 	           bd=[]

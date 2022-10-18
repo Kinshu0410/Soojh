@@ -1530,11 +1530,15 @@ async def answer(client, callback_query):
 
 import fitz
 #@restrictedD
-#@run_async
+yx=5
+@run_async
 @send_typing_action
 def poll(update, context):
     """Sends a predefined poll"""
     if reaaa.match("https://t.me/.*?/\d{1,}((:|\n){1,}(https://t.me/.*?/\d{1,}|a|b|c|d|e)){1,}",update.message.text):
+    	global yx
+    	yx+=15
+    	asyncio.sleep(yx)
     	text=reaaa.sub("\na","\nhttps://t.me/PhotoQuiz/820",update.message.text)
     	text=reaaa.sub("\nb","\nhttps://t.me/PhotoQuiz/821",text)
     	text=reaaa.sub("\nc","\nhttps://t.me/PhotoQuiz/822",text)
@@ -1595,6 +1599,7 @@ def poll(update, context):
   reply_markup=reply_markup)
     	    except:
     	        pass#context.bot.send_message(chat_id = "@"+text[0],text="Some information",reply_to_message_id=int(text[1]),reply_markup=reply_markup)
+    	    yx-=15
     	
     	
     	

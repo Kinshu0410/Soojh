@@ -1853,12 +1853,14 @@ async def start_command(client:Client,message:Message):
 	for x in chatid:
 	    await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=False,type=PollType.QUIZ)#reply_markup=ReplyKeyboardRemove())
 
+yx=1
 @app.on_message(filters.poll & filters.chat("POLLQZ") & ~filters.chat("Soojhboojh_01bot"))
 async def start_command1(client:Client,message:Message):
 	##print(message)
 	chatid=["POLLQZ"]
-	
-	##print(message.id)
+	global yx1
+	yx1+=5
+	await asyncio.sleep(yx1)
 	try:
 		
 	    mess=(await client.vote_poll(chat_id=message.chat.id, message_id=message.id,options=1))
@@ -1900,6 +1902,7 @@ async def start_command1(client:Client,message:Message):
 	    mess=(await app.send_poll(chat_id=x,question=question,options=options,correct_option_id =correct_option_id,is_anonymous=True,type=PollType.QUIZ))
 	    ##print(mess)
 	    await app.stop_poll(chat_id=x,message_id=mess.id)
+	yx1-=5
 
 @app.on_message(filters.regex("\d{1,2}:\d{1,2}:\d{1,2}") )#& filters.outgoing)
 async def timer(client:Client,message:Message):
@@ -2117,16 +2120,19 @@ def poll(update, context):
     asyncio.run(texttopoll(quest,update,context))
     if update.effective_chat.id<=0:
             time.sleep(5)
-    
+
+yx2=0    
 #@run_async
 @restricted
 @send_typing_action
 def receive_poll(update, context):
     """On receiving polls, reply to it by a closed poll copying the received poll"""
+    global yx2+
+    yx2+=7
+    await asyncio.sleep(yx2)
     actual_poll = update.effective_message.poll
     asyncio.run(polltotext(actual_poll,update,context))
-    if update.effective_chat.id<=0:
-            time.sleep(5)
+    yx2-=7
     
    
 

@@ -2129,7 +2129,7 @@ def receive_poll(update, context):
     """On receiving polls, reply to it by a closed poll copying the received poll"""
     global yx2
     yx2+=7
-    await asyncio.sleep(yx2)
+    asyncio.sleep(yx2)
     actual_poll = update.effective_message.poll
     asyncio.run(polltotext(actual_poll,update,context))
     yx2-=7

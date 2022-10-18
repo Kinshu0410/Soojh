@@ -73,18 +73,18 @@ async def start__1__command(client:Client,message:Message):
 	    ##print(mess)
 	await app.delete_messages(chat_id="me", message_ids=message.id)
 	question=mess.question
-	options=[o.text for o in mess.options]
 	correct_option_id = 0
 	for i in range(len(mess.options)):
 	       if mess.options[i].correct:
 	           correct_option_id = i
 	           break
-	#correct_option_id
-	##print(message)
-	#time.sleep(100)
+	options=[o.text for o in mess.options]
+	for x in range(4):
+		if x==correct_option_id:
+			options[x]="<b><a href=\"https://t.me/Polls_Quiz\">"+options[x]+"</a></b>"
 	for x in chatid:
 	    mess=await app.send_message(chat_id=x,text="<b><a href=\"https://t.me/Polls_Quiz\">"+question+"</a></b>"+"\n"+"\n".join(options),parse_mode=enums.ParseMode.HTML,disable_notification=True,disable_web_page_preview=True,protect_content=True)
-	    mess=await app.send_message(chat_id="@soojhboojh_01bot",text="https://t.me/"+x+"/"+str(mess.id)+"\n\nhttps://t.me/PhotoQuiz/"+str(820+correct_option_id),disable_notification=True,disable_web_page_preview=True,)
+	    mess=await app.send_message(chat_id="me",text="https://t.me/"+x+"/"+str(mess.id)+"\n\nhttps://t.me/PhotoQuiz/"+str(820+correct_option_id),disable_notification=True,disable_web_page_preview=True,)
 	    yx-=15
 
 @app.on_message( filters.chat(chats=[-1001534819469,1001183009]) & filters.text)

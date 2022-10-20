@@ -2072,8 +2072,13 @@ def pollf(update,context):
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
     	text=reaaa.split("idID",text)
     	from quickstart import Drive_OCR
-    	
-    	mem=context.bot.get_chat_member("@"+text[0],update.message.chat.id)
+    	if text[0]=="ramji5198":
+    	    text[0]=-1001897080738
+    	try:
+    	    text[0]="@"+text[0]
+    	except:
+    	    text[0]=int(text[0])
+    	mem=context.bot.get_chat_member(text[0],update.message.chat.id)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=str(mem))
     	zz=""
     	

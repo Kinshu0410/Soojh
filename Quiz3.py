@@ -2100,7 +2100,7 @@ def pollf(update,context):
     	    for yy in text[1]:
     	        if text[0]==-1001897080738:
     	            vvar="""     .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')"""
-    	        elif
+    	        else:
     	            vvar="""     .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')"""
     	        res_url=Drive_OCR("y").google_form_responce_url(yy)
     	        x="""

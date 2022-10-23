@@ -2071,9 +2071,11 @@ def pollf(update,context):
     	text=reaaa.sub("/start g_f","",update.message.text)
     	#context.bot.send_message(chat_id=update.message.chat.id, text=(text))
     	text=reaaa.split("idID",text)
+    	vvar=""
     	from quickstart import Drive_OCR
     	if text[0]=="ramji5198":
     	    text[0]=-1001897080738
+    	    
     	try:
     	    text[0]="@"+text[0]
     	except:
@@ -2096,7 +2098,10 @@ def pollf(update,context):
     	    text[1]=Drive_OCR("g").google_drive_get(text[1])
     	    res_url=""
     	    for yy in text[1]:
-    	        
+    	        if text[0]==-1001897080738:
+    	            vvar="""     .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')"""
+    	        elif
+    	            vvar="""     .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')"""
     	        res_url=Drive_OCR("y").google_form_responce_url(yy)
     	        x="""
 function d() {
@@ -2106,7 +2111,7 @@ function d() {
    var item1 = items[1];
    var item = items[1];
    var textValidation = FormApp.createTextValidation()
-     .setHelpText('https://t.me/Soojhboojh_01bot?start=g_fPolls_QuizidID"""+yy[:10]+""" Open in new Tab of Google Chrome')
+"""+vvar+"""
      .requireTextContainsPattern('"""+zz+"""')
      .build();
    item.asTextItem().setValidation(textValidation);
